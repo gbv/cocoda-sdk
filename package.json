@@ -1,0 +1,43 @@
+{
+  "name": "cocoda-sdk",
+  "version": "0.0.1",
+  "description": "SDK for Cocoda",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint ./**/*.js ./**/.*.js",
+    "fix": "eslint --fix ./**/*.js ./**/.*.js",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix"
+    ],
+    "**/.*.js": [
+      "eslint --fix"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbv/cocoda-sdk.git"
+  },
+  "author": "Stefan Peters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gbv/cocoda-sdk/issues"
+  },
+  "homepage": "https://github.com/gbv/cocoda-sdk#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-gbv": "github:gbv/eslint-config-gbv",
+    "lint-staged": "^10.0.2",
+    "mocha": "^7.0.0",
+    "mocha-eslint": "^6.0.0",
+    "pre-commit": "^1.2.2"
+  },
+  "dependencies": {}
+}
