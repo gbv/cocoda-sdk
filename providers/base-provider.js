@@ -3,220 +3,143 @@ const _ = require("lodash")
 const axios = require("axios")
 
 /**
- * An empty provider as well as superclass for Cocoda Registry Providers.
- *
- * The constructor sets the functionality object provider.has according to the provided registry object.
- *
- * Extend this class like this:
- * ```javascript
- *  class TestProvider extends BaseProvider {
- *    // override functions as needed
- *    // (usually it is recommended to only override the _ functions)
- *    // ...
- *  }
- *  TestProvider.providerName = "Test"
- * ```
- * The providerName is necessary for the provider to be identified.
+ * TODO: Documentation.
  */
 class BaseProvider {
 
-  /**
-   *
-   * @param {*} registry - a registry object
-   * @param {*} options - an options object
-   */
-  constructor(registry = {}, options = {}) {
+  constructor({ registry } = {}) {
     this.registry = registry
-    this.http = options.http || axios
-    // Create a dictionary with functionality of registry
-    this.has = {}
-    // Set instance path
+
+    this.axios = axios.create({
+      // TODO: Decide on timeout value
+      timeout: 5000,
+    })
+    // Path is used for https check and local mappings
     this.path = typeof window !== "undefined" && window.location.pathname
-    // Set languages
+    // Create a dictionary with functionality of registry (defined in subclasses)
+    this.has = {}
+    // Set default language priority list
     this.defaultLanguages = "de,en,es,nl,it,fi,pl,ru,cs,jp".split(",")
-    this.languages = this.defaultLanguages
-    // Set properties
-    this.properties = {
-      minimum: "-",
-      default: "uri,prefLabel,notation,inScheme,annotations",
-      detail: "uri,prefLabel,notation,inScheme,identifier,altLabel,definition,license,publisher,created,issued,modified,scopeNote,editorialNote,annotations",
-      all: "*",
+    // This can be set from the outside
+    this.languages = []
+    // Set auth details to null
+    this.auth = {
+      key: null,
+      bearerToken: null,
     }
-    this.auth = null
-    this.authPublicKey = null
-    // Save modified http methods
-    this.request = (method, url, data, options, cancelToken) => {
+
+    // Add a request interceptor
+    this.axios.interceptors.request.use((config) => {
+      // Add language parameter to request
+      if (!_.get(config, "params.language")) {
+        const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this.defaultLanguages).filter(lang => lang != "")).join(",")
+        _.set(config, "params.language", language)
+      }
+      // Set auth
+      if (this.has.auth && this.auth.bearerToken && !_.get(config, "headers.Authorization")) {
+        _.set(config, "headers.Authorization", `Bearer ${this.auth.bearerToken}`)
+      }
+      console.log("Config from interceptor:", config)
+
       // Don't perform http requests if site is used via https
-      if (url.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
-        return Promise.resolve([])
+      if (config.url.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
+        // TODO: Return proper error object.
+        throw new axios.Cancel("Can't call http API from https.")
       }
-      options = options || {}
-      // Set properties to default properties if no properties are given
-      if (!_.get(options, "params.properties")) {
-        _.set(options, "params.properties", this.properties.default)
-      }
-      options.cancelToken = cancelToken
-      let language = _.uniq([].concat(_.get(options, "params.language", "").split(","), this.languages, this.defaultLanguages).filter(lang => lang != "")).join(",")
-      _.set(options, "params.language", language)
-      // Try 5 times with 1.5 second delay
-      let retryCount = 3, retryDelay = 1500
-      let tryRequest = (tries) => {
-        if (tries == 0) {
-          return Promise.reject("No retries left.")
-        }
-        // Set auth
-        if (this.has.auth && this.auth) {
-          _.set(options, "headers.Authorization", `Bearer ${this.auth}`)
-        }
-        tries -= 1
-        let promise
-        if (method == "get") {
-          promise = this.http.get(url, options)
-        } else if (method == "post") {
-          promise = this.http.post(url, data, options)
-        } else if (method == "put") {
-          promise = this.http.put(url, data, options)
-        } else if (method == "patch") {
-          promise = this.http.patch(url, data, options)
-        } else if (method == "delete") {
-          promise = this.http.delete(url, options)
+
+      return config
+    })
+
+    // Add a response interceptor
+    this.axios.interceptors.response.use(({ data, headers, config }) => {
+      // Apply unicode normalization
+      data = jskos.normalize(data)
+
+      if (_.isArray(data)) {
+        // Add total count to array as prop
+        let totalCount = parseInt(headers["x-total-count"])
+        if (totalCount) {
+          data.totalCount = totalCount
         } else {
-          promise = Promise.reject("No method called " + method)
+          // TODO: Does this break things or does this help?
+          data.totalCount = data.length
         }
-        return promise.then(({ data, headers }) => {
-          // Apply unicode normalization
-          data = jskos.normalize(data)
+        // Add URL to array as prop
+        data.url = config.url
+      }
 
-          if (_.isArray(data)) {
-            let totalCount = parseInt(headers["x-total-count"])
-            if (totalCount) {
-              // Add total count to array as prop
-              data.totalCount = totalCount
-            }
-          }
-          return data
-        }).catch(error => {
-          if (_.get(error, "response.status") === 401 && tries > 0) {
-            console.warn(`API authorization error => trying again! (${tries})`)
-            return new Promise(resolve => { setTimeout(() => { resolve() }, retryDelay) }).then(() => {
-              return tryRequest(tries)
-            })
-          } else {
-            throw error
-          }
-        })
-      }
-      return tryRequest(retryCount).catch(error => {
-        console.warn("API error:", error)
-        return undefined
-      })
-    }
-    this.get = (url, options, cancelToken) => {
-      return this.request("get", url, null, options, cancelToken)
-    }
-    this.post = (url, data, options, cancelToken) => {
-      return this.request("post", url, data, options, cancelToken)
-    }
-    this.put = (url, data, options, cancelToken) => {
-      return this.request("put", url, data, options, cancelToken)
-    }
-    this.patch = (url, data, options, cancelToken) => {
-      return this.request("patch", url, data, options, cancelToken)
-    }
-    this.delete = (url, options, cancelToken) => {
-      return this.request("delete", url, null, options, cancelToken)
-    }
+      // TODO: Return data or whole response here?
+      return data
+    })
 
-    /**
-     * The following are adjustment methods for specific types of objects. These are called by the wrapper functions (those without a leading underscope) to modify the results before returning.
-     * These are defined in the constructor so that they will have access to "this".
-     */
-    this.adjustConcepts = (concepts) => {
-      for (let concept of concepts) {
-        // Add _getNarrower function to concepts
-        concept._getNarrower = () => {
-          return this.getNarrower(concept)
-        }
-        // Add _getAncestors function to concepts
-        concept._getAncestors = () => {
-          return this.getAncestors(concept)
-        }
-        // Add _getDetails function to concepts
-        concept._getDetails = () => {
-          return this.getDetails(concept)
-        }
+    const requestMethods = [
+      // General
+      "getRegistries",
+      "getSchemes",
+      "getTypes",
+      "suggest",
+      "getConcordances",
+      "getOccurrences",
+      // Concepts
+      "getTop",
+      "getConcepts",
+      "getConcept",
+      "getNarrower",
+      "getAncestors",
+      "search",
+      // Mappings
+      "getMapping",
+      "getMappings",
+      "postMapping",
+      "postMappings",
+      "putMapping",
+      // "patchMapping",
+      "deleteMapping",
+      "deleteMappings",
+      // Annotations
+      "getAnnotation",
+      "getAnnotations",
+      "postAnnotation",
+      "putAnnotation",
+      // "patchAnnotation",
+      "deleteAnnotation",
+    ]
+    for (let method of requestMethods) {
+      // Make sure underscore methods exist, but return a rejecting Promise
+      if (!this[`_${method}`]) {
+        // TODO: Use proper error object
+        this[`_${method}`] = () => Promise.reject("Method not implemented")
       }
-      return concepts
-    }
-    this.adjustRegistries = (registries) => {
-      return registries
-    }
-    this.adjustSchemes = (schemes) => {
-      for (let scheme of schemes) {
-        // Add _getTop function to schemes
-        scheme._getTop = () => {
-          return this.getTop(scheme)
+      this[method] = (options = {}) => {
+        let source
+        if (!options.cancelToken) {
+          source = this.getCancelTokenSource()
+          options.cancelToken = source.token
         }
-        // Add _getTypes function to schemes
-        scheme._getTypes = () => {
-          return this.getTypes(scheme)
+        // Call same method with leading underscore
+        const promise = this[`_${method}`](options)
+        // Attach cancel method to Promise
+        if (source) {
+          promise.cancel = () => {
+            return source.cancel()
+          }
         }
-        // Add _provider to schemes
-        scheme._provider = this
-        // Add _suggest function to schemes
-        scheme._suggest = (search) => {
-          return this.suggest(search, scheme)
-        }
+        // Add adjustment methods
+        return promise
       }
-      return schemes
-    }
-    this.adjustConcordances = (concordances) => {
-      for (let concordance of concordances) {
-        // Add _provider to concordance
-        concordance._provider = this
-      }
-      return concordances
-    }
-    this.adjustMapping = (mapping) => {
-      // Add fromScheme and toScheme if missing
-      for (let side of ["from", "to"]) {
-        let sideScheme = `${side}Scheme`
-        if (!mapping[sideScheme]) {
-          mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]")
-        }
-      }
-      mapping._provider = this
-      if (!mapping.identifier) {
-        // Add mapping identifiers for this mapping
-        let identifier = _.get(jskos.addMappingIdentifiers(mapping), "identifier")
-        if (identifier) {
-          mapping.identifier = identifier
-        }
-      }
-      return mapping
-    }
-    this.adjustMappings = (mappings) => {
-      let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
-      // Retain custom props if available
-      if (mappings.totalCount) {
-        newMappings.totalCount = mappings.totalCount
-      }
-      if (mappings.url) {
-        newMappings.url = mappings.url
-      }
-      return newMappings
     }
   }
 
-  getCancelToken() {
+  /**
+   * Returns a source for a axios cancel token.
+   */
+  getCancelTokenSource() {
     return axios.CancelToken.source()
   }
 
-  setAuth(auth) {
-    this.auth = auth
-  }
-  setAuthPublicKey(key) {
-    this.authPublicKey = key
+  setAuth({ key, bearerToken }) {
+    this.auth.key = key
+    this.auth.bearerToken = bearerToken
   }
 
   isAuthorizedFor({ type, action, user, crossUser }) {
@@ -230,11 +153,11 @@ class BaseProvider {
     if (!options) {
       return !!this.has[type][action]
     }
-    if (options.auth && (!user || !this.auth)) {
+    if (options.auth && (!user || !this.auth.key)) {
       return false
     }
     // Public key mismatch
-    if (options.auth && this.authPublicKey != this.registry.config.auth.key) {
+    if (options.auth && this.auth.key != this.registry.config.auth.key) {
       return false
     }
     if (options.auth && options.identities) {
@@ -258,380 +181,6 @@ class BaseProvider {
   }
 
   /**
-   * Returns a Promise with a list of registries.
-   *
-   * By default, the current registry is returned.
-   *
-   * Usually, this method has no parameters.
-   */
-  getRegistries(...params) {
-    return this._getRegistries(...params)
-      .then(this.adjustRegistries)
-  }
-  _getRegistries() {
-    return Promise.resolve([this.registry])
-  }
-
-  /**
-   * Returns a Promise with a list of supported concept schemes.
-   *
-   * If registry.schemes is an array, it will be returned, otherwise an empty array will be returned by default.
-   *
-   * Usually, this method has no parameters.
-   */
-  getSchemes(...params) {
-    return this._getSchemes(...params)
-      .then(this.adjustSchemes)
-  }
-  _getSchemes() {
-    if (Array.isArray(this.registry.schemes)) {
-      return Promise.resolve(this.registry.schemes)
-    }
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of top concepts.
-   *
-   * Usually, this method has one parameter `scheme` (JSKOS object).
-   */
-  getTop(...params) {
-    return this._getTop(...params)
-      .then(this.adjustConcepts)
-  }
-  _getTop() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of concepts.
-   *
-   * Usually, this method has two parameters:
-   * - 1. A list of JSKOS concepts to be retrieved from the API.
-   * - 2. An options object currently supporting only a `properties` field which defaults to this.properties.default.
-   * Note that this might change in the future.
-   */
-  getConcepts(...params) {
-    return this._getConcepts(...params)
-      .then(this.adjustConcepts)
-  }
-  _getConcepts() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Wrapper around getConcepts that returns detailed properties.
-   */
-  getDetails(concepts) {
-    return this.getConcepts(concepts, { properties: this.properties.detail })
-  }
-
-  /**
-   * Returns a Promise with a list of types of concepts.
-   *
-   * Usually, this method has one parameter `scheme` (JSKOS object).
-   */
-  getTypes(...params) {
-    return this._getTypes(...params)
-  }
-  _getTypes() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of narrower concepts for a concept.
-   *
-   * Usually, this method has one parameter `concept` (JSKOS object).
-   */
-  getNarrower(...params) {
-    return this._getNarrower(...params)
-      .then(this.adjustConcepts)
-  }
-  _getNarrower() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of ancestor concepts for a concept.
-   *
-   * Usually, this method has one parameter `concept` (JSKOS object).
-   */
-  getAncestors(...params) {
-    return this._getAncestors(...params)
-      .then(this.adjustConcepts)
-  }
-  _getAncestors() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns Promise with typeahead suggestions according to the OpenSearch Suggest Format.
-   *
-   * Usually, this method has two parameters:
-   * 1. A search string.
-   * 2. A params/options object with the following fields:
-   *    - scheme: if the search should be restricted by scheme
-   *    - limit: number of results returned
-   *    - types: an array of type URIs
-   *    - cancelToken: an axios cancel token (e.g. provided by provider.cancelToken)
-   */
-  suggest(...params) {
-    return this._suggest(...params)
-  }
-  _suggest() {
-    return Promise.resolve(["", [], [], []])
-  }
-
-  /**
-   * Returns a Promise with a list of search results.
-   *
-   * Usually, this method has the same parameters as `suggest`.
-   * Note that this might change in the future.
-   */
-  search(...params) {
-    return this._search(...params)
-      .then(this.adjustConcepts)
-  }
-  _search() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of concordances.
-   *
-   * Usually, this method has no parameters.
-   */
-  getConcordances(...params) {
-    return this._getConcordances(...params)
-      .then(this.adjustConcordances)
-  }
-  _getConcordances() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of mappings.
-   *
-   * Usually, this method has one parameter which is an object containing some of the following fields:
-   * - from: a JSKOS concept from which to map
-   * - to: a JSKOS concept to which to map
-   * - direction: one of `forward`, `backward`, or `both`
-   * - mode: one of `and` or `or`
-   * - identifier: a string of identifiers separated by `|`
-   * - options: a raw options object for the GET request
-   */
-  getMappings(...params) {
-    return this._getMappings(...params)
-      .then(this.adjustMappings)
-  }
-  _getMappings() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Saves mappings to the registry. Returns a Promise with a list of mappings that were saved.
-   *
-   * Usually, this method has one parameter which is a list of JSKOS mappings to be saved.
-   */
-  saveMappings(...params) {
-    // Adjust created or modified date of mappings to be saved
-    let promises = []
-    if (Array.isArray(params[0])) {
-      for (let { mapping, original } of params[0]) {
-        promises.push(this.saveMapping(mapping, original))
-      }
-    }
-    return Promise.all(promises).then(mappings => {
-      return mappings
-    })
-  }
-
-  /**
-   * Saves a single mapping to the registry.
-   * If `original` is given, there will be an attempt to find the original in the registry and override it.
-   * Otherwise, the mapping will be saved as a new mapping.
-   *
-   * @param {*} mapping
-   * @param {*} original
-   */
-  saveMapping(mapping, original) {
-    if (!mapping) {
-      return Promise.resolve(null)
-    }
-    mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
-    return this._saveMapping(mapping, original).then(this.adjustMapping).catch(() => null)
-  }
-
-  _saveMapping() {
-    return Promise.resolve(null)
-  }
-
-  /**
-   * Removes mappings from the registry. Returns a Promise with a list of booleans (true if removed) corresponding to the indexes in the mappings array.
-   *
-   * @param {Array} mappings
-   */
-  removeMappings(mappings) {
-    let promises = []
-    for (let mapping of mappings || []) {
-      promises.push(this.removeMapping(mapping))
-    }
-    return Promise.all(promises)
-  }
-
-  /**
-   * Removes a single mapping.
-   *
-   * @param {Object} mapping
-   */
-  removeMapping(mapping) {
-    if (!mapping) {
-      return
-    }
-    return this._removeMapping(mapping)
-  }
-
-  _removeMapping() {
-    return Promise.resolve(false)
-  }
-
-  /**
-   * Adds a single annotation.
-   *
-   * @param {Object} annotation
-   */
-  addAnnotation(annotation) {
-    if (!annotation) {
-      return Promise.resolve(null)
-    }
-    return this._addAnnotation(annotation)
-  }
-
-  _addAnnotation() {
-    return Promise.resolve(null)
-  }
-
-  /**
-   * Edits an annotation. If patch is given, a PATCH request will be performed.
-   *
-   * @param {Object} annotation
-   * @param {Object} patch
-   */
-  editAnnotation(annotation, patch) {
-    if (!annotation) {
-      return Promise.resolve(null)
-    }
-    return this._editAnnotation(annotation, patch)
-  }
-
-  _editAnnotation() {
-    return Promise.resolve(null)
-  }
-
-  /**
-   * Removes an annotation.
-   *
-   * @param {Object} annotation
-   */
-  removeAnnotation(annotation) {
-    if (!annotation) {
-      return Promise.resolve(false)
-    }
-    return this._removeAnnotation(annotation)
-  }
-
-  _removeAnnotation() {
-    return Promise.resolve(false)
-  }
-
-  /**
-   * Returns a Promise with a list of occurrences.
-   *
-   * Usually, this method has one parameter which is an object containing some of the following fields:
-   * - from: a JSKOS concept for which to search for occurrences (for compatibility with getMappings)
-   * - to: a JSKOS concept for which to search for occurrences (for compatibility with getMappings)
-   * - concepts: a list of JSKOS concepts for which to search for occurrences
-   */
-  getOccurrences(...params) {
-    return this._getOccurrences(...params)
-  }
-  _getOccurrences() {
-    return Promise.resolve([])
-  }
-
-  /**
-   * Returns a Promise with a list of mappings, occurrences, and mapping suggestions, all converted into mappings.
-   *
-   * By default, it combines the results of getMappings and getOccurrences.
-   *
-   * This method should have the same parameter as `getMappings`, with an additional field `selected` (see * below).
-   *
-   * (*) The selected parameter allows this method to rearrange occurrences based on already selected concept schemes. It should have the following form (same as in Cocoda):
-   * {
-   *   scheme: {
-   *     [true]: {...},
-   *     [false]: {...}
-   *   },
-   *   concept: {
-   *     [true]: {...},
-   *     [false]: {...}
-   *   }
-   * }
-   */
-  getAllMappings(params) {
-    let { selected } = params
-    let mappings = this.getMappings(params)
-    let occurrences = this.getOccurrences(params).then(occurrences => {
-      // Transform occurrences into mappings
-      let mappings = []
-      for (let occurrence of occurrences) {
-        if (!occurrence) {
-          continue
-        }
-        let mapping = {}
-        mapping.from = _.get(occurrence, "memberSet[0]")
-        if (mapping.from) {
-          mapping.from = { memberSet: [mapping.from] }
-        } else {
-          mapping.from = null
-        }
-        mapping.fromScheme = _.get(occurrence, "memberSet[0].inScheme[0]")
-        mapping.to = _.get(occurrence, "memberSet[1]")
-        if (mapping.to) {
-          mapping.to = { memberSet: [mapping.to] }
-        } else {
-          mapping.to = { memberSet: [] }
-        }
-        mapping.toScheme = _.get(occurrence, "memberSet[1].inScheme[0]")
-        if (selected) {
-          // Swap sides if necessary
-          if (!jskos.compare(mapping.fromScheme, selected.scheme[true]) && !jskos.compare(mapping.toScheme, selected.scheme[false])) {
-            [mapping.from, mapping.fromScheme, mapping.to, mapping.toScheme] = [mapping.to, mapping.toScheme, mapping.from, mapping.fromScheme]
-          }
-        }
-        mapping.type = [jskos.defaultMappingType.uri]
-        mapping._occurrence = occurrence
-        mapping = jskos.addMappingIdentifiers(mapping)
-        if (occurrence.database) {
-          mapping.creator = [occurrence.database]
-        }
-        mappings.push(mapping)
-      }
-      return mappings
-    }).catch(error => {
-      console.warn(error)
-      return []
-    })
-    return Promise.all([mappings, occurrences]).then(results => {
-      const mappings = _.union(...results)
-      // Usually, only one of the two should have results and possibly a URL attached. Use that.
-      mappings.url = results.map(result => result.url).filter(url => url != null)[0]
-      return mappings
-    }).then(this.adjustMappings)
-  }
-
-  /**
    * Returns a boolean whether a certain target scheme is supported or not.
    *
    * @param {object} scheme
@@ -645,6 +194,122 @@ class BaseProvider {
       return true
     }
     return jskos.isContainedIn(scheme, schemes)
+  }
+
+  // TODO: Reevaluate adjustment methods
+  adjustConcepts(concepts) {
+    for (let concept of concepts) {
+      // Add _getNarrower function to concepts
+      concept._getNarrower = () => {
+        return this.getNarrower(concept)
+      }
+      // Add _getAncestors function to concepts
+      concept._getAncestors = () => {
+        return this.getAncestors(concept)
+      }
+      // Add _getDetails function to concepts
+      concept._getDetails = () => {
+        return this.getDetails(concept)
+      }
+    }
+    return concepts
+  }
+  adjustRegistries(registries) {
+    return registries
+  }
+  adjustSchemes(schemes) {
+    for (let scheme of schemes) {
+      // Add _getTop function to schemes
+      scheme._getTop = () => {
+        return this.getTop(scheme)
+      }
+      // Add _getTypes function to schemes
+      scheme._getTypes = () => {
+        return this.getTypes(scheme)
+      }
+      // Add _provider to schemes
+      scheme._provider = this
+      // Add _suggest function to schemes
+      scheme._suggest = (search) => {
+        return this.suggest(search, scheme)
+      }
+    }
+    return schemes
+  }
+  adjustConcordances(concordances) {
+    for (let concordance of concordances) {
+      // Add _provider to concordance
+      concordance._provider = this
+    }
+    return concordances
+  }
+  adjustMapping(mapping) {
+    // Add fromScheme and toScheme if missing
+    for (let side of ["from", "to"]) {
+      let sideScheme = `${side}Scheme`
+      if (!mapping[sideScheme]) {
+        mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]")
+      }
+    }
+    mapping._provider = this
+    if (!mapping.identifier) {
+      // Add mapping identifiers for this mapping
+      let identifier = _.get(jskos.addMappingIdentifiers(mapping), "identifier")
+      if (identifier) {
+        mapping.identifier = identifier
+      }
+    }
+    return mapping
+  }
+  adjustMappings(mappings) {
+    let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
+    // Retain custom props if available
+    if (mappings.totalCount) {
+      newMappings.totalCount = mappings.totalCount
+    }
+    if (mappings.url) {
+      newMappings.url = mappings.url
+    }
+    return newMappings
+  }
+
+  /**
+   * GETs information about a single concept. Do not override in subclass!
+   *
+   * TODO: Test and evaluate whether concept and/or uri should be used.
+   *
+   * @param {object} config
+   */
+  async _getConcept({ concept, uri, ...config } = {}) {
+    if (!concept && !uri) {
+      throw new Error("Expecting concept or uri to load")
+    }
+    return this._getConcepts({
+      concepts: [concept || { uri }],
+      ...config,
+    })
+  }
+
+  /**
+   * POSTs multiple mappings. Do not override in subclass!
+   *
+   * TODO: Test.
+   *
+   * @param {object} config
+   */
+  async _postMappings({ mappings = [], ...config } = {}) {
+    return Promise.all(mappings.map(mapping => this._postMapping({ mapping, ...config })))
+  }
+
+  /**
+   * DELETEs multiple mappings. Do not override in subclass!
+   *
+   * TODO: Test.
+   *
+   * @param {object} config
+   */
+  async _deleteMappings({ mappings = [], ...config } = {}) {
+    return Promise.all(mappings.map(mapping => this._deleteMapping({ mapping, ...config })))
   }
 
 }
