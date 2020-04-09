@@ -19,7 +19,7 @@ class BaseProvider {
     // Create a dictionary with functionality of registry (defined in subclasses)
     this.has = {}
     // Set default language priority list
-    this.defaultLanguages = "de,en,es,nl,it,fi,pl,ru,cs,jp".split(",")
+    this.defaultLanguages = "en,de,fr,es,nl,it,fi,pl,ru,cs,jp".split(",")
     // This can be set from the outside
     this.languages = []
     // Set auth details to null
@@ -39,7 +39,6 @@ class BaseProvider {
       if (this.has.auth && this.auth.bearerToken && !_.get(config, "headers.Authorization")) {
         _.set(config, "headers.Authorization", `Bearer ${this.auth.bearerToken}`)
       }
-      console.log("Config from interceptor:", config)
 
       // Don't perform http requests if site is used via https
       if (config.url.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
@@ -117,7 +116,8 @@ class BaseProvider {
           options.cancelToken = source.token
         }
         // Call same method with leading underscore
-        const promise = this[`_${method}`](options)
+        // TODO: Is this a good solution?
+        const promise = this.init().then(() => this[`_${method}`](options))
         // Attach cancel method to Promise
         if (source) {
           promise.cancel = () => {
@@ -128,6 +128,35 @@ class BaseProvider {
         return promise
       }
     }
+  }
+
+  /**
+   * Load data about registry via the status endpoint.
+   */
+  async init() {
+    // Save the actual Promise in _init and return it immediately on a second call
+    if (this._init) {
+      return this._init
+    }
+    this._init = (async () => {
+      let status
+      if (_.isString(this.registry.status)) {
+        // Request status endpoint
+        status = await this.axios({
+          method: "get",
+          url: this.registry.status,
+        })
+      } else {
+        // Assume object
+        status = this.registry.status
+      }
+      if (_.isObject(status) && !_.isEmpty(status)) {
+        // Merge status result and registry
+        // (registry always has priority)
+        this.registry = _.merge({}, status, this.registry)
+      }
+    })()
+    return this._init
   }
 
   /**
