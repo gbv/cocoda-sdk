@@ -64,7 +64,14 @@ class BaseProvider {
           data.totalCount = data.length
         }
         // Add URL to array as prop
-        data.url = config.url
+        let url = config.url
+        if (!url.endsWith("?")) {
+          url += "?"
+        }
+        _.forOwn(config.params || {}, (value, key) => {
+          url += `${key}=${encodeURIComponent(value)}&`
+        })
+        data.url = url
       }
 
       // TODO: Return data or whole response here?
