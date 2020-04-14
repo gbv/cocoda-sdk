@@ -155,9 +155,15 @@ class BaseProvider {
         // (registry always has priority)
         this.registry = _.merge({}, status, this.registry)
       }
+      this._setup()
     })()
     return this._init
   }
+
+  /**
+   * Setup to be executed after init. Should be overwritten by subclasses.
+   */
+  _setup() {}
 
   /**
    * Returns a source for a axios cancel token.
