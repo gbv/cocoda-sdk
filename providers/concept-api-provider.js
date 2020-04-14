@@ -7,8 +7,7 @@ const _ = require("lodash")
  */
 class ConceptApiProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
+  _setup() {
     this.has.schemes = !!this.registry.schemes
     this.has.top = !!this.registry.top
     this.has.data = !!this.registry.data
@@ -20,52 +19,62 @@ class ConceptApiProvider extends BaseProvider {
     this.has.search = !!this.registry.search
   }
 
-  _getSchemes() {
+  async _getSchemes(config) {
     if (!this.registry.schemes) {
-      return Promise.resolve([])
+      return []
     }
     if (Array.isArray(this.registry.schemes)) {
-      return Promise.resolve(this.registry.schemes)
+      return this.registry.schemes
     }
-    // TODO: Should we really do it this way?
-    let options = {
-      params: {
-        limit: 500,
-      },
+    // ? Should we really do it this way?
+    if (!_.get(config, "params.limit")) {
+      _.set(config, "params.limit", 500)
     }
-    return this.get(this.registry.schemes, options).then(schemes => schemes || [])
+    return this.axios({
+      method: "get",
+      url: this.registry.schemes,
+      ...config,
+    })
   }
 
-  _getTop(scheme) {
-    if (!this.registry.top || !scheme || !scheme.uri) {
-      return Promise.resolve([])
+  async _getTop({ scheme, ...config }) {
+    // ? Should we return an empty array if scheme is not given?
+    if (!this.registry.top) {
+      return []
     }
-    let options = {
-      params: {
-        uri: scheme.uri,
-        properties: this.properties.default,
-        limit: 10000,
-      },
+    if (Array.isArray(this.registry.top)) {
+      return this.registry.top
     }
-    return this.get(this.registry.top, options).then(top => top || [])
+    if (scheme) {
+      _.set(config, "params.uri", scheme.uri)
+    }
+    // ? Should we really do it this way?
+    if (!_.get(config, "params.limit")) {
+      _.set(config, "params.limit", 10000)
+    }
+    // ? Properties
+    return this.axios({
+      method: "get",
+      url: this.registry.top,
+      ...config,
+    })
   }
 
-  _getConcepts(concepts, { properties } = {}) {
+  async _getConcepts({ concepts, ...config }) {
     if (!this.has.data || !concepts) {
-      return Promise.resolve([])
+      return []
     }
     if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
     let uris = concepts.map(concept => concept.uri).filter(uri => uri != null)
-    properties = properties || this.properties.default
-    let options = {
-      params: {
-        uri: uris.join("|"),
-        properties,
-      },
-    }
-    return this.get(this.registry.data, options).then(concepts => concepts || [])
+    _.set(config, "params.uri", uris.join("|"))
+    // ? Properties
+    return this.axios({
+      method: "get",
+      url: this.registry.data,
+      ...config,
+    })
   }
 
   _getNarrower(concept) {
