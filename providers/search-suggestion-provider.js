@@ -3,6 +3,7 @@ const jskos = require("jskos-tools")
 const _ = require("lodash")
 
 // TODO!!!
+// TODO: Only keep the last 20 results in cache.
 
 /**
  * Provider for search suggestions.
