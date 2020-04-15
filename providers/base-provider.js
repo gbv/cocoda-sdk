@@ -318,7 +318,8 @@ class BaseProvider {
   /**
    * GETs information about a single concept. Do not override in subclass!
    *
-   * TODO: Test and evaluate whether concept and/or uri should be used.
+   * TODO: Evaluate whether concept and/or uri should be used.
+   * ? Returning a single object removes API URL. How should we do this?
    *
    * @param {object} config
    */
@@ -329,7 +330,7 @@ class BaseProvider {
     return this._getConcepts({
       concepts: [concept || { uri }],
       ...config,
-    })
+    }).then(result => result[0])
   }
 
   /**
