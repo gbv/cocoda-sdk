@@ -9,8 +9,7 @@ const _ = require("lodash")
  */
 class MappingsApiProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
+  _setup() {
     this.has.mappings = this.registry.mappings ? {} : false
     if (this.has.mappings) {
       this.has.mappings.read = !!_.get(this.registry, "config.mappings.read", true)
@@ -33,10 +32,9 @@ class MappingsApiProvider extends BaseProvider {
   /**
    * Returns a Promise with a list of mappings from a jskos-server.
    */
-  _getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, options, cancelToken }) {
-    let promise, url
+  async _getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
+    let params = {}, url = this.registry.mappings
     if (!uri) {
-      let params = {}
       if (from) {
         params.from = _.isString(from) ? from : from.uri
       }
@@ -79,43 +77,19 @@ class MappingsApiProvider extends BaseProvider {
       if (order) {
         params.order = order
       }
-      // Build full API URL to be attached to result array later
-      url = this.registry.mappings + "?"
-      _.forOwn(params, (value, key) => {
-        url += `${key}=${encodeURIComponent(value)}&`
-      })
-      url = url.slice(0, url.length - 1)
-      options = Object.assign({}, { params }, options)
-      promise = this.get(this.registry.mappings, options, cancelToken)
     } else {
       // Load single mapping directly from URI if it comes from the current registry
       if (uri.startsWith(this.registry.mappings)) {
-        promise = this.get(uri, options, cancelToken).then(mapping => mapping && [mapping])
         url = uri
       } else {
-        promise = Promise.resolve([])
+        params.identifier = uri
       }
     }
-    return promise.then(mappings => {
-      mappings = mappings || []
-      for (let mapping of mappings) {
-        // Add mapping type if not available
-        mapping.type = mapping.type || [jskos.defaultMappingType.uri]
-        // Add JSKOS mapping identifiers
-        mapping = jskos.addMappingIdentifiers(mapping)
-        // Add fromScheme and toScheme if missing
-        if (!mapping.fromScheme) {
-          mapping.fromScheme = _.get(mapping, "from.memberSet[0].inScheme[0]")
-        }
-        if (!mapping.toScheme) {
-          mapping.toScheme = _.get(mapping, "to.memberSet[0].inScheme[0]")
-        }
-      }
-      // Add API URL as property to result array
-      if (url) {
-        mappings.url = url
-      }
-      return mappings
+    return this.axios({
+      ...config,
+      method: "get",
+      url,
+      params,
     })
   }
 
