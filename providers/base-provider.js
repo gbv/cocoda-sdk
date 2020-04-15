@@ -286,6 +286,7 @@ class BaseProvider {
     return concordances
   }
   adjustMapping(mapping) {
+    // TODO: Add default type
     // Add fromScheme and toScheme if missing
     for (let side of ["from", "to"]) {
       let sideScheme = `${side}Scheme`
