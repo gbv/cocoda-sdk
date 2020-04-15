@@ -31,9 +31,9 @@ class ConceptApiProvider extends BaseProvider {
       _.set(config, "params.limit", 500)
     }
     return this.axios({
+      ...config,
       method: "get",
       url: this.registry.schemes,
-      ...config,
     })
   }
 
@@ -54,9 +54,9 @@ class ConceptApiProvider extends BaseProvider {
     }
     // ? Properties
     return this.axios({
+      ...config,
       method: "get",
       url: this.registry.top,
-      ...config,
     })
   }
 
@@ -71,77 +71,94 @@ class ConceptApiProvider extends BaseProvider {
     _.set(config, "params.uri", uris.join("|"))
     // ? Properties
     return this.axios({
+      ...config,
       method: "get",
       url: this.registry.data,
-      ...config,
     })
   }
 
-  _getNarrower(concept) {
+  async _getNarrower({ concept, ...config }) {
     if (!this.registry.narrower || !concept || !concept.uri) {
-      return Promise.resolve([])
+      return []
     }
-    let options = {
-      params: {
-        uri: concept.uri,
-        properties: this.properties.default,
-        limit: 10000,
-      },
+    _.set(config, "params.uri", concept.uri)
+    // ? Properties
+    // ? Should we really do it this way?
+    if (!_.get(config, "params.limit")) {
+      _.set(config, "params.limit", 10000)
     }
-    return this.get(this.registry.narrower, options).then(narrower => narrower || [])
+    return this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.narrower,
+    })
   }
 
-  _getAncestors(concept) {
+  async _getAncestors({ concept, ...config }) {
     if (!this.registry.ancestors || !concept || !concept.uri) {
-      return Promise.resolve([])
+      return []
     }
-    let options = {
-      params: {
-        uri: concept.uri,
-        properties: this.properties.default,
-      },
+    _.set(config, "params.uri", concept.uri)
+    // ? Properties
+    // ? Should we really do it this way?
+    if (!_.get(config, "params.limit")) {
+      _.set(config, "params.limit", 10000)
     }
-    return this.get(this.registry.ancestors, options).then(ancestors => ancestors || [])
+    return this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.ancestors,
+    })
   }
 
-  _suggest(search, { scheme, limit, use = "notation,label", types = [], sort = "score", cancelToken } = {}) {
-    limit = limit || this.registry.suggestResultLimit || 100
+  _suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this.registry.suggest || !search) {
-      return Promise.resolve(["", [], [], []])
+      return ["", [], [], []]
     }
-    let options = {
-      params: {
-        search: search,
-        voc: _.get(scheme, "uri", ""),
-        limit: limit,
-        count: limit, // Some endpoints use count instead of limit
-        use,
-        type: types.join("|"),
-        sort,
-      },
-    }
+    limit = limit || this.registry.suggestResultLimit || 100
     // Some registries use URL templates with {searchTerms}
     let url = this.registry.suggest.replace("{searchTerms}", search)
-    return this.get(url, options, cancelToken).then(result => result || ["", [], [], []])
+    return this.axios({
+      ...config,
+      params: {
+        ...{
+          voc: _.get(scheme, "uri", ""),
+          limit: limit,
+          count: limit, // Some endpoints use count instead of limit
+          use,
+          type: types.join("|"),
+          sort,
+        },
+        ...config.params,
+        search,
+      },
+      method: "get",
+      url,
+    })
   }
 
   /**
    * Search not yet implemented.
    */
-  _search() {
-    return Promise.resolve([])
+  async _search() {
+    return []
   }
 
-  _getTypes(scheme) {
+  async _getTypes({ scheme, ...config }) {
     if (!this.registry.types) {
-      return Promise.resolve([])
+      return []
     }
     if (Array.isArray(this.registry.types)) {
-      return Promise.resolve(this.registry.types)
+      return this.registry.types
     }
-    return this.get(this.registry.types, {
-      uri: _.get(scheme, "uri"),
-    }).then(types => types || [])
+    if (scheme && scheme.uri) {
+      _.set(config, "params.uri", scheme.uri)
+    }
+    return this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.types,
+    })
   }
 
 }
