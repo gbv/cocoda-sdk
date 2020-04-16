@@ -4,6 +4,7 @@ const axios = require("axios")
 
 /**
  * TODO: Documentation.
+ * TODO: Adjustment methods.
  */
 class BaseProvider {
 
@@ -112,11 +113,19 @@ class BaseProvider {
     ]
     for (let method of requestMethods) {
       // Make sure underscore methods exist, but return a rejecting Promise
-      if (!this[`_${method}`]) {
+      const existingMethod = this[method] && this[method].bind(this)
+      if (!existingMethod) {
         // TODO: Use proper error object
-        this[`_${method}`] = () => Promise.reject("Method not implemented")
+        this[method] = () => Promise.reject("Method not implemented")
+        continue
       }
       this[method] = (options = {}) => {
+        // Allow calling the "raw" method without adjustments
+        if (options._raw) {
+          delete options._raw
+          return existingMethod(options)
+        }
+        console.log("overwritten method", method)
         let source
         if (!options.cancelToken) {
           source = this.getCancelTokenSource()
@@ -124,7 +133,7 @@ class BaseProvider {
         }
         // Call same method with leading underscore
         // TODO: Is this a good solution?
-        const promise = this.init().then(() => this[`_${method}`](options))
+        const promise = this.init().then(() => existingMethod(options))
         // Attach cancel method to Promise
         if (source) {
           promise.cancel = () => {
@@ -324,36 +333,33 @@ class BaseProvider {
    *
    * @param {object} config
    */
-  async _getConcept({ concept, uri, ...config } = {}) {
+  async getConcept({ concept, uri, ...config } = {}) {
     if (!concept && !uri) {
       throw new Error("Expecting concept or uri to load")
     }
-    return this._getConcepts({
+    return this.getConcepts({
       concepts: [concept || { uri }],
       ...config,
+      _raw: true,
     }).then(result => result[0])
   }
 
   /**
    * POSTs multiple mappings. Do not override in subclass!
    *
-   * TODO: Test.
-   *
    * @param {object} config
    */
-  async _postMappings({ mappings = [], ...config } = {}) {
-    return Promise.all(mappings.map(mapping => this._postMapping({ mapping, ...config })))
+  async postMappings({ mappings = [], ...config } = {}) {
+    return Promise.all(mappings.map(mapping => this.postMapping({ mapping, ...config, _raw: true })))
   }
 
   /**
    * DELETEs multiple mappings. Do not override in subclass!
    *
-   * TODO: Test.
-   *
    * @param {object} config
    */
-  async _deleteMappings({ mappings = [], ...config } = {}) {
-    return Promise.all(mappings.map(mapping => this._deleteMapping({ mapping, ...config })))
+  async deleteMappings({ mappings = [], ...config } = {}) {
+    return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
   }
 
 }

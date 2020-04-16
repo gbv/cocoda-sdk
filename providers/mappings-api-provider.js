@@ -29,17 +29,18 @@ class MappingsApiProvider extends BaseProvider {
     this.has.auth = _.get(this.registry, "config.auth.key") != null
   }
 
-  async _getMapping({ mapping, ...config }) {
-    return this._getMappings({
+  async getMapping({ mapping, ...config }) {
+    return this.getMappings({
       ...config,
       uri: mapping.uri,
+      _raw: true,
     })
   }
 
   /**
    * Returns a Promise with a list of mappings from a jskos-server.
    */
-  async _getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
     let params = {}, url = this.registry.mappings
     if (!uri) {
       if (from) {
@@ -100,7 +101,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _postMapping({ mapping, ...config }) {
+  async postMapping({ mapping, ...config }) {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     return this.axios({
@@ -111,7 +112,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _putMapping({ mapping, ...config }) {
+  async putMapping({ mapping, ...config }) {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
@@ -126,7 +127,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _patchMapping({ mapping, ...config }) {
+  async patchMapping({ mapping, ...config }) {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
@@ -141,7 +142,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _deleteMapping({ mapping, ...config }) {
+  async deleteMapping({ mapping, ...config }) {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
@@ -155,7 +156,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _getAnnotations({ target, ...config }) {
+  async getAnnotations({ target, ...config }) {
     if (target) {
       _.set(config, "params.target", target)
     }
@@ -166,7 +167,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _postAnnotation({ annotation, ...config }) {
+  async postAnnotation({ annotation, ...config }) {
     return this.axios({
       ...config,
       method: "post",
@@ -175,7 +176,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _putAnnotation({ annotation, ...config }) {
+  async putAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
       throw new Error("Invalid URI for PUT request.")
@@ -188,7 +189,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _patchAnnotation({ annotation, ...config }) {
+  async patchAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
       throw new Error("Invalid URI for PATCH request.")
@@ -201,7 +202,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _deleteAnnotation({ annotation, ...config }) {
+  async deleteAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
       throw new Error("Invalid URI for DELETE request.")
@@ -213,7 +214,7 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  async _getConcordances(config) {
+  async getConcordances(config) {
     return this.axios({
       ...config,
       method: "get",

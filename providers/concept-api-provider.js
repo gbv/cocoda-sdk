@@ -19,7 +19,7 @@ class ConceptApiProvider extends BaseProvider {
     this.has.search = !!this.registry.search
   }
 
-  async _getSchemes(config) {
+  async getSchemes(config) {
     if (!this.registry.schemes) {
       return []
     }
@@ -37,7 +37,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _getTop({ scheme, ...config }) {
+  async getTop({ scheme, ...config }) {
     // ? Should we return an empty array if scheme is not given?
     if (!this.registry.top) {
       return []
@@ -60,7 +60,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _getConcepts({ concepts, ...config }) {
+  async getConcepts({ concepts, ...config }) {
     if (!this.has.data || !concepts) {
       return []
     }
@@ -77,7 +77,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _getNarrower({ concept, ...config }) {
+  async getNarrower({ concept, ...config }) {
     if (!this.registry.narrower || !concept || !concept.uri) {
       return []
     }
@@ -94,7 +94,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _getAncestors({ concept, ...config }) {
+  async getAncestors({ concept, ...config }) {
     if (!this.registry.ancestors || !concept || !concept.uri) {
       return []
     }
@@ -111,7 +111,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  _suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
+  async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this.registry.suggest || !search) {
       return ["", [], [], []]
     }
@@ -140,11 +140,11 @@ class ConceptApiProvider extends BaseProvider {
   /**
    * Search not yet implemented.
    */
-  async _search() {
-    return []
+  async search() {
+    throw new Error("Method not implemented")
   }
 
-  async _getTypes({ scheme, ...config }) {
+  async getTypes({ scheme, ...config }) {
     if (!this.registry.types) {
       return []
     }
