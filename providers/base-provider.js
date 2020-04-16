@@ -99,15 +99,15 @@ class BaseProvider {
       "postMapping",
       "postMappings",
       "putMapping",
-      // "patchMapping",
+      "patchMapping",
       "deleteMapping",
       "deleteMappings",
       // Annotations
-      "getAnnotation",
+      // "getAnnotation",
       "getAnnotations",
       "postAnnotation",
       "putAnnotation",
-      // "patchAnnotation",
+      "patchAnnotation",
       "deleteAnnotation",
     ]
     for (let method of requestMethods) {
