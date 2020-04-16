@@ -2,10 +2,10 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 
-// TODO!!!
-
 /**
  * For APIs that provide concordances and mappings in JSKOS format.
+ *
+ * TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
  */
 class MappingsApiProvider extends BaseProvider {
 
@@ -27,6 +27,13 @@ class MappingsApiProvider extends BaseProvider {
       this.has.annotations.delete = !!_.get(this.registry, "config.annotations.delete")
     }
     this.has.auth = _.get(this.registry, "config.auth.key") != null
+  }
+
+  async _getMapping({ mapping, ...config }) {
+    return this._getMappings({
+      ...config,
+      uri: mapping.uri,
+    })
   }
 
   /**
@@ -93,83 +100,127 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
-  /**
-   * Saves a mapping with http post or http put. Returns a Promise with the saved mapping.
-   *
-   * @param {*} mapping
-   * @param {*} original
-   */
-  _saveMapping(mapping, original) {
+  async _postMapping({ mapping, ...config }) {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
-    let uri = _.get(original, "uri")
-    if (uri) {
-      // If there is a URI, use PUT to update the mapping.
-      return this.put(uri, mapping)
-    } else {
-      // Otherwise, use POST to save the mapping.
-      return this.post(this.registry.mappings, mapping)
-    }
-  }
-
-  /**
-   * Removes a mapping with http delete. Returns a Promise with a boolean whether removal was successful.
-   */
-  _removeMapping(mapping) {
-    let uri = _.get(mapping, "uri")
-    if (uri) {
-      return this.delete(uri).then(result => result === undefined ? false : true)
-    } else {
-      return Promise.resolve(false)
-    }
-  }
-
-  /**
-   * Adds a new annotation with http POST.
-   */
-  _addAnnotation(annotation) {
-    return this.post(this.registry.annotations, annotation)
-  }
-
-  /**
-   * Edits an annotation. If patch is given, http PATCH will be used, otherwise PUT.
-   */
-  _editAnnotation(annotation, patch) {
-    let uri = _.get(annotation, "id")
-    if (uri) {
-      if (patch) {
-        return this.patch(uri, patch)
-      } else {
-        return this.put(uri, annotation)
-      }
-    } else {
-      return Promise.resolve(null)
-    }
-  }
-
-  /**
-   * Removes an annotation with http DELETE. Returns a Promise with a boolean whether removal was successful.
-   */
-  _removeAnnotation(annotation) {
-    let uri = _.get(annotation, "id")
-    if (uri) {
-      return this.delete(uri).then(result => result === undefined ? false : true)
-    } else {
-      return Promise.resolve(false)
-    }
-  }
-
-  /**
-   * Returns a promise with a list of concordances.
-   */
-  _getConcordances() {
-    if (!this.registry.concordances) {
-      return Promise.resolve([])
-    }
-    return this.get(this.registry.concordances).then(concordances => {
-      return concordances
+    return this.axios({
+      ...config,
+      method: "post",
+      url: this.registry.mappings,
+      data: mapping,
     })
   }
+
+  async _putMapping({ mapping, ...config }) {
+    mapping = jskos.minifyMapping(mapping)
+    mapping = jskos.addMappingIdentifiers(mapping)
+    const uri = mapping.uri
+    if (!uri || !uri.startsWith(this.registry.mappings)) {
+      throw new Error("Invalid URI for PUT request.")
+    }
+    return this.axios({
+      ...config,
+      method: "put",
+      url: uri,
+      data: mapping,
+    })
+  }
+
+  async _patchMapping({ mapping, ...config }) {
+    mapping = jskos.minifyMapping(mapping)
+    mapping = jskos.addMappingIdentifiers(mapping)
+    const uri = mapping.uri
+    if (!uri || !uri.startsWith(this.registry.mappings)) {
+      throw new Error("Invalid URI for PATCH request.")
+    }
+    return this.axios({
+      ...config,
+      method: "patch",
+      url: uri,
+      data: mapping,
+    })
+  }
+
+  async _deleteMapping({ mapping, ...config }) {
+    mapping = jskos.minifyMapping(mapping)
+    mapping = jskos.addMappingIdentifiers(mapping)
+    const uri = mapping.uri
+    if (!uri || !uri.startsWith(this.registry.mappings)) {
+      throw new Error("Invalid URI for DELETE request.")
+    }
+    return this.axios({
+      ...config,
+      method: "delete",
+      url: uri,
+    })
+  }
+
+  async _getAnnotations({ target, ...config }) {
+    if (target) {
+      _.set(config, "params.target", target)
+    }
+    return this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.annotations,
+    })
+  }
+
+  async _postAnnotation({ annotation, ...config }) {
+    return this.axios({
+      ...config,
+      method: "post",
+      url: this.registry.annotations,
+      data: annotation,
+    })
+  }
+
+  async _putAnnotation({ annotation, ...config }) {
+    const uri = annotation.id
+    if (!uri || !uri.startsWith(this.registry.annotations)) {
+      throw new Error("Invalid URI for PUT request.")
+    }
+    return this.axios({
+      ...config,
+      method: "put",
+      url: uri,
+      data: annotation,
+    })
+  }
+
+  async _patchAnnotation({ annotation, ...config }) {
+    const uri = annotation.id
+    if (!uri || !uri.startsWith(this.registry.annotations)) {
+      throw new Error("Invalid URI for PATCH request.")
+    }
+    return this.axios({
+      ...config,
+      method: "patch",
+      url: uri,
+      data: annotation,
+    })
+  }
+
+  async _deleteAnnotation({ annotation, ...config }) {
+    const uri = annotation.id
+    if (!uri || !uri.startsWith(this.registry.annotations)) {
+      throw new Error("Invalid URI for DELETE request.")
+    }
+    return this.axios({
+      ...config,
+      method: "delete",
+      url: uri,
+    })
+  }
+
+  async _getConcordances(config) {
+    return this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.concordances,
+    })
+  }
+
 }
 
 MappingsApiProvider.providerName = "MappingsApi"
