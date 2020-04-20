@@ -2,22 +2,19 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 
-// TODO!!!
-
 /**
  * Skosmos API Wrapper.
  */
 class SkosmosApiProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
+  _setup() {
     this.has.schemes = true
     this.has.top = false
     this.has.data = true
     this.has.concepts = true
     this.has.narrower = true
     this.has.ancestors = true
-    this.has.types = false
+    this.has.types = true // ?
     this.has.suggest = true
     this.has.search = true
     // Set concepts and topConcepts for schemes
@@ -27,15 +24,23 @@ class SkosmosApiProvider extends BaseProvider {
     }
   }
 
-  async _getSchemes() {
+  async getSchemes({ ...config }) {
+    // TODO: Re-evaluate!
     if (!this.registry.loadSchemeInfo) {
-      return this.registry.schemes
+      const result = this.registry.schemes
+      result.totalCount = result.length
+      return result
     }
     const schemes = []
+    // TODO
     const language = this.languages[0] || "en"
     for (let scheme of this.registry.schemes || []) {
       const url = `${this.registry.api}${scheme.VOCID}/?lang=${language}`
-      const data = await this.get(url)
+      const data = await this.axios({
+        ...config,
+        method: "get",
+        url,
+      })
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       if (resultScheme && resultScheme.prefLabel) {
         _.set(scheme, `prefLabel.${language}`, resultScheme.prefLabel)
@@ -43,14 +48,15 @@ class SkosmosApiProvider extends BaseProvider {
       // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
     }
+    schemes.totalCount = schemes.length
     return schemes
   }
 
-  async _getTop() {
+  async getTop() {
     return []
   }
 
-  getDataUrl(concept, { addFormatParameter = true } = {}) {
+  _getDataUrl(concept, { addFormatParameter = true } = {}) {
     const scheme = _.get(concept, "inScheme[0]")
     if (!concept.uri || !scheme || !scheme.VOCID) {
       return null
@@ -58,17 +64,20 @@ class SkosmosApiProvider extends BaseProvider {
     return `${this.registry.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
   }
 
-  async _getConcepts(concepts) {
+  async getConcepts({ concepts, ...config }) {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
     }
     const newConcepts = []
     for (let concept of concepts) {
-      const url = this.getDataUrl(concept, { addFormatParameter: false })
+      const url = this._getDataUrl(concept, { addFormatParameter: false })
       if (!url) {
         continue
       }
-      const result = await this.get(url, {
+      const result = await this.axios({
+        ...config,
+        method: "get",
+        url,
         params: {
           uri: concept.uri,
           format: "application/json",
@@ -98,8 +107,11 @@ class SkosmosApiProvider extends BaseProvider {
           if (concept[type] && !_.isArray(concept[type])) {
             concept[type] = [concept[type]]
           }
+          if (!concept[type]) {
+            concept[type] = []
+          }
           // Set prefLabel for broader/narrower
-          for (let relative of concept[type] || []) {
+          for (let relative of concept[type]) {
             const resultRelative = result.graph.find(c => jskos.compare(c, relative))
             if (resultRelative) {
               for (let prefLabel of resultRelative.prefLabel || []) {
@@ -139,17 +151,18 @@ class SkosmosApiProvider extends BaseProvider {
     return newConcepts
   }
 
-  async _getNarrower() {
+  async getNarrower() {
     return []
   }
 
-  async _getAncestors() {
+  async getAncestors() {
     return []
   }
 
-  async _suggest(search, options = {}) {
-    const concepts = await this._search(search, options)
-    const result = [search, [], [], []]
+  async suggest(config) {
+    config._raw = true
+    const concepts = await this.search(config)
+    const result = [config.search, [], [], []]
     for (let concept of concepts) {
       const notation = jskos.notation(concept)
       const label = jskos.prefLabel(concept)
@@ -160,23 +173,20 @@ class SkosmosApiProvider extends BaseProvider {
     return result
   }
 
-  /**
-   * Search not yet implemented.
-   */
-  async _search(search, { scheme, limit, types = [], cancelToken } = {}) {
+  async search({ search, scheme, limit, types = [], ...config }) {
     if (!scheme || !scheme.VOCID) {
       return []
     }
     const url = `${this.registry.api}${scheme.VOCID}/search`
-    const options = {
-      params: {
-        query: `${search}*`,
-        unique: 1,
-        maxhits: limit || 100,
-        type: types.join(" "),
-      },
-    }
-    const response = await this.get(url, options, cancelToken)
+    _.set(config, "params.query", `${search}*`)
+    _.set(config, "params.unique", 1)
+    _.set(config, "params.maxhits", limit || 100)
+    _.set(config, "params.type", types.join(" "))
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     if (!response) {
       return []
     }
@@ -199,14 +209,22 @@ class SkosmosApiProvider extends BaseProvider {
     return concepts
   }
 
-  async _getTypes(scheme) {
+  async getTypes({ scheme, ...config }) {
     if (!scheme || !scheme.VOCID) {
       return []
     }
     const types = []
     const url = `${this.registry.api}${scheme.VOCID}/types`
-    const response = await this.get(url)
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     for (let type of (response && response.types) || []) {
+      // Skip SKOS type Concept
+      if (type.uri == "http://www.w3.org/2004/02/skos/core#Concept") {
+        continue
+      }
       // Set prefLabel if available
       if (type.label) {
         type.prefLabel = {
@@ -216,8 +234,9 @@ class SkosmosApiProvider extends BaseProvider {
       }
       types.push(type)
     }
-    // Filter SKOS type Concept
-    return types.filter(type => type.uri != "http://www.w3.org/2004/02/skos/core#Concept")
+    types.totalCount = types.length
+    types.url = url
+    return types
   }
 
 }
