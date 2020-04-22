@@ -13,8 +13,7 @@ const uriPrefix = "urn:uuid:"
  */
 class LocalMappingsProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
+  _setup() {
     this.has.mappings = {
       read: true,
       create: true,
@@ -70,7 +69,7 @@ class LocalMappingsProvider extends BaseProvider {
 
   /**
    * Returns a Promise that returns an object { mappings, done } with the local mappings and a done function that is supposed to be called when the transaction is finished.
-   * This prevents conflicts when _saveMapping is called multiple times simultaneously.
+   * This prevents conflicts when saveMapping is called multiple times simultaneously.
    *
    * TODO: There might be a better solution for this...
    */
@@ -108,8 +107,9 @@ class LocalMappingsProvider extends BaseProvider {
    * Returns a Promise with a list of local mappings.
    *
    * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).
+   * TODO: Check if this still works.
    */
-  _getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
+  getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
     let params = {}
     if (from) {
       params.from = _.isString(from) ? from : from.uri
@@ -265,6 +265,17 @@ class LocalMappingsProvider extends BaseProvider {
     })
   }
 
+  // TODO: These are lazy implementations of post/put/patch
+  async postMapping({ mapping }) {
+    return this._saveMapping(mapping)
+  }
+  async putMapping({ mapping }) {
+    return this._saveMapping(mapping, mapping)
+  }
+  async patchMapping({ mapping }) {
+    return this._saveMapping(mapping, mapping)
+  }
+
   /**
    * Saves mappings to local storage. Returns a Promise with a list of mappings that were saved.
    *
@@ -324,22 +335,20 @@ class LocalMappingsProvider extends BaseProvider {
   /**
    * Removes mappings from local storage. Returns a Promise with a list of mappings that were removed.
    */
-  _removeMapping(mapping) {
-    return this.getMappingsQueue().then(({ mappings: localMappings, done }) => {
-      // Remove by content identifier
+  async deleteMapping({ mapping }) {
+    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    try {
+      // Remove by URI
       localMappings = localMappings.filter(m => m.uri != mapping.uri)
       // Minify mappings before saving back to local storage
       localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
-      return localforage.setItem(this.localStorageKey, localMappings).then(() => {
-        return mapping
-      }).catch(error => {
-        console.error("local-mappings - error in removeMapping:", error)
-        return null
-      }).then(mapping => {
-        done()
-        return mapping
-      })
-    })
+      await localforage.setItem(this.localStorageKey, localMappings)
+    } catch(error) {
+      console.error("local-mappings - error in removeMapping:", error)
+    }
+    done()
+    // ?
+    return mapping
   }
 }
 
