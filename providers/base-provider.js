@@ -125,7 +125,6 @@ class BaseProvider {
           delete options._raw
           return existingMethod(options)
         }
-        console.log("overwritten method", method)
         let source
         if (!options.cancelToken) {
           source = this.getCancelTokenSource()
