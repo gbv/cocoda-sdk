@@ -30,14 +30,53 @@ npm i gbv/cocoda-sdk#abc1def
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a singleton, that means that the same object is used anywhere in a project where `cocoda-sdk` is imported.
+`cocoda-sdk` exports a default instance as a singleton, that means that the same object is used anywhere in a project where `cocoda-sdk` is imported.
 
 ```js
 const cdk = require("cocoda-sdk")
 ```
 
+### Configuration
+`cocoda-sdk` takes a `config` option which is equivalent to the configuration file in [Cocoda](https://github.com/gbv/cocoda).
+
+```js
+const config = require("./config") // Import configuration from somewhere
+const cdk = require("cocoda-sdk")
+cdk.config = config
+```
+or
+```js
+const config = require("./config") // Import configuration from somewhere
+const cdk = require("cocoda-sdk")(config)
+```
+
+This should be done only once because certain steps are performed after setting the config file.
+
 ### Methods
-...
+`cocoda-sdk`'s "providers" (which are basically different types of APIs) offer several methods to access the API that use the [RORO pattern](https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/) ("receive an object, return an object"), i.e. every method only has a single object parameter and the properties of that object are the actual parameters for the method.
+
+All of these provider methods are also available on the default instance of `cocoda-sdk`, only that they require an additional property `registry`.
+
+Simplest example:
+```js
+cdk.getMappings({ registry })
+```
+
+It would also be possible to use the provider directly on the registry:
+```js
+registry.provider.getMappings()
+```
+
+<!-- TODO -->
+
+### Multiple Instances
+If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
+
+```js
+const newCdk = cdk.createInstance({ newConfig })
+```
+
+It will be completely separate from the default instance.
 
 ## Maintainers
 - [@stefandesu](https://github.com/stefandesu)
