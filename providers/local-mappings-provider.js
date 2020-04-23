@@ -2,11 +2,9 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 const localforage = require("localforage")
-const uuid = require("uuid/v4")
+const { v4: uuid } = require("uuid")
 
 const uriPrefix = "urn:uuid:"
-
-// TODO!!!
 
 /**
  * For saving and retrieving mappings from the browser's local storage.
@@ -107,9 +105,9 @@ class LocalMappingsProvider extends BaseProvider {
    * Returns a Promise with a list of local mappings.
    *
    * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).
-   * TODO: Check if this still works.
+   * TODO: Clean up and use async/await
    */
-  getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
     let params = {}
     if (from) {
       params.from = _.isString(from) ? from : from.uri
@@ -265,71 +263,104 @@ class LocalMappingsProvider extends BaseProvider {
     })
   }
 
-  // TODO: These are lazy implementations of post/put/patch
   async postMapping({ mapping }) {
-    return this._saveMapping(mapping)
+    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    // Set URI if necessary
+    if (!mapping.uri || !mapping.uri.startsWith(uriPrefix)) {
+      if (mapping.uri) {
+        // Keep previous URI in identifier
+        if (!mapping.identifier) {
+          mapping.identifier = []
+        }
+        mapping.identifier.push(mapping.uri)
+      }
+      mapping.uri = `${uriPrefix}${uuid()}`
+    }
+    // Check if mapping already exists => throw error
+    if (localMappings.find(m => m.uri == mapping.uri)) {
+      done()
+      // TODO: Proper errors
+      throw new Error("URI already exists in local mappings")
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = (new Date()).toISOString()
+    }
+    if (!mapping.modified) {
+      mapping.modified = mapping.created
+    }
+    // Add to local mappings
+    localMappings.push(mapping)
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      // TODO: Proper errors
+      done()
+      throw new Error(error)
+    }
   }
   async putMapping({ mapping }) {
-    return this._saveMapping(mapping, mapping)
+    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    // Check if mapping already exists => throw error if it doesn't
+    const index = localMappings.findIndex(m => m.uri == mapping.uri)
+    if (index == -1) {
+      done()
+      // TODO: Proper errors
+      throw new Error("Mapping not found in local mappings")
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = localMappings[index].created
+    }
+    mapping.modified = (new Date()).toISOString()
+    // Add to local mappings
+    localMappings[index] = mapping
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      // TODO: Proper errors
+      done()
+      throw new Error(error)
+    }
   }
   async patchMapping({ mapping }) {
-    return this._saveMapping(mapping, mapping)
-  }
-
-  /**
-   * Saves mappings to local storage. Returns a Promise with a list of mappings that were saved.
-   *
-   * @param {*} mappings - list of mappings in object form: { mapping, original }
-   */
-  _saveMapping(mapping, original) {
-    return this.getMappingsQueue().then(({ mappings: localMappings, done }) => {
-      if (!mapping.created) {
-        mapping.created = (new Date()).toISOString()
-      }
-      if (!mapping.modified) {
-        mapping.modified = mapping.created
-      }
-      if (original) {
-        mapping.modified = (new Date()).toISOString()
-      }
-
-      let previousIndex = original ? localMappings.findIndex(m => m.uri == original.uri) : -1
-
-      // Set URI if necessary
-      if (!mapping.uri || !mapping.uri.startsWith(uriPrefix)) {
-        if (mapping.uri) {
-          // Keep previous URI in identifier
-          if (!mapping.identifier) {
-            mapping.identifier = []
-          }
-          mapping.identifier.push(mapping.uri)
-        }
-        mapping.uri = `${uriPrefix}${uuid()}`
-      }
-
-      if (original) {
-        localMappings = localMappings.filter(m => m.uri != original.uri)
-      }
-      if (original && previousIndex != -1) {
-        // Insert mapping at previous index
-        localMappings.splice(previousIndex, 0, mapping)
-      } else {
-        // Insert mapping at the end
-        localMappings.push(mapping)
-      }
-
-      // Minify mappings before saving back to local storage
-      localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
-      return localforage.setItem(this.localStorageKey, localMappings).then(() => {
-        return mapping
-      }).catch(error => {
-        console.error("local-mappings - error in saveMapping:", error)
-        return null
-      }).then(mapping => {
-        done()
-        return mapping
-      })
-    })
+    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    // Check if mapping already exists => throw error if it doesn't
+    const index = localMappings.findIndex(m => m.uri == mapping.uri)
+    if (index == -1) {
+      done()
+      // TODO: Proper errors
+      throw new Error("Mapping not found in local mappings")
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = localMappings[index].created
+    }
+    mapping.modified = (new Date()).toISOString()
+    // Add to local mappings
+    localMappings[index] = Object.assign(localMappings[index], mapping)
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      // TODO: Proper errors
+      done()
+      throw new Error(error)
+    }
   }
 
   /**
