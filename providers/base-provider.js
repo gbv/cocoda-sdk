@@ -101,7 +101,15 @@ class BaseProvider {
         }
         // Call same method with leading underscore
         // TODO: Is this a good solution?
-        const promise = this.init().then(() => existingMethod(options))
+        const promise = this.init()
+          .then(() => existingMethod(options))
+          // Add totalCount to arrays
+          .then(result => {
+            if (_.isArray(result) && result.totalCount === undefined) {
+              result.totalCount = result.length
+            }
+            return result
+          })
         // Attach cancel method to Promise
         if (source) {
           promise.cancel = () => {
