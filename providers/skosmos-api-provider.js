@@ -28,7 +28,6 @@ class SkosmosApiProvider extends BaseProvider {
     // TODO: Re-evaluate!
     if (!this.registry.loadSchemeInfo) {
       const result = this.registry.schemes
-      result.totalCount = result.length
       return result
     }
     const schemes = []
@@ -48,7 +47,6 @@ class SkosmosApiProvider extends BaseProvider {
       // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
     }
-    schemes.totalCount = schemes.length
     return schemes
   }
 
@@ -234,7 +232,6 @@ class SkosmosApiProvider extends BaseProvider {
       }
       types.push(type)
     }
-    types.totalCount = types.length
     types.url = url
     return types
   }
