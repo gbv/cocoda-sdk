@@ -2,53 +2,54 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 
-// TODO!!!
-
 /**
  * For APIs that provide occurrences in JSKOS format.
+ *
+ * TODO: Modernize.
  */
 class OccurrencesApiProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
-    this.occurrencesCache = []
+  _setup() {
+    this._occurrencesCache = []
+    this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
   }
 
-  occurrencesIsSupported(scheme) {
-    let promise
-    if (this.occurrencesSupportedSchemes && this.occurrencesSupportedSchemes.length) {
-      promise = Promise.resolve(this.occurrencesSupportedSchemes)
+  async _occurrencesIsSupported(scheme) {
+    if (this._occurrencesSupportedSchemes && this._occurrencesSupportedSchemes.length) {
+      // No action needed
     } else {
       // Load supported schemes from API
-      promise = this.http.get(this.registry.occurrences + "voc").then(response => {
-        this.occurrencesSupportedSchemes = _.get(response, "data", [])
-        return this.occurrencesSupportedSchemes
-      }).catch(() => {
-        // Set to empty list, will try to load again on next request.
-        this.occurrencesSupportedSchemes = []
-        return this.occurrencesSupportedSchemes
-      })
-    }
-    return promise.then(supportedSchemes => {
-      let supported = false
-      for (let supportedScheme of supportedSchemes) {
-        if (jskos.compare(scheme, supportedScheme)) {
-          supported = true
-        }
+      try {
+        const url = this.registry.occurrences + "voc"
+        const data = await this.axios({
+          method: "get",
+          url,
+        })
+        console.log(url)
+        this._occurrencesSupportedSchemes = data || []
+      } catch(error) {
+        // Do nothing so that it is tried again next time
+        // TODO: Save number of failures?
       }
-      return supported
-    })
+    }
+    let supported = false
+    for (let supportedScheme of this._occurrencesSupportedSchemes) {
+      if (jskos.compare(scheme, supportedScheme)) {
+        supported = true
+      }
+    }
+    return supported
   }
 
   /**
    * Returns a Promise with a list of occurrences.
    */
-  _getOccurrences({ from, to, concepts }) {
+  async getOccurrences({ from, to, concepts, ...config }) {
     let promises = []
-    concepts = (concepts || []).concat([from, to])
+    concepts = (concepts || []).concat([from, to]).filter(c => !!c)
     for (let concept of concepts) {
-      promises.push(this.occurrencesIsSupported(_.get(concept, "inScheme[0]")).then(supported => {
+      promises.push(this._occurrencesIsSupported(_.get(concept, "inScheme[0]")).then(supported => {
         if (supported && concept.uri) {
           return concept.uri
         } else {
@@ -56,64 +57,61 @@ class OccurrencesApiProvider extends BaseProvider {
         }
       }))
     }
-    return Promise.all(promises).then(uris => {
-      uris = uris.filter(uri => uri != null)
-      if (uris.length == 0) {
-        return []
-      }
-      let promises = []
-      for (let uri of uris) {
-        promises.push(this.__getOccurrences({
-          params: {
-            member: uri,
-            scheme: "*",
-            threshold: 5,
-          },
-        }).catch(() => {
-          return []
-        }))
-      }
-      // Another request for co-occurrences between two specific concepts
-      if (uris.length > 1) {
-        let urisString = uris.join(" ")
-        promises.push(this.__getOccurrences({
-          params: {
-            member: urisString,
-            threshold: 5,
-          },
-        }).catch(() => {
-          return []
-        }))
-      }
-      return Promise.all(promises)
-    }).then(results => {
-      let occurrences = _.concat([], ...results)
-      // Filter duplicates
-      let existingUris = []
-      let indexesToDelete = []
-      for (let i = 0; i < occurrences.length; i += 1) {
-        let occurrence = occurrences[i]
-        if (!occurrence) {
-          continue
-        }
-        let uris = occurrence.memberSet.reduce((total, current) => total.concat(current.uri), []).sort().join(" ")
-        if (existingUris.includes(uris)) {
-          indexesToDelete.push(i)
-        } else {
-          existingUris.push(uris)
-        }
-      }
-      indexesToDelete.forEach(value => {
-        delete occurrences[value]
-      })
-      // Filter null values
-      occurrences = occurrences.filter(o => o != null)
-      // Sort occurrences
-      return occurrences.sort((a, b) => parseInt(b.count || 0) - parseInt(a.count || 0))
-    }).catch(error => {
-      console.error("Occurrences Error:", error)
+    let uris = await Promise.all(promises)
+    uris = uris.filter(uri => uri != null)
+    if (uris.length == 0) {
       return []
+    }
+    promises = []
+    for (let uri of uris) {
+      promises.push(this._getOccurrences({
+        ...config,
+        params: {
+          member: uri,
+          scheme: "*",
+          threshold: 5,
+        },
+      }).catch(() => {
+        return []
+      }))
+    }
+    // Another request for co-occurrences between two specific concepts
+    if (uris.length > 1) {
+      let urisString = uris.join(" ")
+      promises.push(this._getOccurrences({
+        ...config,
+        params: {
+          member: urisString,
+          threshold: 5,
+        },
+      }).catch(() => {
+        return []
+      }))
+    }
+    const results = await Promise.all(promises)
+    let occurrences = _.concat([], ...results)
+    // Filter duplicates
+    let existingUris = []
+    let indexesToDelete = []
+    for (let i = 0; i < occurrences.length; i += 1) {
+      let occurrence = occurrences[i]
+      if (!occurrence) {
+        continue
+      }
+      let uris = occurrence.memberSet.reduce((total, current) => total.concat(current.uri), []).sort().join(" ")
+      if (existingUris.includes(uris)) {
+        indexesToDelete.push(i)
+      } else {
+        existingUris.push(uris)
+      }
+    }
+    indexesToDelete.forEach(value => {
+      delete occurrences[value]
     })
+    // Filter null values
+    occurrences = occurrences.filter(o => o != null)
+    // Sort occurrences
+    return occurrences.sort((a, b) => parseInt(b.count || 0) - parseInt(a.count || 0))
   }
 
   /**
@@ -121,21 +119,24 @@ class OccurrencesApiProvider extends BaseProvider {
    *
    * @param {*} params
    */
-  __getOccurrences(options) {
+  async _getOccurrences(config) {
     // Use local cache.
-    let resultsFromCache = this.occurrencesCache.find(item => {
-      return _.isEqual(item.options.params, options.params)
+    let resultsFromCache = this._occurrencesCache.find(item => {
+      return _.isEqual(item.config.params, config.params)
     })
     if (resultsFromCache) {
-      return Promise.resolve(resultsFromCache.data)
+      return resultsFromCache.data
     }
-    return this.get(this.registry.occurrences, options).then(data => {
-      this.occurrencesCache.push({
-        options,
-        data,
-      })
-      return data
+    const data = await this.axios({
+      ...config,
+      method: "get",
+      url: this.registry.occurrences,
     })
+    this._occurrencesCache.push({
+      config,
+      data,
+    })
+    return data
   }
 }
 
