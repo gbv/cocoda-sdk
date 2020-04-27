@@ -2,8 +2,8 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 
-// TODO!!!
 // TODO: Only keep the last 20 results in cache.
+// TODO: Try to remove dependencies on `selected`, `scheme._provider.registry.uri`, etc.
 
 /**
  * Provider for search suggestions.
@@ -12,18 +12,24 @@ const _ = require("lodash")
  */
 class SearchSuggestionProvider extends BaseProvider {
 
-  constructor(...params) {
-    super(...params)
+  _setup() {
+    this._cache = []
     this.has.mappings = true
-    this.cache = []
-    // Assemble searchUris
-    let registries = (params[1] || {}).registries || []
-    this.searchUris = {}
-    for (let registry of registries) {
-      if (registry.search) {
-        this.searchUris[registry.uri] = registry.search
+  }
+
+  setRegistries(registries) {
+    this._registries = registries
+  }
+
+  get _searchUris() {
+    const _searchUris = {}
+    for (let registry of this._registries) {
+      const search = registry.search || _.get(registry, "provider.registry.search")
+      if (search) {
+        _searchUris[registry.uri] = search
       }
     }
+    return _searchUris
   }
 
   /**
@@ -33,23 +39,22 @@ class SearchSuggestionProvider extends BaseProvider {
    */
   supportsScheme(scheme) {
     let targetRegistry = _.get(scheme, "_provider.registry.uri")
-    return super.supportsScheme(scheme) && targetRegistry != null && this.searchUris && this.searchUris[targetRegistry]
+    return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
   }
 
-  _getMappings({ from, to, mode, selected }) {
-    if (!this.searchUris || mode != "or" || !selected) {
-      return Promise.resolve([])
+  async getMappings({ from, to, mode, selected, ...config }) {
+    // TODO: Why mode?
+    if (!this._searchUris || mode != "or" || !selected) {
+      return []
     }
     let promises = []
     if (from && this.supportsScheme(selected.scheme[false])) {
-      promises.push(this.__getMappings(from, selected.scheme[true], selected.scheme[false]))
+      promises.push(this._getMappings({ ...config, concept: from, sourceScheme: selected.scheme[true], targetScheme: selected.scheme[false] }))
     }
     if (to && this.supportsScheme(selected.scheme[true])) {
-      promises.push(this.__getMappings(to, selected.scheme[false], selected.scheme[true], true))
+      promises.push(this._getMappings({ ...config, concept: to, sourceScheme: selected.scheme[false], targetScheme: selected.scheme[true], swap: true }))
     }
-    return Promise.all(promises).then(results => {
-      return _.union(...results)
-    })
+    return _.union(...(await Promise.all(promises)))
   }
 
   /**
@@ -60,40 +65,39 @@ class SearchSuggestionProvider extends BaseProvider {
    * @param {object} targetScheme
    * @param {boolean} swap - whether to reverse the direction of the mappings
    */
-  __getMappings(concept, sourceScheme, targetScheme, swap = false) {
+  async _getMappings({ concept, sourceScheme, targetScheme, swap = false, ...config }) {
     if (!concept || !sourceScheme || !targetScheme) {
-      return Promise.resolve([])
+      return []
     }
     // If source scheme is the same as target scheme, skip
     if (jskos.compare(sourceScheme, targetScheme)) {
-      return Promise.resolve([])
+      return []
     }
     // Prepare label
     let label = jskos.prefLabel(concept)
     if (!label) {
-      return Promise.resolve([])
+      return []
     }
     // Get results from API or cache
-    return this.__getResults(label, targetScheme).then(results => {
-      // Map results to actual mappings
-      let mappings = results.map(result => ({
-        fromScheme: sourceScheme,
-        from: { memberSet: [concept] },
-        toScheme: targetScheme,
-        to: { memberSet: [result] },
-        type: ["http://www.w3.org/2004/02/skos/core#mappingRelation"],
+    const results = await this._getResults({ ...config, label, targetScheme })
+    // Map results to actual mappings
+    let mappings = results.map(result => ({
+      fromScheme: sourceScheme,
+      from: { memberSet: [concept] },
+      toScheme: targetScheme,
+      to: { memberSet: [result] },
+      type: ["http://www.w3.org/2004/02/skos/core#mappingRelation"],
+    }))
+    if (swap) {
+      // Swap mapping sides if only `to` was set
+      mappings = mappings.map(mapping => Object.assign(mapping, {
+        fromScheme: mapping.toScheme,
+        from: mapping.to,
+        toScheme: mapping.fromScheme,
+        to: mapping.from,
       }))
-      if (swap) {
-        // Swap mapping sides if only `to` was set
-        mappings = mappings.map(mapping => Object.assign(mapping, {
-          fromScheme: mapping.toScheme,
-          from: mapping.to,
-          toScheme: mapping.fromScheme,
-          to: mapping.from,
-        }))
-      }
-      return mappings
-    })
+    }
+    return mappings
   }
 
   /**
@@ -101,34 +105,35 @@ class SearchSuggestionProvider extends BaseProvider {
    *
    * @param {string} label
    */
-  __getResults(label, targetScheme) {
+  async _getResults({ label, targetScheme, ...config }) {
     // Use local cache.
-    let resultsFromCache = (this.cache[targetScheme.uri] || {})[label]
+    let resultsFromCache = (this._cache[targetScheme.uri] || {})[label]
     if (resultsFromCache) {
-      return Promise.resolve(resultsFromCache)
+      return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    let targetRegistry = _.get(targetScheme, "_provider.registry.uri")
-    let url = targetRegistry != null && this.searchUris && this.searchUris[targetRegistry]
-    if (!url || (url.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:")) {
-      return Promise.resolve([])
+    const targetRegistry = _.get(targetScheme, "_provider.registry.uri")
+    const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
+    if (!url) {
+      return []
     }
     // API request
-    return this.get(url, {
+    const data = await this.axios({
+      ...config,
+      method: "get",
+      url,
       params: {
         query: label,
         limit: 10,
         voc: targetScheme.uri,
       },
-    }).then(data => {
-      data = data || []
-      // Save result in cache
-      if (!this.cache[targetScheme.uri]) {
-        this.cache[targetScheme.uri] = {}
-      }
-      this.cache[targetScheme.uri][label] = data
-      return data
     })
+    // Save result in cache
+    if (!this._cache[targetScheme.uri]) {
+      this._cache[targetScheme.uri] = {}
+    }
+    this._cache[targetScheme.uri][label] = data
+    return data
   }
 
 }
