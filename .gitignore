@@ -12,3 +12,5 @@ npm-debug.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+*test*.js*
