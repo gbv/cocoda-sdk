@@ -10,7 +10,7 @@ const _ = require("lodash")
 class OccurrencesApiProvider extends BaseProvider {
 
   _setup() {
-    this._occurrencesCache = []
+    this._cache = []
     this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
   }
@@ -121,7 +121,7 @@ class OccurrencesApiProvider extends BaseProvider {
    */
   async _getOccurrences(config) {
     // Use local cache.
-    let resultsFromCache = this._occurrencesCache.find(item => {
+    let resultsFromCache = this._cache.find(item => {
       return _.isEqual(item.config.params, config.params)
     })
     if (resultsFromCache) {
@@ -132,10 +132,13 @@ class OccurrencesApiProvider extends BaseProvider {
       method: "get",
       url: this.registry.occurrences,
     })
-    this._occurrencesCache.push({
+    this._cache.push({
       config,
       data,
     })
+    if (this._cache.length > 20) {
+      this._cache = this._cache.slice(this._cache.length - 20)
+    }
     return data
   }
 }
