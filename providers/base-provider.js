@@ -6,7 +6,6 @@ const CDKError = require("../lib/CDKError")
 
 /**
  * TODO: Documentation.
- * TODO: Adjustment methods.
  */
 class BaseProvider {
 
@@ -81,11 +80,10 @@ class BaseProvider {
       return data
     })
 
-    for (let { method } of utils.requestMethods) {
+    for (let { method, type } of utils.requestMethods) {
       // Make sure underscore methods exist, but return a rejecting Promise
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
-        // TODO: Use proper error object
         this[method] = () => { throw new CDKError.MethodNotImplemented({ method }) }
         continue
       }
@@ -108,6 +106,9 @@ class BaseProvider {
           .then(result => {
             if (_.isArray(result) && result.totalCount === undefined) {
               result.totalCount = result.length
+            }
+            if (type && this[`adjust${type}`]) {
+              result = this[`adjust${type}`](result)
             }
             return result
           }).catch(error => {
@@ -232,22 +233,31 @@ class BaseProvider {
   }
 
   // TODO: Reevaluate adjustment methods
-  adjustConcepts(concepts) {
-    for (let concept of concepts) {
-      // Add _getNarrower function to concepts
-      concept._getNarrower = () => {
-        return this.getNarrower(concept)
-      }
-      // Add _getAncestors function to concepts
-      concept._getAncestors = () => {
-        return this.getAncestors(concept)
-      }
-      // Add _getDetails function to concepts
-      concept._getDetails = () => {
-        return this.getDetails(concept)
-      }
+  adjustConcept(concept) {
+    // Add _getNarrower function to concepts
+    concept._getNarrower = () => {
+      return this.getNarrower(concept)
     }
-    return concepts
+    // Add _getAncestors function to concepts
+    concept._getAncestors = () => {
+      return this.getAncestors(concept)
+    }
+    // Add _getDetails function to concepts
+    concept._getDetails = () => {
+      return this.getDetails(concept)
+    }
+    return concept
+  }
+  adjustConcepts(concepts) {
+    let newConcepts = concepts.map(concept => this.adjustConcept(concept))
+    // Retain custom props if available
+    if (concepts.totalCount) {
+      newConcepts.totalCount = concepts.totalCount
+    }
+    if (concepts.url) {
+      newConcepts.url = concepts.url
+    }
+    return newConcepts
   }
   adjustRegistries(registries) {
     return registries
