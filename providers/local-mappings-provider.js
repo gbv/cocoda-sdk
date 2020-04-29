@@ -72,7 +72,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * TODO: There might be a better solution for this...
    */
-  getMappingsQueue(...params) {
+  _getMappingsQueue(...params) {
     let last = _.last(this.queue) || Promise.resolve()
     return new Promise((resolve) => {
       function defer() {
@@ -267,7 +267,7 @@ class LocalMappingsProvider extends BaseProvider {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
     }
-    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Set URI if necessary
     if (!mapping.uri || !mapping.uri.startsWith(uriPrefix)) {
       if (mapping.uri) {
@@ -309,7 +309,7 @@ class LocalMappingsProvider extends BaseProvider {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
     }
-    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Check if mapping already exists => throw error if it doesn't
     const index = localMappings.findIndex(m => m.uri == mapping.uri)
     if (index == -1) {
@@ -339,7 +339,7 @@ class LocalMappingsProvider extends BaseProvider {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
     }
-    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Check if mapping already exists => throw error if it doesn't
     const index = localMappings.findIndex(m => m.uri == mapping.uri)
     if (index == -1) {
@@ -373,7 +373,7 @@ class LocalMappingsProvider extends BaseProvider {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
     }
-    let { mappings: localMappings, done } = await this.getMappingsQueue()
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
     try {
       // Remove by URI
       localMappings = localMappings.filter(m => m.uri != mapping.uri)
