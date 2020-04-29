@@ -1,6 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
+const CDKError = require("../lib/CDKError")
 
 /**
  * For APIs that provide concordances and mappings in JSKOS format.
@@ -102,6 +103,9 @@ class MappingsApiProvider extends BaseProvider {
   }
 
   async postMapping({ mapping, ...config }) {
+    if (!mapping) {
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+    }
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     return this.axios({
@@ -113,11 +117,14 @@ class MappingsApiProvider extends BaseProvider {
   }
 
   async putMapping({ mapping, ...config }) {
+    if (!mapping) {
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+    }
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this.registry.mappings)) {
-      throw new Error("Invalid URI for PUT request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,
@@ -128,11 +135,14 @@ class MappingsApiProvider extends BaseProvider {
   }
 
   async patchMapping({ mapping, ...config }) {
+    if (!mapping) {
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+    }
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this.registry.mappings)) {
-      throw new Error("Invalid URI for PATCH request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,
@@ -143,11 +153,12 @@ class MappingsApiProvider extends BaseProvider {
   }
 
   async deleteMapping({ mapping, ...config }) {
-    mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
+    if (!mapping) {
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+    }
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this.registry.mappings)) {
-      throw new Error("Invalid URI for DELETE request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,
@@ -179,7 +190,7 @@ class MappingsApiProvider extends BaseProvider {
   async putAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
-      throw new Error("Invalid URI for PUT request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,
@@ -192,7 +203,7 @@ class MappingsApiProvider extends BaseProvider {
   async patchAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
-      throw new Error("Invalid URI for PATCH request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,
@@ -205,7 +216,7 @@ class MappingsApiProvider extends BaseProvider {
   async deleteAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
-      throw new Error("Invalid URI for DELETE request.")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
       ...config,

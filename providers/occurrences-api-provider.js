@@ -1,6 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
+const CDKError = require("../lib/CDKError")
 
 /**
  * For APIs that provide occurrences in JSKOS format.
@@ -26,7 +27,6 @@ class OccurrencesApiProvider extends BaseProvider {
           method: "get",
           url,
         })
-        console.log(url)
         this._occurrencesSupportedSchemes = data || []
       } catch(error) {
         // Do nothing so that it is tried again next time
@@ -60,7 +60,7 @@ class OccurrencesApiProvider extends BaseProvider {
     let uris = await Promise.all(promises)
     uris = uris.filter(uri => uri != null)
     if (uris.length == 0) {
-      return []
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "concepts" })
     }
     promises = []
     for (let uri of uris) {
@@ -71,8 +71,6 @@ class OccurrencesApiProvider extends BaseProvider {
           scheme: "*",
           threshold: 5,
         },
-      }).catch(() => {
-        return []
       }))
     }
     // Another request for co-occurrences between two specific concepts
@@ -84,8 +82,6 @@ class OccurrencesApiProvider extends BaseProvider {
           member: urisString,
           threshold: 5,
         },
-      }).catch(() => {
-        return []
       }))
     }
     const results = await Promise.all(promises)

@@ -2,6 +2,7 @@ const jskos = require("jskos-tools")
 const _ = require("lodash")
 const axios = require("axios")
 const utils = require("../utils")
+const CDKError = require("../lib/CDKError")
 
 /**
  * TODO: Documentation.
@@ -80,12 +81,12 @@ class BaseProvider {
       return data
     })
 
-    for (let method of utils.requestMethods) {
+    for (let { method } of utils.requestMethods) {
       // Make sure underscore methods exist, but return a rejecting Promise
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
         // TODO: Use proper error object
-        this[method] = () => Promise.reject("Method not implemented")
+        this[method] = () => { throw new CDKError.MethodNotImplemented({ method }) }
         continue
       }
       this[method] = (options = {}) => {
@@ -109,6 +110,13 @@ class BaseProvider {
               result.totalCount = result.length
             }
             return result
+          }).catch(error => {
+            if (error instanceof CDKError) {
+              throw error
+            } else {
+              // TODO: Handle axios errors etc.
+              throw new CDKError({ relatedError: error })
+            }
           })
         // Attach cancel method to Promise
         if (source) {
@@ -311,7 +319,7 @@ class BaseProvider {
    */
   async getConcept({ concept, uri, ...config } = {}) {
     if (!concept && !uri) {
-      throw new Error("Expecting concept or uri to load")
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept" })
     }
     return this.getConcepts({
       concepts: [concept || { uri }],

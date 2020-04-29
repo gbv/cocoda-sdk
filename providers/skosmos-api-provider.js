@@ -1,6 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
+const CDKError = require("../lib/CDKError")
 
 /**
  * Skosmos API Wrapper.
@@ -51,13 +52,13 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   async getTop() {
-    return []
+    throw new CDKError.MethodNotImplemented({ method: "getTop" })
   }
 
   _getDataUrl(concept, { addFormatParameter = true } = {}) {
     const scheme = _.get(concept, "inScheme[0]")
-    if (!concept.uri || !scheme || !scheme.VOCID) {
-      return null
+    if (!concept || !concept.uri || !scheme || !scheme.VOCID) {
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept", message: "Missing concept URI or missing VOCID on concept scheme" })
     }
     return `${this.registry.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
   }
@@ -150,11 +151,11 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   async getNarrower() {
-    return []
+    throw new CDKError.MethodNotImplemented({ method: "getNarrower" })
   }
 
   async getAncestors() {
-    return []
+    throw new CDKError.MethodNotImplemented({ method: "getAncestors" })
   }
 
   async suggest(config) {
@@ -173,7 +174,7 @@ class SkosmosApiProvider extends BaseProvider {
 
   async search({ search, scheme, limit, types = [], ...config }) {
     if (!scheme || !scheme.VOCID) {
-      return []
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     const url = `${this.registry.api}${scheme.VOCID}/search`
     _.set(config, "params.query", `${search}*`)
@@ -185,9 +186,6 @@ class SkosmosApiProvider extends BaseProvider {
       method: "get",
       url,
     })
-    if (!response) {
-      return []
-    }
     const concepts = []
     for (let concept of response.results || []) {
       const notation = jskos.notation({ uri: concept.uri, inScheme: [scheme] })
@@ -209,7 +207,7 @@ class SkosmosApiProvider extends BaseProvider {
 
   async getTypes({ scheme, ...config }) {
     if (!scheme || !scheme.VOCID) {
-      return []
+      throw new CDKError.InvalidOrMissingParameter({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     const types = []
     const url = `${this.registry.api}${scheme.VOCID}/types`

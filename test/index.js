@@ -13,7 +13,7 @@ describe("index", () => {
     const props = [
       "config",
       "createInstance",
-    ].concat(utils.requestMethods)
+    ].concat(utils.requestMethods.map(m => m.method))
     for (let prop of props) {
       assert.ok(!!cdk[prop], `cdk should have property "${prop}"`)
     }
