@@ -5,10 +5,65 @@ const utils = require("../utils")
 const CDKError = require("../lib/CDKError")
 
 /**
- * TODO: Documentation.
+ * BaseProvider to be subclassed to implement specific providers.
+ *
+ * Prefix all internal method and properties with underscore (e.g. `this._cache`)!
+ *
+ * Methods that can be overridden:
+ * - Do not override the constructor! Use _setup instead.
+ * - _setup: will be called after registry is initialized, should be used to set properties on this.has and custom preparations
+ * - isAuthorizedFor: override if you want to customize
+ * - supportsScheme: override if you want to customize
+ * - setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter `registries`)
+ * - getRegistries
+ * - getSchemes
+ * - getTypes
+ * - suggest
+ * - getConcordances
+ * - getOccurrences
+ * - getTop
+ * - getConcepts
+ * - getConcept
+ * - getNarrower
+ * - getAncestors
+ * - search
+ * - getMapping
+ * - getMappings
+ * - postMapping
+ * - postMappings
+ * - putMapping
+ * - patchMapping
+ * - deleteMapping
+ * - deleteMappings
+ * - getAnnotations
+ * - postAnnotation
+ * - putAnnotation
+ * - patchAnnotation
+ * - deleteAnnotation
+ *
+ * All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
+ * Example:
+ *  getConcept({ concept, ...config }) {
+ *    return this.axios({
+ *      ...config,
+ *      method: "get",
+ *      params: {
+ *        uri: concept.uri,
+ *      },
+ *    })
+ *  }
+ *
+ * Always use `this.axios` like in the example for http requests!
+ *
  */
 class BaseProvider {
 
+  /**
+   * Provider constructor.
+   *
+   * @param {Object} config
+   * @param {Object} config.registry the registry for this provider
+   */
   constructor({ registry } = {}) {
     this.registry = registry
 
@@ -61,9 +116,6 @@ class BaseProvider {
         let totalCount = parseInt(headers["x-total-count"])
         if (totalCount) {
           data.totalCount = totalCount
-        } else {
-          // TODO: Does this break things or does this help?
-          data.totalCount = data.length
         }
         // Add URL to array as prop
         let url = config.url
@@ -81,7 +133,7 @@ class BaseProvider {
     })
 
     for (let { method, type } of utils.requestMethods) {
-      // Make sure underscore methods exist, but return a rejecting Promise
+      // Make sure all methods exist, but thrown an error if they are not implemented
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
         this[method] = () => { throw new CDKError.MethodNotImplemented({ method }) }
@@ -93,12 +145,13 @@ class BaseProvider {
           delete options._raw
           return existingMethod(options)
         }
+        // Add an axios cancel token to each request
         let source
         if (!options.cancelToken) {
           source = this.getCancelTokenSource()
           options.cancelToken = source.token
         }
-        // Call same method with leading underscore
+        // Make sure a registry is initialized (see `init` method) before any request
         // TODO: Is this a good solution?
         const promise = this.init()
           .then(() => existingMethod(options))
@@ -173,11 +226,27 @@ class BaseProvider {
     return axios.CancelToken.source()
   }
 
-  setAuth({ key, bearerToken }) {
+  /**
+   * Sets authentication credentials.
+   *
+   * @param {Object} options
+   * @param {string} options.key public key of login-server instance the user is authorized for
+   * @param {string} options.bearerToken token that is sent with each request
+   */
+  setAuth({ key = this.auth.key, bearerToken = this.auth.bearerToken }) {
     this.auth.key = key
     this.auth.bearerToken = bearerToken
   }
 
+  /**
+   * Returns whether a user is authorized for a certain request.
+   *
+   * @param {Object} options
+   * @param {string} type type of item (e.g. mappings)
+   * @param {string} action action to be performed (read/create/update/delete)
+   * @param {Object} user user object
+   * @param {boolean} crossUser whether the request is a crossUser request (i.e. updading/deleting another user's item)
+   */
   isAuthorizedFor({ type, action, user, crossUser }) {
     if (action == "read" && this.has[type] === true) {
       return true
@@ -197,7 +266,7 @@ class BaseProvider {
       return false
     }
     if (options.auth && options.identities) {
-      // Check if on of the user's identities matches
+      // Check if one of the user's identities matches
       const uris = [user.uri].concat(Object.values(user.identities || {}).map(id => id.uri)).filter(uri => uri != null)
       if (_.intersection(uris, options.identities).length == 0) {
         return false
@@ -219,7 +288,7 @@ class BaseProvider {
   /**
    * Returns a boolean whether a certain target scheme is supported or not.
    *
-   * @param {object} scheme
+   * @param {Object} scheme
    */
   supportsScheme(scheme) {
     if (!scheme) {
@@ -325,7 +394,9 @@ class BaseProvider {
    * TODO: Evaluate whether concept and/or uri should be used.
    * ? Returning a single object removes API URL. How should we do this?
    *
-   * @param {object} config
+   * @param {Object} config
+   * @param {Object} config.concept concept to be requested
+   * @param {string} config.uri concept URI (alternative to concept)
    */
   async getConcept({ concept, uri, ...config } = {}) {
     if (!concept && !uri) {
@@ -341,7 +412,8 @@ class BaseProvider {
   /**
    * POSTs multiple mappings. Do not override in subclass!
    *
-   * @param {object} config
+   * @param {Object} config
+   * @param {Array} config.mappings array of mapping objects
    */
   async postMappings({ mappings = [], ...config } = {}) {
     return Promise.all(mappings.map(mapping => this.postMapping({ mapping, ...config, _raw: true })))
@@ -350,7 +422,8 @@ class BaseProvider {
   /**
    * DELETEs multiple mappings. Do not override in subclass!
    *
-   * @param {object} config
+   * @param {Object} config
+   * @param {Array} config.mappings array of mapping objects
    */
   async deleteMappings({ mappings = [], ...config } = {}) {
     return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
