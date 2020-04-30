@@ -16,6 +16,11 @@ class OccurrencesApiProvider extends BaseProvider {
     this.has.occurrences = true
   }
 
+  /**
+   * Returns whether a concept scheme is supported for occurrences.
+   *
+   * @param {Object} scheme JSKOS scheme to query
+   */
   async _occurrencesIsSupported(scheme) {
     if (this._occurrencesSupportedSchemes && this._occurrencesSupportedSchemes.length) {
       // No action needed
@@ -43,7 +48,12 @@ class OccurrencesApiProvider extends BaseProvider {
   }
 
   /**
-   * Returns a Promise with a list of occurrences.
+   * Returns a list of occurrences.
+   *
+   * @param {Object} config
+   * @param {Object} [config.from] JSKOS concept to load occurrences for (from side)
+   * @param {Object} [config.to] JSKOS concept to load occurrences for (to side)
+   * @param {Object[]} [config.concepts] list of JSKOS concepts to load occurrences for
    */
   async getOccurrences({ from, to, concepts, ...config }) {
     let promises = []
@@ -113,7 +123,7 @@ class OccurrencesApiProvider extends BaseProvider {
   /**
    * Internal function for getOccurrences that either makes an API request or uses a local cache.
    *
-   * @param {*} params
+   * @param {Object} config passthrough of config parameter for axios request
    */
   async _getOccurrences(config) {
     // Use local cache.

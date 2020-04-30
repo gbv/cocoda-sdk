@@ -103,7 +103,7 @@ class LocalMappingsProvider extends BaseProvider {
   }
 
   /**
-   * Returns a Promise with a list of local mappings.
+   * Returns a list of local mappings.
    *
    * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).
    * TODO: Clean up and use async/await
@@ -263,6 +263,12 @@ class LocalMappingsProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Creates a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async postMapping({ mapping }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -305,6 +311,13 @@ class LocalMappingsProvider extends BaseProvider {
       throw error
     }
   }
+
+  /**
+   * Overwrites a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async putMapping({ mapping }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -335,6 +348,13 @@ class LocalMappingsProvider extends BaseProvider {
       throw error
     }
   }
+
+  /**
+   * Patches a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} mapping JSKOS mapping (or part of mapping)
+   */
   async patchMapping({ mapping }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -367,7 +387,10 @@ class LocalMappingsProvider extends BaseProvider {
   }
 
   /**
-   * Removes mappings from local storage. Returns a Promise with a list of mappings that were removed.
+   * Removes a mapping from local storage.
+   *
+   * @param {Object} config
+   * @param {Object} mapping JSKOS mapping
    */
   async deleteMapping({ mapping }) {
     if (!mapping) {

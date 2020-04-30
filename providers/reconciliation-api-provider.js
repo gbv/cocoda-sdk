@@ -14,6 +14,14 @@ class ReconciliationApiProvider extends BaseProvider {
     this._cache = []
   }
 
+  /**
+   * Returns a list of mappings.
+   *
+   * @param {Object} config
+   * @param {Object} config.from JSKOS concept on from side
+   * @param {Object} config.to JSKOS concept on to side
+   * @param {Object} config.mode mappings mode
+   */
   async getMappings({ from, to, mode, ...config }) {
     let swap
     let concept
@@ -114,7 +122,9 @@ class ReconciliationApiProvider extends BaseProvider {
   /**
    * Internal function that either makes an API request or uses a local cache.
    *
-   * @param {*} labels - list of labels
+   * @param {Object} config passthrough of config object for axios request
+   * @param {string[]} labels list of labels to get results for
+   * @param {string} language language of labels
    */
   async _getReconciliationResults({ labels, language, ...config }) {
     labels = labels.sort()

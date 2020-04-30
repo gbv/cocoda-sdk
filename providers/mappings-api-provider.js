@@ -30,6 +30,12 @@ class MappingsApiProvider extends BaseProvider {
     this.has.auth = _.get(this.registry, "config.auth.key") != null
   }
 
+  /**
+   * Returns a single mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async getMapping({ mapping, ...config }) {
     return this.getMappings({
       ...config,
@@ -39,7 +45,9 @@ class MappingsApiProvider extends BaseProvider {
   }
 
   /**
-   * Returns a Promise with a list of mappings from a jskos-server.
+   * Returns a list of mappings.
+   *
+   * @param {Object} config request config with parameters
    */
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
     let params = {}, url = this.registry.mappings
@@ -102,6 +110,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Creates a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async postMapping({ mapping, ...config }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -116,6 +130,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Overwrites a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async putMapping({ mapping, ...config }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -134,6 +154,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Patches a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping (or part of mapping)
+   */
   async patchMapping({ mapping, ...config }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -152,6 +178,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Deletes a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
   async deleteMapping({ mapping, ...config }) {
     if (!mapping) {
       throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
@@ -167,6 +199,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns a list of annotations.
+   *
+   * @param {Object} config
+   * @param {string} [config.target] target URI
+   */
   async getAnnotations({ target, ...config }) {
     if (target) {
       _.set(config, "params.target", target)
@@ -178,6 +216,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Creates an annotation.
+   *
+   * @param {Object} config
+   * @param {Object} config.annotation JSKOS annotation
+   */
   async postAnnotation({ annotation, ...config }) {
     return this.axios({
       ...config,
@@ -187,6 +231,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Overwrites an annotation.
+   *
+   * @param {Object} config
+   * @param {Object} config.annotation JSKOS annotation
+   */
   async putAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
@@ -200,6 +250,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Patches an annotation.
+   *
+   * @param {Object} config
+   * @param {Object} config.annotation JSKOS annotation
+   */
   async patchAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
@@ -213,6 +269,12 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Deletes an annotation.
+   *
+   * @param {Object} config
+   * @param {Object} config.annotation JSKOS annotation
+   */
   async deleteAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this.registry.annotations)) {
@@ -225,6 +287,11 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns a list of concordances.
+   *
+   * @param {Object} config
+   */
   async getConcordances(config) {
     return this.axios({
       ...config,

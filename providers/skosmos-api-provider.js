@@ -5,6 +5,8 @@ const CDKError = require("../lib/CDKError")
 
 /**
  * Skosmos API Wrapper.
+ *
+ * TODO: Documentation
  */
 class SkosmosApiProvider extends BaseProvider {
 

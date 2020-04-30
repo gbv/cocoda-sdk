@@ -4,7 +4,8 @@ const CDKError = require("../lib/CDKError")
 
 /**
  * For APIs that provide concept schemes and concepts in JSKOS format
- * like [DANTE](http://api.dante.gbv.de/).
+ * like [DANTE](https://api.dante.gbv.de/) and jskos-server
+ * [jskos-server](https://github.com/gbv/jskos-server).
  */
 class ConceptApiProvider extends BaseProvider {
 
@@ -20,6 +21,11 @@ class ConceptApiProvider extends BaseProvider {
     this.has.search = !!this.registry.search
   }
 
+  /**
+   * Returns all concept schemes.
+   *
+   * @param {Object} config
+   */
   async getSchemes(config) {
     if (!this.registry.schemes) {
       throw new CDKError.MissingApiUrl()
@@ -38,6 +44,12 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns top concepts for a concept scheme.
+   *
+   * @param {Object} config
+   * @param {Object} config.scheme concept scheme object
+   */
   async getTop({ scheme, ...config }) {
     if (!this.registry.top) {
       throw new CDKError.MissingApiUrl()
@@ -61,6 +73,12 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns details for a list of concepts.
+   *
+   * @param {Object} config
+   * @param {Object[]} config.concepts list of concept objects to load
+   */
   async getConcepts({ concepts, ...config }) {
     if (!this.has.data) {
       throw new CDKError.MissingApiUrl()
@@ -81,6 +99,12 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns narrower concepts for a concept.
+   *
+   * @param {Object} config
+   * @param {Object} config.concept concept object
+   */
   async getNarrower({ concept, ...config }) {
     if (!this.registry.narrower) {
       throw new CDKError.MissingApiUrl()
@@ -101,6 +125,12 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns ancestor concepts for a concept.
+   *
+   * @param {Object} config
+   * @param {Object} config.concept concept object
+   */
   async getAncestors({ concept, ...config }) {
     if (!this.registry.ancestors) {
       throw new CDKError.MissingApiUrl()
@@ -121,6 +151,17 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns suggestion result in OpenSearch Suggest Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {string} [config.use=notation,label] which fields to search ("notation", "label" or "notation,label")
+   * @param {string[]} [config.types=[]] list of type URIs
+   * @param {string} [config.sort=score] sorting parameter
+   */
   async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this.registry.suggest) {
       throw new CDKError.MissingApiUrl()
@@ -157,6 +198,12 @@ class ConceptApiProvider extends BaseProvider {
     throw new CDKError.MethodNotImplemented({ method: "search" })
   }
 
+  /**
+   * Returns a list of types.
+   *
+   * @param {Object} config
+   * @param {Object} [config.scheme] concept scheme to load types for
+   */
   async getTypes({ scheme, ...config }) {
     if (!this.registry.types) {
       throw new CDKError.MissingApiUrl()

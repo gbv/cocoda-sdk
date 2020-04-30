@@ -18,10 +18,18 @@ class SearchSuggestionProvider extends BaseProvider {
     this.has.mappings = true
   }
 
+  /**
+   * Sets a local list of registries where the search providers are taken from.
+   *
+   * @param {Object[]} registries list of registries
+   */
   setRegistries(registries) {
     this._registries = registries
   }
 
+  /**
+   * List of search provider URIs.
+   */
   get _searchUris() {
     const _searchUris = {}
     for (let registry of this._registries) {
@@ -36,13 +44,22 @@ class SearchSuggestionProvider extends BaseProvider {
   /**
    * Override `supportsScheme` to check whether a search URI is available for the scheme's registry.
    *
-   * @param {object} scheme - target scheme to check for support
+   * @param {Object} scheme - target scheme to check for support
    */
   supportsScheme(scheme) {
     let targetRegistry = _.get(scheme, "_provider.registry.uri")
     return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
   }
 
+  /**
+   * Returns a list of mappings.
+   *
+   * @param {Object} config
+   * @param {Object} config.from JSKOS concept on from side
+   * @param {Object} config.to JSKOS concept on to side
+   * @param {Object} config.mode mappings mode
+   * @param {Object} config.selected selected mappings in Cocoda
+   */
   async getMappings({ from, to, mode, selected, ...config }) {
     // TODO: Why mode?
     if (mode != "or") {
@@ -67,10 +84,11 @@ class SearchSuggestionProvider extends BaseProvider {
   /**
    * Internal function to get mapping recommendations for a certain concept with sourceScheme and targetScheme.
    *
-   * @param {object} concept
-   * @param {object} sourceScheme
-   * @param {object} targetScheme
-   * @param {boolean} swap - whether to reverse the direction of the mappings
+   * @param {Object} config
+   * @param {Object} config.concept
+   * @param {Object} config.sourceScheme
+   * @param {Pbject} config.targetScheme
+   * @param {boolean} config.swap - whether to reverse the direction of the mappings
    */
   async _getMappings({ concept, sourceScheme, targetScheme, swap = false, ...config }) {
     if (!concept || !sourceScheme || !targetScheme) {
@@ -110,7 +128,9 @@ class SearchSuggestionProvider extends BaseProvider {
   /**
    * Internal function that either makes an API request or uses a local cache.
    *
-   * @param {string} label
+   * @param {Object} config
+   * @param {string} config.label
+   * @param {Object} config.targetScheme
    */
   async _getResults({ label, targetScheme, ...config }) {
     // Use local cache.
