@@ -114,7 +114,7 @@ class BaseProvider {
       if (_.isArray(data)) {
         // Add total count to array as prop
         let totalCount = parseInt(headers["x-total-count"])
-        if (totalCount) {
+        if (!isNaN(totalCount)) {
           data.totalCount = totalCount
         }
         // Add URL to array as prop
@@ -320,12 +320,8 @@ class BaseProvider {
   adjustConcepts(concepts) {
     let newConcepts = concepts.map(concept => this.adjustConcept(concept))
     // Retain custom props if available
-    if (concepts.totalCount) {
-      newConcepts.totalCount = concepts.totalCount
-    }
-    if (concepts.url) {
-      newConcepts.url = concepts.url
-    }
+    newConcepts.totalCount = concepts.totalCount
+    newConcepts.url = concepts.url
     return newConcepts
   }
   adjustRegistries(registries) {
@@ -379,12 +375,8 @@ class BaseProvider {
   adjustMappings(mappings) {
     let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
     // Retain custom props if available
-    if (mappings.totalCount) {
-      newMappings.totalCount = mappings.totalCount
-    }
-    if (mappings.url) {
-      newMappings.url = mappings.url
-    }
+    newMappings.totalCount = mappings.totalCount
+    newMappings.url = mappings.url
     return newMappings
   }
 
