@@ -88,10 +88,8 @@ class BaseProvider {
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
       // Add language parameter to request
-      if (!_.get(config, "params.language")) {
-        const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this.defaultLanguages).filter(lang => lang != "")).join(",")
-        _.set(config, "params.language", language)
-      }
+      const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this.defaultLanguages).filter(lang => lang != "")).join(",")
+      _.set(config, "params.language", language)
       // Set auth
       if (this.has.auth && this.auth.bearerToken && !_.get(config, "headers.Authorization")) {
         _.set(config, "headers.Authorization", `Bearer ${this.auth.bearerToken}`)
