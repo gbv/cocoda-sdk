@@ -4,7 +4,7 @@
   "description": "SDK for Cocoda",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --recursive",
     "lint": "eslint ./**/*.js ./**/.*.js",
     "fix": "eslint --fix ./**/*.js ./**/.*.js",
     "lint-staged": "lint-staged"
@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/gbv/cocoda-sdk#readme",
   "devDependencies": {
+    "axios-mock-adapter": "^1.18.1",
     "eslint": "^6.8.0",
     "eslint-config-gbv": "github:gbv/eslint-config-gbv",
     "lint-staged": "^10.0.2",
