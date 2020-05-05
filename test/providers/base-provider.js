@@ -137,4 +137,27 @@ describe("BaseProvider", () => {
     assert.equal(adjustedRegistries, registries)
   })
 
+  it("supportsScheme", () => {
+    // By default, any scheme should be supported if neither `schemes` nor `excludedSchemes` is set on registry
+    assert.ok(provider.supportsScheme({}))
+    // excludedSchemes
+    const excludedScheme = { uri: "test:excluded" }
+    provider.registry.excludedSchemes = [excludedScheme]
+    assert.ok(!provider.supportsScheme(excludedScheme))
+    // schemes
+    const scheme = { uri: "test:scheme" }
+    provider.registry.schemes = [scheme]
+    // if `schemes` is set, any scheme shouldn't be supported anymore
+    assert.ok(!provider.supportsScheme({}))
+    // excluded schemes shouldn't be supported
+    assert.ok(!provider.supportsScheme(excludedScheme))
+    // only scheme in `schemes` should be supported
+    assert.ok(provider.supportsScheme(scheme))
+  })
+
+  // TODO
+  // it("isAuthorizedFor", () => {
+
+  // })
+
 })
