@@ -1,6 +1,6 @@
 const BaseProvider = require("./base-provider")
 const _ = require("lodash")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 /**
  * For APIs that provide concept schemes and concepts in JSKOS format
@@ -28,7 +28,7 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getSchemes(config) {
     if (!this.registry.schemes) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (Array.isArray(this.registry.schemes)) {
       return this.registry.schemes
@@ -52,10 +52,10 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getTop({ scheme, ...config }) {
     if (!this.registry.top) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!scheme) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "scheme" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
     if (Array.isArray(this.registry.top)) {
       return this.registry.top
@@ -81,10 +81,10 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getConcepts({ concepts, ...config }) {
     if (!this.has.data) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!concepts) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concepts" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concepts" })
     }
     if (!Array.isArray(concepts)) {
       concepts = [concepts]
@@ -107,10 +107,10 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getNarrower({ concept, ...config }) {
     if (!this.registry.narrower) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
     _.set(config, "params.uri", concept.uri)
     // ? Properties
@@ -133,10 +133,10 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getAncestors({ concept, ...config }) {
     if (!this.registry.ancestors) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
     _.set(config, "params.uri", concept.uri)
     // ? Properties
@@ -164,10 +164,10 @@ class ConceptApiProvider extends BaseProvider {
    */
   async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this.registry.suggest) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!search) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "search" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "search" })
     }
     limit = limit || this.registry.suggestResultLimit || 100
     // Some registries use URL templates with {searchTerms}
@@ -195,7 +195,7 @@ class ConceptApiProvider extends BaseProvider {
    * Search not yet implemented.
    */
   async search() {
-    throw new CDKError.MethodNotImplemented({ method: "search" })
+    throw new errors.MethodNotImplementedError({ method: "search" })
   }
 
   /**
@@ -206,7 +206,7 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getTypes({ scheme, ...config }) {
     if (!this.registry.types) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (Array.isArray(this.registry.types)) {
       return this.registry.types

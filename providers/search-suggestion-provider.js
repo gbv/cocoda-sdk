@@ -1,7 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 // TODO: Only keep the last 20 results in cache.
 // TODO: Try to remove dependencies on `selected`, `scheme._provider.registry.uri`, etc.
@@ -66,10 +66,10 @@ class SearchSuggestionProvider extends BaseProvider {
       return []
     }
     if (!this._searchUris) {
-      throw new CDKError.MissingApiUrl({ message: "No registries available to search" })
+      throw new errors.MissingApiUrlError({ message: "No registries available to search" })
     }
     if (!selected) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "selected" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "selected" })
     }
     let promises = []
     if (from && this.supportsScheme(selected.scheme[false])) {

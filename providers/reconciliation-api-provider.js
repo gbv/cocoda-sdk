@@ -2,7 +2,7 @@ const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
 const qs = require("qs")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 /**
  * Provider for the OpenRefine Reconciliation API.
@@ -46,19 +46,19 @@ class ReconciliationApiProvider extends BaseProvider {
       return []
     }
     if (!this.registry.reconcile) {
-      throw new CDKError.MissingApiUrl()
+      throw new errors.MissingApiUrlError()
     }
     if (!concept) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: swap ? "to" : "from" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from" })
     }
     // If concept's scheme is the same as reconciliation scheme, skip
     if (!fromScheme || !toScheme || jskos.compare(fromScheme, toScheme)) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: swap ? "to" : "from", message: "Missing scheme or matches reconciliation scheme" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from", message: "Missing scheme or matches reconciliation scheme" })
     }
     // Prepare labels
     let language = jskos.languagePreference.selectLanguage(concept.prefLabel)
     if (!language) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: swap ? "to" : "from", message: "Missing language" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from", message: "Missing language" })
     }
     let altLabels = _.get(concept, `altLabel.${language}`, [])
     if (_.isString(altLabels)) {

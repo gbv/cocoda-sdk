@@ -1,7 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 /**
  * For APIs that provide occurrences in JSKOS format.
@@ -70,7 +70,7 @@ class OccurrencesApiProvider extends BaseProvider {
     let uris = await Promise.all(promises)
     uris = uris.filter(uri => uri != null)
     if (uris.length == 0) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concepts" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concepts" })
     }
     promises = []
     for (let uri of uris) {

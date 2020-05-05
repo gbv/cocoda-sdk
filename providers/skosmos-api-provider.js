@@ -1,7 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("lodash")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 /**
  * Skosmos API Wrapper.
@@ -54,13 +54,13 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   async getTop() {
-    throw new CDKError.MethodNotImplemented({ method: "getTop" })
+    throw new errors.MethodNotImplementedError({ method: "getTop" })
   }
 
   _getDataUrl(concept, { addFormatParameter = true } = {}) {
     const scheme = _.get(concept, "inScheme[0]")
     if (!concept || !concept.uri || !scheme || !scheme.VOCID) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept", message: "Missing concept URI or missing VOCID on concept scheme" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI or missing VOCID on concept scheme" })
     }
     return `${this.registry.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
   }
@@ -153,11 +153,11 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   async getNarrower() {
-    throw new CDKError.MethodNotImplemented({ method: "getNarrower" })
+    throw new errors.MethodNotImplementedError({ method: "getNarrower" })
   }
 
   async getAncestors() {
-    throw new CDKError.MethodNotImplemented({ method: "getAncestors" })
+    throw new errors.MethodNotImplementedError({ method: "getAncestors" })
   }
 
   async suggest(config) {
@@ -176,7 +176,7 @@ class SkosmosApiProvider extends BaseProvider {
 
   async search({ search, scheme, limit, types = [], ...config }) {
     if (!scheme || !scheme.VOCID) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     const url = `${this.registry.api}${scheme.VOCID}/search`
     _.set(config, "params.query", `${search}*`)
@@ -209,7 +209,7 @@ class SkosmosApiProvider extends BaseProvider {
 
   async getTypes({ scheme, ...config }) {
     if (!scheme || !scheme.VOCID) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     const types = []
     const url = `${this.registry.api}${scheme.VOCID}/types`

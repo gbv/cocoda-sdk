@@ -11,7 +11,7 @@ class CDKError extends Error {
 /**
  * MethodNotImplementedError should be thrown when the called method is valid, but not implemented for the current provider.
  */
-CDKError.MethodNotImplemented = class MethodNotImplementedError extends CDKError {
+class MethodNotImplementedError extends CDKError {
   constructor({ method, message = "", ...options }) {
     options.message = `Method not implemented: ${method} (${message})`
     super(options)
@@ -21,7 +21,7 @@ CDKError.MethodNotImplemented = class MethodNotImplementedError extends CDKError
 /**
  * InvalidOrMissingParameterError should be thrown when a parameter is missing or is not valid for the request.
  */
-CDKError.InvalidOrMissingParameter = class InvalidOrMissingParameterError extends CDKError {
+class InvalidOrMissingParameterError extends CDKError {
   constructor({ parameter, message = "", ...options }) {
     options.message = `Invalid or missing parameter: ${parameter} (${message})`
     super(options)
@@ -31,18 +31,25 @@ CDKError.InvalidOrMissingParameter = class InvalidOrMissingParameterError extend
 /**
  * MissingRegistryError should be thrown by cocoda-sdk to indicate that a registry is needed to perform the request.
  */
-CDKError.MissingRegistry = class MissingRegistryError extends CDKError {}
+class MissingRegistryError extends CDKError {}
 
 /**
  * InvalidRequestError should be thrown when the request is somehow invalid.
  *
  * ? Where is this needed?
  */
-CDKError.InvalidRequest = class InvalidRequestError extends CDKError {}
+class InvalidRequestError extends CDKError {}
 
 /**
  * MissingApiUrlError should be thrown when the called method is valid, but the required API URL is not available for the current registry.
  */
-CDKError.MissingApiUrl = class MissingApiUrlError extends CDKError {}
+class MissingApiUrlError extends CDKError {}
 
-module.exports = CDKError
+module.exports = {
+  CDKError,
+  MethodNotImplementedError,
+  InvalidOrMissingParameterError,
+  MissingRegistryError,
+  InvalidRequestError,
+  MissingApiUrlError,
+}

@@ -2,7 +2,7 @@ const jskos = require("jskos-tools")
 const _ = require("lodash")
 const axios = require("axios")
 const utils = require("../utils")
-const CDKError = require("../lib/CDKError")
+const errors = require("../errors")
 
 /**
  * BaseProvider to be subclassed to implement specific providers.
@@ -134,7 +134,7 @@ class BaseProvider {
       // Make sure all methods exist, but thrown an error if they are not implemented
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
-        this[method] = () => { throw new CDKError.MethodNotImplemented({ method }) }
+        this[method] = () => { throw new errors.MethodNotImplementedError({ method }) }
         continue
       }
       this[method] = (options = {}) => {
@@ -163,11 +163,11 @@ class BaseProvider {
             }
             return result
           }).catch(error => {
-            if (error instanceof CDKError) {
+            if (error instanceof errors.CDKError) {
               throw error
             } else {
               // TODO: Handle axios errors etc.
-              throw new CDKError({ relatedError: error })
+              throw new errors.CDKError({ relatedError: error })
             }
           })
         // Attach cancel method to Promise
@@ -390,7 +390,7 @@ class BaseProvider {
    */
   async getConcept({ concept, uri, ...config } = {}) {
     if (!concept && !uri) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "concept" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
     return this.getConcepts({
       concepts: [concept || { uri }],

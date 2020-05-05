@@ -3,8 +3,7 @@ const jskos = require("jskos-tools")
 const _ = require("lodash")
 const localforage = require("localforage")
 const { v4: uuid } = require("uuid")
-const CDKError = require("../lib/CDKError")
-
+const errors = require("../errors")
 const uriPrefix = "urn:uuid:"
 
 /**
@@ -150,7 +149,7 @@ class LocalMappingsProvider extends BaseProvider {
       params.uri = uri
     }
     return localforage.getItem(this.localStorageKey).then(mappings => mappings || []).catch(relatedError => {
-      throw new CDKError({ message: "Could not get mappings from local storage", relatedError })
+      throw new errors.CDKError({ message: "Could not get mappings from local storage", relatedError })
     }).then(mappings => {
       // Check concept with param
       let checkConcept = (concept, param) => concept.uri == param || (param && concept.notation && concept.notation[0].toLowerCase() == param.toLowerCase())
@@ -271,7 +270,7 @@ class LocalMappingsProvider extends BaseProvider {
    */
   async postMapping({ mapping }) {
     if (!mapping) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Set URI if necessary
@@ -288,7 +287,7 @@ class LocalMappingsProvider extends BaseProvider {
     // Check if mapping already exists => throw error
     if (localMappings.find(m => m.uri == mapping.uri)) {
       done()
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "Duplicate URI" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Duplicate URI" })
     }
     // Set created/modified
     if (!mapping.created) {
@@ -320,14 +319,14 @@ class LocalMappingsProvider extends BaseProvider {
    */
   async putMapping({ mapping }) {
     if (!mapping) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Check if mapping already exists => throw error if it doesn't
     const index = localMappings.findIndex(m => m.uri == mapping.uri)
     if (index == -1) {
       done()
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "Mapping not found" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Mapping not found" })
     }
     // Set created/modified
     if (!mapping.created) {
@@ -357,14 +356,14 @@ class LocalMappingsProvider extends BaseProvider {
    */
   async patchMapping({ mapping }) {
     if (!mapping) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     let { mappings: localMappings, done } = await this._getMappingsQueue()
     // Check if mapping already exists => throw error if it doesn't
     const index = localMappings.findIndex(m => m.uri == mapping.uri)
     if (index == -1) {
       done()
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping", message: "Mapping not found" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Mapping not found" })
     }
     // Set created/modified
     if (!mapping.created) {
@@ -394,7 +393,7 @@ class LocalMappingsProvider extends BaseProvider {
    */
   async deleteMapping({ mapping }) {
     if (!mapping) {
-      throw new CDKError.InvalidOrMissingParameter({ parameter: "mapping" })
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     let { mappings: localMappings, done } = await this._getMappingsQueue()
     try {
