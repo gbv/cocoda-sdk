@@ -32,7 +32,7 @@ describe("BaseProvider", () => {
     for (let { method } of utils.requestMethods) {
       assert.ok(!!provider[method], `could not find method ${method}`)
       // All request methods should throw by default
-      await assert.rejects(async () => { await provider[method]({ mappings: [{}] }) }, `method ${method} does not throw by default`)
+      await assert.rejects(async () => { await provider[method]() }, `method ${method} does not throw by default`)
     }
   })
 

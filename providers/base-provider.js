@@ -405,7 +405,10 @@ class BaseProvider {
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
    */
-  async postMappings({ mappings = [], ...config } = {}) {
+  async postMappings({ mappings, ...config } = {}) {
+    if (!mappings || !mappings.length) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
+    }
     return Promise.all(mappings.map(mapping => this.postMapping({ mapping, ...config, _raw: true })))
   }
 
@@ -415,7 +418,10 @@ class BaseProvider {
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
    */
-  async deleteMappings({ mappings = [], ...config } = {}) {
+  async deleteMappings({ mappings, ...config } = {}) {
+    if (!mappings || !mappings.length) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
+    }
     return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
   }
 
