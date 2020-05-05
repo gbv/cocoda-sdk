@@ -78,6 +78,40 @@ const newCdk = cdk.createInstance({ newConfig })
 
 It will be completely separate from the default instance.
 
+### Providers
+It is possible to get direct access to provider classes.
+
+```js
+const providers = require("cocoda-sdk/providers")
+// Example
+const provider = new providers.MappingsApi({ registry })
+```
+
+The following providers are offered in `cocoda-sdk` by default:
+- `Base` - the base provider that all other providers inherit from
+- `ConceptApi` - access to concept schemes and concepts via [jskos-server]
+- `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
+- `LocalMappings` - access to local mappings via [localForage](https://github.com/localForage/localForage) (only available in browser)
+- `SkosmosApi` - access to concept schemes and concepts via a [Skosmos](https://github.com/NatLibFi/Skosmos) API
+- `ReconciliationApi` - access to mapping suggestions via a [OpenRefine Reconciliation API](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API)
+- `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
+- `SearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
+
+### Errors
+`cocoda-sdk` defines some custom errors.
+
+```js
+const errors = require("cocoda-sdk/errors")
+```
+
+The following errors are defined:
+- `CDKError` - generic error
+- `MethodNotImplementedError` - called method is available, but not implemented by the provider
+- `InvalidOrMissingParameterError` - a parameter is missing or invalid
+- `MissingRegistryError` - a registry parameter is necessary to call this method
+- `InvalidRequestError` - the request was invalid
+- `MissingApiUrlError` - the API URL necessary to make this request is not defined on the registry
+
 ## Maintainers
 - [@stefandesu](https://github.com/stefandesu)
 - [@nichtich](https://github.com/nichtich)
@@ -89,3 +123,5 @@ Small note: If editing the README, please conform to the [standard-readme](https
 
 ## License
 MIT Copyright (c) 2020 Verbundzentrale des GBV (VZG)
+
+[jskos-server]: https://github.com/gbv/jskos-server
