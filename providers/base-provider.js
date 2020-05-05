@@ -299,20 +299,21 @@ class BaseProvider {
     return jskos.isContainedIn(scheme, schemes)
   }
 
-  // TODO: Reevaluate adjustment methods
   adjustConcept(concept) {
     // Add _getNarrower function to concepts
-    concept._getNarrower = () => {
-      return this.getNarrower(concept)
+    concept._getNarrower = (config) => {
+      return this.getNarrower({ ...config, concept })
     }
     // Add _getAncestors function to concepts
-    concept._getAncestors = () => {
-      return this.getAncestors(concept)
+    concept._getAncestors = (config) => {
+      return this.getAncestors({ ...config, concept })
     }
     // Add _getDetails function to concepts
-    concept._getDetails = () => {
-      return this.getDetails(concept)
+    concept._getDetails = (config) => {
+      return this.getConcept({ ...config, concept })
     }
+    // Add _provider to concepts
+    concept._provider = this
     return concept
   }
   adjustConcepts(concepts) {
@@ -328,18 +329,18 @@ class BaseProvider {
   adjustSchemes(schemes) {
     for (let scheme of schemes) {
       // Add _getTop function to schemes
-      scheme._getTop = () => {
-        return this.getTop(scheme)
+      scheme._getTop = (config) => {
+        return this.getTop({ ...config, scheme })
       }
       // Add _getTypes function to schemes
-      scheme._getTypes = () => {
-        return this.getTypes(scheme)
+      scheme._getTypes = (config) => {
+        return this.getTypes({ ...config, scheme })
       }
       // Add _provider to schemes
       scheme._provider = this
       // Add _suggest function to schemes
-      scheme._suggest = (search) => {
-        return this.suggest(search, scheme)
+      scheme._suggest = ({ search, ...config }) => {
+        return this.suggest({ ...config, search, scheme })
       }
     }
     return schemes
@@ -357,7 +358,7 @@ class BaseProvider {
     for (let side of ["from", "to"]) {
       let sideScheme = `${side}Scheme`
       if (!mapping[sideScheme]) {
-        mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]")
+        mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]", null)
       }
     }
     mapping._provider = this
