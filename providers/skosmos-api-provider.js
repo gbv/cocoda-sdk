@@ -232,7 +232,7 @@ class SkosmosApiProvider extends BaseProvider {
       }
       types.push(type)
     }
-    types.url = url
+    types._url = url
     return types
   }
 

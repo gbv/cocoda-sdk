@@ -115,7 +115,7 @@ class ReconciliationApiProvider extends BaseProvider {
         to: mapping.from,
       }))
     }
-    mappings.url = url
+    mappings._url = url
     return mappings
   }
 

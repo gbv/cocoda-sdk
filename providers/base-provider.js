@@ -113,7 +113,7 @@ class BaseProvider {
         // Add total count to array as prop
         let totalCount = parseInt(headers["x-total-count"])
         if (!isNaN(totalCount)) {
-          data.totalCount = totalCount
+          data._totalCount = totalCount
         }
         // Add URL to array as prop
         let url = config.url
@@ -123,7 +123,7 @@ class BaseProvider {
         _.forOwn(config.params || {}, (value, key) => {
           url += `${key}=${encodeURIComponent(value)}&`
         })
-        data.url = url
+        data._url = url
       }
 
       // TODO: Return data or whole response here?
@@ -155,8 +155,8 @@ class BaseProvider {
           .then(() => existingMethod(options))
           // Add totalCount to arrays
           .then(result => {
-            if (_.isArray(result) && result.totalCount === undefined) {
-              result.totalCount = result.length
+            if (_.isArray(result) && result._totalCount === undefined) {
+              result._totalCount = result.length
             }
             if (type && this[`adjust${type}`]) {
               result = this[`adjust${type}`](result)
@@ -319,8 +319,8 @@ class BaseProvider {
   adjustConcepts(concepts) {
     let newConcepts = concepts.map(concept => this.adjustConcept(concept))
     // Retain custom props if available
-    newConcepts.totalCount = concepts.totalCount
-    newConcepts.url = concepts.url
+    newConcepts._totalCount = concepts._totalCount
+    newConcepts._url = concepts._url
     return newConcepts
   }
   adjustRegistries(registries) {
@@ -374,8 +374,8 @@ class BaseProvider {
   adjustMappings(mappings) {
     let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
     // Retain custom props if available
-    newMappings.totalCount = mappings.totalCount
-    newMappings.url = mappings.url
+    newMappings._totalCount = mappings._totalCount
+    newMappings._url = mappings._url
     return newMappings
   }
 

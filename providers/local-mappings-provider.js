@@ -257,7 +257,7 @@ class LocalMappingsProvider extends BaseProvider {
       })
       mappings = mappings.slice(params.offset || 0)
       mappings = mappings.slice(0, params.limit)
-      mappings.totalCount = totalCount
+      mappings._totalCount = totalCount
       return mappings
     })
   }
