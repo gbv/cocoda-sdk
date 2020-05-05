@@ -77,4 +77,64 @@ describe("BaseProvider", () => {
     assert.equal(result.totalCount, 5)
   })
 
+  it("should adjust schemes as expected", () => {
+    const schemes = [{}]
+    schemes.totalCount = 1
+    schemes.url = "test-url"
+    const adjustedSchemes = provider.adjustSchemes(schemes)
+    assert.equal(adjustedSchemes.totalCount, schemes.totalCount)
+    assert.equal(adjustedSchemes.url, schemes.url)
+    const [scheme] = adjustedSchemes
+    assert.equal(scheme._provider, provider)
+    assert.ok(typeof scheme._getTop == "function")
+    assert.ok(typeof scheme._suggest == "function")
+    assert.ok(typeof scheme._getTypes == "function")
+  })
+
+  it("should adjust concepts as expected", () => {
+    const concepts = [{}]
+    concepts.totalCount = 1
+    concepts.url = "test-url"
+    const adjustedConcepts = provider.adjustConcepts(concepts)
+    assert.equal(adjustedConcepts.totalCount, concepts.totalCount)
+    assert.equal(adjustedConcepts.url, concepts.url)
+    const [concept] = adjustedConcepts
+    assert.equal(concept._provider, provider)
+    assert.ok(typeof concept._getNarrower == "function")
+    assert.ok(typeof concept._getAncestors == "function")
+    assert.ok(typeof concept._getDetails == "function")
+  })
+
+  it("should adjust mappings as expected", () => {
+    const mappings = [{}]
+    mappings.totalCount = 1
+    mappings.url = "test-url"
+    const adjustedMappings = provider.adjustMappings(mappings)
+    assert.equal(adjustedMappings.totalCount, mappings.totalCount)
+    assert.equal(adjustedMappings.url, mappings.url)
+    const [mapping] = adjustedMappings
+    assert.equal(mapping._provider, provider)
+    assert.ok(Array.isArray(mapping.identifier))
+    assert.equal(mapping.fromScheme, null)
+    assert.equal(mapping.toScheme, null)
+  })
+
+  it("should adjust concordances as expected", () => {
+    const concordances = [{}]
+    concordances.totalCount = 1
+    concordances.url = "test-url"
+    const adjustedConcordances = provider.adjustConcordances(concordances)
+    assert.equal(adjustedConcordances.totalCount, concordances.totalCount)
+    assert.equal(adjustedConcordances.url, concordances.url)
+    const [concordance] = adjustedConcordances
+    assert.equal(concordance._provider, provider)
+  })
+
+  it("should adjust registries as expected", () => {
+    const registries = [{}]
+    const adjustedRegistries = provider.adjustConcordances(registries)
+    // Currently no adjustments to registries
+    assert.equal(adjustedRegistries, registries)
+  })
+
 })
