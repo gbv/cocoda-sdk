@@ -37,7 +37,7 @@ const cdk = require("cocoda-sdk")
 ```
 
 ### Configuration
-`cocoda-sdk` takes a `config` option which is equivalent to the configuration file in [Cocoda](https://github.com/gbv/cocoda).
+`cocoda-sdk` takes a `config` option which is equivalent to the configuration file in [Cocoda](https://github.com/gbv/cocoda#configuration). In particular the configuration contains an array field [`registries`](#registries).
 
 ```js
 const config = require("./config") // Import configuration from somewhere
@@ -59,34 +59,15 @@ const cdk = require("cocoda-sdk")
 await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
 ```
 
-### Methods
-`cocoda-sdk`'s "providers" (which are basically different types of APIs) offer several methods to access the API that have only a single object parameter and the properties of that object are the actual parameters for the method.
+### Registries
 
-All of these provider methods are also available on the default instance of `cocoda-sdk`, only that they require an additional property `registry`.
-
-Simplest example:
-```js
-cdk.getMappings({ registry })
-```
-
-It would also be possible to use the provider directly on the registry:
-```js
-registry.provider.getMappings()
-```
-
-<!-- TODO -->
-
-### Multiple Instances
-If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
-
-```js
-const newCdk = cdk.createInstance({ config: newConfig })
-```
-
-It will be completely separate from the default instance.
+A registry is an individual source of data, for instance a set of concept schemes available from a specific terminology service. Access to the specific API of each registry is implemented via [providers](#providers).
 
 ### Providers
-It is possible to get direct access to provider classes.
+
+Providers are basically different types of APIs wrapped by `cocoda-sdk` for uniform access.
+
+It is also possible use provider classes independently:
 
 ```js
 const providers = require("cocoda-sdk/providers")
@@ -113,6 +94,33 @@ providers.addProvider(myProvider)
 ```
 
 It is then possible to use that provider via `cocoda-sdk` as well.
+
+### Methods
+
+Most methods offered by [providers](#providers) have only a single object parameter and the properties of that object are the actual parameters for the method.
+
+All of these provider methods are also available on the default instance of `cocoda-sdk`, only that they require an additional property `registry`.
+
+Simplest example:
+```js
+cdk.getMappings({ registry })
+```
+
+It would also be possible to use the provider directly on the registry:
+```js
+registry.provider.getMappings()
+```
+
+<!-- TODO -->
+
+### Multiple Instances
+If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
+
+```js
+const newCdk = cdk.createInstance({ config: newConfig })
+```
+
+It will be completely separate from the default instance.
 
 ### Errors
 `cocoda-sdk` defines some custom errors.
