@@ -105,24 +105,25 @@ class BaseProvider {
     })
 
     // Add a response interceptor
-    this.axios.interceptors.response.use(({ data, headers, config }) => {
+    this.axios.interceptors.response.use(({ data, headers = {}, config = {} }) => {
       // Apply unicode normalization
       data = jskos.normalize(data)
 
-      if (_.isArray(data)) {
+      // Add URL to array as prop
+      let url = config.url
+      if (!url.endsWith("?")) {
+        url += "?"
+      }
+      _.forOwn(config.params || {}, (value, key) => {
+        url += `${key}=${encodeURIComponent(value)}&`
+      })
+
+      if (_.isArray(data) || _.isObject(data)) {
         // Add total count to array as prop
         let totalCount = parseInt(headers["x-total-count"])
         if (!isNaN(totalCount)) {
           data._totalCount = totalCount
         }
-        // Add URL to array as prop
-        let url = config.url
-        if (!url.endsWith("?")) {
-          url += "?"
-        }
-        _.forOwn(config.params || {}, (value, key) => {
-          url += `${key}=${encodeURIComponent(value)}&`
-        })
         data._url = url
       }
 
@@ -157,6 +158,8 @@ class BaseProvider {
           .then(result => {
             if (_.isArray(result) && result._totalCount === undefined) {
               result._totalCount = result.length
+            } else if (_.isObject(result) && result._totalCount === undefined) {
+              result._totalCount = 1
             }
             if (type && this[`adjust${type}`]) {
               result = this[`adjust${type}`](result)

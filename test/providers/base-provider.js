@@ -65,6 +65,7 @@ describe("BaseProvider", () => {
       method: "get",
       url: "test",
     })
+    delete result._url
     assert.deepEqual(result, {})
 
     mock.onGet("test").reply(200, [], { "x-total-count": 5 })
