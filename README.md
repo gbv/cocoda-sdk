@@ -47,7 +47,7 @@ cdk.config = config
 or
 ```js
 const config = require("./config") // Import configuration from somewhere
-const cdk = require("cocoda-sdk")(config)
+const cdk = require("cocoda-sdk")({ config })
 ```
 
 This should be done only once because certain steps are performed after setting the config file.
@@ -60,7 +60,7 @@ await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/co
 ```
 
 ### Methods
-`cocoda-sdk`'s "providers" (which are basically different types of APIs) offer several methods to access the API that use the [RORO pattern](https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/) ("receive an object, return an object"), i.e. every method only has a single object parameter and the properties of that object are the actual parameters for the method.
+`cocoda-sdk`'s "providers" (which are basically different types of APIs) offer several methods to access the API that have only a single object parameter and the properties of that object are the actual parameters for the method.
 
 All of these provider methods are also available on the default instance of `cocoda-sdk`, only that they require an additional property `registry`.
 
@@ -80,7 +80,7 @@ registry.provider.getMappings()
 If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
 
 ```js
-const newCdk = cdk.createInstance({ newConfig })
+const newCdk = cdk.createInstance({ config: newConfig })
 ```
 
 It will be completely separate from the default instance.
