@@ -1,5 +1,5 @@
 # Cocoda SDK
-[![Build Status](https://travis-ci.com/gbv/cocoda-sdk.svg?branch=master)](https://travis-ci.com/gbv/cocoda-sdk)
+![Node.js CI](https://github.com/gbv/cocoda-sdk/workflows/Node.js%20CI/badge.svg)
 [![GitHub package version](https://img.shields.io/github/package-json/v/gbv/cocoda-sdk.svg?label=version)](https://github.com/gbv/cocoda-sdk)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
 
