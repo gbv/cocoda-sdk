@@ -84,6 +84,8 @@ class BaseProvider {
       key: null,
       bearerToken: null,
     }
+    // Set repeating requests array
+    this._repeating = []
 
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
@@ -427,6 +429,93 @@ class BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
     }
     return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
+  }
+
+  /**
+   * Repeatedly call a certain method.
+   *
+   * Callback will only be called if the results were changed.
+   *
+   * Example:
+   * ```js
+   *  provider.repeat({
+   *    method: "getMappings",
+   *    callback: (result) => console.log(result),
+   *    limit: 3,
+   *    offset: 3,
+   *  })
+   * ```
+   *
+   * @param {Object} config
+   * @param {string} config.method name of method to be called
+   * @param {number} [config.interval=15000] interval in ms
+   * @param {Function} config.callback callback function called with two parameters (result, error)
+   *
+   * Additionally include parameters needed for the actual request.
+   */
+  repeat({ method, interval = 15000, callback, ...config } = {}) {
+    // Check parameters
+    // ? Are these thorough checks really necessary?
+    if (!method) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "method" })
+    }
+    if (!this[method]) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "method", message: "method does not exist" })
+    }
+    interval = parseInt(interval)
+    if (isNaN(interval)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "interval" })
+    }
+    if (!callback) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "callback" })
+    }
+    if (typeof callback != "function") {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "callback", message: "callback needs to be a function" })
+    }
+    // Prepare repeat cache
+    let repeat = {
+      timer: null,
+      result: null,
+    }
+    this._repeating.push(repeat)
+    // Functions to handle results and errors
+    const handleResult = (result) => {
+      if (!_.isEqual(repeat.result, result)) {
+        callback(result)
+        repeat.result = result
+      }
+    }
+    const handleError = (error) => {
+      callback(null, error)
+    }
+    // Call method once immediately
+    this[method](config)
+      .then(result => [result])
+      .catch(error => [null, error])
+      .then(([result, error]) => {
+        // Handle result/error once
+        if (!error) {
+          handleResult(result)
+        } else {
+          handleError(error)
+        }
+        // Set up interval
+        repeat.timer = setInterval(() => {
+          this[method](config).then(handleResult).catch(handleError)
+        }, interval)
+      })
+    // Return function to clear interval
+    return () => {
+      this._repeating = this._repeating.filter(r => r != repeat)
+      // If timer is available, clear immediately, if not, wait for one interval
+      if (repeat.timer) {
+        clearInterval(repeat.timer)
+      } else {
+        setTimeout(() => {
+          repeat.timer && clearInterval(repeat.timer)
+        }, interval)
+      }
+    }
   }
 
 }
