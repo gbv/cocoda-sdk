@@ -52,6 +52,13 @@ const cdk = require("cocoda-sdk")(config)
 
 This should be done only once because certain steps are performed after setting the config file.
 
+The configuration can also be loaded from a URL:
+
+```js
+const cdk = require("cocoda-sdk")
+await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
+```
+
 ### Methods
 `cocoda-sdk`'s "providers" (which are basically different types of APIs) offer several methods to access the API that use the [RORO pattern](https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/) ("receive an object, return an object"), i.e. every method only has a single object parameter and the properties of that object are the actual parameters for the method.
 
