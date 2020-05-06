@@ -1,6 +1,6 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
-const _ = require("lodash")
+const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 // TODO: Only keep the last 20 results in cache.

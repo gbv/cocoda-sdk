@@ -1,5 +1,5 @@
 const BaseProvider = require("./base-provider")
-const _ = require("lodash")
+const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 /**

@@ -1,5 +1,5 @@
 const jskos = require("jskos-tools")
-const _ = require("lodash")
+const _ = require("../utils/lodash")
 const axios = require("axios")
 const utils = require("../utils")
 const errors = require("../errors")
