@@ -45,6 +45,11 @@ class InvalidRequestError extends CDKError {}
  */
 class MissingApiUrlError extends CDKError {}
 
+/**
+ * InvalidProviderError should be thrown when a provider is added to the provider list that does not inherit from BaseProvider.
+ */
+class InvalidProviderError extends CDKError {}
+
 module.exports = {
   CDKError,
   MethodNotImplementedError,
@@ -52,4 +57,5 @@ module.exports = {
   MissingRegistryError,
   InvalidRequestError,
   MissingApiUrlError,
+  InvalidProviderError,
 }

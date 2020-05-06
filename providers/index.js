@@ -1,30 +1,30 @@
-
-let providers = {}
-
+const errors = require("../errors")
 const BaseProvider = require("./base-provider")
-providers[BaseProvider.providerName] = BaseProvider
 
-const LocalMappingsProvider = require("./local-mappings-provider")
-providers[LocalMappingsProvider.providerName] = LocalMappingsProvider
+let providers = {
+  [BaseProvider.providerName]: BaseProvider,
+}
 
-const MappingsApiProvider = require("./mappings-api-provider")
-providers[MappingsApiProvider.providerName] = MappingsApiProvider
+function addProvider(provider) {
+  if (provider.prototype instanceof providers[BaseProvider.providerName]) {
+    providers[provider.providerName] = provider
+  } else {
+    throw new errors.InvalidProviderError()
+  }
+}
 
-const OccurrencesApiProvider = require("./occurrences-api-provider")
-providers[OccurrencesApiProvider.providerName] = OccurrencesApiProvider
+providers.addProvider = addProvider
 
-const ConceptApiProvider = require("./concept-api-provider")
-providers[ConceptApiProvider.providerName] = ConceptApiProvider
-
-const ReconciliationApiProvider = require("./reconciliation-api-provider")
-providers[ReconciliationApiProvider.providerName] = ReconciliationApiProvider
-
-const SearchSuggestionProvider = require("./search-suggestion-provider")
-providers[SearchSuggestionProvider.providerName] = SearchSuggestionProvider
-
-const SkosmosApiProvider = require("./skosmos-api-provider")
-providers[SkosmosApiProvider.providerName] = SkosmosApiProvider
-
-// Add more providers here.
+for (let provider of [
+  require("./local-mappings-provider"),
+  require("./mappings-api-provider"),
+  require("./occurrences-api-provider"),
+  require("./concept-api-provider"),
+  require("./reconciliation-api-provider"),
+  require("./search-suggestion-provider"),
+  require("./skosmos-api-provider"),
+]) {
+  addProvider(provider)
+}
 
 module.exports = providers

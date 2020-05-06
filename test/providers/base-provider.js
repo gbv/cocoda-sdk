@@ -1,4 +1,4 @@
-const BaseProvider = require("../../providers/base-provider")
+const BaseProvider = require("../../providers").Base
 const assert = require("assert")
 const MockAdapter = require("axios-mock-adapter")
 const utils = require("../../utils")

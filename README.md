@@ -104,6 +104,16 @@ The following providers are offered in `cocoda-sdk` by default:
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `SearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
 
+It is also possible to add custom providers that inherit from BaseProvider:
+
+```js
+const providers = require("cocoda-sdk/providers")
+const myProvider = require("myCustomProvider")
+providers.addProvider(myProvider)
+```
+
+It is then possible to use that provider via `cocoda-sdk` as well.
+
 ### Errors
 `cocoda-sdk` defines some custom errors.
 
