@@ -1,6 +1,5 @@
 const assert = require("assert")
 const cdk = require("../")
-const utils = require("../utils")
 
 describe("index", () => {
 
@@ -13,7 +12,12 @@ describe("index", () => {
     const props = [
       "config",
       "createInstance",
-    ].concat(utils.requestMethods.map(m => m.method))
+      "loadConfig",
+      "loadBuildInfo",
+      "getRegistryForUri",
+      "initializeRegistry",
+      "addProvider",
+    ]
     for (let prop of props) {
       assert.ok(!!cdk[prop], `cdk should have property "${prop}"`)
     }

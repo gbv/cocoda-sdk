@@ -1,7 +1,7 @@
 const providers = require("../../providers")
 const assert = require("assert")
 
-describe("BaseProvider", () => {
+describe("providers", () => {
 
   it("should have an addProvider method", () => {
     assert.ok(typeof providers.addProvider == "function", "expected method addProvider to exist")
