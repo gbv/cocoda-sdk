@@ -21,7 +21,7 @@ class SkosmosApiProvider extends BaseProvider {
     this.has.suggest = true
     this.has.search = true
     // Set concepts and topConcepts for schemes
-    for (let scheme of this.registry.schemes) {
+    for (let scheme of this.schemes) {
       scheme.concepts = [null]
       scheme.topConcepts = []
     }
@@ -29,15 +29,15 @@ class SkosmosApiProvider extends BaseProvider {
 
   async getSchemes({ ...config }) {
     // TODO: Re-evaluate!
-    if (!this.registry.loadSchemeInfo) {
-      const result = this.registry.schemes
+    if (!this._jskos.loadSchemeInfo) {
+      const result = this.schemes
       return result
     }
     const schemes = []
     // TODO
     const language = this.languages[0] || "en"
-    for (let scheme of this.registry.schemes || []) {
-      const url = `${this.registry.api}${scheme.VOCID}/?lang=${language}`
+    for (let scheme of this.schemes || []) {
+      const url = `${this.api.api}${scheme.VOCID}/?lang=${language}`
       const data = await this.axios({
         ...config,
         method: "get",
@@ -62,7 +62,7 @@ class SkosmosApiProvider extends BaseProvider {
     if (!concept || !concept.uri || !scheme || !scheme.VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI or missing VOCID on concept scheme" })
     }
-    return `${this.registry.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
+    return `${this.api.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
   }
 
   async getConcepts({ concepts, ...config }) {
@@ -184,7 +184,7 @@ class SkosmosApiProvider extends BaseProvider {
     if (!scheme || !scheme.VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
-    const url = `${this.registry.api}${scheme.VOCID}/search`
+    const url = `${this.api.api}${scheme.VOCID}/search`
     _.set(config, "params.query", `${search}*`)
     _.set(config, "params.unique", 1)
     _.set(config, "params.maxhits", limit || 100)
@@ -218,7 +218,7 @@ class SkosmosApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     const types = []
-    const url = `${this.registry.api}${scheme.VOCID}/types`
+    const url = `${this.api.api}${scheme.VOCID}/types`
     const response = await this.axios({
       ...config,
       method: "get",

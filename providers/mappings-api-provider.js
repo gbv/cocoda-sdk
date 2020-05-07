@@ -11,23 +11,23 @@ const errors = require("../errors")
 class MappingsApiProvider extends BaseProvider {
 
   _setup() {
-    this.has.mappings = this.registry.mappings ? {} : false
+    this.has.mappings = this.api.mappings ? {} : false
     if (this.has.mappings) {
-      this.has.mappings.read = !!_.get(this.registry, "config.mappings.read", true)
-      this.has.mappings.create = !!_.get(this.registry, "config.mappings.create")
-      this.has.mappings.update = !!_.get(this.registry, "config.mappings.update")
-      this.has.mappings.delete = !!_.get(this.registry, "config.mappings.delete")
-      this.has.mappings.anonymous = !!_.get(this.registry, "config.mappings.anonymous")
+      this.has.mappings.read = !!_.get(this.config, "mappings.read", true)
+      this.has.mappings.create = !!_.get(this.config, "mappings.create")
+      this.has.mappings.update = !!_.get(this.config, "mappings.update")
+      this.has.mappings.delete = !!_.get(this.config, "mappings.delete")
+      this.has.mappings.anonymous = !!_.get(this.config, "mappings.anonymous")
     }
-    this.has.concordances = !!this.registry.concordances
-    this.has.annotations = this.registry.annotations ? {} : false
+    this.has.concordances = !!this.api.concordances
+    this.has.annotations = this.api.annotations ? {} : false
     if (this.has.annotations) {
-      this.has.annotations.read = !!_.get(this.registry, "config.annotations.read")
-      this.has.annotations.create = !!_.get(this.registry, "config.annotations.create")
-      this.has.annotations.update = !!_.get(this.registry, "config.annotations.update")
-      this.has.annotations.delete = !!_.get(this.registry, "config.annotations.delete")
+      this.has.annotations.read = !!_.get(this.config, "annotations.read")
+      this.has.annotations.create = !!_.get(this.config, "annotations.create")
+      this.has.annotations.update = !!_.get(this.config, "annotations.update")
+      this.has.annotations.delete = !!_.get(this.config, "annotations.delete")
     }
-    this.has.auth = _.get(this.registry, "config.auth.key") != null
+    this.has.auth = _.get(this.config, "auth.key") != null
   }
 
   /**
@@ -50,7 +50,7 @@ class MappingsApiProvider extends BaseProvider {
    * @param {Object} config request config with parameters
    */
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
-    let params = {}, url = this.registry.mappings
+    let params = {}, url = this.api.mappings
     if (!uri) {
       if (from) {
         params.from = _.isString(from) ? from : from.uri
@@ -96,7 +96,7 @@ class MappingsApiProvider extends BaseProvider {
       }
     } else {
       // Load single mapping directly from URI if it comes from the current registry
-      if (uri.startsWith(this.registry.mappings)) {
+      if (uri.startsWith(this.api.mappings)) {
         url = uri
       } else {
         params.identifier = uri
@@ -125,7 +125,7 @@ class MappingsApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "post",
-      url: this.registry.mappings,
+      url: this.api.mappings,
       data: mapping,
     })
   }
@@ -143,7 +143,7 @@ class MappingsApiProvider extends BaseProvider {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
-    if (!uri || !uri.startsWith(this.registry.mappings)) {
+    if (!uri || !uri.startsWith(this.api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -167,7 +167,7 @@ class MappingsApiProvider extends BaseProvider {
     mapping = jskos.minifyMapping(mapping)
     mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
-    if (!uri || !uri.startsWith(this.registry.mappings)) {
+    if (!uri || !uri.startsWith(this.api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -189,7 +189,7 @@ class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     const uri = mapping.uri
-    if (!uri || !uri.startsWith(this.registry.mappings)) {
+    if (!uri || !uri.startsWith(this.api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -212,7 +212,7 @@ class MappingsApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.annotations,
+      url: this.api.annotations,
     })
   }
 
@@ -226,7 +226,7 @@ class MappingsApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "post",
-      url: this.registry.annotations,
+      url: this.api.annotations,
       data: annotation,
     })
   }
@@ -239,7 +239,7 @@ class MappingsApiProvider extends BaseProvider {
    */
   async putAnnotation({ annotation, ...config }) {
     const uri = annotation.id
-    if (!uri || !uri.startsWith(this.registry.annotations)) {
+    if (!uri || !uri.startsWith(this.api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -258,7 +258,7 @@ class MappingsApiProvider extends BaseProvider {
    */
   async patchAnnotation({ annotation, ...config }) {
     const uri = annotation.id
-    if (!uri || !uri.startsWith(this.registry.annotations)) {
+    if (!uri || !uri.startsWith(this.api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -277,7 +277,7 @@ class MappingsApiProvider extends BaseProvider {
    */
   async deleteAnnotation({ annotation, ...config }) {
     const uri = annotation.id
-    if (!uri || !uri.startsWith(this.registry.annotations)) {
+    if (!uri || !uri.startsWith(this.api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
     return this.axios({
@@ -296,7 +296,7 @@ class MappingsApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.concordances,
+      url: this.api.concordances,
     })
   }
 

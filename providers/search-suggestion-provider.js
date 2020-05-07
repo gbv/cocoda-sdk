@@ -33,8 +33,8 @@ class SearchSuggestionProvider extends BaseProvider {
   get _searchUris() {
     const _searchUris = {}
     for (let registry of this._registries) {
-      const search = registry.search || _.get(registry, "provider.registry.search")
-      if (search) {
+      const search = _.get(registry, "api.search") || _.get(registry, "_jskos.search") || registry.search
+      if (search && _.isString(search)) {
         _searchUris[registry.uri] = search
       }
     }
@@ -47,7 +47,7 @@ class SearchSuggestionProvider extends BaseProvider {
    * @param {Object} scheme - target scheme to check for support
    */
   supportsScheme(scheme) {
-    let targetRegistry = _.get(scheme, "_provider.registry.uri")
+    let targetRegistry = _.get(scheme, "_provider.uri")
     return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
   }
 
@@ -139,7 +139,7 @@ class SearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const targetRegistry = _.get(targetScheme, "_provider.registry.uri")
+    const targetRegistry = _.get(targetScheme, "_provider.uri")
     const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
     if (!url) {
       return []

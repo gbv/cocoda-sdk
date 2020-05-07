@@ -61,11 +61,10 @@ class BaseProvider {
   /**
    * Provider constructor.
    *
-   * @param {Object} config
-   * @param {Object} config.registry the registry for this provider
+   * @param {Object} registry the registry for this provider
    */
-  constructor({ registry } = {}) {
-    this.registry = registry
+  constructor(registry = {}) {
+    this._jskos = registry
 
     this.axios = axios.create({
       // TODO: Decide on timeout value
@@ -86,6 +85,27 @@ class BaseProvider {
     }
     // Set repeating requests array
     this._repeating = []
+
+    // Set API URLs from registry object
+    this.api = {
+      status: registry.status,
+      schemes: registry.schemes,
+      top: registry.top,
+      data: registry.data,
+      concepts: registry.concepts,
+      narrower: registry.narrower,
+      ancestors: registry.ancestors,
+      types: registry.types,
+      suggest: registry.suggest,
+      search: registry.search,
+      mappings: registry.mappings,
+      concordances: registry.concordances,
+      annotations: registry.annotations,
+      occurrences: registry.occurrences,
+      reconcile: registry.reconcile,
+      api: registry.api,
+    }
+    this.config = {}
 
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
@@ -187,6 +207,15 @@ class BaseProvider {
     }
   }
 
+  // Expose some properties from original registry object as getters
+  get uri() { return this._jskos.uri }
+  get notation() { return this._jskos.notation }
+  get prefLabel() { return this._jskos.prefLabel }
+  get definition() { return this._jskos.definition }
+  get schemes() { return this._jskos.schemes }
+  get excludedSchemes() { return this._jskos.excludedSchemes }
+  // TODO: stored, autoRefresh, suggestResultLimit, loadSchemeInfo, ...?
+
   /**
    * Load data about registry via the status endpoint.
    */
@@ -197,20 +226,25 @@ class BaseProvider {
     }
     this._init = (async () => {
       let status
-      if (_.isString(this.registry.status)) {
+      if (_.isString(this.api.status)) {
         // Request status endpoint
         status = await this.axios({
           method: "get",
-          url: this.registry.status,
+          url: this.api.status,
         })
       } else {
         // Assume object
-        status = this.registry.status
+        status = this.api.status
       }
       if (_.isObject(status) && !_.isEmpty(status)) {
-        // Merge status result and registry
-        // (registry always has priority)
-        this.registry = _.merge({}, status, this.registry)
+        // Set config
+        this.config = status.config || {}
+        // Merge status result and existing API URLs
+        for (let key of Object.keys(this.api)) {
+          if (status[key] && !this.api[key]) {
+            this.api[key] = status[key]
+          }
+        }
       }
       this._setup()
     })()
@@ -257,7 +291,7 @@ class BaseProvider {
     if (!this.has[type]) {
       return false
     }
-    const options = _.get(this.registry, `config.${type}.${action}`)
+    const options = _.get(this.config, `${type}.${action}`)
     if (!options) {
       return !!this.has[type][action]
     }
@@ -265,7 +299,7 @@ class BaseProvider {
       return false
     }
     // Public key mismatch
-    if (options.auth && this.auth.key != this.registry.config.auth.key) {
+    if (options.auth && this.auth.key != _.get(this.config, "auth.key")) {
       return false
     }
     if (options.auth && options.identities) {
@@ -297,8 +331,8 @@ class BaseProvider {
     if (!scheme) {
       return false
     }
-    let schemes = _.isArray(this.registry.schemes) ? this.registry.schemes : null
-    if (schemes == null && !jskos.isContainedIn(scheme, this.registry.excludedSchemes || [])) {
+    let schemes = _.isArray(this.schemes) ? this.schemes : null
+    if (schemes == null && !jskos.isContainedIn(scheme, this.excludedSchemes || [])) {
       return true
     }
     return jskos.isContainedIn(scheme, schemes)

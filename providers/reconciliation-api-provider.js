@@ -29,23 +29,23 @@ class ReconciliationApiProvider extends BaseProvider {
     let toConceptScheme = _.get(to, "inScheme[0]")
     let fromScheme
     let toScheme
-    if (!from || jskos.isContainedIn(fromConceptScheme, this.registry.schemes || [])) {
+    if (!from || jskos.isContainedIn(fromConceptScheme, this.schemes || [])) {
       swap = true
       concept = to
       fromScheme = toConceptScheme
-      toScheme = (this.registry.schemes || []).find(scheme => jskos.compare(scheme, _.get(to, "inScheme[0]"))) || (this.registry.schemes || [])[0]
+      toScheme = (this.schemes || []).find(scheme => jskos.compare(scheme, _.get(to, "inScheme[0]"))) || (this.schemes || [])[0]
     } else {
       swap = false
       concept = from
       fromScheme = fromConceptScheme
-      toScheme = (this.registry.schemes || []).find(scheme => jskos.compare(scheme, _.get(from, "inScheme[0]"))) || (this.registry.schemes || [])[0]
+      toScheme = (this.schemes || []).find(scheme => jskos.compare(scheme, _.get(from, "inScheme[0]"))) || (this.schemes || [])[0]
     }
     // Temporary to filter out GND mapping requests...
     // TODO: Remove?!?
     if (mode != "or") {
       return []
     }
-    if (!this.registry.reconcile) {
+    if (!this.api.reconcile) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept) {
@@ -69,7 +69,7 @@ class ReconciliationApiProvider extends BaseProvider {
     labels = [prefLabel]
     // Get results from API or cache
     let { url, data: results } = await this._getReconciliationResults({ ...config, labels, language })
-    results = [].concat(...Object.values(results).map(value => value.result))
+    results = [].concat(...Object.values(results).map(value => value.result)).filter(r => r)
     // Sort results, first by score descending, then by match, then by length of notation
     results = results.sort((a, b) => {
       if (a.score != b.score) {
@@ -144,7 +144,7 @@ class ReconciliationApiProvider extends BaseProvider {
       }
       index += 1
     }
-    let url = this.registry.reconcile
+    let url = this.api.reconcile
     if (language) {
       url = url.replace("{language}", language)
     }

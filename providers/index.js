@@ -3,17 +3,20 @@ const BaseProvider = require("./base-provider")
 
 let providers = {
   [BaseProvider.providerName]: BaseProvider,
-}
-
-function addProvider(provider) {
-  if (provider.prototype instanceof providers[BaseProvider.providerName]) {
-    providers[provider.providerName] = provider
-  } else {
+  init(registry) {
+    if (this[registry.provider]) {
+      return new this[registry.provider](registry)
+    }
     throw new errors.InvalidProviderError()
-  }
+  },
+  addProvider(provider) {
+    if (provider.prototype instanceof providers[BaseProvider.providerName]) {
+      this[provider.providerName] = provider
+    } else {
+      throw new errors.InvalidProviderError()
+    }
+  },
 }
-
-providers.addProvider = addProvider
 
 for (let provider of [
   require("./local-mappings-provider"),
@@ -24,7 +27,7 @@ for (let provider of [
   require("./search-suggestion-provider"),
   require("./skosmos-api-provider"),
 ]) {
-  addProvider(provider)
+  providers.addProvider(provider)
 }
 
 module.exports = providers

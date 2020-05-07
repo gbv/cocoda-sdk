@@ -11,7 +11,7 @@
   result = await cdk.getMappings({ registry, limit: 10 })
   console.log(result.length)
   // Way 2:
-  result = await registry.provider.getMappings({ limit: 10 })
+  result = await registry.getMappings({ limit: 10 })
   console.log(result.length)
 
   // Repeatedly request mappings

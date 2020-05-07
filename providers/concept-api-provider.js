@@ -10,15 +10,15 @@ const errors = require("../errors")
 class ConceptApiProvider extends BaseProvider {
 
   _setup() {
-    this.has.schemes = !!this.registry.schemes
-    this.has.top = !!this.registry.top
-    this.has.data = !!this.registry.data
-    this.has.concepts = !!this.registry.concepts || this.has.data
-    this.has.narrower = !!this.registry.narrower
-    this.has.ancestors = !!this.registry.ancestors
-    this.has.types = !!this.registry.types
-    this.has.suggest = !!this.registry.suggest
-    this.has.search = !!this.registry.search
+    this.has.schemes = !!this.api.schemes
+    this.has.top = !!this.api.top
+    this.has.data = !!this.api.data
+    this.has.concepts = !!this.api.concepts || this.has.data
+    this.has.narrower = !!this.api.narrower
+    this.has.ancestors = !!this.api.ancestors
+    this.has.types = !!this.api.types
+    this.has.suggest = !!this.api.suggest
+    this.has.search = !!this.api.search
   }
 
   /**
@@ -27,11 +27,11 @@ class ConceptApiProvider extends BaseProvider {
    * @param {Object} config
    */
   async getSchemes(config) {
-    if (!this.registry.schemes) {
+    if (!this.api.schemes) {
       throw new errors.MissingApiUrlError()
     }
-    if (Array.isArray(this.registry.schemes)) {
-      return this.registry.schemes
+    if (Array.isArray(this.api.schemes)) {
+      return this.api.schemes
     }
     // ? Should we really do it this way?
     if (!_.get(config, "params.limit")) {
@@ -40,7 +40,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.schemes,
+      url: this.api.schemes,
     })
   }
 
@@ -51,14 +51,14 @@ class ConceptApiProvider extends BaseProvider {
    * @param {Object} config.scheme concept scheme object
    */
   async getTop({ scheme, ...config }) {
-    if (!this.registry.top) {
+    if (!this.api.top) {
       throw new errors.MissingApiUrlError()
     }
     if (!scheme) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
-    if (Array.isArray(this.registry.top)) {
-      return this.registry.top
+    if (Array.isArray(this.api.top)) {
+      return this.api.top
     }
     _.set(config, "params.uri", scheme.uri)
     // ? Should we really do it this way?
@@ -69,7 +69,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.top,
+      url: this.api.top,
     })
   }
 
@@ -95,7 +95,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.data,
+      url: this.api.data,
     })
   }
 
@@ -106,7 +106,7 @@ class ConceptApiProvider extends BaseProvider {
    * @param {Object} config.concept concept object
    */
   async getNarrower({ concept, ...config }) {
-    if (!this.registry.narrower) {
+    if (!this.api.narrower) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
@@ -121,7 +121,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.narrower,
+      url: this.api.narrower,
     })
   }
 
@@ -132,7 +132,7 @@ class ConceptApiProvider extends BaseProvider {
    * @param {Object} config.concept concept object
    */
   async getAncestors({ concept, ...config }) {
-    if (!this.registry.ancestors) {
+    if (!this.api.ancestors) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
@@ -147,7 +147,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.ancestors,
+      url: this.api.ancestors,
     })
   }
 
@@ -163,15 +163,15 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    */
   async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
-    if (!this.registry.suggest) {
+    if (!this.api.suggest) {
       throw new errors.MissingApiUrlError()
     }
     if (!search) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "search" })
     }
-    limit = limit || this.registry.suggestResultLimit || 100
+    limit = limit || this._jskos.suggestResultLimit || 100
     // Some registries use URL templates with {searchTerms}
-    let url = this.registry.suggest.replace("{searchTerms}", search)
+    let url = this.api.suggest.replace("{searchTerms}", search)
     return this.axios({
       ...config,
       params: {
@@ -205,11 +205,11 @@ class ConceptApiProvider extends BaseProvider {
    * @param {Object} [config.scheme] concept scheme to load types for
    */
   async getTypes({ scheme, ...config }) {
-    if (!this.registry.types) {
+    if (!this.api.types) {
       throw new errors.MissingApiUrlError()
     }
-    if (Array.isArray(this.registry.types)) {
-      return this.registry.types
+    if (Array.isArray(this.api.types)) {
+      return this.api.types
     }
     if (scheme && scheme.uri) {
       _.set(config, "params.uri", scheme.uri)
@@ -217,7 +217,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.registry.types,
+      url: this.api.types,
     })
   }
 

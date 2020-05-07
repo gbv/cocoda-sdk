@@ -20,8 +20,8 @@ describe("BaseProvider", () => {
   })
 
   it("should have certain properties", () => {
-    provider = getProvider({ registry })
-    assert.equal(provider.registry, registry, "registry property does not refer to registry object")
+    provider = getProvider(registry)
+    assert.equal(provider._jskos, registry, "registry property does not refer to registry object")
     assert.deepEqual(provider.has, {}, "has property is not empty")
     assert.deepEqual(provider.languages, [], "languages property is not an empty array")
     assert.deepEqual(provider.auth, { key: null, bearerToken: null })
@@ -143,11 +143,11 @@ describe("BaseProvider", () => {
     assert.ok(provider.supportsScheme({}))
     // excludedSchemes
     const excludedScheme = { uri: "test:excluded" }
-    provider.registry.excludedSchemes = [excludedScheme]
+    provider._jskos.excludedSchemes = [excludedScheme]
     assert.ok(!provider.supportsScheme(excludedScheme))
     // schemes
     const scheme = { uri: "test:scheme" }
-    provider.registry.schemes = [scheme]
+    provider._jskos.schemes = [scheme]
     // if `schemes` is set, any scheme shouldn't be supported anymore
     assert.ok(!provider.supportsScheme({}))
     // excluded schemes shouldn't be supported
