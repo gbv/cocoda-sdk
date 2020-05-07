@@ -87,6 +87,9 @@ class SkosmosApiProvider extends BaseProvider {
       const resultConcept = result && result.graph && result.graph.find(c => jskos.compare(c, concept))
       if (resultConcept) {
         // Set prefLabel
+        if (resultConcept.prefLabel && !_.isArray(resultConcept.prefLabel)) {
+          resultConcept.prefLabel = [resultConcept.prefLabel]
+        }
         for (let prefLabel of resultConcept.prefLabel || []) {
           _.set(concept, `prefLabel.${prefLabel.lang}`, prefLabel.value)
         }
@@ -115,6 +118,9 @@ class SkosmosApiProvider extends BaseProvider {
           for (let relative of concept[type]) {
             const resultRelative = result.graph.find(c => jskos.compare(c, relative))
             if (resultRelative) {
+              if (resultRelative.prefLabel && !_.isArray(resultRelative.prefLabel)) {
+                resultRelative.prefLabel = [resultRelative.prefLabel]
+              }
               for (let prefLabel of resultRelative.prefLabel || []) {
                 _.set(relative, `prefLabel.${prefLabel.lang}`, prefLabel.value)
               }
