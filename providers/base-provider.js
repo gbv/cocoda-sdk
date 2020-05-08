@@ -5,12 +5,6 @@ const utils = require("../utils")
 const errors = require("../errors")
 
 /**
- * Providers
- *
- * @namespace
- */
-
-/**
  * BaseProvider to be subclassed to implement specific providers.
  *
  * Prefix all internal method and properties with underscore (e.g. `this._cache`)!

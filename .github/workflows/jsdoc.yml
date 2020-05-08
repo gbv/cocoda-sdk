@@ -19,7 +19,6 @@ jobs:
           config_file: jsdoc.conf.json
           recurse: true
           output_dir: ./out
-          template: minami
           front_page: README.md
 
       - name: Deploy
