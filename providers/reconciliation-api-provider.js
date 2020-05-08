@@ -4,6 +4,8 @@ const _ = require("../utils/lodash")
 const qs = require("qs")
 const errors = require("../errors")
 
+// TODO: Document namespace etc.
+
 /**
  * Provider for the OpenRefine Reconciliation API.
  *
@@ -28,7 +30,7 @@ class ReconciliationApiProvider extends BaseProvider {
   }
 
   /**
-   * Returns a list of mappings.
+   * Returns a list of mappings suggestions.
    *
    * @param {Object} config
    * @param {Object} config.from JSKOS concept on from side
@@ -37,22 +39,26 @@ class ReconciliationApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS mapping objects
    */
   async getMappings({ from, to, mode, ...config }) {
+    let schemes = []
+    if (_.isArray(this.schemes)) {
+      schemes = this.schemes
+    }
     let swap
     let concept
     let fromConceptScheme = _.get(from, "inScheme[0]")
     let toConceptScheme = _.get(to, "inScheme[0]")
     let fromScheme
     let toScheme
-    if (!from || jskos.isContainedIn(fromConceptScheme, this.schemes || [])) {
+    if (!from || jskos.isContainedIn(fromConceptScheme, schemes)) {
       swap = true
       concept = to
       fromScheme = toConceptScheme
-      toScheme = (this.schemes || []).find(scheme => jskos.compare(scheme, _.get(to, "inScheme[0]"))) || (this.schemes || [])[0]
+      toScheme = schemes.find(scheme => jskos.compare(scheme, fromConceptScheme)) || schemes[0]
     } else {
       swap = false
       concept = from
       fromScheme = fromConceptScheme
-      toScheme = (this.schemes || []).find(scheme => jskos.compare(scheme, _.get(from, "inScheme[0]"))) || (this.schemes || [])[0]
+      toScheme = schemes.find(scheme => jskos.compare(scheme, toConceptScheme)) || schemes[0]
     }
     // Temporary to filter out GND mapping requests...
     // TODO: Remove?!?
@@ -64,10 +70,6 @@ class ReconciliationApiProvider extends BaseProvider {
     }
     if (!concept) {
       throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from" })
-    }
-    // If concept's scheme is the same as reconciliation scheme, skip
-    if (!fromScheme || !toScheme || jskos.compare(fromScheme, toScheme)) {
-      throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from", message: "Missing scheme or matches reconciliation scheme" })
     }
     // Prepare labels
     let language = jskos.languagePreference.selectLanguage(concept.prefLabel)
@@ -101,6 +103,7 @@ class ReconciliationApiProvider extends BaseProvider {
     // Prepare namespace
     let namespace = _.get(toScheme, "namespace", "")
     // Map results to actual mappings
+    console.log(JSON.stringify(results, null, 2))
     let mappings = results.map(result => ({
       fromScheme,
       from: { memberSet: [concept] },
