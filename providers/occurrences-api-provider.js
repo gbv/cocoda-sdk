@@ -7,6 +7,9 @@ const errors = require("../errors")
  * For APIs that provide occurrences in JSKOS format.
  *
  * TODO: Modernize.
+ *
+ * @category Providers
+ *
  */
 class OccurrencesApiProvider extends BaseProvider {
 

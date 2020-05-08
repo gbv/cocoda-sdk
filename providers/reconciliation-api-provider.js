@@ -6,6 +6,9 @@ const errors = require("../errors")
 
 /**
  * Provider for the OpenRefine Reconciliation API.
+ *
+ * @category Providers
+ *
  */
 class ReconciliationApiProvider extends BaseProvider {
 

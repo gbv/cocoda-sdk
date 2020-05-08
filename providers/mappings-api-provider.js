@@ -7,6 +7,9 @@ const errors = require("../errors")
  * For APIs that provide concordances and mappings in JSKOS format.
  *
  * TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
+ *
+ * @category Providers
+ *
  */
 class MappingsApiProvider extends BaseProvider {
 

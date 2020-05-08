@@ -8,6 +8,9 @@ const uriPrefix = "urn:uuid:"
 
 /**
  * For saving and retrieving mappings from the browser's local storage.
+ *
+ * @category Providers
+ *
  */
 class LocalMappingsProvider extends BaseProvider {
 

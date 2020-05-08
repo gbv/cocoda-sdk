@@ -7,6 +7,9 @@ const errors = require("../errors")
  * Skosmos API Wrapper.
  *
  * TODO: Documentation
+ *
+ * @category Providers
+ *
  */
 class SkosmosApiProvider extends BaseProvider {
 

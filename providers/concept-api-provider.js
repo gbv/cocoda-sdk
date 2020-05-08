@@ -6,6 +6,9 @@ const errors = require("../errors")
  * For APIs that provide concept schemes and concepts in JSKOS format
  * like [DANTE](https://api.dante.gbv.de/) and jskos-server
  * [jskos-server](https://github.com/gbv/jskos-server).
+ *
+ * @category Providers
+ *
  */
 class ConceptApiProvider extends BaseProvider {
 
