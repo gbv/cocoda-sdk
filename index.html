@@ -207,7 +207,7 @@ cdk.addProvider(CustomProvider)
 <p>It is then possible to use that provider via <code>cocoda-sdk</code> as well. (See also: Example under <code>examples/custom-provider.js</code>.)</p>
 <h3>Multiple Instances</h3>
 <p>If you need multiple instances of <code>cocoda-sdk</code>, use the <code>createInstance</code> method on the default instance:</p>
-<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance({ config: newConfig })
+<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance(newConfig)
 </code></pre>
 <p>It will be completely separate from the default instance.</p>
 <h2>Methods</h2>
