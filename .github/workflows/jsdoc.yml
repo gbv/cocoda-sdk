@@ -16,7 +16,7 @@ jobs:
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: .
-          config_file: jsdoc.conf.json
+          config_file: jsdoc.json
           recurse: true
           output_dir: ./out
           template: better-docs
