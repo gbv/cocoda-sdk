@@ -50,10 +50,10 @@ class MissingRegistryError extends CDKError {}
 /**
  * InvalidRequestError should be thrown when the request is somehow invalid.
  *
+ * ? Where is this needed?
+ *
  * @category Errors
  *
- *
- * ? Where is this needed?
  */
 class InvalidRequestError extends CDKError {}
 
