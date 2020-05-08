@@ -14,6 +14,7 @@ const errors = require("../errors")
  * }
  * ```
  *
+ * @extends BaseProvider
  * @category Providers
  */
 class ReconciliationApiProvider extends BaseProvider {

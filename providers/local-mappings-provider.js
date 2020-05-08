@@ -16,6 +16,7 @@ const uriPrefix = "urn:uuid:"
  * }
  * ```
  *
+ * @extends BaseProvider
  * @category Providers
  */
 class LocalMappingsProvider extends BaseProvider {

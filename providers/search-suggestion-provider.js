@@ -18,6 +18,7 @@ const errors = require("../errors")
  * }
  * ```
  *
+ * @extends BaseProvider
  * @category Providers
  */
 class SearchSuggestionProvider extends BaseProvider {

@@ -13,6 +13,7 @@ const errors = require("../errors")
  * }
  * ```
  *
+ * @extends BaseProvider
  * @category Providers
  */
 class SkosmosApiProvider extends BaseProvider {
