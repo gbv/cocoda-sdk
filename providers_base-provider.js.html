@@ -140,6 +140,7 @@ const errors = require("../errors")
  *
  * All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
  * Example:
+ * ```js
  *  getConcept({ concept, ...config }) {
  *    return this.axios({
  *      ...config,
@@ -149,6 +150,7 @@ const errors = require("../errors")
  *      },
  *    })
  *  }
+ * ```
  *
  * Always use `this.axios` like in the example for http requests!
  *
