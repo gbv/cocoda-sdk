@@ -5,5 +5,22 @@
   ],
   "tags": {
     "allowUnknownTags": ["category"]
+  },
+  "templates": {
+    "search": true,
+    "better-docs": {
+      "name": "cocoda-sdk Documentation",
+      "title": "cocoda-sdk",
+      "navigation": [
+        {
+            "label": "Github",
+            "href": "https://github.com/gbv/cocoda-sdk"
+        },
+        {
+            "label": "Cocoda Mapping Tool",
+            "href": "https://github.com/gbv/cocoda"
+        }
+    ]
+    }
   }
 }
