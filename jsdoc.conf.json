@@ -1,7 +1,7 @@
 {
   "plugins": [
     "plugins/markdown",
-    "node_modules/better-docs/category"
+    "/home/runner/work/_actions/andstor/jsdoc-action/v1/node_modules/better-docs/category"
   ],
   "tags": {
     "allowUnknownTags": ["category"]
