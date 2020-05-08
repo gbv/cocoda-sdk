@@ -145,24 +145,22 @@
 <p><strong>Note:</strong> Replace the commit hash with the desired commit.</p>
 <h2>Usage</h2>
 <h3>Import</h3>
-<p><code>cocoda-sdk</code> exports a default instance of the CocodaSDK class, that means that the same object is used anywhere in a project where <code>cocoda-sdk</code> is imported.</p>
+<p><code>cocoda-sdk</code> exports a singleton, so the same object is used on each import of <code>cocoda-sdk</code>.</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 </code></pre>
 <h3>Configuration</h3>
-<p><code>cocoda-sdk</code> takes a <code>config</code> option which is equivalent to the configuration file in <a href="https://github.com/gbv/cocoda#configuration">Cocoda</a>. In particular the configuration contains an array field <a href="#registries"><code>registries</code></a>.</p>
-<pre class="prettyprint source lang-js"><code>const config = require(&quot;./config&quot;) // Import configuration from somewhere
-const cdk = require(&quot;cocoda-sdk&quot;)
+<p><code>cocoda-sdk</code> can be configured on import or by setting the <code>config</code> property:</p>
+<pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)(config)
+</code></pre>
+<pre class="prettyprint source"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 cdk.config = config
 </code></pre>
-<p>or</p>
-<pre class="prettyprint source lang-js"><code>const config = require(&quot;./config&quot;) // Import configuration from somewhere
-const cdk = require(&quot;cocoda-sdk&quot;)(config)
-</code></pre>
-<p>This should be done only once because certain steps are performed after setting the config file.</p>
 <p>The configuration can also be loaded from a URL:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 await cdk.loadConfig(&quot;https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json&quot;)
 </code></pre>
+<p>Configuration should only be set once because certain steps are performed afterwards.</p>
+<p>The configuration is a JSON object corresponding the the <a href="https://github.com/gbv/cocoda#configuration">configuration format of Cocoda</a>. In particular the configuration contains an array property <a href="#registries"><code>registries</code></a>.</p>
 <p>If you only use <code>cocoda-sdk</code> with a single registry, configuration might not be necessary (see below).</p>
 <h3>Registries</h3>
 <p>A registry is an individual source of data, for instance a set of concept schemes available from a specific terminology service. The simplest registry consists only of a unique identifier (<code>uri</code>) and the name of the access provider (<code>provider</code>):</p>
@@ -206,10 +204,9 @@ cdk.addProvider(CustomProvider)
 </code></pre>
 <p>It is then possible to use that provider via <code>cocoda-sdk</code> as well. (See also: Example under <code>examples/custom-provider.js</code>.)</p>
 <h3>Multiple Instances</h3>
-<p>If you need multiple instances of <code>cocoda-sdk</code>, use the <code>createInstance</code> method on the default instance:</p>
-<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance(newConfig)
+<p>The <code>createInstance</code> method can be used to create a new and independent instance, if actually needed:</p>
+<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance(config)
 </code></pre>
-<p>It will be completely separate from the default instance.</p>
 <h2>Methods</h2>
 <p>A <code>cocoda-sdk</code> instance itself offers only a handful of methods. The actual access to APIs happens through <a href="#registries">registries</a>. The following list of methods assume either an instance of <code>cocoda-sdk</code> (<code>cdk.someMethod</code>) or an initialized registry (<code>registry.someMethod</code>). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.</p>
 <h3>Methods for <code>cocoda-sdk</code> instance</h3>
