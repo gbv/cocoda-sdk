@@ -255,6 +255,8 @@ class BaseProvider {
 
   /**
    * Setup to be executed after init. Should be overwritten by subclasses.
+   *
+   * @private
    */
   _setup() {}
 

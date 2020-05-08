@@ -13,6 +13,9 @@ const errors = require("../errors")
  */
 class SkosmosApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.schemes = true
     this.has.top = false
@@ -60,6 +63,9 @@ class SkosmosApiProvider extends BaseProvider {
     throw new errors.MethodNotImplementedError({ method: "getTop" })
   }
 
+  /**
+   * @private
+   */
   _getDataUrl(concept, { addFormatParameter = true } = {}) {
     const scheme = _.get(concept, "inScheme[0]")
     if (!concept || !concept.uri || !scheme || !scheme.VOCID) {

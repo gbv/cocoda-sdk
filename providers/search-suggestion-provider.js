@@ -16,6 +16,9 @@ const errors = require("../errors")
  */
 class SearchSuggestionProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this._cache = []
     this.has.mappings = true
@@ -32,6 +35,8 @@ class SearchSuggestionProvider extends BaseProvider {
 
   /**
    * List of search provider URIs.
+   *
+   * @private
    */
   get _searchUris() {
     const _searchUris = {}
@@ -87,6 +92,8 @@ class SearchSuggestionProvider extends BaseProvider {
   /**
    * Internal function to get mapping recommendations for a certain concept with sourceScheme and targetScheme.
    *
+   * @private
+   *
    * @param {Object} config
    * @param {Object} config.concept
    * @param {Object} config.sourceScheme
@@ -130,6 +137,8 @@ class SearchSuggestionProvider extends BaseProvider {
 
   /**
    * Internal function that either makes an API request or uses a local cache.
+   *
+   * @private
    *
    * @param {Object} config
    * @param {string} config.label

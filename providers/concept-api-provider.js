@@ -12,6 +12,9 @@ const errors = require("../errors")
  */
 class ConceptApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.schemes = !!this.api.schemes
     this.has.top = !!this.api.top

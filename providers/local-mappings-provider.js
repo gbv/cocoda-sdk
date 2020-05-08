@@ -14,6 +14,9 @@ const uriPrefix = "urn:uuid:"
  */
 class LocalMappingsProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.mappings = {
       read: true,
@@ -73,6 +76,8 @@ class LocalMappingsProvider extends BaseProvider {
    * This prevents conflicts when saveMapping is called multiple times simultaneously.
    *
    * TODO: There might be a better solution for this...
+   *
+   * @private
    */
   _getMappingsQueue(...params) {
     let last = _.last(this.queue) || Promise.resolve()

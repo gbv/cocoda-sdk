@@ -12,6 +12,9 @@ const errors = require("../errors")
  */
 class ReconciliationApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.mappings = true
     this._cache = []
@@ -124,6 +127,8 @@ class ReconciliationApiProvider extends BaseProvider {
 
   /**
    * Internal function that either makes an API request or uses a local cache.
+   *
+   * @private
    *
    * @param {Object} config passthrough of config object for axios request
    * @param {string[]} labels list of labels to get results for

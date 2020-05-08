@@ -13,6 +13,9 @@ const errors = require("../errors")
  */
 class OccurrencesApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this._cache = []
     this._occurrencesSupportedSchemes = []
@@ -21,6 +24,8 @@ class OccurrencesApiProvider extends BaseProvider {
 
   /**
    * Returns whether a concept scheme is supported for occurrences.
+   *
+   * @private
    *
    * @param {Object} scheme JSKOS scheme to query
    */
@@ -125,6 +130,8 @@ class OccurrencesApiProvider extends BaseProvider {
 
   /**
    * Internal function for getOccurrences that either makes an API request or uses a local cache.
+   *
+   * @private
    *
    * @param {Object} config passthrough of config parameter for axios request
    */

@@ -13,6 +13,9 @@ const errors = require("../errors")
  */
 class MappingsApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.mappings = this.api.mappings ? {} : false
     if (this.has.mappings) {
