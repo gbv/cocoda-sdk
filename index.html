@@ -122,6 +122,8 @@
 <ul>
 <li><a href="#install">Install</a></li>
 <li><a href="#usage">Usage</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#errors">Errors</a></li>
 <li><a href="#maintainers">Maintainers</a></li>
 <li><a href="#contribute">Contribute</a></li>
 <li><a href="#license">License</a></li>
@@ -195,8 +197,14 @@ const registry = cdk.getRegistryForUri(&quot;...&quot;)
 cdk.addProvider(CustomProvider)
 </code></pre>
 <p>It is then possible to use that provider via <code>cocoda-sdk</code> as well. (See also: Example under <code>examples/custom-provider.js</code>.)</p>
-<h3>Methods</h3>
-<p>A <code>cocoda-sdk</code> instance itself offers only a handful of methods. The actual access to APIs happens through <a href="#registries">registries</a>. The following list of methods assume either an instance of <code>cocoda-sdk</code> (<code>cdk.someMethod</code>) or an initialized registry (<code>registry.someMethod</code>).</p>
+<h3>Multiple Instances</h3>
+<p>If you need multiple instances of <code>cocoda-sdk</code>, use the <code>createInstance</code> method on the default instance:</p>
+<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance({ config: newConfig })
+</code></pre>
+<p>It will be completely separate from the default instance.</p>
+<h2>Methods</h2>
+<p>A <code>cocoda-sdk</code> instance itself offers only a handful of methods. The actual access to APIs happens through <a href="#registries">registries</a>. The following list of methods assume either an instance of <code>cocoda-sdk</code> (<code>cdk.someMethod</code>) or an initialized registry (<code>registry.someMethod</code>). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.</p>
+<h3>Methods for <code>cocoda-sdk</code> instance</h3>
 <h4><code>cdk.createInstance()</code></h4>
 <p>Creates an additional instance of <code>cocoda-sdk</code>.</p>
 <h4><code>cdk.loadConfig(url)</code> (async)</h4>
@@ -209,16 +217,148 @@ cdk.addProvider(CustomProvider)
 <p>Returns an initialized registry (see <a href="#registries">above</a>).</p>
 <h4><code>cdk.addProvider(CustomProvider)</code></h4>
 <p>Adds a custom provider to <code>cocoda-sdk</code> (see <a href="#providers">above</a>).</p>
-<h4><code>registry.getSchemes()</code> (async)</h4>
-<p>Requests a list of concept schemes from a registry.</p>
-<p>...</p>
-<!-- TODO: Add more methods -->
-<h3>Multiple Instances</h3>
-<p>If you need multiple instances of <code>cocoda-sdk</code>, use the <code>createInstance</code> method on the default instance:</p>
-<pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance({ config: newConfig })
-</code></pre>
-<p>It will be completely separate from the default instance.</p>
-<h3>Errors</h3>
+<h3>Registry Methods - General</h3>
+<h4><code>registry.init</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#init">BaseProvider - init</a></li>
+</ul>
+<h4><code>registry.isAuthorizedFor</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#isAuthorizedFor">BaseProvider - isAuthorizedFor</a></li>
+</ul>
+<h4><code>registry.supportsScheme</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme">BaseProvider - supportsScheme</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#supportsScheme">SearchSuggestionProvider - supportsScheme</a></li>
+</ul>
+<h4><code>registry.setAuth</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth">BaseProvider - setAuth</a></li>
+</ul>
+<h4><code>registry.setRegistries</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#setRegistries">SearchSuggestionProvider - setRegistries</a></li>
+</ul>
+<h4><code>registry.getCancelTokenSource</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource">BaseProvider - getCancelTokenSource</a></li>
+</ul>
+<h4><code>registry.repeat</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#repeat">BaseProvider - repeat</a></li>
+</ul>
+<h3>Registry Methods - Concept Schemes</h3>
+<h4><code>registry.getSchemes</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getSchemes">ConceptApiProvider - getSchemes</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getSchemes">SkosmosApiProvider - getSchemes</a></li>
+</ul>
+<h3>Registry Methods - Concepts</h3>
+<h4><code>registry.getTop</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTop">ConceptApiProvider - getTop</a></li>
+</ul>
+<h4><code>registry.getConcepts</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getConcepts">ConceptApiProvider - getConcepts</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getConcepts">SkosmosApiProvider - getConcepts</a></li>
+</ul>
+<h4><code>registry.getConcept</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#getConcept">BaseProvider - getConcept</a></li>
+</ul>
+<h4><code>registry.getNarrower</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getNarrower">ConceptApiProvider - getNarrower</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getNarrower">SkosmosApiProvider - getNarrower</a></li>
+</ul>
+<h4><code>registry.getAncestors</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getAncestors">ConceptApiProvider - getAncestors</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getAncestors">SkosmosApiProvider - getAncestors</a></li>
+</ul>
+<h4><code>registry.search</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#search">ConceptApiProvider - search</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#search">SkosmosApiProvider - search</a></li>
+</ul>
+<h4><code>registry.suggest</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#suggest">ConceptApiProvider - suggest</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#suggest">SkosmosApiProvider - suggest</a></li>
+</ul>
+<h3>Registry Methods - Mappings</h3>
+<h4><code>registry.getMappings</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMappings">MappingsApiProvider - getMappings</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMappings">LocalMappingsProvider - getMappings</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/ReconciliationApiProvider.html#getMappings">ReconciliationApiProvider - getMappings</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#getMappings">SearchSuggestionProvider - getMappings</a></li>
+</ul>
+<h4><code>registry.getMapping</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMapping">MappingsApiProvider - getMapping</a></li>
+</ul>
+<h4><code>registry.postMapping</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postMapping">MappingsApiProvider - postMapping</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#postMapping">LocalMappingsProvider - postMapping</a></li>
+</ul>
+<h4><code>registry.postMappings</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#postMappings">BaseProvider - postMappings</a></li>
+</ul>
+<h4><code>registry.putMapping</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putMapping">MappingsApiProvider - putMapping</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#putMapping">LocalMappingsProvider - putMapping</a></li>
+</ul>
+<h4><code>registry.patchMapping</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchMapping">MappingsApiProvider - patchMapping</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#patchMapping">LocalMappingsProvider - patchMapping</a></li>
+</ul>
+<h4><code>registry.deleteMapping</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteMapping">MappingsApiProvider - deleteMapping</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#deleteMapping">LocalMappingsProvider - deleteMapping</a></li>
+</ul>
+<h4><code>registry.deleteMappings</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#deleteMappings">BaseProvider - deleteMappings</a></li>
+</ul>
+<h3>Registry Methods - Annotations</h3>
+<h4><code>registry.getAnnotations</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getAnnotations">MappingsApiProvider - getAnnotations</a></li>
+</ul>
+<h4><code>registry.postAnnotation</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postAnnotation">MappingsApiProvider - postAnnotation</a></li>
+</ul>
+<h4><code>registry.putAnnotation</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putAnnotation">MappingsApiProvider - putAnnotation</a></li>
+</ul>
+<h4><code>registry.patchAnnotation</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchAnnotation">MappingsApiProvider - patchAnnotation</a></li>
+</ul>
+<h4><code>registry.deleteAnnotation</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteAnnotation">MappingsApiProvider - deleteAnnotation</a></li>
+</ul>
+<h3>Registry Methods - Various</h3>
+<h4><code>registry.getOccurrences</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getOccurrences">OccurrencesApiProvider - getOccurrences</a></li>
+</ul>
+<h4><code>registry.getTypes</code></h4>
+<ul>
+<li><a href="https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTypes">ConceptApiProvider - getTypes</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getTypes">SkosmosApiProvider - getTypes</a></li>
+</ul>
+<h2>Errors</h2>
 <p><code>cocoda-sdk</code> defines some custom errors.</p>
 <pre class="prettyprint source lang-js"><code>const errors = require(&quot;cocoda-sdk/errors&quot;)
 </code></pre>
@@ -231,6 +371,7 @@ cdk.addProvider(CustomProvider)
 <li><code>InvalidRequestError</code> - the request was invalid</li>
 <li><code>MissingApiUrlError</code> - the API URL necessary to make this request is not defined on the registry</li>
 </ul>
+<p>For details about the errors, refer to the <a href="https://gbv.github.io/cocoda-sdk/index.html">documentation</a>.</p>
 <h2>Maintainers</h2>
 <ul>
 <li><a href="https://github.com/stefandesu">@stefandesu</a></li>
