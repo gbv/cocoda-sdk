@@ -126,7 +126,7 @@ It is then possible to use that provider via `cocoda-sdk` as well. (See also: Ex
 If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
 
 ```js
-const newCdk = cdk.createInstance({ config: newConfig })
+const newCdk = cdk.createInstance(newConfig)
 ```
 
 It will be completely separate from the default instance.
