@@ -55,6 +55,8 @@ const errors = require("../errors")
  *
  * Always use `this.axios` like in the example for http requests!
  *
+ * @memberof Providers
+ *
  */
 class BaseProvider {
 
