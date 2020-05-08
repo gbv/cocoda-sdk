@@ -1,25 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: SearchSuggestionProvider</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> SearchSuggestionProvider</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
 
-<div id="main">
 
-    <h1 class="page-title">Class: SearchSuggestionProvider</h1>
-
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="Providers.BaseProvider.html">BaseProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createInstance">createInstance</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Class</p>
+                    <h1>SearchSuggestionProvider</h1>
+                </header>
+                
 
 
 
@@ -40,18 +107,29 @@
     <div class="container-overview">
     
         
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="SearchSuggestionProvider"><span class="type-signature"></span>new SearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
 
+    
+    <h4 class="name" id="SearchSuggestionProvider">
+        <a class="href-link" href="#SearchSuggestionProvider">#</a>
+        
+        <span class="code-name">
+            
+                new SearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
 
 
 
@@ -90,18 +168,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line14">line 14</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line14">line 14</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -124,9 +203,15 @@
 
 
 
+
+
+                    </div>
+                </div>
+            </div>
+        
     
     </div>
-
+    
     
 
     
@@ -140,11 +225,20 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
             
-<h4 class="name" id="_searchUris"><span class="type-signature"></span>_searchUris<span class="type-signature"></span></h4>
+                <div class="member">
+
+<h4 class="name" id="_searchUris">
+    <a class="href-link" href="#_searchUris">#</a>
+    
+    <span class="code-name">
+        _searchUris
+    </span>
+    
+</h4>
 
 
 
@@ -157,8 +251,6 @@
 
 
 
-
-
 <dl class="details">
 
     
@@ -184,18 +276,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line33">line 33</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line33">line 33</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -203,29 +296,42 @@
 
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id="_getMappings">
+        <a class="href-link" href="#_getMappings">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                _getMappings<span class="signature">(config)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="_getMappings"><span class="type-signature">(async) </span>_getMappings<span class="signature">(config)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Internal function to get mapping recommendations for a certain concept with sourceScheme and targetScheme.</p>
+    </div>
     
-
-
-
-<div class="description">
-    <p>Internal function to get mapping recommendations for a certain concept with sourceScheme and targetScheme.</p>
-</div>
 
 
 
@@ -237,170 +343,149 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>config</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>concept</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
+        <tbody>
+        
 
-        <tr>
             
-                <td class="name"><code>sourceScheme</code></td>
-            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
 
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"></td>
-        </tr>
+  <td class="description last"></td>
+</tr>
 
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>concept</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>targetScheme</code></td>
-            
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
 
-            <td class="type">
-            
-                
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>sourceScheme</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>targetScheme</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">Pbject</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"></td>
-        </tr>
+  <td class="description last"></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>swap</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>swap</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">boolean</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>whether to reverse the direction of the mappings</p></td>
-        </tr>
+  <td class="description last"><p>whether to reverse the direction of the mappings</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -431,18 +516,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line93">line 93</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -465,22 +551,34 @@
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="_getResults">
+        <a class="href-link" href="#_getResults">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                _getResults<span class="signature">(config)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="_getResults"><span class="type-signature">(async) </span>_getResults<span class="signature">(config)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Internal function that either makes an API request or uses a local cache.</p>
+    </div>
     
-
-
-
-<div class="description">
-    <p>Internal function that either makes an API request or uses a local cache.</p>
-</div>
 
 
 
@@ -492,124 +590,103 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>config</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
+  <td class="description last"></td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>label</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>label</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">string</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"></td>
-        </tr>
+  <td class="description last"></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>targetScheme</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>targetScheme</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"></td>
-        </tr>
+  <td class="description last"></td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -640,18 +717,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line135">line 135</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line135">line 135</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -674,22 +752,34 @@
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getMappings">
+        <a class="href-link" href="#getMappings">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                getMappings<span class="signature">(config)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="getMappings"><span class="type-signature">(async) </span>getMappings<span class="signature">(config)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Returns a list of mappings.</p>
+    </div>
     
-
-
-
-<div class="description">
-    <p>Returns a list of mappings.</p>
-</div>
 
 
 
@@ -701,170 +791,149 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>config</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
+  <td class="description last"></td>
+</tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>from</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>from</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>JSKOS concept on from side</p></td>
-        </tr>
+  <td class="description last"><p>JSKOS concept on from side</p></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>to</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>JSKOS concept on to side</p></td>
-        </tr>
+  <td class="description last"><p>JSKOS concept on to side</p></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>mode</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>mode</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>mappings mode</p></td>
-        </tr>
+  <td class="description last"><p>mappings mode</p></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>selected</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>selected</code></td>
-            
-
-            <td class="type">
-            
-                
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>selected mappings in Cocoda</p></td>
-        </tr>
+  <td class="description last"><p>selected mappings in Cocoda</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -895,18 +964,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line63">line 63</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line63">line 63</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -929,22 +999,30 @@
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="setRegistries"><span class="type-signature"></span>setRegistries<span class="signature">(registries)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Sets a local list of registries where the search providers are taken from.</p>
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setRegistries">
+        <a class="href-link" href="#setRegistries">#</a>
+        
+        <span class="code-name">
+            
+                setRegistries<span class="signature">(registries)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Sets a local list of registries where the search providers are taken from.</p>
+    </div>
+    
 
 
 
@@ -956,52 +1034,54 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>registries</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>registries</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">Array.&lt;Object></span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>list of registries</p></td>
-        </tr>
+  <td class="description last"><p>list of registries</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1032,18 +1112,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line26">line 26</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line26">line 26</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1066,22 +1147,30 @@
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="supportsScheme"><span class="type-signature"></span>supportsScheme<span class="signature">(scheme)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Override <code>supportsScheme</code> to check whether a search URI is available for the scheme's registry.</p>
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="supportsScheme">
+        <a class="href-link" href="#supportsScheme">#</a>
+        
+        <span class="code-name">
+            
+                supportsScheme<span class="signature">(scheme)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Override <code>supportsScheme</code> to check whether a search URI is available for the scheme's registry.</p>
+    </div>
+    
 
 
 
@@ -1093,52 +1182,54 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>scheme</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>scheme</code></td>
+  
+
+  <td class="type">
+  
+      
 <span class="param-type">Object</span>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last"><p>target scheme to check for support</p></td>
-        </tr>
+  <td class="description last"><p>target scheme to check for support</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1169,18 +1260,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line49">line 49</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line49">line 49</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1203,7 +1295,11 @@
 
 
 
-        
+
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -1216,19 +1312,25 @@
 
 
 
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="Providers.BaseProvider.html">BaseProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createInstance">createInstance</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:52:40 GMT+0000 (Coordinated Universal Time)
-</footer>
-
-<script> prettyPrint(); </script>
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
 </body>
 </html>
