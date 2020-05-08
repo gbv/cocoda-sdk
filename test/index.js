@@ -1,11 +1,17 @@
 const assert = require("assert")
 const cdk = require("../")
+const CDK = require("../lib/CocodaSDK")
 
 describe("index", () => {
 
   it("should export the default instance that can also be called as a function", () => {
     assert.equal(typeof cdk, "function", "cdk should be a function")
-    assert.equal(cdk instanceof Object, true, "cdk should be instance of Object")
+    assert.equal(cdk instanceof CDK, true, "cdk should be instance of CocodaSDK")
+  })
+
+  it("should set config when instance is called as a function", () => {
+    cdk({ test: "test" })
+    assert.equal(cdk.config.test, "test")
   })
 
   it("should have expected properties", () => {

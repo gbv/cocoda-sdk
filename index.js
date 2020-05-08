@@ -1,5 +1,5 @@
-const cdk = require("./lib/cocoda-sdk")
+const CDK = require("./lib/CocodaSDK")
 
 // Create and export a default instance
-const defaultInstance = cdk()
-module.exports = defaultInstance
+const cdk = new CDK()
+module.exports = cdk

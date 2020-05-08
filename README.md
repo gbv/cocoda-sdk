@@ -32,7 +32,7 @@ npm i gbv/cocoda-sdk#abc1def
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a default instance as a singleton, that means that the same object is used anywhere in a project where `cocoda-sdk` is imported.
+`cocoda-sdk` exports a default instance of the CocodaSDK class, that means that the same object is used anywhere in a project where `cocoda-sdk` is imported.
 
 ```js
 const cdk = require("cocoda-sdk")
@@ -49,7 +49,7 @@ cdk.config = config
 or
 ```js
 const config = require("./config") // Import configuration from somewhere
-const cdk = require("cocoda-sdk")({ config })
+const cdk = require("cocoda-sdk")(config)
 ```
 
 This should be done only once because certain steps are performed after setting the config file.

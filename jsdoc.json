@@ -4,7 +4,7 @@
     "/home/runner/work/_actions/andstor/jsdoc-action/v1/node_modules/better-docs/category"
   ],
   "source": {
-    "include": ["./errors", "./providers"]
+    "include": ["./errors", "./providers", "./lib"]
   },
   "opts": {
     "encoding": "utf8",
