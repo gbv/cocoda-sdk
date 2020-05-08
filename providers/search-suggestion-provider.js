@@ -9,7 +9,7 @@ const errors = require("../errors")
 /**
  * Provider for search suggestions.
  *
- * The constructor requires the `registries` property in `options` (second param) which should be all available ConceptApi registries.
+ * This provider requires that a list of registries with search endpoints is provided via `setRegistries`.
  *
  * To use this in a registry, specific it as "SearchSuggestion":
  * ```json
