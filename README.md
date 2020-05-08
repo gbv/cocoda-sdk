@@ -32,27 +32,23 @@ npm i gbv/cocoda-sdk#abc1def
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a default instance of the CocodaSDK class, that means that the same object is used anywhere in a project where `cocoda-sdk` is imported.
+`cocoda-sdk` exports a singleton, so the same object is used on each import of `cocoda-sdk`.
 
 ```js
 const cdk = require("cocoda-sdk")
 ```
 
 ### Configuration
-`cocoda-sdk` takes a `config` option which is equivalent to the configuration file in [Cocoda](https://github.com/gbv/cocoda#configuration). In particular the configuration contains an array field [`registries`](#registries).
+`cocoda-sdk` can be configured on import or by setting the `config` property:
 
 ```js
-const config = require("./config") // Import configuration from somewhere
-const cdk = require("cocoda-sdk")
-cdk.config = config
-```
-or
-```js
-const config = require("./config") // Import configuration from somewhere
 const cdk = require("cocoda-sdk")(config)
 ```
 
-This should be done only once because certain steps are performed after setting the config file.
+```
+const cdk = require("cocoda-sdk")
+cdk.config = config
+```
 
 The configuration can also be loaded from a URL:
 
@@ -60,6 +56,10 @@ The configuration can also be loaded from a URL:
 const cdk = require("cocoda-sdk")
 await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
 ```
+
+Configuration should only be set once because certain steps are performed afterwards.
+
+The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular the configuration contains an array property [`registries`](#registries).
 
 If you only use `cocoda-sdk` with a single registry, configuration might not be necessary (see below).
 
@@ -123,13 +123,12 @@ cdk.addProvider(CustomProvider)
 It is then possible to use that provider via `cocoda-sdk` as well. (See also: Example under `examples/custom-provider.js`.)
 
 ### Multiple Instances
-If you need multiple instances of `cocoda-sdk`, use the `createInstance` method on the default instance:
+
+The `createInstance` method can be used to create a new and independent instance, if actually needed:
 
 ```js
-const newCdk = cdk.createInstance(newConfig)
+const newCdk = cdk.createInstance(config)
 ```
-
-It will be completely separate from the default instance.
 
 ## Methods
 
