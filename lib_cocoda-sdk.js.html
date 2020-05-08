@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>lib/cocoda-sdk.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BaseProvider.html">BaseProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#_setup">_setup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#deleteMappings">deleteMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getCancelTokenSource">getCancelTokenSource</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getConcept">getConcept</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#isAuthorizedFor">isAuthorizedFor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#postMappings">postMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#repeat">repeat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#setAuth">setAuth</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ConceptApiProvider.html">ConceptApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getAncestors">getAncestors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getConcepts">getConcepts</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getNarrower">getNarrower</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getSchemes">getSchemes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTop">getTop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTypes">getTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#search">search</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#suggest">suggest</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidProviderError.html">InvalidProviderError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidRequestError.html">InvalidRequestError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#_getMappingsQueue">_getMappingsQueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MappingsApiProvider.html">MappingsApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteAnnotation">deleteAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getAnnotations">getAnnotations</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getConcordances">getConcordances</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMapping">getMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchAnnotation">patchAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postAnnotation">postAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putAnnotation">putAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingApiUrlError.html">MissingApiUrlError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingRegistryError.html">MissingRegistryError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_getOccurrences">_getOccurrences</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_occurrencesIsSupported">_occurrencesIsSupported</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#getOccurrences">getOccurrences</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#_getReconciliationResults">_getReconciliationResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getMappings">_getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getResults">_getResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#setRegistries">setRegistries</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createInstance">createInstance</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib/cocoda-sdk.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const providers = require("../providers")
+const errors = require("../errors")
+const axios = require("axios")
+const _ = require("../utils/lodash")
+
+/**
+ * Creates a new cdk instance.
+ *
+ * @param {*} options
+ * @param {Object} options.config Cocoda config object
+ * @param {boolean} options._throw option whether errors should be thrown or fallback values should be return (default: true)
+ *
+ * @returns {Object|Function} returns a cdk instance that can also be called as a function for configuration
+ */
+function createInstance(options = {}) {
+
+  /**
+   * Sets options for the current cdk instance.
+   *
+   * @param {*} options
+   * @param {Object} options.config Cocoda config object
+   * @param {boolean} options._throw option whether errors should be thrown or fallback values should be return (default: true)
+   */
+  function cdk({ config, _throw = true } = {}) {
+    cdk.config = config
+    cdk._throw = _throw
+    return cdk
+  }
+
+  // Define getter/setter for config
+  Object.defineProperties(cdk, {
+    config: {
+      get() {
+        return this._config
+      },
+      /**
+       * Prepares config when set.
+       *
+       * @param {Object} config Cocoda config object
+       */
+      set(config = {}) {
+        // Preparations for config
+        // 1. Make sure config.registries exists
+        config.registries = config.registries || []
+        // 2. Initialize registries
+        config.registries = config.registries.map(registry => {
+          try {
+            return providers.init(registry)
+          } catch(error) {
+            if (cdk._throw) {
+              throw error
+            }
+            return null
+          }
+        }).filter(r => r)
+        // 3. Call setRegistries for registries if available
+        for (let registry of config.registries.filter(r => r.setRegistries)) {
+          registry.setRegistries(config.registries)
+        }
+        // ...
+        this._config = config
+      },
+    },
+  })
+
+  // Set options
+  cdk(options)
+
+  // Also offer createInstance method
+  cdk.createInstance = createInstance
+
+  // Offer method to load a config file from URL
+  cdk.loadConfig = async (url) => {
+    const response = await axios.get(url)
+    cdk.config = response.data
+  }
+
+  /**
+   * Method to load buildInfo.
+   *
+   * Callback will only be called if buildInfo changes (note: even if it changes from `null`). An error will be added as a second parameter, in that case the first parameter will contain the previous buildInfo.
+   *
+   * @param {Object} config
+   * @param {string} [config.url] full URL for build-info.json (default is taken from config.cocodaBaseUrl)
+   * @param {Object} [config.buildInfo] current buildInfo
+   * @param {number} [config.interval=60000] interval to load buildInfo in ms
+   * @param {Function} config.callback callback function called with two parameters (buildInfo, error)
+   */
+  cdk.loadBuildInfo = ({ url, buildInfo = null, interval = 60000, callback }) => {
+    if (!url &amp;&amp; !cdk.config.cocodaBaseUrl) {
+      throw new errors.CDKError({ message: "Could not determine URL to load build config." })
+    }
+    if (!url) {
+      url = `${cdk.config.cocodaBaseUrl}build-info.json`
+    }
+    const timer = setInterval(async () => {
+      try {
+        const response = await axios.get(url)
+        if (!_.isEqual(buildInfo, response.data)) {
+          callback(response.data)
+        }
+        buildInfo = response.data
+      } catch(error) {
+        callback(buildInfo, error)
+      }
+    }, interval)
+    return () => {
+      clearInterval(timer)
+    }
+  }
+
+  // Method to get a registry by URI
+  cdk.getRegistryForUri = (uri) => cdk.config.registries.find(r => r.uri == uri)
+
+  // Method to initialize registry
+  cdk.initializeRegistry = (registry) => providers.init(registry)
+
+  // Method to add custom provider
+  cdk.addProvider = (provider) => providers.addProvider(provider)
+
+  return cdk
+}
+
+module.exports = createInstance
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:16:45 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

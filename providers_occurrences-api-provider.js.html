@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>providers/occurrences-api-provider.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BaseProvider.html">BaseProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#_setup">_setup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#deleteMappings">deleteMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getCancelTokenSource">getCancelTokenSource</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getConcept">getConcept</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#isAuthorizedFor">isAuthorizedFor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#postMappings">postMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#repeat">repeat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#setAuth">setAuth</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ConceptApiProvider.html">ConceptApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getAncestors">getAncestors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getConcepts">getConcepts</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getNarrower">getNarrower</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getSchemes">getSchemes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTop">getTop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTypes">getTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#search">search</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#suggest">suggest</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidProviderError.html">InvalidProviderError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidRequestError.html">InvalidRequestError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#_getMappingsQueue">_getMappingsQueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MappingsApiProvider.html">MappingsApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteAnnotation">deleteAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getAnnotations">getAnnotations</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getConcordances">getConcordances</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMapping">getMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchAnnotation">patchAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postAnnotation">postAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putAnnotation">putAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingApiUrlError.html">MissingApiUrlError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingRegistryError.html">MissingRegistryError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_getOccurrences">_getOccurrences</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_occurrencesIsSupported">_occurrencesIsSupported</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#getOccurrences">getOccurrences</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#_getReconciliationResults">_getReconciliationResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getMappings">_getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getResults">_getResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#setRegistries">setRegistries</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createInstance">createInstance</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">providers/occurrences-api-provider.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BaseProvider = require("./base-provider")
+const jskos = require("jskos-tools")
+const _ = require("../utils/lodash")
+const errors = require("../errors")
+
+/**
+ * For APIs that provide occurrences in JSKOS format.
+ *
+ * TODO: Modernize.
+ */
+class OccurrencesApiProvider extends BaseProvider {
+
+  _setup() {
+    this._cache = []
+    this._occurrencesSupportedSchemes = []
+    this.has.occurrences = true
+  }
+
+  /**
+   * Returns whether a concept scheme is supported for occurrences.
+   *
+   * @param {Object} scheme JSKOS scheme to query
+   */
+  async _occurrencesIsSupported(scheme) {
+    if (this._occurrencesSupportedSchemes &amp;&amp; this._occurrencesSupportedSchemes.length) {
+      // No action needed
+    } else {
+      // Load supported schemes from API
+      try {
+        const url = this.api.occurrences + "voc"
+        const data = await this.axios({
+          method: "get",
+          url,
+        })
+        this._occurrencesSupportedSchemes = data || []
+      } catch(error) {
+        // Do nothing so that it is tried again next time
+        // TODO: Save number of failures?
+      }
+    }
+    let supported = false
+    for (let supportedScheme of this._occurrencesSupportedSchemes) {
+      if (jskos.compare(scheme, supportedScheme)) {
+        supported = true
+      }
+    }
+    return supported
+  }
+
+  /**
+   * Returns a list of occurrences.
+   *
+   * @param {Object} config
+   * @param {Object} [config.from] JSKOS concept to load occurrences for (from side)
+   * @param {Object} [config.to] JSKOS concept to load occurrences for (to side)
+   * @param {Object[]} [config.concepts] list of JSKOS concepts to load occurrences for
+   */
+  async getOccurrences({ from, to, concepts, ...config }) {
+    let promises = []
+    concepts = (concepts || []).concat([from, to]).filter(c => !!c)
+    for (let concept of concepts) {
+      promises.push(this._occurrencesIsSupported(_.get(concept, "inScheme[0]")).then(supported => {
+        if (supported &amp;&amp; concept.uri) {
+          return concept.uri
+        } else {
+          return null
+        }
+      }))
+    }
+    let uris = await Promise.all(promises)
+    uris = uris.filter(uri => uri != null)
+    if (uris.length == 0) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concepts" })
+    }
+    promises = []
+    for (let uri of uris) {
+      promises.push(this._getOccurrences({
+        ...config,
+        params: {
+          member: uri,
+          scheme: "*",
+          threshold: 5,
+        },
+      }))
+    }
+    // Another request for co-occurrences between two specific concepts
+    if (uris.length > 1) {
+      let urisString = uris.join(" ")
+      promises.push(this._getOccurrences({
+        ...config,
+        params: {
+          member: urisString,
+          threshold: 5,
+        },
+      }))
+    }
+    const results = await Promise.all(promises)
+    let occurrences = _.concat([], ...results)
+    // Filter duplicates
+    let existingUris = []
+    let indexesToDelete = []
+    for (let i = 0; i &lt; occurrences.length; i += 1) {
+      let occurrence = occurrences[i]
+      if (!occurrence) {
+        continue
+      }
+      let uris = occurrence.memberSet.reduce((total, current) => total.concat(current.uri), []).sort().join(" ")
+      if (existingUris.includes(uris)) {
+        indexesToDelete.push(i)
+      } else {
+        existingUris.push(uris)
+      }
+    }
+    indexesToDelete.forEach(value => {
+      delete occurrences[value]
+    })
+    // Filter null values
+    occurrences = occurrences.filter(o => o != null)
+    // Sort occurrences
+    return occurrences.sort((a, b) => parseInt(b.count || 0) - parseInt(a.count || 0))
+  }
+
+  /**
+   * Internal function for getOccurrences that either makes an API request or uses a local cache.
+   *
+   * @param {Object} config passthrough of config parameter for axios request
+   */
+  async _getOccurrences(config) {
+    // Use local cache.
+    let resultsFromCache = this._cache.find(item => {
+      return _.isEqual(item.config.params, config.params)
+    })
+    if (resultsFromCache) {
+      return resultsFromCache.data
+    }
+    const data = await this.axios({
+      ...config,
+      method: "get",
+      url: this.api.occurrences,
+    })
+    this._cache.push({
+      config,
+      data,
+    })
+    if (this._cache.length > 20) {
+      this._cache = this._cache.slice(this._cache.length - 20)
+    }
+    return data
+  }
+}
+
+OccurrencesApiProvider.providerName = "OccurrencesApi"
+OccurrencesApiProvider.stored = false
+
+module.exports = OccurrencesApiProvider
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:16:45 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

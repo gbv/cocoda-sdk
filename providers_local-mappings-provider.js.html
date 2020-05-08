@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>providers/local-mappings-provider.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="BaseProvider.html">BaseProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#_setup">_setup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#deleteMappings">deleteMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getCancelTokenSource">getCancelTokenSource</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#getConcept">getConcept</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#isAuthorizedFor">isAuthorizedFor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#postMappings">postMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#repeat">repeat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#setAuth">setAuth</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="BaseProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ConceptApiProvider.html">ConceptApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getAncestors">getAncestors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getConcepts">getConcepts</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getNarrower">getNarrower</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getSchemes">getSchemes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTop">getTop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#getTypes">getTypes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#search">search</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ConceptApiProvider.html#suggest">suggest</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidProviderError.html">InvalidProviderError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="InvalidRequestError.html">InvalidRequestError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#_getMappingsQueue">_getMappingsQueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="LocalMappingsProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MappingsApiProvider.html">MappingsApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteAnnotation">deleteAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#deleteMapping">deleteMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getAnnotations">getAnnotations</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getConcordances">getConcordances</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMapping">getMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchAnnotation">patchAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#patchMapping">patchMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postAnnotation">postAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#postMapping">postMapping</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putAnnotation">putAnnotation</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="MappingsApiProvider.html#putMapping">putMapping</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingApiUrlError.html">MissingApiUrlError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="MissingRegistryError.html">MissingRegistryError</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_getOccurrences">_getOccurrences</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#_occurrencesIsSupported">_occurrencesIsSupported</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="OccurrencesApiProvider.html#getOccurrences">getOccurrences</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#_getReconciliationResults">_getReconciliationResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="ReconciliationApiProvider.html#getMappings">getMappings</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getMappings">_getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#_getResults">_getResults</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#getMappings">getMappings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#setRegistries">setRegistries</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SearchSuggestionProvider.html#supportsScheme">supportsScheme</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#createInstance">createInstance</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">providers/local-mappings-provider.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BaseProvider = require("./base-provider")
+const jskos = require("jskos-tools")
+const _ = require("../utils/lodash")
+const localforage = require("localforage")
+const { v4: uuid } = require("uuid")
+const errors = require("../errors")
+const uriPrefix = "urn:uuid:"
+
+/**
+ * For saving and retrieving mappings from the browser's local storage.
+ */
+class LocalMappingsProvider extends BaseProvider {
+
+  _setup() {
+    this.has.mappings = {
+      read: true,
+      create: true,
+      update: true,
+      delete: true,
+    }
+    this.queue = []
+    this.localStorageKey = "cocoda-mappings--" + this.path
+    let oldLocalStorageKey = "mappings"
+    // Function that adds URIs to all existing local mappings that don't yet have one
+    let addUris = () => {
+      return localforage.getItem(this.localStorageKey).then(mappings => {
+        mappings = mappings || []
+        let adjusted = 0
+        for (let mapping of mappings.filter(m => !m.uri || !m.uri.startsWith(uriPrefix))) {
+          if (mapping.uri) {
+            // Keep previous URI in identifier
+            if (!mapping.identifier) {
+              mapping.identifier = []
+            }
+            mapping.identifier.push(mapping.uri)
+          }
+          mapping.uri = `${uriPrefix}${uuid()}`
+          adjusted += 1
+        }
+        if (adjusted) {
+          console.warn(`URIs added to ${adjusted} local mappings.`)
+        }
+        return localforage.setItem(this.localStorageKey, mappings)
+      })
+    }
+    // Show warning if there are mappings in local storage that use the old local storage key.
+    localforage.getItem(oldLocalStorageKey).then(results => {
+      if (results) {
+        console.warn(`Warning: There is old data in local storage (or IndexedDB, depending on the ) with the key "${oldLocalStorageKey}". This data will not be used anymore. A manual export is necessary to get this data back.`)
+      }
+    })
+    // Put promise into queue so that getMappings requests are waiting for adjustments to finish
+    this.queue.push(
+      addUris().catch(error => {
+        console.warn("Error when adding URIs to local mappings:", error)
+      }),
+    )
+  }
+
+  isAuthorizedFor({ type, action }) {
+    // Allow all for mappings
+    if (type == "mappings" &amp;&amp; action != "anonymous") {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * Returns a Promise that returns an object { mappings, done } with the local mappings and a done function that is supposed to be called when the transaction is finished.
+   * This prevents conflicts when saveMapping is called multiple times simultaneously.
+   *
+   * TODO: There might be a better solution for this...
+   */
+  _getMappingsQueue(...params) {
+    let last = _.last(this.queue) || Promise.resolve()
+    return new Promise((resolve) => {
+      function defer() {
+        var res, rej
+
+        var promise = new Promise((resolve, reject) => {
+          res = resolve
+          rej = reject
+        })
+
+        promise.resolve = res
+        promise.reject = rej
+
+        return promise
+      }
+      let promise = defer()
+      let done = () => {
+        promise.resolve()
+      }
+      this.queue.push(promise)
+
+      last.then(() => {
+        return this.getMappings(...params)
+      }).then(mappings => {
+        resolve({ mappings, done })
+      })
+    })
+  }
+
+  /**
+   * Returns a list of local mappings.
+   *
+   * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).
+   * TODO: Clean up and use async/await
+   */
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
+    let params = {}
+    if (from) {
+      params.from = _.isString(from) ? from : from.uri
+    }
+    if (fromScheme) {
+      params.fromScheme = _.isString(fromScheme) ? { uri: fromScheme } : fromScheme
+    }
+    if (to) {
+      params.to = _.isString(to) ? to : to.uri
+    }
+    if (toScheme) {
+      params.toScheme = _.isString(toScheme) ? { uri: toScheme } : toScheme
+    }
+    if (creator) {
+      params.creator = _.isString(creator) ? creator : jskos.prefLabel(creator)
+    }
+    if (type) {
+      params.type = _.isString(type) ? type : type.uri
+    }
+    if (partOf) {
+      params.partOf = _.isString(partOf) ? partOf : partOf.uri
+    }
+    if (offset) {
+      params.offset = offset
+    }
+    if (limit) {
+      params.limit = limit
+    }
+    if (direction) {
+      params.direction = direction
+    }
+    if (mode) {
+      params.mode = mode
+    }
+    if (identifier) {
+      params.identifier = identifier
+    }
+    if (uri) {
+      params.uri = uri
+    }
+    return localforage.getItem(this.localStorageKey).then(mappings => mappings || []).catch(relatedError => {
+      throw new errors.CDKError({ message: "Could not get mappings from local storage", relatedError })
+    }).then(mappings => {
+      // Check concept with param
+      let checkConcept = (concept, param) => concept.uri == param || (param &amp;&amp; concept.notation &amp;&amp; concept.notation[0].toLowerCase() == param.toLowerCase())
+      // Filter mappings according to params (support for from + to)
+      // TODO: - Support more parameters.
+      // TODO: - Move to its own things.
+      // TODO: - Clean all this up.
+      if (params.from || params.to) {
+        mappings = mappings.filter(mapping => {
+          let fromInFrom = null != jskos.conceptsOfMapping(mapping, "from").find(concept => checkConcept(concept, params.from))
+          let fromInTo = null != jskos.conceptsOfMapping(mapping, "to").find(concept => checkConcept(concept, params.from))
+          let toInFrom = null != jskos.conceptsOfMapping(mapping, "from").find(concept => checkConcept(concept, params.to))
+          let toInTo = null != jskos.conceptsOfMapping(mapping, "to").find(concept => checkConcept(concept, params.to))
+          if (params.direction == "backward") {
+            if (params.mode == "or") {
+              return (params.from &amp;&amp; fromInTo) || (params.to &amp;&amp; toInFrom)
+            } else {
+              return (!params.from || fromInTo) &amp;&amp; (!params.to || toInFrom)
+            }
+          } else if (params.direction == "both") {
+            if (params.mode == "or") {
+              return (params.from &amp;&amp; (fromInFrom || fromInTo)) || (params.to &amp;&amp; (toInFrom || toInTo))
+            } else {
+              return ((!params.from || fromInFrom) &amp;&amp; (!params.to || toInTo)) || ((!params.from || fromInTo) &amp;&amp; (!params.to || toInFrom))
+            }
+          } else {
+            if (params.mode == "or") {
+              return (params.from &amp;&amp; fromInFrom) || (params.to &amp;&amp; toInTo)
+            } else {
+              return (!params.from || fromInFrom) &amp;&amp; (!params.to || toInTo)
+            }
+          }
+        })
+      }
+      if (params.fromScheme || params.toScheme) {
+        mappings = mappings.filter(mapping => {
+          let fromInFrom = jskos.compare(mapping.fromScheme, params.fromScheme)
+          let fromInTo = jskos.compare(mapping.toScheme, params.fromScheme)
+          let toInFrom = jskos.compare(mapping.fromScheme, params.toScheme)
+          let toInTo = jskos.compare(mapping.toScheme, params.toScheme)
+          if (params.direction == "backward") {
+            if (params.mode == "or") {
+              return (params.fromScheme &amp;&amp; fromInTo) || (params.toScheme &amp;&amp; toInFrom)
+            } else {
+              return (!params.fromScheme || fromInTo) &amp;&amp; (!params.toScheme || toInFrom)
+            }
+          } else if (params.direction == "both") {
+            if (params.mode == "or") {
+              return (params.fromScheme &amp;&amp; (fromInFrom || fromInTo)) || (params.toScheme &amp;&amp; (toInFrom || toInTo))
+            } else {
+              return ((!params.fromScheme || fromInFrom) &amp;&amp; (!params.toScheme || toInTo)) || ((!params.fromScheme || fromInTo) &amp;&amp; (!params.toScheme || toInFrom))
+            }
+          } else {
+            if (params.mode == "or") {
+              return (params.fromScheme &amp;&amp; fromInFrom) || (params.toScheme &amp;&amp; toInTo)
+            } else {
+              return (!params.fromScheme || fromInFrom) &amp;&amp; (!params.toScheme || toInTo)
+            }
+          }
+        })
+      }
+      // creator
+      if (params.creator) {
+        let creators = params.creator.split("|")
+        mappings = mappings.filter(mapping => {
+          return (mapping.creator &amp;&amp; mapping.creator.find(creator => creators.includes(jskos.prefLabel(creator)) || creators.includes(creator.uri))) != null
+        })
+      }
+      // type
+      if (params.type) {
+        mappings = mappings.filter(mapping => (mapping.type || [jskos.defaultMappingType.uri]).includes(params.type))
+      }
+      // concordance
+      if (params.partOf) {
+        mappings = mappings.filter(mapping => {
+          return mapping.partOf != null &amp;&amp; mapping.partOf.find(partOf => jskos.compare(partOf, { uri: params.partOf })) != null
+        })
+      }
+      // identifier
+      if (params.identifier) {
+        mappings = mappings.filter(mapping => {
+          return params.identifier.split("|").map(identifier => {
+            return (mapping.identifier || []).includes(identifier) || mapping.uri == identifier
+          }).reduce((current, total) => current || total)
+        })
+      }
+      if (params.uri) {
+        mappings = mappings.filter(mapping => mapping.uri == params.uri)
+      }
+      let totalCount = mappings.length
+      // Sort mappings (default: modified/created date descending)
+      mappings = mappings.sort((a, b) => {
+        let aDate = a.modified || a.created
+        let bDate = b.modified || b.created
+        if (bDate == null) {
+          return -1
+        }
+        if (aDate == null) {
+          return 1
+        }
+        if (aDate > bDate) {
+          return -1
+        }
+        return 1
+      })
+      mappings = mappings.slice(params.offset || 0)
+      mappings = mappings.slice(0, params.limit)
+      mappings._totalCount = totalCount
+      return mappings
+    })
+  }
+
+  /**
+   * Creates a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
+  async postMapping({ mapping }) {
+    if (!mapping) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
+    // Set URI if necessary
+    if (!mapping.uri || !mapping.uri.startsWith(uriPrefix)) {
+      if (mapping.uri) {
+        // Keep previous URI in identifier
+        if (!mapping.identifier) {
+          mapping.identifier = []
+        }
+        mapping.identifier.push(mapping.uri)
+      }
+      mapping.uri = `${uriPrefix}${uuid()}`
+    }
+    // Check if mapping already exists => throw error
+    if (localMappings.find(m => m.uri == mapping.uri)) {
+      done()
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Duplicate URI" })
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = (new Date()).toISOString()
+    }
+    if (!mapping.modified) {
+      mapping.modified = mapping.created
+    }
+    // Add to local mappings
+    localMappings.push(mapping)
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      done()
+      throw error
+    }
+  }
+
+  /**
+   * Overwrites a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   */
+  async putMapping({ mapping }) {
+    if (!mapping) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
+    // Check if mapping already exists => throw error if it doesn't
+    const index = localMappings.findIndex(m => m.uri == mapping.uri)
+    if (index == -1) {
+      done()
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Mapping not found" })
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = localMappings[index].created
+    }
+    mapping.modified = (new Date()).toISOString()
+    // Add to local mappings
+    localMappings[index] = mapping
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      done()
+      throw error
+    }
+  }
+
+  /**
+   * Patches a mapping.
+   *
+   * @param {Object} config
+   * @param {Object} mapping JSKOS mapping (or part of mapping)
+   */
+  async patchMapping({ mapping }) {
+    if (!mapping) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
+    // Check if mapping already exists => throw error if it doesn't
+    const index = localMappings.findIndex(m => m.uri == mapping.uri)
+    if (index == -1) {
+      done()
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "Mapping not found" })
+    }
+    // Set created/modified
+    if (!mapping.created) {
+      mapping.created = localMappings[index].created
+    }
+    mapping.modified = (new Date()).toISOString()
+    // Add to local mappings
+    localMappings[index] = Object.assign(localMappings[index], mapping)
+    // Minify mappings before saving back to local storage
+    localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+    // Write local mappings
+    try {
+      await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return mapping
+    } catch(error) {
+      done()
+      throw error
+    }
+  }
+
+  /**
+   * Removes a mapping from local storage.
+   *
+   * @param {Object} config
+   * @param {Object} mapping JSKOS mapping
+   */
+  async deleteMapping({ mapping }) {
+    if (!mapping) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    let { mappings: localMappings, done } = await this._getMappingsQueue()
+    try {
+      // Remove by URI
+      localMappings = localMappings.filter(m => m.uri != mapping.uri)
+      // Minify mappings before saving back to local storage
+      localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
+      await localforage.setItem(this.localStorageKey, localMappings)
+    } catch(error) {
+      done()
+      throw error
+    }
+    return true
+  }
+}
+
+LocalMappingsProvider.providerName = "LocalMappings"
+LocalMappingsProvider.stored = true
+
+module.exports = LocalMappingsProvider
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:16:45 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
