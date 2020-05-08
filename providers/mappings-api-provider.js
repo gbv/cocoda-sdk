@@ -8,8 +8,14 @@ const errors = require("../errors")
  *
  * TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
  *
- * @category Providers
+ * To use this in a registry, specific it as "MappingsApi":
+ * ```json
+ * {
+ *  "provider": "MappingsApi"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class MappingsApiProvider extends BaseProvider {
 
@@ -41,6 +47,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
    */
   async getMapping({ mapping, ...config }) {
     return this.getMappings({
@@ -54,6 +61,7 @@ class MappingsApiProvider extends BaseProvider {
    * Returns a list of mappings.
    *
    * @param {Object} config request config with parameters
+   * @returns {Object[]} array of JSKOS mapping objects
    */
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
     let params = {}, url = this.api.mappings
@@ -121,6 +129,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
    */
   async postMapping({ mapping, ...config }) {
     if (!mapping) {
@@ -141,6 +150,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
    */
   async putMapping({ mapping, ...config }) {
     if (!mapping) {
@@ -165,6 +175,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping (or part of mapping)
+   * @returns {Object} JSKOS mapping object
    */
   async patchMapping({ mapping, ...config }) {
     if (!mapping) {
@@ -210,6 +221,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {string} [config.target] target URI
+   * @returns {Object[]} array of JSKOS annotation objects
    */
   async getAnnotations({ target, ...config }) {
     if (target) {
@@ -227,6 +239,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.annotation JSKOS annotation
+   * @returns {Object} JSKOS annotation object
    */
   async postAnnotation({ annotation, ...config }) {
     return this.axios({
@@ -242,6 +255,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.annotation JSKOS annotation
+   * @returns {Object} JSKOS annotation object
    */
   async putAnnotation({ annotation, ...config }) {
     const uri = annotation.id
@@ -261,6 +275,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.annotation JSKOS annotation
+   * @returns {Object} JSKOS annotation object
    */
   async patchAnnotation({ annotation, ...config }) {
     const uri = annotation.id
@@ -297,6 +312,7 @@ class MappingsApiProvider extends BaseProvider {
    * Returns a list of concordances.
    *
    * @param {Object} config
+   * @returns {Object[]} array of JSKOS concordance objects
    */
   async getConcordances(config) {
     return this.axios({

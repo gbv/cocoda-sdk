@@ -5,7 +5,7 @@ const utils = require("../utils")
 const errors = require("../errors")
 
 /**
- * BaseProvider to be subclassed to implement specific providers.
+ * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
  *
  * Prefix all internal method and properties with underscore (e.g. `this._cache`)!
  *
@@ -56,7 +56,6 @@ const errors = require("../errors")
  * Always use `this.axios` like in the example for http requests!
  *
  * @category Providers
- *
  */
 class BaseProvider {
 
@@ -220,6 +219,8 @@ class BaseProvider {
 
   /**
    * Load data about registry via the status endpoint.
+   *
+   * @returns {Promise} Promise that resolves when initialization is complete.
    */
   async init() {
     // Save the actual Promise in _init and return it immediately on a second call
@@ -262,6 +263,8 @@ class BaseProvider {
 
   /**
    * Returns a source for a axios cancel token.
+   *
+   * @returns {Object} axios cancel token source
    */
   getCancelTokenSource() {
     return axios.CancelToken.source()
@@ -283,10 +286,11 @@ class BaseProvider {
    * Returns whether a user is authorized for a certain request.
    *
    * @param {Object} options
-   * @param {string} type type of item (e.g. mappings)
-   * @param {string} action action to be performed (read/create/update/delete)
-   * @param {Object} user user object
-   * @param {boolean} crossUser whether the request is a crossUser request (i.e. updading/deleting another user's item)
+   * @param {string} options.type type of item (e.g. mappings)
+   * @param {string} options.action action to be performed (read/create/update/delete)
+   * @param {Object} options.user user object
+   * @param {boolean} [options.crossUser] whether the request is a crossUser request (i.e. updading/deleting another user's item)
+   * @returns {boolean}
    */
   isAuthorizedFor({ type, action, user, crossUser }) {
     if (action == "read" && this.has[type] === true) {
@@ -330,6 +334,7 @@ class BaseProvider {
    * Returns a boolean whether a certain target scheme is supported or not.
    *
    * @param {Object} scheme
+   * @returns {boolean}
    */
   supportsScheme(scheme) {
     if (!scheme) {
@@ -431,6 +436,7 @@ class BaseProvider {
    * @param {Object} config
    * @param {Object} config.concept concept to be requested
    * @param {string} config.uri concept URI (alternative to concept)
+   * @returns {Object} JSKOS concept object
    */
   async getConcept({ concept, uri, ...config } = {}) {
     if (!concept && !uri) {
@@ -448,6 +454,7 @@ class BaseProvider {
    *
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
+   * @returns {Object[]} array of created mapping objects
    */
   async postMappings({ mappings, ...config } = {}) {
     if (!mappings || !mappings.length) {
@@ -484,12 +491,11 @@ class BaseProvider {
    *  })
    * ```
    *
-   * @param {Object} config
+   * @param {Object} config See properties below. Additionally include parameters needed for the actual request.
    * @param {string} config.method name of method to be called
    * @param {number} [config.interval=15000] interval in ms
    * @param {Function} config.callback callback function called with two parameters (result, error)
-   *
-   * Additionally include parameters needed for the actual request.
+   * @returns {Function} function to cancel the repeating request
    */
   repeat({ method, interval = 15000, callback, ...config } = {}) {
     // Check parameters

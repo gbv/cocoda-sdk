@@ -9,8 +9,14 @@ const uriPrefix = "urn:uuid:"
 /**
  * For saving and retrieving mappings from the browser's local storage.
  *
- * @category Providers
+ * To use this in a registry, specific it as "LocalMappings":
+ * ```json
+ * {
+ *  "provider": "LocalMappings"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class LocalMappingsProvider extends BaseProvider {
 
@@ -114,6 +120,8 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).
    * TODO: Clean up and use async/await
+   *
+   * @returns {Object[]} array of JSKOS mapping objects
    */
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
     let params = {}
@@ -275,6 +283,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
    */
   async postMapping({ mapping }) {
     if (!mapping) {
@@ -324,6 +333,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
    */
   async putMapping({ mapping }) {
     if (!mapping) {
@@ -361,6 +371,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} mapping JSKOS mapping (or part of mapping)
+   * @returns {Object} JSKOS mapping object
    */
   async patchMapping({ mapping }) {
     if (!mapping) {
@@ -398,6 +409,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} mapping JSKOS mapping
+   * @returns {boolean} boolean whether deleting the mapping was successful
    */
   async deleteMapping({ mapping }) {
     if (!mapping) {

@@ -7,8 +7,14 @@ const errors = require("../errors")
 /**
  * Provider for the OpenRefine Reconciliation API.
  *
- * @category Providers
+ * To use this in a registry, specific it as "ReconciliationApi":
+ * ```json
+ * {
+ *  "provider": "ReconciliationApi"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class ReconciliationApiProvider extends BaseProvider {
 
@@ -27,6 +33,7 @@ class ReconciliationApiProvider extends BaseProvider {
    * @param {Object} config.from JSKOS concept on from side
    * @param {Object} config.to JSKOS concept on to side
    * @param {Object} config.mode mappings mode
+   * @returns {Object[]} array of JSKOS mapping objects
    */
   async getMappings({ from, to, mode, ...config }) {
     let swap

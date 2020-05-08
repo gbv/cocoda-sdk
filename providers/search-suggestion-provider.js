@@ -11,8 +11,14 @@ const errors = require("../errors")
  *
  * The constructor requires the `registries` property in `options` (second param) which should be all available ConceptApi registries.
  *
- * @category Providers
+ * To use this in a registry, specific it as "SearchSuggestion":
+ * ```json
+ * {
+ *  "provider": "SearchSuggestion"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class SearchSuggestionProvider extends BaseProvider {
 
@@ -53,6 +59,7 @@ class SearchSuggestionProvider extends BaseProvider {
    * Override `supportsScheme` to check whether a search URI is available for the scheme's registry.
    *
    * @param {Object} scheme - target scheme to check for support
+   * @returns {boolean}
    */
   supportsScheme(scheme) {
     let targetRegistry = _.get(scheme, "_provider.uri")
@@ -67,6 +74,7 @@ class SearchSuggestionProvider extends BaseProvider {
    * @param {Object} config.to JSKOS concept on to side
    * @param {Object} config.mode mappings mode
    * @param {Object} config.selected selected mappings in Cocoda
+   * @returns {Object[]} array of JSKOS mapping objects
    */
   async getMappings({ from, to, mode, selected, ...config }) {
     // TODO: Why mode?

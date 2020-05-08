@@ -8,8 +8,14 @@ const errors = require("../errors")
  *
  * TODO: Modernize.
  *
- * @category Providers
+ * To use this in a registry, specific it as "OccurrencesApi":
+ * ```json
+ * {
+ *  "provider": "OccurrencesApi"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class OccurrencesApiProvider extends BaseProvider {
 
@@ -62,6 +68,7 @@ class OccurrencesApiProvider extends BaseProvider {
    * @param {Object} [config.from] JSKOS concept to load occurrences for (from side)
    * @param {Object} [config.to] JSKOS concept to load occurrences for (to side)
    * @param {Object[]} [config.concepts] list of JSKOS concepts to load occurrences for
+   * @returns {Object[]} array of JSKOS occurrence objects
    */
   async getOccurrences({ from, to, concepts, ...config }) {
     let promises = []
