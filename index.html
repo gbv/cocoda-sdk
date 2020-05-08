@@ -84,7 +84,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -145,7 +145,7 @@
 <p><strong>Note:</strong> Replace the commit hash with the desired commit.</p>
 <h2>Usage</h2>
 <h3>Import</h3>
-<p><code>cocoda-sdk</code> exports a default instance as a singleton, that means that the same object is used anywhere in a project where <code>cocoda-sdk</code> is imported.</p>
+<p><code>cocoda-sdk</code> exports a default instance of the CocodaSDK class, that means that the same object is used anywhere in a project where <code>cocoda-sdk</code> is imported.</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 </code></pre>
 <h3>Configuration</h3>
@@ -156,7 +156,7 @@ cdk.config = config
 </code></pre>
 <p>or</p>
 <pre class="prettyprint source lang-js"><code>const config = require(&quot;./config&quot;) // Import configuration from somewhere
-const cdk = require(&quot;cocoda-sdk&quot;)({ config })
+const cdk = require(&quot;cocoda-sdk&quot;)(config)
 </code></pre>
 <p>This should be done only once because certain steps are performed after setting the config file.</p>
 <p>The configuration can also be loaded from a URL:</p>
