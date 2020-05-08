@@ -104,8 +104,14 @@ const errors = require("../errors")
  * like [DANTE](https://api.dante.gbv.de/) and jskos-server
  * [jskos-server](https://github.com/gbv/jskos-server).
  *
- * @category Providers
+ * To use this in a registry, specific it as "ConceptApi":
+ * ```json
+ * {
+ *  "provider": "ConceptApi"
+ * }
+ * ```
  *
+ * @category Providers
  */
 class ConceptApiProvider extends BaseProvider {
 
@@ -128,6 +134,7 @@ class ConceptApiProvider extends BaseProvider {
    * Returns all concept schemes.
    *
    * @param {Object} config
+   * @returns {Object[]} array of JSKOS concept scheme objects
    */
   async getSchemes(config) {
     if (!this.api.schemes) {
@@ -152,6 +159,7 @@ class ConceptApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.scheme concept scheme object
+   * @returns {Object[]} array of JSKOS concept objects
    */
   async getTop({ scheme, ...config }) {
     if (!this.api.top) {
@@ -181,6 +189,7 @@ class ConceptApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object[]} config.concepts list of concept objects to load
+   * @returns {Object[]} array of JSKOS concept objects
    */
   async getConcepts({ concepts, ...config }) {
     if (!this.has.data) {
@@ -207,6 +216,7 @@ class ConceptApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.concept concept object
+   * @returns {Object[]} array of JSKOS concept objects
    */
   async getNarrower({ concept, ...config }) {
     if (!this.api.narrower) {
@@ -233,6 +243,7 @@ class ConceptApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.concept concept object
+   * @returns {Object[]} array of JSKOS concept objects
    */
   async getAncestors({ concept, ...config }) {
     if (!this.api.ancestors) {
@@ -264,6 +275,7 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.use=notation,label] which fields to search ("notation", "label" or "notation,label")
    * @param {string[]} [config.types=[]] list of type URIs
    * @param {string} [config.sort=score] sorting parameter
+   * @returns {Array} result in OpenSearch Suggest Format
    */
   async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this.api.suggest) {
@@ -295,7 +307,7 @@ class ConceptApiProvider extends BaseProvider {
   }
 
   /**
-   * Search not yet implemented.
+   * Method not yet implemented.
    */
   async search() {
     throw new errors.MethodNotImplementedError({ method: "search" })
@@ -306,6 +318,7 @@ class ConceptApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} [config.scheme] concept scheme to load types for
+   * @returns {Object[]} array of JSKOS type objects
    */
   async getTypes({ scheme, ...config }) {
     if (!this.api.types) {

@@ -98,7 +98,12 @@
         <h2><span class="attribs"><span class="type-signature"></span></span>OccurrencesApiProvider<span class="signature">()</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>For APIs that provide occurrences in JSKOS format.</p>
-<p>TODO: Modernize.</p></div>
+<p>TODO: Modernize.</p>
+<p>To use this in a registry, specific it as &quot;OccurrencesApi&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;provider&quot;: &quot;OccurrencesApi&quot;
+}
+</code></pre></div>
         
     
 </header>
@@ -178,7 +183,7 @@
         <p class="tag-source">
             <a href="providers_occurrences-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_occurrences-api-provider.js.html">providers/occurrences-api-provider.js</a>, <a href="providers_occurrences-api-provider.js.html#line14">line 14</a>
+                <a href="providers_occurrences-api-provider.js.html">providers/occurrences-api-provider.js</a>, <a href="providers_occurrences-api-provider.js.html#line20">line 20</a>
             </span>
         </p>
     
@@ -244,7 +249,7 @@
         
         <span class="code-name">
             
-                getOccurrences<span class="signature">(config)</span><span class="type-signature"></span>
+                getOccurrences<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -467,7 +472,7 @@
         <p class="tag-source">
             <a href="providers_occurrences-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_occurrences-api-provider.js.html">providers/occurrences-api-provider.js</a>, <a href="providers_occurrences-api-provider.js.html#line66">line 66</a>
+                <a href="providers_occurrences-api-provider.js.html">providers/occurrences-api-provider.js</a>, <a href="providers_occurrences-api-provider.js.html#line73">line 73</a>
             </span>
         </p>
     
@@ -489,6 +494,31 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS occurrence objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

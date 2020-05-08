@@ -98,7 +98,12 @@
         <h2><span class="attribs"><span class="type-signature"></span></span>MappingsApiProvider<span class="signature">()</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>For APIs that provide concordances and mappings in JSKOS format.</p>
-<p>TODO: Check capabilities (<code>this.has</code>) and authorization (<code>this.isAuthorizedFor</code>) before actions.</p></div>
+<p>TODO: Check capabilities (<code>this.has</code>) and authorization (<code>this.isAuthorizedFor</code>) before actions.</p>
+<p>To use this in a registry, specific it as &quot;MappingsApi&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;provider&quot;: &quot;MappingsApi&quot;
+}
+</code></pre></div>
         
     
 </header>
@@ -178,7 +183,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line14">line 14</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line20">line 20</a>
             </span>
         </p>
     
@@ -381,7 +386,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line284">line 284</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line299">line 299</a>
             </span>
         </p>
     
@@ -559,7 +564,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line193">line 193</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line204">line 204</a>
             </span>
         </p>
     
@@ -600,7 +605,7 @@
         
         <span class="code-name">
             
-                getAnnotations<span class="signature">(config)</span><span class="type-signature"></span>
+                getAnnotations<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -757,7 +762,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line214">line 214</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line226">line 226</a>
             </span>
         </p>
     
@@ -780,6 +785,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS annotation objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -798,7 +828,7 @@
         
         <span class="code-name">
             
-                getConcordances<span class="signature">(config)</span><span class="type-signature"></span>
+                getConcordances<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -909,7 +939,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line301">line 301</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line317">line 317</a>
             </span>
         </p>
     
@@ -932,6 +962,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concordance objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -950,7 +1005,7 @@
         
         <span class="code-name">
             
-                getMapping<span class="signature">(config)</span><span class="type-signature"></span>
+                getMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1087,7 +1142,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line45">line 45</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line52">line 52</a>
             </span>
         </p>
     
@@ -1110,6 +1165,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1128,7 +1208,7 @@
         
         <span class="code-name">
             
-                getMappings<span class="signature">(config)</span><span class="type-signature"></span>
+                getMappings<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -1239,7 +1319,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line58">line 58</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line66">line 66</a>
             </span>
         </p>
     
@@ -1262,6 +1342,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS mapping objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1280,7 +1385,7 @@
         
         <span class="code-name">
             
-                patchAnnotation<span class="signature">(config)</span><span class="type-signature"></span>
+                patchAnnotation<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1417,7 +1522,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line265">line 265</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line280">line 280</a>
             </span>
         </p>
     
@@ -1440,6 +1545,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS annotation object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1458,7 +1588,7 @@
         
         <span class="code-name">
             
-                patchMapping<span class="signature">(config)</span><span class="type-signature"></span>
+                patchMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1595,7 +1725,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line169">line 169</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line180">line 180</a>
             </span>
         </p>
     
@@ -1618,6 +1748,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1636,7 +1791,7 @@
         
         <span class="code-name">
             
-                postAnnotation<span class="signature">(config)</span><span class="type-signature"></span>
+                postAnnotation<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1773,7 +1928,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line231">line 231</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line244">line 244</a>
             </span>
         </p>
     
@@ -1796,6 +1951,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS annotation object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1814,7 +1994,7 @@
         
         <span class="code-name">
             
-                postMapping<span class="signature">(config)</span><span class="type-signature"></span>
+                postMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1951,7 +2131,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line125">line 125</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line134">line 134</a>
             </span>
         </p>
     
@@ -1974,6 +2154,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1992,7 +2197,7 @@
         
         <span class="code-name">
             
-                putAnnotation<span class="signature">(config)</span><span class="type-signature"></span>
+                putAnnotation<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -2129,7 +2334,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line246">line 246</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line260">line 260</a>
             </span>
         </p>
     
@@ -2152,6 +2357,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS annotation object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -2170,7 +2400,7 @@
         
         <span class="code-name">
             
-                putMapping<span class="signature">(config)</span><span class="type-signature"></span>
+                putMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -2307,7 +2537,7 @@
         <p class="tag-source">
             <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line145">line 145</a>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line155">line 155</a>
             </span>
         </p>
     
@@ -2329,6 +2559,31 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

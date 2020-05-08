@@ -99,7 +99,12 @@
         
             <div class="class-description"><p>For APIs that provide concept schemes and concepts in JSKOS format
 like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
-<a href="https://github.com/gbv/jskos-server">jskos-server</a>.</p></div>
+<a href="https://github.com/gbv/jskos-server">jskos-server</a>.</p>
+<p>To use this in a registry, specific it as &quot;ConceptApi&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;provider&quot;: &quot;ConceptApi&quot;
+}
+</code></pre></div>
         
     
 </header>
@@ -179,7 +184,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line13">line 13</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line19">line 19</a>
             </span>
         </p>
     
@@ -245,7 +250,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getAncestors<span class="signature">(config)</span><span class="type-signature"></span>
+                getAncestors<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -382,7 +387,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line140">line 140</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line151">line 151</a>
             </span>
         </p>
     
@@ -405,6 +410,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -423,7 +453,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getConcepts<span class="signature">(config)</span><span class="type-signature"></span>
+                getConcepts<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -560,7 +590,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line88">line 88</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line97">line 97</a>
             </span>
         </p>
     
@@ -583,6 +613,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -601,7 +656,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getNarrower<span class="signature">(config)</span><span class="type-signature"></span>
+                getNarrower<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -738,7 +793,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line114">line 114</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line124">line 124</a>
             </span>
         </p>
     
@@ -761,6 +816,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -779,7 +859,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getSchemes<span class="signature">(config)</span><span class="type-signature"></span>
+                getSchemes<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -890,7 +970,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line35">line 35</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line42">line 42</a>
             </span>
         </p>
     
@@ -913,6 +993,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept scheme objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -931,7 +1036,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getTop<span class="signature">(config)</span><span class="type-signature"></span>
+                getTop<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -1068,7 +1173,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line59">line 59</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line67">line 67</a>
             </span>
         </p>
     
@@ -1091,6 +1196,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -1109,7 +1239,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                getTypes<span class="signature">(config)</span><span class="type-signature"></span>
+                getTypes<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -1266,7 +1396,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line213">line 213</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line226">line 226</a>
             </span>
         </p>
     
@@ -1288,6 +1418,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS type objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -1316,7 +1471,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
     
     
     <div class="description">
-        <p>Search not yet implemented.</p>
+        <p>Method not yet implemented.</p>
     </div>
     
 
@@ -1367,7 +1522,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line203">line 203</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line215">line 215</a>
             </span>
         </p>
     
@@ -1408,7 +1563,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         
         <span class="code-name">
             
-                suggest<span class="signature">(config)</span><span class="type-signature"></span>
+                suggest<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array}</span>
             
         </span>
     </h4>
@@ -1766,7 +1921,7 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line171">line 171</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line183">line 183</a>
             </span>
         </p>
     
@@ -1788,6 +1943,31 @@ like <a href="https://api.dante.gbv.de/">DANTE</a> and jskos-server
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>result in OpenSearch Suggest Format</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

@@ -103,10 +103,14 @@ const errors = require("../errors")
 /**
  * Skosmos API Wrapper.
  *
- * TODO: Documentation
+ * To use this in a registry, specific it as "SkosmosApi":
+ * ```json
+ * {
+ *  "provider": "SkosmosApi"
+ * }
+ * ```
  *
  * @category Providers
- *
  */
 class SkosmosApiProvider extends BaseProvider {
 
@@ -130,6 +134,12 @@ class SkosmosApiProvider extends BaseProvider {
     }
   }
 
+  /**
+   * Returns all concept schemes.
+   *
+   * @param {Object} config
+   * @returns {Object[]} array of JSKOS concept scheme objects
+   */
   async getSchemes({ ...config }) {
     // TODO: Re-evaluate!
     if (!this._jskos.loadSchemeInfo) {
@@ -156,6 +166,9 @@ class SkosmosApiProvider extends BaseProvider {
     return schemes
   }
 
+  /**
+   * Method not yet implemented.
+   */
   async getTop() {
     throw new errors.MethodNotImplementedError({ method: "getTop" })
   }
@@ -171,6 +184,13 @@ class SkosmosApiProvider extends BaseProvider {
     return `${this.api.api}${scheme.VOCID}/data${addFormatParameter ? "?format=application/json" : ""}`
   }
 
+  /**
+   * Returns details for a list of concepts.
+   *
+   * @param {Object} config
+   * @param {Object[]} config.concepts list of concept objects to load
+   * @returns {Object[]} array of JSKOS concept objects
+   */
   async getConcepts({ concepts, ...config }) {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
@@ -264,14 +284,30 @@ class SkosmosApiProvider extends BaseProvider {
     return newConcepts
   }
 
+  /**
+   * Method not yet implemented.
+   */
   async getNarrower() {
     throw new errors.MethodNotImplementedError({ method: "getNarrower" })
   }
 
+  /**
+   * Method not yet implemented.
+   */
   async getAncestors() {
     throw new errors.MethodNotImplementedError({ method: "getAncestors" })
   }
 
+  /**
+   * Returns suggestion result in OpenSearch Suggest Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {string[]} [config.types=[]] list of type URIs
+   * @returns {Array} result in OpenSearch Suggest Format
+   */
   async suggest(config) {
     config._raw = true
     const concepts = await this.search(config)
@@ -286,6 +322,16 @@ class SkosmosApiProvider extends BaseProvider {
     return result
   }
 
+  /**
+   * Returns concept search results.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {string[]} [config.types=[]] list of type URIs
+   * @returns {Array} array of JSKOS concept objects
+   */
   async search({ search, scheme, limit, types = [], ...config }) {
     if (!scheme || !scheme.VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
@@ -319,6 +365,13 @@ class SkosmosApiProvider extends BaseProvider {
     return concepts
   }
 
+  /**
+   * Returns a list of types.
+   *
+   * @param {Object} config
+   * @param {Object} [config.scheme] concept scheme to load types for
+   * @returns {Object[]} array of JSKOS type objects
+   */
   async getTypes({ scheme, ...config }) {
     if (!scheme || !scheme.VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
