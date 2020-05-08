@@ -45,55 +45,53 @@
         BaseProvider
         </h2>
         
-            <div class="class-description">BaseProvider to be subclassed to implement specific providers.
-
-Prefix all internal method and properties with underscore (e.g. `this._cache`)!
-
-Methods that can be overridden:
-- Do not override the constructor! Use _setup instead.
-- _setup: will be called after registry is initialized, should be used to set properties on this.has and custom preparations
-- isAuthorizedFor: override if you want to customize
-- supportsScheme: override if you want to customize
-- setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter `registries`)
-- getRegistries
-- getSchemes
-- getTypes
-- suggest
-- getConcordances
-- getOccurrences
-- getTop
-- getConcepts
-- getConcept
-- getNarrower
-- getAncestors
-- search
-- getMapping
-- getMappings
-- postMapping
-- postMappings
-- putMapping
-- patchMapping
-- deleteMapping
-- deleteMappings
-- getAnnotations
-- postAnnotation
-- putAnnotation
-- patchAnnotation
-- deleteAnnotation
-
-All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
+            <div class="class-description"><p>BaseProvider to be subclassed to implement specific providers.</p>
+<p>Prefix all internal method and properties with underscore (e.g. <code>this._cache</code>)!</p>
+<p>Methods that can be overridden:</p>
+<ul>
+<li>Do not override the constructor! Use _setup instead.</li>
+<li>_setup: will be called after registry is initialized, should be used to set properties on this.has and custom preparations</li>
+<li>isAuthorizedFor: override if you want to customize</li>
+<li>supportsScheme: override if you want to customize</li>
+<li>setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter <code>registries</code>)</li>
+<li>getRegistries</li>
+<li>getSchemes</li>
+<li>getTypes</li>
+<li>suggest</li>
+<li>getConcordances</li>
+<li>getOccurrences</li>
+<li>getTop</li>
+<li>getConcepts</li>
+<li>getConcept</li>
+<li>getNarrower</li>
+<li>getAncestors</li>
+<li>search</li>
+<li>getMapping</li>
+<li>getMappings</li>
+<li>postMapping</li>
+<li>postMappings</li>
+<li>putMapping</li>
+<li>patchMapping</li>
+<li>deleteMapping</li>
+<li>deleteMappings</li>
+<li>getAnnotations</li>
+<li>postAnnotation</li>
+<li>putAnnotation</li>
+<li>patchAnnotation</li>
+<li>deleteAnnotation</li>
+</ul>
+<p>All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
 Example:
- getConcept({ concept, ...config }) {
-   return this.axios({
-     ...config,
-     method: "get",
-     params: {
-       uri: concept.uri,
-     },
-   })
- }
-
-Always use `this.axios` like in the example for http requests!</div>
+getConcept({ concept, ...config }) {
+return this.axios({
+...config,
+method: &quot;get&quot;,
+params: {
+uri: concept.uri,
+},
+})
+}</p>
+<p>Always use <code>this.axios</code> like in the example for http requests!</p></div>
         
     
 </header>
@@ -115,7 +113,7 @@ Always use `this.axios` like in the example for http requests!</div>
 
 
 <div class="description">
-    Provider constructor.
+    <p>Provider constructor.</p>
 </div>
 
 
@@ -212,7 +210,7 @@ Always use `this.axios` like in the example for http requests!</div>
             
 
             <td class="description last">
-                the registry for this provider
+                <p>the registry for this provider</p>
                 
             </td>
         </tr>
@@ -268,7 +266,7 @@ Always use `this.axios` like in the example for http requests!</div>
 
 
 <div class="description">
-    Setup to be executed after init. Should be overwritten by subclasses.
+    <p>Setup to be executed after init. Should be overwritten by subclasses.</p>
 </div>
 
 
@@ -351,7 +349,7 @@ Always use `this.axios` like in the example for http requests!</div>
 
 
 <div class="description">
-    DELETEs multiple mappings. Do not override in subclass!
+    <p>DELETEs multiple mappings. Do not override in subclass!</p>
 </div>
 
 
@@ -491,7 +489,7 @@ Always use `this.axios` like in the example for http requests!</div>
             
 
             <td class="description last">
-                array of mapping objects
+                <p>array of mapping objects</p>
                 
             </td>
         </tr>
@@ -537,7 +535,7 @@ Always use `this.axios` like in the example for http requests!</div>
 
 
 <div class="description">
-    Returns a source for a axios cancel token.
+    <p>Returns a source for a axios cancel token.</p>
 </div>
 
 
@@ -620,10 +618,9 @@ Always use `this.axios` like in the example for http requests!</div>
 
 
 <div class="description">
-    GETs information about a single concept. Do not override in subclass!
-
-TODO: Evaluate whether concept and/or uri should be used.
-? Returning a single object removes API URL. How should we do this?
+    <p>GETs information about a single concept. Do not override in subclass!</p>
+<p>TODO: Evaluate whether concept and/or uri should be used.
+? Returning a single object removes API URL. How should we do this?</p>
 </div>
 
 
@@ -763,7 +760,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                concept to be requested
+                <p>concept to be requested</p>
                 
             </td>
         </tr>
@@ -789,7 +786,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                concept URI (alternative to concept)
+                <p>concept URI (alternative to concept)</p>
                 
             </td>
         </tr>
@@ -835,7 +832,7 @@ TODO: Evaluate whether concept and/or uri should be used.
 
 
 <div class="description">
-    Load data about registry via the status endpoint.
+    <p>Load data about registry via the status endpoint.</p>
 </div>
 
 
@@ -918,7 +915,7 @@ TODO: Evaluate whether concept and/or uri should be used.
 
 
 <div class="description">
-    Returns whether a user is authorized for a certain request.
+    <p>Returns whether a user is authorized for a certain request.</p>
 </div>
 
 
@@ -1041,7 +1038,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                type of item (e.g. mappings)
+                <p>type of item (e.g. mappings)</p>
                 
             </td>
         </tr>
@@ -1067,7 +1064,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                action to be performed (read/create/update/delete)
+                <p>action to be performed (read/create/update/delete)</p>
                 
             </td>
         </tr>
@@ -1093,7 +1090,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                user object
+                <p>user object</p>
                 
             </td>
         </tr>
@@ -1119,7 +1116,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                whether the request is a crossUser request (i.e. updading/deleting another user's item)
+                <p>whether the request is a crossUser request (i.e. updading/deleting another user's item)</p>
                 
             </td>
         </tr>
@@ -1157,7 +1154,7 @@ TODO: Evaluate whether concept and/or uri should be used.
 
 
 <div class="description">
-    POSTs multiple mappings. Do not override in subclass!
+    <p>POSTs multiple mappings. Do not override in subclass!</p>
 </div>
 
 
@@ -1297,7 +1294,7 @@ TODO: Evaluate whether concept and/or uri should be used.
             
 
             <td class="description last">
-                array of mapping objects
+                <p>array of mapping objects</p>
                 
             </td>
         </tr>
@@ -1343,19 +1340,16 @@ TODO: Evaluate whether concept and/or uri should be used.
 
 
 <div class="description">
-    Repeatedly call a certain method.
-
-Callback will only be called if the results were changed.
-
-Example:
-```js
- provider.repeat({
-   method: "getMappings",
+    <p>Repeatedly call a certain method.</p>
+<p>Callback will only be called if the results were changed.</p>
+<p>Example:</p>
+<pre class="prettyprint source lang-js"><code> provider.repeat({
+   method: &quot;getMappings&quot;,
    callback: (result) => console.log(result),
    limit: 3,
    offset: 3,
  })
-```
+</code></pre>
 </div>
 
 
@@ -1511,7 +1505,7 @@ Example:
             
 
             <td class="description last">
-                name of method to be called
+                <p>name of method to be called</p>
                 
             </td>
         </tr>
@@ -1553,7 +1547,7 @@ Example:
             
 
             <td class="description last">
-                interval in ms
+                <p>interval in ms</p>
                 
             </td>
         </tr>
@@ -1591,9 +1585,8 @@ Example:
             
 
             <td class="description last">
-                callback function called with two parameters (result, error)
-
-Additionally include parameters needed for the actual request.
+                <p>callback function called with two parameters (result, error)</p>
+<p>Additionally include parameters needed for the actual request.</p>
                 
             </td>
         </tr>
@@ -1639,7 +1632,7 @@ Additionally include parameters needed for the actual request.
 
 
 <div class="description">
-    Sets authentication credentials.
+    <p>Sets authentication credentials.</p>
 </div>
 
 
@@ -1779,7 +1772,7 @@ Additionally include parameters needed for the actual request.
             
 
             <td class="description last">
-                public key of login-server instance the user is authorized for
+                <p>public key of login-server instance the user is authorized for</p>
                 
             </td>
         </tr>
@@ -1805,7 +1798,7 @@ Additionally include parameters needed for the actual request.
             
 
             <td class="description last">
-                token that is sent with each request
+                <p>token that is sent with each request</p>
                 
             </td>
         </tr>
@@ -1851,7 +1844,7 @@ Additionally include parameters needed for the actual request.
 
 
 <div class="description">
-    Returns a boolean whether a certain target scheme is supported or not.
+    <p>Returns a boolean whether a certain target scheme is supported or not.</p>
 </div>
 
 
@@ -1991,7 +1984,7 @@ Additionally include parameters needed for the actual request.
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:16:45 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri May 08 2020 07:29:26 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
