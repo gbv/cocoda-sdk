@@ -194,8 +194,26 @@ class BaseProvider {
             if (error instanceof errors.CDKError) {
               throw error
             } else {
-              // TODO: Handle axios errors etc.
-              throw new errors.CDKError({ relatedError: error })
+              if (error.response) {
+                // 4xx = invalid request
+                if (error.response.status.toString().startsWith(5)) {
+                  throw new errors.InvalidRequestError({ relatedError: error, code: error.response.status })
+                } else {
+                  throw new errors.BackendError({ relatedError: error, code: error.response.status })
+                }
+              } else if (error.request) {
+                if (typeof navigator !== "undefined") {
+                  // If connected, it should be a backend problem
+                  if (navigator.connection || navigator.mozConnection || navigator.webkitConnection) {
+                    throw new errors.BackendUnavailableError({ relatedError: error })
+                  }
+                }
+                // Otherwise, assume a network error
+                throw new errors.NetworkError({ relatedError: error })
+              } else {
+                // Otherwise, throw generic CDKError
+                throw new errors.CDKError({ relatedError: error })
+              }
             }
           })
         // Attach cancel method to Promise
