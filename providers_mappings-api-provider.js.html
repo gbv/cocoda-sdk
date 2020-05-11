@@ -156,10 +156,15 @@ class MappingsApiProvider extends BaseProvider {
    * @returns {Object} JSKOS mapping object
    */
   async getMapping({ mapping, ...config }) {
-    return this.getMappings({
+    if (!mapping) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    if (!mapping.uri || !mapping.uri.startsWith(this.api.mappings)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
+    }
+    return this.axios({
       ...config,
-      uri: mapping.uri,
-      _raw: true,
+      url: mapping.uri,
     })
   }
 
@@ -169,58 +174,49 @@ class MappingsApiProvider extends BaseProvider {
    * @param {Object} config request config with parameters
    * @returns {Object[]} array of JSKOS mapping objects
    */
-  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri, sort, order, ...config }) {
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, sort, order, ...config }) {
     let params = {}, url = this.api.mappings
-    if (!uri) {
-      if (from) {
-        params.from = _.isString(from) ? from : from.uri
-      }
-      if (fromScheme) {
-        params.fromScheme = _.isString(fromScheme) ? fromScheme : fromScheme.uri
-      }
-      if (to) {
-        params.to = _.isString(to) ? to : to.uri
-      }
-      if (toScheme) {
-        params.toScheme = _.isString(toScheme) ? toScheme : toScheme.uri
-      }
-      if (creator) {
-        params.creator = _.isString(creator) ? creator : jskos.prefLabel(creator)
-      }
-      if (type) {
-        params.type = _.isString(type) ? type : type.uri
-      }
-      if (partOf) {
-        params.partOf = _.isString(partOf) ? partOf : partOf.uri
-      }
-      if (offset) {
-        params.offset = offset
-      }
-      if (limit) {
-        params.limit = limit
-      }
-      if (direction) {
-        params.direction = direction
-      }
-      if (mode) {
-        params.mode = mode
-      }
-      if (identifier) {
-        params.identifier = identifier
-      }
-      if (sort) {
-        params.sort = sort
-      }
-      if (order) {
-        params.order = order
-      }
-    } else {
-      // Load single mapping directly from URI if it comes from the current registry
-      if (uri.startsWith(this.api.mappings)) {
-        url = uri
-      } else {
-        params.identifier = uri
-      }
+    if (from) {
+      params.from = _.isString(from) ? from : from.uri
+    }
+    if (fromScheme) {
+      params.fromScheme = _.isString(fromScheme) ? fromScheme : fromScheme.uri
+    }
+    if (to) {
+      params.to = _.isString(to) ? to : to.uri
+    }
+    if (toScheme) {
+      params.toScheme = _.isString(toScheme) ? toScheme : toScheme.uri
+    }
+    if (creator) {
+      params.creator = _.isString(creator) ? creator : jskos.prefLabel(creator)
+    }
+    if (type) {
+      params.type = _.isString(type) ? type : type.uri
+    }
+    if (partOf) {
+      params.partOf = _.isString(partOf) ? partOf : partOf.uri
+    }
+    if (offset) {
+      params.offset = offset
+    }
+    if (limit) {
+      params.limit = limit
+    }
+    if (direction) {
+      params.direction = direction
+    }
+    if (mode) {
+      params.mode = mode
+    }
+    if (identifier) {
+      params.identifier = identifier
+    }
+    if (sort) {
+      params.sort = sort
+    }
+    if (order) {
+      params.order = order
     }
     return this.axios({
       ...config,
