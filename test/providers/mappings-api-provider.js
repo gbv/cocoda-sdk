@@ -2,6 +2,7 @@ const MappingsApiProvider = require("../../providers/mappings-api-provider")
 const assert = require("assert")
 const MockAdapter = require("axios-mock-adapter")
 const errors = require("../../errors")
+const jskos = require("jskos-tools")
 
 const api = {
   mappings: "test:/mappings",
@@ -79,6 +80,30 @@ describe("MappingsApiProvider", () => {
     let wasError = false
     try {
       await registry.getMapping({ mapping: {} })
+    } catch(error) {
+      wasError = true
+      assert(error instanceof errors.InvalidOrMissingParameterError)
+    }
+    assert(wasError)
+  })
+
+  it("should perform posting a mapping correctly", (done) => {
+    const mappingToPost = {}
+    const mapping = jskos.addMappingIdentifiers(mappingToPost)
+    mock.onPost().reply(config => {
+      assert.equal(config.url, api.mappings)
+      assert.deepEqual(JSON.parse(config.data), mapping)
+
+      done()
+      return [200, {}]
+    })
+    registry.postMapping({ mapping })
+  })
+
+  it("should throw an error when calling postMapping without mapping", async () => {
+    let wasError = false
+    try {
+      await registry.postMapping()
     } catch(error) {
       wasError = true
       assert(error instanceof errors.InvalidOrMissingParameterError)
