@@ -108,30 +108,28 @@ const errors = require("../errors")
 const axios = require("axios")
 const _ = require("../utils/lodash")
 
-class CocodaSDK extends Function {
+class CocodaSDK {
 
   /**
    * CDK constructor.
    *
-   * @param {Object} [config={}] Cocoda config object
+   * @param {Object} [config={}] Cocoda-stye config object
    */
   constructor(config) {
-    // See https://stackoverflow.com/a/40878674/11050851 how this all works.
-    super("...args", "return this.__self__.__call__(...args)")
-    const self = this.bind(this)
-    this.__self__ = self
-    self.config = config
-    return self
-  }
-
-  // Will be called when instance of this class is called as a function.
-  __call__(config) {
     this.config = config
-    return this
   }
 
   /**
-   * Configuration
+   * Method to set the configuration.
+   *
+   * @param {Object} config Cocoda-stye config object
+   */
+  setConfig(config) {
+    this.config = config
+  }
+
+  /**
+   * Current configuration.
    *
    * @returns {Object} current configuration
    */
@@ -143,6 +141,7 @@ class CocodaSDK extends Function {
    * Prepares config when set.
    *
    * @param {Object} config Cocoda config object
+   * @private
    */
   set config(config) {
     config = config || {}

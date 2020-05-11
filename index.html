@@ -149,11 +149,9 @@
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 </code></pre>
 <h3>Configuration</h3>
-<p><code>cocoda-sdk</code> can be configured on import or by setting the <code>config</code> property:</p>
-<pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)(config)
-</code></pre>
+<p><code>cocoda-sdk</code> can be configured after import:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
-cdk.config = config
+cdk.setConfig(config)
 </code></pre>
 <p>The configuration can also be loaded from a URL:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
