@@ -129,24 +129,7 @@ const newCdk = cdk.createInstance(config)
 A `cocoda-sdk` instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of `cocoda-sdk` (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
 
 ### Methods for `cocoda-sdk` instance
-
-#### `cdk.createInstance()`
-Creates an additional instance of `cocoda-sdk`.
-
-#### `cdk.loadConfig(url)` (async)
-Loads a configuration from a URL into the current instance.
-
-#### `cdk.loadBuildInfo({ url, buildInfo = null, interval = 60000, callback })`
-Sets up a regular query of a `build-info.json` file for Cocoda. `callback` will be called whenever the build info updates.
-
-#### `cdk.getRegistryForUri(uri)`
-Returns the initialized registry from the configuration for the given `uri`.
-
-#### `cdk.initializeRegistry(registry)`
-Returns an initialized registry (see [above](#registries)).
-
-#### `cdk.addProvider(CustomProvider)`
-Adds a custom provider to `cocoda-sdk` (see [above](#providers)).
+Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.html).
 
 ### Registry Methods - General
 
