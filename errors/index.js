@@ -76,6 +76,13 @@ class InvalidRequestError extends CDKError {}
 class BackendError extends CDKError {}
 
 /**
+ * BackendUnavailableError is thrown when the server did not respond, but the client's internet connection seems to be working.
+ *
+ * @category Errors
+ */
+class BackendUnavailableError extends CDKError {}
+
+/**
  * NetworkError is thrown when the request could not be performend (e.g. the network was not available).
  *
  * @category Errors
@@ -101,6 +108,7 @@ module.exports = {
   MethodNotImplementedError,
   InvalidOrMissingParameterError,
   BackendError,
+  BackendUnavailableError,
   NetworkError,
   InvalidRequestError,
   MissingApiUrlError,
