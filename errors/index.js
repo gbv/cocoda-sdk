@@ -14,6 +14,9 @@ class CDKError extends Error {
    * @param {number} [options.code] HTTP status code for the error
    */
   constructor({ message = "", relatedError = null, code = null } = {}) {
+    if (!message && relatedError && relatedError.message) {
+      message = relatedError.message
+    }
     super(message)
     this.name = this.constructor.name
     this.relatedError = relatedError
