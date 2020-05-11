@@ -32,7 +32,7 @@ npm i gbv/cocoda-sdk#abc1def
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a singleton, so the same object is used on each import of `cocoda-sdk`.
+`cocoda-sdk` exports a default instance, so the same object is used on each import of `cocoda-sdk`.
 
 ```js
 const cdk = require("cocoda-sdk")
