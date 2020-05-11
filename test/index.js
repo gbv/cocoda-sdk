@@ -4,19 +4,13 @@ const CDK = require("../lib/CocodaSDK")
 
 describe("index", () => {
 
-  it("should export the default instance that can also be called as a function", () => {
-    assert.equal(typeof cdk, "function", "cdk should be a function")
+  it("should export the default instance", () => {
     assert.equal(cdk instanceof CDK, true, "cdk should be instance of CocodaSDK")
   })
 
-  it("should set config when instance is called as a function", () => {
-    cdk({ test: "test" })
+  it("should set config when setConfig is called", () => {
+    cdk.setConfig({ test: "test" })
     assert.equal(cdk.config.test, "test")
-  })
-
-  it("should return instance when instance is called as a function", () => {
-    const other = cdk({})
-    assert.equal(other, cdk)
   })
 
   it("should have expected properties", () => {
@@ -24,6 +18,7 @@ describe("index", () => {
       "config",
       "createInstance",
       "loadConfig",
+      "setConfig",
       "loadBuildInfo",
       "getRegistryForUri",
       "initializeRegistry",

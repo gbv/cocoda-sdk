@@ -39,15 +39,11 @@ const cdk = require("cocoda-sdk")
 ```
 
 ### Configuration
-`cocoda-sdk` can be configured on import or by setting the `config` property:
-
-```js
-const cdk = require("cocoda-sdk")(config)
-```
+`cocoda-sdk` can be configured after import:
 
 ```js
 const cdk = require("cocoda-sdk")
-cdk.config = config
+cdk.setConfig(config)
 ```
 
 The configuration can also be loaded from a URL:
