@@ -14,6 +14,11 @@ describe("index", () => {
     assert.equal(cdk.config.test, "test")
   })
 
+  it("should return instance when instance is called as a function", () => {
+    const other = cdk({})
+    assert.equal(other, cdk)
+  })
+
   it("should have expected properties", () => {
     const props = [
       "config",
