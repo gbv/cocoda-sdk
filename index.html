@@ -207,18 +207,7 @@ cdk.addProvider(CustomProvider)
 <h2>Methods</h2>
 <p>A <code>cocoda-sdk</code> instance itself offers only a handful of methods. The actual access to APIs happens through <a href="#registries">registries</a>. The following list of methods assume either an instance of <code>cocoda-sdk</code> (<code>cdk.someMethod</code>) or an initialized registry (<code>registry.someMethod</code>). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.</p>
 <h3>Methods for <code>cocoda-sdk</code> instance</h3>
-<h4><code>cdk.createInstance()</code></h4>
-<p>Creates an additional instance of <code>cocoda-sdk</code>.</p>
-<h4><code>cdk.loadConfig(url)</code> (async)</h4>
-<p>Loads a configuration from a URL into the current instance.</p>
-<h4><code>cdk.loadBuildInfo({ url, buildInfo = null, interval = 60000, callback })</code></h4>
-<p>Sets up a regular query of a <code>build-info.json</code> file for Cocoda. <code>callback</code> will be called whenever the build info updates.</p>
-<h4><code>cdk.getRegistryForUri(uri)</code></h4>
-<p>Returns the initialized registry from the configuration for the given <code>uri</code>.</p>
-<h4><code>cdk.initializeRegistry(registry)</code></h4>
-<p>Returns an initialized registry (see <a href="#registries">above</a>).</p>
-<h4><code>cdk.addProvider(CustomProvider)</code></h4>
-<p>Adds a custom provider to <code>cocoda-sdk</code> (see <a href="#providers">above</a>).</p>
+<p>Please refer to the <a href="https://gbv.github.io/cocoda-sdk/CocodaSDK.html">documentation</a>.</p>
 <h3>Registry Methods - General</h3>
 <h4><code>registry.init</code></h4>
 <ul>
