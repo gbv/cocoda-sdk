@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cocoda-sdk MissingRegistryError</title>
+  <title>cocoda-sdk BackendError</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -84,7 +84,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -92,7 +92,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>MissingRegistryError</h1>
+                    <h1>BackendError</h1>
                 </header>
                 
 
@@ -103,9 +103,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>MissingRegistryError<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BackendError<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>MissingRegistryError should be thrown by cocoda-sdk to indicate that a registry is needed to perform the request.</p></div>
+            <div class="class-description"><p>BackendError is thrown when the server responded with a 5xx error (i.e. it's a problem on the server side).</p></div>
         
     
 </header>
@@ -124,12 +124,12 @@
 
 
     
-    <h4 class="name" id="MissingRegistryError">
-        <a class="href-link" href="#MissingRegistryError">#</a>
+    <h4 class="name" id="BackendError">
+        <a class="href-link" href="#BackendError">#</a>
         
         <span class="code-name">
             
-                new MissingRegistryError<span class="signature">()</span><span class="type-signature"></span>
+                new BackendError<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -185,7 +185,7 @@
         <p class="tag-source">
             <a href="errors_index.js.html" class="button">View Source</a>
             <span>
-                <a href="errors_index.js.html">errors/index.js</a>, <a href="errors_index.js.html#line69">line 69</a>
+                <a href="errors_index.js.html">errors/index.js</a>, <a href="errors_index.js.html#line76">line 76</a>
             </span>
         </p>
     

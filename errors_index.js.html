@@ -86,7 +86,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -127,7 +127,7 @@ class CDKError extends Error {
 }
 
 /**
- * MethodNotImplementedError should be thrown when the called method is valid, but not implemented for the current provider.
+ * MethodNotImplementedError is thrown when the called method is valid, but not implemented for the current provider.
  *
  * @category Errors
  */
@@ -147,7 +147,7 @@ class MethodNotImplementedError extends CDKError {
 }
 
 /**
- * InvalidOrMissingParameterError should be thrown when a parameter is missing or is not valid for the request.
+ * InvalidOrMissingParameterError is thrown when a parameter is missing or is not valid for the request.
  *
  * @category Errors
  */
@@ -167,30 +167,42 @@ class InvalidOrMissingParameterError extends CDKError {
 }
 
 /**
- * MissingRegistryError should be thrown by cocoda-sdk to indicate that a registry is needed to perform the request.
- *
- * @category Errors
- */
-class MissingRegistryError extends CDKError {}
-
-/**
- * InvalidRequestError should be thrown when the request is somehow invalid.
- *
- * ? Where is this needed?
+ * InvalidRequestError is thrown when the server responded with a 4xx error (i.e. it's a problem on the client side).
  *
  * @category Errors
  */
 class InvalidRequestError extends CDKError {}
 
 /**
- * MissingApiUrlError should be thrown when the called method is valid, but the required API URL is not available for the current registry.
+ * BackendError is thrown when the server responded with a 5xx error (i.e. it's a problem on the server side).
+ *
+ * @category Errors
+ */
+class BackendError extends CDKError {}
+
+/**
+ * BackendUnavailableError is thrown when the server did not respond, but the client's internet connection seems to be working.
+ *
+ * @category Errors
+ */
+class BackendUnavailableError extends CDKError {}
+
+/**
+ * NetworkError is thrown when the request could not be performend (e.g. the network was not available).
+ *
+ * @category Errors
+ */
+class NetworkError extends CDKError {}
+
+/**
+ * MissingApiUrlError is thrown when the called method is valid, but the required API URL is not available for the current registry.
  *
  * @category Errors
  */
 class MissingApiUrlError extends CDKError {}
 
 /**
- * InvalidProviderError should be thrown when a provider is added to the provider list that does not inherit from BaseProvider.
+ * InvalidProviderError is thrown when a provider is added to the provider list that does not inherit from BaseProvider.
  *
  * @category Errors
  */
@@ -200,7 +212,9 @@ module.exports = {
   CDKError,
   MethodNotImplementedError,
   InvalidOrMissingParameterError,
-  MissingRegistryError,
+  BackendError,
+  BackendUnavailableError,
+  NetworkError,
   InvalidRequestError,
   MissingApiUrlError,
   InvalidProviderError,

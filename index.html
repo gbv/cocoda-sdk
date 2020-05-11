@@ -84,7 +84,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="MissingRegistryError.html">MissingRegistryError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -358,7 +358,9 @@ cdk.addProvider(CustomProvider)
 <li><code>CDKError</code> - generic error</li>
 <li><code>MethodNotImplementedError</code> - called method is available, but not implemented by the provider</li>
 <li><code>InvalidOrMissingParameterError</code> - a parameter is missing or invalid</li>
-<li><code>MissingRegistryError</code> - a registry parameter is necessary to call this method</li>
+<li><code>BackendError</code> - a response was received, but there was a problem on the backend</li>
+<li><code>BackendUnavailableError</code> - no response was received, but the client's internet connection seems to be working</li>
+<li><code>NetworkError</code> - there was a problem with the network</li>
 <li><code>InvalidRequestError</code> - the request was invalid</li>
 <li><code>MissingApiUrlError</code> - the API URL necessary to make this request is not defined on the registry</li>
 </ul>

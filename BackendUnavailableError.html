@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cocoda-sdk lib/CocodaSDK.js</title>
+  <title>cocoda-sdk BackendUnavailableError</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -93,160 +91,156 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>lib/CocodaSDK.js</h1>
+                    <p>Class</p>
+                    <h1>BackendUnavailableError</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const providers = require("../providers")
-const errors = require("../errors")
-const axios = require("axios")
-const _ = require("../utils/lodash")
+        <h2><span class="attribs"><span class="type-signature"></span></span>BackendUnavailableError<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>BackendUnavailableError is thrown when the server did not respond, but the client's internet connection seems to be working.</p></div>
+        
+    
+</header>
 
-class CocodaSDK {
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
-  /**
-   * CDK constructor.
-   *
-   * @param {Object} [config={}] Cocoda-stye config object
-   */
-  constructor(config) {
-    this.config = config
-  }
 
-  /**
-   * Method to set the configuration.
-   *
-   * @param {Object} config Cocoda-stye config object
-   */
-  setConfig(config) {
-    this.config = config
-  }
+    
+    <h4 class="name" id="BackendUnavailableError">
+        <a class="href-link" href="#BackendUnavailableError">#</a>
+        
+        <span class="code-name">
+            
+                new BackendUnavailableError<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
 
-  /**
-   * Current configuration.
-   *
-   * @returns {Object} current configuration
-   */
-  get config() {
-    return this._config
-  }
+    
+    
 
-  /**
-   * Prepares config when set.
-   *
-   * @param {Object} config Cocoda config object
-   * @private
-   */
-  set config(config) {
-    config = config || {}
-    // Preparations for config
-    // 1. Make sure config.registries exists
-    config.registries = config.registries || []
-    // 2. Initialize registries
-    config.registries = config.registries.map(registry => providers.init(registry)).filter(r => r)
-    // 3. Call setRegistries for registries if available
-    for (let registry of config.registries.filter(r => r.setRegistries)) {
-      registry.setRegistries(config.registries)
-    }
-    this._config = config
-  }
 
-  /**
-   * Creates a new CDK instance (same as `new CocodaSDK(config)`).
-   *
-   * @param {Object} config Cocoda config object
-   * @returns {CocodaSDK} new CDK instance
-   */
-  createInstance(config) {
-    return new CocodaSDK(config)
-  }
 
-  /**
-   * Offer method to load a config file from URL.
-   *
-   * @param {string} url URL of config as JSON
-   */
-  async loadConfig(url) {
-    const response = await axios.get(url)
-    this.config = response.data
-  }
 
-  /**
-   * Method to load buildInfo.
-   *
-   * Callback will only be called if buildInfo changes (note: even if it changes from `null`). An error will be added as a second parameter, in that case the first parameter will contain the previous buildInfo.
-   *
-   * @param {Object} config
-   * @param {string} [config.url] full URL for build-info.json (default is taken from config.cocodaBaseUrl)
-   * @param {Object} [config.buildInfo] current buildInfo
-   * @param {number} [config.interval=60000] interval to load buildInfo in ms
-   * @param {Function} config.callback callback function called with two parameters (buildInfo, error)
-   * @returns {Function} function to clear interval
-   */
-  loadBuildInfo({ url, buildInfo = null, interval = 60000, callback }) {
-    if (!url &amp;&amp; !this.config.cocodaBaseUrl) {
-      throw new errors.CDKError({ message: "Could not determine URL to load build config." })
-    }
-    if (!url) {
-      url = `${this.config.cocodaBaseUrl}build-info.json`
-    }
-    const timer = setInterval(async () => {
-      try {
-        const response = await axios.get(url)
-        if (!_.isEqual(buildInfo, response.data)) {
-          callback(response.data)
-        }
-        buildInfo = response.data
-      } catch(error) {
-        callback(buildInfo, error)
-      }
-    }, interval)
-    return () => {
-      clearInterval(timer)
-    }
-  }
 
-  /**
-   * Method to get a registry by URI.
-   *
-   * @param {string} uri URI of registry in config
-   * @returns {?Object} initialized registry from config if found
-   */
-  getRegistryForUri(uri) {
-    this.config.registries.find(r => r.uri == uri)
-  }
 
-  /**
-   * Method to initialize registry.
-   *
-   * @param {Object} registry JSKOS registry object
-   * @returns {Object} initialized registry
-   */
-  initializeRegistry(registry) {
-    return providers.init(registry)
-  }
 
-  /**
-   * Method to add custom provider.
-   *
-   * @param {Object} provider provider class that extends BaseProvider
-   */
-  addProvider(provider) {
-    providers.addProvider(provider)
-  }
 
-}
 
-module.exports = CocodaSDK
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="errors_index.js.html" class="button">View Source</a>
+            <span>
+                <a href="errors_index.js.html">errors/index.js</a>, <a href="errors_index.js.html#line83">line 83</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
