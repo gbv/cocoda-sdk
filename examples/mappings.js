@@ -7,10 +7,6 @@
   const registry = cdk.getRegistryForUri("http://coli-conc.gbv.de/registry/coli-conc-mappings-dev")
 
   // Get 10 mappings
-  // Way 1:
-  result = await cdk.getMappings({ registry, limit: 10 })
-  console.log(result.length)
-  // Way 2:
   result = await registry.getMappings({ limit: 10 })
   console.log(result.length)
 
@@ -19,7 +15,7 @@
   console.log("Create or delete mapping via https://coli-conc.gbv.de/cocoda/dev/ to see change.")
   console.log("Press ctrl+c to stop.")
   // Method returns a cancel function
-  const cancel = cdk.repeat({
+  const cancel = registry.repeat({
     registry,
     method: "getMappings",
     interval: 3000,
