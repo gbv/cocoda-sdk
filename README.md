@@ -152,9 +152,6 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 #### `registry.getCancelTokenSource`
 - [BaseProvider - getCancelTokenSource](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
 
-#### `registry.repeat`
-- [BaseProvider - repeat](https://gbv.github.io/cocoda-sdk/BaseProvider.html#repeat)
-
 ### Registry Methods - Concept Schemes
 
 #### `registry.getSchemes`

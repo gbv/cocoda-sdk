@@ -15,9 +15,8 @@
   console.log("Create or delete mapping via https://coli-conc.gbv.de/cocoda/dev/ to see change.")
   console.log("Press ctrl+c to stop.")
   // Method returns a cancel function
-  const cancel = registry.repeat({
-    registry,
-    method: "getMappings",
+  const cancel = cdk.repeat({
+    function: () => registry.getMappings(),
     interval: 3000,
     callback: (mappings, error) => {
       if (error) {
