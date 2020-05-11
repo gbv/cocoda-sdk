@@ -45,7 +45,7 @@ const cdk = require("cocoda-sdk")
 const cdk = require("cocoda-sdk")(config)
 ```
 
-```
+```js
 const cdk = require("cocoda-sdk")
 cdk.config = config
 ```
@@ -57,9 +57,7 @@ const cdk = require("cocoda-sdk")
 await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
 ```
 
-Configuration should only be set once because certain steps are performed afterwards.
-
-The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular the configuration contains an array property [`registries`](#registries).
+The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular, the configuration contains an array property [`registries`](#registries).
 
 If you only use `cocoda-sdk` with a single registry, configuration might not be necessary (see below).
 
@@ -120,11 +118,11 @@ const CustomProvider = require("CustomProvider")
 cdk.addProvider(CustomProvider)
 ```
 
-It is then possible to use that provider via `cocoda-sdk` as well. (See also: Example under `examples/custom-provider.js`.)
+It is then possible to use that provider via `cocoda-sdk` as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/master/examples/custom-provider.js).)
 
 ### Multiple Instances
 
-The `createInstance` method can be used to create a new and independent instance, if actually needed:
+The `createInstance` method can be used to create a new and independent instance with a separate configuration if needed:
 
 ```js
 const newCdk = cdk.createInstance(config)
