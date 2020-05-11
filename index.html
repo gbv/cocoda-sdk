@@ -152,15 +152,14 @@
 <p><code>cocoda-sdk</code> can be configured on import or by setting the <code>config</code> property:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)(config)
 </code></pre>
-<pre class="prettyprint source"><code>const cdk = require(&quot;cocoda-sdk&quot;)
+<pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 cdk.config = config
 </code></pre>
 <p>The configuration can also be loaded from a URL:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
 await cdk.loadConfig(&quot;https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json&quot;)
 </code></pre>
-<p>Configuration should only be set once because certain steps are performed afterwards.</p>
-<p>The configuration is a JSON object corresponding the the <a href="https://github.com/gbv/cocoda#configuration">configuration format of Cocoda</a>. In particular the configuration contains an array property <a href="#registries"><code>registries</code></a>.</p>
+<p>The configuration is a JSON object corresponding the the <a href="https://github.com/gbv/cocoda#configuration">configuration format of Cocoda</a>. In particular, the configuration contains an array property <a href="#registries"><code>registries</code></a>.</p>
 <p>If you only use <code>cocoda-sdk</code> with a single registry, configuration might not be necessary (see below).</p>
 <h3>Registries</h3>
 <p>A registry is an individual source of data, for instance a set of concept schemes available from a specific terminology service. The simplest registry consists only of a unique identifier (<code>uri</code>) and the name of the access provider (<code>provider</code>):</p>
@@ -202,9 +201,9 @@ const registry = cdk.getRegistryForUri(&quot;...&quot;)
 <pre class="prettyprint source lang-js"><code>const CustomProvider = require(&quot;CustomProvider&quot;)
 cdk.addProvider(CustomProvider)
 </code></pre>
-<p>It is then possible to use that provider via <code>cocoda-sdk</code> as well. (See also: Example under <code>examples/custom-provider.js</code>.)</p>
+<p>It is then possible to use that provider via <code>cocoda-sdk</code> as well. (See also: Example under <a href="https://github.com/gbv/cocoda-sdk/blob/master/examples/custom-provider.js"><code>examples/custom-provider.js</code></a>.)</p>
 <h3>Multiple Instances</h3>
-<p>The <code>createInstance</code> method can be used to create a new and independent instance, if actually needed:</p>
+<p>The <code>createInstance</code> method can be used to create a new and independent instance with a separate configuration if needed:</p>
 <pre class="prettyprint source lang-js"><code>const newCdk = cdk.createInstance(config)
 </code></pre>
 <h2>Methods</h2>
