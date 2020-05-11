@@ -259,7 +259,8 @@ The following errors are defined:
 - `CDKError` - generic error
 - `MethodNotImplementedError` - called method is available, but not implemented by the provider
 - `InvalidOrMissingParameterError` - a parameter is missing or invalid
-- `MissingRegistryError` - a registry parameter is necessary to call this method
+- `BackendError` - there was a problem on the backend
+- `NetworkError` - there was a problem with the network
 - `InvalidRequestError` - the request was invalid
 - `MissingApiUrlError` - the API URL necessary to make this request is not defined on the registry
 
