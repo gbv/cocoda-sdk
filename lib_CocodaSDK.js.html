@@ -127,6 +127,7 @@ class CocodaSDK extends Function {
   // Will be called when instance of this class is called as a function.
   __call__(config) {
     this.config = config
+    return this
   }
 
   /**
