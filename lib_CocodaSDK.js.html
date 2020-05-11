@@ -219,7 +219,7 @@ class CocodaSDK {
    * @returns {?Object} initialized registry from config if found
    */
   getRegistryForUri(uri) {
-    this.config.registries.find(r => r.uri == uri)
+    return this.config.registries.find(r => r.uri == uri)
   }
 
   /**
