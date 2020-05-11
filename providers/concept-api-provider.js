@@ -3,11 +3,12 @@ const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 /**
- * For APIs that provide concept schemes and concepts in JSKOS format
- * like [DANTE](https://api.dante.gbv.de/) and jskos-server
- * [jskos-server](https://github.com/gbv/jskos-server).
+ * JSKOS Concept API.
  *
- * To use this in a registry, specific it as "ConceptApi":
+ * This class provides access to concept schemes and their concepts via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/). 
+ * See [jskos-server](https://github.com/gbv/jskos-server) for a JSKOS API reference implementation and [DANTE](https://api.dante.gbv.de/) for another API endpoint.
+ *
+ * To use it in a registry, specify as "ConceptApi":
  * ```json
  * {
  *  "provider": "ConceptApi"

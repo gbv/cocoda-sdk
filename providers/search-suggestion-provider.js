@@ -7,11 +7,13 @@ const errors = require("../errors")
 // TODO: Try to remove dependencies on `selected`, `scheme._provider.registry.uri`, etc.
 
 /**
- * Provider for search suggestions.
+ * OpenSearch Search Suggestions.
  *
- * This provider requires that a list of registries with search endpoints is provided via `setRegistries`.
+ * This class provides access to the [OpenSearch Search Suggestions API](https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki)
  *
- * To use this in a registry, specific it as "SearchSuggestion":
+ * The provider requires that a list of registries with search endpoints is provided via `setRegistries`.
+ *
+ * To use it in a registry, specify as "SearchSuggestion":
  * ```json
  * {
  *  "provider": "SearchSuggestion"

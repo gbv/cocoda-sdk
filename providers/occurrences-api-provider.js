@@ -4,11 +4,13 @@ const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 /**
- * For APIs that provide occurrences in JSKOS format.
+ * JSKOS Occurrences API.
+ *
+ * This class provides access to concept occurrences via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/). 
  *
  * TODO: Modernize.
  *
- * To use this in a registry, specific it as "OccurrencesApi":
+ * To use it in a registry, specify as "OccurrencesApi":
  * ```json
  * {
  *  "provider": "OccurrencesApi"
