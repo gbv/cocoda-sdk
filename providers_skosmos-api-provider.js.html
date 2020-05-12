@@ -109,12 +109,16 @@ const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 /**
- * Skosmos API Wrapper.
+ * Skosmos API.
  *
- * To use this in a registry, specific it as "SkosmosApi":
+ * [Skosmos](http://skosmos.org/) is a web application to publish SKOS-based vocabularies.
+ * This class provides access to a Skosmos instance via its REST API.
+ *
+ * To use it in a registry, specify as "SkosmosApi":
  * ```json
  * {
  *  "provider": "SkosmosApi"
+ *  "api": "http://base-url-of-skosmos-instance/rest/v1/"
  * }
  * ```
  *

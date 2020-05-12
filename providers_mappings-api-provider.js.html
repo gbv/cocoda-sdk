@@ -109,11 +109,14 @@ const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 /**
- * For APIs that provide concordances and mappings in JSKOS format.
+ * JSKOS Mappings API.
+ *
+ * This class provides access to concept mappings via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/). 
+ * See [jskos-server](https://github.com/gbv/jskos-server) for a JSKOS API reference implementation
  *
  * TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
  *
- * To use this in a registry, specific it as "MappingsApi":
+ * To use it in a registry, specify as "MappingsApi":
  * ```json
  * {
  *  "provider": "MappingsApi"

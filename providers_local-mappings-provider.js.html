@@ -112,9 +112,11 @@ const errors = require("../errors")
 const uriPrefix = "urn:uuid:"
 
 /**
- * For saving and retrieving mappings from the browser's local storage.
+ * Local Mappings.
  *
- * To use this in a registry, specific it as "LocalMappings":
+ * This class provides read-write access to mappings in the browser's local storage.
+ *
+ * To use it in a registry, specify as "LocalMappings":
  * ```json
  * {
  *  "provider": "LocalMappings"
