@@ -4,7 +4,7 @@ const _ = require("../utils/lodash")
 const errors = require("../errors")
 
 // TODO: Only keep the last 20 results in cache.
-// TODO: Try to remove dependencies on `selected`, `scheme._provider.registry.uri`, etc.
+// TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.
 
 /**
  * OpenSearch Search Suggestions.
@@ -65,7 +65,7 @@ class SearchSuggestionProvider extends BaseProvider {
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    let targetRegistry = _.get(scheme, "_provider.uri")
+    let targetRegistry = _.get(scheme, "_registry.uri")
     return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
   }
 
@@ -162,7 +162,7 @@ class SearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const targetRegistry = _.get(targetScheme, "_provider.uri")
+    const targetRegistry = _.get(targetScheme, "_registry.uri")
     const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
     if (!url) {
       return []

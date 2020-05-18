@@ -86,7 +86,7 @@ describe("BaseProvider", () => {
     assert.equal(adjustedSchemes._totalCount, schemes._totalCount)
     assert.equal(adjustedSchemes._url, schemes._url)
     const [scheme] = adjustedSchemes
-    assert.equal(scheme._provider, provider)
+    assert.equal(scheme._registry, provider)
     assert.ok(typeof scheme._getTop == "function")
     assert.ok(typeof scheme._suggest == "function")
     assert.ok(typeof scheme._getTypes == "function")
@@ -100,7 +100,7 @@ describe("BaseProvider", () => {
     assert.equal(adjustedConcepts._totalCount, concepts._totalCount)
     assert.equal(adjustedConcepts._url, concepts._url)
     const [concept] = adjustedConcepts
-    assert.equal(concept._provider, provider)
+    assert.equal(concept._registry, provider)
     assert.ok(typeof concept._getNarrower == "function")
     assert.ok(typeof concept._getAncestors == "function")
     assert.ok(typeof concept._getDetails == "function")
@@ -114,7 +114,7 @@ describe("BaseProvider", () => {
     assert.equal(adjustedMappings._totalCount, mappings._totalCount)
     assert.equal(adjustedMappings._url, mappings._url)
     const [mapping] = adjustedMappings
-    assert.equal(mapping._provider, provider)
+    assert.equal(mapping._registry, provider)
     assert.ok(Array.isArray(mapping.identifier))
     assert.equal(mapping.fromScheme, null)
     assert.equal(mapping.toScheme, null)
@@ -128,7 +128,7 @@ describe("BaseProvider", () => {
     assert.equal(adjustedConcordances._totalCount, concordances._totalCount)
     assert.equal(adjustedConcordances._url, concordances._url)
     const [concordance] = adjustedConcordances
-    assert.equal(concordance._provider, provider)
+    assert.equal(concordance._registry, provider)
   })
 
   it("should adjust registries as expected", () => {
