@@ -146,6 +146,9 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 #### `registry.setAuth`
 - [BaseProvider - setAuth](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth)
 
+#### `registry.setRetryConfig`
+- [BaseProvider - setRetryConfig](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
+
 #### `registry.setRegistries`
 - [SearchSuggestionProvider - setRegistries](https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#setRegistries)
 
