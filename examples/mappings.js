@@ -18,11 +18,11 @@
   const cancel = cdk.repeat({
     function: () => registry.getMappings(),
     interval: 3000,
-    callback: (mappings, error) => {
+    callback: (error, mappings, previousMappings) => {
       if (error) {
         console.error(error)
       } else {
-        console.log("- mappings changed:", mappings.length)
+        console.log("- mappings changed:", mappings.length, "previously:", previousMappings ? previousMappings.length : "?")
       }
     },
   })
