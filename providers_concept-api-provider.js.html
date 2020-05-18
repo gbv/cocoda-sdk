@@ -126,7 +126,7 @@ const errors = require("../errors")
 /**
  * JSKOS Concept API.
  *
- * This class provides access to concept schemes and their concepts via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/). 
+ * This class provides access to concept schemes and their concepts via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/).
  * See [jskos-server](https://github.com/gbv/jskos-server) for a JSKOS API reference implementation and [DANTE](https://api.dante.gbv.de/) for another API endpoint.
  *
  * To use it in a registry, specify as "ConceptApi":
@@ -154,6 +154,7 @@ class ConceptApiProvider extends BaseProvider {
     this.has.types = !!this.api.types
     this.has.suggest = !!this.api.suggest
     this.has.search = !!this.api.search
+    this.has.auth = _.get(this.config, "auth.key") != null
   }
 
   /**

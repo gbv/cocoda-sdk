@@ -266,7 +266,7 @@ class CocodaSDK {
    * ```js
    *  cdk.repeat({
    *    function: () => registry.getMappings(),
-   *    callback: (result) => console.log(result),
+   *    callback: (error, result) => console.log(result),
    *    limit: 3,
    *    offset: 3,
    *  })
@@ -275,7 +275,7 @@ class CocodaSDK {
    * @param {Object} config
    * @param {string} config.function a function to be called (can be async)
    * @param {number} [config.interval=15000] interval in ms
-   * @param {Function} config.callback callback function called with two parameters (result, error)
+   * @param {Function} config.callback callback function called with two parameters (error, result, previousResult)
    * @returns {Function} function to cancel the repeating request
    */
   repeat({ function: func, interval = 15000, callback } = {}) {
@@ -307,12 +307,12 @@ class CocodaSDK {
     // Functions to handle results and errors
     const handleResult = (result) => {
       if (!_.isEqual(repeat.result, result)) {
-        callback(result)
+        callback(null, result, repeat.result)
         repeat.result = result
       }
     }
     const handleError = (error) => {
-      callback(null, error)
+      callback(error)
     }
     // Call method once immediately
     asyncFunc()

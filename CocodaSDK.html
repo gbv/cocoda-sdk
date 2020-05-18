@@ -1586,7 +1586,7 @@
 <p>Example:</p>
 <pre class="prettyprint source lang-js"><code> cdk.repeat({
    function: () => registry.getMappings(),
-   callback: (result) => console.log(result),
+   callback: (error, result) => console.log(result),
    limit: 3,
    offset: 3,
  })
@@ -1770,7 +1770,7 @@
       </td>
   
 
-  <td class="description last"><p>callback function called with two parameters (result, error)</p></td>
+  <td class="description last"><p>callback function called with two parameters (error, result, previousResult)</p></td>
 </tr>
 
   
