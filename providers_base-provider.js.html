@@ -231,6 +231,9 @@ class BaseProvider {
     }
     this.config = {}
 
+    // Set default retry config
+    this.setRetryConfig()
+
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
       // Add language parameter to request
@@ -275,6 +278,30 @@ class BaseProvider {
 
       // TODO: Return data or whole response here?
       return data
+    }, error => {
+      const count = _.get(error, "config._retryCount", 0)
+      if (
+        this._retryConfig.methods.includes(error.config.method)
+        &amp;&amp; this._retryConfig.statusCodes.includes(error.response.status)
+        &amp;&amp; count &lt; this._retryConfig.count
+      ) {
+        error.config._retryCount = count + 1
+        // from: https://github.com/axios/axios/issues/934#issuecomment-531463172
+        if(error.config.data) error.config.data = JSON.parse(error.config.data)
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            this.axios(error.config).then(resolve).catch(reject)
+          }, (() => {
+            const delay = this._retryConfig.delay
+            if (typeof delay === "function") {
+              return delay(count)
+            }
+            return delay
+          })())
+        })
+      } else {
+        return Promise.reject(error)
+      }
     })
 
     for (let { method, type } of utils.requestMethods) {
@@ -421,6 +448,26 @@ class BaseProvider {
   setAuth({ key = this.auth.key, bearerToken = this.auth.bearerToken }) {
     this.auth.key = key
     this.auth.bearerToken = bearerToken
+  }
+
+  /**
+   * Sets retry configuration.
+   *
+   * @param {Object} config
+   * @param {string[]} [config.methods=["get", "head", "options"]] HTTP methods to retry (lowercase)
+   * @param {number[]} [config.statusCodes=[401, 403]] status codes to retry
+   * @param {number} [config.count=3] maximum number of retries
+   * @param {number|Function} [config.delay=300*count] a delay in ms or a function that takes the number of current retries and returns a delay in ms
+   */
+  setRetryConfig(config = {}) {
+    this._retryConfig = Object.assign({
+      methods: ["get", "head", "options"],
+      statusCodes: [401, 403],
+      count: 3,
+      delay: (count) => {
+        return 300 * count
+      },
+    }, config)
   }
 
   /**
