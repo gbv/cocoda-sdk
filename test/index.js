@@ -2,6 +2,9 @@ const assert = require("assert")
 const cdk = require("../")
 const CDK = require("../lib/CocodaSDK")
 
+// Import BaseProvider for subclassing
+const BaseProvider = require("../providers/base-provider")
+
 // axios mock
 const MockAdapter = require("axios-mock-adapter")
 const mock = new MockAdapter(cdk.axios)
@@ -141,6 +144,64 @@ describe("index", () => {
           done()
         }
       },
+    })
+  })
+
+  it("should load schemes properly", async () => {
+    const scheme1 = {
+      uri: "scheme1",
+    }
+    const scheme2 = {
+      uri: "scheme2",
+    }
+    const scheme1alt = {
+      uri: "scheme1",
+      test: 1,
+    }
+    class SchemeProvider1 extends BaseProvider {
+      constructor(registry) {
+        super(registry)
+        this.has.schemes = true
+      }
+      async getSchemes() {
+        return [scheme1, scheme2]
+      }
+    }
+    SchemeProvider1.providerName = "Scheme1"
+    class SchemeProvider2 extends BaseProvider {
+      constructor(registry) {
+        super(registry)
+        this.has.schemes = true
+      }
+      async getSchemes() {
+        return [scheme1alt]
+      }
+    }
+    SchemeProvider2.providerName = "Scheme2"
+    const cdk2 = cdk.createInstance()
+    cdk2.addProvider(SchemeProvider1)
+    cdk2.addProvider(SchemeProvider2)
+    cdk2.setConfig({
+      registries: [
+        {
+          provider: SchemeProvider2.providerName,
+        },
+        {
+          provider: SchemeProvider1.providerName,
+        },
+      ],
+    })
+    const schemes = await cdk2.getSchemes()
+    assert.equal(schemes.length, 2)
+    schemes.forEach(scheme => {
+      if (scheme.uri == "scheme1") {
+        // Expect scheme1 to be from SchemeProvider2
+        assert(scheme._registry instanceof SchemeProvider2)
+      }
+      if (scheme.uri == "scheme2") {
+        // Expect scheme2 to be from SchemeProvider1
+        assert(scheme._registry instanceof SchemeProvider1)
+      }
     })
   })
 

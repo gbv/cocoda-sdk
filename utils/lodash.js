@@ -15,6 +15,7 @@ module.exports = {
   isEqual: require("lodash/isEqual"),
   merge: require("lodash/merge"),
   last: require("lodash/last"),
+  omit: require("lodash/omit"),
   // TODO: Use native concat instead
   concat: require("lodash/concat"),
 }
