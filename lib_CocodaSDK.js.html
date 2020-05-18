@@ -133,6 +133,7 @@ class CocodaSDK {
    */
   constructor(config) {
     this.config = config
+    this.axios = axios.create()
   }
 
   /**
@@ -189,20 +190,20 @@ class CocodaSDK {
    * @param {string} url URL of config as JSON
    */
   async loadConfig(url) {
-    const response = await axios.get(url)
+    const response = await this.axios.get(url)
     this.config = response.data
   }
 
   /**
    * Method to load buildInfo.
    *
-   * Callback will only be called if buildInfo changes (note: even if it changes from `null`). An error will be added as a second parameter, in that case the first parameter will contain the previous buildInfo.
+   * Callback will only be called if buildInfo changes; it will not be called when there is no previous value.
    *
    * @param {Object} config
    * @param {string} [config.url] full URL for build-info.json (default is taken from config.cocodaBaseUrl)
    * @param {Object} [config.buildInfo] current buildInfo
    * @param {number} [config.interval=60000] interval to load buildInfo in ms
-   * @param {Function} config.callback callback function called with two parameters (buildInfo, error)
+   * @param {Function} config.callback callback function called with two parameters (error, buildInfo, previousBuildInfo)
    * @returns {Function} function to clear interval
    */
   loadBuildInfo({ url, buildInfo = null, interval = 60000, callback }) {
@@ -212,20 +213,19 @@ class CocodaSDK {
     if (!url) {
       url = `${this.config.cocodaBaseUrl}build-info.json`
     }
-    const timer = setInterval(async () => {
-      try {
-        const response = await axios.get(url)
-        if (!_.isEqual(buildInfo, response.data)) {
-          callback(response.data)
+    return this.repeat({
+      function: async () => {
+        return (await this.axios.get(url)).data
+      },
+      interval,
+      callback: (error, result, previousResult) => {
+        if (error) {
+          callback(error)
+        } else if (previousResult || (!previousResult &amp;&amp; buildInfo &amp;&amp; !_.isEqual(result, buildInfo))) {
+          callback(null, result, previousResult || buildInfo)
         }
-        buildInfo = response.data
-      } catch(error) {
-        callback(buildInfo, error)
-      }
-    }, interval)
-    return () => {
-      clearInterval(timer)
-    }
+      },
+    })
   }
 
   /**
