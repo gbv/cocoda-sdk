@@ -161,4 +161,76 @@ describe("BaseProvider", () => {
 
   // })
 
+  it("should retry axios requests", async () => {
+    provider.setRetryConfig({
+      delay: 5,
+    })
+    let requestCount = 0
+    mock.onGet("test").reply(() => {
+      requestCount += 1
+      return [requestCount == 1 ? 403 : 200]
+    })
+    await assert.doesNotReject(async () => {
+      await provider.axios({
+        method: "get",
+        url: "test",
+      })
+    })
+    assert(requestCount, 2)
+  })
+
+  it("should not retry axios requests indefinitely", async () => {
+    provider.setRetryConfig({
+      delay: 5,
+    })
+    let requestCount = 0
+    mock.onGet("test").reply(() => {
+      requestCount += 1
+      return [401]
+    })
+    await assert.rejects(async () => {
+      await provider.axios({
+        method: "get",
+        url: "test",
+      })
+    })
+    assert(requestCount, 3)
+  })
+
+  it("should not retry axios requests at all if count is set to 0", async () => {
+    provider.setRetryConfig({
+      count: 0,
+    })
+    let requestCount = 0
+    mock.onGet("test").reply(() => {
+      requestCount += 1
+      return [401]
+    })
+    await assert.rejects(async () => {
+      await provider.axios({
+        method: "get",
+        url: "test",
+      })
+    })
+    assert(requestCount, 1)
+  })
+
+  it("should not retry axios requests for POST requests", async () => {
+    provider.setRetryConfig({
+      count: 3,
+    })
+    let requestCount = 0
+    mock.onPost("test").reply(() => {
+      requestCount += 1
+      return [401]
+    })
+    await assert.rejects(async () => {
+      await provider.axios({
+        method: "post",
+        url: "test",
+      })
+    })
+    assert(requestCount, 1)
+  })
+
 })
