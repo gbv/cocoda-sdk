@@ -20,7 +20,7 @@
     "better-docs": {
       "name": "cocoda-sdk Documentation",
       "title": "cocoda-sdk",
-      "navigation": [
+      "navLinks": [
         {
             "label": "Github",
             "href": "https://github.com/gbv/cocoda-sdk"
