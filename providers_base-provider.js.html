@@ -501,8 +501,8 @@ class BaseProvider {
     concept._getDetails = (config) => {
       return this.getConcept({ ...config, concept })
     }
-    // Add _provider to concepts
-    concept._provider = this
+    // Add _registry to concepts
+    concept._registry = this
     return concept
   }
   adjustConcepts(concepts) {
@@ -525,8 +525,8 @@ class BaseProvider {
       scheme._getTypes = (config) => {
         return this.getTypes({ ...config, scheme })
       }
-      // Add _provider to schemes
-      scheme._provider = this
+      // Add _registry to schemes
+      scheme._registry = this
       // Add _suggest function to schemes
       scheme._suggest = ({ search, ...config }) => {
         return this.suggest({ ...config, search, scheme })
@@ -536,8 +536,8 @@ class BaseProvider {
   }
   adjustConcordances(concordances) {
     for (let concordance of concordances) {
-      // Add _provider to concordance
-      concordance._provider = this
+      // Add _registry to concordance
+      concordance._registry = this
     }
     return concordances
   }
@@ -550,7 +550,7 @@ class BaseProvider {
         mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]", null)
       }
     }
-    mapping._provider = this
+    mapping._registry = this
     if (!mapping.identifier) {
       // Add mapping identifiers for this mapping
       let identifier = _.get(jskos.addMappingIdentifiers(mapping), "identifier")

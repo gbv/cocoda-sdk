@@ -123,6 +123,7 @@
 const errors = require("../errors")
 const axios = require("axios")
 const _ = require("../utils/lodash")
+const jskos = require("jskos-tools")
 
 class CocodaSDK {
 
@@ -341,6 +342,93 @@ class CocodaSDK {
         }, interval)
       }
     }
+  }
+
+  /**
+   * Gets schemes from all registries that support schemes and merges the results.
+   *
+   * @param {Object} [config={}] configuration object that will be used as a parameter for internal `getSchemes` calls
+   * @returns {Object[]} array of JSKOS schemes
+   */
+  async getSchemes(config = {}) {
+    let schemes = [], promises = []
+
+    for (let registry of this.config.registries) {
+      if (registry.has.schemes) {
+        let promise = registry.getSchemes(config).then(results => {
+          for (let scheme of results) {
+            // Add scheme specific custom properties
+            scheme.__DETAILSLOADED__ = 1
+            scheme.type = scheme.type || ["http://www.w3.org/2004/02/skos/core#ConceptScheme"]
+            // Check if scheme is already loaded
+            let otherScheme = schemes.find(s => jskos.compare(s, scheme)), prio, otherPrio, override = false
+            if (otherScheme) {
+              // Set priorities as index of registry array
+              prio = this.config.registries.indexOf(registry)
+              if (prio != -1) {
+                prio = this.config.registries.length - prio
+              }
+              otherPrio = this.config.registries.indexOf(_.get(otherScheme, "_registry"))
+              if (otherPrio != -1) {
+                otherPrio = this.config.registries.length - otherPrio
+              }
+              let currentHasConcepts = !scheme.concepts ? 0 : (scheme.concepts.length == 0 ? -1 : 1)
+              let otherHasConcepts = !otherScheme.concepts ? 0 : (otherScheme.concepts.length == 0 ? -1 : 1)
+              // Use existence of concepts first, priority second
+              if (currentHasConcepts > otherHasConcepts) {
+                override = true
+              } else if (currentHasConcepts &lt; otherHasConcepts) {
+                override = false
+              } else {
+                override = otherPrio &lt; prio
+              }
+            }
+            if (!otherScheme || override) {
+              if (override) {
+                // Find and remove scheme from schemes array
+                let otherSchemeIndex = schemes.findIndex(s => jskos.compare(s, otherScheme))
+                if (otherSchemeIndex != -1) {
+                  schemes.splice(otherSchemeIndex, 1)
+                }
+                // Integrate details from existing scheme
+                scheme = jskos.merge(scheme, otherScheme, { mergeUris: true, skipPaths: ["_registry"] })
+              }
+              scheme._registry = registry
+              // Save scheme in objects and push into schemes array
+              schemes.push(scheme)
+            } else {
+              // Integrate details into existing scheme
+              let index = schemes.findIndex(s => jskos.compare(s, scheme))
+              if (index != -1) {
+                let registry = schemes[index]._registry
+                schemes[index] = jskos.merge(schemes[index], _.omit(scheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
+                schemes[index]._registry = registry
+              }
+            }
+          }
+        }).catch(error => {
+          // TODO
+          console.warn("Couldn't load schemes for registry", registry.uri, error)
+        })
+        promises.push(promise)
+      }
+    }
+
+    return Promise.all(promises).then(() => {
+      // Remove certain properties from objects
+      // ? Why?
+      for (let scheme of schemes) {
+        if (scheme.concepts &amp;&amp; scheme.concepts.length == 0) {
+          delete scheme.concepts
+        }
+        if (scheme.topConcepts &amp;&amp; scheme.topConcepts.length == 0) {
+          delete scheme.topConcepts
+        }
+      }
+      schemes = schemes.filter(scheme => scheme != null)
+      schemes = jskos.sortSchemes(schemes)
+      return schemes
+    })
   }
 
 }
