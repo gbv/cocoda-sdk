@@ -11,12 +11,15 @@ const uriPrefix = "urn:uuid:"
  *
  * This class provides read-write access to mappings in the browser's local storage.
  *
- * To use it in a registry, specify as "LocalMappings":
+ * To use it in a registry, specify `provider` as "LocalMappings":
  * ```json
  * {
+ *  "uri": "http://coli-conc.gbv.de/registry/local-mappings",
  *  "provider": "LocalMappings"
  * }
  * ```
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers

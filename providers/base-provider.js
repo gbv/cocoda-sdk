@@ -10,8 +10,9 @@ const errors = require("../errors")
  * Prefix all internal method and properties with underscore (e.g. `this._cache`)!
  *
  * Methods that can be overridden:
- * - Do not override the constructor! Use _setup instead.
- * - _setup: will be called after registry is initialized, should be used to set properties on this.has and custom preparations
+ * - Do not override the constructor! Use _prepare or _setup instead.
+ * - _prepare: will be called before the registry is initialized (i.e. it's `/status` endpoint is queries if necessasry)
+ * - _setup: will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations
  * - isAuthorizedFor: override if you want to customize
  * - supportsScheme: override if you want to customize
  * - setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter `registries`)
@@ -290,13 +291,19 @@ class BaseProvider {
       return this._init
     }
     this._init = (async () => {
+      // Call preparation method
+      this._prepare()
       let status
       if (_.isString(this.api.status)) {
         // Request status endpoint
-        status = await this.axios({
-          method: "get",
-          url: this.api.status,
-        })
+        try {
+          status = await this.axios({
+            method: "get",
+            url: this.api.status,
+          })
+        } catch(error) {
+          // Ignore error because we assumed the status endpoint was there when it wasn't.
+        }
       } else {
         // Assume object
         status = this.api.status
@@ -306,7 +313,7 @@ class BaseProvider {
         this.config = status.config || {}
         // Merge status result and existing API URLs
         for (let key of Object.keys(this.api)) {
-          if (status[key] && !this.api[key]) {
+          if (status[key] !== undefined) {
             this.api[key] = status[key]
           }
         }
@@ -315,6 +322,13 @@ class BaseProvider {
     })()
     return this._init
   }
+
+  /**
+   * Preparation to be executed before init. Should be overwritten by subclasses.
+   *
+   * @private
+   */
+  _prepare() {}
 
   /**
    * Setup to be executed after init. Should be overwritten by subclasses.

@@ -13,12 +13,17 @@ const errors = require("../errors")
  *
  * The provider requires that a list of registries with search endpoints is provided via `setRegistries`.
  *
- * To use it in a registry, specify as "SearchSuggestion":
+ * To use it in a registry, specify `provider` as "SearchSuggestion":
  * ```json
  * {
+ *  "uri": "http://coli-conc.gbv.de/registry/coli-conc-recommendations"
  *  "provider": "SearchSuggestion"
  * }
  * ```
+ *
+ * You can provide a list of excluded schemes as JSKOS objects in `excludedSchemes`.
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers

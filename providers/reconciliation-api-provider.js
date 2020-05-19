@@ -11,12 +11,23 @@ const errors = require("../errors")
  *
  * This class provides access to the [Reconciliation Service API](https://reconciliation-api.github.io/specs/).
  *
- * To use it in a registry, specify as "ReconciliationApi":
+ * To use it in a registry, specify `provider` as "ReconciliationApi", provide the API base URL as `api`, and the compatible scheme or schemes in `schemes`:
  * ```json
  * {
- *  "provider": "ReconciliationApi"
+ *  "uri": "http://coli-conc.gbv.de/registry/wikidata-reconciliation",
+ *  "provider": "ReconciliationApi",
+ *  "api": "https://tools.wmflabs.org/openrefine-wikidata/{language}/api",
+ *  "schemes": [
+ *    {
+ *      "uri": "http://bartoc.org/en/node/1940"
+ *    }
+ *  ],
  * }
  * ```
+ *
+ * The string `{language}` in `api` will be replaced with the queried language for the reconciliation request.
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers
@@ -67,7 +78,7 @@ class ReconciliationApiProvider extends BaseProvider {
     if (mode != "or") {
       return []
     }
-    if (!this.api.reconcile) {
+    if (!this.api.api) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept) {
@@ -164,7 +175,7 @@ class ReconciliationApiProvider extends BaseProvider {
       }
       index += 1
     }
-    let url = this.api.reconcile
+    let url = this.api.api
     if (language) {
       url = url.replace("{language}", language)
     }

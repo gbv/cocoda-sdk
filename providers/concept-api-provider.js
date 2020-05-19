@@ -1,6 +1,7 @@
 const BaseProvider = require("./base-provider")
 const _ = require("../utils/lodash")
 const errors = require("../errors")
+const utils = require("../utils")
 
 /**
  * JSKOS Concept API.
@@ -8,17 +9,52 @@ const errors = require("../errors")
  * This class provides access to concept schemes and their concepts via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/).
  * See [jskos-server](https://github.com/gbv/jskos-server) for a JSKOS API reference implementation and [DANTE](https://api.dante.gbv.de/) for another API endpoint.
  *
- * To use it in a registry, specify as "ConceptApi":
+ * To use it in a registry, specify `provider` as "ConceptApi" and provide the API base URL as `api`:
  * ```json
  * {
- *  "provider": "ConceptApi"
+ *  "uri": "http://coli-conc.gbv.de/registry/coli-conc-concepts",
+ *  "provider": "ConceptApi",
+ *  "api": "https://coli-conc.gbv.de/api/"
  * }
  * ```
+ *
+ * If the `/status` endpoint can be queried, the remaining API methods will be taken from that. As a fallback, the default endpoints will be appended to `api`.
+ *
+ * Alternatively, you can provide the endpoints separately: `status`, `schemes`, `top`, `concepts`, `data`, `narrower`, `ancestors`, `types`, `suggest`, `search`
+ * Note that `schemes`, `top`, and `types` can also be provided as arrays.
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers
  */
 class ConceptApiProvider extends BaseProvider {
+
+  /**
+   * @private
+   */
+  _prepare() {
+    // Fill `this.api` if necessary
+    if (this.api.api) {
+      const endpoints = {
+        status: "/status",
+        schemes: "/voc",
+        top: "/voc/top",
+        concepts: "/voc/concepts",
+        data: "/data",
+        narrower: "/narrower",
+        ancestors: "/ancestors",
+        types: "/types",
+        suggest: "/suggest",
+        search: "/search",
+      }
+      for (let key of Object.keys(endpoints)) {
+        if (!this.api[key]) {
+          this.api[key] = utils.concatUrl(this.api.api, endpoints[key])
+        }
+      }
+    }
+  }
 
   /**
    * @private

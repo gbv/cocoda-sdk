@@ -130,6 +130,21 @@ const requestMethods = [
   },
 ]
 
+function concatUrl(...parts) {
+  let [url, ...otherParts] = parts
+  for (let part of otherParts) {
+    if (!url.endsWith("/")) {
+      url += "/"
+    }
+    if (part.startsWith("/")) {
+      part = part.slice(1)
+    }
+    url += part
+  }
+  return url
+}
+
 module.exports = {
   requestMethods,
+  concatUrl,
 }
