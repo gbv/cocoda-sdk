@@ -183,6 +183,7 @@ class BaseProvider {
       }
     })
 
+    const currentRequests = []
     for (let { method, type } of utils.requestMethods) {
       // Make sure all methods exist, but thrown an error if they are not implemented
       const existingMethod = this[method] && this[method].bind(this)
@@ -195,6 +196,11 @@ class BaseProvider {
         if (options._raw) {
           delete options._raw
           return existingMethod(options)
+        }
+        // Return from existing requests if one exists
+        const existingRequest = currentRequests.find(r => r.method == method && _.isEqual(r.options, options))
+        if (existingRequest) {
+          return existingRequest.promise
         }
         // Add an axios cancel token to each request
         let source
@@ -249,6 +255,15 @@ class BaseProvider {
             return source.cancel()
           }
         }
+        // Save to list of existing requests
+        const request = {
+          method,
+          options: _.omit(options, ["cancelToken"]),
+          promise,
+        }
+        currentRequests.push(request)
+        // Remove from list of current requests after promise is done
+        promise.catch(() => {}).then(() => currentRequests.splice(currentRequests.indexOf(request), 1))
         // Add adjustment methods
         return promise
       }

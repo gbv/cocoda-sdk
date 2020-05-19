@@ -233,4 +233,31 @@ describe("BaseProvider", () => {
     assert(requestCount, 1)
   })
 
+  it("should not repeat the same axios request is one is already there", async () => {
+    class CustomProvider extends BaseProvider {
+      async getMappings() {
+        return this.axios({
+          method: "get",
+          url: "mappings",
+        })
+      }
+    }
+    const provider = new CustomProvider({})
+    const mock = new MockAdapter(provider.axios)
+    let mockCalled = 0
+    mock.onGet("mappings").reply(() => {
+      mockCalled += 1
+      return [200, []]
+    })
+    const promise1 = provider.getMappings()
+    const promise2 = provider.getMappings()
+    assert.equal(promise1, promise2)
+    await promise1
+    await promise2
+    assert.equal(mockCalled, 1, "axios request was performed twice even though it shouldn't")
+    // Now that the request is finished, do it again to make sure it made a new axios request
+    await provider.getMappings()
+    assert.equal(mockCalled, 2, "expected axios to perform a new request after other requests are finished")
+  })
+
 })
