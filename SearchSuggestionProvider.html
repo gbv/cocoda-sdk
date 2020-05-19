@@ -124,11 +124,14 @@
             <div class="class-description"><p>OpenSearch Search Suggestions.</p>
 <p>This class provides access to the <a href="https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki">OpenSearch Search Suggestions API</a></p>
 <p>The provider requires that a list of registries with search endpoints is provided via <code>setRegistries</code>.</p>
-<p>To use it in a registry, specify as &quot;SearchSuggestion&quot;:</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;SearchSuggestion&quot;:</p>
 <pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-recommendations&quot;
  &quot;provider&quot;: &quot;SearchSuggestion&quot;
 }
-</code></pre></div>
+</code></pre>
+<p>You can provide a list of excluded schemes as JSKOS objects in <code>excludedSchemes</code>.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
         
     
 </header>
@@ -208,7 +211,7 @@
         <p class="tag-source">
             <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line26">line 26</a>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line31">line 31</a>
             </span>
         </p>
     
@@ -427,7 +430,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line554">line 554</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line568">line 568</a>
             </span>
         </p>
     
@@ -529,7 +532,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line331">line 331</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line345">line 345</a>
             </span>
         </p>
     
@@ -762,7 +765,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line523">line 523</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line537">line 537</a>
             </span>
         </p>
     
@@ -1034,7 +1037,7 @@
         <p class="tag-source">
             <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line82">line 82</a>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line87">line 87</a>
             </span>
         </p>
     
@@ -1165,7 +1168,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line287">line 287</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line288">line 288</a>
             </span>
         </p>
     
@@ -1482,7 +1485,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line377">line 377</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line391">line 391</a>
             </span>
         </p>
     
@@ -1688,7 +1691,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line541">line 541</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line555">line 555</a>
             </span>
         </p>
     
@@ -1915,7 +1918,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line342">line 342</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
             </span>
         </p>
     
@@ -2063,7 +2066,7 @@
         <p class="tag-source">
             <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line41">line 41</a>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line46">line 46</a>
             </span>
         </p>
     
@@ -2394,7 +2397,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line370">line 370</a>
             </span>
         </p>
     
@@ -2547,7 +2550,7 @@
         <p class="tag-source">
             <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line67">line 67</a>
+                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line72">line 72</a>
             </span>
         </p>
     

@@ -130,13 +130,24 @@ const errors = require("../errors")
  * [Skosmos](http://skosmos.org/) is a web application to publish SKOS-based vocabularies.
  * This class provides access to a Skosmos instance via its REST API.
  *
- * To use it in a registry, specify as "SkosmosApi":
+ * To use it in a registry, specify `provider` as "SkosmosApi" and provide the API base URL as `api`:
  * ```json
  * {
- *  "provider": "SkosmosApi"
- *  "api": "http://base-url-of-skosmos-instance/rest/v1/"
+ *  "uri": "http://coli-conc.gbv.de/registry/skosmos-zbw",
+ *  "provider": "SkosmosApi",
+ *  "api": "https://zbw.eu/beta/skosmos/rest/v1/",
+ *  "schemes": [
+ *    {
+ *      "uri": "http://bartoc.org/en/node/313",
+ *      "VOCID": "stw"
+ *    }
+ *  ]
  * }
  * ```
+ *
+ * Currently, it is not possible to query a list of concept schemes from the API, so you need to provide this list including a `VOCID` for every scheme.
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers

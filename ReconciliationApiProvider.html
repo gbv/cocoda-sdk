@@ -123,11 +123,20 @@
         
             <div class="class-description"><p>Reconciliation Service API.</p>
 <p>This class provides access to the <a href="https://reconciliation-api.github.io/specs/">Reconciliation Service API</a>.</p>
-<p>To use it in a registry, specify as &quot;ReconciliationApi&quot;:</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;ReconciliationApi&quot;, provide the API base URL as <code>api</code>, and the compatible scheme or schemes in <code>schemes</code>:</p>
 <pre class="prettyprint source lang-json"><code>{
- &quot;provider&quot;: &quot;ReconciliationApi&quot;
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/wikidata-reconciliation&quot;,
+ &quot;provider&quot;: &quot;ReconciliationApi&quot;,
+ &quot;api&quot;: &quot;https://tools.wmflabs.org/openrefine-wikidata/{language}/api&quot;,
+ &quot;schemes&quot;: [
+   {
+     &quot;uri&quot;: &quot;http://bartoc.org/en/node/1940&quot;
+   }
+ ],
 }
-</code></pre></div>
+</code></pre>
+<p>The string <code>{language}</code> in <code>api</code> will be replaced with the queried language for the reconciliation request.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
         
     
 </header>
@@ -207,7 +216,7 @@
         <p class="tag-source">
             <a href="providers_reconciliation-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_reconciliation-api-provider.js.html">providers/reconciliation-api-provider.js</a>, <a href="providers_reconciliation-api-provider.js.html#line24">line 24</a>
+                <a href="providers_reconciliation-api-provider.js.html">providers/reconciliation-api-provider.js</a>, <a href="providers_reconciliation-api-provider.js.html#line35">line 35</a>
             </span>
         </p>
     
@@ -426,7 +435,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line554">line 554</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line568">line 568</a>
             </span>
         </p>
     
@@ -528,7 +537,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line331">line 331</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line345">line 345</a>
             </span>
         </p>
     
@@ -761,7 +770,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line523">line 523</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line537">line 537</a>
             </span>
         </p>
     
@@ -1010,7 +1019,7 @@
         <p class="tag-source">
             <a href="providers_reconciliation-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_reconciliation-api-provider.js.html">providers/reconciliation-api-provider.js</a>, <a href="providers_reconciliation-api-provider.js.html#line43">line 43</a>
+                <a href="providers_reconciliation-api-provider.js.html">providers/reconciliation-api-provider.js</a>, <a href="providers_reconciliation-api-provider.js.html#line54">line 54</a>
             </span>
         </p>
     
@@ -1141,7 +1150,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line287">line 287</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line288">line 288</a>
             </span>
         </p>
     
@@ -1458,7 +1467,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line377">line 377</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line391">line 391</a>
             </span>
         </p>
     
@@ -1664,7 +1673,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line541">line 541</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line555">line 555</a>
             </span>
         </p>
     
@@ -1891,7 +1900,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line342">line 342</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
             </span>
         </p>
     
@@ -2222,7 +2231,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line370">line 370</a>
             </span>
         </p>
     
@@ -2375,7 +2384,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line421">line 421</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line435">line 435</a>
             </span>
         </p>
     

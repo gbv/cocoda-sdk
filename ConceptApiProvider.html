@@ -124,11 +124,17 @@
             <div class="class-description"><p>JSKOS Concept API.</p>
 <p>This class provides access to concept schemes and their concepts via JSKOS API in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.
 See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS API reference implementation and <a href="https://api.dante.gbv.de/">DANTE</a> for another API endpoint.</p>
-<p>To use it in a registry, specify as &quot;ConceptApi&quot;:</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;ConceptApi&quot; and provide the API base URL as <code>api</code>:</p>
 <pre class="prettyprint source lang-json"><code>{
- &quot;provider&quot;: &quot;ConceptApi&quot;
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-concepts&quot;,
+ &quot;provider&quot;: &quot;ConceptApi&quot;,
+ &quot;api&quot;: &quot;https://coli-conc.gbv.de/api/&quot;
 }
-</code></pre></div>
+</code></pre>
+<p>If the <code>/status</code> endpoint can be queried, the remaining API methods will be taken from that. As a fallback, the default endpoints will be appended to <code>api</code>.</p>
+<p>Alternatively, you can provide the endpoints separately: <code>status</code>, <code>schemes</code>, <code>top</code>, <code>concepts</code>, <code>data</code>, <code>narrower</code>, <code>ancestors</code>, <code>types</code>, <code>suggest</code>, <code>search</code>
+Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can also be provided as arrays.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
         
     
 </header>
@@ -208,7 +214,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line21">line 21</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line31">line 31</a>
             </span>
         </p>
     
@@ -427,7 +433,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line554">line 554</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line568">line 568</a>
             </span>
         </p>
     
@@ -605,7 +611,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line154">line 154</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line190">line 190</a>
             </span>
         </p>
     
@@ -732,7 +738,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line331">line 331</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line345">line 345</a>
             </span>
         </p>
     
@@ -965,7 +971,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line523">line 523</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line537">line 537</a>
             </span>
         </p>
     
@@ -1168,7 +1174,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line100">line 100</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line136">line 136</a>
             </span>
         </p>
     
@@ -1371,7 +1377,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line127">line 127</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line163">line 163</a>
             </span>
         </p>
     
@@ -1548,7 +1554,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line45">line 45</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line81">line 81</a>
             </span>
         </p>
     
@@ -1751,7 +1757,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line70">line 70</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line106">line 106</a>
             </span>
         </p>
     
@@ -1974,7 +1980,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line229">line 229</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line265">line 265</a>
             </span>
         </p>
     
@@ -2105,7 +2111,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line287">line 287</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line288">line 288</a>
             </span>
         </p>
     
@@ -2422,7 +2428,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line377">line 377</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line391">line 391</a>
             </span>
         </p>
     
@@ -2628,7 +2634,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line541">line 541</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line555">line 555</a>
             </span>
         </p>
     
@@ -2754,7 +2760,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line218">line 218</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line254">line 254</a>
             </span>
         </p>
     
@@ -2956,7 +2962,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line342">line 342</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
             </span>
         </p>
     
@@ -3287,7 +3293,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line370">line 370</a>
             </span>
         </p>
     
@@ -3686,7 +3692,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line186">line 186</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line222">line 222</a>
             </span>
         </p>
     
@@ -3864,7 +3870,7 @@ See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS A
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line421">line 421</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line435">line 435</a>
             </span>
         </p>
     

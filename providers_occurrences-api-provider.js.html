@@ -123,20 +123,25 @@
 const jskos = require("jskos-tools")
 const _ = require("../utils/lodash")
 const errors = require("../errors")
+const utils = require("../utils")
+
+// TODO: Modernize.
 
 /**
  * JSKOS Occurrences API.
  *
- * This class provides access to concept occurrences via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/). 
+ * This class provides access to concept occurrences via JSKOS API in [JSKOS format](https://gbv.github.io/jskos/).
  *
- * TODO: Modernize.
- *
- * To use it in a registry, specify as "OccurrencesApi":
+ * To use it in a registry, specify `provider` as "OccurrencesApi" and provide the API base URL as `api`:
  * ```json
  * {
- *  "provider": "OccurrencesApi"
+ *  "uri": "http://coli-conc.gbv.de/registry/occurrences",
+ *  "provider": "OccurrencesApi",
+ *  "api": "https://coli-conc.gbv.de/occurrences/api/"
  * }
  * ```
+ *
+ * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
  * @category Providers
@@ -165,7 +170,7 @@ class OccurrencesApiProvider extends BaseProvider {
     } else {
       // Load supported schemes from API
       try {
-        const url = this.api.occurrences + "voc"
+        const url = utils.concatUrl(this.api.api, "voc")
         const data = await this.axios({
           method: "get",
           url,
@@ -277,7 +282,7 @@ class OccurrencesApiProvider extends BaseProvider {
     const data = await this.axios({
       ...config,
       method: "get",
-      url: this.api.occurrences,
+      url: this.api.api,
     })
     this._cache.push({
       config,

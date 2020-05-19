@@ -125,8 +125,9 @@
 <p>Prefix all internal method and properties with underscore (e.g. <code>this._cache</code>)!</p>
 <p>Methods that can be overridden:</p>
 <ul>
-<li>Do not override the constructor! Use _setup instead.</li>
-<li>_setup: will be called after registry is initialized, should be used to set properties on this.has and custom preparations</li>
+<li>Do not override the constructor! Use _prepare or _setup instead.</li>
+<li>_prepare: will be called before the registry is initialized (i.e. it's <code>/status</code> endpoint is queries if necessasry)</li>
+<li>_setup: will be called after registry is initialized (i.e. it's <code>/status</code> endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations</li>
 <li>isAuthorizedFor: override if you want to customize</li>
 <li>supportsScheme: override if you want to customize</li>
 <li>setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter <code>registries</code>)</li>
@@ -303,7 +304,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line69">line 69</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line70">line 70</a>
             </span>
         </p>
     
@@ -506,7 +507,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line554">line 554</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line568">line 568</a>
             </span>
         </p>
     
@@ -603,7 +604,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line331">line 331</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line345">line 345</a>
             </span>
         </p>
     
@@ -831,7 +832,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line523">line 523</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line537">line 537</a>
             </span>
         </p>
     
@@ -957,7 +958,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line287">line 287</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line288">line 288</a>
             </span>
         </p>
     
@@ -1269,7 +1270,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line377">line 377</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line391">line 391</a>
             </span>
         </p>
     
@@ -1470,7 +1471,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line541">line 541</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line555">line 555</a>
             </span>
         </p>
     
@@ -1692,7 +1693,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line342">line 342</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
             </span>
         </p>
     
@@ -2018,7 +2019,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line370">line 370</a>
             </span>
         </p>
     
@@ -2166,7 +2167,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line421">line 421</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line435">line 435</a>
             </span>
         </p>
     

@@ -211,6 +211,7 @@ const registry = cdk.getRegistryForUri(&quot;...&quot;)
 <li><code>OccurrencesApi</code> - access to concept occurrences via <a href="https://github.com/gbv/occurrences-api">occurrences-api</a> (will be changed to <a href="https://github.com/gbv/occurrences-server">occurrences-server</a> in the future)</li>
 <li><code>SearchSuggestion</code> - access to mapping suggestions using other registries' search endpoints (using <a href="https://github.com/gbv/jskos-server">jskos-server</a>)</li>
 </ul>
+<p>Please refer to each provider's documentation for how exactly to configure that provider: <a href="https://gbv.github.io/cocoda-sdk/">Documentation</a></p>
 <p>It is also possible to add custom providers that inherit from BaseProvider:</p>
 <pre class="prettyprint source lang-js"><code>const CustomProvider = require(&quot;CustomProvider&quot;)
 cdk.addProvider(CustomProvider)
