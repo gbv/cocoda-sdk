@@ -226,7 +226,6 @@ class ReconciliationApiProvider extends BaseProvider {
     // Prepare namespace
     let namespace = _.get(toScheme, "namespace", "")
     // Map results to actual mappings
-    console.log(JSON.stringify(results, null, 2))
     let mappings = results.map(result => ({
       fromScheme,
       from: { memberSet: [concept] },
