@@ -8,7 +8,7 @@ const cdk = require("../index")
  *  const cdk = await require("./cdk")
  * ```
  */
-module.exports = (async (url = "https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.dev.json") => {
+module.exports = (async (url = "https://coli-conc.gbv.de/cocoda/dev/cocoda.json") => {
   await cdk.loadConfig(url)
   return cdk
 })()
