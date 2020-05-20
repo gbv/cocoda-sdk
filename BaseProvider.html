@@ -157,6 +157,17 @@
 <li>patchAnnotation</li>
 <li>deleteAnnotation</li>
 </ul>
+<p>Internal (starting with underscore) and external properties that can be used:</p>
+<ul>
+<li><code>this.has</code>: an object of functionality of the registry (needs to be set by subclasses)</li>
+<li><code>this.languages</code>: an array of language tags provided by the user in order of priority</li>
+<li><code>this._jskos</code>: the raw JSKOS object used to initialize this registry</li>
+<li><code>this._path</code>: if available, the path of the current browser window</li>
+<li><code>this._defaultLanguages</code>: an array of default language tags</li>
+<li><code>this._auth</code>: authentication key and token</li>
+<li><code>this._api</code>: object of API endpoints for the registry</li>
+<li><code>this._config</code>: configuration of the registry as provided by the <code>/status</code> endpoint if available</li>
+</ul>
 <p>All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
 Example:</p>
 <pre class="prettyprint source lang-js"><code> getConcept({ concept, ...config }) {
@@ -304,7 +315,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line70">line 70</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line80">line 80</a>
             </span>
         </p>
     
@@ -350,6 +361,171 @@ Example:</p>
 
     
 
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line94">line 94</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line101">line 101</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -507,7 +683,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line568">line 568</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line585">line 585</a>
             </span>
         </p>
     
@@ -604,7 +780,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line345">line 345</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line362">line 362</a>
             </span>
         </p>
     
@@ -832,7 +1008,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line537">line 537</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line554">line 554</a>
             </span>
         </p>
     
@@ -958,7 +1134,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line288">line 288</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line305">line 305</a>
             </span>
         </p>
     
@@ -1270,7 +1446,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line391">line 391</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line408">line 408</a>
             </span>
         </p>
     
@@ -1471,7 +1647,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line555">line 555</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line572">line 572</a>
             </span>
         </p>
     
@@ -1693,7 +1869,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line356">line 356</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line373">line 373</a>
             </span>
         </p>
     
@@ -2019,7 +2195,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line370">line 370</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line387">line 387</a>
             </span>
         </p>
     
@@ -2167,7 +2343,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line435">line 435</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line452">line 452</a>
             </span>
         </p>
     

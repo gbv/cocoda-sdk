@@ -170,7 +170,7 @@ class OccurrencesApiProvider extends BaseProvider {
     } else {
       // Load supported schemes from API
       try {
-        const url = utils.concatUrl(this.api.api, "voc")
+        const url = utils.concatUrl(this._api.api, "voc")
         const data = await this.axios({
           method: "get",
           url,
@@ -282,7 +282,7 @@ class OccurrencesApiProvider extends BaseProvider {
     const data = await this.axios({
       ...config,
       method: "get",
-      url: this.api.api,
+      url: this._api.api,
     })
     this._cache.push({
       config,
