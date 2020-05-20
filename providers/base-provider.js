@@ -269,8 +269,8 @@ class BaseProvider {
           })
         // Attach cancel method to Promise
         if (source) {
-          promise.cancel = () => {
-            return source.cancel()
+          promise.cancel = (...args) => {
+            return source.cancel(...args)
           }
         }
         // Save to list of existing requests
