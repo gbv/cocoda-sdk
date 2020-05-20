@@ -73,6 +73,9 @@ class MappingsApiProvider extends BaseProvider {
       this.has.annotations.delete = !!_.get(this._config, "annotations.delete")
     }
     this.has.auth = _.get(this._config, "auth.key") != null
+    this._defaultParams = {
+      properties: "annotations",
+    }
   }
 
   /**
@@ -92,6 +95,10 @@ class MappingsApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       url: mapping.uri,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
     })
   }
 
@@ -149,7 +156,11 @@ class MappingsApiProvider extends BaseProvider {
       ...config,
       method: "get",
       url,
-      params,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+        ...params,
+      },
     })
   }
 
@@ -171,6 +182,10 @@ class MappingsApiProvider extends BaseProvider {
       method: "post",
       url: this._api.mappings,
       data: mapping,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
     })
   }
 
@@ -196,6 +211,10 @@ class MappingsApiProvider extends BaseProvider {
       method: "put",
       url: uri,
       data: mapping,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
     })
   }
 
@@ -221,6 +240,10 @@ class MappingsApiProvider extends BaseProvider {
       method: "patch",
       url: uri,
       data: mapping,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
     })
   }
 
