@@ -34,8 +34,8 @@ class ConceptApiProvider extends BaseProvider {
    * @private
    */
   _prepare() {
-    // Fill `this.api` if necessary
-    if (this.api.api) {
+    // Fill `this._api` if necessary
+    if (this._api.api) {
       const endpoints = {
         status: "/status",
         schemes: "/voc",
@@ -49,8 +49,8 @@ class ConceptApiProvider extends BaseProvider {
         search: "/search",
       }
       for (let key of Object.keys(endpoints)) {
-        if (!this.api[key]) {
-          this.api[key] = utils.concatUrl(this.api.api, endpoints[key])
+        if (!this._api[key]) {
+          this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
         }
       }
     }
@@ -60,16 +60,16 @@ class ConceptApiProvider extends BaseProvider {
    * @private
    */
   _setup() {
-    this.has.schemes = !!this.api.schemes
-    this.has.top = !!this.api.top
-    this.has.data = !!this.api.data
-    this.has.concepts = !!this.api.concepts || this.has.data
-    this.has.narrower = !!this.api.narrower
-    this.has.ancestors = !!this.api.ancestors
-    this.has.types = !!this.api.types
-    this.has.suggest = !!this.api.suggest
-    this.has.search = !!this.api.search
-    this.has.auth = _.get(this.config, "auth.key") != null
+    this.has.schemes = !!this._api.schemes
+    this.has.top = !!this._api.top
+    this.has.data = !!this._api.data
+    this.has.concepts = !!this._api.concepts || this.has.data
+    this.has.narrower = !!this._api.narrower
+    this.has.ancestors = !!this._api.ancestors
+    this.has.types = !!this._api.types
+    this.has.suggest = !!this._api.suggest
+    this.has.search = !!this._api.search
+    this.has.auth = _.get(this._config, "auth.key") != null
   }
 
   /**
@@ -79,11 +79,11 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
   async getSchemes(config) {
-    if (!this.api.schemes) {
+    if (!this._api.schemes) {
       throw new errors.MissingApiUrlError()
     }
-    if (Array.isArray(this.api.schemes)) {
-      return this.api.schemes
+    if (Array.isArray(this._api.schemes)) {
+      return this._api.schemes
     }
     // ? Should we really do it this way?
     if (!_.get(config, "params.limit")) {
@@ -92,7 +92,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.schemes,
+      url: this._api.schemes,
     })
   }
 
@@ -104,14 +104,14 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getTop({ scheme, ...config }) {
-    if (!this.api.top) {
+    if (!this._api.top) {
       throw new errors.MissingApiUrlError()
     }
     if (!scheme) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
-    if (Array.isArray(this.api.top)) {
-      return this.api.top
+    if (Array.isArray(this._api.top)) {
+      return this._api.top
     }
     _.set(config, "params.uri", scheme.uri)
     // ? Should we really do it this way?
@@ -122,7 +122,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.top,
+      url: this._api.top,
     })
   }
 
@@ -149,7 +149,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.data,
+      url: this._api.data,
     })
   }
 
@@ -161,7 +161,7 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getNarrower({ concept, ...config }) {
-    if (!this.api.narrower) {
+    if (!this._api.narrower) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
@@ -176,7 +176,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.narrower,
+      url: this._api.narrower,
     })
   }
 
@@ -188,7 +188,7 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getAncestors({ concept, ...config }) {
-    if (!this.api.ancestors) {
+    if (!this._api.ancestors) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept || !concept.uri) {
@@ -203,7 +203,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.ancestors,
+      url: this._api.ancestors,
     })
   }
 
@@ -220,7 +220,7 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Array} result in OpenSearch Suggest Format
    */
   async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
-    if (!this.api.suggest) {
+    if (!this._api.suggest) {
       throw new errors.MissingApiUrlError()
     }
     if (!search) {
@@ -228,7 +228,7 @@ class ConceptApiProvider extends BaseProvider {
     }
     limit = limit || this._jskos.suggestResultLimit || 100
     // Some registries use URL templates with {searchTerms}
-    let url = this.api.suggest.replace("{searchTerms}", search)
+    let url = this._api.suggest.replace("{searchTerms}", search)
     return this.axios({
       ...config,
       params: {
@@ -263,11 +263,11 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS type objects
    */
   async getTypes({ scheme, ...config }) {
-    if (!this.api.types) {
+    if (!this._api.types) {
       throw new errors.MissingApiUrlError()
     }
-    if (Array.isArray(this.api.types)) {
-      return this.api.types
+    if (Array.isArray(this._api.types)) {
+      return this._api.types
     }
     if (scheme && scheme.uri) {
       _.set(config, "params.uri", scheme.uri)
@@ -275,7 +275,7 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this.api.types,
+      url: this._api.types,
     })
   }
 

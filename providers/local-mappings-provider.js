@@ -37,7 +37,7 @@ class LocalMappingsProvider extends BaseProvider {
       delete: true,
     }
     this.queue = []
-    this.localStorageKey = "cocoda-mappings--" + this.path
+    this.localStorageKey = "cocoda-mappings--" + this._path
     let oldLocalStorageKey = "mappings"
     // Function that adds URIs to all existing local mappings that don't yet have one
     let addUris = () => {

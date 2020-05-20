@@ -78,7 +78,7 @@ class ReconciliationApiProvider extends BaseProvider {
     if (mode != "or") {
       return []
     }
-    if (!this.api.api) {
+    if (!this._api.api) {
       throw new errors.MissingApiUrlError()
     }
     if (!concept) {
@@ -175,7 +175,7 @@ class ReconciliationApiProvider extends BaseProvider {
       }
       index += 1
     }
-    let url = this.api.api
+    let url = this._api.api
     if (language) {
       url = url.replace("{language}", language)
     }

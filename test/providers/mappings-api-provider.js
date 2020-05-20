@@ -26,7 +26,7 @@ describe("MappingsApiProvider", () => {
     mock.onGet(api.status).reply(200, api)
     await registry.init()
     Object.keys(api).forEach(key => {
-      assert.equal(registry.api[key], api[key])
+      assert.equal(registry._api[key], api[key])
     })
   })
 

@@ -42,6 +42,16 @@ const errors = require("../errors")
  * - patchAnnotation
  * - deleteAnnotation
  *
+ * Internal (starting with underscore) and external properties that can be used:
+ * - `this.has`: an object of functionality of the registry (needs to be set by subclasses)
+ * - `this.languages`: an array of language tags provided by the user in order of priority
+ * - `this._jskos`: the raw JSKOS object used to initialize this registry
+ * - `this._path`: if available, the path of the current browser window
+ * - `this._defaultLanguages`: an array of default language tags
+ * - `this._auth`: authentication key and token
+ * - `this._api`: object of API endpoints for the registry
+ * - `this._config`: configuration of the registry as provided by the `/status` endpoint if available
+ *
  * All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
  * Example:
  * ```js
@@ -75,15 +85,22 @@ class BaseProvider {
       timeout: 5000,
     })
     // Path is used for https check and local mappings
-    this.path = typeof window !== "undefined" && window.location.pathname
-    // Create a dictionary with functionality of registry (defined in subclasses)
+    this._path = typeof window !== "undefined" && window.location.pathname
+    /**
+     * A dictionary with functionality of the registry (e.g. `registry.has.schemes`).
+     * @type {Object}
+     * @readonly
+     */
     this.has = {}
     // Set default language priority list
-    this.defaultLanguages = "en,de,fr,es,nl,it,fi,pl,ru,cs,jp".split(",")
-    // This can be set from the outside
+    this._defaultLanguages = "en,de,fr,es,nl,it,fi,pl,ru,cs,jp".split(",")
+    /**
+     * A list of RFC 3066 language tags in lowercase in order of priority.
+     * @type {string[]}
+     */
     this.languages = []
     // Set auth details to null
-    this.auth = {
+    this._auth = {
       key: null,
       bearerToken: null,
     }
@@ -91,7 +108,7 @@ class BaseProvider {
     this._repeating = []
 
     // Set API URLs from registry object
-    this.api = {
+    this._api = {
       status: registry.status,
       schemes: registry.schemes,
       top: registry.top,
@@ -109,7 +126,7 @@ class BaseProvider {
       reconcile: registry.reconcile,
       api: registry.api,
     }
-    this.config = {}
+    this._config = {}
 
     // Set default retry config
     this.setRetryConfig()
@@ -117,11 +134,11 @@ class BaseProvider {
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
       // Add language parameter to request
-      const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this.defaultLanguages).filter(lang => lang != "")).join(",")
+      const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this._defaultLanguages).filter(lang => lang != "")).join(",")
       _.set(config, "params.language", language)
       // Set auth
-      if (this.has.auth && this.auth.bearerToken && !_.get(config, "headers.Authorization")) {
-        _.set(config, "headers.Authorization", `Bearer ${this.auth.bearerToken}`)
+      if (this.has.auth && this._auth.bearerToken && !_.get(config, "headers.Authorization")) {
+        _.set(config, "headers.Authorization", `Bearer ${this._auth.bearerToken}`)
       }
 
       // Don't perform http requests if site is used via https
@@ -294,27 +311,27 @@ class BaseProvider {
       // Call preparation method
       this._prepare()
       let status
-      if (_.isString(this.api.status)) {
+      if (_.isString(this._api.status)) {
         // Request status endpoint
         try {
           status = await this.axios({
             method: "get",
-            url: this.api.status,
+            url: this._api.status,
           })
         } catch(error) {
           // Ignore error because we assumed the status endpoint was there when it wasn't.
         }
       } else {
         // Assume object
-        status = this.api.status
+        status = this._api.status
       }
       if (_.isObject(status) && !_.isEmpty(status)) {
         // Set config
-        this.config = status.config || {}
+        this._config = status.config || {}
         // Merge status result and existing API URLs
-        for (let key of Object.keys(this.api)) {
+        for (let key of Object.keys(this._api)) {
           if (status[key] !== undefined) {
-            this.api[key] = status[key]
+            this._api[key] = status[key]
           }
         }
       }
@@ -353,9 +370,9 @@ class BaseProvider {
    * @param {string} options.key public key of login-server instance the user is authorized for
    * @param {string} options.bearerToken token that is sent with each request
    */
-  setAuth({ key = this.auth.key, bearerToken = this.auth.bearerToken }) {
-    this.auth.key = key
-    this.auth.bearerToken = bearerToken
+  setAuth({ key = this._auth.key, bearerToken = this._auth.bearerToken }) {
+    this._auth.key = key
+    this._auth.bearerToken = bearerToken
   }
 
   /**
@@ -395,15 +412,15 @@ class BaseProvider {
     if (!this.has[type]) {
       return false
     }
-    const options = _.get(this.config, `${type}.${action}`)
+    const options = _.get(this._config, `${type}.${action}`)
     if (!options) {
       return !!this.has[type][action]
     }
-    if (options.auth && (!user || !this.auth.key)) {
+    if (options.auth && (!user || !this._auth.key)) {
       return false
     }
     // Public key mismatch
-    if (options.auth && this.auth.key != _.get(this.config, "auth.key")) {
+    if (options.auth && this._auth.key != _.get(this._config, "auth.key")) {
       return false
     }
     if (options.auth && options.identities) {
