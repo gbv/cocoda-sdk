@@ -1,7 +1,6 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("../utils/lodash")
-const qs = require("qs")
 const errors = require("../errors")
 
 // TODO: Document namespace etc.
@@ -179,20 +178,21 @@ class ReconciliationApiProvider extends BaseProvider {
     if (language) {
       url = url.replace("{language}", language)
     }
-    queries = JSON.stringify(queries)
+    // Encode data
+    const encodedData = `queries=${encodeURIComponent(JSON.stringify(queries))}`
     // Set appropriate header
     _.set(config, ["headers", "Content-Type"], "application/x-www-form-urlencoded")
     let data = await this.axios({
       ...config,
       url,
-      data: qs.stringify({ queries }),
+      data: encodedData,
     })
     data = data || {}
     let newCacheEntry = {
       labels,
       language,
       data,
-      url: `${url}${url.includes("?") ? "&" : "?"}${qs.stringify({ queries })}`,
+      url: `${url}${url.includes("?") ? "&" : "?"}${encodedData}`,
     }
     this._cache.push(newCacheEntry)
     // Make sure there are a maximum of 20 entries in cache
