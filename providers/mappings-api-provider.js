@@ -252,6 +252,7 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.mapping JSKOS mapping
+   * @returns {boolean} `true` if deletion was successful
    */
   async deleteMapping({ mapping, ...config }) {
     if (!mapping) {
@@ -261,11 +262,12 @@ class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    await this.axios({
       ...config,
       method: "delete",
       url: uri,
     })
+    return true
   }
 
   /**
@@ -347,17 +349,19 @@ class MappingsApiProvider extends BaseProvider {
    *
    * @param {Object} config
    * @param {Object} config.annotation JSKOS annotation
+   * @returns {boolean} `true` if deletion was successful
    */
   async deleteAnnotation({ annotation, ...config }) {
     const uri = annotation.id
     if (!uri || !uri.startsWith(this._api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    await this.axios({
       ...config,
       method: "delete",
       url: uri,
     })
+    return true
   }
 
   /**
