@@ -416,7 +416,7 @@ class BaseProvider {
   get definition() { return this._jskos.definition }
   get schemes() { return this._jskos.schemes }
   get excludedSchemes() { return this._jskos.excludedSchemes }
-  // TODO: stored, autoRefresh, suggestResultLimit, loadSchemeInfo, ...?
+  get stored() { return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored }
 
   /**
    * Load data about registry via the status endpoint.
