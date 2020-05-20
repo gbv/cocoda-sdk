@@ -24,7 +24,7 @@ for (let provider of [
   require("./occurrences-api-provider"),
   require("./concept-api-provider"),
   require("./reconciliation-api-provider"),
-  require("./search-suggestion-provider"),
+  require("./label-search-suggestion-provider"),
   require("./skosmos-api-provider"),
 ]) {
   providers.addProvider(provider)

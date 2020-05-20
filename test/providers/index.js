@@ -15,7 +15,7 @@ describe("providers", () => {
       "MappingsApi",
       "OccurrencesApi",
       "ReconciliationApi",
-      "SearchSuggestion",
+      "LabelSearchSuggestion",
       "SkosmosApi",
     ]
     for (let name of defaultProviderNames) {

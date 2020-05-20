@@ -105,7 +105,7 @@ The following providers are offered in `cocoda-sdk` by default:
 - `SkosmosApi` - access to concept schemes and concepts via a [Skosmos](https://github.com/NatLibFi/Skosmos) API
 - `ReconciliationApi` - access to mapping suggestions via a [OpenRefine Reconciliation API](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API)
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
-- `SearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
+- `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
 
 Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
 
@@ -143,7 +143,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 
 #### `registry.supportsScheme`
 - [BaseProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme)
-- [SearchSuggestionProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#supportsScheme)
+- [LabelSearchSuggestionProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme)
 
 #### `registry.setAuth`
 - [BaseProvider - setAuth](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth)
@@ -152,7 +152,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [BaseProvider - setRetryConfig](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
 
 #### `registry.setRegistries`
-- [SearchSuggestionProvider - setRegistries](https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#setRegistries)
+- [LabelSearchSuggestionProvider - setRegistries](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#setRegistries)
 
 #### `registry.getCancelTokenSource`
 - [BaseProvider - getCancelTokenSource](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
@@ -197,7 +197,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [MappingsApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMappings)
 - [LocalMappingsProvider - getMappings](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMappings)
 - [ReconciliationApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/ReconciliationApiProvider.html#getMappings)
-- [SearchSuggestionProvider - getMappings](https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#getMappings)
+- [LabelSearchSuggestionProvider - getMappings](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#getMappings)
 
 #### `registry.getMapping`
 - [MappingsApiProvider - getMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMapping)

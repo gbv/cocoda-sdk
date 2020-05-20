@@ -7,17 +7,17 @@ const errors = require("../errors")
 // TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.
 
 /**
- * OpenSearch Search Suggestions.
+ * Label search suggestion provider.
  *
- * This class provides access to the [OpenSearch Search Suggestions API](https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki)
+ * This provider offers mapping recommendations based on label match via the `/search` endpoint of JSKOS APIs.
  *
- * The provider requires that a list of registries with search endpoints is provided via `setRegistries`.
+ * The provider requires that a list of initialized registries with search endpoints is provided via `setRegistries`. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.
  *
- * To use it in a registry, specify `provider` as "SearchSuggestion":
+ * To use it in a registry, specify `provider` as "LabelSearchSuggestion":
  * ```json
  * {
  *  "uri": "http://coli-conc.gbv.de/registry/coli-conc-recommendations"
- *  "provider": "SearchSuggestion"
+ *  "provider": "LabelSearchSuggestion"
  * }
  * ```
  *
@@ -28,7 +28,7 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class SearchSuggestionProvider extends BaseProvider {
+class LabelSearchSuggestionProvider extends BaseProvider {
 
   /**
    * @private
@@ -55,7 +55,7 @@ class SearchSuggestionProvider extends BaseProvider {
   get _searchUris() {
     const _searchUris = {}
     for (let registry of this._registries) {
-      const search = _.get(registry, "api.search") || _.get(registry, "_jskos.search") || registry.search
+      const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
       if (search && _.isString(search)) {
         _searchUris[registry.uri] = search
       }
@@ -193,7 +193,7 @@ class SearchSuggestionProvider extends BaseProvider {
 
 }
 
-SearchSuggestionProvider.providerName = "SearchSuggestion"
-SearchSuggestionProvider.stored = false
+LabelSearchSuggestionProvider.providerName = "LabelSearchSuggestion"
+LabelSearchSuggestionProvider.stored = false
 
-module.exports = SearchSuggestionProvider
+module.exports = LabelSearchSuggestionProvider
