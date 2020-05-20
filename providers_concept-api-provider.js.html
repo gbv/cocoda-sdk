@@ -191,6 +191,9 @@ class ConceptApiProvider extends BaseProvider {
     this.has.suggest = !!this._api.suggest
     this.has.search = !!this._api.search
     this.has.auth = _.get(this._config, "auth.key") != null
+    this._defaultParams = {
+      properties: "uri,prefLabel,notation,inScheme",
+    }
   }
 
   /**
@@ -206,14 +209,16 @@ class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.schemes)) {
       return this._api.schemes
     }
-    // ? Should we really do it this way?
-    if (!_.get(config, "params.limit")) {
-      _.set(config, "params.limit", 500)
-    }
     return this.axios({
       ...config,
       method: "get",
       url: this._api.schemes,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 500,
+        ...(config.params || {}),
+      },
     })
   }
 
@@ -234,16 +239,17 @@ class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.top)) {
       return this._api.top
     }
-    _.set(config, "params.uri", scheme.uri)
-    // ? Should we really do it this way?
-    if (!_.get(config, "params.limit")) {
-      _.set(config, "params.limit", 10000)
-    }
-    // ? Properties
     return this.axios({
       ...config,
       method: "get",
       url: this._api.top,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 10000,
+        ...(config.params || {}),
+        uri: scheme.uri,
+      },
     })
   }
 
@@ -265,12 +271,17 @@ class ConceptApiProvider extends BaseProvider {
       concepts = [concepts]
     }
     let uris = concepts.map(concept => concept.uri).filter(uri => uri != null)
-    _.set(config, "params.uri", uris.join("|"))
-    // ? Properties
     return this.axios({
       ...config,
       method: "get",
       url: this._api.data,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 500,
+        ...(config.params || {}),
+        uri: uris.join("|"),
+      },
     })
   }
 
@@ -288,16 +299,17 @@ class ConceptApiProvider extends BaseProvider {
     if (!concept || !concept.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
-    _.set(config, "params.uri", concept.uri)
-    // ? Properties
-    // ? Should we really do it this way?
-    if (!_.get(config, "params.limit")) {
-      _.set(config, "params.limit", 10000)
-    }
     return this.axios({
       ...config,
       method: "get",
       url: this._api.narrower,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 10000,
+        ...(config.params || {}),
+        uri: concept.uri,
+      },
     })
   }
 
@@ -315,16 +327,17 @@ class ConceptApiProvider extends BaseProvider {
     if (!concept || !concept.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
-    _.set(config, "params.uri", concept.uri)
-    // ? Properties
-    // ? Should we really do it this way?
-    if (!_.get(config, "params.limit")) {
-      _.set(config, "params.limit", 10000)
-    }
     return this.axios({
       ...config,
       method: "get",
       url: this._api.ancestors,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 10000,
+        ...(config.params || {}),
+        uri: concept.uri,
+      },
     })
   }
 
@@ -353,14 +366,13 @@ class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       params: {
-        ...{
-          voc: _.get(scheme, "uri", ""),
-          limit: limit,
-          count: limit, // Some endpoints use count instead of limit
-          use,
-          type: types.join("|"),
-          sort,
-        },
+        ...this._defaultParams,
+        voc: _.get(scheme, "uri", ""),
+        limit: limit,
+        count: limit, // Some endpoints use count instead of limit
+        use,
+        type: types.join("|"),
+        sort,
         ...config.params,
         search,
       },
