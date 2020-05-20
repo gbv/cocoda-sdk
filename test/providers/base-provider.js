@@ -260,4 +260,18 @@ describe("BaseProvider", () => {
     assert.equal(mockCalled, 2, "expected axios to perform a new request after other requests are finished")
   })
 
+  it("should properly handle `stored` property", () => {
+    let provider
+
+    provider = new BaseProvider()
+    assert.equal(provider.stored, undefined)
+
+    BaseProvider.stored = true
+    provider = new BaseProvider()
+    assert.equal(provider.stored, true)
+
+    provider = new BaseProvider({ stored: false })
+    assert.equal(provider.stored, false)
+  })
+
 })
