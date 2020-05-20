@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cocoda-sdk SearchSuggestionProvider</title>
+  <title>cocoda-sdk LabelSearchSuggestionProvider</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -100,7 +100,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LabelSearchSuggestionProvider.html">LabelSearchSuggestionProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -108,7 +108,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>SearchSuggestionProvider</h1>
+                    <h1>LabelSearchSuggestionProvider</h1>
                 </header>
                 
 
@@ -119,15 +119,15 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>LabelSearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>OpenSearch Search Suggestions.</p>
-<p>This class provides access to the <a href="https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki">OpenSearch Search Suggestions API</a></p>
-<p>The provider requires that a list of registries with search endpoints is provided via <code>setRegistries</code>.</p>
-<p>To use it in a registry, specify <code>provider</code> as &quot;SearchSuggestion&quot;:</p>
+            <div class="class-description"><p>Label search suggestion provider.</p>
+<p>This provider offers mapping recommendations based on label match via the <code>/search</code> endpoint of JSKOS APIs.</p>
+<p>The provider requires that a list of initialized registries with search endpoints is provided via <code>setRegistries</code>. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;LabelSearchSuggestion&quot;:</p>
 <pre class="prettyprint source lang-json"><code>{
  &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-recommendations&quot;
- &quot;provider&quot;: &quot;SearchSuggestion&quot;
+ &quot;provider&quot;: &quot;LabelSearchSuggestion&quot;
 }
 </code></pre>
 <p>You can provide a list of excluded schemes as JSKOS objects in <code>excludedSchemes</code>.</p>
@@ -150,12 +150,12 @@
 
 
     
-    <h4 class="name" id="SearchSuggestionProvider">
-        <a class="href-link" href="#SearchSuggestionProvider">#</a>
+    <h4 class="name" id="LabelSearchSuggestionProvider">
+        <a class="href-link" href="#LabelSearchSuggestionProvider">#</a>
         
         <span class="code-name">
             
-                new SearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span>
+                new LabelSearchSuggestionProvider<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -209,9 +209,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line31">line 31</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line31">line 31</a>
             </span>
         </p>
     
@@ -1210,9 +1210,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line87">line 87</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line87">line 87</a>
             </span>
         </p>
     
@@ -2239,9 +2239,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line46">line 46</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line46">line 46</a>
             </span>
         </p>
     
@@ -2723,9 +2723,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_search-suggestion-provider.js.html" class="button">View Source</a>
+            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_search-suggestion-provider.js.html">providers/search-suggestion-provider.js</a>, <a href="providers_search-suggestion-provider.js.html#line72">line 72</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line72">line 72</a>
             </span>
         </p>
     

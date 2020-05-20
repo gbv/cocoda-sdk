@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cocoda-sdk providers/search-suggestion-provider.js</title>
+  <title>cocoda-sdk providers/label-search-suggestion-provider.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -102,7 +102,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LabelSearchSuggestionProvider.html">LabelSearchSuggestionProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -110,7 +110,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>providers/search-suggestion-provider.js</h1>
+                    <h1>providers/label-search-suggestion-provider.js</h1>
                 </header>
                 
 
@@ -128,17 +128,17 @@ const errors = require("../errors")
 // TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.
 
 /**
- * OpenSearch Search Suggestions.
+ * Label search suggestion provider.
  *
- * This class provides access to the [OpenSearch Search Suggestions API](https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki)
+ * This provider offers mapping recommendations based on label match via the `/search` endpoint of JSKOS APIs.
  *
- * The provider requires that a list of registries with search endpoints is provided via `setRegistries`.
+ * The provider requires that a list of initialized registries with search endpoints is provided via `setRegistries`. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.
  *
- * To use it in a registry, specify `provider` as "SearchSuggestion":
+ * To use it in a registry, specify `provider` as "LabelSearchSuggestion":
  * ```json
  * {
  *  "uri": "http://coli-conc.gbv.de/registry/coli-conc-recommendations"
- *  "provider": "SearchSuggestion"
+ *  "provider": "LabelSearchSuggestion"
  * }
  * ```
  *
@@ -149,7 +149,7 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class SearchSuggestionProvider extends BaseProvider {
+class LabelSearchSuggestionProvider extends BaseProvider {
 
   /**
    * @private
@@ -176,7 +176,7 @@ class SearchSuggestionProvider extends BaseProvider {
   get _searchUris() {
     const _searchUris = {}
     for (let registry of this._registries) {
-      const search = _.get(registry, "api.search") || _.get(registry, "_jskos.search") || registry.search
+      const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
       if (search &amp;&amp; _.isString(search)) {
         _searchUris[registry.uri] = search
       }
@@ -314,10 +314,10 @@ class SearchSuggestionProvider extends BaseProvider {
 
 }
 
-SearchSuggestionProvider.providerName = "SearchSuggestion"
-SearchSuggestionProvider.stored = false
+LabelSearchSuggestionProvider.providerName = "LabelSearchSuggestion"
+LabelSearchSuggestionProvider.stored = false
 
-module.exports = SearchSuggestionProvider
+module.exports = LabelSearchSuggestionProvider
 </code></pre>
         </article>
     </section>

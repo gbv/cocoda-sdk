@@ -100,7 +100,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SearchSuggestionProvider.html">SearchSuggestionProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LabelSearchSuggestionProvider.html">LabelSearchSuggestionProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
                 
             </nav>
         </div>
@@ -209,7 +209,7 @@ const registry = cdk.getRegistryForUri(&quot;...&quot;)
 <li><code>SkosmosApi</code> - access to concept schemes and concepts via a <a href="https://github.com/NatLibFi/Skosmos">Skosmos</a> API</li>
 <li><code>ReconciliationApi</code> - access to mapping suggestions via a <a href="https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API">OpenRefine Reconciliation API</a></li>
 <li><code>OccurrencesApi</code> - access to concept occurrences via <a href="https://github.com/gbv/occurrences-api">occurrences-api</a> (will be changed to <a href="https://github.com/gbv/occurrences-server">occurrences-server</a> in the future)</li>
-<li><code>SearchSuggestion</code> - access to mapping suggestions using other registries' search endpoints (using <a href="https://github.com/gbv/jskos-server">jskos-server</a>)</li>
+<li><code>LabelSearchSuggestion</code> - access to mapping suggestions using other registries' search endpoints (using <a href="https://github.com/gbv/jskos-server">jskos-server</a>)</li>
 </ul>
 <p>Please refer to each provider's documentation for how exactly to configure that provider: <a href="https://gbv.github.io/cocoda-sdk/">Documentation</a></p>
 <p>It is also possible to add custom providers that inherit from BaseProvider:</p>
@@ -237,7 +237,7 @@ cdk.addProvider(CustomProvider)
 <h4><code>registry.supportsScheme</code></h4>
 <ul>
 <li><a href="https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme">BaseProvider - supportsScheme</a></li>
-<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#supportsScheme">SearchSuggestionProvider - supportsScheme</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme">LabelSearchSuggestionProvider - supportsScheme</a></li>
 </ul>
 <h4><code>registry.setAuth</code></h4>
 <ul>
@@ -249,7 +249,7 @@ cdk.addProvider(CustomProvider)
 </ul>
 <h4><code>registry.setRegistries</code></h4>
 <ul>
-<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#setRegistries">SearchSuggestionProvider - setRegistries</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#setRegistries">LabelSearchSuggestionProvider - setRegistries</a></li>
 </ul>
 <h4><code>registry.getCancelTokenSource</code></h4>
 <ul>
@@ -301,7 +301,7 @@ cdk.addProvider(CustomProvider)
 <li><a href="https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMappings">MappingsApiProvider - getMappings</a></li>
 <li><a href="https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMappings">LocalMappingsProvider - getMappings</a></li>
 <li><a href="https://gbv.github.io/cocoda-sdk/ReconciliationApiProvider.html#getMappings">ReconciliationApiProvider - getMappings</a></li>
-<li><a href="https://gbv.github.io/cocoda-sdk/SearchSuggestionProvider.html#getMappings">SearchSuggestionProvider - getMappings</a></li>
+<li><a href="https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#getMappings">LabelSearchSuggestionProvider - getMappings</a></li>
 </ul>
 <h4><code>registry.getMapping</code></h4>
 <ul>
