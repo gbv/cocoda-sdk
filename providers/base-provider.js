@@ -177,9 +177,11 @@ class BaseProvider {
       return data
     }, error => {
       const count = _.get(error, "config._retryCount", 0)
+      const method = _.get(error, "config.method")
+      const statusCode = _.get(error, "response.status")
       if (
-        this._retryConfig.methods.includes(error.config.method)
-        && this._retryConfig.statusCodes.includes(error.response.status)
+        this._retryConfig.methods.includes(method)
+        && this._retryConfig.statusCodes.includes(statusCode)
         && count < this._retryConfig.count
       ) {
         error.config._retryCount = count + 1
