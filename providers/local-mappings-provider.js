@@ -428,11 +428,12 @@ class LocalMappingsProvider extends BaseProvider {
       // Minify mappings before saving back to local storage
       localMappings = localMappings.map(mapping => jskos.minifyMapping(mapping))
       await localforage.setItem(this.localStorageKey, localMappings)
+      done()
+      return true
     } catch(error) {
       done()
       throw error
     }
-    return true
   }
 }
 
