@@ -91,7 +91,7 @@ class LocalMappingsProvider extends BaseProvider {
    *
    * @private
    */
-  _getMappingsQueue(...params) {
+  _getMappingsQueue() {
     let last = _.last(this.queue) || Promise.resolve()
     return new Promise((resolve) => {
       function defer() {
@@ -114,7 +114,7 @@ class LocalMappingsProvider extends BaseProvider {
       this.queue.push(promise)
 
       last.then(() => {
-        return this.getMappings(...params)
+        return localforage.getItem(this.localStorageKey)
       }).then(mappings => {
         resolve({ mappings, done })
       })
@@ -170,9 +170,10 @@ class LocalMappingsProvider extends BaseProvider {
     if (uri) {
       params.uri = uri
     }
-    return localforage.getItem(this.localStorageKey).then(mappings => mappings || []).catch(relatedError => {
+    return this._getMappingsQueue().catch(relatedError => {
       throw new errors.CDKError({ message: "Could not get mappings from local storage", relatedError })
-    }).then(mappings => {
+    }).then(({ mappings, done }) => {
+      done()
       // Check concept with param
       let checkConcept = (concept, param) => concept.uri == param || (param && concept.notation && concept.notation[0].toLowerCase() == param.toLowerCase())
       // Filter mappings according to params (support for from + to)
