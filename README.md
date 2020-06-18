@@ -198,6 +198,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [LocalMappingsProvider - getMappings](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMappings)
 - [ReconciliationApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/ReconciliationApiProvider.html#getMappings)
 - [LabelSearchSuggestionProvider - getMappings](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#getMappings)
+- [OccurrencesApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getMappings)
 
 #### `registry.getMapping`
 - [MappingsApiProvider - getMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMapping)

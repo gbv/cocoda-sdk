@@ -70,6 +70,52 @@ class OccurrencesApiProvider extends BaseProvider {
   }
 
   /**
+   * Wrapper around getOccurrences that converts occurrences into mappings.
+   *
+   * @param {Object} config config object for getOccurrences request
+   * @returns {Object[]} array of JSKOS mapping objects
+   */
+  async getMappings({ selected, ...config }) {
+    const occurrences = await this.getOccurrences(config)
+    const mappings = []
+    // Convert occurrences to mappings
+    for (let occurrence of occurrences) {
+      if (!occurrence) {
+        continue
+      }
+      let mapping = {}
+      mapping.from = _.get(occurrence, "memberSet[0]")
+      if (mapping.from) {
+        mapping.from = { memberSet: [mapping.from] }
+      } else {
+        mapping.from = null
+      }
+      mapping.fromScheme = _.get(occurrence, "memberSet[0].inScheme[0]")
+      mapping.to = _.get(occurrence, "memberSet[1]")
+      if (mapping.to) {
+        mapping.to = { memberSet: [mapping.to] }
+      } else {
+        mapping.to = { memberSet: [] }
+      }
+      mapping.toScheme = _.get(occurrence, "memberSet[1].inScheme[0]")
+      // TODO
+      if (selected) {
+        // Swap sides if necessary
+        if (!jskos.compare(mapping.fromScheme, selected.scheme[true]) && !jskos.compare(mapping.toScheme, selected.scheme[false])) {
+          [mapping.from, mapping.fromScheme, mapping.to, mapping.toScheme] = [mapping.to, mapping.toScheme, mapping.from, mapping.fromScheme]
+        }
+      }
+      mapping.type = [jskos.defaultMappingType.uri]
+      mapping._occurrence = occurrence
+      mapping = jskos.addMappingIdentifiers(mapping)
+      if (occurrence.database) {
+        mapping.creator = [occurrence.database]
+      }
+      mappings.push(mapping)
+    }
+  }
+
+  /**
    * Returns a list of occurrences.
    *
    * @param {Object} config
