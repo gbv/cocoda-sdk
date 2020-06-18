@@ -34,6 +34,7 @@ class OccurrencesApiProvider extends BaseProvider {
     this._cache = []
     this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
+    this.has.mappings = true
   }
 
   /**
