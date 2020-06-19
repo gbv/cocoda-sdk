@@ -122,6 +122,21 @@ class LocalMappingsProvider extends BaseProvider {
   }
 
   /**
+   * Returns a single mapping.
+   *
+   * @param {Object} config
+   * @param {Object} config.mapping JSKOS mapping
+   * @returns {Object} JSKOS mapping object
+   */
+  async getMapping({ mapping, ...config }) {
+    config._raw = true
+    if (!mapping || !mapping.uri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
+    }
+    return (await this.getMappings({ ...config, uri: mapping.uri }))[0]
+  }
+
+  /**
    * Returns a list of local mappings.
    *
    * TODO: Add support for sort (`created` or `modified`) and order (`asc` or `desc`).

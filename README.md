@@ -202,6 +202,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 
 #### `registry.getMapping`
 - [MappingsApiProvider - getMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMapping)
+- [LocalMappingsProvider - getMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMapping)
 
 #### `registry.postMapping`
 - [MappingsApiProvider - postMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postMapping)
