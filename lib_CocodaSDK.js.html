@@ -216,7 +216,11 @@ class CocodaSDK {
     }
     return this.repeat({
       function: async () => {
-        return (await this.axios.get(url)).data
+        return (await this.axios.get(url, {
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        })).data
       },
       interval,
       callback: (error, result, previousResult) => {
