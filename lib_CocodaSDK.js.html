@@ -265,7 +265,9 @@ class CocodaSDK {
   /**
    * Repeatedly call a certain function.
    *
-   * Callback will only be called if the results were changed.
+   * Notes:
+   * - Callback will only be called if the results were changed.
+   * - The function will only be repeated after the previous call is resolved. This means that the total interval duration is (interval + duration of function call).
    *
    * Example:
    * ```js
@@ -308,6 +310,7 @@ class CocodaSDK {
       timer: null,
       result: null,
       error: null,
+      isPaused: false,
     }
     // Functions to handle results and errors
     const handleResult = (result) => {
@@ -322,41 +325,47 @@ class CocodaSDK {
       repeat.error = error
       callback(error)
     }
-    // Method to call the function and handle result/error
-    const call = () => asyncFunc().then(handleResult).catch(handleError)
-    // Method to start the interval
-    const start = () => {
-      repeat.timer = setInterval(() => {
-        call()
+    // Method to call a method after timeout if necessary
+    const repeatIfNecessary = toCall => {
+      if (repeat.isPaused) {
+        return
+      }
+      repeat.timer = setTimeout(() => {
+        toCall()
       }, interval)
     }
-    // Method to set up the interval (either call immediately and then start interval, or just start interval)
+    // Method to call the function, handle result/error, and repeat if necessary
+    const call = () => asyncFunc().then(handleResult).catch(handleError).then(() => repeatIfNecessary(call))
+    // Method to set up the repeating call (skip initial call if necessary)
     const setup = (_callImmediately = callImmediately) => {
       if (_callImmediately) {
         call()
+      } else {
+        repeatIfNecessary(call)
       }
-      start()
     }
     // Set up
     setup()
     // Return object with methods to start/stop the interval and an indicator whether it is paused
-    const manager = {
+    return {
       start: (...params) => {
+        repeat.isPaused = false
         setup(...params)
-        manager.isPaused = false
       },
       stop: () => {
+        repeat.isPaused = true
         // If timer is available, clear immediately, if not, wait for one interval
         if (repeat.timer) {
-          clearInterval(repeat.timer)
+          clearTimeout(repeat.timer)
         } else {
           setTimeout(() => {
-            repeat.timer &amp;&amp; clearInterval(repeat.timer)
+            repeat.timer &amp;&amp; clearTimeout(repeat.timer)
           }, interval)
         }
-        manager.isPaused = true
       },
-      isPaused: false,
+      get isPaused() {
+        return repeat.isPaused
+      },
       get lastResult() {
         return repeat.result
       },
@@ -364,7 +373,6 @@ class CocodaSDK {
         return !!repeat.error
       },
     }
-    return manager
   }
 
   /**

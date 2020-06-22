@@ -1041,7 +1041,7 @@
         <p class="tag-source">
             <a href="lib_CocodaSDK.js.html" class="button">View Source</a>
             <span>
-                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line255">line 255</a>
+                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line263">line 263</a>
             </span>
         </p>
     
@@ -1779,7 +1779,11 @@
     
     <div class="description">
         <p>Repeatedly call a certain function.</p>
-<p>Callback will only be called if the results were changed.</p>
+<p>Notes:</p>
+<ul>
+<li>Callback will only be called if the results were changed.</li>
+<li>The function will only be repeated after the previous call is resolved. This means that the total interval duration is (interval + duration of function call).</li>
+</ul>
 <p>Example:</p>
 <pre class="prettyprint source lang-js"><code> cdk.repeat({
    function: () => registry.getMappings(),
@@ -2054,7 +2058,7 @@
         <p class="tag-source">
             <a href="lib_CocodaSDK.js.html" class="button">View Source</a>
             <span>
-                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line164">line 164</a>
+                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line166">line 166</a>
             </span>
         </p>
     
