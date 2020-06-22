@@ -1041,7 +1041,7 @@
         <p class="tag-source">
             <a href="lib_CocodaSDK.js.html" class="button">View Source</a>
             <span>
-                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line236">line 236</a>
+                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line255">line 255</a>
             </span>
         </p>
     
@@ -1276,7 +1276,7 @@
         
         <span class="code-name">
             
-                loadBuildInfo<span class="signature">(config)</span><span class="type-signature"> &rarr; {function}</span>
+                loadBuildInfo<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1586,13 +1586,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>function to clear interval</p></div>
+    <div class='param-desc column is-7'><p>object with two function properties, <code>stop</code> to cancel the repeating request, <code>start</code> to restart the repeating request, as well as three convenience properties, <code>isPaused</code> (whether it is currently paused), <code>lastResult</code>, <code>hasErrored</code> (whether the last call of the function has errored)</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">function</span>
+<span class="param-type">Object</span>
 
 
     </div>
@@ -1769,7 +1769,7 @@
         
         <span class="code-name">
             
-                repeat<span class="signature">(config)</span><span class="type-signature"> &rarr; {function}</span>
+                repeat<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -1784,8 +1784,6 @@
 <pre class="prettyprint source lang-js"><code> cdk.repeat({
    function: () => registry.getMappings(),
    callback: (error, result) => console.log(result),
-   limit: 3,
-   offset: 3,
  })
 </code></pre>
     </div>
@@ -1971,6 +1969,45 @@
 </tr>
 
   
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>callImmediately</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          true
+      
+      </td>
+  
+
+  <td class="description last"><p>whether to call the function immediately</p></td>
+</tr>
+
+  
 
 
         
@@ -2017,7 +2054,7 @@
         <p class="tag-source">
             <a href="lib_CocodaSDK.js.html" class="button">View Source</a>
             <span>
-                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line165">line 165</a>
+                <a href="lib_CocodaSDK.js.html">lib/CocodaSDK.js</a>, <a href="lib_CocodaSDK.js.html#line164">line 164</a>
             </span>
         </p>
     
@@ -2048,13 +2085,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>function to cancel the repeating request</p></div>
+    <div class='param-desc column is-7'><p>object with two function properties, <code>stop</code> to cancel the repeating request, <code>start</code> to restart the repeating request, as well as three convenience properties, <code>isPaused</code> (whether it is currently paused), <code>lastResult</code>, <code>hasErrored</code> (whether the last call of the function has errored)</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">function</span>
+<span class="param-type">Object</span>
 
 
     </div>
