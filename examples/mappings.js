@@ -15,9 +15,9 @@
   console.log("Create or delete mapping via https://coli-conc.gbv.de/cocoda/dev/ to see change.")
   console.log("Press ctrl+c to stop.")
   // Method returns a cancel function
-  const cancel = cdk.repeat({
+  const repeat = cdk.repeat({
     function: () => registry.getMappings(),
-    interval: 3000,
+    interval: 2000,
     callback: (error, mappings, previousMappings) => {
       if (error) {
         console.error(error)
@@ -26,11 +26,34 @@
       }
     },
   })
+  console.log(repeat)
 
+  let lastSignal
+  let interval
   process.on("SIGINT", () => {
-    console.log("Stopping...")
-    cancel()
-    // Not calling process.exit because it should exit anyway after the interval is cleared.
+    const time = new Date()
+    if (lastSignal && time - lastSignal < 1000) {
+      // Stopping when sent twice in a row
+      console.log("Stopping...")
+      repeat.stop()
+      interval && clearInterval(interval)
+      // Not calling process.exit because it should exit anyway after the interval is cleared.
+    } else {
+      lastSignal = time
+      // Otherwise pause/resume
+      if (repeat.isPaused) {
+        console.log("Unpausing...")
+        repeat.start()
+        interval && clearInterval(interval)
+      } else {
+        console.log("Pausing...")
+        repeat.stop()
+        // Add an interval so that the process doesn't stop
+        interval = setInterval(() => {
+          console.log(repeat)
+        }, 10000)
+      }
+    }
   })
 
 })()

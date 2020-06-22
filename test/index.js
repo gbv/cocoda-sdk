@@ -49,14 +49,15 @@ describe("index", () => {
     assert.ok(!cdk2.someProp)
   })
 
+  // TODO: Test additional functionality of repeat.
+
   it("should properly repeat a method", (done) => {
     let callbackCalled = 0
     let valueToBeIncremented = 0
     let method = () => {
       return ++valueToBeIncremented
     }
-    let cancel
-    cancel = cdk.repeat({
+    let repeat = cdk.repeat({
       function: method,
       interval: 10,
       callback: (error, result, previousResult) => {
@@ -65,7 +66,7 @@ describe("index", () => {
         callbackCalled += 1
         // Stop test after three calls
         if (callbackCalled == 3) {
-          cancel()
+          repeat.stop()
           done()
         }
       },
@@ -78,15 +79,14 @@ describe("index", () => {
       mockCalled += 1
       return [200, { mockCalled }]
     })
-    let cancel
-    cancel = cdk.loadBuildInfo({
+    let repeat = cdk.loadBuildInfo({
       url: "buildInfo",
       interval: 10,
       callback: (error, buildInfo, previousBuildInfo) => {
         assert(!error)
         assert.notEqual(previousBuildInfo, null)
         assert.equal(buildInfo.mockCalled, mockCalled)
-        cancel()
+        repeat.stop()
         done()
       },
     })
@@ -98,8 +98,7 @@ describe("index", () => {
       mockCalled += 1
       return [200, { mockCalled }]
     })
-    let cancel
-    cancel = cdk.loadBuildInfo({
+    let repeat = cdk.loadBuildInfo({
       url: "buildInfo",
       buildInfo: {
         mockCalled,
@@ -115,7 +114,7 @@ describe("index", () => {
           assert.notEqual(previousBuildInfo, null)
           assert.equal(previousBuildInfo.mockCalled, 1)
           assert.equal(buildInfo.mockCalled, 2)
-          cancel()
+          repeat.stop()
           done()
         }
       },
@@ -128,8 +127,7 @@ describe("index", () => {
       mockCalled += 1
       return [mockCalled == 1 ? 404 : 200, { mockCalled }]
     })
-    let cancel
-    cancel = cdk.loadBuildInfo({
+    let repeat = cdk.loadBuildInfo({
       url: "buildInfo",
       interval: 10,
       callback: (error, result) => {
@@ -140,7 +138,7 @@ describe("index", () => {
           assert(false)
         } else if (mockCalled == 3) {
           assert.equal(result.mockCalled, mockCalled)
-          cancel()
+          repeat.stop()
           done()
         }
       },
