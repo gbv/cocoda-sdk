@@ -82,7 +82,7 @@ class BaseProvider {
 
     this.axios = axios.create({
       // TODO: Decide on timeout value
-      timeout: 10000,
+      timeout: 20000,
     })
     // Path is used for https check and local mappings
     this._path = typeof window !== "undefined" && window.location.pathname
