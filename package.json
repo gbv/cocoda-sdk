@@ -35,16 +35,16 @@
     "axios-mock-adapter": "^1.18.1",
     "eslint": "^6.8.0",
     "eslint-config-gbv": "github:gbv/eslint-config-gbv",
-    "lint-staged": "^10.2.2",
-    "mocha": "^7.1.2",
+    "lint-staged": "^10.2.11",
+    "mocha": "^8.0.1",
     "mocha-eslint": "^6.0.0",
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "jskos-tools": "^1.0.7",
-    "localforage": "^1.7.3",
+    "jskos-tools": "^1.0.8",
+    "localforage": "^1.7.4",
     "lodash": "^4.17.15",
-    "uuid": "^8.0.0"
+    "uuid": "^8.2.0"
   }
 }
