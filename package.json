@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/gbv/cocoda-sdk#readme",
   "devDependencies": {
-    "axios-mock-adapter": "^1.18.1",
+    "axios-mock-adapter": "^1.18.2",
     "eslint": "^6.8.0",
     "eslint-config-gbv": "github:gbv/eslint-config-gbv",
     "lint-staged": "^10.2.11",
@@ -42,9 +42,9 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "jskos-tools": "^1.0.8",
-    "localforage": "^1.7.4",
-    "lodash": "^4.17.15",
+    "jskos-tools": "^1.0.9",
+    "localforage": "^1.8.0",
+    "lodash": "^4.17.19",
     "uuid": "^8.2.0"
   }
 }
