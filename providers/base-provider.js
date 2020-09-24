@@ -24,7 +24,6 @@ const errors = require("../errors")
  * - getOccurrences
  * - getTop
  * - getConcepts
- * - getConcept
  * - getNarrower
  * - getAncestors
  * - search
@@ -472,8 +471,8 @@ class BaseProvider {
       return this.getAncestors({ ...config, concept })
     }
     // Add _getDetails function to concepts
-    concept._getDetails = (config) => {
-      return this.getConcept({ ...config, concept })
+    concept._getDetails = async (config) => {
+      return (await this.getConcepts({ ...config, concepts: [concept] }))[0]
     }
     // Add _registry to concepts
     concept._registry = this
@@ -540,28 +539,6 @@ class BaseProvider {
     newMappings._totalCount = mappings._totalCount
     newMappings._url = mappings._url
     return newMappings
-  }
-
-  /**
-   * GETs information about a single concept. Do not override in subclass!
-   *
-   * TODO: Evaluate whether concept and/or uri should be used.
-   * ? Returning a single object removes API URL. How should we do this?
-   *
-   * @param {Object} config
-   * @param {Object} config.concept concept to be requested
-   * @param {string} config.uri concept URI (alternative to concept)
-   * @returns {Object} JSKOS concept object
-   */
-  async getConcept({ concept, uri, ...config } = {}) {
-    if (!concept && !uri) {
-      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
-    }
-    return this.getConcepts({
-      concepts: [concept || { uri }],
-      ...config,
-      _raw: true,
-    }).then(result => result[0])
   }
 
   /**

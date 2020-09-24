@@ -172,9 +172,6 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [ConceptApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getConcepts)
 - [SkosmosApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getConcepts)
 
-#### `registry.getConcept`
-- [BaseProvider - getConcept](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getConcept)
-
 #### `registry.getNarrower`
 - [ConceptApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getNarrower)
 - [SkosmosApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getNarrower)

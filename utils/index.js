@@ -41,11 +41,6 @@ const requestMethods = [
     type: "Concepts",
   },
   {
-    method: "getConcept",
-    fallback: null,
-    type: "Concept",
-  },
-  {
     method: "getNarrower",
     fallback: [],
     type: "Concepts",
