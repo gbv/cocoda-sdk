@@ -359,7 +359,7 @@ class BaseProvider {
             } else {
               if (error.response) {
                 // 4xx = invalid request
-                if (error.response.status.toString().startsWith(5)) {
+                if (error.response.status.toString().startsWith(4)) {
                   throw new errors.InvalidRequestError({ relatedError: error, code: error.response.status })
                 } else {
                   throw new errors.BackendError({ relatedError: error, code: error.response.status })
