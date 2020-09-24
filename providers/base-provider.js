@@ -238,7 +238,7 @@ class BaseProvider {
             } else if (_.isObject(result) && result._totalCount === undefined) {
               result._totalCount = 1
             }
-            if (type && this[`adjust${type}`]) {
+            if (result && type && this[`adjust${type}`]) {
               result = this[`adjust${type}`](result)
             }
             return result
