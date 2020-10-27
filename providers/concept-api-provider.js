@@ -2,6 +2,7 @@ const BaseProvider = require("./base-provider")
 const _ = require("../utils/lodash")
 const errors = require("../errors")
 const utils = require("../utils")
+const jskos = require("jskos-tools")
 
 /**
  * JSKOS Concept API.
@@ -88,7 +89,7 @@ class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.schemes)) {
       return this._api.schemes
     }
-    return this.axios({
+    const schemes = await this.axios({
       ...config,
       method: "get",
       url: this._api.schemes,
@@ -99,6 +100,8 @@ class ConceptApiProvider extends BaseProvider {
         ...(config.params || {}),
       },
     })
+    // If schemes were given in registry object, only request those schemes from API
+    return schemes.filter(s => Array.isArray(this._jskos.schemes) ? jskos.isContainedIn(s, this._jskos.schemes) : true)
   }
 
   /**
