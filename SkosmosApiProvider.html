@@ -602,7 +602,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line564">line 564</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line570">line 570</a>
             </span>
         </p>
     
@@ -643,7 +643,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         
         <span class="code-name">
             
-                getAncestors<span class="signature">()</span><span class="type-signature"></span>
+                getAncestors<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -652,7 +652,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
     
     
     <div class="description">
-        <p>Method not yet implemented.</p>
+        <p>Returns ancestor concepts for a concept.</p>
     </div>
     
 
@@ -663,6 +663,83 @@ This class provides access to a Skosmos instance via its REST API.</p>
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>concept</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>concept object</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -703,7 +780,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line263">line 263</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line315">line 315</a>
             </span>
         </p>
     
@@ -725,6 +802,31 @@ This class provides access to a Skosmos instance via its REST API.</p>
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -1008,7 +1110,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line150">line 150</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line236">line 236</a>
             </span>
         </p>
     
@@ -1074,7 +1176,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         
         <span class="code-name">
             
-                getNarrower<span class="signature">()</span><span class="type-signature"></span>
+                getNarrower<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -1083,7 +1185,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
     
     
     <div class="description">
-        <p>Method not yet implemented.</p>
+        <p>Returns narrower concepts for a concept.</p>
     </div>
     
 
@@ -1094,6 +1196,83 @@ This class provides access to a Skosmos instance via its REST API.</p>
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>concept</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>concept object</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1134,7 +1313,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line256">line 256</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line292">line 292</a>
             </span>
         </p>
     
@@ -1156,6 +1335,31 @@ This class provides access to a Skosmos instance via its REST API.</p>
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array.&lt;Object></span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -1286,7 +1490,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line62">line 62</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line174">line 174</a>
             </span>
         </p>
     
@@ -1489,7 +1693,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line96">line 96</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line208">line 208</a>
             </span>
         </p>
     
@@ -1712,7 +1916,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line356">line 356</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line400">line 400</a>
             </span>
         </p>
     
@@ -2366,7 +2570,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line551">line 551</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line557">line 557</a>
             </span>
         </p>
     
@@ -2712,7 +2916,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line319">line 319</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line378">line 378</a>
             </span>
         </p>
     
@@ -3591,7 +3795,7 @@ This class provides access to a Skosmos instance via its REST API.</p>
         <p class="tag-source">
             <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line277">line 277</a>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line349">line 349</a>
             </span>
         </p>
     
