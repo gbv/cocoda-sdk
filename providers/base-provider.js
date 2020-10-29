@@ -474,6 +474,12 @@ class BaseProvider {
     concept._getDetails = async (config) => {
       return (await this.getConcepts({ ...config, concepts: [concept] }))[0]
     }
+    // Adjust broader/narrower/ancestors if necessary
+    for (let type of ["broader", "narrower", "ancestors"]) {
+      if (Array.isArray(concept[type]) && !concept[type].includes(null)) {
+        concept[type] = this.adjustConcepts(concept[type])
+      }
+    }
     // Add _registry to concepts
     concept._registry = this
     return concept
