@@ -251,7 +251,6 @@ class SkosmosApiProvider extends BaseProvider {
     endpoint = endpoint || ""
     params = params || {}
     const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
-    console.log(paramString)
     return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
   }
 
