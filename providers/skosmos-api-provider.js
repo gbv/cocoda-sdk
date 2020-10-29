@@ -187,6 +187,11 @@ class SkosmosApiProvider extends BaseProvider {
             _.set(concept, `altLabel.${altLabel.lang}`, [altLabel.value])
           }
         }
+        // Set notation
+        const notation = resultConcept.notation || resultConcept["skos:notation"]
+        if (notation) {
+          concept.notation = [notation]
+        }
         // Set broader/narrower
         for (let type of ["broader", "narrower"]) {
           concept[type] = resultConcept[type] || concept[type]
@@ -205,6 +210,11 @@ class SkosmosApiProvider extends BaseProvider {
               }
               for (let prefLabel of resultRelative.prefLabel || []) {
                 _.set(relative, `prefLabel.${prefLabel.lang}`, prefLabel.value)
+              }
+              // Set notation
+              const notation = resultRelative.notation || resultRelative["skos:notation"]
+              if (notation) {
+                relative.notation = [notation]
               }
             }
             // Set ancestors to empty array
