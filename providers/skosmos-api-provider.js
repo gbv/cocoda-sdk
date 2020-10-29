@@ -283,17 +283,57 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * Method not yet implemented.
+   * Returns narrower concepts for a concept.
+   *
+   * @param {Object} config
+   * @param {Object} config.concept concept object
+   * @returns {Object[]} array of JSKOS concept objects
    */
-  async getNarrower() {
-    throw new errors.MethodNotImplementedError({ method: "getNarrower" })
+  async getNarrower({ concept, ...config }) {
+    if (!concept || !concept.uri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
+    }
+    const scheme = concept.inScheme[0]
+    const url = this._getApiUrl(scheme, "/children")
+    _.set(config, "params.uri", concept.uri)
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
+    const concepts = (response.narrower || []).map(c => this._toJskosConcept(c, { scheme }))
+    return concepts
   }
 
   /**
-   * Method not yet implemented.
+   * Returns ancestor concepts for a concept.
+   *
+   * @param {Object} config
+   * @param {Object} config.concept concept object
+   * @returns {Object[]} array of JSKOS concept objects
    */
-  async getAncestors() {
-    throw new errors.MethodNotImplementedError({ method: "getAncestors" })
+  async getAncestors({ concept, ...config }) {
+    if (!concept || !concept.uri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
+    }
+    const scheme = concept.inScheme[0]
+    const url = this._getApiUrl(scheme, "/broaderTransitive")
+    _.set(config, "params.uri", concept.uri)
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
+    let ancestors = []
+    let uri = concept.uri
+    while (uri) {
+      if (uri != concept.uri) {
+        ancestors = [{ uri }].concat(ancestors)
+      }
+      uri = _.get(response, `broaderTransitive["${uri}"].broader[0]`)
+    }
+    const concepts = ancestors.map(c => this._toJskosConcept(c, { scheme })).filter(c => c.uri != concept.uri)
+    return concepts
   }
 
   /**
