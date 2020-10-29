@@ -76,8 +76,9 @@ class SkosmosApiProvider extends BaseProvider {
         url,
       })
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
-      if (resultScheme && resultScheme.prefLabel) {
-        _.set(scheme, `prefLabel.${language}`, resultScheme.prefLabel)
+      const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
+      if (label) {
+        _.set(scheme, `prefLabel.${language}`, label)
       }
       // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
