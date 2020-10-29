@@ -54,6 +54,30 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
+   * @private
+   */
+  _getApiUrl(scheme, endpoint, params) {
+    if (!scheme || !scheme.VOCID) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
+    }
+    endpoint = endpoint || ""
+    params = params || {}
+    const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
+    return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
+  }
+
+  /**
+   * @private
+   */
+  _getDataUrl(concept, { addFormatParameter = true } = {}) {
+    const scheme = _.get(concept, "inScheme[0]")
+    if (!concept || !concept.uri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI" })
+    }
+    return this._getApiUrl(scheme, "/data", addFormatParameter ? { format: "application/json" } : {})
+  }
+
+  /**
    * Returns all concept schemes.
    *
    * @param {Object} config
@@ -127,17 +151,6 @@ class SkosmosApiProvider extends BaseProvider {
       concepts.push(newConcept)
     }
     return concepts
-  }
-
-  /**
-   * @private
-   */
-  _getDataUrl(concept, { addFormatParameter = true } = {}) {
-    const scheme = _.get(concept, "inScheme[0]")
-    if (!concept || !concept.uri) {
-      throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI" })
-    }
-    return this._getApiUrl(scheme, "/data", addFormatParameter ? { format: "application/json" } : {})
   }
 
   /**
@@ -291,19 +304,6 @@ class SkosmosApiProvider extends BaseProvider {
       result._totalCount = concepts.length
     }
     return result
-  }
-
-  /**
-   * @private
-   */
-  _getApiUrl(scheme, endpoint, params) {
-    if (!scheme || !scheme.VOCID) {
-      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
-    }
-    endpoint = endpoint || ""
-    params = params || {}
-    const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
-    return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
   }
 
   /**
