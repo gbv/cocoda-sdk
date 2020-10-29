@@ -187,8 +187,9 @@ class SkosmosApiProvider extends BaseProvider {
         url,
       })
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
-      if (resultScheme &amp;&amp; resultScheme.prefLabel) {
-        _.set(scheme, `prefLabel.${language}`, resultScheme.prefLabel)
+      const label = resultScheme &amp;&amp; (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
+      if (label) {
+        _.set(scheme, `prefLabel.${language}`, label)
       }
       // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
@@ -197,10 +198,46 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * Method not yet implemented.
+   * Returns top concepts.
+   *
+   * @param {Object} config
+   * @param {Object} config.scheme concept scheme
+   * @returns {Object[]} array of JSKOS concept scheme objects
    */
-  async getTop() {
-    throw new errors.MethodNotImplementedError({ method: "getTop" })
+  async getTop({ scheme, ...config }) {
+    const url = this._getApiUrl(scheme, "/topConcepts")
+    const language = this.languages[0] || "en"
+    _.set(config, "params.lang", language)
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
+    const concepts = []
+    for (let concept of response.topconcepts || []) {
+      const notation = concept.notation
+      const label = concept.label || concept.prefLabel || concept.altLabel
+      const newConcept = {
+        uri: concept.uri,
+        inScheme: [scheme],
+        topConceptOf: [scheme],
+      }
+      if (label) {
+        newConcept.prefLabel = {
+          [language]: label,
+        }
+      }
+      if (notation) {
+        newConcept.notation = [notation]
+      }
+      if (concept.hasChildren) {
+        newConcept.narrower = [null]
+      } else {
+        newConcept.narrower = []
+      }
+      concepts.push(newConcept)
+    }
+    return concepts
   }
 
   /**
@@ -348,6 +385,11 @@ class SkosmosApiProvider extends BaseProvider {
       result[1].push((notation ? notation + " " : "") + label)
       result[2].push("")
       result[3].push(concept.uri)
+    }
+    if (concepts._totalCount != undefined) {
+      result._totalCount = concepts._totalCount
+    } else {
+      result._totalCount = concepts.length
     }
     return result
   }
