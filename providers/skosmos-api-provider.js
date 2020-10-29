@@ -87,10 +87,46 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * Method not yet implemented.
+   * Returns top concepts.
+   *
+   * @param {Object} config
+   * @param {Object} config.scheme concept scheme
+   * @returns {Object[]} array of JSKOS concept scheme objects
    */
-  async getTop() {
-    throw new errors.MethodNotImplementedError({ method: "getTop" })
+  async getTop({ scheme, ...config }) {
+    const url = this._getApiUrl(scheme, "/topConcepts")
+    const language = this.languages[0] || "en"
+    _.set(config, "params.lang", language)
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
+    const concepts = []
+    for (let concept of response.topconcepts || []) {
+      const notation = concept.notation
+      const label = concept.label || concept.prefLabel || concept.altLabel
+      const newConcept = {
+        uri: concept.uri,
+        inScheme: [scheme],
+        topConceptOf: [scheme],
+      }
+      if (label) {
+        newConcept.prefLabel = {
+          [language]: label,
+        }
+      }
+      if (notation) {
+        newConcept.notation = [notation]
+      }
+      if (concept.hasChildren) {
+        newConcept.narrower = [null]
+      } else {
+        newConcept.narrower = []
+      }
+      concepts.push(newConcept)
+    }
+    return concepts
   }
 
   /**
