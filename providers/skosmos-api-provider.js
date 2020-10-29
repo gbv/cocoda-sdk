@@ -62,6 +62,9 @@ class SkosmosApiProvider extends BaseProvider {
     }
     endpoint = endpoint || ""
     params = params || {}
+    if (!params.lang) {
+      params.lang = this.languages[0] || "en"
+    }
     const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
     return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
   }
@@ -84,7 +87,7 @@ class SkosmosApiProvider extends BaseProvider {
     if (!skosmosConcept) {
       return null
     }
-    concept = concept || {}
+    concept = jskos.deepCopy(concept || {})
     language = language || skosmosConcept.lang || "en"
 
     concept.uri = skosmosConcept.uri
@@ -126,11 +129,9 @@ class SkosmosApiProvider extends BaseProvider {
     }
 
     // Set notation
-    const notation = skosmosConcept.notation || skosmosConcept["skos:notation"]
+    const notation = skosmosConcept.notation || skosmosConcept["skos:notation"] || jskos.notation(concept)
     if (notation) {
       concept.notation = [notation]
-    } else {
-      concept.notation = jskos.notation(concept)
     }
 
     // Set narrower
@@ -236,6 +237,7 @@ class SkosmosApiProvider extends BaseProvider {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
     }
+    concepts = concepts.map(c => ({ uri: c.uri, inScheme: c.inScheme }))
     const newConcepts = []
     for (let concept of concepts) {
       const url = this._getDataUrl(concept, { addFormatParameter: false })
@@ -263,7 +265,12 @@ class SkosmosApiProvider extends BaseProvider {
           if (!relatives) {
             relatives = []
           }
-          concept[type] = relatives.map(r => this._toJskosConcept(result.graph.find(c => jskos.compare(c, r)), { scheme: concept.inScheme[0], result }))
+          newConcept[type] = relatives.map(r => this._toJskosConcept(result.graph.find(c => jskos.compare(c, r)), { scheme: concept.inScheme[0], result }))
+          // if (relatives.length) {
+          //   newConcept[type] = [null]
+          // } else {
+          //   newConcept[type] = []
+          // }
         }
         // Set ancestors to empty array
         // ?
