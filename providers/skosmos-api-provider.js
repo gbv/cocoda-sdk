@@ -239,6 +239,11 @@ class SkosmosApiProvider extends BaseProvider {
       result[2].push("")
       result[3].push(concept.uri)
     }
+    if (concepts._totalCount != undefined) {
+      result._totalCount = concepts._totalCount
+    } else {
+      result._totalCount = concepts.length
+    }
     return result
   }
 
