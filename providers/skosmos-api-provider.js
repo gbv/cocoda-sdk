@@ -78,6 +78,93 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
+   * @private
+   */
+  _toJskosConcept(skosmosConcept, { concept, scheme, result, language } = {}) {
+    if (!skosmosConcept) {
+      return null
+    }
+    concept = concept || {}
+    language = language || skosmosConcept.lang || "en"
+
+    concept.uri = skosmosConcept.uri
+
+    // Set inScheme
+    if (scheme) {
+      concept.inScheme = [scheme]
+    }
+
+    // Set prefLabel
+    let prefLabel = skosmosConcept.matchedPrefLabel || skosmosConcept.prefLabel || skosmosConcept.label
+    if (_.isString(prefLabel)) {
+      _.set(concept, `prefLabel.${language}`, prefLabel)
+    } else {
+      if (prefLabel && !_.isArray(prefLabel)) {
+        prefLabel = [prefLabel]
+      }
+      for (let label of prefLabel || []) {
+        _.set(concept, `prefLabel.${label.lang}`, label.value)
+      }
+    }
+
+    // Set altLabel
+    let altLabel = skosmosConcept.altLabel
+    if (_.isString(altLabel)) {
+      _.set(concept, `altLabel.${language}`, [altLabel])
+    } else {
+      if (altLabel && !_.isArray(altLabel)) {
+        altLabel = [altLabel]
+      }
+      for (let label of altLabel || []) {
+        if (_.get(concept, `altLabel.${label.lang}`)) {
+          concept.altLabel[label.lang].push(label.value)
+          concept.altLabel[label.lang] = _.uniq(concept.altLabel[label.lang])
+        } else {
+          _.set(concept, `altLabel.${label.lang}`, [label.value])
+        }
+      }
+    }
+
+    // Set notation
+    const notation = skosmosConcept.notation || skosmosConcept["skos:notation"]
+    if (notation) {
+      concept.notation = [notation]
+    } else {
+      concept.notation = jskos.notation(concept)
+    }
+
+    // Set narrower
+    if (skosmosConcept.hasChildren === true) {
+      concept.narrower = [null]
+    } else if (skosmosConcept.hasChildren === false) {
+      concept.narrower = []
+    }
+
+    // Set type
+    if (skosmosConcept.type && !_.isArray(skosmosConcept.type)) {
+      skosmosConcept.type = [skosmosConcept.type]
+    }
+    concept.type = concept.type || []
+    for (let type of skosmosConcept.type || []) {
+      if (!jskos.isValidUri(type)) {
+        continue
+      }
+      const uriScheme = type.slice(0, type.indexOf(":"))
+      // Try to find uriScheme in @context
+      if (result && result["@context"] && result["@context"][uriScheme]) {
+        type = type.replace(uriScheme + ":", result["@context"][uriScheme])
+      }
+      concept.type.push(type)
+    }
+    concept.type = _.uniq(concept.type)
+    if (!concept.type.length) {
+      concept.type = ["http://www.w3.org/2004/02/skos/core#Concept"]
+    }
+
+    return concept
+  }
+
+  /**
    * Returns all concept schemes.
    *
    * @param {Object} config
@@ -86,7 +173,7 @@ class SkosmosApiProvider extends BaseProvider {
   async getSchemes({ ...config }) {
     // TODO: Re-evaluate!
     if (!this._jskos.loadSchemeInfo) {
-      const result = this.schemes
+      const result = this.schemes.map(s => jskos.deepCopy(s))
       return result
     }
     const schemes = []
@@ -128,26 +215,11 @@ class SkosmosApiProvider extends BaseProvider {
     })
     const concepts = []
     for (let concept of response.topconcepts || []) {
-      const notation = concept.notation
-      const label = concept.label || concept.prefLabel || concept.altLabel
-      const newConcept = {
-        uri: concept.uri,
-        inScheme: [scheme],
-        topConceptOf: [scheme],
-      }
-      if (label) {
-        newConcept.prefLabel = {
-          [language]: label,
-        }
-      }
-      if (notation) {
-        newConcept.notation = [notation]
-      }
-      if (concept.hasChildren) {
-        newConcept.narrower = [null]
-      } else {
-        newConcept.narrower = []
-      }
+      const newConcept = this._toJskosConcept(concept, {
+        scheme,
+        language,
+      })
+      newConcept.topConceptOf = [scheme]
       concepts.push(newConcept)
     }
     return concepts
@@ -181,82 +253,22 @@ class SkosmosApiProvider extends BaseProvider {
       })
       const resultConcept = result && result.graph && result.graph.find(c => jskos.compare(c, concept))
       if (resultConcept) {
-        // Set prefLabel
-        if (resultConcept.prefLabel && !_.isArray(resultConcept.prefLabel)) {
-          resultConcept.prefLabel = [resultConcept.prefLabel]
-        }
-        for (let prefLabel of resultConcept.prefLabel || []) {
-          _.set(concept, `prefLabel.${prefLabel.lang}`, prefLabel.value)
-        }
-        // Set altLabel
-        if (resultConcept.altLabel && !_.isArray(resultConcept.altLabel)) {
-          resultConcept.altLabel = [resultConcept.altLabel]
-        }
-        for (let altLabel of resultConcept.altLabel || []) {
-          if (_.get(concept, `altLabel.${altLabel.lang}`)) {
-            concept.altLabel[altLabel.lang].push(altLabel.value)
-            concept.altLabel[altLabel.lang] = _.uniq(concept.altLabel[altLabel.lang])
-          } else {
-            _.set(concept, `altLabel.${altLabel.lang}`, [altLabel.value])
-          }
-        }
-        // Set notation
-        const notation = resultConcept.notation || resultConcept["skos:notation"]
-        if (notation) {
-          concept.notation = [notation]
-        }
+        const newConcept = this._toJskosConcept(resultConcept, { concept, result })
         // Set broader/narrower
         for (let type of ["broader", "narrower"]) {
-          concept[type] = resultConcept[type] || concept[type]
-          if (concept[type] && !_.isArray(concept[type])) {
-            concept[type] = [concept[type]]
+          let relatives = resultConcept[type] || newConcept[type]
+          if (relatives && !_.isArray(relatives)) {
+            relatives = [relatives]
           }
-          if (!concept[type]) {
-            concept[type] = []
+          if (!relatives) {
+            relatives = []
           }
-          // Set prefLabel for broader/narrower
-          for (let relative of concept[type]) {
-            const resultRelative = result.graph.find(c => jskos.compare(c, relative))
-            if (resultRelative) {
-              if (resultRelative.prefLabel && !_.isArray(resultRelative.prefLabel)) {
-                resultRelative.prefLabel = [resultRelative.prefLabel]
-              }
-              for (let prefLabel of resultRelative.prefLabel || []) {
-                _.set(relative, `prefLabel.${prefLabel.lang}`, prefLabel.value)
-              }
-              // Set notation
-              const notation = resultRelative.notation || resultRelative["skos:notation"]
-              if (notation) {
-                relative.notation = [notation]
-              }
-            }
-            // Set ancestors to empty array
-            relative.ancestors = []
-          }
+          concept[type] = relatives.map(r => this._toJskosConcept(result.graph.find(c => jskos.compare(c, r)), { scheme: concept.inScheme[0], result }))
         }
-        // ESLint exceptions see: https://github.com/eslint/eslint/issues/11899
         // Set ancestors to empty array
-        // eslint-disable-next-line require-atomic-updates
-        concept.ancestors = []
-        // Set type
-        if (resultConcept.type && !_.isArray(resultConcept.type)) {
-          resultConcept.type = [resultConcept.type]
-        }
-        // eslint-disable-next-line require-atomic-updates
-        concept.type = concept.type || []
-        for (let type of resultConcept.type || []) {
-          if (!jskos.isValidUri(type)) {
-            continue
-          }
-          const uriScheme = type.slice(0, type.indexOf(":"))
-          // Try to find uriScheme in @context
-          if (result["@context"][uriScheme]) {
-            type = type.replace(uriScheme + ":", result["@context"][uriScheme])
-          }
-          concept.type.push(type)
-        }
-        // eslint-disable-next-line require-atomic-updates
-        concept.type = _.uniq(concept.type)
+        // ?
+        newConcept.ancestors = []
+        // Push to array
         newConcepts.push(concept)
       }
     }
@@ -327,22 +339,7 @@ class SkosmosApiProvider extends BaseProvider {
       method: "get",
       url,
     })
-    const concepts = []
-    for (let concept of response.results || []) {
-      const notation = jskos.notation({ uri: concept.uri, inScheme: [scheme] })
-      const label = concept.matchedPrefLabel || concept.altLabel || concept.prefLabel
-      const newConcept = {
-        uri: concept.uri,
-        prefLabel: {
-          [concept.lang]: label,
-        },
-        inScheme: [scheme],
-      }
-      if (notation) {
-        newConcept.notation = [notation]
-      }
-      concepts.push(newConcept)
-    }
+    const concepts = (response.results || []).map(c => this._toJskosConcept(c))
     return concepts
   }
 
