@@ -1,7 +1,7 @@
 const BaseProvider = require("./base-provider")
 const jskos = require("jskos-tools")
 const _ = require("../utils/lodash")
-const localforage = require("localforage")
+const localforage = require("localforage").default || require("localforage")
 const { v4: uuid } = require("uuid")
 const errors = require("../errors")
 const uriPrefix = "urn:uuid:"
