@@ -277,7 +277,7 @@ class SkosmosApiProvider extends BaseProvider {
         // ?
         newConcept.ancestors = []
         // Push to array
-        newConcepts.push(concept)
+        newConcepts.push(newConcept)
       }
     }
     return newConcepts
