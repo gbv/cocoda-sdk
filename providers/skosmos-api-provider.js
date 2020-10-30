@@ -209,6 +209,7 @@ class SkosmosApiProvider extends BaseProvider {
     const url = this._getApiUrl(scheme, "/topConcepts")
     const language = this.languages[0] || "en"
     _.set(config, "params.lang", language)
+    _.set(config, "params.scheme", scheme.uri)
     const response = await this.axios({
       ...config,
       method: "get",
