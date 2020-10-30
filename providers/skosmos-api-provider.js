@@ -131,7 +131,8 @@ class SkosmosApiProvider extends BaseProvider {
     // Set notation
     const notation = skosmosConcept.notation || skosmosConcept["skos:notation"] || jskos.notation(concept)
     if (notation) {
-      concept.notation = [notation]
+      // notation can be string or object, so we're trying notation.value first
+      concept.notation = [notation.value || notation]
     }
 
     // Set narrower
