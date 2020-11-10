@@ -146,10 +146,19 @@ class ConceptApiProvider extends BaseProvider {
    * @private
    */
   _prepare() {
-    // Fill `this._api` if necessary
+    // Set status endpoint only
+    if (this._api.api &amp;&amp; this._api.status === undefined) {
+      this._api.status = utils.concatUrl(this._api.api, "/status")
+    }
+  }
+
+  /**
+   * @private
+   */
+  _setup() {
+    // Implicitly fill `this._api` if necessary
     if (this._api.api) {
       const endpoints = {
-        status: "/status",
         schemes: "/voc",
         top: "/voc/top",
         concepts: "/voc/concepts",
@@ -161,17 +170,12 @@ class ConceptApiProvider extends BaseProvider {
         search: "/search",
       }
       for (let key of Object.keys(endpoints)) {
-        if (!this._api[key]) {
+        // Only override if undefined
+        if (this._api[key] === undefined) {
           this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
         }
       }
     }
-  }
-
-  /**
-   * @private
-   */
-  _setup() {
     this.has.schemes = !!this._api.schemes
     this.has.top = !!this._api.top
     this.has.data = !!this._api.data
