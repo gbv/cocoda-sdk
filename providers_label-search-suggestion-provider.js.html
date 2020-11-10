@@ -213,7 +213,12 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     if (to &amp;&amp; this.supportsScheme(selected.scheme[true])) {
       promises.push(this._getMappings({ ...config, concept: to, sourceScheme: selected.scheme[false], targetScheme: selected.scheme[true], swap: true }))
     }
-    return _.union(...(await Promise.all(promises)))
+    return _.unionWith(
+      ...(await Promise.all(promises)),
+      (a, b) => {
+        return jskos.compareMappingMembers(a, b)
+      },
+    )
   }
 
   /**
