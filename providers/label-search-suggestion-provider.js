@@ -84,7 +84,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
    * @param {Object} config.selected selected mappings in Cocoda
    * @returns {Object[]} array of JSKOS mapping objects
    */
-  async getMappings({ from, to, mode, selected, ...config }) {
+  async getMappings({ from, to, mode, selected, limit = 10, ...config }) {
     // TODO: Why mode?
     if (mode != "or") {
       return []
@@ -97,17 +97,23 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     }
     let promises = []
     if (from && this.supportsScheme(selected.scheme[false])) {
-      promises.push(this._getMappings({ ...config, concept: from, sourceScheme: selected.scheme[true], targetScheme: selected.scheme[false] }))
+      promises.push(this._getMappings({ ...config, concept: from, sourceScheme: selected.scheme[true], targetScheme: selected.scheme[false], limit }))
     }
     if (to && this.supportsScheme(selected.scheme[true])) {
-      promises.push(this._getMappings({ ...config, concept: to, sourceScheme: selected.scheme[false], targetScheme: selected.scheme[true], swap: true }))
+      promises.push(this._getMappings({ ...config, concept: to, sourceScheme: selected.scheme[false], targetScheme: selected.scheme[true], limit, swap: true }))
     }
-    return _.unionWith(
-      ...(await Promise.all(promises)),
-      (a, b) => {
-        return jskos.compareMappingMembers(a, b)
-      },
-    )
+    let [fromResult, toResult] = await Promise.all(promises)
+    // Filter all duplicates from toResult
+    toResult = toResult.filter(m => !fromResult.find(n => jskos.compareMappingMembers(m, n)))
+    // Reduce number of results until limit is reached
+    while (fromResult.length + toResult.length > limit) {
+      if (toResult.length >= fromResult.length) {
+        toResult = toResult.slice(0, -1)
+      } else {
+        fromResult = fromResult.slice(0, -1)
+      }
+    }
+    return _.union(fromResult, toResult)
   }
 
   /**
@@ -121,7 +127,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
    * @param {Pbject} config.targetScheme
    * @param {boolean} config.swap - whether to reverse the direction of the mappings
    */
-  async _getMappings({ concept, sourceScheme, targetScheme, swap = false, ...config }) {
+  async _getMappings({ concept, sourceScheme, targetScheme, limit, swap = false, ...config }) {
     if (!concept || !sourceScheme || !targetScheme) {
       return []
     }
@@ -135,7 +141,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       return []
     }
     // Get results from API or cache
-    const results = await this._getResults({ ...config, label, targetScheme })
+    const results = await this._getResults({ ...config, label, targetScheme, limit })
     // Map results to actual mappings
     let mappings = results.map(result => ({
       fromScheme: sourceScheme,
@@ -165,10 +171,10 @@ class LabelSearchSuggestionProvider extends BaseProvider {
    * @param {string} config.label
    * @param {Object} config.targetScheme
    */
-  async _getResults({ label, targetScheme, ...config }) {
+  async _getResults({ label, targetScheme, limit, ...config }) {
     // Use local cache.
     let resultsFromCache = (this._cache[targetScheme.uri] || {})[label]
-    if (resultsFromCache) {
+    if (resultsFromCache && resultsFromCache._limit >= limit) {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
@@ -184,7 +190,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       url,
       params: {
         query: label,
-        limit: 10,
+        limit,
         voc: targetScheme.uri,
       },
     })
@@ -193,6 +199,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       this._cache[targetScheme.uri] = {}
     }
     this._cache[targetScheme.uri][label] = data
+    this._cache[targetScheme.uri][label]._limit = limit
     return data
   }
 
