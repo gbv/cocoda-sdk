@@ -6,6 +6,7 @@ module.exports = {
   uniq: require("lodash/uniq"),
   intersection: require("lodash/intersection"),
   union: require("lodash/union"),
+  unionWith: require("lodash/unionWith"),
   forOwn: require("lodash/forOwn"),
   // TOOD: Use Array.isArray instead
   isArray: require("lodash/isArray"),
