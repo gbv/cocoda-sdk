@@ -36,19 +36,9 @@ class MappingsApiProvider extends BaseProvider {
    * @private
    */
   _prepare() {
-    // Fill `this._api` if necessary
-    if (this._api.api) {
-      const endpoints = {
-        status: "/status",
-        mappings: "/mappings",
-        concordances: "/concordances",
-        annotations: "/annotations",
-      }
-      for (let key of Object.keys(endpoints)) {
-        if (!this._api[key]) {
-          this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
-        }
-      }
+    // Set status endpoint only
+    if (this._api.api && this._api.status === undefined) {
+      this._api.status = utils.concatUrl(this._api.api, "/status")
     }
   }
 
@@ -56,6 +46,19 @@ class MappingsApiProvider extends BaseProvider {
    * @private
    */
   _setup() {
+    // Fill `this._api` if necessary
+    if (this._api.api) {
+      const endpoints = {
+        mappings: "/mappings",
+        concordances: "/concordances",
+        annotations: "/annotations",
+      }
+      for (let key of Object.keys(endpoints)) {
+        if (this._api[key] === undefined) {
+          this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
+        }
+      }
+    }
     this.has.mappings = this._api.mappings ? {} : false
     if (this.has.mappings) {
       this.has.mappings.read = !!_.get(this._config, "mappings.read", true)

@@ -322,7 +322,10 @@ class BaseProvider {
             url: this._api.status,
           })
         } catch(error) {
-          // Ignore error because we assumed the status endpoint was there when it wasn't.
+          if (error.response.status === 404) {
+            // If /status is not available, remove from _api
+            this._api.status = null
+          }
         }
       } else {
         // Assume object
@@ -333,7 +336,8 @@ class BaseProvider {
         this._config = status.config || {}
         // Merge status result and existing API URLs
         for (let key of Object.keys(this._api)) {
-          if (status[key] !== undefined) {
+          // Only override if undefined
+          if (this._api[key] === undefined) {
             this._api[key] = status[key]
           }
         }
