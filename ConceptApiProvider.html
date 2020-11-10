@@ -1912,7 +1912,7 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line280">line 280</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line310">line 310</a>
             </span>
         </p>
     
@@ -2632,7 +2632,7 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
         
         <span class="code-name">
             
-                search<span class="signature">()</span><span class="type-signature"></span>
+                search<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array}</span>
             
         </span>
     </h4>
@@ -2641,7 +2641,7 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
     
     
     <div class="description">
-        <p>Method not yet implemented.</p>
+        <p>Returns search results in JSKOS Format.</p>
     </div>
     
 
@@ -2652,6 +2652,265 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
 
 
 
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>search</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>search string</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>scheme</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>concept scheme to search in</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>limit</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          100
+      
+      </td>
+  
+
+  <td class="description last"><p>maximum number of search results (default might be overridden by registry)</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>offset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last"><p>offset</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>types</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array.&lt;string></span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          []
+      
+      </td>
+  
+
+  <td class="description last"><p>list of type URIs</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2692,7 +2951,7 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
         <p class="tag-source">
             <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line269">line 269</a>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line263">line 263</a>
             </span>
         </p>
     
@@ -2714,6 +2973,31 @@ Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can als
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>result in JSKOS Format</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

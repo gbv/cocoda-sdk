@@ -346,39 +346,69 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
-    if (!this._api.suggest) {
+  async suggest({ scheme, use = "notation,label", types = [], sort = "score", ...config }) {
+    return this._search({
+      ...config,
+      endpoint: "suggest",
+      params: {
+        ...config.params,
+        voc: _.get(scheme, "uri", ""),
+        type: types.join("|"),
+        use,
+        sort,
+      },
+    })
+  }
+
+  /**
+   * Returns search results in JSKOS Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {number} [config.offset=0] offset
+   * @param {string[]} [config.types=[]] list of type URIs
+   * @returns {Array} result in JSKOS Format
+   */
+  async search({ scheme, types = [], ...config }) {
+    return this._search({
+      ...config,
+      endpoint: "search",
+      params: {
+        ...config.params,
+        voc: _.get(scheme, "uri", ""),
+        type: types.join("|"),
+      },
+    })
+  }
+
+  async _search({ endpoint, search, limit, offset, params, ...config }) {
+    let url = this._api[endpoint]
+    if (!url) {
       throw new errors.MissingApiUrlError()
     }
     if (!search) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "search" })
     }
     limit = limit || this._jskos.suggestResultLimit || 100
+    offset = offset || 0
     // Some registries use URL templates with {searchTerms}
-    let url = this._api.suggest.replace("{searchTerms}", search)
+    url = url.replace("{searchTerms}", search)
     return this.axios({
       ...config,
       params: {
         ...this._defaultParams,
-        voc: _.get(scheme, "uri", ""),
+        ...params,
         limit: limit,
         count: limit, // Some endpoints use count instead of limit
-        use,
-        type: types.join("|"),
-        sort,
-        ...config.params,
+        offset,
         search,
+        query: search,
       },
       method: "get",
       url,
     })
-  }
-
-  /**
-   * Method not yet implemented.
-   */
-  async search() {
-    throw new errors.MethodNotImplementedError({ method: "search" })
   }
 
   /**
