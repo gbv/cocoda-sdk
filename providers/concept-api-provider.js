@@ -235,7 +235,7 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async suggest({ search, scheme, limit, use = "notation,label", types = [], sort = "score", ...config }) {
+  async suggest({ search, scheme, limit, offset, use = "notation,label", types = [], sort = "score", ...config }) {
     if (!this._api.suggest) {
       throw new errors.MissingApiUrlError()
     }
@@ -243,6 +243,7 @@ class ConceptApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "search" })
     }
     limit = limit || this._jskos.suggestResultLimit || 100
+    offset = offset || 0
     // Some registries use URL templates with {searchTerms}
     let url = this._api.suggest.replace("{searchTerms}", search)
     return this.axios({
@@ -252,6 +253,7 @@ class ConceptApiProvider extends BaseProvider {
         voc: _.get(scheme, "uri", ""),
         limit: limit,
         count: limit, // Some endpoints use count instead of limit
+        offset,
         use,
         type: types.join("|"),
         sort,
