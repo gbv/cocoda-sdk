@@ -272,6 +272,44 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Returns concept scheme suggestion result in OpenSearch Suggest Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {string} [config.use=notation,label] which fields to search ("notation", "label" or "notation,label")
+   * @param {string} [config.sort=score] sorting parameter
+   * @returns {Array} result in OpenSearch Suggest Format
+   */
+  async vocSuggest({ use = "notation,label", sort = "score", ...config }) {
+    return this._search({
+      ...config,
+      endpoint: "voc-suggest",
+      params: {
+        ...config.params,
+        use,
+        sort,
+      },
+    })
+  }
+
+  /**
+   * Returns concept scheme search results in JSKOS Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {number} [config.offset=0] offset
+   * @returns {Array} result in JSKOS Format
+   */
+  async vocSearch(config) {
+    return this._search({
+      ...config,
+      endpoint: "voc-search",
+    })
+  }
+
   async _search({ endpoint, search, limit, offset, params, ...config }) {
     let url = this._api[endpoint]
     if (!url) {

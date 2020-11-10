@@ -163,6 +163,12 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [ConceptApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getSchemes)
 - [SkosmosApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getSchemes)
 
+#### `registry.vocSearch`
+- [ConceptApiProvider - vocSearch](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSearch)
+
+#### `registry.vocSuggest`
+- [ConceptApiProvider - vocSuggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSuggest)
+
 ### Registry Methods - Concepts
 
 #### `registry.getTop`

@@ -118,6 +118,8 @@ class BaseProvider {
       types: registry.types,
       suggest: registry.suggest,
       search: registry.search,
+      "voc-suggest": registry["voc-suggest"],
+      "voc-search": registry["voc-search"],
       mappings: registry.mappings,
       concordances: registry.concordances,
       annotations: registry.annotations,
