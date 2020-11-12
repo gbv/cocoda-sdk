@@ -38,6 +38,8 @@ We are also providing browser bundles:
 - Development (not minified, ~97K): https://cdn.jsdelivr.net/npm/cocoda-sdk/dist/cocoda-sdk.js
 - Production (minified, ~40K): https://cdn.jsdelivr.net/npm/cocoda-sdk@1
 
+[![](https://data.jsdelivr.com/v1/package/npm/cocoda-sdk/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cocoda-sdk)
+
 ## Usage
 
 ### Import
