@@ -17,7 +17,11 @@
     "lint": "eslint ./**/*.js ./**/.*.js",
     "fix": "eslint --fix ./**/*.js ./**/.*.js",
     "lint-staged": "lint-staged",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "release": "npm run build && npm test && git checkout dev && git pull && npm version $SEMVER && git push && git checkout master && git merge dev && git push --follow-tags && git checkout dev",
+    "release:patch": "SEMVER=patch npm run release",
+    "release:minor": "SEMVER=minor npm run release",
+    "release:major": "SEMVER=major npm run release"
   },
   "lint-staged": {
     "**/*.js": [

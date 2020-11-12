@@ -278,6 +278,28 @@ For details about the errors, refer to the [documentation](https://gbv.github.io
 - [@stefandesu](https://github.com/stefandesu)
 - [@nichtich](https://github.com/nichtich)
 
+## Publish
+Please work on the `dev` branch during development (or better yet, develop in a feature branch and merge into `dev` when ready).
+
+When a new release is ready (i.e. the features are finished, merged into `dev`, and all tests succeed), run the included release script (replace "patch" with "minor" or "major" if necessary):
+
+```bash
+npm run release:patch
+```
+
+This will:
+- Run tests and build to make sure everything works
+- Switch to `dev`
+- Make sure `dev` is up-to-date
+- Run `npm version patch` (or "minor"/"major")
+- Push changes to `dev`
+- Switch to `master`
+- Merge changes from `dev`
+- Push `master` with tags
+- Switch back to `dev`
+
+After running this, GitHub Actions will automatically publish the new version to npm. It will also create a new GitHub Release draft. Please edit and publish the release manually.
+
 ## Contribute
 PRs accepted.
 
