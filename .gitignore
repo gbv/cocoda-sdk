@@ -14,3 +14,5 @@ npm-debug.log*
 *.sln
 
 *test*.js*
+
+dist/

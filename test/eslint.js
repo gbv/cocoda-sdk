@@ -4,6 +4,7 @@ const lint = require("mocha-eslint")
 let paths = [
   "**/*.js",
   "**/.*.js",
+  "!dist/**/*.js",
   "!node_modules/**/*.js",
   "!node_modules/**/.*.js",
 ]

@@ -3,11 +3,21 @@
   "version": "0.0.1",
   "description": "SDK for Cocoda",
   "main": "index.js",
+  "browser": "dist/cocoda-sdk.js",
+  "browserslist": "> 1.5%, not dead",
+  "files": [
+    "dist",
+    "lib",
+    "errors",
+    "utils",
+    "providers"
+  ],
   "scripts": {
     "test": "mocha --recursive",
     "lint": "eslint ./**/*.js ./**/.*.js",
     "fix": "eslint --fix ./**/*.js ./**/.*.js",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "build": "rollup -c"
   },
   "lint-staged": {
     "**/*.js": [
@@ -32,13 +42,21 @@
   },
   "homepage": "https://github.com/gbv/cocoda-sdk#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "axios-mock-adapter": "^1.18.2",
     "eslint": "^6.8.0",
     "eslint-config-gbv": "github:gbv/eslint-config-gbv",
     "lint-staged": "^10.2.11",
     "mocha": "^8.1.1",
     "mocha-eslint": "^6.0.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "rollup": "^2.33.1",
+    "rollup-plugin-license": "^2.2.0"
   },
   "dependencies": {
     "axios": "^0.19.2",
