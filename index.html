@@ -383,6 +383,24 @@ cdk.addProvider(CustomProvider)
 <li><a href="https://github.com/stefandesu">@stefandesu</a></li>
 <li><a href="https://github.com/nichtich">@nichtich</a></li>
 </ul>
+<h2>Publish</h2>
+<p>Please work on the <code>dev</code> branch during development (or better yet, develop in a feature branch and merge into <code>dev</code> when ready).</p>
+<p>When a new release is ready (i.e. the features are finished, merged into <code>dev</code>, and all tests succeed), run the included release script (replace &quot;patch&quot; with &quot;minor&quot; or &quot;major&quot; if necessary):</p>
+<pre class="prettyprint source lang-bash"><code>npm run release:patch
+</code></pre>
+<p>This will:</p>
+<ul>
+<li>Run tests and build to make sure everything works</li>
+<li>Switch to <code>dev</code></li>
+<li>Make sure <code>dev</code> is up-to-date</li>
+<li>Run <code>npm version patch</code> (or &quot;minor&quot;/&quot;major&quot;)</li>
+<li>Push changes to <code>dev</code></li>
+<li>Switch to <code>master</code></li>
+<li>Merge changes from <code>dev</code></li>
+<li>Push <code>master</code> with tags</li>
+<li>Switch back to <code>dev</code></li>
+</ul>
+<p>After running this, GitHub Actions will automatically publish the new version to npm. It will also create a new GitHub Release draft. Please edit and publish the release manually.</p>
 <h2>Contribute</h2>
 <p>PRs accepted.</p>
 <p>Small note: If editing the README, please conform to the <a href="https://github.com/RichardLitt/standard-readme">standard-readme</a> specification.</p>
