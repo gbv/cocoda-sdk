@@ -6,12 +6,25 @@
 
 > SDK for [Cocoda](https://github.com/gbv/cocoda) and [coli-conc](https://coli-conc.gbv.de/) services
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 - [Install](#install)
 - [Usage](#usage)
+  - [Import](#import)
+  - [Configuration](#configuration)
+  - [Registries](#registries)
+  - [Providers](#providers)
+  - [Multiple Instances](#multiple-instances)
 - [Methods](#methods)
+  - [Methods for `cocoda-sdk` instance](#methods-for-cocoda-sdk-instance)
+  - [Registry Methods - General](#registry-methods---general)
+  - [Registry Methods - Concept Schemes](#registry-methods---concept-schemes)
+  - [Registry Methods - Concepts](#registry-methods---concepts)
+  - [Registry Methods - Mappings](#registry-methods---mappings)
+  - [Registry Methods - Annotations](#registry-methods---annotations)
+  - [Registry Methods - Various](#registry-methods---various)
 - [Errors](#errors)
 - [Maintainers](#maintainers)
+- [Publish](#publish)
 - [Contribute](#contribute)
 - [License](#license)
 
