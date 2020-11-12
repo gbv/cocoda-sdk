@@ -14,6 +14,7 @@
   - [Registries](#registries)
   - [Providers](#providers)
   - [Multiple Instances](#multiple-instances)
+  - [Authenticated Requests](#authenticated-requests)
 - [Methods](#methods)
   - [Methods for `cocoda-sdk` instance](#methods-for-cocoda-sdk-instance)
   - [Registry Methods - General](#registry-methods---general)
@@ -133,6 +134,91 @@ The `createInstance` method can be used to create a new and independent instance
 ```js
 const newCdk = cdk.createInstance(config)
 ```
+
+### Authenticated Requests
+The following is a barebones example on how to use `cocoda-sdk` together with [`login-client`](https://github.com/gbv/login-client).
+
+Prerequisites:
+- A local instance of [Login Server](https://github.com/gbv/login-server) running on `localhost:3004`
+  - Needs a configured identity provider with at least one user
+  - The HTTP server that is serving the example below must be configured under `ALLOWED_ORIGINS`
+  - The user must already be logged in
+- A local instance of [JSKOS Server](https://github.com/gbv/jskos-server) running on `localhost:3000`
+  - The Login Server's public key must be configured
+  - Mappings must be enabled for authenticated users (is given for the default configuration)
+
+See also the code comments inside the example.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+</head>
+<body>
+<!-- login-client, cocoda-sdk -->
+<script src="https://cdn.jsdelivr.net/npm/gbv-login-client"></script>
+<script src="https://cdn.jsdelivr.net/npm/cocoda-sdk"></script>
+<script>
+// Initialize mapping registry at localhost:3000
+const registry = cdk.initializeRegistry({
+  provider: "MappingsApi",
+  uri: "local:mappings",
+  status: "http://localhost:3000/status",
+})
+// Note: This is an async function, so we might be dealing with race conditions here.
+registry.init()
+// Create client to connect to Login Server at localhost:3004
+let client = new LoginClient("localhost:3004", { ssl: false })
+let user
+// Add listener for all event types
+client.addEventListener(null, event => {
+  switch (event.type) {
+    case LoginClient.events.connect:
+      // At this point, we don't know whether the user has logged in yet, but we can try
+      console.log(registry.isAuthorizedFor({ type: "mappings", action: "create", user }))
+      break
+    case LoginClient.events.login:
+      // Update user
+      user = event.user
+      // Now we know the user is logged in, so this should return true
+      // Note that if the user is already logged in, this event will fire before connected
+      console.log(registry.isAuthorizedFor({ type: "mappings", action: "create", user }))
+      break
+    case LoginClient.events.update:
+      // Update user
+      user = event.user
+      break
+    case LoginClient.events.about:
+      // Register the server's public key in the registry
+      registry.setAuth({ key: event.publicKey })
+      break
+    case LoginClient.events.token:
+      // On every token update, update the token in the registry
+      registry.setAuth({ bearerToken: event.token })
+      break
+  }
+})
+// Start connection to client
+client.connect()
+</script>
+</body>
+</html>
+```
+
+Note that for a real application, there are more things necessary:
+- Track whether the client is connected and whether the user is logged in
+- Tell the user to log in if necessary
+- Check if the `registry.init()` call finished before making requests (might not be necessary because requests will wait for initialization)
+- Error handling
+- etc.
+
+You can find more in-depth examples here:
+- The [Vuex store module for authentication in Cocoda](https://github.com/gbv/cocoda/blob/dev/src/store/modules/auth.js).
+  - Even if you're not using Vue.js, this can be helpful.
+  - Cocoda is using `cocoda-sdk` extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
+- The [API page of Login Server](https://github.com/gbv/login-server/blob/master/views/api.ejs). This is merely an example on how to use `login-client`.
 
 ## Methods
 
