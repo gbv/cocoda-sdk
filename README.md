@@ -1,11 +1,10 @@
 # Cocoda SDK
 ![Node.js CI](https://github.com/gbv/cocoda-sdk/workflows/Node.js%20CI/badge.svg)
 [![GitHub package version](https://img.shields.io/github/package-json/v/gbv/cocoda-sdk.svg?label=version)](https://github.com/gbv/cocoda-sdk)
+[![NPM package name](https://img.shields.io/badge/npm-cocoda--sdk-blue.svg)](https://www.npmjs.com/package/cocoda-sdk)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
 
 > SDK for [Cocoda](https://github.com/gbv/cocoda) and [coli-conc](https://coli-conc.gbv.de/) services
-
-**Note: This is currently evolving and methods can be removed or changed without notice! If you're not prepared for that, please wait until version 1.0.0.**
 
 ## Table of Contents
 - [Install](#install)
@@ -18,16 +17,12 @@
 
 ## Install
 ```bash
-npm i gbv/cocoda-sdk
+npm i cocoda-sdk
 ```
 
-We suggest to install it referring to a certain commit and updating only after making sure that everything works (at least until version 1.0.0 is released):
-
-```bash
-npm i gbv/cocoda-sdk#abc1def
-```
-
-**Note:** Replace the commit hash with the desired commit.
+We are also providing browser bundles:
+- Development (not minified, ~97K): https://cdn.jsdelivr.net/npm/cocoda-sdk/dist/cocoda-sdk.js
+- Production (minified, ~40K): https://cdn.jsdelivr.net/npm/cocoda-sdk@1
 
 ## Usage
 
