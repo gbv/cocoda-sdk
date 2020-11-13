@@ -338,7 +338,9 @@ class BaseProvider {
         for (let key of Object.keys(this._api)) {
           // Only override if undefined
           if (this._api[key] === undefined) {
-            this._api[key] = status[key]
+            // Fall back to null, i.e. if /status was successful, no endpoints are implied by the provider
+            // See also: https://github.com/gbv/cocoda-sdk/issues/21
+            this._api[key] = status[key] || null
           }
         }
       }
