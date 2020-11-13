@@ -195,6 +195,14 @@ await cdk.loadConfig(&quot;https://raw.githubusercontent.com/gbv/cocoda/dev/conf
 }
 </code></pre>
 <p>A list of available providers can be found <a href="#providers">below</a>. Most providers need additional properties to work correctly.</p>
+<h4>Endpoint Determination</h4>
+<p>For many providers, you need to specify one or more endpoints on the registry object for it to work. There are, however, three steps in which these endpoints are determined:</p>
+<ol>
+<li>By explicitly specifying an endpoint on the registry object.</li>
+<li>By performaning a request to the provider's <code>/status</code> endpoint and parsing its result (which is done in <code>registry.init()</code>).</li>
+<li>By implication using the <code>api</code> base URL.</li>
+</ol>
+<p>Values set earlier in these steps will never be overwritten by later steps. That means to disable an endpoint explicitly, you can set it to <code>null</code> when configuring the registry. Also, if step 2 is successful, it will be assumed that no further endpoints exist and all missing endpoints will be set to <code>null</code>, i.e. essentially skipping step 3.</p>
 <h4>Using a Single Registry</h4>
 <p>If you only have a single registry you want to access, you can initialize it as follows:</p>
 <pre class="prettyprint source lang-js"><code>const cdk = require(&quot;cocoda-sdk&quot;)
