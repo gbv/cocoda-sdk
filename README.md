@@ -81,6 +81,15 @@ A registry is an individual source of data, for instance a set of concept scheme
 
 A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
 
+#### Endpoint Determination
+For many providers, you need to specify one or more endpoints on the registry object for it to work. There are, however, three steps in which these endpoints are determined:
+
+1. By explicitly specifying an endpoint on the registry object.
+2. By performaning a request to the provider's `/status` endpoint and parsing its result (which is done in `registry.init()`).
+3. By implication using the `api` base URL.
+
+Values set earlier in these steps will never be overwritten by later steps. That means to disable an endpoint explicitly, you can set it to `null` when configuring the registry. Also, if step 2 is successful, it will be assumed that no further endpoints exist and all missing endpoints will be set to `null`, i.e. essentially skipping step 3.
+
 #### Using a Single Registry
 
 If you only have a single registry you want to access, you can initialize it as follows:
