@@ -98,9 +98,13 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     let promises = []
     if (from && this.supportsScheme(selected.scheme[false])) {
       promises.push(this._getMappings({ ...config, concept: from, sourceScheme: selected.scheme[true], targetScheme: selected.scheme[false], limit }))
+    } else {
+      promises.push(Promise.resolve([]))
     }
     if (to && this.supportsScheme(selected.scheme[true])) {
       promises.push(this._getMappings({ ...config, concept: to, sourceScheme: selected.scheme[false], targetScheme: selected.scheme[true], limit, swap: true }))
+    } else {
+      promises.push(Promise.resolve([]))
     }
     let [fromResult, toResult] = await Promise.all(promises)
     // Filter all duplicates from toResult
