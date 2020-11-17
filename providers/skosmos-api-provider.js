@@ -388,7 +388,7 @@ class SkosmosApiProvider extends BaseProvider {
       method: "get",
       url,
     })
-    const concepts = (response.results || []).map(c => this._toJskosConcept(c))
+    const concepts = (response.results || []).map(c => this._toJskosConcept(c, { scheme }))
     return concepts
   }
 
