@@ -28,7 +28,7 @@ jobs:
     - run: npm pack
     - name: set release name, artifact, and message
       run: |
-        echo "::set-env name=ARTIFACT_NAME::$(ls cocoda-sdk-*.tgz)"
+        echo "ARTIFACT_NAME=$(ls cocoda-sdk-*.tgz)" >> $GITHUB_ENV
     - id: create_release
       uses: actions/create-release@v1
       env:
@@ -44,6 +44,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ env.ARTIFACT_NAME }}
-        asset_name: ${{ env.ARTIFACT_NAME }}
+        asset_path: ./$ARTIFACT_NAME
+        asset_name: $ARTIFACT_NAME
         asset_content_type: application/gzip
