@@ -246,6 +246,11 @@ class SkosmosApiProvider extends BaseProvider {
       concept.notation = [notation.value || notation]
     }
 
+    // Set broader
+    if (skosmosConcept.broader) {
+      concept.broader = skosmosConcept.broader.map(concept => _.isString(concept) ? { uri: concept } : concept)
+    }
+
     // Set narrower
     if (skosmosConcept.hasChildren === true) {
       concept.narrower = [null]
@@ -441,7 +446,8 @@ class SkosmosApiProvider extends BaseProvider {
     let uri = concept.uri
     while (uri) {
       if (uri != concept.uri) {
-        ancestors = [{ uri }].concat(ancestors)
+        const ancestor = _.get(response, `broaderTransitive["${uri}"]`)
+        ancestors = [ancestor].concat(ancestors)
       }
       uri = _.get(response, `broaderTransitive["${uri}"].broader[0]`)
     }
