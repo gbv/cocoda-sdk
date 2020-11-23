@@ -137,6 +137,9 @@ class SkosmosApiProvider extends BaseProvider {
 
     // Set broader
     if (skosmosConcept.broader) {
+      if (!_.isArray(skosmosConcept.broader)) {
+        skosmosConcept.broader = [skosmosConcept.broader]
+      }
       concept.broader = skosmosConcept.broader.map(concept => _.isString(concept) ? { uri: concept } : concept)
     }
 
