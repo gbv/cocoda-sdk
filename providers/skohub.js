@@ -5,7 +5,6 @@ const errors = require("../errors")
 /**
  * ```json
  * {
- *  "uri": "http://coli-conc.gbv.de/registry/skohub.io",
  *  "provider": "Skohub",
  *  "schemes": [
  *    {
@@ -37,13 +36,7 @@ class SkohubProvider extends BaseProvider {
       return scheme
     }
 
-    const data = await this.axios({ ...config, url: `${uri}.json` })
-
-    // TODO: if not found
-
-    if (data.id !== uri) {
-      throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept scheme" })
-    }
+    const data = await this._request({ ...config, url: uri })
 
     const { title } = data //, description, issued, created, modified, creator, publisher } = data
     const { preferredNamespaceUri } = data //, preferredNamespacePrefix, isBasedOn, source } = data
@@ -111,7 +104,8 @@ class SkohubProvider extends BaseProvider {
       if (found) {
         newConcepts.push(found)
       } else if (_.last(scheme.concepts) === null) {
-        const loaded = await this._loadConcept(uri)
+
+        const loaded = await this._loadConcept(uri, config)
         if (loaded) {
           newConcepts.push(loaded)
           // TODO: add it to scheme.concepts (caching)
@@ -123,15 +117,12 @@ class SkohubProvider extends BaseProvider {
   }
 
   async _loadConcept(uri, config) {
-    const data = await this.axios({ ...config, url: `${uri}.json` })
-
-    // TODO: if not found
-
-    if (data.id !== uri) {
-      throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
+    try {
+      const data = await this._request({ ...config, url: uri })
+      return this._mapConcept(data)
+    } catch (error) {
+      return // concept not found or backend error
     }
-      
-    return this._mapConcept(data)
   }
  
   _mapConcept(data) {
@@ -140,9 +131,20 @@ class SkohubProvider extends BaseProvider {
     concept.prefLabel = data.prefLabel
     concept.narrower = (data.narrower || []).map(c => this._mapConcept(c))
 
+    // TODO: notation, broader, inScheme, altLabel...
     // TODO: convert to JSKOS
       
     return concept 
+  }
+
+  async _request(config) {
+    const data = await this.axios(config)
+
+    if (data.id !== config.url) {
+      throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected URI" })
+    }
+    
+    return data
   }
 }
 
