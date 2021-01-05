@@ -139,7 +139,16 @@ function concatUrl(...parts) {
   return url
 }
 
+
+// Retain custom array properties
+function withCustomProps(arr, from) {
+  arr._totalCount = from._totalCount
+  arr._url = from._url
+  return arr
+}
+
 module.exports = {
   requestMethods,
   concatUrl,
+  withCustomProps,
 }

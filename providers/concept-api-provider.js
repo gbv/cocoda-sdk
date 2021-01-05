@@ -105,7 +105,11 @@ class ConceptApiProvider extends BaseProvider {
       },
     })
     // If schemes were given in registry object, only request those schemes from API
-    return schemes.filter(s => Array.isArray(this._jskos.schemes) ? jskos.isContainedIn(s, this._jskos.schemes) : true)
+    if (Array.isArray(this._jskos.schemes)) {
+      return utils.withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this._jskos.schemes)), schemes)
+    } else {
+      return schemes
+    }
   }
 
   /**

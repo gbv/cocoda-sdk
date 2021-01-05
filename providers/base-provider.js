@@ -493,11 +493,7 @@ class BaseProvider {
     return concept
   }
   adjustConcepts(concepts) {
-    let newConcepts = concepts.map(concept => this.adjustConcept(concept))
-    // Retain custom props if available
-    newConcepts._totalCount = concepts._totalCount
-    newConcepts._url = concepts._url
-    return newConcepts
+    return utils.withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
   }
   adjustRegistries(registries) {
     return registries
@@ -548,11 +544,7 @@ class BaseProvider {
     return mapping
   }
   adjustMappings(mappings) {
-    let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
-    // Retain custom props if available
-    newMappings._totalCount = mappings._totalCount
-    newMappings._url = mappings._url
-    return newMappings
+    return utils.withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
   }
 
   /**
