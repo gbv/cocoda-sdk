@@ -63,7 +63,7 @@
     "rollup-plugin-license": "^2.2.0"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "jskos-tools": "^1.0.10",
     "localforage": "^1.8.0",
     "lodash": "^4.17.20",
