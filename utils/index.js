@@ -11,12 +11,21 @@ const requestMethods = [
     type: "Schemes",
   },
   {
+    method: "vocSearch",
+    fallback: [],
+    type: "Schemes",
+  },
+  {
     method: "getTypes",
     fallback: [],
     type: "Types",
   },
   {
     method: "suggest",
+    fallback: ["", [], [], []],
+  },
+  {
+    method: "vocSuggest",
     fallback: ["", [], [], []],
   },
   {
