@@ -1,6 +1,6 @@
 {
   "name": "cocoda-sdk",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "SDK for Cocoda",
   "main": "index.js",
   "browser": "dist/cocoda-sdk.js",
