@@ -433,7 +433,7 @@ class BaseProvider {
             url: this._api.status,
           })
         } catch(error) {
-          if (error.response.status === 404) {
+          if (_.get(error, "response.status") === 404) {
             // If /status is not available, remove from _api
             this._api.status = null
           }
