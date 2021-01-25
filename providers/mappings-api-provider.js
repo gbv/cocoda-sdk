@@ -105,7 +105,7 @@ class MappingsApiProvider extends BaseProvider {
         },
       })
     } catch (error) {
-      if (error.response && error.response.status == 404) {
+      if (_.get(error, "response.status") == 404) {
         return null
       }
       throw error
