@@ -11,7 +11,7 @@ const errors = require("../errors")
  *
  * This provider offers mapping recommendations based on label match via the `/search` endpoint of JSKOS APIs.
  *
- * The provider requires that a list of initialized registries with search endpoints is provided via `setRegistries`. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.
+ * The provider requires that a list of initialized registries with search endpoints is provided via `cdk` (which refers to the CDK instance that's using this provider).
  *
  * To use it in a registry, specify `provider` as "LabelSearchSuggestion":
  * ```json
@@ -39,22 +39,13 @@ class LabelSearchSuggestionProvider extends BaseProvider {
   }
 
   /**
-   * Sets a local list of registries where the search providers are taken from.
-   *
-   * @param {Object[]} registries list of registries
-   */
-  setRegistries(registries) {
-    this._registries = registries
-  }
-
-  /**
    * List of search provider URIs.
    *
    * @private
    */
   get _searchUris() {
     const _searchUris = {}
-    for (let registry of this._registries) {
+    for (let registry of this.cdk && this.cdk.config.registries) {
       const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
       if (search && _.isString(search)) {
         _searchUris[registry.uri] = search

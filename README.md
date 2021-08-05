@@ -256,9 +256,6 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 #### `registry.setRetryConfig`
 - [BaseProvider - setRetryConfig](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
 
-#### `registry.setRegistries`
-- [LabelSearchSuggestionProvider - setRegistries](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#setRegistries)
-
 #### `registry.getCancelTokenSource`
 - [BaseProvider - getCancelTokenSource](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
 
