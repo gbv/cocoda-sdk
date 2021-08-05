@@ -81,6 +81,40 @@ class ConceptApiProvider extends BaseProvider {
   }
 
   /**
+   * @private
+   *
+   * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.
+   */
+  async _getSchemeUri(scheme) {
+    this._approvedSchemes = this._approvedSchemes || []
+    this._rejectedSchemes = this._rejectedSchemes || []
+    let _scheme = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+    if (_scheme) {
+      return _scheme.uri
+    }
+    // Return null if it was already rejected
+    if (this._rejectedSchemes.find(s => jskos.compare(scheme, s))) {
+      return null
+    }
+    // Otherwise load scheme data and save in approved/rejected schemes
+    const schemes = await this.getSchemes({ uri: jskos.getAllUris(scheme) })
+    const resultScheme = schemes.find(s => jskos.compare(s, scheme))
+    if (resultScheme) {
+      this._approvedSchemes.push({
+        uri: resultScheme.uri,
+        identifier: jskos.getAllUris(scheme),
+      })
+      return resultScheme.uri
+    } else {
+      this._rejectedSchemes.push({
+        uri: scheme.uri,
+        identifier: scheme.identifier,
+      })
+      return null
+    }
+  }
+
+  /**
    * Returns all concept schemes.
    *
    * @param {Object} config
@@ -126,6 +160,10 @@ class ConceptApiProvider extends BaseProvider {
     if (!scheme) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
+    const schemeUri = await this._getSchemeUri(scheme)
+    if (!schemeUri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Requested vocabulary seems to be unsupported by this API." })
+    }
     if (Array.isArray(this._api.top)) {
       return this._api.top
     }
@@ -138,7 +176,7 @@ class ConceptApiProvider extends BaseProvider {
         // ? What should the default limit be?
         limit: 10000,
         ...(config.params || {}),
-        uri: scheme.uri,
+        uri: schemeUri,
       },
     })
   }
@@ -360,8 +398,9 @@ class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.types)) {
       return this._api.types
     }
-    if (scheme && scheme.uri) {
-      _.set(config, "params.uri", scheme.uri)
+    const schemeUri = scheme && await this._getSchemeUri(scheme)
+    if (schemeUri) {
+      _.set(config, "params.uri", schemeUri)
     }
     return this.axios({
       ...config,

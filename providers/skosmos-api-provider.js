@@ -82,6 +82,45 @@ class SkosmosApiProvider extends BaseProvider {
 
   /**
    * @private
+   *
+   * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.
+   */
+  async _getSchemeUri(scheme) {
+    this._approvedSchemes = this._approvedSchemes || []
+    this._rejectedSchemes = this._rejectedSchemes || []
+    let _scheme = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+    if (_scheme) {
+      return _scheme.uri
+    }
+    // Return null if it was already rejected
+    if (this._rejectedSchemes.find(s => jskos.compare(scheme, s))) {
+      return null
+    }
+    // Otherwise load scheme data and save in approved/rejected schemes
+    const language = this.languages[0] || "en"
+    const url = this._getApiUrl(scheme, "/", { lang: language })
+    const data = await this.axios({
+      method: "get",
+      url,
+    })
+    const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
+    if (resultScheme) {
+      this._approvedSchemes.push({
+        uri: resultScheme.uri,
+        identifier: jskos.getAllUris(scheme),
+      })
+      return resultScheme.uri
+    } else {
+      this._rejectedSchemes.push({
+        uri: scheme.uri,
+        identifier: scheme.identifier,
+      })
+      return null
+    }
+  }
+
+  /**
+   * @private
    */
   _toJskosConcept(skosmosConcept, { concept, scheme, result, language } = {}) {
     if (!skosmosConcept) {
@@ -218,7 +257,11 @@ class SkosmosApiProvider extends BaseProvider {
     const url = this._getApiUrl(scheme, "/topConcepts")
     const language = this.languages[0] || "en"
     _.set(config, "params.lang", language)
-    _.set(config, "params.scheme", scheme.uri)
+    const schemeUri = await this._getSchemeUri(scheme)
+    if (!schemeUri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing or unsupported scheme or VOCID property on scheme" })
+    }
+    _.set(config, "params.scheme", schemeUri)
     const response = await this.axios({
       ...config,
       method: "get",
