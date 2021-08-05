@@ -15,7 +15,6 @@ const errors = require("../errors")
  * - _setup: will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations
  * - isAuthorizedFor: override if you want to customize
  * - supportsScheme: override if you want to customize
- * - setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter `registries`)
  * - getRegistries
  * - getSchemes
  * - getTypes
@@ -42,6 +41,7 @@ const errors = require("../errors")
  * - deleteAnnotation
  *
  * Internal (starting with underscore) and external properties that can be used:
+ * - `this.cdk`: a reference to the current CDK instance (can be use to request other registries or initialize a new registry)
  * - `this.has`: an object of functionality of the registry (needs to be set by subclasses)
  * - `this.languages`: an array of language tags provided by the user in order of priority
  * - `this._jskos`: the raw JSKOS object used to initialize this registry
@@ -469,6 +469,40 @@ class BaseProvider {
     return jskos.isContainedIn(scheme, schemes)
   }
 
+  registryForScheme(scheme, { fallbackToSelf = false } = {}) {
+    let registry = scheme._registry
+    if (registry) {
+      return registry
+    }
+    // We can't initialize the scheme's registry if there's no access to the CDK instance
+    if (!this.cdk) {
+      return fallbackToSelf ? this : null
+    }
+
+    const { url, type } = scheme.API && scheme.API[0] || {}
+
+    const config = {}
+    if (type === "http://bartoc.org/api-type/jskos") {
+      config.api = url
+      config.provider = "ConceptApi"
+    } else if (type === "http://bartoc.org/api-type/skosmos") {
+      config.schemes = [scheme]
+      config.provider = "SkosmosApi"
+      const match = url.match(/(.+\/)([^/]+)\/$/)
+      if (!match) return
+      config.api = match[1] + "rest/v1/"
+      scheme.VOCID = match[2]
+    }
+
+    try {
+      registry = this.cdk.initializeRegistry(config)
+      return registry
+    } catch (error) {
+      // Ignore
+    }
+    return fallbackToSelf ? this : null
+  }
+
   adjustConcept(concept) {
     // Add _getNarrower function to concepts
     concept._getNarrower = (config) => {
@@ -498,24 +532,27 @@ class BaseProvider {
   adjustRegistries(registries) {
     return registries
   }
-  adjustSchemes(schemes) {
-    for (let scheme of schemes) {
+  adjustScheme(scheme) {
+    // Add _registry to schemes
+    scheme._registry = this.registryForScheme(scheme, { fallbackToSelf: true })
+    if (scheme._registry) {
       // Add _getTop function to schemes
       scheme._getTop = (config) => {
-        return this.getTop({ ...config, scheme })
+        return scheme._registry.getTop({ ...config, scheme })
       }
       // Add _getTypes function to schemes
       scheme._getTypes = (config) => {
-        return this.getTypes({ ...config, scheme })
+        return scheme._registry.getTypes({ ...config, scheme })
       }
-      // Add _registry to schemes
-      scheme._registry = this
       // Add _suggest function to schemes
       scheme._suggest = ({ search, ...config }) => {
-        return this.suggest({ ...config, search, scheme })
+        return scheme._registry.suggest({ ...config, search, scheme })
       }
     }
-    return schemes
+    return scheme
+  }
+  adjustSchemes(schemes) {
+    return utils.withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
   }
   adjustConcordances(concordances) {
     for (let concordance of concordances) {
