@@ -7,9 +7,11 @@ const registry = cdk.initializeRegistry({
 
 // Run rest of commands asynchronously
 (async () => {
-  console.log("Loading schemes from BARTOC API... (will take a while since we're loading ALL schemes)")
+  console.log("Loading schemes from BARTOC API... (may take a while when loading many schemes)")
   const schemes = await registry.getSchemes({
     params: {
+      limit: 5000,
+      // comment out to get ALL schemes
       uri: "http://bartoc.org/en/node/313|http://bartoc.org/en/node/18785",
     },
   })
@@ -17,8 +19,9 @@ const registry = cdk.initializeRegistry({
 
   for (let scheme of schemes) {
     console.log()
-    console.log(`Found scheme ${scheme.notation[0]}, it was initiliazed with ${scheme._registry._jskos.provider} (${scheme._registry._jskos.api})`)
-    console.log(`Loading top concepts for ${scheme.notation[0]}...`)
+    const id = scheme.notation ? scheme.notation[0] : scheme.uri
+    console.log(`Found scheme ${id}, it was initialized with ${scheme._registry._jskos.provider} (${scheme._registry._jskos.api})`)
+    console.log(`Loading top concepts for ${id}...`)
     const top = await scheme._getTop()
     console.log(`Loaded ${top.length} top concepts.`)
   }
