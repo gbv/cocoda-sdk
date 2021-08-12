@@ -12,7 +12,7 @@ const registry = cdk.initializeRegistry({
     params: {
       limit: 5000,
       // comment out to get ALL schemes
-      uri: "http://bartoc.org/en/node/313|http://bartoc.org/en/node/18785",
+      uri: "http://bartoc.org/en/node/313|http://bartoc.org/en/node/18785|http://bartoc.org/en/node/15",
     },
   })
   console.log(`Loaded ${schemes.length} schemes.`)
