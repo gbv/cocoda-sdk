@@ -54,6 +54,26 @@ class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
+   * TODO!
+   *
+   * @param {*} scheme
+   */
+  static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
+    if (!url || !scheme) {
+      return null
+    }
+    const config = {}
+    const match = url.match(/(.+\/)([^/]+)\/$/)
+    if (!match) {
+      return null
+    }
+    config.api = match[1] + "rest/v1/"
+    scheme.VOCID = match[2]
+    config.schemes = [scheme]
+    return config
+  }
+
+  /**
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {

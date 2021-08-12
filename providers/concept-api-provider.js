@@ -81,6 +81,20 @@ class ConceptApiProvider extends BaseProvider {
   }
 
   /**
+   * TODO!
+   *
+   * @param {*} scheme
+   */
+  static _registryConfigForBartocApiConfig({ url } = {}) {
+    if (!url) {
+      return null
+    }
+    return {
+      api: url,
+    }
+  }
+
+  /**
    * @private
    *
    * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.

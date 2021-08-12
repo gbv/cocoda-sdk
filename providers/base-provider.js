@@ -469,40 +469,6 @@ class BaseProvider {
     return jskos.isContainedIn(scheme, schemes)
   }
 
-  registryForScheme(scheme, { fallbackToSelf = false } = {}) {
-    let registry = scheme._registry
-    if (registry) {
-      return registry
-    }
-    // We can't initialize the scheme's registry if there's no access to the CDK instance
-    if (!this.cdk) {
-      return fallbackToSelf ? this : null
-    }
-
-    const { url, type } = scheme.API && scheme.API[0] || {}
-
-    const config = {}
-    if (type === "http://bartoc.org/api-type/jskos") {
-      config.api = url
-      config.provider = "ConceptApi"
-    } else if (type === "http://bartoc.org/api-type/skosmos") {
-      config.schemes = [scheme]
-      config.provider = "SkosmosApi"
-      const match = url.match(/(.+\/)([^/]+)\/$/)
-      if (!match) return
-      config.api = match[1] + "rest/v1/"
-      scheme.VOCID = match[2]
-    }
-
-    try {
-      registry = this.cdk.initializeRegistry(config)
-      return registry
-    } catch (error) {
-      // Ignore
-    }
-    return fallbackToSelf ? this : null
-  }
-
   adjustConcept(concept) {
     // Add _getNarrower function to concepts
     concept._getNarrower = (config) => {
@@ -534,7 +500,7 @@ class BaseProvider {
   }
   adjustScheme(scheme) {
     // Add _registry to schemes
-    scheme._registry = this.registryForScheme(scheme, { fallbackToSelf: true })
+    scheme._registry = (this.cdk && this.cdk.registryForScheme(scheme)) || this
     if (scheme._registry) {
       // Add _getTop function to schemes
       scheme._getTop = (config) => {
