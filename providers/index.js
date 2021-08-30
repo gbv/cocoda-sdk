@@ -26,6 +26,7 @@ for (let provider of [
   require("./reconciliation-api-provider"),
   require("./label-search-suggestion-provider"),
   require("./skosmos-api-provider"),
+  require("./loc-api-provider"),
 ]) {
   providers.addProvider(provider)
 }
