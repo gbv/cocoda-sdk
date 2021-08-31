@@ -84,8 +84,31 @@ function madsToJskosConcept(data, { scheme }) {
   return concept
 }
 
+/**
+ * Library of Congress API (experimental)
+ *
+ * This class provides access to concept schemes and their concepts via the Library of Congress Linked Open Data Service (https://id.loc.gov/), in [JSKOS format](https://gbv.github.io/jskos/).
+ *
+ * To use it in a registry, specify `provider` as "LocApi":
+ * ```json
+ * {
+ *  "uri": "http://coli-conc.gbv.de/registry/loc-concepts",
+ *  "provider": "LocApi",
+ * }
+ * ```
+ *
+ * No further configuration is needed. Currently supported are LC Subject Headings (LCSH) and LC Name Authority File (LCNAF), both of which are hardcoded.
+ *
+ * Additionally, the following JSKOS properties on the registry can be provided: `prefLabel`, `notation`, `definition` (i.e. to be shown in Cocoda)
+ *
+ * @extends BaseProvider
+ * @category Providers
+ */
 class LocApiProvider extends BaseProvider {
 
+  /**
+   * @private
+   */
   _setup() {
     this.has.schemes = true
     this.has.top = false
@@ -97,6 +120,11 @@ class LocApiProvider extends BaseProvider {
     this.has.search = true
   }
 
+  /**
+   * Returns all concept schemes.
+   *
+   * @returns {Object[]} array of JSKOS concept scheme objects
+   */
   async getSchemes() {
     const schemes = []
 

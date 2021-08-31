@@ -123,6 +123,8 @@ The following providers are offered in `cocoda-sdk` by default:
 - `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
 - `LocalMappings` - access to local mappings via [localForage](https://github.com/localForage/localForage) (only available in browser)
 - `SkosmosApi` - access to concept schemes and concepts via a [Skosmos](https://github.com/NatLibFi/Skosmos) API
+- `LocApi` - access to concept schemes and concepts via the [Library of Congress Linked Data Service](https://id.loc.gov/)
+  - **This integration is currently experimental and only supports LCSH and LCNAF.**
 - `ReconciliationApi` - access to mapping suggestions via a [OpenRefine Reconciliation API](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API)
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
