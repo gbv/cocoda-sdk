@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>cocoda-sdk LocalMappingsProvider</title>
+  <title>cocoda-sdk LocApiProvider</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -98,7 +98,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>LocalMappingsProvider</h1>
+                    <h1>LocApiProvider</h1>
                 </header>
                 
 
@@ -109,17 +109,18 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>LocalMappingsProvider<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>LocApiProvider<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Local Mappings.</p>
-<p>This class provides read-write access to mappings in the browser's local storage.</p>
-<p>To use it in a registry, specify <code>provider</code> as &quot;LocalMappings&quot;:</p>
+            <div class="class-description"><p>Library of Congress API (experimental)</p>
+<p>This class provides access to concept schemes and their concepts via the Library of Congress Linked Open Data Service (https://id.loc.gov/), in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;LocApi&quot;:</p>
 <pre class="prettyprint source lang-json"><code>{
- &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/local-mappings&quot;,
- &quot;provider&quot;: &quot;LocalMappings&quot;
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/loc-concepts&quot;,
+ &quot;provider&quot;: &quot;LocApi&quot;,
 }
 </code></pre>
-<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+<p>No further configuration is needed. Currently supported are LC Subject Headings (LCSH) and LC Name Authority File (LCNAF), both of which are hardcoded.</p>
+<p>Additionally, the following JSKOS properties on the registry can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code> (i.e. to be shown in Cocoda)</p></div>
         
     
 </header>
@@ -138,12 +139,12 @@
 
 
     
-    <h4 class="name" id="LocalMappingsProvider">
-        <a class="href-link" href="#LocalMappingsProvider">#</a>
+    <h4 class="name" id="LocApiProvider">
+        <a class="href-link" href="#LocApiProvider">#</a>
         
         <span class="code-name">
             
-                new LocalMappingsProvider<span class="signature">()</span><span class="type-signature"></span>
+                new LocApiProvider<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -197,9 +198,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line27">line 27</a>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line107">line 107</a>
             </span>
         </p>
     
@@ -437,208 +438,6 @@
         <div class='vertical-section'>
             <h1>Methods</h1>
             <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="deleteMapping">
-        <a class="href-link" href="#deleteMapping">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            
-                deleteMapping<span class="signature">(config, mapping)</span><span class="type-signature"> &rarr; {boolean}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Removes a mapping from local storage.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>config</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>mapping</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>JSKOS mapping</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
-            <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line436">line 436</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>boolean whether deleting the mapping was successful</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">boolean</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
             
                 <div class="member">
 
@@ -954,8 +753,8 @@
 
 
     
-    <h4 class="name" id="getMapping">
-        <a class="href-link" href="#getMapping">#</a>
+    <h4 class="name" id="getConcepts">
+        <a class="href-link" href="#getConcepts">#</a>
         
             
                 <span class='tag'>async</span>
@@ -963,7 +762,7 @@
         
         <span class="code-name">
             
-                getMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
+                getConcepts<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -972,7 +771,7 @@
     
     
     <div class="description">
-        <p>Returns a single mapping.</p>
+        <p>Returns details for a list of concepts.</p>
     </div>
     
 
@@ -1034,13 +833,13 @@
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>mapping</code></td>
+      <td class="name"><code>concepts</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">Object</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
   
@@ -1050,7 +849,7 @@
 
   
 
-  <td class="description last"><p>JSKOS mapping</p></td>
+  <td class="description last"><p>list of concept objects to load</p></td>
 </tr>
 
   
@@ -1098,9 +897,9 @@
 
     
         <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line131">line 131</a>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line178">line 178</a>
             </span>
         </p>
     
@@ -1131,13 +930,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    <div class='param-desc column is-7'><p>array of JSKOS concept objects</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Object</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
     </div>
@@ -1157,8 +956,8 @@
 
 
     
-    <h4 class="name" id="getMappings">
-        <a class="href-link" href="#getMappings">#</a>
+    <h4 class="name" id="getSchemes">
+        <a class="href-link" href="#getSchemes">#</a>
         
             
                 <span class='tag'>async</span>
@@ -1166,7 +965,7 @@
         
         <span class="code-name">
             
-                getMappings<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
+                getSchemes<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span>
             
         </span>
     </h4>
@@ -1175,9 +974,7 @@
     
     
     <div class="description">
-        <p>Returns a list of local mappings.</p>
-<p>TODO: Add support for sort (<code>created</code> or <code>modified</code>) and order (<code>asc</code> or <code>desc</code>).
-TODO: Clean up and use async/await</p>
+        <p>Returns all concept schemes.</p>
     </div>
     
 
@@ -1226,9 +1023,9 @@ TODO: Clean up and use async/await</p>
 
     
         <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line147">line 147</a>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line128">line 128</a>
             </span>
         </p>
     
@@ -1259,7 +1056,7 @@ TODO: Clean up and use async/await</p>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>array of JSKOS mapping objects</p></div>
+    <div class='param-desc column is-7'><p>array of JSKOS concept scheme objects</p></div>
     
     
     <div class='column is-5 has-text-left'>
@@ -1643,12 +1440,12 @@ TODO: Clean up and use async/await</p>
     
 
     
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
         <a href="BaseProvider.html#isAuthorizedFor">BaseProvider#isAuthorizedFor</a>
     </li></ul></dd>
+    
+
     
 
     
@@ -1712,411 +1509,6 @@ TODO: Clean up and use async/await</p>
         <label>Type: </label>
         
 <span class="param-type">boolean</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="patchMapping">
-        <a class="href-link" href="#patchMapping">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            
-                patchMapping<span class="signature">(config, mapping)</span><span class="type-signature"> &rarr; {Object}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Patches a mapping.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>config</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>mapping</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>JSKOS mapping (or part of mapping)</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
-            <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line398">line 398</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Object</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="postMapping">
-        <a class="href-link" href="#postMapping">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            
-                postMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Creates a mapping.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>config</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-  
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>mapping</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>JSKOS mapping</p></td>
-</tr>
-
-  
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
-            <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line310">line 310</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Object</span>
 
 
     </div>
@@ -2344,8 +1736,8 @@ TODO: Clean up and use async/await</p>
 
 
     
-    <h4 class="name" id="putMapping">
-        <a class="href-link" href="#putMapping">#</a>
+    <h4 class="name" id="search">
+        <a class="href-link" href="#search">#</a>
         
             
                 <span class='tag'>async</span>
@@ -2353,7 +1745,7 @@ TODO: Clean up and use async/await</p>
         
         <span class="code-name">
             
-                putMapping<span class="signature">(config)</span><span class="type-signature"> &rarr; {Object}</span>
+                search<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array}</span>
             
         </span>
     </h4>
@@ -2362,7 +1754,7 @@ TODO: Clean up and use async/await</p>
     
     
     <div class="description">
-        <p>Overwrites a mapping.</p>
+        <p>Returns search results in JSKOS Format.</p>
     </div>
     
 
@@ -2387,7 +1779,11 @@ TODO: Clean up and use async/await</p>
             <th>Type</th>
 
             
+            <th>Attributes</th>
+            
 
+            
+            <th>Default</th>
             
 
             <th class="last">Description</th>
@@ -2413,7 +1809,19 @@ TODO: Clean up and use async/await</p>
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
   
 
   <td class="description last"></td>
@@ -2424,7 +1832,42 @@ TODO: Clean up and use async/await</p>
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>mapping</code></td>
+      <td class="name"><code>search</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>search string</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>scheme</code></td>
   
 
   <td class="type">
@@ -2437,10 +1880,100 @@ TODO: Clean up and use async/await</p>
   </td>
 
   
+      <td class="attributes">
+      
 
+      
+
+      
+      </td>
   
 
-  <td class="description last"><p>JSKOS mapping</p></td>
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>concept scheme to search in</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>limit</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          100
+      
+      </td>
+  
+
+  <td class="description last"><p>maximum number of search results (default might be overridden by registry)</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>offset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last"><p>offset</p></td>
 </tr>
 
   
@@ -2488,9 +2021,9 @@ TODO: Clean up and use async/await</p>
 
     
         <p class="tag-source">
-            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line360">line 360</a>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line244">line 244</a>
             </span>
         </p>
     
@@ -2521,13 +2054,13 @@ TODO: Clean up and use async/await</p>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>JSKOS mapping object</p></div>
+    <div class='param-desc column is-7'><p>result in JSKOS Format</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
 
 
     </div>
@@ -3070,6 +2603,350 @@ TODO: Clean up and use async/await</p>
 
 
 
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="suggest">
+        <a class="href-link" href="#suggest">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                suggest<span class="signature">(config)</span><span class="type-signature"> &rarr; {Array}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Returns suggestion result in OpenSearch Suggest Format.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>config</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>search</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>search string</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>scheme</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>concept scheme to search in</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>limit</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          100
+      
+      </td>
+  
+
+  <td class="description last"><p>maximum number of search results (default might be overridden by registry)</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>offset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last"><p>offset</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line216">line 216</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>result in OpenSearch Suggest Format</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
