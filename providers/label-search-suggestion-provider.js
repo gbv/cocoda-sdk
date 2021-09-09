@@ -48,30 +48,13 @@ class LabelSearchSuggestionProvider extends BaseProvider {
   }
 
   /**
-   * List of search provider URIs.
-   *
-   * @private
-   */
-  get _searchUris() {
-    const _searchUris = {}
-    for (let registry of this._registries) {
-      const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
-      if (search && _.isString(search)) {
-        _searchUris[registry.uri] = search
-      }
-    }
-    return _searchUris
-  }
-
-  /**
    * Override `supportsScheme` to check whether a search URI is available for the scheme's registry.
    *
    * @param {Object} scheme - target scheme to check for support
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    let targetRegistry = _.get(scheme, "_registry.uri")
-    return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
+    return _.get(scheme, "_registry.has.search", false)
   }
 
   /**
@@ -88,9 +71,6 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     // TODO: Why mode?
     if (mode != "or") {
       return []
-    }
-    if (!this._searchUris) {
-      throw new errors.MissingApiUrlError({ message: "No registries available to search" })
     }
     if (!selected) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "selected" })
@@ -186,21 +166,16 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const targetRegistry = _.get(targetScheme, "_registry.uri")
-    const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
-    if (!url) {
+    const registry = _.get(targetScheme, "_registry")
+    if (!registry || !registry.has.search) {
       return []
     }
     // API request
-    const data = await this.axios({
+    const data = await registry.search({
       ...config,
-      method: "get",
-      url,
-      params: {
-        query: label,
-        limit,
-        voc: targetScheme.uri,
-      },
+      search: label,
+      scheme: targetScheme,
+      limit,
     })
     // Save result in cache
     if (!this._cache[targetScheme.uri]) {
