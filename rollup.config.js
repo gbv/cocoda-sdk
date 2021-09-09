@@ -10,7 +10,7 @@ export default [
     input: "index.js",
     output: {
       name: "cdk",
-      file: pkg.browser,
+      file: pkg.jsdelivr,
       format: "umd",
     },
     plugins: [
@@ -23,11 +23,11 @@ export default [
       license({
         banner: {
           commentStyle: "ignored",
-          content: `${pkg.name} v${pkg.version}\nCopyright (c) 2020 Verbundzentrale des GBV (VZG)\n@license ${pkg.license}\n\nFor dependency license information, please see ${pkg.browser}.LICENSES.txt.`,
+          content: `${pkg.name} v${pkg.version}\nCopyright (c) 2020 Verbundzentrale des GBV (VZG)\n@license ${pkg.license}\n\nFor dependency license information, please see ${pkg.jsdelivr}.LICENSES.txt.`,
         },
         thirdParty: {
           output: {
-            file: pkg.browser + ".LICENSES.txt",
+            file: pkg.jsdelivr + ".LICENSES.txt",
           },
         },
       }),

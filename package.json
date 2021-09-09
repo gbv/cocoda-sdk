@@ -3,8 +3,9 @@
   "version": "1.0.13",
   "description": "SDK for Cocoda",
   "main": "index.js",
-  "browser": "dist/cocoda-sdk.js",
-  "browserslist": "> 1.5%, not dead",
+  "jsdelivr": "dist/cocoda-sdk.js",
+  "unpkg": "dist/cocoda-sdk.js",
+  "browserslist": "defaults and not ie<=11 and supports es6",
   "files": [
     "dist",
     "lib",
