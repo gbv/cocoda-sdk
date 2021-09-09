@@ -67,6 +67,16 @@ function madsToJskosScheme(data) {
   return scheme
 }
 
+
+// TODO: This might not be necessary anymore once LoC fixes their API.
+const schemeNamespaceFilter = (scheme) => (c) => {
+  if (!c || !scheme || !scheme.namespace) {
+    // Do not filter if no scheme is given
+    return true
+  }
+  return c.uri.startsWith(scheme.namespace)
+}
+
 function madsToJskosConcept(data, { scheme }) {
   const concept = madsToJskosItem(data)
   concept.type = ["http://www.w3.org/2004/02/skos/core#Concept"]
@@ -77,10 +87,10 @@ function madsToJskosConcept(data, { scheme }) {
   }
   // narrower
   const narrower = data["http://www.loc.gov/mads/rdf/v1#hasNarrowerAuthority"] || (jskos.compare(concept.inScheme[0], { uri: lccUri }) && data["http://www.loc.gov/mads/rdf/v1#hasMADSCollectionMember"]) || []
-  concept.narrower = narrower.map(n => ({ uri: n["@id"] }))
+  concept.narrower = narrower.map(n => ({ uri: n["@id"] })).filter(schemeNamespaceFilter(concept.inScheme && concept.inScheme[0]))
   // broader
   const broader = data["http://www.loc.gov/mads/rdf/v1#hasBroaderAuthority"] || (jskos.compare(concept.inScheme[0], { uri: lccUri }) && data["http://www.loc.gov/mads/rdf/v1#isMemberOfMADSCollection"]) || []
-  concept.broader = broader.map(n => ({ uri: n["@id"] }))
+  concept.broader = broader.map(n => ({ uri: n["@id"] })).filter(schemeNamespaceFilter(concept.inScheme && concept.inScheme[0]))
   return concept
 }
 
@@ -266,7 +276,7 @@ class LocApiProvider extends BaseProvider {
       notation: [d.token],
       prefLabel: { en: d.aLabel },
       inScheme: [scheme],
-    }))
+    })).filter(schemeNamespaceFilter(scheme))
   }
 
 }
