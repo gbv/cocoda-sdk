@@ -47,9 +47,9 @@
   },
   "homepage": "https://github.com/gbv/cocoda-sdk#readme",
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/helper-define-map": "^7.14.5",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/core": "^7.15.5",
+    "@babel/helper-define-map": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -65,7 +65,7 @@
     "rollup-plugin-license": "^2.5.0"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "jskos-tools": "^1.0.17",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
