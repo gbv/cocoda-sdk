@@ -130,6 +130,16 @@ class LocApiProvider extends BaseProvider {
     this.has.search = true
   }
 
+  static _registryConfigForBartocApiConfig({ scheme } = {}) {
+    if (!scheme || !supportedSchemes.find(s => jskos.compare(s, scheme))) {
+      return null
+    }
+    // We don't need any API endpoints because they are hardcoded.
+    return {
+      schemes: [scheme],
+    }
+  }
+
   /**
    * Returns all concept schemes.
    *
