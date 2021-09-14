@@ -19,6 +19,7 @@ const registry = cdk.initializeRegistry({
 
   for (let scheme of schemes) {
     if (!scheme._registry || scheme._registry === registry) {
+      // Fallback by default is the registry that provided the scheme (BARTOC in this case), but we don't want that.
       continue
     }
     console.log()
