@@ -500,5 +500,6 @@ class SkosmosApiProvider extends BaseProvider {
 }
 
 SkosmosApiProvider.providerName = "SkosmosApi"
+SkosmosApiProvider.providerType = "http://bartoc.org/api-type/skosmos"
 
 module.exports = SkosmosApiProvider

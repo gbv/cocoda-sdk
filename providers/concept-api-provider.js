@@ -426,5 +426,6 @@ class ConceptApiProvider extends BaseProvider {
 }
 
 ConceptApiProvider.providerName = "ConceptApi"
+ConceptApiProvider.providerType = "http://bartoc.org/api-type/jskos"
 
 module.exports = ConceptApiProvider

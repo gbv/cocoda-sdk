@@ -292,4 +292,6 @@ class LocApiProvider extends BaseProvider {
 }
 
 LocApiProvider.providerName = "LocApi"
+LocApiProvider.providerType = "http://bartoc.org/api-type/loc"
+
 module.exports = LocApiProvider
