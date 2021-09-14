@@ -39,15 +39,6 @@ class LabelSearchSuggestionProvider extends BaseProvider {
   }
 
   /**
-   * Sets a local list of registries where the search providers are taken from.
-   *
-   * @param {Object[]} registries list of registries
-   */
-  setRegistries(registries) {
-    this._registries = registries
-  }
-
-  /**
    * Override `supportsScheme` to check whether a search URI is available for the scheme's registry.
    *
    * @param {Object} scheme - target scheme to check for support
