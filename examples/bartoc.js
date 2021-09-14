@@ -2,7 +2,7 @@
 const cdk = require("../index")
 const registry = cdk.initializeRegistry({
   provider: "ConceptApi",
-  status: "https://bartoc.org/api/status",
+  api: "https://bartoc.org/api/",
 });
 
 // Run rest of commands asynchronously
@@ -18,11 +18,18 @@ const registry = cdk.initializeRegistry({
   console.log(`Loaded ${schemes.length} schemes.`)
 
   for (let scheme of schemes) {
+    if (!scheme._registry || scheme._registry === registry) {
+      continue
+    }
     console.log()
     const id = scheme.notation ? scheme.notation[0] : scheme.uri
     console.log(`Found scheme ${id}, it was initialized with ${scheme._registry._jskos.provider} (${scheme._registry._jskos.api})`)
     console.log(`Loading top concepts for ${id}...`)
-    const top = await scheme._getTop()
-    console.log(`Loaded ${top.length} top concepts.`)
+    try {
+      const top = await scheme._getTop()
+      console.log(`Loaded ${top.length} top concepts.`)
+    } catch (error) {
+      console.error("Error loading top concepts:", error)
+    }
   }
 })()
