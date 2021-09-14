@@ -39,19 +39,12 @@ class LabelSearchSuggestionProvider extends BaseProvider {
   }
 
   /**
-   * List of search provider URIs.
+   * Sets a local list of registries where the search providers are taken from.
    *
-   * @private
+   * @param {Object[]} registries list of registries
    */
-  get _searchUris() {
-    const _searchUris = {}
-    for (let registry of this.cdk && this.cdk.config.registries) {
-      const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
-      if (search && _.isString(search)) {
-        _searchUris[registry.uri] = search
-      }
-    }
-    return _searchUris
+  setRegistries(registries) {
+    this._registries = registries
   }
 
   /**
@@ -61,8 +54,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    let targetRegistry = _.get(scheme, "_registry.uri")
-    return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
+    return _.get(scheme, "_registry.has.search", false)
   }
 
   /**
@@ -79,9 +71,6 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     // TODO: Why mode?
     if (mode != "or") {
       return []
-    }
-    if (!this._searchUris) {
-      throw new errors.MissingApiUrlError({ message: "No registries available to search" })
     }
     if (!selected) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "selected" })
@@ -177,21 +166,16 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const targetRegistry = _.get(targetScheme, "_registry.uri")
-    const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
-    if (!url) {
+    const registry = _.get(targetScheme, "_registry")
+    if (!registry || !registry.has.search) {
       return []
     }
     // API request
-    const data = await this.axios({
+    const data = await registry.search({
       ...config,
-      method: "get",
-      url,
-      params: {
-        query: label,
-        limit,
-        voc: targetScheme.uri,
-      },
+      search: label,
+      scheme: targetScheme,
+      limit,
     })
     // Save result in cache
     if (!this._cache[targetScheme.uri]) {
