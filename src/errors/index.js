@@ -1,9 +1,9 @@
 /**
- * CDKError superclass.
+ * CDKError superexport class.
  *
  * @category Errors
  */
-class CDKError extends Error {
+export class CDKError extends Error {
 
   /**
    * CDKError constructor.
@@ -29,7 +29,7 @@ class CDKError extends Error {
  *
  * @category Errors
  */
-class MethodNotImplementedError extends CDKError {
+export class MethodNotImplementedError extends CDKError {
 
   /**
    * MethodNotImplementedError constructor.
@@ -49,7 +49,7 @@ class MethodNotImplementedError extends CDKError {
  *
  * @category Errors
  */
-class InvalidOrMissingParameterError extends CDKError {
+export class InvalidOrMissingParameterError extends CDKError {
 
   /**
    * InvalidOrMissingParameterError constructor.
@@ -69,51 +69,39 @@ class InvalidOrMissingParameterError extends CDKError {
  *
  * @category Errors
  */
-class InvalidRequestError extends CDKError {}
+export class InvalidRequestError extends CDKError { }
 
 /**
  * BackendError is thrown when the server responded with a 5xx error (i.e. it's a problem on the server side).
  *
  * @category Errors
  */
-class BackendError extends CDKError {}
+export class BackendError extends CDKError { }
 
 /**
  * BackendUnavailableError is thrown when the server did not respond, but the client's internet connection seems to be working.
  *
  * @category Errors
  */
-class BackendUnavailableError extends CDKError {}
+export class BackendUnavailableError extends CDKError { }
 
 /**
  * NetworkError is thrown when the request could not be performend (e.g. the network was not available).
  *
  * @category Errors
  */
-class NetworkError extends CDKError {}
+export class NetworkError extends CDKError { }
 
 /**
  * MissingApiUrlError is thrown when the called method is valid, but the required API URL is not available for the current registry.
  *
  * @category Errors
  */
-class MissingApiUrlError extends CDKError {}
+export class MissingApiUrlError extends CDKError { }
 
 /**
  * InvalidProviderError is thrown when a provider is added to the provider list that does not inherit from BaseProvider.
  *
  * @category Errors
  */
-class InvalidProviderError extends CDKError {}
-
-module.exports = {
-  CDKError,
-  MethodNotImplementedError,
-  InvalidOrMissingParameterError,
-  BackendError,
-  BackendUnavailableError,
-  NetworkError,
-  InvalidRequestError,
-  MissingApiUrlError,
-  InvalidProviderError,
-}
+export class InvalidProviderError extends CDKError { }

@@ -1,12 +1,12 @@
-const assert = require("assert")
-const cdk = require("../")
-const CDK = require("../lib/CocodaSDK")
+import assert from "assert"
+import { cdk } from "../src/index.js"
+import CDK from "../src/lib/CocodaSDK.js"
 
 // Import BaseProvider for subclassing
-const BaseProvider = require("../providers/base-provider")
+import BaseProvider from "../src/providers/base-provider.js"
 
 // axios mock
-const MockAdapter = require("axios-mock-adapter")
+import MockAdapter from "axios-mock-adapter"
 const mock = new MockAdapter(cdk.axios)
 
 describe("index", () => {

@@ -1,4 +1,4 @@
-const cdk = require("../index")
+const cdk = require("../dist/cjs/index.cjs")
 
 /**
  * Get a cdk instances and load config from dev config.

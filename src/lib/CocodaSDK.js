@@ -1,10 +1,10 @@
-const providers = require("../providers")
-const errors = require("../errors")
-const axios = require("axios")
-const _ = require("../utils/lodash")
-const jskos = require("jskos-tools")
+import { providers } from "../providers/index.js"
+import * as errors from "../errors/index.js"
+import axios from "axios"
+import * as _ from "../utils/lodash.js"
+import jskos from "jskos-tools"
 
-class CocodaSDK {
+export default class CocodaSDK {
 
   /**
    * CDK constructor.
@@ -388,5 +388,3 @@ class CocodaSDK {
   }
 
 }
-
-module.exports = CocodaSDK

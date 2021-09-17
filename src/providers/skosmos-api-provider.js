@@ -1,7 +1,7 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
 
 /**
  * Skosmos API.
@@ -31,7 +31,7 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class SkosmosApiProvider extends BaseProvider {
+export default class SkosmosApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -501,5 +501,3 @@ class SkosmosApiProvider extends BaseProvider {
 
 SkosmosApiProvider.providerName = "SkosmosApi"
 SkosmosApiProvider.providerType = "http://bartoc.org/api-type/skosmos"
-
-module.exports = SkosmosApiProvider

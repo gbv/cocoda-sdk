@@ -1,7 +1,7 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
 
 // TODO: Only keep the last 20 results in cache.
 // TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.
@@ -28,7 +28,7 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class LabelSearchSuggestionProvider extends BaseProvider {
+export default class LabelSearchSuggestionProvider extends BaseProvider {
 
   /**
    * @private
@@ -181,5 +181,3 @@ class LabelSearchSuggestionProvider extends BaseProvider {
 
 LabelSearchSuggestionProvider.providerName = "LabelSearchSuggestion"
 LabelSearchSuggestionProvider.stored = false
-
-module.exports = LabelSearchSuggestionProvider

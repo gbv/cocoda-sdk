@@ -1,8 +1,8 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
 
 // TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
 
@@ -30,7 +30,7 @@ const utils = require("../utils")
  * @extends BaseProvider
  * @category Providers
  */
-class MappingsApiProvider extends BaseProvider {
+export default class MappingsApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -392,5 +392,3 @@ class MappingsApiProvider extends BaseProvider {
 
 MappingsApiProvider.providerName = "MappingsApi"
 MappingsApiProvider.stored = true
-
-module.exports = MappingsApiProvider

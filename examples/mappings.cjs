@@ -1,7 +1,7 @@
 (async () => {
   let result
 
-  const cdk = await require("./cdk")
+  const cdk = await require("./cdk.cjs")
 
   // Get dev mapping registry
   const registry = cdk.getRegistryForUri("http://coli-conc.gbv.de/registry/coli-conc-mappings-dev")

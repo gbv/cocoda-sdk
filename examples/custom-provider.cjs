@@ -1,5 +1,5 @@
-const cdk = require("../index")
-const BaseProvider = require("../providers/base-provider")
+const cdk = require("../dist/cjs/index.cjs")
+const BaseProvider = cdk.providers.Base
 
 // Custom provider that only returns one empty mapping
 class CustomProvider extends BaseProvider {
@@ -14,10 +14,9 @@ class CustomProvider extends BaseProvider {
     ]
   }
 }
-CustomProvider.providerName = "Custom"
+CustomProvider.providerName = "Custom";
 
-;(async () => {
-
+(async () => {
   cdk.addProvider(CustomProvider)
   const registry = cdk.initializeRegistry({
     provider: "Custom",

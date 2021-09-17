@@ -1,4 +1,4 @@
-const requestMethods = [
+export const requestMethods = [
   // General
   {
     method: "getRegistries",
@@ -134,7 +134,7 @@ const requestMethods = [
   },
 ]
 
-function concatUrl(...parts) {
+export function concatUrl(...parts) {
   let [url, ...otherParts] = parts
   for (let part of otherParts) {
     if (!url.endsWith("/")) {
@@ -150,14 +150,8 @@ function concatUrl(...parts) {
 
 
 // Retain custom array properties
-function withCustomProps(arr, from) {
+export function withCustomProps(arr, from) {
   arr._totalCount = from._totalCount
   arr._url = from._url
   return arr
-}
-
-module.exports = {
-  requestMethods,
-  concatUrl,
-  withCustomProps,
 }

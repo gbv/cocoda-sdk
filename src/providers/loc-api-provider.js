@@ -1,7 +1,7 @@
-const BaseProvider = require("./base-provider")
-const errors = require("../errors")
-const jskos = require("jskos-tools")
-const axios = require("axios")
+import BaseProvider from "./base-provider.js"
+import * as errors from "../errors/index.js"
+import jskos from "jskos-tools"
+import axios from "axios"
 
 const locUriPrefix = "http://id.loc.gov/authorities/"
 const supportedSchemes = [
@@ -114,7 +114,7 @@ function madsToJskosConcept(data, { scheme }) {
  * @extends BaseProvider
  * @category Providers
  */
-class LocApiProvider extends BaseProvider {
+export default class LocApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -293,5 +293,3 @@ class LocApiProvider extends BaseProvider {
 
 LocApiProvider.providerName = "LocApi"
 LocApiProvider.providerType = "http://bartoc.org/api-type/loc"
-
-module.exports = LocApiProvider

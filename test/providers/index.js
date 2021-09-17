@@ -1,5 +1,5 @@
-const providers = require("../../providers")
-const assert = require("assert")
+import { providers } from "../../src/providers/index.js"
+import assert from "assert"
 
 describe("providers", () => {
 

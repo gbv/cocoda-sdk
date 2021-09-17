@@ -1,8 +1,8 @@
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const axios = require("axios")
-const utils = require("../utils")
-const errors = require("../errors")
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import axios from "axios"
+import * as utils from "../utils/index.js"
+import * as errors from "../errors/index.js"
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
@@ -69,7 +69,7 @@ const errors = require("../errors")
  *
  * @category Providers
  */
-class BaseProvider {
+export default class BaseProvider {
 
   /**
    * Provider constructor.
@@ -187,7 +187,7 @@ class BaseProvider {
       ) {
         error.config._retryCount = count + 1
         // from: https://github.com/axios/axios/issues/934#issuecomment-531463172
-        if(error.config.data) error.config.data = JSON.parse(error.config.data)
+        if (error.config.data) error.config.data = JSON.parse(error.config.data)
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             this.axios(error.config).then(resolve).catch(reject)
@@ -284,7 +284,7 @@ class BaseProvider {
         }
         currentRequests.push(request)
         // Remove from list of current requests after promise is done
-        promise.catch(() => {}).then(() => currentRequests.splice(currentRequests.indexOf(request), 1))
+        promise.catch(() => { }).then(() => currentRequests.splice(currentRequests.indexOf(request), 1))
         // Add adjustment methods
         return promise
       }
@@ -321,7 +321,7 @@ class BaseProvider {
             method: "get",
             url: this._api.status,
           })
-        } catch(error) {
+        } catch (error) {
           if (_.get(error, "response.status") === 404) {
             // If /status is not available, remove from _api
             this._api.status = null
@@ -354,14 +354,14 @@ class BaseProvider {
    *
    * @private
    */
-  _prepare() {}
+  _prepare() { }
 
   /**
    * Setup to be executed after init. Should be overwritten by subclasses.
    *
    * @private
    */
-  _setup() {}
+  _setup() { }
 
   /**
    * Returns a source for a axios cancel token.
@@ -580,5 +580,3 @@ class BaseProvider {
 }
 
 BaseProvider.providerName = "Base"
-
-module.exports = BaseProvider

@@ -1,8 +1,8 @@
-const BaseProvider = require("./base-provider")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
-const jskos = require("jskos-tools")
+import BaseProvider from "./base-provider.js"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
+import jskos from "jskos-tools"
 
 /**
  * JSKOS Concept API.
@@ -29,7 +29,7 @@ const jskos = require("jskos-tools")
  * @extends BaseProvider
  * @category Providers
  */
-class ConceptApiProvider extends BaseProvider {
+export default class ConceptApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -427,5 +427,3 @@ class ConceptApiProvider extends BaseProvider {
 
 ConceptApiProvider.providerName = "ConceptApi"
 ConceptApiProvider.providerType = "http://bartoc.org/api-type/jskos"
-
-module.exports = ConceptApiProvider

@@ -1,8 +1,8 @@
-const MappingsApiProvider = require("../../providers/mappings-api-provider")
-const assert = require("assert")
-const MockAdapter = require("axios-mock-adapter")
-const errors = require("../../errors")
-const jskos = require("jskos-tools")
+import MappingsApiProvider from "../../src/providers/mappings-api-provider.js"
+import assert from "assert"
+import MockAdapter from "axios-mock-adapter"
+import * as errors from "../../src/errors/index.js"
+import jskos from "jskos-tools"
 
 const api = {
   mappings: "test:/mappings",

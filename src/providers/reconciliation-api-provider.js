@@ -1,7 +1,7 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
 
 // TODO: Document namespace etc.
 
@@ -31,7 +31,7 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class ReconciliationApiProvider extends BaseProvider {
+export default class ReconciliationApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -119,11 +119,13 @@ class ReconciliationApiProvider extends BaseProvider {
       fromScheme,
       from: { memberSet: [concept] },
       toScheme,
-      to: { memberSet: [
-        {
-          uri: namespace + result.id,
-        },
-      ] },
+      to: {
+        memberSet: [
+          {
+            uri: namespace + result.id,
+          },
+        ],
+      },
       type: [
         result.match ?
           "http://www.w3.org/2004/02/skos/core#exactMatch" :
@@ -207,5 +209,3 @@ class ReconciliationApiProvider extends BaseProvider {
 
 ReconciliationApiProvider.providerName = "ReconciliationApi"
 ReconciliationApiProvider.stored = false
-
-module.exports = ReconciliationApiProvider
