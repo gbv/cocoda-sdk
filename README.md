@@ -459,6 +459,6 @@ PRs accepted.
 Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ## License
-MIT Copyright (c) 2020 Verbundzentrale des GBV (VZG)
+MIT Copyright (c) 2021 Verbundzentrale des GBV (VZG)
 
 [jskos-server]: https://github.com/gbv/jskos-server
