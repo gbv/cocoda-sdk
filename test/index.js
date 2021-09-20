@@ -1,9 +1,5 @@
 import assert from "assert"
-import { cdk } from "../src/index.js"
-import CDK from "../src/lib/CocodaSDK.js"
-
-// Import BaseProvider for subclassing
-import BaseProvider from "../src/providers/base-provider.js"
+import { cdk, CDK, BaseProvider } from "../src/index.js"
 
 // axios mock
 import MockAdapter from "axios-mock-adapter"

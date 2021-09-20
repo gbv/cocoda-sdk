@@ -1,5 +1,6 @@
-import { providers } from "../../src/providers/index.js"
 import assert from "assert"
+import { cdk } from "../../src/index.js"
+const providers = cdk.providers
 
 describe("providers", () => {
 
@@ -11,12 +12,7 @@ describe("providers", () => {
     const defaultProviderNames = [
       "Base",
       "ConceptApi",
-      "LocalMappings",
       "MappingsApi",
-      "OccurrencesApi",
-      "ReconciliationApi",
-      "LabelSearchSuggestion",
-      "SkosmosApi",
     ]
     for (let name of defaultProviderNames) {
       assert.ok(!!providers[name], `expected provider ${name} to exist`)

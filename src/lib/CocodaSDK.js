@@ -1,8 +1,30 @@
-import { providers } from "../providers/index.js"
 import * as errors from "../errors/index.js"
 import axios from "axios"
 import * as _ from "../utils/lodash.js"
 import jskos from "jskos-tools"
+
+import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../providers/index.js"
+
+// Registered providers
+const providers = {
+  [BaseProvider.providerName]: BaseProvider,
+  init(registry) {
+    if (this[registry.provider]) {
+      return new this[registry.provider](registry)
+    }
+    throw new errors.InvalidProviderError()
+  },
+  addProvider(provider) {
+    if (provider.prototype instanceof providers[BaseProvider.providerName]) {
+      this[provider.providerName] = provider
+    } else {
+      throw new errors.InvalidProviderError()
+    }
+  },
+}
+// Only ConceptApi and MappingsApi are available by default
+providers.addProvider(ConceptApiProvider)
+providers.addProvider(MappingsApiProvider)
 
 export default class CocodaSDK {
 
@@ -55,13 +77,9 @@ export default class CocodaSDK {
   }
 
   /**
-   * Array of registered providers. Especially useful for implementating custom providers:
+   * Map of registered providers.
    *
-   * class CustomProvider extends cdk.providers.Base {
-   *   // ...
-   * }
-   *
-   * @returns {Array} array of registered providers
+   * @returns {Object} map of registered providers (name -> provider)
    */
   get providers() {
     return providers
@@ -154,6 +172,15 @@ export default class CocodaSDK {
    * @param {Object} provider provider class that extends BaseProvider
    */
   addProvider(provider) {
+    providers.addProvider(provider)
+  }
+
+  /**
+   * Static method to add custom provider.
+   *
+   * @param {Object} provider provider class that extends BaseProvider
+   */
+  static addProvider(provider) {
     providers.addProvider(provider)
   }
 
