@@ -10,13 +10,14 @@
 - [Install](#install)
 - [Usage](#usage)
   - [Import](#import)
+  - [v1 Compatibility](#v1-compatibility)
   - [Configuration](#configuration)
   - [Registries](#registries)
   - [Providers](#providers)
   - [Multiple Instances](#multiple-instances)
   - [Authenticated Requests](#authenticated-requests)
 - [Methods](#methods)
-  - [Methods for `cocoda-sdk` instance](#methods-for-cocoda-sdk-instance)
+  - [Methods for cocoda-sdk instance](#methods-for-cocoda-sdk-instance)
   - [Registry Methods - General](#registry-methods---general)
   - [Registry Methods - Concept Schemes](#registry-methods---concept-schemes)
   - [Registry Methods - Concepts](#registry-methods---concepts)
@@ -34,15 +35,14 @@
 npm i cocoda-sdk
 ```
 
-We are also providing a browser bundle:
-- https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~49K gzipped, ~151K not gzipped)
+We are also providing a browser bundle: https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~49K gzipped, ~151K not gzipped) It will be available under the global name `CDK` and contain the listed members below (in particular the default instance `CDK.cdk`).
 
 [![](https://data.jsdelivr.com/v1/package/npm/cocoda-sdk/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cocoda-sdk)
 
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a default instance, so the same object is used on each import of `cocoda-sdk`. We recommend using this instance over creating one's own.
+cocoda-sdk exports a default instance, so the same object is used on each import of cocoda-sdk. We recommend using this instance over creating one's own.
 
 ```js
 const { cdk } = require("cocoda-sdk") // CommonJS
@@ -51,14 +51,39 @@ import { cdk } from "cocoda-sdk" // ESM
 
 Since cocoda-sdk is an ES module, we'll use the `import`/`export` syntax in the rest of the documentation.
 
-`cocoda-sdk` also exports some other members:
+cocoda-sdk also exports some other members:
 - `CocodaSDK` - the class that is behind the default instance
 - `errors` - see [Errors](#errors)
 - All individual provider classes - see [Providers](#providers)
   - Note: You need to append `Provider` to the names, e.g. `LocalMappings` is exported as `LocalMappingsProvider`.
 
+### v1 Compatibility
+cocoda-sdk v2 changed how it is exported and therefore it needs to be included differently.
+
+```js
+// CommonJS
+// Previously: const cdk = require("cocoda-sdk")
+// Now:
+const { cdk } = require("cocoda-sdk")
+// or: const cdk = require("cocoda-sdk").cdk
+```
+
+```js
+// ES6
+// Previously: import * as cdk from "cocoda-sdk"
+// Now:
+import { cdk } from "cocoda-sdk"
+```
+
+```js
+// Browser
+// Previously the default instance was globally available under `cdk`.
+// Now the module is available under `CDK` with `cdk` as one of its members. To easily make previous code compatible:
+const { cdk } = CDK
+```
+
 ### Configuration
-`cocoda-sdk` can be configured after import:
+cocoda-sdk can be configured after import:
 
 ```js
 import { cdk } from "cocoda-sdk"
@@ -74,7 +99,7 @@ await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/co
 
 The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular, the configuration contains an array property [`registries`](#registries).
 
-If you only use `cocoda-sdk` with a single registry, configuration might not be necessary (see below).
+If you only use cocoda-sdk with a single registry, configuration might not be necessary (see below).
 
 ### Registries
 
@@ -116,7 +141,7 @@ registry.getMappings()
 
 #### Using Registries From a Configuration
 
-If you initialize `cocoda-sdk` with a [configuration](#configuration), it will initialize all included registries automatically. Those registries are then accessible via `cdk.config.registries`. Alternatively, you can retrieve registries by URI:
+If you initialize cocoda-sdk with a [configuration](#configuration), it will initialize all included registries automatically. Those registries are then accessible via `cdk.config.registries`. Alternatively, you can retrieve registries by URI:
 
 ```js
 // After setting up cdk
@@ -127,7 +152,7 @@ const registry = cdk.getRegistryForUri("...")
 
 Providers allow access to different types of APIs.
 
-The following providers are offered in `cocoda-sdk` by default:
+The following providers are offered in cocoda-sdk by default:
 - `Base` - the base provider that all other providers have to inherit from
 - `ConceptApi` - access to concept schemes and concepts via [jskos-server]
 - `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
@@ -159,7 +184,7 @@ import CustomProvider from "./custom-provider.js"
 cdk.addProvider(CustomProvider)
 ```
 
-It is then possible to use that provider via `cocoda-sdk` as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/master/examples/custom-provider.js).)
+It is then possible to use that provider via cocoda-sdk as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/master/examples/custom-provider.js).)
 
 ### Multiple Instances
 
@@ -170,7 +195,7 @@ const newCdk = cdk.createInstance(config)
 ```
 
 ### Authenticated Requests
-The following is a barebones example on how to use `cocoda-sdk` together with [`login-client`](https://github.com/gbv/login-client).
+The following is a barebones example on how to use cocoda-sdk together with [`login-client`](https://github.com/gbv/login-client).
 
 Prerequisites:
 - A local instance of [Login Server](https://github.com/gbv/login-server) running on `localhost:3004`
@@ -253,14 +278,14 @@ Note that for a real application, there are more things necessary:
 You can find more in-depth examples here:
 - The [Vuex store module for authentication in Cocoda](https://github.com/gbv/cocoda/blob/dev/src/store/modules/auth.js).
   - Even if you're not using Vue.js, this can be helpful.
-  - Cocoda is using `cocoda-sdk` extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
+  - Cocoda is using cocoda-sdk extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
 - The [API page of Login Server](https://github.com/gbv/login-server/blob/master/views/api.ejs). This is merely an example on how to use `login-client`.
 
 ## Methods
 
-A `cocoda-sdk` instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of `cocoda-sdk` (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
+A cocoda-sdk instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of cocoda-sdk (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
 
-### Methods for `cocoda-sdk` instance
+### Methods for cocoda-sdk instance
 Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.html).
 
 ### Registry Methods - General
@@ -383,7 +408,7 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 - [SkosmosApiProvider - getTypes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getTypes)
 
 ## Errors
-`cocoda-sdk` defines some custom errors.
+cocoda-sdk defines some custom errors.
 
 ```js
 const { errors } = require("cocoda-sdk") // CommonJS
