@@ -3,82 +3,95 @@ import glob from "glob"
 import pkg from "./package.json"
 import checker from "license-checker"
 import fs from "fs"
+import ifdef from "esbuild-plugin-ifdef";
 
-const sourceFolder = process.env.BUILD_SOURCE_FOLDER || "./src"
-const targetFolder = process.env.BUILD_TARGET_FOLDER || "./dist"
+(async () => {
 
-// Node ESM build
-esbuild.buildSync({
-  entryPoints: glob.sync(`${sourceFolder}/**/*.js`),
-  platform: "node",
-  format: "esm",
-  outdir: `${targetFolder}/esm`,
-})
+  const sourceFolder = process.env.BUILD_SOURCE_FOLDER || "./src"
+  const targetFolder = process.env.BUILD_TARGET_FOLDER || "./dist"
+  let define = {}
 
-// Node CJS build
-esbuild.buildSync({
-  entryPoints: [`${sourceFolder}/index.js`],
-  platform: "node",
-  format: "cjs",
-  outdir: `${targetFolder}/cjs`,
-  outExtension: {
-    ".js": ".cjs",
-  },
-  bundle: true,
-  external: Object.keys(pkg.dependencies),
-})
+  // Node ESM build
+  await esbuild.build({
+    entryPoints: glob.sync(`${sourceFolder}/**/*.js`),
+    platform: "node",
+    format: "esm",
+    outdir: `${targetFolder}/esm`,
+    define,
+    plugins: [ifdef(define)],
+  })
 
-// Browser
-const browserTargetFile = `${targetFolder}/${pkg.name}.js`
-const browserTargetFileLicenses = `${browserTargetFile}.LICENSES.txt`
-let licenseFile = "./LICENSE"
+  // Node CJS build
+  await esbuild.build({
+    entryPoints: [`${sourceFolder}/index.js`],
+    platform: "node",
+    format: "cjs",
+    outdir: `${targetFolder}/cjs`,
+    outExtension: {
+      ".js": ".cjs",
+    },
+    bundle: true,
+    external: Object.keys(pkg.dependencies),
+    define,
+    plugins: [ifdef(define)],
+  })
 
-// Licenses file
-checker.init({
-  start: "./",
-  production: true,
-}, (error, packages) => {
-  if (error) {
-    console.error("Error assembling licenses:", error)
-    process.exit(1)
-  }
-  let text = ""
-  for (const name of Object.keys(packages)) {
-    const pkgInfo = packages[name]
-    if (pkgInfo.path === "./") {
-      if (pkgInfo.licenseFile) {
-        licenseFile = `${pkgInfo.path}${pkgInfo.licenseFile}`
-      }
-      continue
+  // Browser
+  define["process.browser"] = true
+  const browserTargetFile = `${targetFolder}/${pkg.name}.js`
+  const browserTargetFileLicenses = `${browserTargetFile}.LICENSES.txt`
+  let licenseFile = "./LICENSE"
+
+  // Licenses file
+  checker.init({
+    start: "./",
+    production: true,
+  }, (error, packages) => {
+    if (error) {
+      console.error("Error assembling licenses:", error)
+      process.exit(1)
     }
-    text += `\n${name} by ${pkgInfo.publisher} (${pkgInfo.repository})\n`
-    text += `License: ${pkgInfo.licenses}\n\n`
-    text += fs.readFileSync(pkgInfo.licenseFile, "utf-8")
-    text += "\n---\n"
-  }
-  fs.writeFileSync(browserTargetFileLicenses, text)
-})
+    let text = ""
+    for (const name of Object.keys(packages)) {
+      const pkgInfo = packages[name]
+      if (pkgInfo.path === "./") {
+        if (pkgInfo.licenseFile) {
+          licenseFile = `${pkgInfo.path}${pkgInfo.licenseFile}`
+        }
+        continue
+      }
+      text += `\n${name} by ${pkgInfo.publisher} (${pkgInfo.repository})\n`
+      text += `License: ${pkgInfo.licenses}\n\n`
+      text += fs.readFileSync(pkgInfo.licenseFile, "utf-8")
+      text += "\n---\n"
+    }
+    fs.writeFileSync(browserTargetFileLicenses, text)
+  })
 
-// Copyright for banner
-const bannerCopyright = fs.readFileSync(licenseFile, "utf-8").split("\n").find(l => l.startsWith("Copyright"))
+  // Copyright for banner
+  const bannerCopyright = fs.readFileSync(licenseFile, "utf-8").split("\n").find(l => l.startsWith("Copyright"))
 
-// Browser build
-esbuild.buildSync({
-  entryPoints: [`${sourceFolder}/index.js`],
-  bundle: true,
-  minify: true,
-  sourcemap: true,
-  target: "es2015",
-  format: "iife",
-  globalName: "CDK",
-  outfile: browserTargetFile,
-  banner: {
-    js: `/*!
-* ${pkg.name} v${pkg.version}
-* ${bannerCopyright}
-* @license ${pkg.license}
-*
-* For dependency license information, please see ${browserTargetFileLicenses}.
-*/`,
-  },
-})
+  // Browser build
+  await esbuild.build({
+    entryPoints: [`${sourceFolder}/index.js`],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    target: "es2015",
+    format: "iife",
+    globalName: "CDK",
+    outfile: browserTargetFile,
+    banner: {
+      js: `/*!
+  * ${pkg.name} v${pkg.version}
+  * ${bannerCopyright}
+  * @license ${pkg.license}
+  *
+  * For dependency license information, please see ${browserTargetFileLicenses}.
+  */`,
+    },
+    define,
+    plugins: [ifdef(define)],
+  })
+
+})()

@@ -142,6 +142,15 @@ The following providers are also exported, but have to be added via `cdk.addProv
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
 
+To add a provider, append `Provider` to its name and import it together with `cdk`:
+
+```js
+import { cdk, LocApiProvider } from "cocoda-sdk"
+cdk.addProvider(LocApiProvider)
+```
+
+Note that in the browser bundle, all providers listed above are included and do not have to be added separately.
+
 Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
 
 It is also possible to add custom providers that inherit from BaseProvider:

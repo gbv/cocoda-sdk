@@ -26,6 +26,14 @@ const providers = {
 providers.addProvider(ConceptApiProvider)
 providers.addProvider(MappingsApiProvider)
 
+// For the browser build, add all providers by default
+//#ifdef process.browser
+import * as allProviders from "../providers/index.js"
+Object.values(allProviders).forEach(provider => {
+  providers.addProvider(provider)
+})
+//#endif
+
 export default class CocodaSDK {
 
   /**
