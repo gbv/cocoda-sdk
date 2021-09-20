@@ -65,7 +65,7 @@
     "axios": "^0.21.4",
     "jskos-tools": "^1.0.17",
     "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "uuid": "^8.3.2"
   }
 }
