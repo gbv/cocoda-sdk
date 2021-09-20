@@ -70,7 +70,7 @@ esbuild.buildSync({
   sourcemap: true,
   target: "es2015",
   format: "iife",
-  globalName: "cdk",
+  globalName: "CDK",
   outfile: browserTargetFile,
   banner: {
     js: `/*!

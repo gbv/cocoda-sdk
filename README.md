@@ -186,11 +186,11 @@ See also the code comments inside the example.
 </head>
 <body>
 <!-- login-client, cocoda-sdk -->
-<script src="https://cdn.jsdelivr.net/npm/gbv-login-client"></script>
-<script src="https://cdn.jsdelivr.net/npm/cocoda-sdk"></script>
+<script src="https://cdn.jsdelivr.net/npm/gbv-login-client@0"></script>
+<script src="https://cdn.jsdelivr.net/npm/cocoda-sdk@2"></script>
 <script>
 // Initialize mapping registry at localhost:3000
-const registry = cdk.cdk.initializeRegistry({
+const registry = CDK.cdk.initializeRegistry({
   provider: "MappingsApi",
   uri: "local:mappings",
   status: "http://localhost:3000/status",
