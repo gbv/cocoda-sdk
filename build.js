@@ -27,12 +27,6 @@ esbuild.buildSync({
   bundle: true,
   external: Object.keys(pkg.dependencies),
 })
-// Adjust how CJS is exported to maintain compatibility with previous builds
-const cjsLines = fs.readFileSync(`${targetFolder}/cjs/index.cjs`, "utf-8").split("\n")
-const exportIndex = cjsLines.findIndex(line => line.includes("module.exports"))
-cjsLines[exportIndex] = "module.exports = cdk;"
-const cjsContent = cjsLines.slice(0, exportIndex + 1).join("\n") + "\n"
-fs.writeFileSync(`${targetFolder}/cjs/index.cjs`, cjsContent)
 
 // Browser
 const browserTargetFile = `${targetFolder}/${pkg.name}.js`
