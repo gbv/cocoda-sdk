@@ -52,6 +52,12 @@ import { cdk } from "cocoda-sdk" // ESM
 
 Since cocoda-sdk is an ES module, we'll use the `import`/`export` syntax in the rest of the documentation.
 
+`cocoda-sdk` also exports some other members:
+- `CocodaSDK` - the class that is behind the default instance
+- `errors` - see [Errors](#errors)
+- All individual provider classes - see [Providers](#providers)
+  - Note: You need to append `Provider` to the names, e.g. `LocalMappings` is exported as `LocalMappingsProvider`.
+
 ### Configuration
 `cocoda-sdk` can be configured after import:
 
