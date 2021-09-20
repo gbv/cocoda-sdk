@@ -113,7 +113,7 @@
         
             <div class="class-description"><p>Label search suggestion provider.</p>
 <p>This provider offers mapping recommendations based on label match via the <code>/search</code> endpoint of JSKOS APIs.</p>
-<p>The provider requires that a list of initialized registries with search endpoints is provided via <code>setRegistries</code>. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.</p>
+<p>The provider requires that a list of initialized registries with search endpoints is provided via <code>cdk</code> (which refers to the CDK instance that's using this provider).</p>
 <p>To use it in a registry, specify <code>provider</code> as &quot;LabelSearchSuggestion&quot;:</p>
 <pre class="prettyprint source lang-json"><code>{
  &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-recommendations&quot;
@@ -595,7 +595,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line570">line 570</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line573">line 573</a>
             </span>
         </p>
     
@@ -969,7 +969,7 @@
         <p class="tag-source">
             <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line70">line 70</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line61">line 61</a>
             </span>
         </p>
     
@@ -1623,7 +1623,7 @@
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line557">line 557</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line560">line 560</a>
             </span>
         </p>
     
@@ -1851,154 +1851,6 @@
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
                 <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line382">line 382</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="setRegistries">
-        <a class="href-link" href="#setRegistries">#</a>
-        
-        <span class="code-name">
-            
-                setRegistries<span class="signature">(registries)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Sets a local list of registries where the search providers are taken from.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>registries</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">Array.&lt;Object></span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>list of registries</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
-            <span>
-                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line46">line 46</a>
             </span>
         </p>
     
@@ -2482,7 +2334,7 @@
         <p class="tag-source">
             <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line56">line 56</a>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line47">line 47</a>
             </span>
         </p>
     

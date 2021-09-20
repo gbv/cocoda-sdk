@@ -158,10 +158,10 @@ class CocodaSDK {
     config.registries = config.registries || []
     // 2. Initialize registries
     config.registries = config.registries.map(registry => providers.init(registry)).filter(r => r)
-    // 3. Call setRegistries for registries if available
-    for (let registry of config.registries.filter(r => r.setRegistries)) {
-      registry.setRegistries(config.registries)
-    }
+    // 3. Set cdk property for all registries
+    config.registries.forEach(registry => {
+      registry.cdk = this
+    })
     this._config = config
   }
 
@@ -254,7 +254,9 @@ class CocodaSDK {
    * @returns {Object} initialized registry
    */
   initializeRegistry(registry) {
-    return providers.init(registry)
+    registry = providers.init(registry)
+    registry.cdk = this
+    return registry
   }
 
   /**
@@ -464,6 +466,36 @@ class CocodaSDK {
       schemes = jskos.sortSchemes(schemes)
       return schemes
     })
+  }
+
+  registryForScheme(scheme) {
+    let registry = scheme._registry
+    if (registry) {
+      return registry
+    }
+
+    for (let { type, ...config } of scheme.API || []) {
+      const provider = Object.values(providers).find(p => p.providerType === type)
+      if (!provider || !provider._registryConfigForBartocApiConfig) {
+        continue
+      }
+      const providerName = provider.providerName
+      // Some providers need access to the scheme
+      config.scheme = scheme
+      config = providers[providerName]._registryConfigForBartocApiConfig(config)
+      if (!config) {
+        continue
+      }
+      config.provider = providerName
+
+      try {
+        registry = this.initializeRegistry(config)
+        return registry
+      } catch (error) {
+        continue
+      }
+    }
+    return null
   }
 
 }

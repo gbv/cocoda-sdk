@@ -120,7 +120,6 @@
 <li>_setup: will be called after registry is initialized (i.e. it's <code>/status</code> endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations</li>
 <li>isAuthorizedFor: override if you want to customize</li>
 <li>supportsScheme: override if you want to customize</li>
-<li>setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter <code>registries</code>)</li>
 <li>getRegistries</li>
 <li>getSchemes</li>
 <li>getTypes</li>
@@ -148,6 +147,7 @@
 </ul>
 <p>Internal (starting with underscore) and external properties that can be used:</p>
 <ul>
+<li><code>this.cdk</code>: a reference to the current CDK instance (can be use to request other registries or initialize a new registry)</li>
 <li><code>this.has</code>: an object of functionality of the registry (needs to be set by subclasses)</li>
 <li><code>this.languages</code>: an array of language tags provided by the user in order of priority</li>
 <li><code>this._jskos</code>: the raw JSKOS object used to initialize this registry</li>
@@ -672,7 +672,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line570">line 570</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line573">line 573</a>
             </span>
         </p>
     
@@ -1408,7 +1408,7 @@ Example:</p>
         <p class="tag-source">
             <a href="providers_base-provider.js.html" class="button">View Source</a>
             <span>
-                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line557">line 557</a>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line560">line 560</a>
             </span>
         </p>
     
