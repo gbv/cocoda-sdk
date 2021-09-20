@@ -1,5 +1,5 @@
 // This is all the setup that's needed!
-const cdk = require("../dist/cjs/index.cjs")
+import { cdk } from "../src/index.js"
 const registry = cdk.initializeRegistry({
   provider: "ConceptApi",
   api: "https://bartoc.org/api/",

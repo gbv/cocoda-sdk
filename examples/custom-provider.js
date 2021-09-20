@@ -1,5 +1,4 @@
-const cdk = require("../dist/cjs/index.cjs")
-const BaseProvider = cdk.providers.Base
+import { cdk, BaseProvider } from "../src/index.js"
 
 // Custom provider that only returns one empty mapping
 class CustomProvider extends BaseProvider {
