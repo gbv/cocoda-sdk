@@ -34,9 +34,8 @@
 npm i cocoda-sdk
 ```
 
-We are also providing browser bundles:
-- Development (not minified, ~115K gzipped, ~510K not gzipped): https://cdn.jsdelivr.net/npm/cocoda-sdk/dist/cocoda-sdk.js
-- **Production** (minified, ~50K gzipped, ~150K not gzipped): https://cdn.jsdelivr.net/npm/cocoda-sdk@1/dist/cocoda-sdk.min.js
+We are also providing a browser bundle:
+- https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~49K gzipped, ~151K not gzipped)
 
 [![](https://data.jsdelivr.com/v1/package/npm/cocoda-sdk/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cocoda-sdk)
 
