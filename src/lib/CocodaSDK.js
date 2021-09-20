@@ -15,7 +15,7 @@ const providers = {
     throw new errors.InvalidProviderError()
   },
   addProvider(provider) {
-    if (provider.prototype instanceof providers[BaseProvider.providerName]) {
+    if (provider.prototype instanceof BaseProvider || provider === BaseProvider) {
       this[provider.providerName] = provider
     } else {
       throw new errors.InvalidProviderError()
