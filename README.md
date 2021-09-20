@@ -169,7 +169,7 @@ Prerequisites:
 
 See also the code comments inside the example.
 
-<!-- TODO: Adjust example with new browser bundle. Maybe offer ESM example as well. -->
+<!-- TODO: Offer modern ESM example. -->
 
 ```html
 <!DOCTYPE html>
@@ -184,7 +184,7 @@ See also the code comments inside the example.
 <script src="https://cdn.jsdelivr.net/npm/cocoda-sdk"></script>
 <script>
 // Initialize mapping registry at localhost:3000
-const registry = cdk.initializeRegistry({
+const registry = cdk.cdk.initializeRegistry({
   provider: "MappingsApi",
   uri: "local:mappings",
   status: "http://localhost:3000/status",
