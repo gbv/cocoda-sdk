@@ -43,24 +43,27 @@ We are also providing browser bundles:
 ## Usage
 
 ### Import
-`cocoda-sdk` exports a default instance, so the same object is used on each import of `cocoda-sdk`.
+`cocoda-sdk` exports a default instance, so the same object is used on each import of `cocoda-sdk`. We recommend using this instance over creating one's own.
 
 ```js
-const cdk = require("cocoda-sdk")
+const { cdk } = require("cocoda-sdk") // CommonJS
+import { cdk } from "cocoda-sdk" // ESM
 ```
+
+Since cocoda-sdk is an ES module, we'll use the `import`/`export` syntax in the rest of the documentation.
 
 ### Configuration
 `cocoda-sdk` can be configured after import:
 
 ```js
-const cdk = require("cocoda-sdk")
+import { cdk } from "cocoda-sdk"
 cdk.setConfig(config)
 ```
 
 The configuration can also be loaded from a URL:
 
 ```js
-const cdk = require("cocoda-sdk")
+import { cdk } from "cocoda-sdk"
 await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
 ```
 
@@ -95,7 +98,9 @@ Values set earlier in these steps will never be overwritten by later steps. That
 If you only have a single registry you want to access, you can initialize it as follows:
 
 ```js
-const cdk = require("cocoda-sdk")
+import { cdk, LocalMappingsProvider } from "cocoda-sdk"
+// Local mappings are not included by default
+cdk.addProvider(LocalMappingsProvider)
 const registry = cdk.initializeRegistry({
   uri: "http://coli-conc.gbv.de/registry/local-mappings",
   provider: "LocalMappings"
@@ -121,6 +126,8 @@ The following providers are offered in `cocoda-sdk` by default:
 - `Base` - the base provider that all other providers have to inherit from
 - `ConceptApi` - access to concept schemes and concepts via [jskos-server]
 - `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
+
+The following providers are also exported, but have to be added via `cdk.addProvider`:
 - `LocalMappings` - access to local mappings via [localForage](https://github.com/localForage/localForage) (only available in browser)
 - `SkosmosApi` - access to concept schemes and concepts via a [Skosmos](https://github.com/NatLibFi/Skosmos) API
 - `LocApi` - access to concept schemes and concepts via the [Library of Congress Linked Data Service](https://id.loc.gov/)
@@ -134,7 +141,7 @@ Please refer to each provider's documentation for how exactly to configure that 
 It is also possible to add custom providers that inherit from BaseProvider:
 
 ```js
-const CustomProvider = require("CustomProvider")
+import CustomProvider from "./custom-provider.js"
 cdk.addProvider(CustomProvider)
 ```
 
@@ -161,6 +168,8 @@ Prerequisites:
   - Mappings must be enabled for authenticated users (is given for the default configuration)
 
 See also the code comments inside the example.
+
+<!-- TODO: Adjust example with new browser bundle. Maybe offer ESM example as well. -->
 
 ```html
 <!DOCTYPE html>
@@ -363,7 +372,8 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 `cocoda-sdk` defines some custom errors.
 
 ```js
-const errors = require("cocoda-sdk/errors")
+const { errors } = require("cocoda-sdk") // CommonJS
+import { errors } from "cocoda-sdk"
 ```
 
 The following errors are defined:
