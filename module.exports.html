@@ -1,0 +1,3248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cocoda-sdk exports</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">cocoda-sdk Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/gbv/cocoda-sdk"
+                        >
+                            Github
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/gbv/cocoda"
+                        >
+                            Cocoda Mapping Tool
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_registryConfigForBartocApiConfig">_registryConfigForBartocApiConfig</a></li><li><a href="global.html#addProvider">addProvider</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#createInstance">createInstance</a></li><li><a href="global.html#deleteAnnotation">deleteAnnotation</a></li><li><a href="global.html#deleteMapping">deleteMapping</a></li><li><a href="global.html#deleteMappings">deleteMappings</a></li><li><a href="global.html#getAncestors">getAncestors</a></li><li><a href="global.html#getAnnotations">getAnnotations</a></li><li><a href="global.html#getCancelTokenSource">getCancelTokenSource</a></li><li><a href="global.html#getConcepts">getConcepts</a></li><li><a href="global.html#getConcordances">getConcordances</a></li><li><a href="global.html#getMapping">getMapping</a></li><li><a href="global.html#getMappings">getMappings</a></li><li><a href="global.html#getNarrower">getNarrower</a></li><li><a href="global.html#getOccurrences">getOccurrences</a></li><li><a href="global.html#getRegistryForUri">getRegistryForUri</a></li><li><a href="global.html#getSchemes">getSchemes</a></li><li><a href="global.html#getTop">getTop</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeRegistry">initializeRegistry</a></li><li><a href="global.html#isAuthorizedFor">isAuthorizedFor</a></li><li><a href="global.html#loadBuildInfo">loadBuildInfo</a></li><li><a href="global.html#loadConfig">loadConfig</a></li><li><a href="global.html#patchAnnotation">patchAnnotation</a></li><li><a href="global.html#patchMapping">patchMapping</a></li><li><a href="global.html#postAnnotation">postAnnotation</a></li><li><a href="global.html#postMapping">postMapping</a></li><li><a href="global.html#postMappings">postMappings</a></li><li><a href="global.html#providers">providers</a></li><li><a href="global.html#putAnnotation">putAnnotation</a></li><li><a href="global.html#putMapping">putMapping</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setAuth">setAuth</a></li><li><a href="global.html#setConfig">setConfig</a></li><li><a href="global.html#setRetryConfig">setRetryConfig</a></li><li><a href="global.html#suggest">suggest</a></li><li><a href="global.html#supportsScheme">supportsScheme</a></li><li><a href="global.html#vocSearch">vocSearch</a></li><li><a href="global.html#vocSuggest">vocSuggest</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Class</p>
+                    <h1>exports</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">(registry)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!</p>
+<p>Prefix all internal method and properties with underscore (e.g. <code>this._cache</code>)!</p>
+<p>Methods that can be overridden:</p>
+<ul>
+<li>Do not override the constructor! Use _prepare or _setup instead.</li>
+<li>_prepare: will be called before the registry is initialized (i.e. it's <code>/status</code> endpoint is queries if necessasry)</li>
+<li>_setup: will be called after registry is initialized (i.e. it's <code>/status</code> endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations</li>
+<li>isAuthorizedFor: override if you want to customize</li>
+<li>supportsScheme: override if you want to customize</li>
+<li>getRegistries</li>
+<li>getSchemes</li>
+<li>getTypes</li>
+<li>suggest</li>
+<li>getConcordances</li>
+<li>getOccurrences</li>
+<li>getTop</li>
+<li>getConcepts</li>
+<li>getNarrower</li>
+<li>getAncestors</li>
+<li>search</li>
+<li>getMapping</li>
+<li>getMappings</li>
+<li>postMapping</li>
+<li>postMappings</li>
+<li>putMapping</li>
+<li>patchMapping</li>
+<li>deleteMapping</li>
+<li>deleteMappings</li>
+<li>getAnnotations</li>
+<li>postAnnotation</li>
+<li>putAnnotation</li>
+<li>patchAnnotation</li>
+<li>deleteAnnotation</li>
+</ul>
+<p>Internal (starting with underscore) and external properties that can be used:</p>
+<ul>
+<li><code>this.cdk</code>: a reference to the current CDK instance (can be use to request other registries or initialize a new registry)</li>
+<li><code>this.has</code>: an object of functionality of the registry (needs to be set by subclasses)</li>
+<li><code>this.languages</code>: an array of language tags provided by the user in order of priority</li>
+<li><code>this._jskos</code>: the raw JSKOS object used to initialize this registry</li>
+<li><code>this._path</code>: if available, the path of the current browser window</li>
+<li><code>this._defaultLanguages</code>: an array of default language tags</li>
+<li><code>this._auth</code>: authentication key and token</li>
+<li><code>this._api</code>: object of API endpoints for the registry</li>
+<li><code>this._config</code>: configuration of the registry as provided by the <code>/status</code> endpoint if available</li>
+</ul>
+<p>All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
+Example:</p>
+<pre class="prettyprint source lang-js"><code> getConcept({ concept, ...config }) {
+   return this.axios({
+     ...config,
+     method: &quot;get&quot;,
+     params: {
+       uri: concept.uri,
+     },
+   })
+ }
+</code></pre>
+<p>Always use <code>this.axios</code> like in the example for http requests!</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">(registry)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Provider constructor.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>registry</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>the registry for this provider</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line79">line 79</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>JSKOS Concept API.</p>
+<p>This class provides access to concept schemes and their concepts via JSKOS API in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.
+See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS API reference implementation and <a href="https://api.dante.gbv.de/">DANTE</a> for another API endpoint.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;ConceptApi&quot; and provide the API base URL as <code>api</code>:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-concepts&quot;,
+ &quot;provider&quot;: &quot;ConceptApi&quot;,
+ &quot;api&quot;: &quot;https://coli-conc.gbv.de/api/&quot;
+}
+</code></pre>
+<p>If the <code>/status</code> endpoint can be queried, the remaining API methods will be taken from that. As a fallback, the default endpoints will be appended to <code>api</code>.</p>
+<p>Alternatively, you can provide the endpoints separately: <code>status</code>, <code>schemes</code>, <code>top</code>, <code>concepts</code>, <code>data</code>, <code>narrower</code>, <code>ancestors</code>, <code>types</code>, <code>suggest</code>, <code>search</code>
+Note that <code>schemes</code>, <code>top</code>, and <code>types</code> can also be provided as arrays.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_concept-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_concept-api-provider.js.html">providers/concept-api-provider.js</a>, <a href="providers_concept-api-provider.js.html#line32">line 32</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Label search suggestion provider.</p>
+<p>This provider offers mapping recommendations based on label match via the <code>/search</code> endpoint of JSKOS APIs.</p>
+<p>The provider requires that a list of initialized registries with search endpoints is provided via <code>cdk</code> (which refers to the CDK instance that's using this provider).</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;LabelSearchSuggestion&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-recommendations&quot;
+ &quot;provider&quot;: &quot;LabelSearchSuggestion&quot;
+}
+</code></pre>
+<p>You can provide a list of excluded schemes as JSKOS objects in <code>excludedSchemes</code>.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_label-search-suggestion-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_label-search-suggestion-provider.js.html">providers/label-search-suggestion-provider.js</a>, <a href="providers_label-search-suggestion-provider.js.html#line31">line 31</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Library of Congress API (experimental)</p>
+<p>This class provides access to concept schemes and their concepts via the Library of Congress Linked Open Data Service (https://id.loc.gov/), in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;LocApi&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/loc-concepts&quot;,
+ &quot;provider&quot;: &quot;LocApi&quot;,
+}
+</code></pre>
+<p>No further configuration is needed. Currently supported are LC Subject Headings (LCSH) and LC Name Authority File (LCNAF), both of which are hardcoded.</p>
+<p>Additionally, the following JSKOS properties on the registry can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code> (i.e. to be shown in Cocoda)</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_loc-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_loc-api-provider.js.html">providers/loc-api-provider.js</a>, <a href="providers_loc-api-provider.js.html#line117">line 117</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Local Mappings.</p>
+<p>This class provides read-write access to mappings in the browser's local storage.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;LocalMappings&quot;:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/local-mappings&quot;,
+ &quot;provider&quot;: &quot;LocalMappings&quot;
+}
+</code></pre>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_local-mappings-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_local-mappings-provider.js.html">providers/local-mappings-provider.js</a>, <a href="providers_local-mappings-provider.js.html#line27">line 27</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>JSKOS Mappings API.</p>
+<p>This class provides access to concept mappings via JSKOS API in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.
+See <a href="https://github.com/gbv/jskos-server">jskos-server</a> for a JSKOS API reference implementation</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;MappingsApi&quot; and provide the API base URL as <code>api</code>:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/coli-conc-mappings&quot;,
+ &quot;provider&quot;: &quot;MappingsApi&quot;,
+ &quot;api&quot;: &quot;https://coli-conc.gbv.de/api/&quot;
+}
+</code></pre>
+<p>If the <code>/status</code> endpoint can be queried, the remaining API methods will be taken from that. As a fallback, the default endpoints will be appended to <code>api</code>.</p>
+<p>Alternatively, you can provide the endpoints separately: <code>status</code>, <code>mappings</code>, <code>concordances</code>, <code>annotations</code></p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_mappings-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_mappings-api-provider.js.html">providers/mappings-api-provider.js</a>, <a href="providers_mappings-api-provider.js.html#line33">line 33</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>JSKOS Occurrences API.</p>
+<p>This class provides access to concept occurrences via JSKOS API in <a href="https://gbv.github.io/jskos/">JSKOS format</a>.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;OccurrencesApi&quot; and provide the API base URL as <code>api</code>:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/occurrences&quot;,
+ &quot;provider&quot;: &quot;OccurrencesApi&quot;,
+ &quot;api&quot;: &quot;https://coli-conc.gbv.de/occurrences/api/&quot;
+}
+</code></pre>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_occurrences-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_occurrences-api-provider.js.html">providers/occurrences-api-provider.js</a>, <a href="providers_occurrences-api-provider.js.html#line28">line 28</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Reconciliation Service API.</p>
+<p>This class provides access to the <a href="https://reconciliation-api.github.io/specs/">Reconciliation Service API</a>.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;ReconciliationApi&quot;, provide the API base URL as <code>api</code>, and the compatible scheme or schemes in <code>schemes</code>:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/wikidata-reconciliation&quot;,
+ &quot;provider&quot;: &quot;ReconciliationApi&quot;,
+ &quot;api&quot;: &quot;https://tools.wmflabs.org/openrefine-wikidata/{language}/api&quot;,
+ &quot;schemes&quot;: [
+   {
+     &quot;uri&quot;: &quot;http://bartoc.org/en/node/1940&quot;
+   }
+ ],
+}
+</code></pre>
+<p>The string <code>{language}</code> in <code>api</code> will be replaced with the queried language for the reconciliation request.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_reconciliation-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_reconciliation-api-provider.js.html">providers/reconciliation-api-provider.js</a>, <a href="providers_reconciliation-api-provider.js.html#line34">line 34</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>exports<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Skosmos API.</p>
+<p><a href="http://skosmos.org/">Skosmos</a> is a web application to publish SKOS-based vocabularies.
+This class provides access to a Skosmos instance via its REST API.</p>
+<p>To use it in a registry, specify <code>provider</code> as &quot;SkosmosApi&quot; and provide the API base URL as <code>api</code>:</p>
+<pre class="prettyprint source lang-json"><code>{
+ &quot;uri&quot;: &quot;http://coli-conc.gbv.de/registry/skosmos-zbw&quot;,
+ &quot;provider&quot;: &quot;SkosmosApi&quot;,
+ &quot;api&quot;: &quot;https://zbw.eu/beta/skosmos/rest/v1/&quot;,
+ &quot;schemes&quot;: [
+   {
+     &quot;uri&quot;: &quot;http://bartoc.org/en/node/313&quot;,
+     &quot;VOCID&quot;: &quot;stw&quot;
+   }
+ ]
+}
+</code></pre>
+<p>Currently, it is not possible to query a list of concept schemes from the API, so you need to provide this list including a <code>VOCID</code> for every scheme.</p>
+<p>Additionally, the following JSKOS properties can be provided: <code>prefLabel</code>, <code>notation</code>, <code>definition</code></p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="exports">
+        <a class="href-link" href="#exports">#</a>
+        
+        <span class="code-name">
+            
+                new exports<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_skosmos-api-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_skosmos-api-provider.js.html">providers/skosmos-api-provider.js</a>, <a href="providers_skosmos-api-provider.js.html#line34">line 34</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>BaseProvider</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="has">
+    <a class="href-link" href="#has">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        has
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A dictionary with functionality of the registry (e.g. <code>registry.has.schemes</code>).</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line93">line 93</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </span>
+
+<h4 class="name" id="languages">
+    <a class="href-link" href="#languages">#</a>
+    
+    <span class="code-name">
+        languages
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>A list of RFC 3066 language tags in lowercase in order of priority.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="providers_base-provider.js.html" class="button">View Source</a>
+            <span>
+                <a href="providers_base-provider.js.html">providers/base-provider.js</a>, <a href="providers_base-provider.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

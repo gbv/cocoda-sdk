@@ -92,7 +92,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CocodaSDK.html">CocodaSDK</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="BaseProvider.html">BaseProvider</a></li><li><a href="ConceptApiProvider.html">ConceptApiProvider</a></li><li><a href="LabelSearchSuggestionProvider.html">LabelSearchSuggestionProvider</a></li><li><a href="LocalMappingsProvider.html">LocalMappingsProvider</a></li><li><a href="LocApiProvider.html">LocApiProvider</a></li><li><a href="MappingsApiProvider.html">MappingsApiProvider</a></li><li><a href="OccurrencesApiProvider.html">OccurrencesApiProvider</a></li><li><a href="ReconciliationApiProvider.html">ReconciliationApiProvider</a></li><li><a href="SkosmosApiProvider.html">SkosmosApiProvider</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module.exports_module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_registryConfigForBartocApiConfig">_registryConfigForBartocApiConfig</a></li><li><a href="global.html#addProvider">addProvider</a></li><li><a href="global.html#config">config</a></li><li><a href="global.html#createInstance">createInstance</a></li><li><a href="global.html#deleteAnnotation">deleteAnnotation</a></li><li><a href="global.html#deleteMapping">deleteMapping</a></li><li><a href="global.html#deleteMappings">deleteMappings</a></li><li><a href="global.html#getAncestors">getAncestors</a></li><li><a href="global.html#getAnnotations">getAnnotations</a></li><li><a href="global.html#getCancelTokenSource">getCancelTokenSource</a></li><li><a href="global.html#getConcepts">getConcepts</a></li><li><a href="global.html#getConcordances">getConcordances</a></li><li><a href="global.html#getMapping">getMapping</a></li><li><a href="global.html#getMappings">getMappings</a></li><li><a href="global.html#getNarrower">getNarrower</a></li><li><a href="global.html#getOccurrences">getOccurrences</a></li><li><a href="global.html#getRegistryForUri">getRegistryForUri</a></li><li><a href="global.html#getSchemes">getSchemes</a></li><li><a href="global.html#getTop">getTop</a></li><li><a href="global.html#getTypes">getTypes</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeRegistry">initializeRegistry</a></li><li><a href="global.html#isAuthorizedFor">isAuthorizedFor</a></li><li><a href="global.html#loadBuildInfo">loadBuildInfo</a></li><li><a href="global.html#loadConfig">loadConfig</a></li><li><a href="global.html#patchAnnotation">patchAnnotation</a></li><li><a href="global.html#patchMapping">patchMapping</a></li><li><a href="global.html#postAnnotation">postAnnotation</a></li><li><a href="global.html#postMapping">postMapping</a></li><li><a href="global.html#postMappings">postMappings</a></li><li><a href="global.html#providers">providers</a></li><li><a href="global.html#putAnnotation">putAnnotation</a></li><li><a href="global.html#putMapping">putMapping</a></li><li><a href="global.html#repeat">repeat</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setAuth">setAuth</a></li><li><a href="global.html#setConfig">setConfig</a></li><li><a href="global.html#setRetryConfig">setRetryConfig</a></li><li><a href="global.html#suggest">suggest</a></li><li><a href="global.html#supportsScheme">supportsScheme</a></li><li><a href="global.html#vocSearch">vocSearch</a></li><li><a href="global.html#vocSuggest">vocSuggest</a></li></ul></div><div class="category"><h2>Errors</h2><h3>Classes</h3><ul><li><a href="BackendError.html">BackendError</a></li><li><a href="BackendUnavailableError.html">BackendUnavailableError</a></li><li><a href="CDKError.html">CDKError</a></li><li><a href="InvalidOrMissingParameterError.html">InvalidOrMissingParameterError</a></li><li><a href="InvalidProviderError.html">InvalidProviderError</a></li><li><a href="InvalidRequestError.html">InvalidRequestError</a></li><li><a href="MethodNotImplementedError.html">MethodNotImplementedError</a></li><li><a href="MissingApiUrlError.html">MissingApiUrlError</a></li><li><a href="NetworkError.html">NetworkError</a></li></ul></div><div class="category"><h2>Providers</h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul></div>
                 
             </nav>
         </div>
@@ -109,11 +109,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BaseProvider = require("./base-provider")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
-const jskos = require("jskos-tools")
+            <pre class="prettyprint source linenums"><code>import BaseProvider from "./base-provider.js"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
+import jskos from "jskos-tools"
 
 /**
  * JSKOS Concept API.
@@ -140,7 +140,7 @@ const jskos = require("jskos-tools")
  * @extends BaseProvider
  * @category Providers
  */
-class ConceptApiProvider extends BaseProvider {
+export default class ConceptApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -192,9 +192,11 @@ class ConceptApiProvider extends BaseProvider {
   }
 
   /**
-   * TODO!
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
    *
-   * @param {*} scheme
+   * @param {Object} options
+   * @param {Object} options.url API URL for server
+   * @returns {Object} provider configuration
    */
   static _registryConfigForBartocApiConfig({ url } = {}) {
     if (!url) {
@@ -538,8 +540,6 @@ class ConceptApiProvider extends BaseProvider {
 
 ConceptApiProvider.providerName = "ConceptApi"
 ConceptApiProvider.providerType = "http://bartoc.org/api-type/jskos"
-
-module.exports = ConceptApiProvider
 </code></pre>
         </article>
     </section>
