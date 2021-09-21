@@ -79,6 +79,13 @@ export default class SkosmosApiProvider extends BaseProvider {
   /**
    * @private
    */
+  get _language() {
+    return this.languages[0] || this._defaultLanguages[0] || "en"
+  }
+
+  /**
+   * @private
+   */
   _getApiUrl(scheme, endpoint, params) {
     if (!scheme || !scheme.VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
@@ -86,7 +93,7 @@ export default class SkosmosApiProvider extends BaseProvider {
     endpoint = endpoint || ""
     params = params || {}
     if (!params.lang) {
-      params.lang = this.languages[0] || "en"
+      params.lang = this._language
     }
     const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
     return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
@@ -120,8 +127,7 @@ export default class SkosmosApiProvider extends BaseProvider {
       return null
     }
     // Otherwise load scheme data and save in approved/rejected schemes
-    const language = this.languages[0] || "en"
-    const url = this._getApiUrl(scheme, "/", { lang: language })
+    const url = this._getApiUrl(scheme, "/")
     const data = await this.axios({
       method: "get",
       url,
@@ -243,16 +249,9 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
   async getSchemes({ ...config }) {
-    // TODO: Re-evaluate!
-    if (!this._jskos.loadSchemeInfo) {
-      const result = this.schemes.map(s => jskos.deepCopy(s))
-      return result
-    }
     const schemes = []
-    // TODO
-    const language = this.languages[0] || "en"
     for (let scheme of this.schemes || []) {
-      const url = this._getApiUrl(scheme, "/", { lang: language })
+      const url = this._getApiUrl(scheme, "/")
       const data = await this.axios({
         ...config,
         method: "get",
@@ -261,10 +260,17 @@ export default class SkosmosApiProvider extends BaseProvider {
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
       if (label) {
-        _.set(scheme, `prefLabel.${language}`, label)
+        _.set(scheme, `prefLabel.${this._language}`, label)
       }
-      // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
+      // Also add scheme to approved schemes
+      this._approvedSchemes = this._approvedSchemes || []
+      if (!this._approvedSchemes.find(s => jskos.compare(scheme, s))) {
+        this._approvedSchemes.push({
+          uri: resultScheme.uri,
+          identifier: jskos.getAllUris(scheme),
+        })
+      }
     }
     return schemes
   }
@@ -278,8 +284,6 @@ export default class SkosmosApiProvider extends BaseProvider {
    */
   async getTop({ scheme, ...config }) {
     const url = this._getApiUrl(scheme, "/topConcepts")
-    const language = this.languages[0] || "en"
-    _.set(config, "params.lang", language)
     const schemeUri = await this._getSchemeUri(scheme)
     if (!schemeUri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing or unsupported scheme or VOCID property on scheme" })
@@ -294,7 +298,7 @@ export default class SkosmosApiProvider extends BaseProvider {
     for (let concept of response.topconcepts || []) {
       const newConcept = this._toJskosConcept(concept, {
         scheme,
-        language,
+        language: this._language,
       })
       newConcept.topConceptOf = [scheme]
       concepts.push(newConcept)
