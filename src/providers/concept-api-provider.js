@@ -81,9 +81,11 @@ export default class ConceptApiProvider extends BaseProvider {
   }
 
   /**
-   * TODO!
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
    *
-   * @param {*} scheme
+   * @param {Object} options
+   * @param {Object} options.url API URL for server
+   * @returns {Object} provider configuration
    */
   static _registryConfigForBartocApiConfig({ url } = {}) {
     if (!url) {

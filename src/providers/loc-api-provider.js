@@ -130,7 +130,15 @@ export default class LocApiProvider extends BaseProvider {
     this.has.search = true
   }
 
+  /**
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
+   *
+   * @param {Object} options
+   * @param {Object} options.scheme scheme for which the config is requested
+   * @returns {Object} provider configuration
+   */
   static _registryConfigForBartocApiConfig({ scheme } = {}) {
+    // Check if scheme is supported
     if (!scheme || !supportedSchemes.find(s => jskos.compare(s, scheme))) {
       return null
     }

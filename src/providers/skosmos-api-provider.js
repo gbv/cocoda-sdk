@@ -54,9 +54,12 @@ export default class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * TODO!
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
    *
-   * @param {*} scheme
+   * @param {Object} options
+   * @param {Object} options.url API URL for BARTOC instance
+   * @param {Object} options.scheme scheme for which the config is requested
+   * @returns {Object} provider configuration
    */
   static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
     if (!url || !scheme) {
