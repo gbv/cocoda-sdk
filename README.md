@@ -35,7 +35,7 @@
 npm i cocoda-sdk
 ```
 
-We are also providing a browser bundle: https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~49K gzipped, ~151K not gzipped) It will be available under the global name `CDK` and contain the listed members below (in particular the default instance `CDK.cdk`).
+We are also providing a browser bundle: https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~52K gzipped, ~161K not gzipped) It will be available under the global name `CDK` and contain the listed members below (in particular the default instance `CDK.cdk`).
 
 [![](https://data.jsdelivr.com/v1/package/npm/cocoda-sdk/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cocoda-sdk)
 
