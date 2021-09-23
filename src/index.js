@@ -10,3 +10,13 @@ export {
   CocodaSDK,
   errors,
 }
+
+import * as providers from "./providers/index.js"
+/**
+ * Adds all available providers to a CocodaSDK instance.
+ *
+ * @param {Object} [_cdk] CocodaSDK instance to which to add the providers (defaults to default instance)
+ */
+export function addAllProviders(_cdk) {
+  Object.values(providers).forEach(provider => (_cdk || cdk).addProvider(provider))
+}

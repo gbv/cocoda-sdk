@@ -56,6 +56,8 @@ cocoda-sdk also exports some other members:
 - `errors` - see [Errors](#errors)
 - All individual provider classes - see [Providers](#providers)
   - Note: You need to append `Provider` to the names, e.g. `LocalMappings` is exported as `LocalMappingsProvider`.
+- `addAllProviders` - a method that adds all avaiable providers to an instance
+  - Can be called without parameters to add to the default instance. Useful if you need all providers.
 
 ### v1 Compatibility
 cocoda-sdk v2 changed how it is exported and therefore it needs to be included differently.
