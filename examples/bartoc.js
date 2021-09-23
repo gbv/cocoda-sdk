@@ -1,5 +1,6 @@
 // This is all the setup that's needed!
-import { cdk } from "../src/index.js"
+import { cdk, addAllProviders } from "../src/index.js"
+addAllProviders()
 const registry = cdk.initializeRegistry({
   provider: "ConceptApi",
   api: "https://bartoc.org/api/",
