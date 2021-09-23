@@ -357,13 +357,7 @@ export default class LocApiProvider extends BaseProvider {
     return [
       config.search,
       results.map(c => {
-        let string = ""
-        const notation = jskos.notation(c)
-        if (notation) {
-          string += notation + " "
-        }
-        string += jskos.prefLabel(c, { fallbackToUri: string === "" })
-        return string
+        return jskos.prefLabel(c, { fallbackToUri: true })
       }),
       [],
       results.map(c => c.uri),
