@@ -1,13 +1,15 @@
 {
   "plugins": [
     "plugins/markdown",
-    "/home/runner/work/_actions/andstor/jsdoc-action/v1/node_modules/better-docs/category"
+    "node_modules/better-docs/category",
+    "jsdoc-es6-fix.cjs"
   ],
   "source": {
-    "include": ["./src/errors", "./src/providers", "./src/lib"]
+    "include": ["./src", "./src/errors", "./src/providers", "./src/lib"]
   },
   "opts": {
     "encoding": "utf8",
+    "template": "node_modules/better-docs",
     "readme": "README.md",
     "destination": "./out",
     "recurse": true

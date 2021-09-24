@@ -589,8 +589,6 @@ export default class BaseProvider {
   }
 
   /**
-   * @private
-   *
    * Calls a method that is for only one item for an array of items. Returns an array of results.
    *
    * If there is an error, that index in the result array will be `null`. There is a property `_errors` on the result array that will contain the respective error at the correct index.
@@ -600,7 +598,9 @@ export default class BaseProvider {
    * @param {Object[]} options.items items to call the method for
    * @param {string} options.itemProperty the property name for the item when calling the method (e.g. `mapping`)
    * @param {Object} options.config other properties to pass to the method call
-   * @returns
+   * @returns {any[]} result array with values returned from individual method calls
+   *
+   * @private
    */
   async _callHelperForArrayWrappers({ method, items, itemProperty, config }) {
     const errors = []

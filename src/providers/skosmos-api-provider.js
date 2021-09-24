@@ -111,9 +111,9 @@ export default class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * @private
-   *
    * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.
+   *
+   * @private
    */
   async _getSchemeUri(scheme) {
     this._approvedSchemes = this._approvedSchemes || []

@@ -34,6 +34,9 @@ Object.values(allProviders).forEach(provider => {
 })
 //#endif
 
+/**
+ * CocodaSDK class
+ */
 export default class CocodaSDK {
 
   /**

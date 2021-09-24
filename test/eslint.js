@@ -5,6 +5,7 @@ let paths = [
   "**/*.js",
   "**/.*.js",
   "!dist/**/*.js",
+  "!out/**/*.js",
   "!node_modules/**/*.js",
   "!node_modules/**/.*.js",
 ]
