@@ -100,6 +100,68 @@ describe("MappingsApiProvider", () => {
     registry.postMapping({ mapping })
   })
 
+  it("should perform posting multiple mappings correctly", (done) => {
+    const mappings = [
+      {
+        uri: "test:/mappings/1",
+      },
+      {
+        uri: "test:/mappings/2",
+      },
+    ].map(mapping => jskos.addMappingIdentifiers(mapping))
+
+    const postedIndexes = []
+    mock.onPost().reply(config => {
+      assert.equal(config.url, api.mappings)
+      const index = mappings.findIndex(mapping => mapping.uri === JSON.parse(config.data).uri)
+      assert.ok(index !== -1 && !postedIndexes.includes(index))
+      postedIndexes.push(index)
+      if (postedIndexes.length === mappings.length) {
+        done()
+      }
+
+      return [200, {}]
+    })
+    registry.postMappings({ mappings })
+  })
+
+  it("should perform deleting a mapping correctly", (done) => {
+    const mapping = {
+      uri: "test:/mappings/1",
+    }
+    mock.onDelete().reply(config => {
+      assert.equal(config.url, mapping.uri)
+      done()
+      return [204]
+    })
+    registry.deleteMapping({ mapping }).catch(error => {
+      console.log(error)
+    })
+  })
+
+  it("should perform deleting multiple mappings correctly", (done) => {
+    const mappings = [
+      {
+        uri: "test:/mappings/1",
+      },
+      {
+        uri: "test:/mappings/2",
+      },
+    ]
+
+    const deletedIndexes = []
+    mock.onDelete().reply(config => {
+      const index = mappings.findIndex(mapping => mapping.uri === config.url)
+      assert.ok(index !== -1 && !deletedIndexes.includes(index))
+      deletedIndexes.push(index)
+      if (deletedIndexes.length === mappings.length) {
+        done()
+      }
+      return [204]
+    })
+    registry.deleteMappings({ mappings })
+  })
+
   it("should throw an error when calling postMapping without mapping", async () => {
     let wasError = false
     try {
