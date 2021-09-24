@@ -555,13 +555,18 @@ export default class BaseProvider {
    *
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
-   * @returns {Object[]} array of created mapping objects
+   * @returns {Object[]} array of created mapping objects; in case of failure, consult the `_errors` property on the array at the index of the failed request
    */
   async postMappings({ mappings, ...config } = {}) {
     if (!mappings || !mappings.length) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
     }
-    return Promise.all(mappings.map(mapping => this.postMapping({ mapping, ...config, _raw: true })))
+    return this._callHelperForArrayWrappers({
+      method: "postMapping",
+      items: mappings,
+      itemProperty: "mapping",
+      config,
+    })
   }
 
   /**
@@ -569,12 +574,47 @@ export default class BaseProvider {
    *
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
+   * @returns {Object[]} array of results (`true` if successful); in case of failure, consult the `_errors` property on the array at the index of the failed request
    */
   async deleteMappings({ mappings, ...config } = {}) {
     if (!mappings || !mappings.length) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
     }
-    return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
+    return this._callHelperForArrayWrappers({
+      method: "deleteMapping",
+      items: mappings,
+      itemProperty: "mapping",
+      config,
+    })
+  }
+
+  /**
+   * @private
+   *
+   * Calls a method that is for only one item for an array of items. Returns an array of results.
+   *
+   * If there is an error, that index in the result array will be `null`. There is a property `_errors` on the result array that will contain the respective error at the correct index.
+   *
+   * @param {Object} options
+   * @param {string} options.method instance method to call (e.g. `postMapping`)
+   * @param {Object[]} options.items items to call the method for
+   * @param {string} options.itemProperty the property name for the item when calling the method (e.g. `mapping`)
+   * @param {Object} options.config other properties to pass to the method call
+   * @returns
+   */
+  async _callHelperForArrayWrappers({ method, items, itemProperty, config }) {
+    const errors = []
+    const resultItems = await Promise.all(items.map(async item => {
+      try {
+        const resultItem = await this[method]({ [itemProperty]: item, ...config, _raw: true })
+        return resultItem
+      } catch (error) {
+        errors[items.indexOf(item)] = error
+        return null
+      }
+    }))
+    resultItems._errors = errors
+    return resultItems
   }
 
 }
