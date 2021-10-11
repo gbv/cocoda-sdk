@@ -112,9 +112,10 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     }
     // Prepare label
     // TODO: Can we use a language prioritiy list like for requests?
+    const language = jskos.languagePreference.selectLanguage(concept.prefLabel) || this._defaultLanguages[0]
     let label = jskos.prefLabel(concept, {
       fallbackToUri: false,
-      language: this.languages[0] || this._defaultLanguages[0],
+      language,
     })
     if (!label) {
       return []
