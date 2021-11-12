@@ -355,7 +355,7 @@ export default class CocodaSDK {
                   schemes.splice(otherSchemeIndex, 1)
                 }
                 // Integrate details from existing scheme
-                scheme = jskos.merge(scheme, otherScheme, { mergeUris: true, skipPaths: ["_registry"] })
+                scheme = jskos.merge(scheme, _.omit(otherScheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
               }
               scheme._registry = registry
               // Save scheme in objects and push into schemes array
@@ -378,21 +378,8 @@ export default class CocodaSDK {
       }
     }
 
-    return Promise.all(promises).then(() => {
-      // Remove certain properties from objects
-      // ? Why?
-      for (let scheme of schemes) {
-        if (scheme.concepts && scheme.concepts.length == 0) {
-          delete scheme.concepts
-        }
-        if (scheme.topConcepts && scheme.topConcepts.length == 0) {
-          delete scheme.topConcepts
-        }
-      }
-      schemes = schemes.filter(scheme => scheme != null)
-      schemes = jskos.sortSchemes(schemes)
-      return schemes
-    })
+    await Promise.all(promises)
+    return jskos.sortSchemes(schemes.filter(Boolean))
   }
 
   registryForScheme(scheme) {
