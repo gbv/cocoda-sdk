@@ -124,7 +124,7 @@ export default class LocApiProvider extends BaseProvider {
     this.has.top = false
     this.has.data = true
     this.has.concepts = true
-    this.has.narrower = true
+    this.has.narrower = false
     this.has.ancestors = false
     this.has.suggest = true
     this.has.search = true
