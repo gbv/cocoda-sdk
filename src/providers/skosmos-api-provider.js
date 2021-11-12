@@ -38,18 +38,18 @@ export default class SkosmosApiProvider extends BaseProvider {
    */
   _setup() {
     this.has.schemes = true
-    this.has.top = false
+    this.has.top = true
     this.has.data = true
     this.has.concepts = true
     this.has.narrower = true
     this.has.ancestors = true
-    this.has.types = true // ?
+    this.has.types = true
     this.has.suggest = true
     this.has.search = true
     // Set concepts and topConcepts for schemes
     for (let scheme of this.schemes) {
       scheme.concepts = [null]
-      scheme.topConcepts = []
+      scheme.topConcepts = [null]
     }
   }
 

@@ -39,6 +39,17 @@ export default class ConceptApiProvider extends BaseProvider {
     if (this._api.api && this._api.status === undefined) {
       this._api.status = utils.concatUrl(this._api.api, "/status")
     }
+    // Set capabilities to true for now; will be overridden by _setup() later
+    this.has.schemes = true
+    this.has.top = true
+    this.has.data = true
+    this.has.concepts = true
+    this.has.narrower = true
+    this.has.ancestors = true
+    this.has.types = true
+    this.has.suggest = true
+    this.has.search = true
+    this.has.auth = true
   }
 
   /**
