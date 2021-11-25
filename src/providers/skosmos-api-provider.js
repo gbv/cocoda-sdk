@@ -82,7 +82,8 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {
-    if (!scheme || !scheme.VOCID) {
+    const VOCID = scheme && scheme.VOCID || _.get(this.schemes.find(s => jskos.compare(s, scheme)), "VOCID")
+    if (!VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     endpoint = endpoint || ""
@@ -91,7 +92,7 @@ export default class SkosmosApiProvider extends BaseProvider {
       params.lang = this._language
     }
     const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
-    return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
+    return `${this._api.api}${VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
   }
 
   /**
