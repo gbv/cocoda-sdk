@@ -405,7 +405,7 @@ export default class SkosmosApiProvider extends BaseProvider {
     while (uri) {
       if (uri != concept.uri) {
         const ancestor = _.get(response, `broaderTransitive["${uri}"]`)
-        ancestors = [ancestor].concat(ancestors)
+        ancestors = ancestors.concat([ancestor])
       }
       uri = _.get(response, `broaderTransitive["${uri}"].broader[0]`)
     }
