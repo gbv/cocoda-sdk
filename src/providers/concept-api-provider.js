@@ -125,6 +125,7 @@ export default class ConceptApiProvider extends BaseProvider {
       return null
     }
     // Otherwise load scheme data and save in approved/rejected schemes
+    // TODO: What does the `uri` parameter here actually do?
     const schemes = await this.getSchemes({ uri: jskos.getAllUris(scheme) })
     const resultScheme = schemes.find(s => jskos.compare(s, scheme))
     if (resultScheme) {
