@@ -98,12 +98,13 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {Object} options.url API URL for server
    * @returns {Object} provider configuration
    */
-  static _registryConfigForBartocApiConfig({ url } = {}) {
-    if (!url) {
+  static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
+    if (!url || !scheme) {
       return null
     }
     return {
       api: url,
+      schemes: [scheme],
     }
   }
 
