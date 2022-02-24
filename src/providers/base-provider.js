@@ -500,7 +500,18 @@ export default class BaseProvider {
   }
   adjustScheme(scheme) {
     // Add _registry to schemes
-    scheme._registry = (this.cdk && this.cdk.registryForScheme(scheme)) || this
+    scheme._registry = this.cdk && this.cdk.registryForScheme(scheme)
+    if (!scheme._registry) {
+      scheme._registry = this
+    } else {
+      // Remove scheme's `concepts` and `topConcepts` fields if they are [] or [null]
+      // because the registry has changed and they might not be accurate.
+      ["concepts", "topConcepts"].forEach(key => {
+        if (Array.isArray(scheme[key]) && (scheme[key].length === 0 || scheme[key][0] === null)) {
+          delete scheme[key]
+        }
+      })
+    }
     if (scheme._registry) {
       // Add _getTop function to schemes
       scheme._getTop = (config) => {
