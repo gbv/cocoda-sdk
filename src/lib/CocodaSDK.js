@@ -34,6 +34,9 @@ Object.values(allProviders).forEach(provider => {
 })
 //#endif
 
+// Registry cache used by registryForScheme
+const registryCache = {}
+
 /**
  * CocodaSDK class
  */
@@ -389,24 +392,40 @@ export default class CocodaSDK {
     }
 
     for (let { type, ...config } of scheme.API || []) {
-      const provider = Object.values(providers).find(p => p.providerType === type)
-      if (!provider || !provider._registryConfigForBartocApiConfig) {
-        continue
-      }
-      const providerName = provider.providerName
-      // Some providers need access to the scheme
-      config.scheme = scheme
-      config = providers[providerName]._registryConfigForBartocApiConfig(config)
-      if (!config) {
-        continue
-      }
-      config.provider = providerName
+      const url = config.url
 
-      try {
-        registry = this.initializeRegistry(config)
+      if (registryCache[url]) {
+        // Registry in cache is used
+        const registry = registryCache[url]
+        // Check if scheme is part of registry already; if not, add it
+        if (Array.isArray(registry._api.schemes) && !jskos.isContainedIn(scheme, registry._api.schemes)) {
+          registry._api.schemes.push(scheme)
+        }
         return registry
-      } catch (error) {
-        continue
+      } else {
+        // Registry will be initialized
+        const provider = Object.values(providers).find(p => p.providerType === type)
+        if (!provider || !provider._registryConfigForBartocApiConfig) {
+          continue
+        }
+        const providerName = provider.providerName
+        // Some providers need access to the scheme
+        config.scheme = scheme
+        config = providers[providerName]._registryConfigForBartocApiConfig(config)
+        if (!config) {
+          continue
+        }
+        config.provider = providerName
+
+        try {
+          registry = this.initializeRegistry(config)
+          if (registry) {
+            registryCache[url] = registry
+            return registry
+          }
+        } catch (error) {
+          continue
+        }
       }
     }
     return null
