@@ -324,6 +324,8 @@ export default class CocodaSDK {
       if (registry.has.schemes) {
         let promise = registry.getSchemes(config).then(results => {
           for (let scheme of results) {
+            // Deal with registry
+            const currentSchemeRegistry = scheme._registry
             // Add scheme specific custom properties
             scheme.__DETAILSLOADED__ = 1
             scheme.type = scheme.type || ["http://www.w3.org/2004/02/skos/core#ConceptScheme"]
@@ -360,16 +362,16 @@ export default class CocodaSDK {
                 // Integrate details from existing scheme
                 scheme = jskos.merge(scheme, _.omit(otherScheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
               }
-              scheme._registry = registry
+              scheme._registry = currentSchemeRegistry
               // Save scheme in objects and push into schemes array
               schemes.push(scheme)
             } else {
               // Integrate details into existing scheme
-              let index = schemes.findIndex(s => jskos.compare(s, scheme))
+              const index = schemes.findIndex(s => jskos.compare(s, scheme))
               if (index != -1) {
-                let registry = schemes[index]._registry
+                const otherSchemeRegistry = schemes[index]._registry
                 schemes[index] = jskos.merge(schemes[index], _.omit(scheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
-                schemes[index]._registry = registry
+                schemes[index]._registry = otherSchemeRegistry
               }
             }
           }
