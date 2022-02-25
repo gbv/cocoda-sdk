@@ -86,9 +86,7 @@ export default class ConceptApiProvider extends BaseProvider {
     this.has.suggest = !!this._api.suggest
     this.has.search = !!this._api.search
     this.has.auth = _.get(this._config, "auth.key") != null
-    this._defaultParams = {
-      properties: "uri,prefLabel,notation,inScheme",
-    }
+    this._defaultParams = {}
   }
 
   /**
