@@ -120,6 +120,10 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     if (!label) {
       return []
     }
+    // Adjust prefLabel by removing everything from the first non-whitespace, non-letter character
+    // (copied from Cocoda)
+    const regexResult = /^[\s\wäüöÄÜÖß]*\w/.exec(label)
+    label = regexResult ? regexResult[0] : label
     // Get results from API or cache
     const results = await this._getResults({ ...config, label, targetScheme, limit })
     // Map results to actual mappings
