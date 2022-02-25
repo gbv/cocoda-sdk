@@ -400,8 +400,8 @@ export default class CocodaSDK {
         // Registry in cache is used
         const registry = registryCache[url]
         // Check if scheme is part of registry already; if not, add it
-        if (Array.isArray(registry._api.schemes) && !jskos.isContainedIn(scheme, registry._api.schemes)) {
-          registry._api.schemes.push(scheme)
+        if (Array.isArray(registry._jskos.schemes) && !jskos.isContainedIn(scheme, registry._jskos.schemes)) {
+          registry._jskos.schemes.push(scheme)
         }
         return registry
       } else {

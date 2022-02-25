@@ -125,8 +125,9 @@ export default class ConceptApiProvider extends BaseProvider {
       return null
     }
     // Otherwise load scheme data and save in approved/rejected schemes
-    // TODO: What does the `uri` parameter here actually do?
-    const schemes = await this.getSchemes({ uri: jskos.getAllUris(scheme) })
+    const schemes = await this.getSchemes({ params: {
+      uri: jskos.getAllUris(scheme).join("|"),
+    } })
     const resultScheme = schemes.find(s => jskos.compare(s, scheme))
     if (resultScheme) {
       this._approvedSchemes.push({
@@ -153,9 +154,6 @@ export default class ConceptApiProvider extends BaseProvider {
     if (!this._api.schemes) {
       throw new errors.MissingApiUrlError()
     }
-    if (Array.isArray(this._api.schemes)) {
-      return this._api.schemes
-    }
     const schemes = await this.axios({
       ...config,
       method: "get",
@@ -168,8 +166,8 @@ export default class ConceptApiProvider extends BaseProvider {
       },
     })
     // If schemes were given in registry object, only request those schemes from API
-    if (Array.isArray(this._jskos.schemes)) {
-      return utils.withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this._jskos.schemes)), schemes)
+    if (Array.isArray(this.schemes)) {
+      return utils.withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
     } else {
       return schemes
     }

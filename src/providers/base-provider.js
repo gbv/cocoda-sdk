@@ -109,7 +109,8 @@ export default class BaseProvider {
     // Set API URLs from registry object
     this._api = {
       status: registry.status,
-      schemes: registry.schemes,
+      // If `schemes` on registry is an array, remove it because we're only keeping it in this._jskos.schemes
+      schemes: Array.isArray(registry.schemes) ? undefined : registry.schemes,
       top: registry.top,
       data: registry.data,
       concepts: registry.concepts,
