@@ -163,7 +163,7 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     }
     // Determine search URI for target scheme's registry
     const registry = _.get(targetScheme, "_registry")
-    if (!registry || !registry.has.search) {
+    if (!registry || registry.has.search === false) {
       return []
     }
     // API request

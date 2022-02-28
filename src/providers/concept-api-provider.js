@@ -217,7 +217,7 @@ export default class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getConcepts({ concepts, ...config }) {
-    if (!this.has.data) {
+    if (this.has.data === false) {
       throw new errors.MissingApiUrlError()
     }
     if (!concepts) {

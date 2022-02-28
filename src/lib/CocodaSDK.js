@@ -321,7 +321,7 @@ export default class CocodaSDK {
     let schemes = [], promises = []
 
     for (let registry of this.config.registries) {
-      if (registry.has.schemes) {
+      if (registry.has.schemes !== false) {
         let promise = registry.getSchemes(config).then(results => {
           for (let scheme of results) {
             // Deal with registry
