@@ -81,6 +81,10 @@ export default class ConceptApiProvider extends BaseProvider {
       }
     }
     this.has.schemes = !!this._api.schemes
+    // If there is no scheme API endpoint, but a list of schemes is given, use that for schemes.
+    if (!this.has.schemes && Array.isArray(this.schemes)) {
+      this.has.schemes = true
+    }
     this.has.top = !!this._api.top
     this.has.data = !!this._api.data
     this.has.concepts = !!this._api.concepts || this.has.data
@@ -157,6 +161,10 @@ export default class ConceptApiProvider extends BaseProvider {
    */
   async getSchemes(config) {
     if (!this._api.schemes) {
+      // If an array of schemes is given, return that here
+      if (Array.isArray(this.schemes)) {
+        return this.schemes
+      }
       throw new errors.MissingApiUrlError()
     }
     const schemes = await this.axios({
