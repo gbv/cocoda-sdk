@@ -50,6 +50,10 @@ export default class ConceptApiProvider extends BaseProvider {
     this.has.suggest = true
     this.has.search = true
     this.has.auth = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**

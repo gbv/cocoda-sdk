@@ -4,6 +4,7 @@ import * as _ from "../utils/lodash.js"
 import localforage from "localforage"
 import { v4 as uuid } from "uuid"
 import * as errors from "../errors/index.js"
+import { listOfCapabilities } from "../utils/index.js"
 const uriPrefix = "urn:uuid:"
 
 /**
@@ -29,13 +30,23 @@ export default class LocalMappingsProvider extends BaseProvider {
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this.has.mappings = {
       read: true,
       create: true,
       update: true,
       delete: true,
     }
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
+  }
+
+  /**
+   * @private
+   */
+  _setup() {
     this.queue = []
     this.localStorageKey = "cocoda-mappings--" + this._path
     let oldLocalStorageKey = "mappings"

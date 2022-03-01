@@ -155,3 +155,20 @@ export function withCustomProps(arr, from) {
   arr._url = from._url
   return arr
 }
+
+export const listOfCapabilities = [
+  "schemes",
+  "top",
+  "data",
+  "concepts",
+  "narrower",
+  "ancestors",
+  "types",
+  "suggest",
+  "search",
+  "auth",
+  "mappings",
+  "concordances",
+  "annotations",
+  "occurrences",
+]

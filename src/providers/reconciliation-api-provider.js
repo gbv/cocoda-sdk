@@ -2,6 +2,7 @@ import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
+import { listOfCapabilities } from "../utils/index.js"
 
 // TODO: Document namespace etc.
 
@@ -36,9 +37,13 @@ export default class ReconciliationApiProvider extends BaseProvider {
   /**
    * @private
    */
-  _setup() {
-    this.has.mappings = true
+  _prepare() {
     this._cache = []
+    this.has.mappings = true
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**

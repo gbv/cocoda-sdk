@@ -30,11 +30,15 @@ export default class OccurrencesApiProvider extends BaseProvider {
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this._cache = []
     this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
     this.has.mappings = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**

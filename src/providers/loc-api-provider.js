@@ -1,5 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
+import { listOfCapabilities } from "../utils/index.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
@@ -119,7 +120,7 @@ export default class LocApiProvider extends BaseProvider {
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this.has.schemes = true
     this.has.top = false
     this.has.data = true
@@ -128,6 +129,10 @@ export default class LocApiProvider extends BaseProvider {
     this.has.ancestors = false
     this.has.suggest = true
     this.has.search = true
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**

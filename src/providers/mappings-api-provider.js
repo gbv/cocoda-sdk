@@ -40,6 +40,14 @@ export default class MappingsApiProvider extends BaseProvider {
     if (this._api.api && this._api.status === undefined) {
       this._api.status = utils.concatUrl(this._api.api, "/status")
     }
+    // Preliminarily set capabilties
+    this.has.mappings = true
+    this.has.concordances = true
+    this.has.annotations = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**
