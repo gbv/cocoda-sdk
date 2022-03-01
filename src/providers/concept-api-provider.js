@@ -313,13 +313,12 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async suggest({ scheme, use = "notation,label", types = [], sort = "score", ...config }) {
+  async suggest({ use = "notation,label", types = [], sort = "score", ...config }) {
     return this._search({
       ...config,
       endpoint: "suggest",
       params: {
         ...config.params,
-        voc: _.get(scheme, "uri", ""),
         type: types.join("|"),
         use,
         sort,
@@ -338,13 +337,12 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {string[]} [config.types=[]] list of type URIs
    * @returns {Array} result in JSKOS Format
    */
-  async search({ scheme, types = [], ...config }) {
+  async search({ types = [], ...config }) {
     return this._search({
       ...config,
       endpoint: "search",
       params: {
         ...config.params,
-        voc: _.get(scheme, "uri", ""),
         type: types.join("|"),
       },
     })
@@ -388,7 +386,7 @@ export default class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _search({ endpoint, search, limit, offset, params, ...config }) {
+  async _search({ endpoint, scheme, search, limit, offset, params, ...config }) {
     let url = this._api[endpoint]
     if (!url) {
       throw new errors.MissingApiUrlError()
@@ -398,6 +396,8 @@ export default class ConceptApiProvider extends BaseProvider {
     }
     limit = limit || this._jskos.suggestResultLimit || 100
     offset = offset || 0
+    // Scheme to search in
+    const voc = scheme && await this._getSchemeUri(scheme)
     // Some registries use URL templates with {searchTerms}
     url = url.replace("{searchTerms}", search)
     return this.axios({
@@ -410,6 +410,7 @@ export default class ConceptApiProvider extends BaseProvider {
         offset,
         search,
         query: search,
+        voc,
       },
       method: "get",
       url,
