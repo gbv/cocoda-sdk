@@ -471,6 +471,10 @@ export default class BaseProvider {
   }
 
   adjustConcept(concept) {
+    // Don't adjust when already saved in Cocoda
+    if (!concept || concept.__SAVED__) {
+      return concept
+    }
     // Add _getNarrower function to concepts
     concept._getNarrower = (config) => {
       return this.getNarrower({ ...config, concept })
@@ -500,10 +504,15 @@ export default class BaseProvider {
     return registries
   }
   adjustScheme(scheme) {
+    // Don't adjust when already saved in Cocoda
+    if (!scheme || scheme.__SAVED__) {
+      return scheme
+    }
     // Add _registry to schemes
+    const previousRegistry = scheme._registry
     scheme._registry = this.cdk && this.cdk.registryForScheme(scheme)
-    if (!scheme._registry) {
-      scheme._registry = this
+    if (!scheme._registry || previousRegistry === scheme._registry) {
+      scheme._registry = previousRegistry || this
     } else {
       // Remove scheme's `concepts` and `topConcepts` fields if they are [] or [null]
       // because the registry has changed and they might not be accurate.
