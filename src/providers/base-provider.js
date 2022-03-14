@@ -511,7 +511,7 @@ export default class BaseProvider {
     // Add _registry to schemes
     const previousRegistry = scheme._registry
     scheme._registry = this.cdk && this.cdk.registryForScheme(scheme)
-    if (!scheme._registry || previousRegistry === scheme._registry) {
+    if (!scheme._registry || previousRegistry === scheme._registry || scheme._registry._api.api === this._api.api) {
       scheme._registry = previousRegistry || this
     } else {
       // Remove scheme's `concepts` and `topConcepts` fields if they are [] or [null]

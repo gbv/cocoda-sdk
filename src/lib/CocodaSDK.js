@@ -324,8 +324,8 @@ export default class CocodaSDK {
       if (registry.has.schemes !== false) {
         let promise = registry.getSchemes(config).then(results => {
           for (let scheme of results) {
-            // Deal with registry
-            const currentSchemeRegistry = scheme._registry
+            // Keep registry; we'll call registryForScheme later to avoid issues
+            scheme._registry = registry
             // Add scheme specific custom properties
             scheme.__DETAILSLOADED__ = 1
             scheme.type = scheme.type || ["http://www.w3.org/2004/02/skos/core#ConceptScheme"]
@@ -362,7 +362,7 @@ export default class CocodaSDK {
                 // Integrate details from existing scheme
                 scheme = jskos.merge(scheme, _.omit(otherScheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
               }
-              scheme._registry = currentSchemeRegistry
+              scheme._registry = registry
               // Save scheme in objects and push into schemes array
               schemes.push(scheme)
             } else {
@@ -384,6 +384,17 @@ export default class CocodaSDK {
     }
 
     await Promise.all(promises)
+    // Adjust scheme registries with registryForScheme
+    schemes.forEach(scheme => {
+      const previousRegistry = scheme._registry
+      delete scheme._registry
+      const newRegistry = this.registryForScheme(scheme)
+      if (!newRegistry || newRegistry._api.api === previousRegistry._api.api) {
+        scheme._registry = previousRegistry
+      } else {
+        scheme._registry = newRegistry
+      }
+    })
     return jskos.sortSchemes(schemes.filter(Boolean))
   }
 
