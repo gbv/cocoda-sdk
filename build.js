@@ -1,11 +1,14 @@
 import esbuild from "esbuild"
 import glob from "glob"
-import pkg from "./package.json"
+import { readFile } from "fs/promises"
 import checker from "license-checker"
 import fs from "fs"
 import ifdef from "esbuild-plugin-ifdef";
 
 (async () => {
+  const pkg = JSON.parse(
+    await readFile("./package.json"),
+  )
 
   const sourceFolder = process.env.BUILD_SOURCE_FOLDER || "./src"
   const targetFolder = process.env.BUILD_TARGET_FOLDER || "./dist"
