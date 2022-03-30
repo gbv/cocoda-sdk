@@ -75,7 +75,13 @@ export default class MappingsApiProvider extends BaseProvider {
       this.has.mappings.delete = !!_.get(this._config, "mappings.delete")
       this.has.mappings.anonymous = !!_.get(this._config, "mappings.anonymous")
     }
-    this.has.concordances = !!this._api.concordances
+    this.has.concordances = this._api.concordances ? {} : false
+    if (this.has.concordances) {
+      this.has.concordances.read = !!_.get(this._config, "concordances.read")
+      this.has.concordances.create = !!_.get(this._config, "concordances.create")
+      this.has.concordances.update = !!_.get(this._config, "concordances.update")
+      this.has.concordances.delete = !!_.get(this._config, "concordances.delete")
+    }
     this.has.annotations = this._api.annotations ? {} : false
     if (this.has.annotations) {
       this.has.annotations.read = !!_.get(this._config, "annotations.read")
@@ -394,6 +400,107 @@ export default class MappingsApiProvider extends BaseProvider {
       method: "get",
       url: this._api.concordances,
     })
+  }
+
+  /**
+   * Creates a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {Object} JSKOS concordance object
+   */
+  async postConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    return this.axios({
+      ...config,
+      method: "post",
+      url: this._api.concordances,
+      data: concordance,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Overwrites a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {Object} JSKOS concordance object
+   */
+  async putConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    return this.axios({
+      ...config,
+      method: "put",
+      url: uri,
+      data: concordance,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Patches a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance (or part of concordance)
+   * @returns {Object} JSKOS concordance object
+   */
+  async patchConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    console.log("PATCH /concordance", concordance)
+    return this.axios({
+      ...config,
+      method: "patch",
+      url: uri,
+      data: _.omit(concordance, "uri"),
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Deletes a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {boolean} `true` if deletion was successful
+   */
+  async deleteConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    await this.axios({
+      ...config,
+      method: "delete",
+      url: uri,
+    })
+    return true
   }
 
 }
