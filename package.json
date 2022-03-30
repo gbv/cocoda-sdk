@@ -26,7 +26,8 @@
     "release": "npm run build && npm test && git checkout dev && git pull && npm version $SEMVER && git push && git checkout master && git merge dev && git push --follow-tags && git checkout dev",
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
-    "release:major": "SEMVER=major npm run release"
+    "release:major": "SEMVER=major npm run release",
+    "postinstall": "[ -d './dist' ] || npm run build"
   },
   "lint-staged": {
     "**/*.js": [
