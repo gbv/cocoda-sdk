@@ -253,8 +253,6 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!mapping) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
-    mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
@@ -263,7 +261,7 @@ export default class MappingsApiProvider extends BaseProvider {
       ...config,
       method: "patch",
       url: uri,
-      data: mapping,
+      data: _.omit(mapping, "uri"),
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
