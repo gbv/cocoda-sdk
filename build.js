@@ -1,8 +1,8 @@
 import esbuild from "esbuild"
 import glob from "glob"
-import { readFile } from "fs/promises"
 import checker from "license-checker"
 import fs from "fs"
+const readFile = fs.promises.readFile
 import ifdef from "esbuild-plugin-ifdef";
 
 (async () => {
