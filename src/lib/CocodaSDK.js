@@ -247,6 +247,7 @@ export default class CocodaSDK {
       result: null,
       error: null,
       isPaused: false,
+      interval,
     }
     // Functions to handle results and errors
     const handleResult = (result) => {
@@ -268,7 +269,7 @@ export default class CocodaSDK {
       }
       repeat.timer = setTimeout(() => {
         toCall()
-      }, interval)
+      }, repeat.interval)
     }
     // Method to call the function, handle result/error, and repeat if necessary
     const call = () => asyncFunc().then(handleResult).catch(handleError).then(() => repeatIfNecessary(call))
@@ -296,7 +297,7 @@ export default class CocodaSDK {
         } else {
           setTimeout(() => {
             repeat.timer && clearTimeout(repeat.timer)
-          }, interval)
+          }, repeat.interval)
         }
       },
       get isPaused() {
@@ -307,6 +308,12 @@ export default class CocodaSDK {
       },
       get hasErrored() {
         return !!repeat.error
+      },
+      get interval() {
+        return repeat.interval
+      },
+      set interval(value) {
+        repeat.interval = value
       },
     }
   }
