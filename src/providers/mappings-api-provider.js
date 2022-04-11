@@ -465,7 +465,6 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.concordances)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
     }
-    console.log("PATCH /concordance", concordance)
     return this.axios({
       ...config,
       method: "patch",
