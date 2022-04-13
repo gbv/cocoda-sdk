@@ -132,7 +132,7 @@ export default class MappingsApiProvider extends BaseProvider {
    * @param {Object} config request config with parameters
    * @returns {Object[]} array of JSKOS mapping objects
    */
-  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, sort, order, ...config }) {
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, cardinality, sort, order, ...config }) {
     let params = {}, url = this._api.mappings
     if (from) {
       params.from = _.isString(from) ? from : from.uri
@@ -163,6 +163,9 @@ export default class MappingsApiProvider extends BaseProvider {
     }
     if (direction) {
       params.direction = direction
+    }
+    if (cardinality) {
+      params.cardinality = cardinality
     }
     if (mode) {
       params.mode = mode
