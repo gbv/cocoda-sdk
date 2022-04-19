@@ -21,6 +21,7 @@
   - [Registry Methods - General](#registry-methods---general)
   - [Registry Methods - Concept Schemes](#registry-methods---concept-schemes)
   - [Registry Methods - Concepts](#registry-methods---concepts)
+  - [Registry Methods - Concordances](#registry-methods---concordances)
   - [Registry Methods - Mappings](#registry-methods---mappings)
   - [Registry Methods - Annotations](#registry-methods---annotations)
   - [Registry Methods - Various](#registry-methods---various)
@@ -347,6 +348,23 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 #### `registry.suggest`
 - [ConceptApiProvider - suggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#suggest)
 - [SkosmosApiProvider - suggest](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#suggest)
+
+### Registry Methods - Concordances
+
+#### `registry.getConcordances`
+- [MappingsApiProvider - getConcordances](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getConcordances)
+
+#### `registry.postConcordance`
+- [MappingsApiProvider - postConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postConcordance)
+
+#### `registry.putConcordance`
+- [MappingsApiProvider - putConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putConcordance)
+
+#### `registry.patchConcordance`
+- [MappingsApiProvider - patchConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchConcordance)
+
+#### `registry.deleteConcordance`
+- [MappingsApiProvider - deleteConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteConcordance)
 
 ### Registry Methods - Mappings
 
