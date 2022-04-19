@@ -61,14 +61,14 @@
     "glob": "^8.0.1",
     "jsdoc": "^3.6.10",
     "license-checker": "^25.0.1",
-    "lint-staged": "^12.3.7",
+    "lint-staged": "^12.3.8",
     "mocha": "^9.2.2",
     "mocha-eslint": "^7.0.0",
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "jskos-tools": "^1.0.25",
+    "jskos-tools": "^1.0.26",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "uuid": "^8.3.2"
