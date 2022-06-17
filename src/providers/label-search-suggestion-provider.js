@@ -1,7 +1,8 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import { listOfCapabilities } from "../utils/index.js"
+import * as errors from "../errors/index.js"
 
 // TODO: Only keep the last 20 results in cache.
 // TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.
@@ -11,7 +12,7 @@ const errors = require("../errors")
  *
  * This provider offers mapping recommendations based on label match via the `/search` endpoint of JSKOS APIs.
  *
- * The provider requires that a list of initialized registries with search endpoints is provided via `setRegistries`. Note that it has further dependencies on Cocoda and might be adjusted to reduce these dependencies.
+ * The provider requires that a list of initialized registries with search endpoints is provided via `cdk` (which refers to the CDK instance that's using this provider).
  *
  * To use it in a registry, specify `provider` as "LabelSearchSuggestion":
  * ```json
@@ -28,39 +29,18 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class LabelSearchSuggestionProvider extends BaseProvider {
+export default class LabelSearchSuggestionProvider extends BaseProvider {
 
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this._cache = []
     this.has.mappings = true
-  }
-
-  /**
-   * Sets a local list of registries where the search providers are taken from.
-   *
-   * @param {Object[]} registries list of registries
-   */
-  setRegistries(registries) {
-    this._registries = registries
-  }
-
-  /**
-   * List of search provider URIs.
-   *
-   * @private
-   */
-  get _searchUris() {
-    const _searchUris = {}
-    for (let registry of this._registries) {
-      const search = _.get(registry, "_api.search") || _.get(registry, "_jskos.search") || registry.search
-      if (search && _.isString(search)) {
-        _searchUris[registry.uri] = search
-      }
-    }
-    return _searchUris
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**
@@ -70,8 +50,7 @@ class LabelSearchSuggestionProvider extends BaseProvider {
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    let targetRegistry = _.get(scheme, "_registry.uri")
-    return super.supportsScheme(scheme) && targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
+    return _.get(scheme, "_registry.has.search", false)
   }
 
   /**
@@ -88,9 +67,6 @@ class LabelSearchSuggestionProvider extends BaseProvider {
     // TODO: Why mode?
     if (mode != "or") {
       return []
-    }
-    if (!this._searchUris) {
-      throw new errors.MissingApiUrlError({ message: "No registries available to search" })
     }
     if (!selected) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "selected" })
@@ -140,10 +116,19 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       return []
     }
     // Prepare label
-    let label = jskos.prefLabel(concept)
+    // TODO: Can we use a language prioritiy list like for requests?
+    const language = jskos.languagePreference.selectLanguage(concept.prefLabel) || this._defaultLanguages[0]
+    let label = jskos.prefLabel(concept, {
+      fallbackToUri: false,
+      language,
+    })
     if (!label) {
       return []
     }
+    // Adjust prefLabel by removing everything from the first non-whitespace, non-letter character
+    // (copied from Cocoda)
+    const regexResult = /^[\s\wäüöÄÜÖß]*\w/.exec(label)
+    label = regexResult ? regexResult[0] : label
     // Get results from API or cache
     const results = await this._getResults({ ...config, label, targetScheme, limit })
     // Map results to actual mappings
@@ -182,21 +167,16 @@ class LabelSearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const targetRegistry = _.get(targetScheme, "_registry.uri")
-    const url = targetRegistry != null && this._searchUris && this._searchUris[targetRegistry]
-    if (!url) {
+    const registry = _.get(targetScheme, "_registry")
+    if (!registry || registry.has.search === false) {
       return []
     }
     // API request
-    const data = await this.axios({
+    const data = await registry.search({
       ...config,
-      method: "get",
-      url,
-      params: {
-        query: label,
-        limit,
-        voc: targetScheme.uri,
-      },
+      search: label,
+      scheme: targetScheme,
+      limit,
     })
     // Save result in cache
     if (!this._cache[targetScheme.uri]) {
@@ -211,5 +191,3 @@ class LabelSearchSuggestionProvider extends BaseProvider {
 
 LabelSearchSuggestionProvider.providerName = "LabelSearchSuggestion"
 LabelSearchSuggestionProvider.stored = false
-
-module.exports = LabelSearchSuggestionProvider

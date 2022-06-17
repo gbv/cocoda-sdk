@@ -1,4 +1,4 @@
-const requestMethods = [
+export const requestMethods = [
   // General
   {
     method: "getRegistries",
@@ -11,12 +11,21 @@ const requestMethods = [
     type: "Schemes",
   },
   {
+    method: "vocSearch",
+    fallback: [],
+    type: "Schemes",
+  },
+  {
     method: "getTypes",
     fallback: [],
     type: "Types",
   },
   {
     method: "suggest",
+    fallback: ["", [], [], []],
+  },
+  {
+    method: "vocSuggest",
     fallback: ["", [], [], []],
   },
   {
@@ -125,7 +134,7 @@ const requestMethods = [
   },
 ]
 
-function concatUrl(...parts) {
+export function concatUrl(...parts) {
   let [url, ...otherParts] = parts
   for (let part of otherParts) {
     if (!url.endsWith("/")) {
@@ -139,7 +148,27 @@ function concatUrl(...parts) {
   return url
 }
 
-module.exports = {
-  requestMethods,
-  concatUrl,
+
+// Retain custom array properties
+export function withCustomProps(arr, from) {
+  arr._totalCount = from._totalCount
+  arr._url = from._url
+  return arr
 }
+
+export const listOfCapabilities = [
+  "schemes",
+  "top",
+  "data",
+  "concepts",
+  "narrower",
+  "ancestors",
+  "types",
+  "suggest",
+  "search",
+  "auth",
+  "mappings",
+  "concordances",
+  "annotations",
+  "occurrences",
+]

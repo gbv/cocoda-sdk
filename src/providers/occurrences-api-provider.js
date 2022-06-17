@@ -1,8 +1,8 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
 
 // TODO: Modernize.
 
@@ -25,16 +25,20 @@ const utils = require("../utils")
  * @extends BaseProvider
  * @category Providers
  */
-class OccurrencesApiProvider extends BaseProvider {
+export default class OccurrencesApiProvider extends BaseProvider {
 
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this._cache = []
     this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
     this.has.mappings = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**
@@ -56,7 +60,7 @@ class OccurrencesApiProvider extends BaseProvider {
           url,
         })
         this._occurrencesSupportedSchemes = data || []
-      } catch(error) {
+      } catch (error) {
         // Do nothing so that it is tried again next time
         // TODO: Save number of failures?
       }
@@ -230,5 +234,3 @@ class OccurrencesApiProvider extends BaseProvider {
 
 OccurrencesApiProvider.providerName = "OccurrencesApi"
 OccurrencesApiProvider.stored = false
-
-module.exports = OccurrencesApiProvider

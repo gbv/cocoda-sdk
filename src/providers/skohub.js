@@ -1,6 +1,6 @@
-const BaseProvider = require("./base-provider")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
 
 /**
  * ```json
@@ -13,7 +13,7 @@ const errors = require("../errors")
  *  ]
  * }
  */
-class SkohubProvider extends BaseProvider {
+export default class SkohubProvider extends BaseProvider {
 
   _setup() {
     this._jskos.schemes = this.schemes || []
@@ -54,7 +54,7 @@ class SkohubProvider extends BaseProvider {
     }
 
     // TODO: map remaining fields
-      
+
     // remove fields without value
     for (let key of Object.keys(scheme).filter(key => !scheme[key])) {
       delete scheme[key]
@@ -112,7 +112,7 @@ class SkohubProvider extends BaseProvider {
         }
       }
     }
-    
+
     return newConcepts
   }
 
@@ -124,7 +124,7 @@ class SkohubProvider extends BaseProvider {
       return // concept not found or backend error
     }
   }
- 
+
   _mapConcept(data) {
     const concept = { uri: data.id }
 
@@ -133,8 +133,8 @@ class SkohubProvider extends BaseProvider {
 
     // TODO: notation, broader, inScheme, altLabel...
     // TODO: convert to JSKOS
-      
-    return concept 
+
+    return concept
   }
 
   async _request(config) {
@@ -143,11 +143,9 @@ class SkohubProvider extends BaseProvider {
     if (data.id !== config.url) {
       throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected URI" })
     }
-    
+
     return data
   }
 }
 
 SkohubProvider.providerName = "Skohub"
-
-module.exports = SkohubProvider

@@ -1,10 +1,46 @@
-const providers = require("../providers")
-const errors = require("../errors")
-const axios = require("axios")
-const _ = require("../utils/lodash")
-const jskos = require("jskos-tools")
+import * as errors from "../errors/index.js"
+import axios from "axios"
+import * as _ from "../utils/lodash.js"
+import jskos from "jskos-tools"
 
-class CocodaSDK {
+import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../providers/index.js"
+
+// Registered providers
+const providers = {
+  [BaseProvider.providerName]: BaseProvider,
+  init(registry) {
+    if (this[registry.provider]) {
+      return new this[registry.provider](registry)
+    }
+    throw new errors.InvalidProviderError()
+  },
+  addProvider(provider) {
+    if (provider.prototype instanceof BaseProvider || provider === BaseProvider) {
+      this[provider.providerName] = provider
+    } else {
+      throw new errors.InvalidProviderError()
+    }
+  },
+}
+// Only ConceptApi and MappingsApi are available by default
+providers.addProvider(ConceptApiProvider)
+providers.addProvider(MappingsApiProvider)
+
+// For the browser build, add all providers by default
+//#ifdef process.browser
+import * as allProviders from "../providers/index.js"
+Object.values(allProviders).forEach(provider => {
+  providers.addProvider(provider)
+})
+//#endif
+
+// Registry cache used by registryForScheme
+const registryCache = {}
+
+/**
+ * CocodaSDK class
+ */
+export default class CocodaSDK {
 
   /**
    * CDK constructor.
@@ -47,11 +83,20 @@ class CocodaSDK {
     config.registries = config.registries || []
     // 2. Initialize registries
     config.registries = config.registries.map(registry => providers.init(registry)).filter(r => r)
-    // 3. Call setRegistries for registries if available
-    for (let registry of config.registries.filter(r => r.setRegistries)) {
-      registry.setRegistries(config.registries)
-    }
+    // 3. Set cdk property for all registries
+    config.registries.forEach(registry => {
+      registry.cdk = this
+    })
     this._config = config
+  }
+
+  /**
+   * Map of registered providers.
+   *
+   * @returns {Object} map of registered providers (name -> provider)
+   */
+  get providers() {
+    return providers
   }
 
   /**
@@ -130,7 +175,9 @@ class CocodaSDK {
    * @returns {Object} initialized registry
    */
   initializeRegistry(registry) {
-    return providers.init(registry)
+    registry = providers.init(registry)
+    registry.cdk = this
+    return registry
   }
 
   /**
@@ -139,6 +186,15 @@ class CocodaSDK {
    * @param {Object} provider provider class that extends BaseProvider
    */
   addProvider(provider) {
+    providers.addProvider(provider)
+  }
+
+  /**
+   * Static method to add custom provider.
+   *
+   * @param {Object} provider provider class that extends BaseProvider
+   */
+  static addProvider(provider) {
     providers.addProvider(provider)
   }
 
@@ -191,6 +247,7 @@ class CocodaSDK {
       result: null,
       error: null,
       isPaused: false,
+      interval,
     }
     // Functions to handle results and errors
     const handleResult = (result) => {
@@ -212,7 +269,7 @@ class CocodaSDK {
       }
       repeat.timer = setTimeout(() => {
         toCall()
-      }, interval)
+      }, repeat.interval)
     }
     // Method to call the function, handle result/error, and repeat if necessary
     const call = () => asyncFunc().then(handleResult).catch(handleError).then(() => repeatIfNecessary(call))
@@ -240,7 +297,7 @@ class CocodaSDK {
         } else {
           setTimeout(() => {
             repeat.timer && clearTimeout(repeat.timer)
-          }, interval)
+          }, repeat.interval)
         }
       },
       get isPaused() {
@@ -251,6 +308,12 @@ class CocodaSDK {
       },
       get hasErrored() {
         return !!repeat.error
+      },
+      get interval() {
+        return repeat.interval
+      },
+      set interval(value) {
+        repeat.interval = value
       },
     }
   }
@@ -265,9 +328,11 @@ class CocodaSDK {
     let schemes = [], promises = []
 
     for (let registry of this.config.registries) {
-      if (registry.has.schemes) {
+      if (registry.has.schemes !== false) {
         let promise = registry.getSchemes(config).then(results => {
           for (let scheme of results) {
+            // Keep registry; we'll call registryForScheme later to avoid issues
+            scheme._registry = registry
             // Add scheme specific custom properties
             scheme.__DETAILSLOADED__ = 1
             scheme.type = scheme.type || ["http://www.w3.org/2004/02/skos/core#ConceptScheme"]
@@ -302,18 +367,18 @@ class CocodaSDK {
                   schemes.splice(otherSchemeIndex, 1)
                 }
                 // Integrate details from existing scheme
-                scheme = jskos.merge(scheme, otherScheme, { mergeUris: true, skipPaths: ["_registry"] })
+                scheme = jskos.merge(scheme, _.omit(otherScheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
               }
               scheme._registry = registry
               // Save scheme in objects and push into schemes array
               schemes.push(scheme)
             } else {
               // Integrate details into existing scheme
-              let index = schemes.findIndex(s => jskos.compare(s, scheme))
+              const index = schemes.findIndex(s => jskos.compare(s, scheme))
               if (index != -1) {
-                let registry = schemes[index]._registry
+                const otherSchemeRegistry = schemes[index]._registry
                 schemes[index] = jskos.merge(schemes[index], _.omit(scheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
-                schemes[index]._registry = registry
+                schemes[index]._registry = otherSchemeRegistry
               }
             }
           }
@@ -325,23 +390,65 @@ class CocodaSDK {
       }
     }
 
-    return Promise.all(promises).then(() => {
-      // Remove certain properties from objects
-      // ? Why?
-      for (let scheme of schemes) {
-        if (scheme.concepts && scheme.concepts.length == 0) {
-          delete scheme.concepts
+    await Promise.all(promises)
+    // Adjust scheme registries with registryForScheme
+    schemes.forEach(scheme => {
+      const previousRegistry = scheme._registry
+      delete scheme._registry
+      const newRegistry = this.registryForScheme(scheme)
+      if (!newRegistry || newRegistry._api.api === previousRegistry._api.api) {
+        scheme._registry = previousRegistry
+      } else {
+        scheme._registry = newRegistry
+      }
+    })
+    return jskos.sortSchemes(schemes.filter(Boolean))
+  }
+
+  registryForScheme(scheme) {
+    let registry = scheme._registry
+    if (registry) {
+      return registry
+    }
+
+    for (let { type, ...config } of scheme.API || []) {
+      const url = config.url
+
+      if (registryCache[url]) {
+        // Registry in cache is used
+        const registry = registryCache[url]
+        // Check if scheme is part of registry already; if not, add it
+        if (Array.isArray(registry._jskos.schemes) && !jskos.isContainedIn(scheme, registry._jskos.schemes)) {
+          registry._jskos.schemes.push(scheme)
         }
-        if (scheme.topConcepts && scheme.topConcepts.length == 0) {
-          delete scheme.topConcepts
+        return registry
+      } else {
+        // Registry will be initialized
+        const provider = Object.values(providers).find(p => p.providerType === type)
+        if (!provider || !provider._registryConfigForBartocApiConfig) {
+          continue
+        }
+        const providerName = provider.providerName
+        // Some providers need access to the scheme
+        config.scheme = scheme
+        config = providers[providerName]._registryConfigForBartocApiConfig(config)
+        if (!config) {
+          continue
+        }
+        config.provider = providerName
+
+        try {
+          registry = this.initializeRegistry(config)
+          if (registry) {
+            registryCache[url] = registry
+            return registry
+          }
+        } catch (error) {
+          continue
         }
       }
-      schemes = schemes.filter(scheme => scheme != null)
-      schemes = jskos.sortSchemes(schemes)
-      return schemes
-    })
+    }
+    return null
   }
 
 }
-
-module.exports = CocodaSDK

@@ -13,6 +13,7 @@ npm-debug.log*
 *.njsproj
 *.sln
 
-*test*.js*
+*test*.*js*
 
 dist/
+out/

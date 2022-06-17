@@ -1,8 +1,8 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
 
 // TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
 
@@ -30,7 +30,7 @@ const utils = require("../utils")
  * @extends BaseProvider
  * @category Providers
  */
-class MappingsApiProvider extends BaseProvider {
+export default class MappingsApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -40,6 +40,14 @@ class MappingsApiProvider extends BaseProvider {
     if (this._api.api && this._api.status === undefined) {
       this._api.status = utils.concatUrl(this._api.api, "/status")
     }
+    // Preliminarily set capabilties
+    this.has.mappings = true
+    this.has.concordances = true
+    this.has.annotations = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**
@@ -67,7 +75,13 @@ class MappingsApiProvider extends BaseProvider {
       this.has.mappings.delete = !!_.get(this._config, "mappings.delete")
       this.has.mappings.anonymous = !!_.get(this._config, "mappings.anonymous")
     }
-    this.has.concordances = !!this._api.concordances
+    this.has.concordances = this._api.concordances ? {} : false
+    if (this.has.concordances) {
+      this.has.concordances.read = !!_.get(this._config, "concordances.read")
+      this.has.concordances.create = !!_.get(this._config, "concordances.create")
+      this.has.concordances.update = !!_.get(this._config, "concordances.update")
+      this.has.concordances.delete = !!_.get(this._config, "concordances.delete")
+    }
     this.has.annotations = this._api.annotations ? {} : false
     if (this.has.annotations) {
       this.has.annotations.read = !!_.get(this._config, "annotations.read")
@@ -105,7 +119,7 @@ class MappingsApiProvider extends BaseProvider {
         },
       })
     } catch (error) {
-      if (error.response && error.response.status == 404) {
+      if (_.get(error, "response.status") == 404) {
         return null
       }
       throw error
@@ -118,7 +132,7 @@ class MappingsApiProvider extends BaseProvider {
    * @param {Object} config request config with parameters
    * @returns {Object[]} array of JSKOS mapping objects
    */
-  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, sort, order, ...config }) {
+  async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, cardinality, sort, order, ...config }) {
     let params = {}, url = this._api.mappings
     if (from) {
       params.from = _.isString(from) ? from : from.uri
@@ -149,6 +163,9 @@ class MappingsApiProvider extends BaseProvider {
     }
     if (direction) {
       params.direction = direction
+    }
+    if (cardinality) {
+      params.cardinality = cardinality
     }
     if (mode) {
       params.mode = mode
@@ -239,8 +256,6 @@ class MappingsApiProvider extends BaseProvider {
     if (!mapping) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
-    mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
@@ -249,7 +264,7 @@ class MappingsApiProvider extends BaseProvider {
       ...config,
       method: "patch",
       url: uri,
-      data: mapping,
+      data: _.omit(mapping, "uri"),
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -388,9 +403,107 @@ class MappingsApiProvider extends BaseProvider {
     })
   }
 
+  /**
+   * Creates a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {Object} JSKOS concordance object
+   */
+  async postConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    return this.axios({
+      ...config,
+      method: "post",
+      url: this._api.concordances,
+      data: concordance,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Overwrites a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {Object} JSKOS concordance object
+   */
+  async putConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    return this.axios({
+      ...config,
+      method: "put",
+      url: uri,
+      data: concordance,
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Patches a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance (or part of concordance)
+   * @returns {Object} JSKOS concordance object
+   */
+  async patchConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    return this.axios({
+      ...config,
+      method: "patch",
+      url: uri,
+      data: _.omit(concordance, "uri"),
+      params: {
+        ...this._defaultParams,
+        ...(config.params || {}),
+      },
+    })
+  }
+
+  /**
+   * Deletes a concordance.
+   *
+   * @param {Object} config
+   * @param {Object} config.concordance JSKOS concordance
+   * @returns {boolean} `true` if deletion was successful
+   */
+  async deleteConcordance({ concordance, ...config }) {
+    if (!concordance) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
+    }
+    const uri = concordance.uri
+    if (!uri || !uri.startsWith(this._api.concordances)) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
+    }
+    await this.axios({
+      ...config,
+      method: "delete",
+      url: uri,
+    })
+    return true
+  }
+
 }
 
 MappingsApiProvider.providerName = "MappingsApi"
 MappingsApiProvider.stored = true
-
-module.exports = MappingsApiProvider

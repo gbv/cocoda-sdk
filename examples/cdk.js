@@ -1,14 +1,9 @@
-const cdk = require("../index")
+import { cdk, addAllProviders } from "../src/index.js"
+addAllProviders()
 
-/**
- * Get a cdk instances and load config from dev config.
- *
- * Exported as Promise:
- * ```js
- *  const cdk = await require("./cdk")
- * ```
- */
-module.exports = (async (url = "https://coli-conc.gbv.de/cocoda/dev/cocoda.json") => {
-  await cdk.loadConfig(url)
+const promise = cdk.loadConfig("https://coli-conc.gbv.de/cocoda/dev/cocoda.json")
+
+export const getInstance = async () => {
+  await promise
   return cdk
-})()
+}

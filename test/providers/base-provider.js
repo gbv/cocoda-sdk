@@ -1,7 +1,7 @@
-const BaseProvider = require("../../providers").Base
-const assert = require("assert")
-const MockAdapter = require("axios-mock-adapter")
-const utils = require("../../utils")
+import BaseProvider from "../../src/providers/base-provider.js"
+import assert from "assert"
+import MockAdapter from "axios-mock-adapter"
+import * as utils from "../../src/utils/index.js"
 
 describe("BaseProvider", () => {
   let provider, registry = {}, mock

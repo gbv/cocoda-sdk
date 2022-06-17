@@ -1,8 +1,8 @@
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const axios = require("axios")
-const utils = require("../utils")
-const errors = require("../errors")
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import axios from "axios"
+import * as utils from "../utils/index.js"
+import * as errors from "../errors/index.js"
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
@@ -15,7 +15,6 @@ const errors = require("../errors")
  * - _setup: will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessasry), should be used to set properties on this.has and custom preparations
  * - isAuthorizedFor: override if you want to customize
  * - supportsScheme: override if you want to customize
- * - setRegistries: implement this method if the provider needs access to other registries in cocoda-sdk (takes one parameter `registries`)
  * - getRegistries
  * - getSchemes
  * - getTypes
@@ -42,6 +41,7 @@ const errors = require("../errors")
  * - deleteAnnotation
  *
  * Internal (starting with underscore) and external properties that can be used:
+ * - `this.cdk`: a reference to the current CDK instance (can be use to request other registries or initialize a new registry)
  * - `this.has`: an object of functionality of the registry (needs to be set by subclasses)
  * - `this.languages`: an array of language tags provided by the user in order of priority
  * - `this._jskos`: the raw JSKOS object used to initialize this registry
@@ -69,7 +69,7 @@ const errors = require("../errors")
  *
  * @category Providers
  */
-class BaseProvider {
+export default class BaseProvider {
 
   /**
    * Provider constructor.
@@ -109,7 +109,8 @@ class BaseProvider {
     // Set API URLs from registry object
     this._api = {
       status: registry.status,
-      schemes: registry.schemes,
+      // If `schemes` on registry is an array, remove it because we're only keeping it in this._jskos.schemes
+      schemes: Array.isArray(registry.schemes) ? undefined : registry.schemes,
       top: registry.top,
       data: registry.data,
       concepts: registry.concepts,
@@ -187,7 +188,7 @@ class BaseProvider {
       ) {
         error.config._retryCount = count + 1
         // from: https://github.com/axios/axios/issues/934#issuecomment-531463172
-        if(error.config.data) error.config.data = JSON.parse(error.config.data)
+        if (error.config.data) error.config.data = JSON.parse(error.config.data)
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             this.axios(error.config).then(resolve).catch(reject)
@@ -284,7 +285,7 @@ class BaseProvider {
         }
         currentRequests.push(request)
         // Remove from list of current requests after promise is done
-        promise.catch(() => {}).then(() => currentRequests.splice(currentRequests.indexOf(request), 1))
+        promise.catch(() => { }).then(() => currentRequests.splice(currentRequests.indexOf(request), 1))
         // Add adjustment methods
         return promise
       }
@@ -321,8 +322,8 @@ class BaseProvider {
             method: "get",
             url: this._api.status,
           })
-        } catch(error) {
-          if (error.response.status === 404) {
+        } catch (error) {
+          if (_.get(error, "response.status") === 404) {
             // If /status is not available, remove from _api
             this._api.status = null
           }
@@ -354,14 +355,14 @@ class BaseProvider {
    *
    * @private
    */
-  _prepare() {}
+  _prepare() { }
 
   /**
    * Setup to be executed after init. Should be overwritten by subclasses.
    *
    * @private
    */
-  _setup() {}
+  _setup() { }
 
   /**
    * Returns a source for a axios cancel token.
@@ -470,6 +471,10 @@ class BaseProvider {
   }
 
   adjustConcept(concept) {
+    // Don't adjust when already saved in Cocoda
+    if (!concept || concept.__SAVED__) {
+      return concept
+    }
     // Add _getNarrower function to concepts
     concept._getNarrower = (config) => {
       return this.getNarrower({ ...config, concept })
@@ -493,33 +498,48 @@ class BaseProvider {
     return concept
   }
   adjustConcepts(concepts) {
-    let newConcepts = concepts.map(concept => this.adjustConcept(concept))
-    // Retain custom props if available
-    newConcepts._totalCount = concepts._totalCount
-    newConcepts._url = concepts._url
-    return newConcepts
+    return utils.withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
   }
   adjustRegistries(registries) {
     return registries
   }
-  adjustSchemes(schemes) {
-    for (let scheme of schemes) {
+  adjustScheme(scheme) {
+    // Don't adjust when already saved in Cocoda
+    if (!scheme || scheme.__SAVED__) {
+      return scheme
+    }
+    // Add _registry to schemes
+    const previousRegistry = scheme._registry
+    scheme._registry = this.cdk && this.cdk.registryForScheme(scheme)
+    if (!scheme._registry || previousRegistry === scheme._registry || scheme._registry._api.api === this._api.api) {
+      scheme._registry = previousRegistry || this
+    } else {
+      // Remove scheme's `concepts` and `topConcepts` fields if they are [] or [null]
+      // because the registry has changed and they might not be accurate.
+      ["concepts", "topConcepts"].forEach(key => {
+        if (Array.isArray(scheme[key]) && (scheme[key].length === 0 || scheme[key][0] === null)) {
+          delete scheme[key]
+        }
+      })
+    }
+    if (scheme._registry) {
       // Add _getTop function to schemes
       scheme._getTop = (config) => {
-        return this.getTop({ ...config, scheme })
+        return scheme._registry.getTop({ ...config, scheme })
       }
       // Add _getTypes function to schemes
       scheme._getTypes = (config) => {
-        return this.getTypes({ ...config, scheme })
+        return scheme._registry.getTypes({ ...config, scheme })
       }
-      // Add _registry to schemes
-      scheme._registry = this
       // Add _suggest function to schemes
       scheme._suggest = ({ search, ...config }) => {
-        return this.suggest({ ...config, search, scheme })
+        return scheme._registry.suggest({ ...config, search, scheme })
       }
     }
-    return schemes
+    return scheme
+  }
+  adjustSchemes(schemes) {
+    return utils.withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
   }
   adjustConcordances(concordances) {
     for (let concordance of concordances) {
@@ -548,11 +568,7 @@ class BaseProvider {
     return mapping
   }
   adjustMappings(mappings) {
-    let newMappings = mappings.map(mapping => this.adjustMapping(mapping))
-    // Retain custom props if available
-    newMappings._totalCount = mappings._totalCount
-    newMappings._url = mappings._url
-    return newMappings
+    return utils.withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
   }
 
   /**
@@ -560,13 +576,18 @@ class BaseProvider {
    *
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
-   * @returns {Object[]} array of created mapping objects
+   * @returns {Object[]} array of created mapping objects; in case of failure, consult the `_errors` property on the array at the index of the failed request
    */
   async postMappings({ mappings, ...config } = {}) {
     if (!mappings || !mappings.length) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
     }
-    return Promise.all(mappings.map(mapping => this.postMapping({ mapping, ...config, _raw: true })))
+    return this._callHelperForArrayWrappers({
+      method: "postMapping",
+      items: mappings,
+      itemProperty: "mapping",
+      config,
+    })
   }
 
   /**
@@ -574,16 +595,49 @@ class BaseProvider {
    *
    * @param {Object} config
    * @param {Array} config.mappings array of mapping objects
+   * @returns {Object[]} array of results (`true` if successful); in case of failure, consult the `_errors` property on the array at the index of the failed request
    */
   async deleteMappings({ mappings, ...config } = {}) {
     if (!mappings || !mappings.length) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mappings" })
     }
-    return Promise.all(mappings.map(mapping => this.deleteMapping({ mapping, ...config, _raw: true })))
+    return this._callHelperForArrayWrappers({
+      method: "deleteMapping",
+      items: mappings,
+      itemProperty: "mapping",
+      config,
+    })
+  }
+
+  /**
+   * Calls a method that is for only one item for an array of items. Returns an array of results.
+   *
+   * If there is an error, that index in the result array will be `null`. There is a property `_errors` on the result array that will contain the respective error at the correct index.
+   *
+   * @param {Object} options
+   * @param {string} options.method instance method to call (e.g. `postMapping`)
+   * @param {Object[]} options.items items to call the method for
+   * @param {string} options.itemProperty the property name for the item when calling the method (e.g. `mapping`)
+   * @param {Object} options.config other properties to pass to the method call
+   * @returns {any[]} result array with values returned from individual method calls
+   *
+   * @private
+   */
+  async _callHelperForArrayWrappers({ method, items, itemProperty, config }) {
+    const errors = []
+    const resultItems = await Promise.all(items.map(async item => {
+      try {
+        const resultItem = await this[method]({ [itemProperty]: item, ...config, _raw: true })
+        return resultItem
+      } catch (error) {
+        errors[items.indexOf(item)] = error
+        return null
+      }
+    }))
+    resultItems._errors = errors
+    return resultItems
   }
 
 }
 
 BaseProvider.providerName = "Base"
-
-module.exports = BaseProvider

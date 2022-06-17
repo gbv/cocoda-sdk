@@ -1,9 +1,10 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const localforage = require("localforage").default || require("localforage")
-const { v4: uuid } = require("uuid")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import localforage from "localforage"
+import { v4 as uuid } from "uuid"
+import * as errors from "../errors/index.js"
+import { listOfCapabilities } from "../utils/index.js"
 const uriPrefix = "urn:uuid:"
 
 /**
@@ -24,18 +25,28 @@ const uriPrefix = "urn:uuid:"
  * @extends BaseProvider
  * @category Providers
  */
-class LocalMappingsProvider extends BaseProvider {
+export default class LocalMappingsProvider extends BaseProvider {
 
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this.has.mappings = {
       read: true,
       create: true,
       update: true,
       delete: true,
     }
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
+  }
+
+  /**
+   * @private
+   */
+  _setup() {
     this.queue = []
     this.localStorageKey = "cocoda-mappings--" + this._path
     let oldLocalStorageKey = "mappings"
@@ -344,7 +355,7 @@ class LocalMappingsProvider extends BaseProvider {
       await localforage.setItem(this.localStorageKey, localMappings)
       done()
       return mapping
-    } catch(error) {
+    } catch (error) {
       done()
       throw error
     }
@@ -382,7 +393,7 @@ class LocalMappingsProvider extends BaseProvider {
       await localforage.setItem(this.localStorageKey, localMappings)
       done()
       return mapping
-    } catch(error) {
+    } catch (error) {
       done()
       throw error
     }
@@ -420,7 +431,7 @@ class LocalMappingsProvider extends BaseProvider {
       await localforage.setItem(this.localStorageKey, localMappings)
       done()
       return mapping
-    } catch(error) {
+    } catch (error) {
       done()
       throw error
     }
@@ -446,7 +457,7 @@ class LocalMappingsProvider extends BaseProvider {
       await localforage.setItem(this.localStorageKey, localMappings)
       done()
       return true
-    } catch(error) {
+    } catch (error) {
       done()
       throw error
     }
@@ -455,5 +466,3 @@ class LocalMappingsProvider extends BaseProvider {
 
 LocalMappingsProvider.providerName = "LocalMappings"
 LocalMappingsProvider.stored = true
-
-module.exports = LocalMappingsProvider

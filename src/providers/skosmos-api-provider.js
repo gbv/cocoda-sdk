@@ -1,7 +1,8 @@
-const BaseProvider = require("./base-provider")
-const jskos = require("jskos-tools")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
+import BaseProvider from "./base-provider.js"
+import jskos from "jskos-tools"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import { listOfCapabilities } from "../utils/index.js"
 
 /**
  * Skosmos API.
@@ -31,42 +32,72 @@ const errors = require("../errors")
  * @extends BaseProvider
  * @category Providers
  */
-class SkosmosApiProvider extends BaseProvider {
+export default class SkosmosApiProvider extends BaseProvider {
 
   /**
    * @private
    */
-  _setup() {
+  _prepare() {
     this.has.schemes = true
-    this.has.top = false
+    this.has.top = true
     this.has.data = true
     this.has.concepts = true
     this.has.narrower = true
     this.has.ancestors = true
-    this.has.types = true // ?
+    this.has.types = true
     this.has.suggest = true
     this.has.search = true
-    // Set concepts and topConcepts for schemes
-    for (let scheme of this.schemes) {
-      scheme.concepts = [null]
-      scheme.topConcepts = []
+    // Explicitly set other capabilities to false
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
+  }
+
+  /**
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
+   *
+   * @param {Object} options
+   * @param {Object} options.url API URL for BARTOC instance
+   * @param {Object} options.scheme scheme for which the config is requested
+   * @returns {Object} provider configuration
+   */
+  static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
+    if (!url || !scheme) {
+      return null
     }
+    const config = {}
+    const match = url.match(/(.+\/)([^/]+)\/$/)
+    if (!match) {
+      return null
+    }
+    config.api = match[1] + "rest/v1/"
+    scheme.VOCID = match[2]
+    config.schemes = [scheme]
+    return config
+  }
+
+  /**
+   * @private
+   */
+  get _language() {
+    return this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
   /**
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {
-    if (!scheme || !scheme.VOCID) {
+    const VOCID = scheme && scheme.VOCID || _.get(this.schemes.find(s => jskos.compare(s, scheme)), "VOCID")
+    if (!VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
     endpoint = endpoint || ""
     params = params || {}
     if (!params.lang) {
-      params.lang = this.languages[0] || "en"
+      params.lang = this._language
     }
     const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&")
-    return `${this._api.api}${scheme.VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
+    return `${this._api.api}${VOCID}${endpoint}${paramString ? "?" + paramString : ""}`
   }
 
   /**
@@ -78,6 +109,44 @@ class SkosmosApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI" })
     }
     return this._getApiUrl(scheme, "/data", addFormatParameter ? { format: "application/json" } : {})
+  }
+
+  /**
+   * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.
+   *
+   * @private
+   */
+  async _getSchemeUri(scheme) {
+    this._approvedSchemes = this._approvedSchemes || []
+    this._rejectedSchemes = this._rejectedSchemes || []
+    let _scheme = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+    if (_scheme) {
+      return _scheme.uri
+    }
+    // Return null if it was already rejected
+    if (this._rejectedSchemes.find(s => jskos.compare(scheme, s))) {
+      return null
+    }
+    // Otherwise load scheme data and save in approved/rejected schemes
+    const url = this._getApiUrl(scheme, "/")
+    const data = await this.axios({
+      method: "get",
+      url,
+    })
+    const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
+    if (resultScheme) {
+      this._approvedSchemes.push({
+        uri: resultScheme.uri,
+        identifier: jskos.getAllUris(scheme),
+      })
+      return resultScheme.uri
+    } else {
+      this._rejectedSchemes.push({
+        uri: scheme.uri,
+        identifier: scheme.identifier,
+      })
+      return null
+    }
   }
 
   /**
@@ -181,16 +250,9 @@ class SkosmosApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
   async getSchemes({ ...config }) {
-    // TODO: Re-evaluate!
-    if (!this._jskos.loadSchemeInfo) {
-      const result = this.schemes.map(s => jskos.deepCopy(s))
-      return result
-    }
     const schemes = []
-    // TODO
-    const language = this.languages[0] || "en"
     for (let scheme of this.schemes || []) {
-      const url = this._getApiUrl(scheme, "/", { lang: language })
+      const url = this._getApiUrl(scheme, "/")
       const data = await this.axios({
         ...config,
         method: "get",
@@ -199,10 +261,17 @@ class SkosmosApiProvider extends BaseProvider {
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
       if (label) {
-        _.set(scheme, `prefLabel.${language}`, label)
+        _.set(scheme, `prefLabel.${this._language}`, label)
       }
-      // TODO: If there is no label, redo the request with one of the available languages.
       schemes.push(scheme)
+      // Also add scheme to approved schemes
+      this._approvedSchemes = this._approvedSchemes || []
+      if (!this._approvedSchemes.find(s => jskos.compare(scheme, s))) {
+        this._approvedSchemes.push({
+          uri: resultScheme.uri,
+          identifier: jskos.getAllUris(scheme),
+        })
+      }
     }
     return schemes
   }
@@ -216,9 +285,11 @@ class SkosmosApiProvider extends BaseProvider {
    */
   async getTop({ scheme, ...config }) {
     const url = this._getApiUrl(scheme, "/topConcepts")
-    const language = this.languages[0] || "en"
-    _.set(config, "params.lang", language)
-    _.set(config, "params.scheme", scheme.uri)
+    const schemeUri = await this._getSchemeUri(scheme)
+    if (!schemeUri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing or unsupported scheme or VOCID property on scheme" })
+    }
+    _.set(config, "params.scheme", schemeUri)
     const response = await this.axios({
       ...config,
       method: "get",
@@ -228,7 +299,7 @@ class SkosmosApiProvider extends BaseProvider {
     for (let concept of response.topconcepts || []) {
       const newConcept = this._toJskosConcept(concept, {
         scheme,
-        language,
+        language: this._language,
       })
       newConcept.topConceptOf = [scheme]
       concepts.push(newConcept)
@@ -339,7 +410,7 @@ class SkosmosApiProvider extends BaseProvider {
     while (uri) {
       if (uri != concept.uri) {
         const ancestor = _.get(response, `broaderTransitive["${uri}"]`)
-        ancestors = [ancestor].concat(ancestors)
+        ancestors = ancestors.concat([ancestor])
       }
       uri = _.get(response, `broaderTransitive["${uri}"].broader[0]`)
     }
@@ -437,5 +508,4 @@ class SkosmosApiProvider extends BaseProvider {
 }
 
 SkosmosApiProvider.providerName = "SkosmosApi"
-
-module.exports = SkosmosApiProvider
+SkosmosApiProvider.providerType = "http://bartoc.org/api-type/skosmos"

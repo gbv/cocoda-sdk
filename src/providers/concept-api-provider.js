@@ -1,8 +1,8 @@
-const BaseProvider = require("./base-provider")
-const _ = require("../utils/lodash")
-const errors = require("../errors")
-const utils = require("../utils")
-const jskos = require("jskos-tools")
+import BaseProvider from "./base-provider.js"
+import * as _ from "../utils/lodash.js"
+import * as errors from "../errors/index.js"
+import * as utils from "../utils/index.js"
+import jskos from "jskos-tools"
 
 /**
  * JSKOS Concept API.
@@ -29,7 +29,7 @@ const jskos = require("jskos-tools")
  * @extends BaseProvider
  * @category Providers
  */
-class ConceptApiProvider extends BaseProvider {
+export default class ConceptApiProvider extends BaseProvider {
 
   /**
    * @private
@@ -39,6 +39,21 @@ class ConceptApiProvider extends BaseProvider {
     if (this._api.api && this._api.status === undefined) {
       this._api.status = utils.concatUrl(this._api.api, "/status")
     }
+    // Set capabilities to true for now; will be overridden by _setup() later
+    this.has.schemes = true
+    this.has.top = true
+    this.has.data = true
+    this.has.concepts = true
+    this.has.narrower = true
+    this.has.ancestors = true
+    this.has.types = true
+    this.has.suggest = true
+    this.has.search = true
+    this.has.auth = true
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
   }
 
   /**
@@ -66,6 +81,10 @@ class ConceptApiProvider extends BaseProvider {
       }
     }
     this.has.schemes = !!this._api.schemes
+    // If there is no scheme API endpoint, but a list of schemes is given, use that for schemes.
+    if (!this.has.schemes && Array.isArray(this.schemes)) {
+      this.has.schemes = true
+    }
     this.has.top = !!this._api.top
     this.has.data = !!this._api.data
     this.has.concepts = !!this._api.concepts || this.has.data
@@ -76,7 +95,61 @@ class ConceptApiProvider extends BaseProvider {
     this.has.search = !!this._api.search
     this.has.auth = _.get(this._config, "auth.key") != null
     this._defaultParams = {
-      properties: "uri,prefLabel,notation,inScheme",
+      // Default parameters mostly for DANTE
+      properties: "+created,issued,modified,editorialNote,scopeNote",
+    }
+  }
+
+  /**
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
+   *
+   * @param {Object} options
+   * @param {Object} options.url API URL for server
+   * @returns {Object} provider configuration
+   */
+  static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
+    if (!url || !scheme) {
+      return null
+    }
+    return {
+      api: url,
+      schemes: [scheme],
+    }
+  }
+
+  /**
+   * Returns the main vocabulary URI by requesting the scheme info and saving it in a cache.
+   *
+   * @private
+   */
+  async _getSchemeUri(scheme) {
+    this._approvedSchemes = this._approvedSchemes || []
+    this._rejectedSchemes = this._rejectedSchemes || []
+    let _scheme = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+    if (_scheme) {
+      return _scheme.uri
+    }
+    // Return null if it was already rejected
+    if (this._rejectedSchemes.find(s => jskos.compare(scheme, s))) {
+      return null
+    }
+    // Otherwise load scheme data and save in approved/rejected schemes
+    const schemes = await this.getSchemes({ params: {
+      uri: jskos.getAllUris(scheme).join("|"),
+    } })
+    const resultScheme = schemes.find(s => jskos.compare(s, scheme))
+    if (resultScheme) {
+      this._approvedSchemes.push({
+        uri: resultScheme.uri,
+        identifier: jskos.getAllUris(scheme),
+      })
+      return resultScheme.uri
+    } else {
+      this._rejectedSchemes.push({
+        uri: scheme.uri,
+        identifier: scheme.identifier,
+      })
+      return null
     }
   }
 
@@ -88,10 +161,11 @@ class ConceptApiProvider extends BaseProvider {
    */
   async getSchemes(config) {
     if (!this._api.schemes) {
+      // If an array of schemes is given, return that here
+      if (Array.isArray(this.schemes)) {
+        return this.schemes
+      }
       throw new errors.MissingApiUrlError()
-    }
-    if (Array.isArray(this._api.schemes)) {
-      return this._api.schemes
     }
     const schemes = await this.axios({
       ...config,
@@ -105,7 +179,11 @@ class ConceptApiProvider extends BaseProvider {
       },
     })
     // If schemes were given in registry object, only request those schemes from API
-    return schemes.filter(s => Array.isArray(this._jskos.schemes) ? jskos.isContainedIn(s, this._jskos.schemes) : true)
+    if (Array.isArray(this.schemes)) {
+      return utils.withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
+    } else {
+      return schemes
+    }
   }
 
   /**
@@ -122,6 +200,10 @@ class ConceptApiProvider extends BaseProvider {
     if (!scheme) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
+    const schemeUri = await this._getSchemeUri(scheme)
+    if (!schemeUri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Requested vocabulary seems to be unsupported by this API." })
+    }
     if (Array.isArray(this._api.top)) {
       return this._api.top
     }
@@ -134,7 +216,7 @@ class ConceptApiProvider extends BaseProvider {
         // ? What should the default limit be?
         limit: 10000,
         ...(config.params || {}),
-        uri: scheme.uri,
+        uri: schemeUri,
       },
     })
   }
@@ -147,7 +229,7 @@ class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getConcepts({ concepts, ...config }) {
-    if (!this.has.data) {
+    if (this.has.data === false) {
       throw new errors.MissingApiUrlError()
     }
     if (!concepts) {
@@ -239,13 +321,12 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async suggest({ scheme, use = "notation,label", types = [], sort = "score", ...config }) {
+  async suggest({ use = "notation,label", types = [], sort = "score", ...config }) {
     return this._search({
       ...config,
       endpoint: "suggest",
       params: {
         ...config.params,
-        voc: _.get(scheme, "uri", ""),
         type: types.join("|"),
         use,
         sort,
@@ -264,13 +345,12 @@ class ConceptApiProvider extends BaseProvider {
    * @param {string[]} [config.types=[]] list of type URIs
    * @returns {Array} result in JSKOS Format
    */
-  async search({ scheme, types = [], ...config }) {
+  async search({ types = [], ...config }) {
     return this._search({
       ...config,
       endpoint: "search",
       params: {
         ...config.params,
-        voc: _.get(scheme, "uri", ""),
         type: types.join("|"),
       },
     })
@@ -314,7 +394,7 @@ class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _search({ endpoint, search, limit, offset, params, ...config }) {
+  async _search({ endpoint, scheme, search, limit, offset, params, ...config }) {
     let url = this._api[endpoint]
     if (!url) {
       throw new errors.MissingApiUrlError()
@@ -324,6 +404,8 @@ class ConceptApiProvider extends BaseProvider {
     }
     limit = limit || this._jskos.suggestResultLimit || 100
     offset = offset || 0
+    // Scheme to search in
+    const voc = scheme && await this._getSchemeUri(scheme)
     // Some registries use URL templates with {searchTerms}
     url = url.replace("{searchTerms}", search)
     return this.axios({
@@ -336,6 +418,7 @@ class ConceptApiProvider extends BaseProvider {
         offset,
         search,
         query: search,
+        voc,
       },
       method: "get",
       url,
@@ -356,8 +439,9 @@ class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.types)) {
       return this._api.types
     }
-    if (scheme && scheme.uri) {
-      _.set(config, "params.uri", scheme.uri)
+    const schemeUri = scheme && await this._getSchemeUri(scheme)
+    if (schemeUri) {
+      _.set(config, "params.uri", schemeUri)
     }
     return this.axios({
       ...config,
@@ -369,5 +453,4 @@ class ConceptApiProvider extends BaseProvider {
 }
 
 ConceptApiProvider.providerName = "ConceptApi"
-
-module.exports = ConceptApiProvider
+ConceptApiProvider.providerType = "http://bartoc.org/api-type/jskos"

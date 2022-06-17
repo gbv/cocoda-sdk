@@ -1,12 +1,8 @@
-const assert = require("assert")
-const cdk = require("../")
-const CDK = require("../lib/CocodaSDK")
-
-// Import BaseProvider for subclassing
-const BaseProvider = require("../providers/base-provider")
+import assert from "assert"
+import { cdk, CocodaSDK, BaseProvider } from "../src/index.js"
 
 // axios mock
-const MockAdapter = require("axios-mock-adapter")
+import MockAdapter from "axios-mock-adapter"
 const mock = new MockAdapter(cdk.axios)
 
 describe("index", () => {
@@ -16,7 +12,7 @@ describe("index", () => {
   })
 
   it("should export the default instance", () => {
-    assert.equal(cdk instanceof CDK, true, "cdk should be instance of CocodaSDK")
+    assert.equal(cdk instanceof CocodaSDK, true, "cdk should be instance of CocodaSDK")
   })
 
   it("should set config when setConfig is called", () => {
