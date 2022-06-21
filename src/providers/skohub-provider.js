@@ -207,11 +207,11 @@ export default class SkohubProvider extends BaseProvider {
         break
       }
       try {
-        let postfix = ".index"
+        let postfix = `.${lang}.index`
         if (scheme.uri.endsWith("/")) {
-          postfix = "index.index"
+          postfix = `index${postfix}`
         }
-        const { data } = await axios.get(`${scheme.uri}.${lang}${postfix}`)
+        const { data } = await axios.get(`${scheme.uri}${postfix}`)
         index = FlexSearch.create()
         index.import(data)
         this._index[scheme.uri][lang] = index
