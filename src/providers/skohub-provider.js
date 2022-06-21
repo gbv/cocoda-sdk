@@ -34,6 +34,7 @@ export default class SkohubProvider extends BaseProvider {
 
   _setup() {
     this._jskos.schemes = this.schemes || []
+    this._cache = {}
   }
 
   async getSchemes({ ...config }) {
@@ -129,8 +130,7 @@ export default class SkohubProvider extends BaseProvider {
         continue
       }
 
-      const found = scheme.concepts.find(c => (c && c.uri === uri))
-
+      const found = this._cache[uri]
       if (found) {
         newConcepts.push(found)
       } else if (_.last(scheme.concepts) === null) {
@@ -138,14 +138,13 @@ export default class SkohubProvider extends BaseProvider {
           const loaded = await this._loadConcept(uri)
           if (loaded) {
             newConcepts.push(loaded)
-            scheme.concepts = [loaded].concat(scheme.concepts)
+            this._cache[loaded.uri] = loaded
           }
         } catch (error) {
           // Ignore error
         }
       }
     }
-
     return newConcepts
   }
 
