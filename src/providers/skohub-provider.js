@@ -67,7 +67,11 @@ export default class SkohubProvider extends BaseProvider {
       return scheme
     }
 
-    const data = await this.axios({ ...config, url: `${uri}.json` })
+    let postfix = ".json"
+    if (uri.endsWith("/")) {
+      postfix = "index.json"
+    }
+    const data = await this.axios({ ...config, url: `${uri}${postfix}` })
 
     // TODO: if not found
 
@@ -203,7 +207,11 @@ export default class SkohubProvider extends BaseProvider {
         break
       }
       try {
-        const { data } = await axios.get(`${scheme.uri}.${lang}.index`)
+        let postfix = ".index"
+        if (scheme.uri.endsWith("/")) {
+          postfix = "index.index"
+        }
+        const { data } = await axios.get(`${scheme.uri}.${lang}${postfix}`)
         index = FlexSearch.create()
         index.import(data)
         this._index[scheme.uri][lang] = index
