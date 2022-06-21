@@ -3,6 +3,15 @@ import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import { listOfCapabilities } from "../utils/index.js"
 
+// from https://stackoverflow.com/a/22021709
+function unicodeToChar(text) {
+  return text.replace(/\\u[\dA-F]{4}/gi,
+    function (match) {
+      return String.fromCharCode(parseInt(match.replace(/\\u/g, ""), 16))
+    },
+  )
+}
+
 /**
  * ```json
  * {
@@ -191,6 +200,9 @@ export default class SkohubProvider extends BaseProvider {
     const concept = { uri: data.id }
 
     concept.prefLabel = data.prefLabel
+    Object.keys(concept.prefLabel || {}).forEach(key => {
+      concept.prefLabel[key] = unicodeToChar(concept.prefLabel[key])
+    })
     concept.narrower = (data.narrower || []).map(c => this._mapConcept(c))
     concept.notation = data.notation || []
     if (data.broader && data.broader.id) {
@@ -203,7 +215,7 @@ export default class SkohubProvider extends BaseProvider {
       concept.scopeNote = data.scopeNote
       // scopeNote values in JSKOS are arrays
       Object.keys(concept.scopeNote).forEach(key => {
-        concept.scopeNote[key] = [concept.scopeNote[key]]
+        concept.scopeNote[key] = [unicodeToChar(concept.scopeNote[key])]
       })
     }
 
