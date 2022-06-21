@@ -2,6 +2,9 @@ import BaseProvider from "./base-provider.js"
 import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import { listOfCapabilities } from "../utils/index.js"
+import jskos from "jskos-tools"
+import FlexSearch from "flexsearch"
+import axios from "axios"
 
 // from https://stackoverflow.com/a/22021709
 function unicodeToChar(text) {
@@ -33,8 +36,8 @@ export default class SkohubProvider extends BaseProvider {
     this.has.concepts = true
     this.has.narrower = true
     this.has.ancestors = true
-    this.has.suggest = false
-    this.has.search = false
+    this.has.suggest = true
+    this.has.search = true
     // Explicitly set other capabilities to false
     listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
       this.has[c] = false
@@ -43,6 +46,7 @@ export default class SkohubProvider extends BaseProvider {
 
   _setup() {
     this._jskos.schemes = this.schemes || []
+    this._index = {}
     this._cache = {}
   }
 
@@ -183,6 +187,82 @@ export default class SkohubProvider extends BaseProvider {
     concept = await this._loadConcept(concept.uri, config)
     return concept.narrower
   }
+
+  /**
+   * Returns concept search results.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results
+   * @returns {Array} array of JSKOS concept objects
+   */
+  async search({ search, scheme, limit = 100 }) {
+    if (!scheme || !scheme.uri) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
+    }
+    if (!search) {
+      throw new errors.InvalidOrMissingParameterError({ parameter: "search" })
+    }
+    // 1. Load index file if necessary
+    let index
+    if (!this._index[scheme.uri]) {
+      this._index[scheme.uri] = {}
+    }
+    // Iterate over languages and use the first one that has an index
+    for (const lang of this.languages) {
+      if (this._index[scheme.uri][lang]) {
+        index = this._index[scheme.uri][lang]
+        break
+      }
+      try {
+        const { data } = await axios.get(`${scheme.uri}.${lang}.index`)
+        index = FlexSearch.create()
+        index.import(data)
+        this._index[scheme.uri][lang] = index
+        break
+      } catch (error) {
+        // Ignore error
+      }
+    }
+    if (!index) {
+      throw new errors.InvalidRequestError({ message: "Could not find search index for any of the available languages " + this.languages.join(",") })
+    }
+    // 2. Use Flexsearch to get result URIs from index
+    const result = index.search(search)
+    // 3. Load concept data for results
+    const concepts = await this.getConcepts({ concepts: result.map(uri => ({ uri, inScheme: [scheme] })) })
+    return concepts.slice(0, limit)
+  }
+
+  /**
+   * Returns suggestion result in OpenSearch Suggest Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results
+   * @returns {Array} result in OpenSearch Suggest Format
+   */
+  async suggest(config) {
+    config._raw = true
+    const concepts = await this.search(config)
+    const result = [config.search, [], [], []]
+    for (let concept of concepts) {
+      const notation = jskos.notation(concept)
+      const label = jskos.prefLabel(concept)
+      result[1].push((notation ? notation + " " : "") + label)
+      result[2].push("")
+      result[3].push(concept.uri)
+    }
+    if (concepts._totalCount != undefined) {
+      result._totalCount = concepts._totalCount
+    } else {
+      result._totalCount = concepts.length
+    }
+    return result
+  }
+
 
   async _loadConcept(uri, config) {
     const data = await this.axios({ ...config, url: `${uri}.json` })
