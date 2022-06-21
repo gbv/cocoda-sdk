@@ -201,13 +201,13 @@ export default class SkohubProvider extends BaseProvider {
       this._index[scheme.uri] = {}
     }
     // Iterate over languages and use the first one that has an index
-    for (const lang of this.languages) {
+    for (const lang of [""].concat(this.languages)) {
       if (this._index[scheme.uri][lang]) {
         index = this._index[scheme.uri][lang]
         break
       }
       try {
-        let postfix = `.${lang}.index`
+        let postfix = lang ? `.${lang}.index` : ".index"
         if (scheme.uri.endsWith("/")) {
           postfix = `index${postfix}`
         }
