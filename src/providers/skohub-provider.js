@@ -121,36 +121,23 @@ export default class SkohubProvider extends BaseProvider {
     }
   }
 
-  async getConcepts({ concepts, ...config }) {
+  async getConcepts({ concepts }) {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
     }
-    concepts = concepts.map(c => ({ uri: c.uri, inScheme: c.inScheme }))
 
-    const newConcepts = []
-    for (let concept of concepts) {
-      const { uri, inScheme } = concept
+    const result = []
 
-      if (!(inScheme && inScheme[0] && inScheme[0].uri)) {
-        throw new errors.InvalidOrMissingParameterError({ parameter: "inScheme", message: "Missing inScheme URI" })
-      }
-
-      var scheme = this._jskos.schemes.find(s => s.uri === inScheme[0].uri)
-      if (scheme) {
-        scheme = await this._loadScheme(scheme, config)
-      }
-      if (!scheme) {
-        continue
-      }
-
+    for (const concept of concepts) {
+      const { uri } = concept
       const found = this._cache[uri]
       if (found) {
-        newConcepts.push(found)
-      } else if (_.last(scheme.concepts) === null) {
+        result.push(found)
+      } else {
         try {
           const loaded = await this._loadConcept(uri)
           if (loaded) {
-            newConcepts.push(loaded)
+            result.push(loaded)
             this._cache[loaded.uri] = loaded
           }
         } catch (error) {
@@ -158,7 +145,8 @@ export default class SkohubProvider extends BaseProvider {
         }
       }
     }
-    return newConcepts
+
+    return result
   }
 
   async getAncestors({ concept, ...config }) {
@@ -173,7 +161,6 @@ export default class SkohubProvider extends BaseProvider {
       return []
     }
     const broader = concept.broader[0]
-    broader.inScheme = concept.inScheme
     return [broader].concat(await this.getAncestors({ concept: broader, ...config })).map(c => ({ uri: c.uri }))
   }
 
@@ -231,7 +218,7 @@ export default class SkohubProvider extends BaseProvider {
     // 2. Use Flexsearch to get result URIs from index
     const result = index.search(search)
     // 3. Load concept data for results
-    const concepts = await this.getConcepts({ concepts: result.map(uri => ({ uri, inScheme: [scheme] })) })
+    const concepts = await this.getConcepts({ concepts: result.map(uri => ({ uri })) })
     return concepts.slice(0, limit)
   }
 
@@ -304,3 +291,4 @@ export default class SkohubProvider extends BaseProvider {
 }
 
 SkohubProvider.providerName = "Skohub"
+SkohubProvider.providerType = "http://bartoc.org/api-type/skohub"
