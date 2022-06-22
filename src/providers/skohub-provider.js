@@ -185,6 +185,10 @@ export default class SkohubProvider extends BaseProvider {
         index = this._index[scheme.uri][lang]
         break
       }
+      // `null` means the request failed before, so we won't try again
+      if (this._index[scheme.uri][lang] === null) {
+        continue
+      }
       try {
         let postfix = lang ? `.${lang}.index` : ".index"
         if (scheme.uri.endsWith("/")) {
@@ -196,7 +200,8 @@ export default class SkohubProvider extends BaseProvider {
         this._index[scheme.uri][lang] = index
         break
       } catch (error) {
-        // Ignore error
+        // ? Can we differentiate between errors? error.response is undefined for some reason.
+        this._index[scheme.uri][lang] = null
       }
     }
     if (!index) {
