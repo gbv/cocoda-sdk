@@ -195,6 +195,11 @@ export default class SkohubProvider extends BaseProvider {
           postfix = `index${postfix}`
         }
         const data = await this.axios({ url: `${scheme.uri}${postfix}`, _skipAdditionalParameters: true })
+        if (data.length < 100) {
+          // Assume the index is empty and skip it
+          this._index[scheme.uri][lang] = null
+          continue
+        }
         index = FlexSearch.create()
         index.import(data)
         this._index[scheme.uri][lang] = index
