@@ -49,6 +49,23 @@ export default class SkohubProvider extends BaseProvider {
     this._schemeCache = {}
   }
 
+  /**
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
+   *
+   * @param {Object} options
+   * @param {Object} options.url API URL for BARTOC instance
+   * @param {Object} options.scheme scheme for which the config is requested
+   * @returns {Object} provider configuration
+   */
+  static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
+    if (!url || !scheme) {
+      return null
+    }
+    // Save scheme with "url" as main URI, add other identifier
+    const newScheme = { uri: url, identifier: jskos.getAllUris(scheme).filter(uri => uri !== url) }
+    return { schemes: [newScheme] }
+  }
+
   async _loadScheme({ scheme, ...config }) {
     const uris = jskos.getAllUris(scheme)
     for (let uri of uris) {
