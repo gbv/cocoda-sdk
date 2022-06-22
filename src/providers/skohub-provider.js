@@ -4,7 +4,6 @@ import * as errors from "../errors/index.js"
 import { listOfCapabilities } from "../utils/index.js"
 import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
-import axios from "axios"
 
 // from https://stackoverflow.com/a/22021709
 function unicodeToChar(text) {
@@ -71,7 +70,7 @@ export default class SkohubProvider extends BaseProvider {
     if (uri.endsWith("/")) {
       postfix = "index.json"
     }
-    const data = await this.axios({ ...config, url: `${uri}${postfix}` })
+    const data = await this.axios({ ...config, url: `${uri}${postfix}`, _skipAdditionalParameters: true })
 
     // TODO: if not found
 
@@ -125,32 +124,12 @@ export default class SkohubProvider extends BaseProvider {
     }
   }
 
-  async getConcepts({ concepts }) {
+  async getConcepts({ concepts, ...config }) {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
     }
-
-    const result = []
-
-    for (const concept of concepts) {
-      const { uri } = concept
-      const found = this._cache[uri]
-      if (found) {
-        result.push(found)
-      } else {
-        try {
-          const loaded = await this._loadConcept(uri)
-          if (loaded) {
-            result.push(loaded)
-            this._cache[loaded.uri] = loaded
-          }
-        } catch (error) {
-          // Ignore error
-        }
-      }
-    }
-
-    return result
+    // Concepts have to be loaded separately, so we parallelize it with Promise.all
+    return (await Promise.all(concepts.map(({ uri }) => this._loadConcept({ ...config, uri })))).filter(Boolean)
   }
 
   async getAncestors({ concept, ...config }) {
@@ -160,7 +139,7 @@ export default class SkohubProvider extends BaseProvider {
     if (concept.ancestors && concept.ancestors[0] !== null) {
       return concept.ancestors
     }
-    concept = (await this.getConcepts({ concepts: [concept], ...config }))[0]
+    concept = await this._loadConcept({ ...config, uri: concept.uri })
     if (!concept || !concept.broader || !concept.broader.length) {
       return []
     }
@@ -175,7 +154,7 @@ export default class SkohubProvider extends BaseProvider {
     if (concept.narrower && concept.narrower[0] !== null) {
       return concept.narrower
     }
-    concept = await this._loadConcept(concept.uri, config)
+    concept = await this._loadConcept({ ...config, uri: concept.uri })
     return concept.narrower
   }
 
@@ -211,7 +190,7 @@ export default class SkohubProvider extends BaseProvider {
         if (scheme.uri.endsWith("/")) {
           postfix = `index${postfix}`
         }
-        const { data } = await axios.get(`${scheme.uri}${postfix}`)
+        const data = await this.axios({ url: `${scheme.uri}${postfix}`, _skipAdditionalParameters: true })
         index = FlexSearch.create()
         index.import(data)
         this._index[scheme.uri][lang] = index
@@ -259,16 +238,24 @@ export default class SkohubProvider extends BaseProvider {
   }
 
 
-  async _loadConcept(uri, config) {
-    const data = await this.axios({ ...config, url: `${uri}.json` })
-
-    // TODO: if not found
-
-    if (data.id !== uri) {
-      throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
+  async _loadConcept({ uri, ...config }) {
+    // Use cache first
+    if (this._cache[uri]) {
+      return this._cache[uri]
     }
 
-    return this._mapConcept(data)
+    try {
+      const data = await this.axios({ ...config, url: `${uri}.json`, _skipAdditionalParameters: true })
+      if (data.id !== uri) {
+        throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
+      }
+      const concept = this._mapConcept(data)
+      this._cache[uri] = concept
+      return concept
+    } catch (error) {
+      // Return null on error
+      return null
+    }
   }
 
   _mapConcept(data) {
