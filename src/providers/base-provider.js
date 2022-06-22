@@ -135,12 +135,14 @@ export default class BaseProvider {
 
     // Add a request interceptor
     this.axios.interceptors.request.use((config) => {
-      // Add language parameter to request
-      const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this._defaultLanguages).filter(lang => lang != "")).join(",")
-      _.set(config, "params.language", language)
-      // Set auth
-      if (this.has.auth && this._auth.bearerToken && !_.get(config, "headers.Authorization")) {
-        _.set(config, "headers.Authorization", `Bearer ${this._auth.bearerToken}`)
+      if (!config._skipAdditionalParameters) {
+        // Add language parameter to request
+        const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this._defaultLanguages).filter(lang => lang != "")).join(",")
+        _.set(config, "params.language", language)
+        // Set auth
+        if (this.has.auth && this._auth.bearerToken && !_.get(config, "headers.Authorization")) {
+          _.set(config, "headers.Authorization", `Bearer ${this._auth.bearerToken}`)
+        }
       }
 
       // Don't perform http requests if site is used via https
