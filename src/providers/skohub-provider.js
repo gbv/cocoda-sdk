@@ -67,18 +67,20 @@ export default class SkohubProvider extends BaseProvider {
   }
 
   async _loadScheme({ scheme, ...config }) {
-    const uris = jskos.getAllUris(scheme)
+    let uris = jskos.getAllUris(scheme)
     for (let uri of uris) {
       if (this._schemeCache[uri]) {
         return this._schemeCache[uri]
       }
     }
     // Find main URI from this.schemes
-    const { uri } = this.schemes.find(s => jskos.compare(s, scheme)) || {}
+    const schemeFromList = this.schemes.find(s => jskos.compare(s, scheme))
 
-    if (!uri) {
+    if (!schemeFromList || !schemeFromList.uri) {
       throw new errors.InvalidRequestError({ message: `Tried to load unsupported scheme (${scheme && scheme.uri})` })
     }
+    const uri = schemeFromList.uri
+    uris = _.uniq(uris.concat(jskos.getAllUris(schemeFromList)))
 
     let postfix = ".json"
     if (uri.endsWith("/")) {
@@ -93,6 +95,7 @@ export default class SkohubProvider extends BaseProvider {
 
     const { title, preferredNamespaceUri, hasTopConcept, description } = data
 
+    scheme = { uri, identifier: uris.filter(u => u !== uri) }
     scheme.prefLabel = title
     Object.keys(scheme.prefLabel || {}).forEach(key => {
       scheme.prefLabel[key] = decodeUnicode(scheme.prefLabel[key])
