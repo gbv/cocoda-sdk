@@ -6,7 +6,7 @@ import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
 
 // from https://stackoverflow.com/a/22021709
-function unicodeToChar(text) {
+function decodeUnicode(text) {
   return text.replace(/\\u[\dA-F]{4}/gi,
     function (match) {
       return String.fromCharCode(parseInt(match.replace(/\\u/g, ""), 16))
@@ -46,17 +46,7 @@ export default class SkohubProvider extends BaseProvider {
   _setup() {
     this._jskos.schemes = this.schemes || []
     this._index = {}
-    this._cache = {}
-  }
-
-  async getSchemes({ ...config }) {
-    const { schemes } = this._jskos
-
-    for (let i=0; i<schemes.length; i++) {
-      schemes[i] = await this._loadScheme(schemes[i], config)
-    }
-
-    return schemes
+    this._conceptCache = {}
   }
 
   async _loadScheme(scheme, config) {
@@ -81,8 +71,11 @@ export default class SkohubProvider extends BaseProvider {
     const { title, preferredNamespaceUri, hasTopConcept, description } = data //, issued, created, modified, creator, publisher } = data
 
     scheme.prefLabel = title
+    Object.keys(scheme.prefLabel || {}).forEach(key => {
+      scheme.prefLabel[key] = decodeUnicode(scheme.prefLabel[key])
+    })
     scheme.namespace = preferredNamespaceUri
-    scheme.topConcepts = (hasTopConcept || []).map(c => this._mapConcept(c))
+    scheme.topConcepts = (hasTopConcept || []).map(c => this._toJskosConcept(c))
 
     // const hasNarrower = scheme.topConcepts.find(c => c.narrower && c.narrower.length)
 
@@ -98,7 +91,7 @@ export default class SkohubProvider extends BaseProvider {
       scheme.definition = description
       // scopeNote values in JSKOS are arrays
       Object.keys(scheme.definition).forEach(key => {
-        scheme.definition[key] = [scheme.definition[key]]
+        scheme.definition[key] = [decodeUnicode(scheme.definition[key])]
       })
     }
 
@@ -108,6 +101,62 @@ export default class SkohubProvider extends BaseProvider {
     }
 
     return scheme
+  }
+
+  async _loadConcept({ uri, ...config }) {
+    // Use cache first
+    if (this._conceptCache[uri]) {
+      return this._conceptCache[uri]
+    }
+
+    try {
+      const data = await this.axios({ ...config, url: `${uri}.json`, _skipAdditionalParameters: true })
+      if (data.id !== uri) {
+        throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
+      }
+      const concept = this._toJskosConcept(data)
+      this._conceptCache[uri] = concept
+      return concept
+    } catch (error) {
+      // Return null on error
+      return null
+    }
+  }
+
+  _toJskosConcept(data) {
+    const concept = { uri: data.id }
+
+    concept.prefLabel = data.prefLabel
+    Object.keys(concept.prefLabel || {}).forEach(key => {
+      concept.prefLabel[key] = decodeUnicode(concept.prefLabel[key])
+    })
+    concept.narrower = (data.narrower || []).map(c => this._toJskosConcept(c))
+    concept.notation = data.notation || []
+    if (data.broader && data.broader.id) {
+      concept.broader = [{ uri: data.broader.id }]
+    }
+    if (data.inScheme && data.inScheme.id) {
+      concept.inScheme = [{ uri: data.inScheme.id }]
+    }
+    if (data.scopeNote) {
+      concept.scopeNote = data.scopeNote
+      // scopeNote values in JSKOS are arrays
+      Object.keys(concept.scopeNote).forEach(key => {
+        concept.scopeNote[key] = [decodeUnicode(concept.scopeNote[key])]
+      })
+    }
+
+    return concept
+  }
+
+  async getSchemes({ ...config }) {
+    const { schemes } = this._jskos
+
+    for (let i=0; i<schemes.length; i++) {
+      schemes[i] = await this._loadScheme(schemes[i], config)
+    }
+
+    return schemes
   }
 
   async getTop({ scheme, ...config }) {
@@ -245,53 +294,6 @@ export default class SkohubProvider extends BaseProvider {
       result._totalCount = concepts.length
     }
     return result
-  }
-
-
-  async _loadConcept({ uri, ...config }) {
-    // Use cache first
-    if (this._cache[uri]) {
-      return this._cache[uri]
-    }
-
-    try {
-      const data = await this.axios({ ...config, url: `${uri}.json`, _skipAdditionalParameters: true })
-      if (data.id !== uri) {
-        throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
-      }
-      const concept = this._mapConcept(data)
-      this._cache[uri] = concept
-      return concept
-    } catch (error) {
-      // Return null on error
-      return null
-    }
-  }
-
-  _mapConcept(data) {
-    const concept = { uri: data.id }
-
-    concept.prefLabel = data.prefLabel
-    Object.keys(concept.prefLabel || {}).forEach(key => {
-      concept.prefLabel[key] = unicodeToChar(concept.prefLabel[key])
-    })
-    concept.narrower = (data.narrower || []).map(c => this._mapConcept(c))
-    concept.notation = data.notation || []
-    if (data.broader && data.broader.id) {
-      concept.broader = [{ uri: data.broader.id }]
-    }
-    if (data.inScheme && data.inScheme.id) {
-      concept.inScheme = [{ uri: data.inScheme.id }]
-    }
-    if (data.scopeNote) {
-      concept.scopeNote = data.scopeNote
-      // scopeNote values in JSKOS are arrays
-      Object.keys(concept.scopeNote).forEach(key => {
-        concept.scopeNote[key] = [unicodeToChar(concept.scopeNote[key])]
-      })
-    }
-
-    return concept
   }
 }
 
