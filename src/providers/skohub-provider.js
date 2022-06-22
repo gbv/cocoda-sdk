@@ -44,31 +44,37 @@ export default class SkohubProvider extends BaseProvider {
   }
 
   _setup() {
-    this._jskos.schemes = this.schemes || []
     this._index = {}
     this._conceptCache = {}
+    this._schemeCache = {}
   }
 
-  async _loadScheme(scheme, config) {
-    const { uri, topConcepts } = scheme
+  async _loadScheme({ scheme, ...config }) {
+    const uris = jskos.getAllUris(scheme)
+    for (let uri of uris) {
+      if (this._schemeCache[uri]) {
+        return this._schemeCache[uri]
+      }
+    }
+    // Find main URI from this.schemes
+    const { uri } = this.schemes.find(s => jskos.compare(s, scheme)) || {}
 
-    if (!uri || topConcepts) {
-      return scheme
+    if (!uri) {
+      throw new errors.InvalidRequestError({ message: `Tried to load unsupported scheme (${scheme && scheme.uri})` })
     }
 
     let postfix = ".json"
     if (uri.endsWith("/")) {
       postfix = "index.json"
     }
+    // Errors for this request will trickle upwards of the call chain
     const data = await this.axios({ ...config, url: `${uri}${postfix}`, _skipAdditionalParameters: true })
-
-    // TODO: if not found
 
     if (data.id !== uri) {
       throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept scheme" })
     }
 
-    const { title, preferredNamespaceUri, hasTopConcept, description } = data //, issued, created, modified, creator, publisher } = data
+    const { title, preferredNamespaceUri, hasTopConcept, description } = data
 
     scheme.prefLabel = title
     Object.keys(scheme.prefLabel || {}).forEach(key => {
@@ -76,17 +82,7 @@ export default class SkohubProvider extends BaseProvider {
     })
     scheme.namespace = preferredNamespaceUri
     scheme.topConcepts = (hasTopConcept || []).map(c => this._toJskosConcept(c))
-
-    // const hasNarrower = scheme.topConcepts.find(c => c.narrower && c.narrower.length)
-
     scheme.concepts = [null]
-    // scheme.concepts = [...scheme.topConcepts]
-    // if (hasNarrower) {
-    //   scheme.concepts.push(null)
-    // }
-
-    // TODO: map remaining fields
-
     if (description) {
       scheme.definition = description
       // scopeNote values in JSKOS are arrays
@@ -94,10 +90,14 @@ export default class SkohubProvider extends BaseProvider {
         scheme.definition[key] = [decodeUnicode(scheme.definition[key])]
       })
     }
-
-    // remove fields without value
+    // Remove fields without value
     for (let key of Object.keys(scheme).filter(key => !scheme[key])) {
       delete scheme[key]
+    }
+
+    // Add to cache
+    for (let uri of uris) {
+      this._schemeCache[uri] = scheme
     }
 
     return scheme
@@ -150,13 +150,7 @@ export default class SkohubProvider extends BaseProvider {
   }
 
   async getSchemes({ ...config }) {
-    const { schemes } = this._jskos
-
-    for (let i=0; i<schemes.length; i++) {
-      schemes[i] = await this._loadScheme(schemes[i], config)
-    }
-
-    return schemes
+    return Promise.all(this.schemes.map(scheme => this._loadScheme({ ...config, scheme })))
   }
 
   async getTop({ scheme, ...config }) {
@@ -164,13 +158,8 @@ export default class SkohubProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme URI" })
     }
 
-    scheme = this._jskos.schemes.find(s => s.uri === scheme.uri)
-    if (scheme) {
-      scheme = await this._loadScheme(scheme, config)
-      return scheme.topConcepts
-    } else {
-      return []
-    }
+    scheme = await this._loadScheme({ scheme, ...config })
+    return scheme.topConcepts || []
   }
 
   async getConcepts({ concepts, ...config }) {
