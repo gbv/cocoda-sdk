@@ -15,6 +15,16 @@ function decodeUnicode(text) {
 }
 
 /**
+ * SkoHub Vocabs
+ *
+ * [SkoHub Vocabs](https://blog.lobid.org/2019/09/27/presenting-skohub-vocabs.html) is a static site generator that provides HTML/JSON versions of vocabularies as static files.
+ *
+ * Example vocabulary (configured below): https://w3id.org/class/esc/scheme
+ *
+ * It is important that a dereferenceable scheme URI is used. When configured via [BARTOC](https://bartoc.org/) in the `API` field, "http://bartoc.org/api-type/skohub" needs to be given as the type and the aforementioned dereferenceable scheme URI needs to be given as the URL.
+ *
+ * See also: https://github.com/gbv/cocoda-sdk/issues/29
+ *
  * ```json
  * {
  *  "uri": "http://coli-conc.gbv.de/registry/skohub.io",
