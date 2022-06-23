@@ -236,6 +236,7 @@ export default class SkohubProvider extends BaseProvider {
    * @returns {Array} array of JSKOS concept objects
    */
   async search({ search, scheme, limit = 100 }) {
+    scheme = await this._loadScheme({ scheme })
     if (!scheme || !scheme.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
