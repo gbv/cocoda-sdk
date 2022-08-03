@@ -136,7 +136,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
    * @param {Object[]} [config.concepts] list of JSKOS concepts to load occurrences for
    * @returns {Object[]} array of JSKOS occurrence objects
    */
-  async getOccurrences({ from, to, concepts, threshold = 5, ...config }) {
+  async getOccurrences({ from, to, concepts, threshold = 0, ...config }) {
     let promises = []
     concepts = (concepts || []).concat([from, to]).filter(c => !!c)
     for (let concept of concepts) {
