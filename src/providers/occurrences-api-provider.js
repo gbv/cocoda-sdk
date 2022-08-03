@@ -82,8 +82,10 @@ export default class OccurrencesApiProvider extends BaseProvider {
    */
   async getMappings(config) {
     const occurrences = await this.getOccurrences(config)
-    const fromScheme = _.get(config, "from.inScheme[0]") || config.fromScheme
-    const toScheme = _.get(config, "to.inScheme[0]") || config.toScheme
+    const from = config.from
+    const fromScheme = _.get(from, "inScheme[0]") || config.fromScheme
+    const to = config.to
+    const toScheme = _.get(to, "inScheme[0]") || config.toScheme
     const mappings = []
     // Convert occurrences to mappings
     for (let occurrence of occurrences) {
@@ -106,7 +108,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
       }
       mapping.toScheme = _.get(occurrence, "memberSet[1].inScheme[0]")
       // Swap sides if necessary
-      if ((fromScheme && mapping.fromScheme && !jskos.compare(mapping.fromScheme, fromScheme)) || (toScheme && mapping.toScheme && !jskos.compare(mapping.toScheme, toScheme))) {
+      if (from && jskos.compare(from, _.get(mapping, "to.memberSet[0]")) || to && jskos.compare(to, _.get(mapping, "from.memberSet[0]"))) {
         [mapping.from, mapping.fromScheme, mapping.to, mapping.toScheme] = [mapping.to, mapping.toScheme, mapping.from, mapping.fromScheme]
       }
       // Set fromScheme/toScheme if necessary
