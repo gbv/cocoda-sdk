@@ -163,16 +163,17 @@ export default class OccurrencesApiProvider extends BaseProvider {
       }))
     }
     // Another request for co-occurrences between two specific concepts
-    if (uris.length > 1) {
-      let urisString = uris.join(" ")
-      promises.push(this._getOccurrences({
-        ...config,
-        params: {
-          member: urisString,
-          threshold: 5,
-        },
-      }))
-    }
+    // TODO: Currently unsupported and therefore removed (2022-08-03)
+    // if (uris.length > 1) {
+    //   let urisString = uris.join(" ")
+    //   promises.push(this._getOccurrences({
+    //     ...config,
+    //     params: {
+    //       member: urisString,
+    //       threshold: 5,
+    //     },
+    //   }))
+    // }
     const results = await Promise.all(promises)
     let occurrences = _.concat([], ...results)
     // Filter duplicates
