@@ -121,6 +121,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
       mapping = jskos.addMappingIdentifiers(mapping)
       mappings.push(mapping)
     }
+    mappings._url = occurrences._url
     return mappings
   }
 
@@ -195,7 +196,11 @@ export default class OccurrencesApiProvider extends BaseProvider {
     // Filter null values
     occurrences = occurrences.filter(o => o != null)
     // Sort occurrences
-    return occurrences.sort((a, b) => parseInt(b.count || 0) - parseInt(a.count || 0))
+    occurrences = occurrences.sort((a, b) => parseInt(b.count || 0) - parseInt(a.count || 0))
+    // Add URL(s)
+    occurrences._url = results.map(result => result._url)
+
+    return occurrences
   }
 
   /**
