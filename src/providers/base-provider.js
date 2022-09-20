@@ -435,10 +435,10 @@ export default class BaseProvider {
     if (options.auth && this._auth.key != _.get(this._config, "auth.key")) {
       return false
     }
+    // Check if one of the user's identities matches
+    const userUris = [user.uri].concat(Object.values(user.identities || {}).map(id => id.uri)).filter(uri => uri != null)
     if (options.auth && options.identities) {
-      // Check if one of the user's identities matches
-      const uris = [user.uri].concat(Object.values(user.identities || {}).map(id => id.uri)).filter(uri => uri != null)
-      if (_.intersection(uris, options.identities).length == 0) {
+      if (_.intersection(userUris, options.identities).length == 0) {
         return false
       }
     }
@@ -449,8 +449,9 @@ export default class BaseProvider {
         return false
       }
     }
+    // Check crossUser capabilities
     if (crossUser) {
-      return !!options.crossUser
+      return options.crossUser === true || _.intersection(options.crossUser || [], userUris).length > 0
     }
     return !!this.has[type][action]
   }
