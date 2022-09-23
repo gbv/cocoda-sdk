@@ -23,13 +23,18 @@ const registry = cdk.initializeRegistry({
       // Fallback by default is the registry that provided the scheme (BARTOC in this case), but we don't want that.
       continue
     }
-    console.log()
+    console.log()    
     const id = scheme.notation ? scheme.notation[0] : scheme.uri
-    console.log(`Found scheme ${id}, it was initialized with ${scheme._registry._jskos.provider} (${scheme._registry._jskos.api})`)
+    const schemeRegistry = scheme._registry // registry by which scheme can be accessed
+    console.log(`Found scheme ${id}, it was initialized with ${schemeRegistry._jskos.provider} (${schemeRegistry._jskos.api})`)
     console.log(`Loading top concepts for ${id}...`)
     try {
-      const top = await scheme._getTop()
+      const top = await scheme._getTop() // or = await schemeRegistry.getTop({scheme})
       console.log(`Loaded ${top.length} top concepts.`)
+      const search = "Europ"
+      const concepts = await schemeRegistry.search({scheme, search, limit: 3})
+      console.log(`Sample search for ${search} resulted in:`)
+      console.log(concepts.map(({uri,prefLabel}) => ({uri,prefLabel})))
     } catch (error) {
       console.error("Error loading top concepts:", error)
     }
