@@ -4,6 +4,7 @@
 
 import CocodaSDK from "./lib/CocodaSDK.js"
 import * as errors from "./errors/index.js"
+import * as utils from "./utils/index.js"
 export * from "./providers/index.js"
 
 // Create and export a default instance
@@ -26,6 +27,12 @@ export {
    * @type {Object}
    */
   errors,
+  /**
+   * Object of utility functions
+   *
+   * @type {Object}
+   */
+  utils,
 }
 
 import * as providers from "./providers/index.js"

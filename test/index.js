@@ -1,5 +1,5 @@
 import assert from "assert"
-import { cdk, CocodaSDK, BaseProvider } from "../src/index.js"
+import { cdk, CocodaSDK, BaseProvider, errors, utils } from "../src/index.js"
 
 // axios mock
 import MockAdapter from "axios-mock-adapter"
@@ -13,6 +13,14 @@ describe("index", () => {
 
   it("should export the default instance", () => {
     assert.equal(cdk instanceof CocodaSDK, true, "cdk should be instance of CocodaSDK")
+  })
+
+  it("should export the errors object", () => {
+    assert.ok(errors)
+  })
+
+  it("should export the utils object", () => {
+    assert.ok(utils)
   })
 
   it("should set config when setConfig is called", () => {
