@@ -27,7 +27,7 @@
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
     "release:major": "SEMVER=major npm run release",
-    "postinstall": "[ -d './dist' ] || npm run build"
+    "prepare": "[ -d './dist' ] || npm run build"
   },
   "lint-staged": {
     "**/*.js": [
