@@ -492,7 +492,7 @@ export default class BaseProvider {
     }
     // Adjust broader/narrower/ancestors if necessary
     for (let type of ["broader", "narrower", "ancestors"]) {
-      if (Array.isArray(concept[type]) && !concept[type].includes(null)) {
+      if (Array.isArray(concept[type]) && concept[type].length && !concept[type].includes(null)) {
         concept[type] = this.adjustConcepts(concept[type])
       }
     }
