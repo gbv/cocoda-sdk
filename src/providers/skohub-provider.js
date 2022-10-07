@@ -14,6 +14,9 @@ function decodeUnicode(text) {
   )
 }
 
+// Data by registry URI
+const data = {}
+
 /**
  * SkoHub Vocabs
  *
@@ -51,13 +54,16 @@ export default class SkohubProvider extends BaseProvider {
     listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
       this.has[c] = false
     })
+    data[this.uri] = {
+      index: {},
+      conceptCache: {},
+      schemeCache: {},
+    }
   }
 
-  _setup() {
-    this._index = {}
-    this._conceptCache = {}
-    this._schemeCache = {}
-  }
+  get _index() { return data[this.uri] && data[this.uri].index }
+  get _conceptCache() { return data[this.uri] && data[this.uri].conceptCache }
+  get _schemeCache() { return data[this.uri] && data[this.uri].schemeCache }
 
   /**
    * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.

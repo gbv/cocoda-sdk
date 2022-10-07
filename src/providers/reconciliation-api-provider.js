@@ -4,6 +4,9 @@ import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import { listOfCapabilities } from "../utils/index.js"
 
+// Cache by registry URI
+const cache = {}
+
 // TODO: Document namespace etc.
 
 /**
@@ -34,11 +37,15 @@ import { listOfCapabilities } from "../utils/index.js"
  */
 export default class ReconciliationApiProvider extends BaseProvider {
 
+  get _cache() {
+    return cache[this.uri]
+  }
+
   /**
    * @private
    */
   _prepare() {
-    this._cache = []
+    cache[this.uri] = []
     this.has.mappings = true
     // Explicitly set other capabilities to false
     listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
@@ -205,7 +212,7 @@ export default class ReconciliationApiProvider extends BaseProvider {
     this._cache.push(newCacheEntry)
     // Make sure there are a maximum of 20 entries in cache
     if (this._cache.length > 20) {
-      this._cache = this._cache.slice(this._cache.length - 20)
+      cache[this.uri] = this._cache.slice(this._cache.length - 20)
     }
     return newCacheEntry
   }

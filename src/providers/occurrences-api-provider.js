@@ -4,6 +4,9 @@ import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import * as utils from "../utils/index.js"
 
+// Cache by registry URI
+const cache = {}
+
 // TODO: Modernize.
 
 /**
@@ -27,11 +30,15 @@ import * as utils from "../utils/index.js"
  */
 export default class OccurrencesApiProvider extends BaseProvider {
 
+  get _cache() {
+    return cache[this.uri]
+  }
+
   /**
    * @private
    */
   _prepare() {
-    this._cache = []
+    cache[this.uri] = []
     this._occurrencesSupportedSchemes = []
     this.has.occurrences = true
     this.has.mappings = true
@@ -231,7 +238,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
       data,
     })
     if (this._cache.length > 20) {
-      this._cache = this._cache.slice(this._cache.length - 20)
+      cache[this.uri] = this._cache.slice(this._cache.length - 20)
     }
     return data
   }
