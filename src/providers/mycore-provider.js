@@ -5,8 +5,13 @@ import { listOfCapabilities } from "../utils/index.js"
 import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
 
+// Holds all scheme data (filed by scheme URI as key)
+const data = {}
+
 /**
  * MyCoRE Classification API
+ *
+ * Currently supports only one vocabulary per registry.
  *
  * See also: https://github.com/gbv/cocoda-sdk/issues/50
  */
@@ -28,11 +33,7 @@ export default class MyCoReProvider extends BaseProvider {
   }
 
   _setup() {
-    this._schemeInfo = null
     this._scheme = null
-    this._topConcepts = null
-    this._searchIndex = null
-    this._concepts = {}
   }
 
   /**
@@ -77,7 +78,7 @@ export default class MyCoReProvider extends BaseProvider {
 
   /**
    * Converts a category to a JSKOS concept.
-   * - Also saves that concept in this._concepts
+   * - Also saves that concept in data
    * - Also adds the concept's prefLabels to the search index
    *
    * ? Question: Should scopeNotes be part of the search index?
@@ -88,15 +89,15 @@ export default class MyCoReProvider extends BaseProvider {
     }
     const id = category.ID
     const uri = `${scheme.uri}/${id}`
-    if (this._concepts[uri]) {
-      return this._concepts[uri]
+    if (data[scheme.uri].concepts[uri]) {
+      return data[scheme.uri].concepts[uri]
     }
     const prefLabel = {}
     category.labels.filter(l => !l.lang.startsWith("x-") && l.text).forEach(l => {
       // Remove ID from label
       prefLabel[l.lang] = l.text.replace(`${id} `, "")
       // Add prefLabel to search index
-      this._searchIndex.add(uri, prefLabel[l.lang])
+      data[scheme.uri].searchIndex.add(uri, prefLabel[l.lang])
     })
     const scopeNote = {}
     category.labels.filter(l => !l.lang.startsWith("x-") && l.description).forEach(l => {
@@ -105,7 +106,7 @@ export default class MyCoReProvider extends BaseProvider {
       }
       scopeNote[l.lang].push(l.description)
     })
-    this._concepts[uri] = {
+    data[scheme.uri].concepts[uri] = {
       uri,
       notation: [id],
       prefLabel,
@@ -114,7 +115,7 @@ export default class MyCoReProvider extends BaseProvider {
       narrower: (category.categories || []).map(c => ({ uri: `${scheme.uri}/${c.ID}`})),
       broader,
     }
-    return this._concepts[uri]
+    return data[scheme.uri].concepts[uri]
   }
 
   /**
@@ -129,30 +130,35 @@ export default class MyCoReProvider extends BaseProvider {
    * Loads the data from the API. Only called from getSchemes and only called once.
    */
   async _loadSchemeData(config) {
-    this._schemeInfo = await this.axios({
+    const schemeInfo = await this.axios({
       ...config,
       method: "get",
       url: this._api.api,
       _skipAdditionalParameters: true,
     })
-    this._scheme = this._schemeInfoToJSKOS(this._schemeInfo)
-    this._searchIndex = FlexSearch.create({
-      tokenize: "full",
-    })
+    this._scheme = this._schemeInfoToJSKOS(schemeInfo)
+    const uri = this._scheme.uri
+    data[uri] = {
+      schemeInfo,
+      searchIndex: FlexSearch.create({
+        tokenize: "full",
+      }),
+      concepts: {},
+    }
     // Recursively go through all concepts and convert them to JSKOS
     const dealWithCategory = (category, { broader = [] } = {}) => {
       const concept = this._categoryToJSKOS(category, { scheme: this._scheme, broader })
       ;(category.categories || []).forEach(c => dealWithCategory(c, { broader: [{ uri: concept.uri }] }))
     }
-    this._schemeInfo.categories.forEach(category => dealWithCategory(category))
-    this._topConcepts = this._schemeInfo.categories.map(category => this._categoryToJSKOS(category, { scheme: this._scheme }))
+    schemeInfo.categories.forEach(category => dealWithCategory(category))
+    data[uri].topConcepts = schemeInfo.categories.map(category => this._categoryToJSKOS(category, { scheme: this._scheme }))
   }
 
   async getSchemes(config = {}) {
     if (!this._api.api) {
       throw new errors.MissingApiUrlError()
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       // Make sure data is only loaded once
       if (!this._loadSchemeDataPromise) {
         this._loadSchemeDataPromise = this._loadSchemeData(config)
@@ -167,23 +173,23 @@ export default class MyCoReProvider extends BaseProvider {
     if (!scheme || !scheme.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme URI" })
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       await this.getSchemes(config)
     }
     if (!jskos.compare(scheme, this._scheme)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Requested vocabulary seems to be unsupported by this API." })
     }
-    return this._topConcepts.map(this._removeNarrower)
+    return data[this._scheme.uri].topConcepts.map(this._removeNarrower)
   }
 
   async getConcepts({ concepts, ...config }) {
     if (!_.isArray(concepts)) {
       concepts = [concepts]
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       await this.getSchemes(config)
     }
-    return concepts.map(c => this._concepts[c.uri]).map(this._removeNarrower)
+    return concepts.map(c => data[this._scheme.uri].concepts[c.uri]).map(this._removeNarrower)
   }
 
   async getAncestors({ concept, ...config }) {
@@ -193,10 +199,10 @@ export default class MyCoReProvider extends BaseProvider {
     if (concept.ancestors && concept.ancestors[0] !== null) {
       return concept.ancestors
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       await this.getSchemes(config)
     }
-    concept = this._concepts[concept.uri]
+    concept = data[this._scheme.uri].concepts[concept.uri]
     const broader = concept && concept.broader && concept.broader[0]
     if (!broader) {
       return []
@@ -211,11 +217,11 @@ export default class MyCoReProvider extends BaseProvider {
     if (concept.narrower && concept.narrower[0] !== null) {
       return concept.narrower
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       await this.getSchemes(config)
     }
-    concept = this._concepts[concept.uri]
-    return (concept && concept.narrower || []).map(c => this._concepts[c.uri]).map(this._removeNarrower)
+    concept = data[this._scheme.uri].concepts[concept.uri]
+    return (concept && concept.narrower || []).map(c => data[this._scheme.uri].concepts[c.uri]).map(this._removeNarrower)
   }
 
   /**
@@ -237,16 +243,16 @@ export default class MyCoReProvider extends BaseProvider {
     if (!scheme || !scheme.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme URI" })
     }
-    if (!this._schemeInfo || !this._scheme) {
+    if (!this._scheme) {
       await this.getSchemes()
     }
     if (!jskos.compare(scheme, this._scheme)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Requested vocabulary seems to be unsupported by this API." })
     }
     // Use Flexsearch to get result URIs from index
-    const result = await this._searchIndex.search(search)
+    const result = await data[this._scheme.uri].searchIndex.search(search)
 
-    return result.map(uri => this._concepts[uri]).map(this._removeNarrower).slice(0, limit)
+    return result.map(uri => data[this._scheme.uri].concepts[uri]).map(this._removeNarrower).slice(0, limit)
   }
 
   /**
