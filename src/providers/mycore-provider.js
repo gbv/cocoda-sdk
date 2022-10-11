@@ -9,11 +9,21 @@ import FlexSearch from "flexsearch"
 const data = {}
 
 /**
- * MyCoRE Classification API
- *
- * Currently supports only one vocabulary per registry.
+ * MyCoRe Classification API
  *
  * See also: https://github.com/gbv/cocoda-sdk/issues/50
+ *
+ * To use it in a registry, specify `provider` as "MyCoRe" and provide the API URL as `api`:
+ * ```json
+ * {
+ *  "uri": "http://coli-conc.gbv.de/registry/mycore-shbsg",
+ *  "provider": "MyCoRe",
+ *  "api": "https://bibliographie.schleswig-holstein.de/api/v2/classifications/shbib_sachgruppen.json"
+ * }
+ * ```
+ *
+ * Specifying `schemes` is currently not required and it will not be used. Currently supports only one vocabulary per registry.
+ *
  */
 export default class MyCoReProvider extends BaseProvider {
 

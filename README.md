@@ -167,6 +167,8 @@ The following providers are also exported, but have to be added via `cdk.addProv
   - **This integration is currently experimental and only supports LCSH and LCNAF.**
 - `Skohub` - access to concept schemes and concepts via a [SkoHub Vocabs](https://blog.lobid.org/2019/09/27/presenting-skohub-vocabs.html)
   - **This integration is currently experimental. Only vocabularies that use a [slash namespace pattern]([hash](https://www.w3.org/2001/sw/BestPractices/VM/http-examples/2006-01-18/#slash)) with dereferenceable URIs are supported.**
+- `MyCoRe` - access to vocabularies via [MyCoRe](https://www.mycore.de/)
+  - **This integration is currently experimental. Only one vocabulary per registry is supported. Not recommended for large vocabularies as all of the vocabulary data is loaded and kept in memory.**
 - `ReconciliationApi` - access to mapping suggestions via a [OpenRefine Reconciliation API](https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-API)
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
