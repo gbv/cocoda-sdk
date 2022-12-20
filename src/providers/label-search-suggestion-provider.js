@@ -50,7 +50,7 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    return _.get(scheme, "_registry.has.search", false)
+    return super.supportsScheme(scheme) && _.get(scheme, "_registry.has.search", false)
   }
 
   /**
