@@ -24,6 +24,8 @@ import * as errors from "../errors/index.js"
  *
  * You can provide a list of excluded schemes as JSKOS objects in `excludedSchemes`.
  *
+ * Experimental: You can also provide API URL overrides in the `overrides` field by giving a list of scheme objects each with a `search` field that contains the API URL. Note: This behavior is experimental and can change without a new major version.
+ *
  * Additionally, the following JSKOS properties can be provided: `prefLabel`, `notation`, `definition`
  *
  * @extends BaseProvider
@@ -171,9 +173,12 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     if (!registry || registry.has.search === false) {
       return []
     }
+    // Determine whether an URL override is defined
+    let url = this._jskos.overrides.find(o => jskos.compare(o, targetScheme))?.search
     // API request
     const data = await registry.search({
       ...config,
+      url,
       search: label,
       scheme: targetScheme,
       limit,
