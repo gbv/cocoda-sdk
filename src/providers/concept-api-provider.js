@@ -321,12 +321,12 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async suggest({ use = "notation,label", types = [], sort = "score", ...config }) {
+  async suggest({ use = "notation,label", types = [], sort = "score", params = {}, ...config }) {
     return this._search({
       ...config,
       endpoint: "suggest",
       params: {
-        ...config.params,
+        ...params,
         type: types.join("|"),
         use,
         sort,
@@ -345,12 +345,12 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {string[]} [config.types=[]] list of type URIs
    * @returns {Array} result in JSKOS Format
    */
-  async search({ types = [], ...config }) {
+  async search({ types = [], params = {}, ...config }) {
     return this._search({
       ...config,
       endpoint: "search",
       params: {
-        ...config.params,
+        ...params,
         type: types.join("|"),
       },
     })
@@ -366,12 +366,12 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {string} [config.sort=score] sorting parameter
    * @returns {Array} result in OpenSearch Suggest Format
    */
-  async vocSuggest({ use = "notation,label", sort = "score", ...config }) {
+  async vocSuggest({ use = "notation,label", sort = "score", params = {}, ...config }) {
     return this._search({
       ...config,
       endpoint: "voc-suggest",
       params: {
-        ...config.params,
+        ...params,
         use,
         sort,
       },
@@ -394,8 +394,9 @@ export default class ConceptApiProvider extends BaseProvider {
     })
   }
 
-  async _search({ endpoint, scheme, search, limit, offset, params, ...config }) {
-    let url = this._api[endpoint]
+  async _search({ endpoint, scheme, search, limit, offset, params, url, ...config }) {
+    // Allows API URL override via parameter
+    url = url ?? this._api[endpoint]
     if (!url) {
       throw new errors.MissingApiUrlError()
     }
