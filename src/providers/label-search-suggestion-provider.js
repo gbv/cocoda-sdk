@@ -174,7 +174,7 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
       return []
     }
     // Determine whether an URL override is defined
-    let url = this._jskos.overrides.find(o => jskos.compare(o, targetScheme))?.search
+    let url = (this._jskos.overrides || []).find(o => jskos.compare(o, targetScheme))?.search
     // API request
     const data = await registry.search({
       ...config,
