@@ -132,7 +132,22 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     const regexResult = /^[\s\wäüöÄÜÖß]*\w/.exec(label)
     label = regexResult ? regexResult[0] : label
     // Get results from API or cache
-    const results = await this._getResults({ ...config, label, targetScheme, limit })
+    let results = await this._getResults({ ...config, label, targetScheme, limit })
+    // Fallback to broader concept(s) if no results
+    if (!results.length && concept.broader?.length) {
+      for (const broader of concept.broader) {
+        const label = jskos.prefLabel(broader, {
+          fallbackToUri: false,
+          language,
+        })
+        if (!label) continue
+        results = await this._getResults({ ...config, label, targetScheme, limit })
+        // Stop if there are results from a broader concept
+        if (results.length) {
+          break
+        }
+      }
+    }
     // Map results to actual mappings
     let mappings = results.map(result => ({
       fromScheme: sourceScheme,
