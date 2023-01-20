@@ -54,11 +54,11 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.21.2",
     "better-docs": "^2.7.2",
-    "esbuild": "~0.14.54",
+    "esbuild": "~0.17.3",
     "esbuild-plugin-ifdef": "^1.0.1",
-    "eslint": "^8.31.0",
+    "eslint": "^8.32.0",
     "eslint-config-gbv": "^1.0.4",
-    "glob": "^8.0.3",
+    "glob": "^8.1.0",
     "jsdoc": "^3.6.11",
     "license-checker": "^25.0.1",
     "lint-staged": "^13.1.0",
@@ -67,7 +67,7 @@
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
-    "axios": "~0.26.1",
+    "axios": "^1.2.3",
     "flexsearch": "~0.6.32",
     "jskos-tools": "^1.0.28",
     "localforage": "^1.10.0",

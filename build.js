@@ -40,7 +40,7 @@ import ifdef from "esbuild-plugin-ifdef";
   })
 
   // Browser
-  define["process.browser"] = true
+  define["process.browser"] = "true"
   const browserTargetFile = `${targetFolder}/${pkg.name}.js`
   const browserTargetFileLicenses = `${browserTargetFile}.LICENSES.txt`
   let licenseFile = "./LICENSE"
