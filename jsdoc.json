@@ -1,37 +1,23 @@
 {
+  "source": {
+    "include": ["./src/index.js", "./src/errors", "./src/providers", "./src/lib", "./src/utils"]
+  },
   "plugins": [
     "plugins/markdown",
-    "node_modules/better-docs/category",
     "jsdoc-es6-fix.cjs"
   ],
-  "source": {
-    "include": ["./src", "./src/errors", "./src/providers", "./src/lib"]
+  "markdown": {
+    "idInHeadings": true
+  },
+  "templates": {
+    "collapseSymbols": false,
+    "outputSourceFiles": false
   },
   "opts": {
     "encoding": "utf8",
-    "template": "node_modules/better-docs",
+    "template": "node_modules/clean-jsdoc-theme",
     "readme": "README.md",
     "destination": "./out",
     "recurse": true
-  },
-  "tags": {
-    "allowUnknownTags": ["category"]
-  },
-  "templates": {
-    "search": true,
-    "better-docs": {
-      "name": "cocoda-sdk Documentation",
-      "title": "cocoda-sdk",
-      "navLinks": [
-        {
-            "label": "Github",
-            "href": "https://github.com/gbv/cocoda-sdk"
-        },
-        {
-            "label": "Cocoda Mapping Tool",
-            "href": "https://github.com/gbv/cocoda"
-        }
-      ]
-    }
   }
 }
