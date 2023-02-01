@@ -16,7 +16,7 @@ jobs:
           node-version: 18.x
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm run build
+      - run: npm run docs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
