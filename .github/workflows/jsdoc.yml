@@ -3,7 +3,7 @@ name: JSDoc to GitHub pages
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   deploy:
