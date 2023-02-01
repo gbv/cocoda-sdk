@@ -1,5 +1,5 @@
 # Cocoda SDK
-![Node.js CI](https://github.com/gbv/cocoda-sdk/workflows/Node.js%20CI/badge.svg)
+[![Test and build](https://github.com/gbv/cocoda-sdk/actions/workflows/test-and-build.yml/badge.svg)](https://github.com/gbv/cocoda-sdk/actions/workflows/test-and-build.yml)
 [![GitHub package version](https://img.shields.io/github/package-json/v/gbv/cocoda-sdk.svg?label=version)](https://github.com/gbv/cocoda-sdk)
 [![NPM package name](https://img.shields.io/badge/npm-cocoda--sdk-blue.svg)](https://www.npmjs.com/package/cocoda-sdk)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
