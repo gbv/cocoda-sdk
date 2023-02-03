@@ -8,6 +8,7 @@ import LabelSearchSuggestionProvider from "./label-search-suggestion-provider.js
 import SkosmosApiProvider from "./skosmos-api-provider.js"
 import LocApiProvider from "./loc-api-provider.js"
 import SkohubProvider from "./skohub-provider.js"
+import LobidApiProvider from "./lobid-api-provider.js"
 import MyCoReProvider from "./mycore-provider.js"
 
 export {
@@ -21,5 +22,6 @@ export {
   SkosmosApiProvider,
   LocApiProvider,
   SkohubProvider,
+  LobidApiProvider,
   MyCoReProvider,
 }
