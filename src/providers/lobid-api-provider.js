@@ -137,6 +137,7 @@ export default class LobidApiProvider extends BaseProvider {
     this.has.narrower = true
     this.has.suggest = true
     this.has.search = true
+    this.has.types = true
     // Explicitly set other capabilities to false
     utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
       this.has[c] = false
