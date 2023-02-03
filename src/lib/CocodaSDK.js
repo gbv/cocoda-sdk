@@ -423,28 +423,33 @@ export default class CocodaSDK {
         }
         return registry
       } else {
-        // Registry will be initialized
-        const provider = Object.values(providers).find(p => p.providerType === type)
-        if (!provider || !provider._registryConfigForBartocApiConfig) {
-          continue
-        }
-        const providerName = provider.providerName
         // Some providers need access to the scheme
         config.scheme = scheme
-        config = providers[providerName]._registryConfigForBartocApiConfig(config)
-        if (!config) {
-          continue
-        }
-        config.provider = providerName
-
-        try {
-          registry = this.initializeRegistry(config)
-          if (registry) {
-            registryCache[url] = registry
-            return registry
+        // Multiple providers may implement a certain API, so we're looping through providers
+        for (const provider of Object.values(providers)) {
+          if (provider.providerType && provider.providerType !== type) {
+            continue
           }
-        } catch (error) {
-          continue
+          if (!provider._registryConfigForBartocApiConfig) {
+            continue
+          }
+          // Get registry config from provider
+          const providerName = provider.providerName
+          const registryConfig = providers[providerName]._registryConfigForBartocApiConfig(config)
+          if (!registryConfig) {
+            continue
+          }
+          registryConfig.provider = providerName
+          // Try to initialize the registry via the config
+          try {
+            registry = this.initializeRegistry(registryConfig)
+            if (registry) {
+              registryCache[url] = registry
+              return registry
+            }
+          } catch (error) {
+            continue
+          }
         }
       }
     }
