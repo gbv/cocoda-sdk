@@ -4,9 +4,6 @@ import * as utils from "../utils/index.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
-// TODOs:
-// - Check (and fix if necessary) _registryConfigForBartocApiConfig
-
 const gndJson = {
   uri: "http://bartoc.org/en/node/430",
   concepts: [
@@ -154,12 +151,13 @@ export default class LobidApiProvider extends BaseProvider {
    * @returns {Object} provider configuration
    */
   static _registryConfigForBartocApiConfig({ url, scheme } = {}) {
-    if (!url || !scheme) {
+    // API is hardcoded
+    if (!url || !scheme || !jskos.compare(scheme, gndJson) || url !== "https://lobid.org/gnd/api") {
       return null
     }
     return {
-      api: url,
-      schemes: [scheme],
+      api: "https://lobid.org/gnd/",
+      schemes: [gndJson],
     }
   }
 
@@ -187,7 +185,7 @@ export default class LobidApiProvider extends BaseProvider {
     const errors = []
     const results = await Promise.all(notations.map(async notation => {
       try {
-        const result = await axios.get(`https://lobid.org/gnd/${notation}.json`)
+        const result = await axios.get(`${this._api.api}${notation}.json`)
         return toJSKOS(result.data)
       } catch (error) {
         errors.push(error)
@@ -207,7 +205,7 @@ export default class LobidApiProvider extends BaseProvider {
     }
     const uri = fixURI(concept.uri)
     const q = broaderProps.map(prop => `${prop}.id:"${uri}"`).join(" OR ")
-    const result = await axios.get("https://lobid.org/gnd/search", {
+    const result = await axios.get(`${this._api.api}search`, {
       params: {
         q,
         format: "json",
@@ -242,7 +240,7 @@ export default class LobidApiProvider extends BaseProvider {
     if (types.length) {
       filter = types.map(type => `type:${type}`).join(" OR ")
     }
-    const results = await axios.get("https://lobid.org/gnd/search", { params: {
+    const results = await axios.get(`${this._api.api}search`, { params: {
       q: search,
       filter,
       format,
@@ -262,4 +260,3 @@ export default class LobidApiProvider extends BaseProvider {
 }
 
 LobidApiProvider.providerName = "LobidApi"
-LobidApiProvider.providerType = "http://bartoc.org/api-type/lobid"
