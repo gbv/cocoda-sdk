@@ -99,7 +99,6 @@ const broaderProps = [
 ]
 
 function toJSKOS(data) {
-  // - type → `type` (with URI mapping)
   const concept = {
     uri: data.id,
     notation: [data.gndIdentifier],
@@ -109,7 +108,7 @@ function toJSKOS(data) {
   if (data.variantName) {
     concept.altLabel = { de: data.variantName }
   }
-  concept.type = data.type.map(type => gndTypeScheme.uriFromNotation(type))
+  concept.type = data.type.map(type => gndTypeScheme.uriFromNotation(type)).filter(Boolean)
   concept.broader = []
   broaderProps.forEach(prop => {
     concept.broader = concept.broader.concat(data[prop] || [])
