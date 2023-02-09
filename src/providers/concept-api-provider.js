@@ -444,11 +444,16 @@ export default class ConceptApiProvider extends BaseProvider {
     if (schemeUri) {
       _.set(config, "params.uri", schemeUri)
     }
-    return this.axios({
+    let types = await this.axios({
       ...config,
       method: "get",
       url: this._api.types,
     })
+    // It might be necessary to filter the result by its `inScheme` property (only if it exists, otherwise assume it belongs to the requested scheme URI).
+    if (schemeUri) {
+      types = types.filter(type => !type.inScheme || jskos.isContainedIn(scheme, type.inScheme))
+    }
+    return types
   }
 
 }
