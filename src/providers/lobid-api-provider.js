@@ -116,6 +116,16 @@ function toJSKOS(data) {
   concept.broader = concept.broader.map(broader => ({ uri: broader.id }))
   // Include old http URI for backwards compatibilty
   concept.identifier = [concept.uri.replace("https://", "http://")]
+  // Embedded mappings (sameAs)
+  if (data.sameAs && data.sameAs.length) {
+    concept.mappings = data.sameAs.map(target => ({
+      from: { memberSet: [{ uri: concept.uri }]},
+      fromScheme: { uri: gndJson.uri },
+      to: { memberSet: [{ uri: target.id }]},
+      toScheme: { uri: target.collection.id },
+      type: ["http://www.w3.org/2004/02/skos/core#exactMatch"],
+    }))
+  }
   return concept
 }
 
