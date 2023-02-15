@@ -4,6 +4,8 @@ import * as utils from "../utils/index.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
+const api = "https://lobid.org/gnd/"
+
 const gndJson = {
   uri: "http://bartoc.org/en/node/430",
   concepts: [
@@ -153,6 +155,13 @@ export default class LobidApiProvider extends BaseProvider {
     })
   }
 
+  _setup() {
+    // Set default API URL when not configured via BARTOC/registryForScheme
+    if (!this._api.api) {
+      this._api.api = api
+    }
+  }
+
   /**
    * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
    *
@@ -166,7 +175,7 @@ export default class LobidApiProvider extends BaseProvider {
       return null
     }
     return {
-      api: "https://lobid.org/gnd/",
+      api,
       schemes: [gndJson],
     }
   }
