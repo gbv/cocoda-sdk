@@ -436,7 +436,7 @@ export default class BaseProvider {
       return false
     }
     // Check if one of the user's identities matches
-    const userUris = [user.uri].concat(Object.values(user.identities || {}).map(id => id.uri)).filter(uri => uri != null)
+    const userUris = [user?.uri].concat(Object.values(user?.identities || {}).map(id => id.uri)).filter(Boolean)
     if (options.auth && options.identities) {
       if (_.intersection(userUris, options.identities).length == 0) {
         return false
@@ -444,7 +444,7 @@ export default class BaseProvider {
     }
     if (options.auth && options.identityProviders) {
       // Check if user has the required provider
-      const providers = Object.keys((user && user.identities) || {})
+      const providers = Object.keys((user?.identities) || {})
       if (_.intersection(providers, options.identityProviders).length == 0) {
         return false
       }
