@@ -159,7 +159,7 @@ export default class ConceptApiProvider extends BaseProvider {
    * @param {Object} config
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
-  async getSchemes(config) {
+  async getSchemes(config = {}) {
     if (!this._api.schemes) {
       // If an array of schemes is given, return that here
       if (Array.isArray(this.schemes)) {

@@ -185,7 +185,7 @@ export default class SkohubProvider extends BaseProvider {
     return concept
   }
 
-  async getSchemes({ ...config }) {
+  async getSchemes({ ...config } = {}) {
     return Promise.all(this.schemes.map(scheme => this._loadScheme({ ...config, scheme })))
   }
 

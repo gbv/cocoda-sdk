@@ -249,7 +249,7 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @param {Object} config
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
-  async getSchemes({ ...config }) {
+  async getSchemes({ ...config } = {}) {
     const schemes = []
     for (let scheme of this.schemes || []) {
       const url = this._getApiUrl(scheme, "/")

@@ -134,7 +134,7 @@ export default class BaseProvider {
     this.setRetryConfig()
 
     // Add a request interceptor
-    this.axios.interceptors.request.use((config) => {
+    this.axios.interceptors.request.use((config = {}) => {
       if (!config._skipAdditionalParameters) {
         // Add language parameter to request
         const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this._defaultLanguages).filter(lang => lang != "")).join(",")
@@ -146,7 +146,7 @@ export default class BaseProvider {
       }
 
       // Don't perform http requests if site is used via https
-      if (config.url.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
+      if (config.url?.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
         // TODO: Return proper error object.
         throw new axios.Cancel("Can't call http API from https.")
       }
