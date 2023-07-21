@@ -96,7 +96,7 @@ export default class ConceptApiProvider extends BaseProvider {
     this.has.auth = _.get(this._config, "auth.key") != null
     this._defaultParams = {
       // Default parameters mostly for DANTE
-      properties: "+created,issued,modified,editorialNote,scopeNote",
+      properties: "+created,issued,modified,editorialNote,scopeNote,note,definition",
     }
   }
 
