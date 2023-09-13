@@ -10,6 +10,7 @@ import LocApiProvider from "./loc-api-provider.js"
 import SkohubProvider from "./skohub-provider.js"
 import LobidApiProvider from "./lobid-api-provider.js"
 import MyCoReProvider from "./mycore-provider.js"
+import NoTApiProvider from "./not-api-provider.js"
 
 export {
   BaseProvider,
@@ -24,4 +25,5 @@ export {
   SkohubProvider,
   LobidApiProvider,
   MyCoReProvider,
+  NoTApiProvider,
 }
