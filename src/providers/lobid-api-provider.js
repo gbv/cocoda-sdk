@@ -110,6 +110,9 @@ function toJSKOS(data) {
   if (data.variantName) {
     concept.altLabel = { de: data.variantName }
   }
+  if (data.usingInstructions?.length) {
+    concept.scopeNote = { de: data.usingInstructions }
+  }
   concept.type = data.type.map(type => gndTypeScheme.uriFromNotation(type)).filter(Boolean)
   concept.broader = []
   broaderProps.forEach(prop => {
