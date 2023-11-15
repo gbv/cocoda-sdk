@@ -132,7 +132,9 @@ export default class MyCoReProvider extends BaseProvider {
    * Helper function that replaces `narrower` key with [null] if it has values. Use this before returning concepts.
    */
   _removeNarrower(concept) {
-    if (!concept) return concept
+    if (!concept) {
+      return concept
+    }
     return Object.assign({}, concept, { narrower: (concept.narrower && concept.narrower.length) ? [null] : []})
   }
 

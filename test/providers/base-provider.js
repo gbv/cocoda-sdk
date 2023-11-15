@@ -16,7 +16,9 @@ describe("BaseProvider", () => {
   })
 
   it("should initialize without parameters", () => {
-    assert.doesNotThrow(() => { provider = getProvider() })
+    assert.doesNotThrow(() => {
+      provider = getProvider() 
+    })
   })
 
   it("should have certain properties", () => {
@@ -32,7 +34,9 @@ describe("BaseProvider", () => {
     for (let { method } of utils.requestMethods) {
       assert.ok(!!provider[method], `could not find method ${method}`)
       // All request methods should throw by default
-      await assert.rejects(async () => { await provider[method]() }, `method ${method} does not throw by default`)
+      await assert.rejects(async () => {
+        await provider[method]() 
+      }, `method ${method} does not throw by default`)
     }
   })
 

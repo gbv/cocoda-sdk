@@ -190,7 +190,9 @@ export default class BaseProvider {
       ) {
         error.config._retryCount = count + 1
         // from: https://github.com/axios/axios/issues/934#issuecomment-531463172
-        if (error.config.data) error.config.data = JSON.parse(error.config.data)
+        if (error.config.data) {
+          error.config.data = JSON.parse(error.config.data)
+        }
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             this.axios(error.config).then(resolve).catch(reject)
@@ -212,7 +214,9 @@ export default class BaseProvider {
       // Make sure all methods exist, but thrown an error if they are not implemented
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
-        this[method] = () => { throw new errors.MethodNotImplementedError({ method }) }
+        this[method] = () => {
+          throw new errors.MethodNotImplementedError({ method }) 
+        }
         continue
       }
       this[method] = (options = {}) => {
@@ -295,13 +299,27 @@ export default class BaseProvider {
   }
 
   // Expose some properties from original registry object as getters
-  get uri() { return this._jskos.uri }
-  get notation() { return this._jskos.notation }
-  get prefLabel() { return this._jskos.prefLabel }
-  get definition() { return this._jskos.definition }
-  get schemes() { return this._jskos.schemes }
-  get excludedSchemes() { return this._jskos.excludedSchemes }
-  get stored() { return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored }
+  get uri() {
+    return this._jskos.uri 
+  }
+  get notation() {
+    return this._jskos.notation 
+  }
+  get prefLabel() {
+    return this._jskos.prefLabel 
+  }
+  get definition() {
+    return this._jskos.definition 
+  }
+  get schemes() {
+    return this._jskos.schemes 
+  }
+  get excludedSchemes() {
+    return this._jskos.excludedSchemes 
+  }
+  get stored() {
+    return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored 
+  }
 
   /**
    * Load data about registry via the status endpoint.

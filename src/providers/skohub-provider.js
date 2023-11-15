@@ -61,9 +61,15 @@ export default class SkohubProvider extends BaseProvider {
     }
   }
 
-  get _index() { return data[this.uri] && data[this.uri].index }
-  get _conceptCache() { return data[this.uri] && data[this.uri].conceptCache }
-  get _schemeCache() { return data[this.uri] && data[this.uri].schemeCache }
+  get _index() {
+    return data[this.uri] && data[this.uri].index 
+  }
+  get _conceptCache() {
+    return data[this.uri] && data[this.uri].conceptCache 
+  }
+  get _schemeCache() {
+    return data[this.uri] && data[this.uri].schemeCache 
+  }
 
   /**
    * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.

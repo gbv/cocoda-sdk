@@ -140,7 +140,9 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
           fallbackToUri: false,
           language,
         })
-        if (!label) continue
+        if (!label) {
+          continue
+        }
         results = await this._getResults({ ...config, label, targetScheme, limit })
         // Stop if there are results from a broader concept
         if (results.length) {
