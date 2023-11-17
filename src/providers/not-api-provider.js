@@ -13,7 +13,6 @@ import jskos from "jskos-tools"
  * - [ ] Better error handling
  * - [ ] Implement getTop (if possible)
  * - [ ] Implement getNarrower and getAncestors (already returned by getConcepts, but methods should be implemented nonetheless)
- * - [ ] Decide on providerType URI
  * - [ ] More testing required
  */
 
@@ -179,4 +178,4 @@ export default class NoTApiProvider extends BaseProvider {
 }
 
 NoTApiProvider.providerName = "NoTApi"
-// NoTApiProvider.providerType = "http://bartoc.org/api-type/not"
+NoTApiProvider.providerType = "http://bartoc.org/api-type/noterms"
