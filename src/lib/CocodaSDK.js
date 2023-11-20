@@ -427,7 +427,7 @@ export default class CocodaSDK {
         config.scheme = scheme
         // Multiple providers may implement a certain API, so we're looping through providers
         for (const provider of Object.values(providers)) {
-          if (provider.providerType && provider.providerType !== type) {
+          if (provider?.providerType !== type) {
             continue
           }
           if (!provider._registryConfigForBartocApiConfig) {
