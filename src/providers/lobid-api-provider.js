@@ -284,3 +284,4 @@ export default class LobidApiProvider extends BaseProvider {
 }
 
 LobidApiProvider.providerName = "LobidApi"
+LobidApiProvider.providerType = "http://bartoc.org/api-type/lobid-gnd"
