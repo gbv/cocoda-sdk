@@ -2,7 +2,6 @@ import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import { listOfCapabilities } from "../utils/index.js"
 
 // Cache by registry URI
 const cache = {}
@@ -36,6 +35,9 @@ const cache = {}
  * @category Providers
  */
 export default class ReconciliationApiProvider extends BaseProvider {
+  static supports = {
+    mappings: true,
+  }
 
   get _cache() {
     return cache[this.uri]
@@ -46,11 +48,6 @@ export default class ReconciliationApiProvider extends BaseProvider {
    */
   _prepare() {
     cache[this.uri] = []
-    this.has.mappings = true
-    // Explicitly set other capabilities to false
-    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
   }
 
   /**

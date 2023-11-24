@@ -2,7 +2,6 @@ import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import { listOfCapabilities } from "../utils/index.js"
 
 /**
  * Skosmos API.
@@ -33,24 +32,16 @@ import { listOfCapabilities } from "../utils/index.js"
  * @category Providers
  */
 export default class SkosmosApiProvider extends BaseProvider {
-
-  /**
-   * @private
-   */
-  _prepare() {
-    this.has.schemes = true
-    this.has.top = true
-    this.has.data = true
-    this.has.concepts = true
-    this.has.narrower = true
-    this.has.ancestors = true
-    this.has.types = true
-    this.has.suggest = true
-    this.has.search = true
-    // Explicitly set other capabilities to false
-    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
+  static supports = {
+    scheme: true,
+    top: true,
+    data: true,
+    concepts: true,
+    narrower: true,
+    ancestors: true,
+    types: true,
+    suggest: true,
+    search: true,
   }
 
   /**

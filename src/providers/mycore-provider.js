@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import { listOfCapabilities } from "../utils/index.js"
 import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
 
@@ -26,20 +25,15 @@ const data = {}
  *
  */
 export default class MyCoReProvider extends BaseProvider {
-
-  _prepare() {
-    this.has.schemes = true
-    this.has.top = true
-    this.has.data = true
-    this.has.concepts = true
-    this.has.narrower = true
-    this.has.ancestors = true
-    this.has.suggest = true
-    this.has.search = true
-    // Explicitly set other capabilities to false
-    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
+  static supports = {
+    schemes: true,
+    top: true,
+    data: true,
+    concepts: true,
+    narrower: true,
+    ancestors: true,
+    suggest: true,
+    search: true,
   }
 
   _setup() {

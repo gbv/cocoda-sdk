@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as _ from "../utils/lodash.js"
-import { listOfCapabilities } from "../utils/index.js"
 import * as errors from "../errors/index.js"
 
 // TODO: Only keep the last 20 results in cache.
@@ -32,17 +31,15 @@ import * as errors from "../errors/index.js"
  * @category Providers
  */
 export default class LabelSearchSuggestionProvider extends BaseProvider {
+  static supports = {
+    mappings: true,
+  }
 
   /**
    * @private
    */
   _prepare() {
     this._cache = []
-    this.has.mappings = true
-    // Explicitly set other capabilities to false
-    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
   }
 
   /**

@@ -1,6 +1,5 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
-import * as utils from "../utils/index.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
@@ -145,19 +144,14 @@ function fixURI(uri) {
 }
 
 export default class LobidApiProvider extends BaseProvider {
-
-  _prepare() {
-    this.has.schemes = true
-    this.has.data = true
-    this.has.concepts = true
-    this.has.narrower = true
-    this.has.suggest = true
-    this.has.search = true
-    this.has.types = true
-    // Explicitly set other capabilities to false
-    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
+  static supports = {
+    schemes: true,
+    data: true,
+    concepts: true,
+    narrower: true,
+    suggest: true,
+    search: true,
+    types: true,
   }
 
   _setup() {

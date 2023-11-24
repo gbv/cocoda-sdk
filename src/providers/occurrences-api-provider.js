@@ -29,6 +29,10 @@ const cache = {}
  * @category Providers
  */
 export default class OccurrencesApiProvider extends BaseProvider {
+  static supports = {
+    occurrences: true,
+    mappings: true,
+  }
 
   get _cache() {
     return cache[this.uri]
@@ -40,12 +44,6 @@ export default class OccurrencesApiProvider extends BaseProvider {
   _prepare() {
     cache[this.uri] = []
     this._occurrencesSupportedSchemes = []
-    this.has.occurrences = true
-    this.has.mappings = true
-    // Explicitly set other capabilities to false
-    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
   }
 
   /**

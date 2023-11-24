@@ -1,6 +1,5 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
-import { listOfCapabilities } from "../utils/index.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
@@ -116,23 +115,16 @@ function madsToJskosConcept(data, { scheme }) {
  * @category Providers
  */
 export default class LocApiProvider extends BaseProvider {
-
-  /**
-   * @private
-   */
-  _prepare() {
-    this.has.schemes = true
-    this.has.top = false
-    this.has.data = true
-    this.has.concepts = true
-    this.has.narrower = false
-    this.has.ancestors = false
-    this.has.suggest = true
-    this.has.search = true
-    // Explicitly set other capabilities to false
-    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
-      this.has[c] = false
-    })
+  // TODO: Can unsupported types be supported later? If not, just remove them here.
+  static supports = {
+    schemes: true,
+    top: false,
+    data: true,
+    concepts: true,
+    narrower: false,
+    ancestors: false,
+    suggest: true,
+    search: true,
   }
 
   /**

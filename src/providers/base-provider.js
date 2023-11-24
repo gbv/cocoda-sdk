@@ -8,6 +8,11 @@ import * as errors from "../errors/index.js"
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
  *
  * Prefix all internal method and properties with underscore (e.g. `this._cache`)!
+ * 
+ * Static members that should be set:
+ * - providerName (This is how a provider is identified in a "registry" object in field `provider`.)
+ * - providerType (Optional BARTOC API type URI. Supported types: https://github.com/gbv/bartoc.org/blob/main/data/bartoc-api-types.concepts.csv, the URI prefix is "http://bartoc.org/api-type/".)
+ * - supports (Optional object of supported capabilities. The keys should be values from this list: https://github.com/gbv/cocoda-sdk/blob/9145952398d6828004beb395c1d392a4d24e9288/src/utils/index.js#L159-L174; values should be a boolean. `false` values can be left out. They will be used to initialize `this.has` (see below). Alternatively, `this.has` can be filled in `_prepare` or `_setup`.)
  *
  * Methods that can be overridden:
  * - Do not override the constructor! Use _prepare or _setup instead.
@@ -91,6 +96,14 @@ export default class BaseProvider {
      * @readonly
      */
     this.has = {}
+    // Use values from static "supports" value
+    if (this.constructor?.supports) {
+      this.has = Object.assign({}, this.constructor?.supports)
+    }
+    // Explicitly set other capabilities to false
+    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+      this.has[c] = false
+    })
     // Set default language priority list
     this._defaultLanguages = "en,de,fr,es,nl,it,fi,pl,ru,cs,jp".split(",")
     /**
