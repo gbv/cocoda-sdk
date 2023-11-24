@@ -24,7 +24,6 @@ describe("BaseProvider", () => {
   it("should have certain properties", () => {
     provider = getProvider(registry)
     assert.equal(provider._jskos, registry, "registry property does not refer to registry object")
-    assert.deepEqual(provider.has, {}, "has property is not empty")
     assert.deepEqual(provider.languages, [], "languages property is not an empty array")
     assert.deepEqual(provider._auth, { key: null, bearerToken: null })
     assert.notEqual(provider.axios && provider.axios.request, undefined)

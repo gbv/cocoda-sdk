@@ -18,8 +18,8 @@
   ],
   "scripts": {
     "test": "mocha --recursive",
-    "lint": "eslint ./**/*.js ./**/.*.js",
-    "fix": "eslint --fix ./**/*.js ./**/.*.js",
+    "lint": "eslint --ext .js --ext .cjs --ignore-pattern /dist/ .",
+    "fix": "eslint --ext .js --ext .cjs --ignore-pattern /dist/ . --fix",
     "lint-staged": "lint-staged",
     "build": "node --experimental-json-modules build.js",
     "docs": "jsdoc -c jsdoc.json",
@@ -56,14 +56,13 @@
     "clean-jsdoc-theme": "^4.2.17",
     "esbuild": "~0.17.19",
     "esbuild-plugin-ifdef": "^1.0.1",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-gbv": "^1.1.0",
     "glob": "^8.1.0",
     "jsdoc": "^4.0.2",
     "license-checker": "^25.0.1",
     "lint-staged": "^13.3.0",
     "mocha": "^10.2.0",
-    "mocha-eslint": "^7.0.0",
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
