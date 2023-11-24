@@ -217,4 +217,5 @@ export default class ReconciliationApiProvider extends BaseProvider {
 }
 
 ReconciliationApiProvider.providerName = "ReconciliationApi"
+ReconciliationApiProvider.providerType = "http://bartoc.org/api-type/reconciliation"
 ReconciliationApiProvider.stored = false
