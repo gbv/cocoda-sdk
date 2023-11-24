@@ -405,7 +405,13 @@ export default class CocodaSDK {
     return jskos.sortSchemes(schemes.filter(Boolean))
   }
 
-  registryForScheme(scheme) {
+  /**
+   * 
+   * @param {Object} scheme JSKOS concept scheme object
+   * @param {string} [dataType="concepts"] only use providers that support a certain data type (default is "concepts" for backward compatibility)
+   * @returns 
+   */
+  registryForScheme(scheme, dataType = "concepts") {
     let registry = scheme._registry
     if (registry) {
       return registry
@@ -413,10 +419,12 @@ export default class CocodaSDK {
 
     for (let { type, ...config } of scheme.API || []) {
       const url = config.url
+      // Use type AND url for caching because the same API URL might be used for multiple API types
+      const cacheKey = `${type}-${url}`
 
-      if (registryCache[url]) {
+      if (registryCache[cacheKey]) {
         // Registry in cache is used
-        const registry = registryCache[url]
+        const registry = registryCache[cacheKey]
         // Check if scheme is part of registry already; if not, add it
         if (Array.isArray(registry._jskos.schemes) && !jskos.isContainedIn(scheme, registry._jskos.schemes)) {
           registry._jskos.schemes.push(scheme)
@@ -425,12 +433,15 @@ export default class CocodaSDK {
       } else {
         // Some providers need access to the scheme
         config.scheme = scheme
-        // Multiple providers may implement a certain API, so we're looping through providers
+        // Multiple providers may implement a certain API, so we're looping through providers and returning the first that works
         for (const provider of Object.values(providers)) {
           if (provider?.providerType !== type) {
             continue
           }
           if (!provider._registryConfigForBartocApiConfig) {
+            continue
+          }
+          if (dataType && !provider?.supports?.[dataType]) {
             continue
           }
           // Get registry config from provider
@@ -444,7 +455,7 @@ export default class CocodaSDK {
           try {
             registry = this.initializeRegistry(registryConfig)
             if (registry) {
-              registryCache[url] = registry
+              registryCache[cacheKey] = registry
               return registry
             }
           } catch (error) {
