@@ -409,7 +409,7 @@ export default class CocodaSDK {
    * 
    * @param {Object} scheme JSKOS concept scheme object
    * @param {string} [dataType="concepts"] only use providers that support a certain data type (default is "concepts" for backward compatibility)
-   * @returns 
+   * @returns {Object|null} registry object, or `null` if determining the registry was not successful
    */
   registryForScheme(scheme, dataType = "concepts") {
     let registry = scheme._registry
