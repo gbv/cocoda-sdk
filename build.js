@@ -1,5 +1,5 @@
 import esbuild from "esbuild"
-import glob from "glob"
+import { globSync as glob } from "glob"
 import checker from "license-checker"
 import fs from "fs"
 const readFile = fs.promises.readFile
@@ -16,7 +16,7 @@ import ifdef from "esbuild-plugin-ifdef";
 
   // Node ESM build
   await esbuild.build({
-    entryPoints: glob.sync(`${sourceFolder}/**/*.js`),
+    entryPoints: glob(`${sourceFolder}/**/*.js`),
     platform: "node",
     format: "esm",
     outdir: `${targetFolder}/esm`,

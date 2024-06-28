@@ -53,24 +53,24 @@
   "homepage": "https://github.com/gbv/cocoda-sdk#readme",
   "devDependencies": {
     "axios-mock-adapter": "^1.22.0",
-    "clean-jsdoc-theme": "^4.2.17",
-    "esbuild": "~0.17.19",
+    "clean-jsdoc-theme": "^4.3.0",
+    "esbuild": "~0.21.5",
     "esbuild-plugin-ifdef": "^1.0.1",
-    "eslint": "^8.54.0",
+    "eslint": "^8.57.0",
     "eslint-config-gbv": "^1.1.0",
-    "glob": "^8.1.0",
-    "jsdoc": "^4.0.2",
+    "glob": "^10.4.2",
+    "jsdoc": "^4.0.3",
     "license-checker": "^25.0.1",
-    "lint-staged": "^13.3.0",
-    "mocha": "^10.2.0",
+    "lint-staged": "^15.2.7",
+    "mocha": "^10.5.2",
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.7.2",
     "flexsearch": "~0.6.32",
-    "jskos-tools": "^1.0.34",
+    "jskos-tools": "^1.0.37",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   }
 }
