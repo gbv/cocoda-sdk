@@ -99,6 +99,88 @@ const broaderProps = [
   "broaderTermPartitive",
 ]
 
+const mappingsProps = {
+  sameAs: "http://www.w3.org/2004/02/skos/core#exactMatch",
+  exactMatch: "http://www.w3.org/2004/02/skos/core#exactMatch",
+  closeMatch: "http://www.w3.org/2004/02/skos/core#closeMatch",
+  // See also: https://d-nb.info/standards/elementset/gnd#relatedDdcWithDegreeOfDeterminacy1
+  relatedDdcWithDegreeOfDeterminacy1: "http://www.w3.org/2004/02/skos/core#narrowMatch",
+  relatedDdcWithDegreeOfDeterminacy2: "http://www.w3.org/2004/02/skos/core#narrowMatch",
+  relatedDdcWithDegreeOfDeterminacy3: "http://www.w3.org/2004/02/skos/core#closeMatch",
+  relatedDdcWithDegreeOfDeterminacy4: "http://www.w3.org/2004/02/skos/core#exactMatch",
+}
+const mappingSchemes = [
+  // DDC
+  {
+    uri: "http://bartoc.org/en/node/241",
+    // Note: In code, we're rewriting DDC notations to include the version number "e23/" at the end.
+    uriPattern: "http://dewey.info/class/(.+)/",
+  },
+  // RAMEAU
+  {
+    uri: "http://bartoc.org/en/node/18",
+    namespace: "https://data.bnf.fr/ark:/12148/",
+  },
+  // EMBNE
+  {
+    uri: "http://bartoc.org/en/node/20450",
+    namespace: "https://datos.bne.es/resource/",
+  },
+  // Wikidata
+  {
+    uri: "http://bartoc.org/en/node/1940",
+    namespace: "http://www.wikidata.org/entity/",
+  },
+  // TheSoz
+  {
+    uri: "http://bartoc.org/en/node/294",
+    namespace: "http://lod.gesis.org/thesoz/",
+  },
+  // T-PRO
+  {
+    uri: "http://bartoc.org/en/node/20425",
+    namespace: "http://uri.gbv.de/terminology/tpro/",
+  },
+  // VIAF
+  {
+    uri: "http://bartoc.org/en/node/2053",
+    namespace: "http://viaf.org/viaf/",
+  },
+  // Note: The following vocabularies use uriPattern to work around http/https URI confusion.
+  // See also: https://github.com/gbv/cocoda-sdk/issues/66#issuecomment-2273422523
+  // TODO: Adjust this after the issue has been fixed in source.
+  // AGROVOC
+  {
+    uri: "http://bartoc.org/en/node/305",
+    uriPattern: "http?://aims.fao.org/aos/agrovoc/(.+)",
+  },
+  // MeSH
+  {
+    uri: "http://bartoc.org/en/node/391",
+    uriPattern: "http?://id.nlm.nih.gov/mesh/(.+)",
+  },
+  // STW
+  {
+    uri: "http://bartoc.org/en/node/313",
+    uriPattern: "http?://zbw.eu/stw/descriptor/(.+)",
+  },
+  // BNCF
+  {
+    uri: "http://bartoc.org/en/node/443",
+    uriPattern: "https?://purl.org/bncf/tid/(.+)",
+  },
+  // LCSH
+  {
+    uri: "http://bartoc.org/en/node/454",
+    uriPattern: "http?://id.loc.gov/authorities/subjects/(.+)",
+  },
+  // LCNAF
+  {
+    uri: "http://bartoc.org/en/node/18536",
+    uriPattern: "http?://id.loc.gov/authorities/names/(.+)",
+  },
+].map(scheme => new jskos.ConceptScheme(scheme))
+
 function toJSKOS(data) {
   const concept = {
     uri: data.id,
@@ -122,15 +204,33 @@ function toJSKOS(data) {
   if (concept.uri) {
     concept.identifier = [concept.uri.replace("https://", "http://")]
   }
-  // Embedded mappings (sameAs)
-  if (data.sameAs && data.sameAs.length) {
-    concept.mappings = data.sameAs.map(target => ({
-      from: { memberSet: [{ uri: concept.uri }]},
-      fromScheme: { uri: gndJson.uri },
-      to: { memberSet: [{ uri: target.id }]},
-      toScheme: { uri: target.collection.id },
-      type: ["http://www.w3.org/2004/02/skos/core#exactMatch"],
-    }))
+  // Embedded mappings
+  let mappings = []
+  for (const prop of Object.keys(mappingsProps)) {
+    const type = mappingsProps[prop]
+    if (data[prop]?.length) {
+      mappings = mappings.concat(data[prop].map(target => {
+        const scheme = mappingSchemes.find(s => s.notationFromUri(target.id))
+        const targetConcept = scheme?.conceptFromUri(target.id)
+        if (!scheme || !targetConcept) {
+          return null
+        }
+        // Dirty hack to add version number to DDC URIs
+        if (scheme.uri === "http://bartoc.org/en/node/241") {
+          targetConcept.uri += "e23/"
+        }
+        return {
+          from: { memberSet: [{ uri: concept.uri, notation: concept.notation }]},
+          fromScheme: { uri: gndJson.uri },
+          to: { memberSet: [targetConcept]},
+          toScheme: { uri: scheme.uri },
+          type: [type],
+        }
+      }).filter(Boolean))
+    }
+  }
+  if (mappings.length) {
+    concept.mappings = mappings
   }
   return concept
 }

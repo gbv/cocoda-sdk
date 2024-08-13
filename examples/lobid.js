@@ -33,6 +33,9 @@ const registry = cdk.initializeRegistry({
       const concepts = await schemeRegistry.search({scheme, search, limit: 3})
       console.log(`Sample search for ${search} resulted in:`)
       console.log(concepts.map(({uri,prefLabel}) => ({uri,prefLabel})))
+      const concepts2 = await schemeRegistry.getConcepts({ concepts: [{ uri: "https://d-nb.info/gnd/4026894-9" }] })
+      console.log("Concept data for 4026894-9 Informatik")
+      console.log(JSON.stringify(concepts2.map(({uri, prefLabel, altLabel, mappings}) => ({uri, prefLabel, altLabel, mappings}))[0], null, 2))
     } catch (error) {
       console.error("Error loading top concepts:", error)
     }
