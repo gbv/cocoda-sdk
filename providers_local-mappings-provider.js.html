@@ -101,9 +101,9 @@ export default class LocalMappingsProvider extends BaseProvider {
     let last = _.last(this.queue) || Promise.resolve()
     return new Promise((resolve) => {
       function defer() {
-        var res, rej
+        let res, rej
 
-        var promise = new Promise((resolve, reject) => {
+        const promise = new Promise((resolve, reject) => {
           res = resolve
           rej = reject
         })
