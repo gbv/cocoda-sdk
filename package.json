@@ -21,9 +21,10 @@
     "lint": "eslint",
     "fix": "eslint --fix",
     "lint-staged": "lint-staged",
-    "build": "node --experimental-json-modules build.js",
+    "build": "node build.js",
     "docs": "jsdoc -c jsdoc.json",
-    "release": "npm run build && npm test && git checkout dev && git pull && npm version $SEMVER && git push && git checkout master && git merge dev && git push --follow-tags && git checkout dev",
+    "yesno": "node -e \"const yesno = require('yesno'); yesno({ question: 'Are you sure you want to continue?' }).then(ok => process.exit(ok ? 0 : 1));\"",
+    "release": "test $(git rev-parse --abbrev-ref HEAD) = dev && git pull && npm test && npm run build && npm version $SEMVER && npm run --silent yesno && (git push && git checkout master && git merge dev && git push --follow-tags && git checkout dev) || (git tag -d $(git describe --tags) && git reset --hard HEAD~1)",
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
     "release:major": "SEMVER=major npm run release",
@@ -63,7 +64,8 @@
     "license-checker": "^25.0.1",
     "lint-staged": "^15.2.10",
     "mocha": "^10.7.3",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "yesno": "^0.4.0"
   },
   "dependencies": {
     "axios": "^1.7.7",
