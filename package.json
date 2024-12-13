@@ -1,6 +1,6 @@
 {
   "name": "cocoda-sdk",
-  "version": "3.4.12",
+  "version": "3.4.13",
   "description": "SDK for Cocoda",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.js",
