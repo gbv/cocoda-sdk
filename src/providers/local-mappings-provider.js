@@ -339,6 +339,8 @@ export default class LocalMappingsProvider extends BaseProvider {
     if (!mapping.modified) {
       mapping.modified = mapping.created
     }
+    // Remove partOf (no concordances supported in local mappings)
+    delete mapping.partOf
     // Add to local mappings
     localMappings.push(mapping)
     // Minify mappings before saving back to local storage
@@ -377,6 +379,8 @@ export default class LocalMappingsProvider extends BaseProvider {
       mapping.created = localMappings[index].created
     }
     mapping.modified = (new Date()).toISOString()
+    // Remove partOf (no concordances supported in local mappings)
+    delete mapping.partOf
     // Add to local mappings
     localMappings[index] = mapping
     // Minify mappings before saving back to local storage
@@ -415,6 +419,8 @@ export default class LocalMappingsProvider extends BaseProvider {
       mapping.created = localMappings[index].created
     }
     mapping.modified = (new Date()).toISOString()
+    // Remove partOf (no concordances supported in local mappings)
+    delete mapping.partOf
     // Add to local mappings
     localMappings[index] = Object.assign(localMappings[index], mapping)
     // Minify mappings before saving back to local storage
