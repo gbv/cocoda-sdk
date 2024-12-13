@@ -28,7 +28,7 @@
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
     "release:major": "SEMVER=major npm run release",
-    "prepare": "[ -d './dist' ] || npm run build"
+    "prepare": "husky || true; [ -d './dist' ] || npm run build"
   },
   "lint-staged": {
     "**/*.js": [
@@ -38,10 +38,6 @@
       "eslint --fix"
     ]
   },
-  "pre-commit": [
-    "lint-staged",
-    "test"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gbv/cocoda-sdk.git"
@@ -60,11 +56,11 @@
     "eslint": "~9.11",
     "eslint-config-gbv": "~2.1",
     "glob": "^10.4.5",
+    "husky": "^9.1.7",
     "jsdoc": "^4.0.3",
     "license-checker": "^25.0.1",
     "lint-staged": "^15.2.10",
     "mocha": "^10.7.3",
-    "pre-commit": "^1.2.2",
     "yesno": "^0.4.0"
   },
   "dependencies": {
