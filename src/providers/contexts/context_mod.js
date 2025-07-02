@@ -4,7 +4,10 @@ export const context_mod = {
     subject: "http://purl.org/dc/terms/subject",
     language: "http://purl.org/dc/terms/language",
     source: "http://purl.org/dc/terms/source",
-    type: "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+    type: {
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "@type": "@id"
+    },
     descriptions: {
       "@id": "http://www.w3.org/2004/02/skos/core#definition",
       "@container": "@set",
@@ -22,7 +25,10 @@ export const context_mod = {
       "@id": "http://purl.org/dc/terms/created",
       "@type": "xsd:date",
     },
-    landingPage: "http://xmlns.com/foaf/0.1/page",
+    landingPage: {
+      "@id": "http://xmlns.com/foaf/0.1/page",
+      "@type": "@id",
+    },  
     label: "http://www.w3.org/2004/02/skos/core#prefLabel",
     version: "http://www.w3.org/2002/07/owl#versionInfo",
     license: "http://purl.org/dc/terms/license",
