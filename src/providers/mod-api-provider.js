@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
-import jsonld from 'jsonld';
+import jsonld from "jsonld"
 import context_mod from "./contexts/context_mod.js"
 import context_jskos from "./contexts/context_jskos.js"
 /**
@@ -20,17 +19,15 @@ import context_jskos from "./contexts/context_jskos.js"
  *   api: "http://localhost:8080/api-gateway"
  * }
  * ```
- * 
+ *
  * @extends BaseProvider
  * @category Providers
  */
 export default class ModApiProvider extends BaseProvider {
-
   // #### CUSTOM PROPERTIES ####
   // - url (The base URL of the MOD API. This is the endpoint where the API can be accessed.)
   // url = "https://ts4nfdi-api-gateway.prod.km.k8s.zbmed.de/api-gateway"
   //  url = "http://localhost:8080/api-gateway"
-
 
   // #### STATIC PROPERTIES ####
 
@@ -56,89 +53,91 @@ export default class ModApiProvider extends BaseProvider {
     occurrences: false,
   }
 
-// #### CUSTOM METHODS ####
+  // #### CUSTOM METHODS ####
 
-/**
- * Constructs the full API URL for a given endpoint.
- * @param {string} endpointA - The API endpoint (e.g., "/artifacts").
- * @param {string} artefactID - The ID of the artefact (optional).
- * @param {string} endpointB - An additional second API endpoint part (optional).
- * @param {Object} params - An object containing query parameters as key-value pairs.
- * @returns {string} The full URL.
- * @private
- */
-_getApiUrl(endpointA, artefactShort, endpointB, params) {
-// result = URL + endpointA (+ artefactID)? (+ endpointB)? (+ paramsString)?
-  var result = this.uri || ""
-  // Ensure the base URL ends with a slash and the endpoint starts with a slash
-  if (result.endsWith("/")) {
-    result = result.slice(0, -1);
-  }
-  // If endpointA is provided, append it to the URL
-  if (!!endpointA){
-    if (!endpointA.startsWith("/")) {
-      endpointA = "/" + endpointA;
+  /**
+   * Constructs the full API URL for a given endpoint.
+   * @param {string} endpointA - The API endpoint (e.g., "/artifacts").
+   * @param {string} artefactID - The ID of the artefact (optional).
+   * @param {string} endpointB - An additional second API endpoint part (optional).
+   * @param {Object} params - An object containing query parameters as key-value pairs.
+   * @returns {string} The full URL.
+   * @private
+   */
+  _getApiUrl(endpointA, artefactShort, endpointB, params) {
+    // result = URL + endpointA (+ artefactID)? (+ endpointB)? (+ paramsString)?
+    let result = this.uri || ""
+    // Ensure the base URL ends with a slash and the endpoint starts with a slash
+    if (result.endsWith("/")) {
+      result = result.slice(0, -1)
     }
-    result += endpointA;
-  }
-  // If artefactShort is provided, append it to the URL
-  if (!!artefactShort){
-    if (!artefactShort.startsWith("/")) {
-      artefactShort = "/" + artefactShort;
-    }
-    result += artefactShort;
-  }
-  // If endpointB is provided, append it to the URL	
-  if (!!endpointB){
-    if (!endpointB.startsWith("/")) {
-      endpointB = "/" + endpointB;
-    }
-    result += endpointB;
-  }
-  // If params are provided, append them as query parameters
-  if (!!params){
-    const paramString = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join("&");
-    result += (result.includes("?") ? "&" : "?") + paramString;
-  }
-  return result
-}
-
-  
-
-_artefactToJSKOS(artefact) {
-  if (!!artefact["@id"]) 
-    delete artefact['@id'];
-  artefact['@context'] = context_mod["@context"];
-
-  return jsonld.expand(artefact).then(expanded =>
-    jsonld.compact(expanded, context_jskos)
-  ).then(compacted => {
-    jskos.clean(compacted);
-    delete compacted['@context'];
-    for (const key in compacted) {
-      if (compacted[key]?.['@none']) {
-        compacted[key].en = compacted[key]['@none'];
-        delete compacted[key]['@none'];
+    // If endpointA is provided, append it to the URL
+    if (endpointA) {
+      if (!endpointA.startsWith("/")) {
+        endpointA = "/" + endpointA
       }
+      result += endpointA
     }
-    jskos.clean(compacted)
-    return compacted;
-  });
-}
-
-_deepStripUnderscoreKeys(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(this._deepStripUnderscoreKeys);
-  } else if (obj !== null && typeof obj === 'object') {
-    return Object.fromEntries(
-      Object.entries(obj)
-        .filter(([key]) => !key.startsWith('_'))
-        .map(([key, value]) => [key, this._deepStripUnderscoreKeys(value)])
-    );
-  } else {
-    return obj;
+    // If artefactShort is provided, append it to the URL
+    if (artefactShort) {
+      if (!artefactShort.startsWith("/")) {
+        artefactShort = "/" + artefactShort
+      }
+      result += artefactShort
+    }
+    // If endpointB is provided, append it to the URL
+    if (endpointB) {
+      if (!endpointB.startsWith("/")) {
+        endpointB = "/" + endpointB
+      }
+      result += endpointB
+    }
+    // If params are provided, append them as query parameters
+    if (params) {
+      const paramString = Object.keys(params)
+        .map((k) => `${k}=${encodeURIComponent(params[k])}`)
+        .join("&")
+      result += (result.includes("?") ? "&" : "?") + paramString
+    }
+    return result
   }
-}
+
+  _artefactToJSKOS(artefact) {
+    if (artefact["@id"]) {
+      delete artefact["@id"]
+    }
+    artefact["@context"] = context_mod["@context"]
+
+    return jsonld
+      .expand(artefact)
+      .then((expanded) => jsonld.compact(expanded, context_jskos))
+      .then((compacted) => {
+        jskos.clean(compacted)
+        delete compacted["@context"]
+        for (const key in compacted) {
+          if (compacted[key]?.["@none"]) {
+            compacted[key].en = compacted[key]["@none"]
+            delete compacted[key]["@none"]
+          }
+        }
+        jskos.clean(compacted)
+        return compacted
+      })
+  }
+
+  _deepStripUnderscoreKeys(obj) {
+    if (Array.isArray(obj)) {
+      return obj.map(this._deepStripUnderscoreKeys)
+    } else if (obj !== null && typeof obj === "object") {
+      return Object.fromEntries(
+        Object.entries(obj)
+          .filter(([key]) => !key.startsWith("_"))
+          .map(([key, value]) => [key, this._deepStripUnderscoreKeys(value)]),
+      )
+    } else {
+      return obj
+    }
+  }
 
   // #### OVERRIDE METHODS ####
 
@@ -147,8 +146,7 @@ _deepStripUnderscoreKeys(obj) {
    * will be called before the registry is initialized (i.e. it's `/status` endpoint is queries if necessasry)
    * @private
    */
-  _prepare() {
-  }
+  _prepare() {}
 
   // - _setup
   /**
@@ -157,8 +155,7 @@ _deepStripUnderscoreKeys(obj) {
    * will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessary), should be used to set properties on this.has and custom preparations
    * @private
    */
-  _setup() {
-  }
+  _setup() {}
 
   // - isAuthorizedFor: override if you want to customize
   // - supportsScheme: override if you want to customize
@@ -171,16 +168,16 @@ _deepStripUnderscoreKeys(obj) {
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
    */
-  async getSchemes(params = {}) {
-    var schemes = []
+  async getSchemes() {
+    let schemes = []
     const url = this._getApiUrl("artefacts", null, null, null)
     const artifacts = await this.axios({
-        method: "get",
-        url
-      })
+      method: "get",
+      url,
+    })
     for (const artefact of artifacts) {
       // var scheme = this._artefactToJSKOSConcept(artefact)
-      var scheme = await this._artefactToJSKOS(artefact)
+      let scheme = await this._artefactToJSKOS(artefact)
       if (scheme) {
         schemes.push(scheme)
       } else {
