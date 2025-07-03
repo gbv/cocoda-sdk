@@ -5,8 +5,8 @@ export const context_mod = {
     language: "http://purl.org/dc/terms/language",
     source: "http://purl.org/dc/terms/source",
     type: {
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-      "@type": "@id"
+      "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "@type": "@id",
     },
     descriptions: {
       "@id": "http://www.w3.org/2004/02/skos/core#definition",

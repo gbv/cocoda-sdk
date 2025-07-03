@@ -16,8 +16,8 @@ import fs from "fs"
  *   languages: ["en"],
  *   defaultLanguages: ["en"],
  *   // url: "localhost:8080/api-gateway",
- *   uri: "http://localhost:8080/api-gateway",
- *   api: "http://localhost:8080/api-gateway"
+ *   uri: "https://terminology.services.base4nfdi.de/api-gateway",
+ *   api: "https://terminology.services.base4nfdi.de/api-gateway"
  * }
  * ```
  *
@@ -26,9 +26,6 @@ import fs from "fs"
  */
 export default class ModApiProvider extends BaseProvider {
   // #### CUSTOM PROPERTIES ####
-  // - url (The base URL of the MOD API. This is the endpoint where the API can be accessed.)
-  // url = "https://ts4nfdi-api-gateway.prod.km.k8s.zbmed.de/api-gateway"
-  //  url = "http://localhost:8080/api-gateway"
 
   // #### STATIC PROPERTIES ####
 
@@ -65,34 +62,24 @@ export default class ModApiProvider extends BaseProvider {
    * @returns {string} The full URL.
    * @private
    */
-  _getApiUrl(endpointA, artefactShort, endpointB, params) {
+  _getApiUrl(parts, params) {
     // result = URL + endpointA (+ artefactID)? (+ endpointB)? (+ paramsString)?
     let result = this.uri || ""
     // Ensure the base URL ends with a slash and the endpoint starts with a slash
     if (result.endsWith("/")) {
       result = result.slice(0, -1)
     }
-    // If endpointA is provided, append it to the URL
-    if (endpointA) {
-      if (!endpointA.startsWith("/")) {
-        endpointA = "/" + endpointA
+    for (const part of parts) {
+      if (part){
+        if (part && !part.startsWith("/")) {
+          result += "/"
+        }
+        result += part
+      } else {
+        console.log("Part is empty, skipping", part, "in", parts)
       }
-      result += endpointA
     }
-    // If artefactShort is provided, append it to the URL
-    if (artefactShort) {
-      if (!artefactShort.startsWith("/")) {
-        artefactShort = "/" + artefactShort
-      }
-      result += artefactShort
-    }
-    // If endpointB is provided, append it to the URL
-    if (endpointB) {
-      if (!endpointB.startsWith("/")) {
-        endpointB = "/" + endpointB
-      }
-      result += endpointB
-    }
+
     // If params are provided, append them as query parameters
     if (params) {
       const paramString = Object.keys(params)
@@ -148,16 +135,71 @@ export default class ModApiProvider extends BaseProvider {
     }
   }
 
+  
+  async _getSchemesMod() {
+    const url = this._getApiUrl(["artefacts"], null)
+    const artifacts = await this.axios({
+      method: "get",
+      url,
+    })
+    return artifacts
+  }
+
+  containsString(obj, searchString) {
+    for (const key in obj) {
+      const value = obj[key]
+
+      if (typeof value === "string" && value.includes(searchString)) {
+        return true
+      }
+
+      if (typeof value === "object" && value !== null) {
+        if (this.containsString(value, searchString)) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  async _getSchemesContaining(partstring) {
+    let schemes = []
+    const schemesMod = await this._getSchemesMod()
+    for (const scheme of schemesMod) {
+      if (this.containsString(scheme, partstring)) {
+        schemes.push(scheme)
+      }
+    }
+    return schemes
+  }
+
+  async _getSchemeID(url) {
+    let source_name = []
+    const schemesMod = await this._getSchemesMod()
+    for (const scheme of schemesMod) {
+      if (
+        scheme.source == url
+        || scheme.source_url == url
+        || scheme.source_name == url
+        || scheme["@id"] == url
+        || scheme.iri == url
+        || scheme.includedInDataCatalog && scheme.includedInDataCatalog.includes(url)
+      ) {
+        source_name.push(scheme.source_name)
+      }
+      
+    }
+    return source_name
+  }
+
   // #### OVERRIDE METHODS ####
 
-  // - _prepare
   /**
    * will be called before the registry is initialized (i.e. it's `/status` endpoint is queries if necessasry)
    * @private
    */
   _prepare() {}
 
-  // - _setup
   /**
    * Sets up provider-specific properties.
    * Enables support for mappings in this provider.
@@ -166,10 +208,6 @@ export default class ModApiProvider extends BaseProvider {
    */
   _setup() {}
 
-  // - isAuthorizedFor: override if you want to customize
-  // - supportsScheme: override if you want to customize
-  // - getRegistries
-  // - getSchemes
   /**
    * Retrieves all concept schemes from the MOD API.
    *
@@ -179,12 +217,8 @@ export default class ModApiProvider extends BaseProvider {
    */
   async getSchemes() {
     let schemes = []
-    const url = this._getApiUrl("artefacts", null, null, null)
-    const artifacts = await this.axios({
-      method: "get",
-      url,
-    })
-    for (const artefact of artifacts) {
+    const artefacts = await this._getSchemesMod()
+    for (const artefact of artefacts) {
       // var scheme = this._artefactToJSKOSConcept(artefact)
       let scheme = await this._artefactToJSKOS(artefact)
       if (scheme) {
@@ -194,6 +228,51 @@ export default class ModApiProvider extends BaseProvider {
       }
     }
     return schemes
+  }
+
+  /**
+ * Retrieves all concepts from the MOD API.
+ *
+ * @param {Object} [params={}] - Optional parameters for the request.
+ * @returns {Promise<Array>} An array of JSKOS concepts.
+ * @async
+ */
+  async getConcepts({ concepts, ...config }) {
+    let concept_results = []
+
+    for (const concept of concepts) {
+      if (!concept.uri || !concept.inScheme || !concept.inScheme[0]?.uri) {
+        console.warn("Învalid concept found, skipping:", concept)
+        continue
+      }
+      const schemeID = await this._getSchemeID(concept.inScheme[0].uri)
+      if (!schemeID) {
+        console.warn("No scheme ID found for concept:", concept)
+        continue
+      }
+
+      const conceptID = concept.uri.split("/").pop()
+      console.log("Concept ID:", conceptID)
+      const url = this._getApiUrl(["artefacts", schemeID[0], "resources/concepts", conceptID], null)
+      console.log("Fetching concept from URL:", url)
+
+      const response = await this.axios({
+        ...config,
+        method: "GET",
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      console.log("concept:", response)
+      console.log("")
+      const con = await this._artefactToJSKOS(response)
+      if (con) {
+        concept_results.push(con)
+      }
+    }
+    return concept_results
   }
 
   /**
