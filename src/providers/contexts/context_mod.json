@@ -10,6 +10,10 @@
     },
     "descriptions": {
       "@id": "http://www.w3.org/2004/02/skos/core#definition",
+      "@container": "@language"
+    },
+    "synonyms": {
+      "@id": "http://www.w3.org/2004/02/skos/core#altLabel",
       "@container": "@set"
     },
     "source_url": "http://www.w3.org/ns/dcat#accessURL",

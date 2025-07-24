@@ -13,11 +13,10 @@ import fs from "fs"
  * ```json
  * {
  *   provider: "ModApi",
- *   languages: ["en"],
- *   defaultLanguages: ["en"],
- *   // url: "localhost:8080/api-gateway",
- *   uri: "https://terminology.services.base4nfdi.de/api-gateway",
- *   api: "https://terminology.services.base4nfdi.de/api-gateway"
+ *   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
+ *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
+ *   transformation: "manual", // "jsonld" for conversion via jsonld-concept or "manual" for manual conversion
+ *   uri: "https://terminology.services.base4nfdi.de/api-gateway" // "http://localhost:8080/api-gateway" if api-gateway is running locally
  * }
  * ```
  *
@@ -25,7 +24,6 @@ import fs from "fs"
  * @category Providers
  */
 export default class ModApiProvider extends BaseProvider {
-  // #### CUSTOM PROPERTIES ####
 
   // #### STATIC PROPERTIES ####
 
@@ -95,6 +93,18 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   _artefactToJSKOS(artefact) {
+    switch (this._jskos.transformation) {
+      case "jsonld":
+        return this._modToJskosJsonLD(artefact)
+      case "manual":
+        return this._modToJskosManual(artefact)
+      default:
+        // If no specific transformation is set, default to JSON-LD conversion
+        return this._modToJskosJsonLD(artefact)
+    }
+  }
+
+  _modToJskosJsonLD(artefact) {
     if (artefact["@id"]) {
       delete artefact["@id"]
     }
@@ -112,7 +122,7 @@ export default class ModApiProvider extends BaseProvider {
         delete compacted["@context"]
         for (const key in compacted) {
           if (compacted[key]?.["@none"]) {
-            compacted[key].en = compacted[key]["@none"]
+            compacted[key][this._language] = compacted[key]["@none"]
             delete compacted[key]["@none"]
           }
         }
@@ -120,6 +130,138 @@ export default class ModApiProvider extends BaseProvider {
         return compacted
       })
   }
+
+  _modToJskosManual(artefact) {
+    const lan = artefact.language || this._language || "en"
+    const concept = {}
+
+    // ########## OBSOLETE ##########
+
+    // artefact.rightsHolder
+    // artefact.backend_type
+    // artefact.createdWith
+    // artefact.keywords
+    // artefact.contactPoint
+    if (artefact.subject) {
+      concept.subject = [artefact.subject]
+    }
+    // artefact.obsolete // boolean
+    // artefact.accrualMethod
+    // artefact.accrualPeriodicity
+    // artefact.status
+    // artefact.bibliographicCitation
+    // artefact.semanticArtefactRelation
+    // artefact.coverage
+    // artefact.competencyQuestion
+    if (artefact.includedInDataCatalog) {
+      concept.api = [artefact.includedInDataCatalog]
+    }
+    // artefact.accessRights
+
+    // ########## TYPES ##########
+
+    if (artefact["@type"]) {
+      concept["@type"] = artefact["@type"]
+    }
+    if (artefact.type) {
+      concept.type = [artefact.type]
+    }
+
+    // ########## NOTATION ##########
+    if (artefact.source_name) {
+      concept.notation = [artefact.source_name]
+    }
+    // artefact.short_form
+    if (artefact.label){
+      concept.prefLabel = {}
+      concept.prefLabel[lan] = artefact.label
+    }
+    if (artefact.synonyms){
+      concept.altLabel = {}
+      concept.altLabel[lan] = artefact.synonyms
+    }
+    if (!!artefact.descriptions && artefact.descriptions.length > 0){
+      concept.definition = {}
+      concept.definition[lan] = artefact.descriptions
+    }
+    // if (artefact.language){
+    //   concept.languages = {}
+    //   concept.languages[lan] = artefact.language
+    // }
+
+    // ########## URLS ##########
+
+    if (artefact["@id"]) {
+      concept.uri = artefact["@id"]
+      concept.url = artefact["@id"]
+    }
+    if (artefact.iri) {
+      concept.iri = artefact.iri
+    }
+    if (artefact.identifier) {
+      concept.identifier = [artefact.identifier]
+    }
+    if (artefact.source) {
+      concept.source = [artefact.source]
+    }
+    if (artefact.source_url) {
+      concept.namespace = artefact.source_url
+    }
+    // artefact.landingPage
+
+    // ########## METADATA ##########
+
+    if (artefact.version) {
+      concept.version = artefact.version
+    }
+    // artefact.versionIRI
+    if (artefact.modified) {
+      concept.modified = artefact.modified
+    }
+    if (artefact.created) {
+      concept.created = artefact.created
+    }
+    // concept.startDate
+    if (artefact.hasFormat) {
+      concept.format = [artefact.hasFormat]
+    }
+    if (artefact.license) {
+      concept.license = [artefact.license]
+    }
+    if (artefact.creator) {
+      concept.creator = artefact.creator
+    }
+    // artefact.wasGeneratedBy
+    if (artefact.contributor){
+      concept.contributor = {}
+      concept.contributor.prefLabel = {}
+      concept.contributor.prefLabel[lan] = artefact.contributor
+    }
+    if (artefact.publisher){
+      concept.publisher = {}
+      concept.publisher[lan] = artefact.publisher
+    }
+
+    // ########## METADATA ##########
+
+    if (artefact.title){
+      concept.prefLabel = {}
+      concept.prefLabel[lan] = artefact.title
+    }
+    if (artefact.released){
+      concept.issued = artefact.released
+    }
+    if (artefact.acronym){
+      concept.notation = artefact.acronym
+    }
+    if (artefact.children){
+      concept.narrower = {}
+      concept.narrower[lan] = artefact.children
+    }
+
+    return concept
+  }
+
 
   _deepStripUnderscoreKeys(obj) {
     if (Array.isArray(obj)) {
@@ -252,9 +394,7 @@ export default class ModApiProvider extends BaseProvider {
       }
 
       const conceptID = concept.uri.split("/").pop()
-      console.log("Concept ID:", conceptID)
       const url = this._getApiUrl(["artefacts", schemeID[0], "resources/concepts", conceptID], null)
-      console.log("Fetching concept from URL:", url)
 
       const response = await this.axios({
         ...config,
@@ -265,8 +405,6 @@ export default class ModApiProvider extends BaseProvider {
           Accept: "application/json",
         },
       })
-      console.log("concept:", response)
-      console.log("")
       const con = await this._artefactToJSKOS(response)
       if (con) {
         concept_results.push(con)
@@ -279,7 +417,7 @@ export default class ModApiProvider extends BaseProvider {
    * @private
    */
   get _language() {
-    return this.languages[0] || this._defaultLanguages[0] || "en"
+    return this._jskos.language || this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
   /**

@@ -1,3 +1,4 @@
+// this MOD context is build depending on the JSKOS context, not from an official source from the MODAPI
 export const context_mod = {
   "@context": {
     iri: "@id",
@@ -10,6 +11,10 @@ export const context_mod = {
     },
     descriptions: {
       "@id": "http://www.w3.org/2004/02/skos/core#definition",
+      "@container": "@language",
+    },
+    synonyms: {
+      "@id": "http://www.w3.org/2004/02/skos/core#altLabel",
       "@container": "@set",
     },
     source_url: "http://www.w3.org/ns/dcat#accessURL",

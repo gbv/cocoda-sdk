@@ -1,3 +1,4 @@
+// context from: https://gbv.github.io/jskos/context.json
 export const context_jskos = {
   "@context": {
     uri: "@id",
