@@ -126,9 +126,28 @@ export default class ModApiProvider extends BaseProvider {
             delete compacted[key]["@none"]
           }
         }
-        jskos.clean(compacted)
+        compacted = jskos.clean(compacted)
+        compacted = this._repairJsonLD(compacted)
+
         return compacted
       })
+  }
+
+  _repairJsonLD(json){
+    // This function is used to repair the JSON-LD context, translating erroneous keys
+    const map = {
+      narrower: "http://www.w3.org/2004/02/skos/core#narrower",
+      altLabel: "http://www.w3.org/2004/02/skos/core#altLabel",
+      definition: "http://www.w3.org/2004/02/skos/core#definition",
+    }
+
+    for (const key in map) {
+      if (json[map[key]]) {
+        json[key] = json[map[key]]
+        delete json[map[key]]
+      }
+    }
+    return json
   }
 
   _modToJskosManual(artefact) {
@@ -172,28 +191,34 @@ export default class ModApiProvider extends BaseProvider {
       concept.notation = [artefact.source_name]
     }
     // artefact.short_form
+    if (artefact.short_form){
+      if (!concept.notation) {
+        concept.notation = [artefact.short_form]
+      } else {
+        concept.notation.push(artefact.short_form)
+      }
+    }
     if (artefact.label){
       concept.prefLabel = {}
-      concept.prefLabel[lan] = artefact.label
+      concept.prefLabel[lan] = []
+      concept.prefLabel[lan].push(artefact.label)
     }
     if (artefact.synonyms){
       concept.altLabel = {}
       concept.altLabel[lan] = artefact.synonyms
     }
-    if (!!artefact.descriptions && artefact.descriptions.length > 0){
+    if (artefact.descriptions){
       concept.definition = {}
       concept.definition[lan] = artefact.descriptions
     }
-    // if (artefact.language){
-    //   concept.languages = {}
-    //   concept.languages[lan] = artefact.language
-    // }
+    if (artefact.language){
+      concept.languages = artefact.language
+    }
 
     // ########## URLS ##########
 
     if (artefact["@id"]) {
       concept.uri = artefact["@id"]
-      concept.url = artefact["@id"]
     }
     if (artefact.iri) {
       concept.iri = artefact.iri
@@ -207,7 +232,9 @@ export default class ModApiProvider extends BaseProvider {
     if (artefact.source_url) {
       concept.namespace = artefact.source_url
     }
-    // artefact.landingPage
+    if (artefact.landingPage) {
+      concept.url = artefact.landingPage
+    }
 
     // ########## METADATA ##########
 
@@ -223,7 +250,7 @@ export default class ModApiProvider extends BaseProvider {
     }
     // concept.startDate
     if (artefact.hasFormat) {
-      concept.format = [artefact.hasFormat]
+      concept.format = artefact.hasFormat
     }
     if (artefact.license) {
       concept.license = [artefact.license]
@@ -244,16 +271,16 @@ export default class ModApiProvider extends BaseProvider {
 
     // ########## METADATA ##########
 
-    if (artefact.title){
-      concept.prefLabel = {}
-      concept.prefLabel[lan] = artefact.title
-    }
+    // if (artefact.title){
+    //   concept.prefLabel = {}
+    //   concept.prefLabel[lan] = artefact.title
+    // }
     if (artefact.released){
       concept.issued = artefact.released
     }
-    if (artefact.acronym){
-      concept.notation = artefact.acronym
-    }
+    // if (artefact.acronym){
+    //   concept.notation = artefact.acronym
+    // }
     if (artefact.children){
       concept.narrower = {}
       concept.narrower[lan] = artefact.children
