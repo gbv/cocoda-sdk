@@ -5,7 +5,6 @@ import jsonld from "jsonld"
 import context_mod from "./contexts/context_mod.js"
 import context_jskos from "./contexts/context_jskos.js"
 */
-import fs from "fs"
 /**
  * MOD API.
  *
@@ -90,10 +89,6 @@ export default class ModApiProvider extends BaseProvider {
     return result
   }
   
-  _readJsonFile(filePath) {
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"))
-  }
-
   _artefactToJSKOS(artefact) {
     switch (this._jskos.transformation) {
       //case "jsonld":
@@ -111,9 +106,6 @@ export default class ModApiProvider extends BaseProvider {
     if (artefact["@id"]) {
       delete artefact["@id"]
     }
-
-    // const context_mod = this._readJsonFile("./src/providers/contexts/context_mod.json")
-    // const context_jskos = this._readJsonFile("./src/providers/contexts/context_jskos.json")
 
     artefact["@context"] = context_mod["@context"]
 
