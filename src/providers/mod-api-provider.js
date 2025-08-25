@@ -1,8 +1,10 @@
 import BaseProvider from "./base-provider.js"
+/*
 import jskos from "jskos-tools"
 import jsonld from "jsonld"
 import context_mod from "./contexts/context_mod.js"
 import context_jskos from "./contexts/context_jskos.js"
+*/
 import fs from "fs"
 /**
  * MOD API.
@@ -94,8 +96,8 @@ export default class ModApiProvider extends BaseProvider {
 
   _artefactToJSKOS(artefact) {
     switch (this._jskos.transformation) {
-      case "jsonld":
-        return this._modToJskosJsonLD(artefact)
+      //case "jsonld":
+      //  return this._modToJskosJsonLD(artefact)
       case "manual":
         return this._modToJskosManual(artefact)
       default:
@@ -104,6 +106,7 @@ export default class ModApiProvider extends BaseProvider {
     }
   }
 
+  /*
   _modToJskosJsonLD(artefact) {
     if (artefact["@id"]) {
       delete artefact["@id"]
@@ -149,6 +152,7 @@ export default class ModApiProvider extends BaseProvider {
     }
     return json
   }
+  */
 
   _modToJskosManual(artefact) {
     const lan = artefact.language || this._language || "en"

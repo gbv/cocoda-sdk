@@ -9,6 +9,7 @@ import SkosmosApiProvider from "./skosmos-api-provider.js"
 import LocApiProvider from "./loc-api-provider.js"
 import SkohubProvider from "./skohub-provider.js"
 import LobidApiProvider from "./lobid-api-provider.js"
+import ModApiProvider from "./mod-api-provider.js"
 import MyCoReProvider from "./mycore-provider.js"
 import NoTApiProvider from "./not-api-provider.js"
 
@@ -25,5 +26,6 @@ export {
   SkohubProvider,
   LobidApiProvider,
   MyCoReProvider,
+  ModApiProvider,
   NoTApiProvider,
 }
