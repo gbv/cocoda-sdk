@@ -174,6 +174,7 @@ The following providers are also exported, but have to be added via `cdk.addProv
 - `ReconciliationApi` - access to mapping suggestions via a [Reconciliation Service API](https://reconciliation-api.github.io/specs/draft/)
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
+- `ModApi` - (experimental) access to concept schemes and concepts via a [MOD](https://github.com/FAIR-IMPACT/MOD) API
 
 To add a provider, append `Provider` to its name and import it together with `cdk`:
 
