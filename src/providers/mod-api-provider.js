@@ -89,6 +89,7 @@ export default class ModApiProvider extends BaseProvider {
     return result
   }
   
+  /*
   _artefactToJSKOS(artefact) {
     switch (this._jskos.transformation) {
       //case "jsonld":
@@ -101,7 +102,6 @@ export default class ModApiProvider extends BaseProvider {
     }
   }
 
-  /*
   _modToJskosJsonLD(artefact) {
     if (artefact["@id"]) {
       delete artefact["@id"]
@@ -146,7 +146,8 @@ export default class ModApiProvider extends BaseProvider {
   }
   */
 
-  _modToJskosManual(artefact) {
+  // _modToJskosManual(artefact) {
+  _artefactToJSKOS(artefact) {
     const lan = artefact.language || this._language || "en"
     const concept = {}
 
