@@ -16,7 +16,7 @@ import context_jskos from "./contexts/context_jskos.js"
  *   provider: "ModApi",
  *   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
  *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
- *   transformation: "manual", // "jsonld" for conversion via jsonld-concept or "manual" for manual conversion
+ *   <feature removed> transformation: "manual", // "jsonld" for conversion via jsonld-concept or "manual" for manual conversion
  *   uri: "https://terminology.services.base4nfdi.de/api-gateway" // "http://localhost:8080/api-gateway" if api-gateway is running locally
  * }
  * ```
