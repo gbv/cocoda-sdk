@@ -69,13 +69,8 @@ export default class ModApiProvider extends BaseProvider {
       result = result.slice(0, -1)
     }
     for (const part of parts) {
-      if (part){
-        if (part && !part.startsWith("/")) {
-          result += "/"
-        }
-        result += part
-      } else {
-        console.log("Part is empty, skipping", part, "in", parts)
+      if (part) {
+        result += "/" + part
       }
     }
 
@@ -286,7 +281,7 @@ export default class ModApiProvider extends BaseProvider {
     return concept
   }
 
-/*
+  /*
   _deepStripUnderscoreKeys(obj) {
     if (obj == null) {
       return obj
@@ -306,17 +301,120 @@ export default class ModApiProvider extends BaseProvider {
     }
   }
 */
-  
+
+
+
+
+  // API REQUESTS
+
   async _getSchemesMod() {
+    //https://terminology.services.base4nfdi.de/api-gateway/artefacts
     const url = this._getApiUrl(["artefacts"], null)
     const artifacts = await this.axios({
       method: "get",
       url,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     })
     return artifacts
   }
 
-  containsString(obj, searchString) {
+  async _getSchemesModLimit(limit) {
+    const artifacts = await this._getSchemesMod()
+    if (limit && limit > 0) {
+      return artifacts.slice(0, limit)
+    }
+    return artifacts
+  }
+
+  async _getSchemeMod(schemeParam) {
+    //https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>
+    if (schemeParam.id){
+      const url = this._getApiUrl(["artefacts", schemeParam.id], null)  
+      const scheme = await this.axios({
+        method: "get",
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      return scheme
+    } else if (schemeParam.uri){
+      let artefacts = []
+      const schemesMod = await this._getSchemesMod()
+      for (const scheme of schemesMod) {
+        if (
+          scheme.source == schemeParam.uri
+          || scheme.source_url == schemeParam.uri
+          || scheme.source_name == schemeParam.uri
+          || scheme["@id"] == schemeParam.uri
+          || scheme.iri == schemeParam.uri
+          || scheme.includedInDataCatalog && scheme.includedInDataCatalog.includes(schemeParam.uri)
+        ) {
+          artefacts.push(scheme)
+        }
+      }
+      return artefacts
+    }
+  }
+
+  async _getConceptsMod(scheme) {
+    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts
+    let schemeId = this._schemeIdFromObj(scheme)
+    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], null)
+
+    // first page
+    const {page, totalPages, member: concepts} = await this.axios({
+      method: "get",
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+
+    // remaining pages
+    for (let p = page+1; p <= totalPages; p++) {
+      const urlPage = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], {page: p})
+      const {member: conceptsNew} = await this.axios({
+        method: "get",
+        url: urlPage,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      concepts.push(conceptsNew)
+      console.log("Page", p, "from total ", totalPages)
+    }
+    return concepts
+  }
+
+  async _getConceptsModLimit(scheme, limit) {
+    let concepts = await this._getConceptsMod(scheme)
+    if (limit && limit > 0) {
+      return concepts.slice(0, limit)
+    }
+    return concepts
+  }
+
+  async _getConceptMod(concept) {
+    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts/<conceptId>
+    const {conceptId, schemeId} = await this._conceptIdFromObj(concept)
+    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts", conceptId], null)
+    const con = await this.axios({
+      method: "get",
+      url,
+    })
+    return con
+  }
+
+  // UTILITIES
+
+  _containsString(obj, searchString) {
     for (const key in obj) {
       const value = obj[key]
 
@@ -358,9 +456,27 @@ export default class ModApiProvider extends BaseProvider {
       ) {
         source_name.push(scheme.source_name)
       }
-      
     }
     return source_name
+  }
+
+  _getConceptID(url) {
+    return url.split("/").pop()
+  }
+
+  _schemeIdFromObj(scheme) {
+    return scheme.id || this._getSchemeID(scheme.uri)
+  }
+
+  _conceptIdFromObj(concept) {
+    let schemeId = concept.inScheme[0].id
+    if (! concept.inScheme[0].id) {
+      schemeId = (async () => {
+        await this._getSchemeID(concept.inScheme[0].uri)
+      })
+    }
+    const conceptId = concept.id || this._getConceptID(concept.uri)
+    return {conceptId: conceptId, schemeId: schemeId}
   }
 
   // #### OVERRIDE METHODS ####
@@ -386,60 +502,55 @@ export default class ModApiProvider extends BaseProvider {
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
    */
-  async getSchemes(params) {
-    let schemes = []
-    let artefacts = await this._getSchemesMod(params)
-    let limit = params.limit || 0
+  async getSchemes({schemes, limit, ..._config}) {
+    let schemes_results = []
+    let artefacts = []
+    if (schemes){
+      for (const s of schemes) {
+        artefacts.push(await this._getSchemeMod(s))
+      }
+    } else {
+      artefacts = await this._getSchemesModLimit(limit)
+    }
     for (const artefact of artefacts) {
       let scheme = await this._artefactToJSKOS(artefact)
       if (scheme) {
-        schemes.push(scheme)
+        schemes_results.push(scheme)
       } else {
         console.warn("No scheme found for artefact: ", artefact)
       }
-      if (--limit == 0) {
-        break
-      }
     }
-    return schemes
+    return schemes_results
   }
 
   /**
  * Retrieves all concepts from the MOD API.
  *
- * @param {Object} [params={}] - Optional parameters for the request.
+ * @param {Object} params - The options object.
+ * @param {string[]} params.concepts - List of concept objects to request specific concepts.
+ * @param {string} params.scheme - A scheme object to request concepts from a specific scheme.
+ * @param {number} [params.limit] - Optional limit for results when requesting concepts from a scheme.
+ * @param {Object} [params._config] - Additional config options.
  * @returns {Promise<Array>} An array of JSKOS concepts.
  * @async
  */
-  async getConcepts({ concepts, ...config }) {
+  async getConcepts({concepts, scheme, limit, ..._config}) {
     let concept_results = []
-
-    for (const concept of concepts) {
-      if (!concept.uri || !concept.inScheme || !concept.inScheme[0]?.uri) {
-        console.warn("Invalid concept found, skipping:", concept)
-        continue
+    if (concepts){
+      for (const concept of concepts) {
+        let  conceptMod = await this._getConceptMod(concept)
+        if (conceptMod){
+          // const conceptJ = await this._artefactToJSKOS(conceptMod)
+          concept_results.push(conceptMod)
+        }
       }
-      const schemeID = await this._getSchemeID(concept.inScheme[0].uri)
-      if (!schemeID) {
-        console.warn("No scheme ID found for concept:", concept)
-        continue
-      }
-
-      const conceptID = concept.uri.split("/").pop()
-      const url = this._getApiUrl(["artefacts", schemeID[0], "resources/concepts", conceptID], null)
-
-      const response = await this.axios({
-        ...config,
-        method: "GET",
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-      const con = await this._artefactToJSKOS(response)
-      if (con) {
-        concept_results.push(con)
+    } else if (scheme) {
+      const conceptsMod = await this._getConceptsModLimit(scheme, limit)
+      for (const conceptMod of conceptsMod) {
+        const conceptJ = await this._artefactToJSKOS(conceptMod)
+        if (conceptJ) {
+          concept_results.push(conceptJ)
+        }
       }
     }
     return concept_results

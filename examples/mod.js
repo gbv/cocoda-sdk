@@ -18,7 +18,7 @@ const provicer = cdk.initializeRegistry({
 const rl = readline.createInterface({ input, output })
 
 function ask(question) {
-  question = question + "\n> "
+  question = "\x1b[36m" + question + "\n>\x1b[0m "
   return new Promise((resolve) => {
     rl.question(question, (answer) => resolve(answer.trim()))
   })
@@ -28,31 +28,56 @@ function ask(question) {
 
 
 // API Calls
-async function allVocabularies(inputLimit) {
-  const schemes = await provicer.getSchemes({limit: inputLimit})
-  if (inputLimit <= 0){
-    console.log(`Loaded ${schemes.length} schemes.`)
-  }
-  for (let scheme of schemes) {
-    console.log(jskos.clean(scheme))
-  }
+async function allSchemes(inputLimit) {
+  const config = {limit: inputLimit}
+  const schemes = await provicer.getSchemes(config)
+  console.log(jskos.clean(schemes))
 }
 
-async function specificVocabulary(schemeURI) {
-  console.log(`method "specificVocabulary" received schemeURI: "${schemeURI}"`)
+async function specificSchemes(schemeId) {
+  const config = { schemes: [{id: schemeId}] }
+  const scheme = await provicer.getSchemes(config)
+  console.log(jskos.clean(scheme))
 }
 
-async function topConcepts(schemeURI) {
-  console.log(`method "topConcepts" received schemeURI: "${schemeURI}"`)
+async function topConcepts(schemeId) {
+  const config = {scheme: { id: schemeId }, limit: 10 }
+  const concepts = await provicer.getConcepts(config)
+  console.log(jskos.clean(concepts))
 }
 
-async function allConcepts(schemeURI, inputLimit) {
-  console.log(`method "allConcepts" received schemeURI: "${schemeURI}", limit: ${inputLimit}`)
+async function allConcepts(schemeId, inputLimit) {
+  const config = {scheme: { id: schemeId }, limit: inputLimit }
+  const concepts = await provicer.getConcepts(config)
+  console.log(jskos.clean(concepts))
 }
 
-async function specificConcept(schemeURI, conceptId) {
-  const config = {concepts: [{ uri: conceptId, inScheme: [ { uri: schemeURI } ] }]}
-  console.log(`method "specificConcept" received schemeURI: "${schemeURI}", conceptId: "${conceptId}"`)
+async function specificConcept(schemeId, conceptId) {
+  const config = {concepts: [{ id: conceptId, inScheme: [ { id: schemeId } ] }]}
+  const concept = await provicer.getConcepts(config)
+  console.log(jskos.clean(concept))
+}
+
+async function specificSchemesUri(schemeUri) {
+  const config = { schemes: [{uri: schemeUri}] }
+  const scheme = await provicer.getSchemes(config)
+  console.log(jskos.clean(scheme))
+}
+
+async function topConceptsUri(schemeUri) {
+  const config = {scheme: { uri: schemeUri }, limit: 10 }
+  const concepts = await provicer.getConcepts(config)
+  console.log(jskos.clean(concepts))
+}
+
+async function allConceptsUri(schemeUri, inputLimit) {
+  const config = {scheme: { uri: schemeUri }, limit: inputLimit }
+  const concepts = await provicer.getConcepts(config)
+  console.log(jskos.clean(concepts))
+}
+
+async function specificConceptUri(schemeUri, conceptUri) {
+  const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
   const concept = await provicer.getConcepts(config)
   console.log(jskos.clean(concept))
 }
@@ -64,7 +89,7 @@ async function specificConcept(schemeURI, conceptId) {
 async function mainLoop() {
   while (true) {
     const choice = (await ask(
-      "Choose an option 0–4 (or 'q' to quit).\n" +
+      "Choose an option (0–4 via ids, 0b-4b via URIs, 'q' to quit).\n" +
         "Options: 0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept",
     )).trim()
 
@@ -75,52 +100,93 @@ async function mainLoop() {
         rl.close()
         console.log()
         return
-      case "0": {
-        let inputLimit = await ask("_Option_0:_All_Vocabularies_ \nPlease enter a limit (0 for all)")
+      case "0":
+      case "0b": {
+        let inputLimit = await ask("_Option_0:_All_Schemes_ \nPlease enter a limit (0 for all)")
         if (inputLimit == "" || isNaN(inputLimit)) {
           inputLimit = 0
         }
-        await allVocabularies(inputLimit)
+        await allSchemes(Number(inputLimit))
         break
       }
       case "1": {
-        let schemeURI = await ask("_Option_1:_Specific_Vocabulary_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
-        if (schemeURI == "") {
-          schemeURI = "https://lobid.org/gnd"
+        let schemeID = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme ID (eg. 'gndo')")
+        if (schemeID == "") {
+          schemeID = "gndo"
         }
-        await specificVocabulary(schemeURI)
+        await specificSchemes(schemeID)
         break
       }
       case "2": {
-        let schemeURI = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
-        if (schemeURI == "") {
-          schemeURI = "https://lobid.org/gnd"
+        let schemeID = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')")
+        if (schemeID == "") {
+          schemeID = "gndo"
         }
-        await topConcepts(schemeURI)
+        await topConcepts(schemeID)
         break
       }
       case "3": {
-        let schemeURI = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
-        if (schemeURI == "") {
-          schemeURI = "https://lobid.org/gnd"
+        let schemeID = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')")
+        if (schemeID == "") {
+          schemeID = "gndo"
         }
         let inputLimit = await ask("Please enter a limit (0 for all)")
         if (inputLimit == "" || isNaN(inputLimit)) {
           inputLimit = 0
         }
-        await allConcepts(schemeURI, inputLimit)
+        await allConcepts(schemeID, Number(inputLimit))
         break
       }
       case "4": {
-        let schemeURI = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
-        if (schemeURI == "") {
-          schemeURI = "https://lobid.org/gnd"
+        let schemeID = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme ID (eg. 'gnd')")
+        if (schemeID == "") {
+          schemeID = "gnd"
         }
-        let conceptURI = await ask("Please enter a concept URI (eg: 'https://d-nb.info/gnd/4179484-9')")
-        if (conceptURI == "") {
-          conceptURI = "https://d-nb.info/gnd/4179484-9"
+        let conceptID = await ask("Please enter a concept ID (eg: '4179484-9')")
+        if (conceptID == "") {
+          conceptID = "4179484-9"
         }
-        await specificConcept(schemeURI, conceptURI)
+        await specificConcept(schemeID, conceptID)
+        break
+      }
+      case "1b": {
+        let schemaUri = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
+        if (schemaUri == "") {
+          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
+        }
+        await specificSchemesUri(schemaUri)
+        break
+      }
+      case "2b": {
+        let schemaUri = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
+        if (schemaUri == "") {
+          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
+        }
+        await topConceptsUri(schemaUri)
+        break
+      }
+      case "3b": {
+        let schemaUri = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
+        if (schemaUri == "") {
+          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
+        }
+        let inputLimit = await ask("Please enter a limit (0 for all)")
+        if (inputLimit == "" || isNaN(inputLimit)) {
+          inputLimit = 0
+        }
+        await allConceptsUri(schemaUri, Number(inputLimit))
+        break
+      }
+      case "4b": {
+        let schemaUri = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
+        if (schemaUri == "") {
+          schemaUri = "https://lobid.org/gnd"
+        }
+        let conceptUri = await ask("Please enter a concept ID (eg: 'https://d-nb.info/gnd/4179484-9')")
+        if (conceptUri == "") {
+          conceptUri = "https://d-nb.info/gnd/4179484-9"
+        }
+        await specificConceptUri(schemaUri, conceptUri)
         break
       }
       default:
