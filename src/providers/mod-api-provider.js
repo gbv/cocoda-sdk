@@ -286,21 +286,26 @@ export default class ModApiProvider extends BaseProvider {
     return concept
   }
 
-
+/*
   _deepStripUnderscoreKeys(obj) {
-    if (Array.isArray(obj)) {
-      return obj.map(this._deepStripUnderscoreKeys)
-    } else if (obj !== null && typeof obj === "object") {
-      return Object.fromEntries(
-        Object.entries(obj)
-          .filter(([key]) => !key.startsWith("_"))
-          .map(([key, value]) => [key, this._deepStripUnderscoreKeys(value)]),
-      )
+    if (obj == null) {
+      return obj
+    } else if (Array.isArray(obj)) {
+      return obj.map(item => this._deepStripUnderscoreKeys(item)) // preserve `this`
+    } else if (typeof obj === "object") {
+      for (const key in obj) {
+        if (key.startsWith("_")) {
+          delete obj[key]
+        } else {
+          obj[key] = this._deepStripUnderscoreKeys(obj[key])
+        }
+      }
+      return obj
     } else {
       return obj
     }
   }
-
+*/
   
   async _getSchemesMod() {
     const url = this._getApiUrl(["artefacts"], null)
@@ -381,16 +386,19 @@ export default class ModApiProvider extends BaseProvider {
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
    */
-  async getSchemes() {
+  async getSchemes(params) {
     let schemes = []
-    const artefacts = await this._getSchemesMod()
+    let artefacts = await this._getSchemesMod(params)
+    let limit = params.limit || 0
     for (const artefact of artefacts) {
-      // var scheme = this._artefactToJSKOSConcept(artefact)
       let scheme = await this._artefactToJSKOS(artefact)
       if (scheme) {
         schemes.push(scheme)
       } else {
         console.warn("No scheme found for artefact: ", artefact)
+      }
+      if (--limit == 0) {
+        break
       }
     }
     return schemes
@@ -408,7 +416,7 @@ export default class ModApiProvider extends BaseProvider {
 
     for (const concept of concepts) {
       if (!concept.uri || !concept.inScheme || !concept.inScheme[0]?.uri) {
-        console.warn("Învalid concept found, skipping:", concept)
+        console.warn("Invalid concept found, skipping:", concept)
         continue
       }
       const schemeID = await this._getSchemeID(concept.inScheme[0].uri)
