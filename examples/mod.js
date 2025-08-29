@@ -5,7 +5,7 @@ import { stdin as input, stdout as output } from "node:process"
 
 // Provider
 addAllProviders()
-const provicer = cdk.initializeRegistry({
+const provider = cdk.initializeRegistry({
   provider: "ModApi",
   // api: "https://bartoc.org/api/",
   uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
@@ -17,69 +17,106 @@ const provicer = cdk.initializeRegistry({
 // Readline interface
 const rl = readline.createInterface({ input, output })
 
-function ask(question) {
+async function ask(question, defaultvalue) {
   question = "\x1b[36m" + question + "\n>\x1b[0m "
-  return new Promise((resolve) => {
+  let result = await new Promise((resolve) => {
     rl.question(question, (answer) => resolve(answer.trim()))
   })
+  if (typeof defaultvalue === "number") {
+    if (result == "" || isNaN(result)) {
+      return defaultvalue
+    } else {
+      return Number(result)
+    } 
+  } else {
+    if (defaultvalue && result == "") {
+      return defaultvalue
+    }
+  }
+  return result
+}
+
+function out(obj, objName) {
+  obj = jskos.clean(obj)
+  let len = obj.length
+  let objString = JSON.stringify(obj, null, 2)
+  if (len == 0) {
+    console.log(`\x1b[35mNo ${objName} found.\x1b[0m`)
+  } else {
+    console.log(objString)
+    console.log(`\x1b[35mLoaded ${len} ${objName}.\x1b[0m`)
+  }
 }
 
 
 
 
 // API Calls
-async function allSchemes(inputLimit) {
+async function allSchemes() {
+  let inputLimit = await ask("_Option_0:_All_Schemes_ \nPlease enter a limit (0 for all)", 0)
   const config = {limit: inputLimit}
-  const schemes = await provicer.getSchemes(config)
-  console.log(jskos.clean(schemes))
+  const schemes = await provider.getSchemes(config)
+  out(schemes, "schemes")
 }
 
-async function specificSchemes(schemeId) {
+async function specificSchemes() {
+  let schemeId = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
   const config = { schemes: [{id: schemeId}] }
-  const scheme = await provicer.getSchemes(config)
-  console.log(jskos.clean(scheme))
+  const scheme = await provider.getSchemes(config)
+  out(scheme, "scheme")
 }
 
-async function topConcepts(schemeId) {
+async function topConcepts() {
+  let schemeId = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
   const config = {scheme: { id: schemeId }, limit: 10 }
-  const concepts = await provicer.getConcepts(config)
-  console.log(jskos.clean(concepts))
+  const concepts = await provider.getConcepts(config)
+  out(concepts, "concepts")
 }
 
-async function allConcepts(schemeId, inputLimit) {
+async function allConcepts() {
+  let schemeId = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
+  let inputLimit = await ask("Please enter a limit (0 for all)", 0)
   const config = {scheme: { id: schemeId }, limit: inputLimit }
-  const concepts = await provicer.getConcepts(config)
-  console.log(jskos.clean(concepts))
+  const concepts = await provider.getConcepts(config)
+  out(concepts, "concepts")
 }
 
-async function specificConcept(schemeId, conceptId) {
+async function specificConcept() {
+  let schemeId = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme ID (eg. 'gnd')", "gnd")
+  let conceptId = await ask("Please enter a concept ID (eg: '4179484-9')", "4179484-9")
   const config = {concepts: [{ id: conceptId, inScheme: [ { id: schemeId } ] }]}
-  const concept = await provicer.getConcepts(config)
-  console.log(jskos.clean(concept))
+  const concept = await provider.getConcepts(config)
+  out(concept, "concept")
 }
 
-async function specificSchemesUri(schemeUri) {
+async function specificSchemesUri() {
+  let schemeUri = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
   const config = { schemes: [{uri: schemeUri}] }
-  const scheme = await provicer.getSchemes(config)
-  console.log(jskos.clean(scheme))
+  const scheme = await provider.getSchemes(config)
+  out(scheme, "scheme")
 }
 
-async function topConceptsUri(schemeUri) {
+async function topConceptsUri() {
+  let schemeUri = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
   const config = {scheme: { uri: schemeUri }, limit: 10 }
-  const concepts = await provicer.getConcepts(config)
-  console.log(jskos.clean(concepts))
+  const concepts = await provider.getConcepts(config)
+  out(concepts, "concepts")
 }
 
-async function allConceptsUri(schemeUri, inputLimit) {
+async function allConceptsUri() {
+  let schemeUri = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
+  let inputLimit = await ask("Please enter a limit (0 for all)", 0)
   const config = {scheme: { uri: schemeUri }, limit: inputLimit }
-  const concepts = await provicer.getConcepts(config)
-  console.log(jskos.clean(concepts))
+  const concepts = await provider.getConcepts(config)
+  out(concepts, "concepts")
 }
 
-async function specificConceptUri(schemeUri, conceptUri) {
+async function specificConceptUri() {
+  let schemeUri = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')", "https://lobid.org/gnd")
+  let conceptUri = await ask("Please enter a concept ID (eg: 'https://d-nb.info/gnd/4179484-9')", "https://d-nb.info/gnd/4179484-9")
   const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
-  const concept = await provicer.getConcepts(config)
-  console.log(jskos.clean(concept))
+  const concept = await provider.getConcepts(config)
+  out(concept, "concept")
 }
 
 
@@ -102,91 +139,39 @@ async function mainLoop() {
         return
       case "0":
       case "0b": {
-        let inputLimit = await ask("_Option_0:_All_Schemes_ \nPlease enter a limit (0 for all)")
-        if (inputLimit == "" || isNaN(inputLimit)) {
-          inputLimit = 0
-        }
-        await allSchemes(Number(inputLimit))
+        await allSchemes()
         break
       }
       case "1": {
-        let schemeID = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme ID (eg. 'gndo')")
-        if (schemeID == "") {
-          schemeID = "gndo"
-        }
-        await specificSchemes(schemeID)
-        break
-      }
-      case "2": {
-        let schemeID = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')")
-        if (schemeID == "") {
-          schemeID = "gndo"
-        }
-        await topConcepts(schemeID)
-        break
-      }
-      case "3": {
-        let schemeID = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')")
-        if (schemeID == "") {
-          schemeID = "gndo"
-        }
-        let inputLimit = await ask("Please enter a limit (0 for all)")
-        if (inputLimit == "" || isNaN(inputLimit)) {
-          inputLimit = 0
-        }
-        await allConcepts(schemeID, Number(inputLimit))
-        break
-      }
-      case "4": {
-        let schemeID = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme ID (eg. 'gnd')")
-        if (schemeID == "") {
-          schemeID = "gnd"
-        }
-        let conceptID = await ask("Please enter a concept ID (eg: '4179484-9')")
-        if (conceptID == "") {
-          conceptID = "4179484-9"
-        }
-        await specificConcept(schemeID, conceptID)
+        await specificSchemes()
         break
       }
       case "1b": {
-        let schemaUri = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
-        if (schemaUri == "") {
-          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
-        }
-        await specificSchemesUri(schemaUri)
+        await specificSchemesUri()
+        break
+      }
+      case "2": {
+        await topConcepts()
         break
       }
       case "2b": {
-        let schemaUri = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
-        if (schemaUri == "") {
-          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
-        }
-        await topConceptsUri(schemaUri)
+        await topConceptsUri()
+        break
+      }
+      case "3": {
+        await allConcepts()
         break
       }
       case "3b": {
-        let schemaUri = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')")
-        if (schemaUri == "") {
-          schemaUri = "http://d-nb.info/standards/elementset/gnd#"
-        }
-        let inputLimit = await ask("Please enter a limit (0 for all)")
-        if (inputLimit == "" || isNaN(inputLimit)) {
-          inputLimit = 0
-        }
-        await allConceptsUri(schemaUri, Number(inputLimit))
+        await allConceptsUri()
+        break
+      }
+      case "4": {
+        await specificConcept()
         break
       }
       case "4b": {
-        let schemaUri = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')")
-        if (schemaUri == "") {
-          schemaUri = "https://lobid.org/gnd"
-        }
-        let conceptUri = await ask("Please enter a concept ID (eg: 'https://d-nb.info/gnd/4179484-9')")
-        if (conceptUri == "") {
-          conceptUri = "https://d-nb.info/gnd/4179484-9"
-        }
-        await specificConceptUri(schemaUri, conceptUri)
+        await specificConceptUri()
         break
       }
       default:

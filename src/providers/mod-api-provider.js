@@ -26,7 +26,7 @@ import context_jskos from "./contexts/context_jskos.js"
  */
 export default class ModApiProvider extends BaseProvider {
 
-  // #### STATIC PROPERTIES ####
+  // #### PROPERTIES ####
 
   // - providerName (This is how a provider is identified in a "registry" object in field `provider`.)
   static providerName = "ModApi"
@@ -54,11 +54,9 @@ export default class ModApiProvider extends BaseProvider {
 
   /**
    * Constructs the full API URL for a given endpoint.
-   * @param {string} endpointA - The API endpoint (e.g., "/artifacts").
-   * @param {string} artefactID - The ID of the artefact (optional).
-   * @param {string} endpointB - An additional second API endpoint part (optional).
+   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeId>]")
    * @param {Object} params - An object containing query parameters as key-value pairs.
-   * @returns {string} The full URL.
+   * @returns {string} The full URL. Returns undefined if any part is undefined.
    * @private
    */
   _getApiUrl(parts, params) {
@@ -71,6 +69,8 @@ export default class ModApiProvider extends BaseProvider {
     for (const part of parts) {
       if (part) {
         result += "/" + part
+      } else {
+        return
       }
     }
 
@@ -145,9 +145,6 @@ export default class ModApiProvider extends BaseProvider {
   _artefactToJSKOS(artefact) {
     const lan = artefact.language || this._language || "en"
     const concept = {}
-
-    // ########## OBSOLETE ##########
-
     // artefact.rightsHolder
     // artefact.backend_type
     // artefact.createdWith
@@ -169,8 +166,7 @@ export default class ModApiProvider extends BaseProvider {
     }
     // artefact.accessRights
 
-    // ########## TYPES ##########
-
+    // TYPES
     if (artefact["@type"]) {
       concept["@type"] = artefact["@type"]
     }
@@ -178,11 +174,10 @@ export default class ModApiProvider extends BaseProvider {
       concept.type = [artefact.type]
     }
 
-    // ########## NOTATION ##########
+    // NOTATION
     if (artefact.source_name) {
       concept.notation = [artefact.source_name]
     }
-    // artefact.short_form
     if (artefact.short_form){
       if (!concept.notation) {
         concept.notation = [artefact.short_form]
@@ -207,8 +202,7 @@ export default class ModApiProvider extends BaseProvider {
       concept.languages = artefact.language
     }
 
-    // ########## URLS ##########
-
+    // URLS
     if (artefact["@id"]) {
       concept.uri = artefact["@id"]
     }
@@ -228,8 +222,7 @@ export default class ModApiProvider extends BaseProvider {
       concept.url = artefact.landingPage
     }
 
-    // ########## METADATA ##########
-
+    // METADATA
     if (artefact.version) {
       concept.version = artefact.version
     }
@@ -260,19 +253,11 @@ export default class ModApiProvider extends BaseProvider {
       concept.publisher = {}
       concept.publisher[lan] = artefact.publisher
     }
-
-    // ########## METADATA ##########
-
-    // if (artefact.title){
-    //   concept.prefLabel = {}
-    //   concept.prefLabel[lan] = artefact.title
-    // }
+    // artefact.title
     if (artefact.released){
       concept.issued = artefact.released
     }
-    // if (artefact.acronym){
-    //   concept.notation = artefact.acronym
-    // }
+    // artefact.acronym
     if (artefact.children){
       concept.narrower = {}
       concept.narrower[lan] = artefact.children
@@ -281,36 +266,16 @@ export default class ModApiProvider extends BaseProvider {
     return concept
   }
 
-  /*
-  _deepStripUnderscoreKeys(obj) {
-    if (obj == null) {
-      return obj
-    } else if (Array.isArray(obj)) {
-      return obj.map(item => this._deepStripUnderscoreKeys(item)) // preserve `this`
-    } else if (typeof obj === "object") {
-      for (const key in obj) {
-        if (key.startsWith("_")) {
-          delete obj[key]
-        } else {
-          obj[key] = this._deepStripUnderscoreKeys(obj[key])
-        }
-      }
-      return obj
-    } else {
-      return obj
-    }
-  }
-*/
 
-
-
-
-  // API REQUESTS
+  // API REQUESTS SCHEMES
 
   async _getSchemesMod() {
     //https://terminology.services.base4nfdi.de/api-gateway/artefacts
     const url = this._getApiUrl(["artefacts"], null)
-    const artifacts = await this.axios({
+    if (!url) {
+      return []
+    } 
+    return await this.axios({
       method: "get",
       url,
       headers: {
@@ -318,7 +283,6 @@ export default class ModApiProvider extends BaseProvider {
         Accept: "application/json",
       },
     })
-    return artifacts
   }
 
   async _getSchemesModLimit(limit) {
@@ -331,43 +295,20 @@ export default class ModApiProvider extends BaseProvider {
 
   async _getSchemeMod(schemeParam) {
     //https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>
-    if (schemeParam.id){
-      const url = this._getApiUrl(["artefacts", schemeParam.id], null)  
-      const scheme = await this.axios({
-        method: "get",
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-      return scheme
-    } else if (schemeParam.uri){
-      let artefacts = []
-      const schemesMod = await this._getSchemesMod()
-      for (const scheme of schemesMod) {
-        if (
-          scheme.source == schemeParam.uri
-          || scheme.source_url == schemeParam.uri
-          || scheme.source_name == schemeParam.uri
-          || scheme["@id"] == schemeParam.uri
-          || scheme.iri == schemeParam.uri
-          || scheme.includedInDataCatalog && scheme.includedInDataCatalog.includes(schemeParam.uri)
-        ) {
-          artefacts.push(scheme)
-        }
-      }
-      return artefacts
+    // const schemeId = await this._schemeIdFromObj(schemeParam)
+    if (schemeParam.id) {
+      return await this._getSchemeFromId(schemeParam.id)
+    } else if (schemeParam.uri) {
+      return await this._getSchemeFromUri(schemeParam.uri)
     }
   }
 
-  async _getConceptsMod(scheme) {
-    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts
-    let schemeId = this._schemeIdFromObj(scheme)
-    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], null)
-
-    // first page
-    const {page, totalPages, member: concepts} = await this.axios({
+  async _getSchemeFromId(id) {
+    const url = this._getApiUrl(["artefacts", id], null)
+    if (!url) {
+      return
+    }
+    const scheme = await this.axios({
       method: "get",
       url,
       headers: {
@@ -375,10 +316,64 @@ export default class ModApiProvider extends BaseProvider {
         Accept: "application/json",
       },
     })
+    if (!scheme?._url || Object.keys(scheme).length != 1){
+      return scheme
+    }
+  }
 
-    // remaining pages
-    for (let p = page+1; p <= totalPages; p++) {
+  async _getSchemeFromUri(uri) {
+    const schemesMod = await this._getSchemesMod()
+    for (const scheme of await schemesMod) {
+      if (
+        scheme.source == uri
+        || scheme.source_url == uri
+        || scheme.source_name == uri
+        || scheme["@id"] == uri
+        || scheme.iri == uri
+        || scheme.includedInDataCatalog && scheme.includedInDataCatalog.includes(uri)
+      ) {
+        return await scheme
+      }
+    }
+  }
+
+  // API REQUESTS CONCEPTS
+
+  async _getConceptsMod(scheme) {
+    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts
+    let schemeId = await this._schemeIdFromObj(scheme)
+    if (!schemeId) {
+      return []
+    }
+
+    // pull page 1
+    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], null)
+    if (!url) {
+      return []
+    }
+    const pageOne = await this.axios({ 
+      method: "get",
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+    const {page, totalPages, member: conceptsOne} = pageOne
+
+    let concepts = []
+    for (const concept of conceptsOne) {
+      if (concept) {
+        concepts.push(concept)
+      }
+    }
+
+    // pull remaining pages
+    for (let p = page+1; p <= totalPages; p++) { 
       const urlPage = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], {page: p})
+      if (!urlPage){
+        break
+      }
       const {member: conceptsNew} = await this.axios({
         method: "get",
         url: urlPage,
@@ -387,8 +382,11 @@ export default class ModApiProvider extends BaseProvider {
           Accept: "application/json",
         },
       })
-      concepts.push(conceptsNew)
-      console.log("Page", p, "from total ", totalPages)
+      for (const concept of conceptsNew) {
+        if (concept) {
+          concepts.push(concept)
+        }
+      }
     }
     return concepts
   }
@@ -405,11 +403,16 @@ export default class ModApiProvider extends BaseProvider {
     // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts/<conceptId>
     const {conceptId, schemeId} = await this._conceptIdFromObj(concept)
     const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts", conceptId], null)
+    if (!url) {
+      return
+    }
     const con = await this.axios({
       method: "get",
       url,
     })
-    return con
+    if (!con?._url || Object.keys(con).length != 1){
+      return con
+    }
   }
 
   // UTILITIES
@@ -442,40 +445,34 @@ export default class ModApiProvider extends BaseProvider {
     return schemes
   }
 
-  async _getSchemeID(url) {
-    let source_name = []
-    const schemesMod = await this._getSchemesMod()
-    for (const scheme of schemesMod) {
-      if (
-        scheme.source == url
-        || scheme.source_url == url
-        || scheme.source_name == url
-        || scheme["@id"] == url
-        || scheme.iri == url
-        || scheme.includedInDataCatalog && scheme.includedInDataCatalog.includes(url)
-      ) {
-        source_name.push(scheme.source_name)
-      }
+  async _getSchemeID(uri) {
+    const schemeMod = await this._getSchemeFromUri(uri)
+    if (schemeMod) {
+      return await schemeMod.short_form.toLowerCase()
     }
-    return source_name
   }
 
-  _getConceptID(url) {
-    return url.split("/").pop()
+  _getConceptID(uri) {
+    return uri.split("/").pop()
   }
 
-  _schemeIdFromObj(scheme) {
-    return scheme.id || this._getSchemeID(scheme.uri)
-  }
-
-  _conceptIdFromObj(concept) {
-    let schemeId = concept.inScheme[0].id
-    if (! concept.inScheme[0].id) {
-      schemeId = (async () => {
-        await this._getSchemeID(concept.inScheme[0].uri)
-      })
+  async _schemeIdFromObj(scheme) {
+    if (scheme.id){
+      return scheme.id
+    } else if (scheme.uri) {
+      return await this._getSchemeID(scheme.uri)
     }
-    const conceptId = concept.id || this._getConceptID(concept.uri)
+  }
+
+  async _conceptIdFromObj(concept) {
+    if (!concept.inScheme || !concept.inScheme[0]) {
+      return
+    }
+    let schemeId = await this._schemeIdFromObj(concept.inScheme[0])
+    let conceptId = concept.id
+    if (!conceptId){
+      conceptId = await this._getConceptID(concept.uri)
+    }
     return {conceptId: conceptId, schemeId: schemeId}
   }
 
@@ -505,13 +502,17 @@ export default class ModApiProvider extends BaseProvider {
   async getSchemes({schemes, limit, ..._config}) {
     let schemes_results = []
     let artefacts = []
-    if (schemes){
+    if (schemes) {
       for (const s of schemes) {
-        artefacts.push(await this._getSchemeMod(s))
+        let sc = await this._getSchemeMod(s)
+        if (sc) {
+          artefacts.push(sc)
+        }
       }
     } else {
       artefacts = await this._getSchemesModLimit(limit)
     }
+
     for (const artefact of artefacts) {
       let scheme = await this._artefactToJSKOS(artefact)
       if (scheme) {
@@ -536,10 +537,10 @@ export default class ModApiProvider extends BaseProvider {
  */
   async getConcepts({concepts, scheme, limit, ..._config}) {
     let concept_results = []
-    if (concepts){
+    if (concepts) {
       for (const concept of concepts) {
-        let  conceptMod = await this._getConceptMod(concept)
-        if (conceptMod){
+        let conceptMod = await this._getConceptMod(concept)
+        if (conceptMod) {
           // const conceptJ = await this._artefactToJSKOS(conceptMod)
           concept_results.push(conceptMod)
         }
