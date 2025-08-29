@@ -266,23 +266,32 @@ export default class ModApiProvider extends BaseProvider {
     return concept
   }
 
+  // #### API REQUESTS ####
 
-  // API REQUESTS SCHEMES
-
-  async _getSchemesMod() {
-    //https://terminology.services.base4nfdi.de/api-gateway/artefacts
-    const url = this._getApiUrl(["artefacts"], null)
+  async _request(url, ..._config) {
     if (!url) {
-      return []
-    } 
-    return await this.axios({
+      return
+    }
+    const result = await this.axios({
       method: "get",
       url,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+      ..._config,
     })
+    if (!result?._url || Object.keys(result).length != 1){
+      return result
+    }
+  }
+
+  // API REQUESTS SCHEMES
+
+  async _getSchemesMod() {
+    //https://terminology.services.base4nfdi.de/api-gateway/artefacts
+    const url = this._getApiUrl(["artefacts"], null)
+    return await this._request(url)
   }
 
   async _getSchemesModLimit(limit) {
@@ -305,24 +314,14 @@ export default class ModApiProvider extends BaseProvider {
 
   async _getSchemeFromId(id) {
     const url = this._getApiUrl(["artefacts", id], null)
-    if (!url) {
-      return
-    }
-    const scheme = await this.axios({
-      method: "get",
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-    if (!scheme?._url || Object.keys(scheme).length != 1){
-      return scheme
-    }
+    return await this._request(url)
   }
 
   async _getSchemeFromUri(uri) {
     const schemesMod = await this._getSchemesMod()
+    if (!schemesMod){
+      return
+    }
     for (const scheme of await schemesMod) {
       if (
         scheme.source == uri
@@ -348,17 +347,10 @@ export default class ModApiProvider extends BaseProvider {
 
     // pull page 1
     const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], null)
-    if (!url) {
+    const pageOne = await this._request(url)
+    if (!pageOne){
       return []
     }
-    const pageOne = await this.axios({ 
-      method: "get",
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
     const {page, totalPages, member: conceptsOne} = pageOne
 
     let concepts = []
@@ -369,19 +361,13 @@ export default class ModApiProvider extends BaseProvider {
     }
 
     // pull remaining pages
-    for (let p = page+1; p <= totalPages; p++) { 
+    for (let p = page+1; p <= totalPages; p++) {
       const urlPage = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], {page: p})
-      if (!urlPage){
+      const pageP = await this._request(urlPage)
+      if (!pageP){
         break
       }
-      const {member: conceptsNew} = await this.axios({
-        method: "get",
-        url: urlPage,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
+      const {member: conceptsNew} = pageP
       for (const concept of conceptsNew) {
         if (concept) {
           concepts.push(concept)
@@ -403,16 +389,7 @@ export default class ModApiProvider extends BaseProvider {
     // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts/<conceptId>
     const {conceptId, schemeId} = await this._conceptIdFromObj(concept)
     const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts", conceptId], null)
-    if (!url) {
-      return
-    }
-    const con = await this.axios({
-      method: "get",
-      url,
-    })
-    if (!con?._url || Object.keys(con).length != 1){
-      return con
-    }
+    return await this._request(url)
   }
 
   // UTILITIES
