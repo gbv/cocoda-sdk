@@ -54,7 +54,7 @@ export default class ModApiProvider extends BaseProvider {
 
   /**
    * Constructs the full API URL for a given endpoint.
-   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeId>]")
+   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeShort>]")
    * @param {Object} params - An object containing query parameters as key-value pairs.
    * @returns {string} The full URL. Returns undefined if any part is undefined.
    * @private
@@ -303,17 +303,17 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   async _getSchemeMod(schemeParam) {
-    //https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>
-    // const schemeId = await this._schemeIdFromObj(schemeParam)
-    if (schemeParam.id) {
-      return await this._getSchemeFromId(schemeParam.id)
+    //https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeShort>
+    // const schemeShort = await this._schemeShortFromObj(schemeParam)
+    if (schemeParam.short) {
+      return await this._getSchemeFromShort(schemeParam.short)
     } else if (schemeParam.uri) {
       return await this._getSchemeFromUri(schemeParam.uri)
     }
   }
 
-  async _getSchemeFromId(id) {
-    const url = this._getApiUrl(["artefacts", id], null)
+  async _getSchemeFromShort(short) {
+    const url = this._getApiUrl(["artefacts", short], null)
     return await this._request(url)
   }
 
@@ -339,14 +339,14 @@ export default class ModApiProvider extends BaseProvider {
   // API REQUESTS CONCEPTS
 
   async _getConceptsMod(scheme) {
-    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts
-    let schemeId = await this._schemeIdFromObj(scheme)
-    if (!schemeId) {
+    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeShort>/resources/concepts
+    let schemeShort = await this._schemeShortFromObj(scheme)
+    if (!schemeShort) {
       return []
     }
 
     // pull page 1
-    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], null)
+    const url = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts"], null)
     const pageOne = await this._request(url)
     if (!pageOne){
       return []
@@ -362,7 +362,7 @@ export default class ModApiProvider extends BaseProvider {
 
     // pull remaining pages
     for (let p = page+1; p <= totalPages; p++) {
-      const urlPage = this._getApiUrl(["artefacts", schemeId, "resources", "concepts"], {page: p})
+      const urlPage = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts"], {page: p})
       const pageP = await this._request(urlPage)
       if (!pageP){
         break
@@ -386,9 +386,9 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   async _getConceptMod(concept) {
-    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeId>/resources/concepts/<conceptId>
-    const {conceptId, schemeId} = await this._conceptIdFromObj(concept)
-    const url = this._getApiUrl(["artefacts", schemeId, "resources", "concepts", conceptId], null)
+    // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeShort>/resources/concepts/<conceptNotation>
+    const {conceptNotation, schemeShort} = await this._conceptNotationFromObj(concept)
+    const url = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts", conceptNotation], null)
     return await this._request(url)
   }
 
@@ -422,35 +422,35 @@ export default class ModApiProvider extends BaseProvider {
     return schemes
   }
 
-  async _getSchemeID(uri) {
+  async _getSchemeShort(uri) {
     const schemeMod = await this._getSchemeFromUri(uri)
     if (schemeMod) {
       return await schemeMod.short_form.toLowerCase()
     }
   }
 
-  _getConceptID(uri) {
+  _getconceptNotation(uri) {
     return uri.split("/").pop()
   }
 
-  async _schemeIdFromObj(scheme) {
-    if (scheme.id){
-      return scheme.id
+  async _schemeShortFromObj(scheme) {
+    if (scheme.short){
+      return scheme.short
     } else if (scheme.uri) {
-      return await this._getSchemeID(scheme.uri)
+      return await this._getSchemeShort(scheme.uri)
     }
   }
 
-  async _conceptIdFromObj(concept) {
+  async _conceptNotationFromObj(concept) {
     if (!concept.inScheme || !concept.inScheme[0]) {
       return
     }
-    let schemeId = await this._schemeIdFromObj(concept.inScheme[0])
-    let conceptId = concept.id
-    if (!conceptId){
-      conceptId = await this._getConceptID(concept.uri)
+    let schemeShort = await this._schemeShortFromObj(concept.inScheme[0])
+    let conceptNotation = concept.notation
+    if (!conceptNotation){
+      conceptNotation = await this._getconceptNotation(concept.uri)
     }
-    return {conceptId: conceptId, schemeId: schemeId}
+    return {conceptNotation: conceptNotation, schemeShort: schemeShort}
   }
 
   // #### OVERRIDE METHODS ####

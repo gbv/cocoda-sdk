@@ -15,12 +15,19 @@ const provider = cdk.initializeRegistry({
 
 
 // Readline interface
+const color_headline = "\x1b[1m\x1b[34m"
+const color_prompt = "\x1b[36m"
+const color_debug = "\x1b[35m"
+const color_reset = "\x1b[0m"
 const rl = readline.createInterface({ input, output })
 
-async function ask(question, defaultvalue) {
-  question = "\x1b[36m" + question + "\n>\x1b[0m "
+async function ask(prompt, defaultvalue) {
+  if (defaultvalue) {
+    prompt = "" + prompt + " (default: '" + defaultvalue + "')"
+  }
+  prompt = `${color_prompt}` + prompt + "\n> " + `${color_reset}`
   let result = await new Promise((resolve) => {
-    rl.question(question, (answer) => resolve(answer.trim()))
+    rl.question(prompt, (answer) => resolve(answer.trim()))
   })
   if (typeof defaultvalue === "number") {
     if (result == "" || isNaN(result)) {
@@ -41,10 +48,10 @@ function out(obj, objName) {
   let len = obj.length
   let objString = JSON.stringify(obj, null, 2)
   if (len == 0) {
-    console.log(`\x1b[35mNo ${objName} found.\x1b[0m`)
+    console.log(`${color_debug}No ${objName} found.${color_reset}`)
   } else {
     console.log(objString)
-    console.log(`\x1b[35mLoaded ${len} ${objName}.\x1b[0m`)
+    console.log(`${color_debug}Loaded ${len} ${objName}.${color_reset}`)
   }
 }
 
@@ -53,67 +60,76 @@ function out(obj, objName) {
 
 // API Calls
 async function allSchemes() {
-  let inputLimit = await ask("_Option_0:_All_Schemes_ \nPlease enter a limit (0 for all)", 0)
+  console.log(`${color_headline}0: All Schemes${color_reset}`)
+  let inputLimit = await ask("Please enter a limit (0 = all)", 0)
   const config = {limit: inputLimit}
   const schemes = await provider.getSchemes(config)
   out(schemes, "schemes")
 }
 
 async function specificSchemes() {
-  let schemeId = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
-  const config = { schemes: [{id: schemeId}] }
+  console.log(`${color_headline}1: Specific Scheme${color_reset}`)
+  let schemeShort = await ask("Please enter a scheme short name", "gndo")
+  const config = { schemes: [ {short: schemeShort} ] }
   const scheme = await provider.getSchemes(config)
   out(scheme, "scheme")
 }
 
 async function topConcepts() {
-  let schemeId = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
-  const config = {scheme: { id: schemeId }, limit: 10 }
+  console.log(`${color_headline}2: Top Concepts${color_reset}`)
+  let schemeShort = await ask("Please enter a scheme short name", "gndo")
+  const config = {scheme: { short: schemeShort }, limit: 10 }
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts")
 }
 
 async function allConcepts() {
-  let schemeId = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme ID (eg. 'gndo')", "gndo")
+  console.log(`${color_headline}3: All Concepts${color_reset}`)
+  let schemeShort = await ask("Please enter a scheme short name", "gndo")
   let inputLimit = await ask("Please enter a limit (0 for all)", 0)
-  const config = {scheme: { id: schemeId }, limit: inputLimit }
+  const config = {scheme: { short: schemeShort }, limit: inputLimit }
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts")
 }
 
 async function specificConcept() {
-  let schemeId = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme ID (eg. 'gnd')", "gnd")
-  let conceptId = await ask("Please enter a concept ID (eg: '4179484-9')", "4179484-9")
-  const config = {concepts: [{ id: conceptId, inScheme: [ { id: schemeId } ] }]}
+  console.log(`${color_headline}4: Specific Concept${color_reset}`)
+  let schemeShort = await ask("Please enter a scheme short name", "gnd")
+  let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", "4179484-9")
+  const config = {concepts: [{ notation: conceptNotation, inScheme: [ { short: schemeShort } ] }]}
   const concept = await provider.getConcepts(config)
   out(concept, "concept")
 }
 
 async function specificSchemesUri() {
-  let schemeUri = await ask("_Option_1:_Specific_Scheme_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
+  console.log(`${color_headline}1b: Specific Scheme via uris${color_reset}`)
+  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
   const config = { schemes: [{uri: schemeUri}] }
   const scheme = await provider.getSchemes(config)
   out(scheme, "scheme")
 }
 
 async function topConceptsUri() {
-  let schemeUri = await ask("_Option_2:_Top_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
+  console.log(`${color_headline}2b: Top Concepts via uris${color_reset}`)
+  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
   const config = {scheme: { uri: schemeUri }, limit: 10 }
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts")
 }
 
 async function allConceptsUri() {
-  let schemeUri = await ask("_Option_3:_All_Concepts_ \nPlease enter a scheme URI (eg. 'http://d-nb.info/standards/elementset/gnd#')", "http://d-nb.info/standards/elementset/gnd#")
-  let inputLimit = await ask("Please enter a limit (0 for all)", 0)
+  console.log(`${color_headline}3b: All Concepts via uris${color_reset}`)
+  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
+  let inputLimit = await ask("Please enter a limit (0 = all)", 0)
   const config = {scheme: { uri: schemeUri }, limit: inputLimit }
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts")
 }
 
 async function specificConceptUri() {
-  let schemeUri = await ask("_Option_4:_Specific_Concept_ \nPlease enter a scheme URI (eg. 'https://lobid.org/gnd')", "https://lobid.org/gnd")
-  let conceptUri = await ask("Please enter a concept ID (eg: 'https://d-nb.info/gnd/4179484-9')", "https://d-nb.info/gnd/4179484-9")
+  console.log(`${color_headline}4b: Specific Concept via uris${color_reset}`)
+  let schemeUri = await ask("Please enter a scheme URI", "https://lobid.org/gnd")
+  let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", "https://d-nb.info/gnd/4179484-9")
   const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
   const concept = await provider.getConcepts(config)
   out(concept, "concept")
@@ -125,9 +141,10 @@ async function specificConceptUri() {
 // Main loop
 async function mainLoop() {
   while (true) {
+    console.log(`${color_headline}_MOD_API_TEST_CLASS_${color_reset}`)
     const choice = (await ask(
-      "Choose an option (0–4 via ids, 0b-4b via URIs, 'q' to quit).\n" +
-        "Options: 0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept",
+      "What do you request? Please choose from the following options:\n" +
+        "0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept\n0–4 via short-form and notation, 0b-4b via URIs, 'q' to quit",
     )).trim()
 
     switch (choice) {
