@@ -8,7 +8,8 @@ addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "ModApi",
   // api: "https://bartoc.org/api/",
-  uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
+  // uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
+  uri: "http://localhost:8080/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
   language: "und",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
@@ -20,6 +21,11 @@ const color_prompt = "\x1b[36m"
 const color_debug = "\x1b[35m"
 const color_reset = "\x1b[0m"
 const rl = readline.createInterface({ input, output })
+
+function prompt(text, color){
+  const output = color + text + color_reset
+  console.log(output)
+}
 
 async function ask(prompt, defaultvalue) {
   if (defaultvalue) {
@@ -48,10 +54,10 @@ function out(obj, objName) {
   let len = obj.length
   let objString = JSON.stringify(obj, null, 2)
   if (len == 0) {
-    console.log(`${color_debug}No ${objName} found.${color_reset}`)
+    prompt(`No ${objName} found.`, color_debug)
   } else {
-    console.log(objString)
-    console.log(`${color_debug}Loaded ${len} ${objName}.${color_reset}`)
+    prompt(objString, color_debug)
+    prompt(`Loaded ${len} ${objName}.`, color_debug)
   }
 }
 
@@ -60,7 +66,7 @@ function out(obj, objName) {
 
 // API Calls
 async function allSchemes() {
-  console.log(`${color_headline}0: All Schemes${color_reset}`)
+  prompt("0: All Schemes", color_headline)
   let inputLimit = await ask("Please enter a limit (0 = all)", 0)
   const config = {limit: inputLimit}
   const schemes = await provider.getSchemes(config)
@@ -68,7 +74,7 @@ async function allSchemes() {
 }
 
 async function specificSchemes() {
-  console.log(`${color_headline}1: Specific Scheme${color_reset}`)
+  prompt("1: Specific Scheme", color_headline)
   let schemeShort = await ask("Please enter a scheme short name", "gndo")
   const config = { schemes: [ {short: schemeShort} ] }
   const scheme = await provider.getSchemes(config)
@@ -76,7 +82,7 @@ async function specificSchemes() {
 }
 
 async function topConcepts() {
-  console.log(`${color_headline}2: Top Concepts${color_reset}`)
+  prompt("2: Top Concepts", color_headline)
   let schemeShort = await ask("Please enter a scheme short name", "gndo")
   const config = {scheme: { short: schemeShort }, limit: 10 }
   const concepts = await provider.getConcepts(config)
@@ -84,7 +90,7 @@ async function topConcepts() {
 }
 
 async function allConcepts() {
-  console.log(`${color_headline}3: All Concepts${color_reset}`)
+  prompt("3: All Concepts", color_headline)
   let schemeShort = await ask("Please enter a scheme short name", "gndo")
   let inputLimit = await ask("Please enter a limit (0 for all)", 0)
   const config = {scheme: { short: schemeShort }, limit: inputLimit }
@@ -93,7 +99,7 @@ async function allConcepts() {
 }
 
 async function specificConcept() {
-  console.log(`${color_headline}4: Specific Concept${color_reset}`)
+  prompt("4: Specific Concept", color_headline)
   let schemeShort = await ask("Please enter a scheme short name", "gnd")
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", "4179484-9")
   const config = {concepts: [{ notation: conceptNotation, inScheme: [ { short: schemeShort } ] }]}
@@ -102,7 +108,7 @@ async function specificConcept() {
 }
 
 async function specificSchemesUri() {
-  console.log(`${color_headline}1b: Specific Scheme via uris${color_reset}`)
+  prompt("1b: Specific Scheme via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
   const config = { schemes: [{uri: schemeUri}] }
   const scheme = await provider.getSchemes(config)
@@ -110,7 +116,7 @@ async function specificSchemesUri() {
 }
 
 async function topConceptsUri() {
-  console.log(`${color_headline}2b: Top Concepts via uris${color_reset}`)
+  prompt("2b: Top Concepts via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
   const config = {scheme: { uri: schemeUri }, limit: 10 }
   const concepts = await provider.getConcepts(config)
@@ -118,7 +124,7 @@ async function topConceptsUri() {
 }
 
 async function allConceptsUri() {
-  console.log(`${color_headline}3b: All Concepts via uris${color_reset}`)
+  prompt("3b: All Concepts via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
   let inputLimit = await ask("Please enter a limit (0 = all)", 0)
   const config = {scheme: { uri: schemeUri }, limit: inputLimit }
@@ -127,7 +133,7 @@ async function allConceptsUri() {
 }
 
 async function specificConceptUri() {
-  console.log(`${color_headline}4b: Specific Concept via uris${color_reset}`)
+  prompt("4b: Specific Concept via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", "https://lobid.org/gnd")
   let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", "https://d-nb.info/gnd/4179484-9")
   const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
@@ -135,24 +141,37 @@ async function specificConceptUri() {
   out(concept, "concept")
 }
 
+async function shortFormFromUri() {
+  prompt("5: Short Form from Scheme URI", color_headline)
+  let schemeUri = await ask("Please enter a scheme URI", "https://lobid.org/gnd")
+  const concept = await provider._getSchemeShort(schemeUri)
+  prompt(`Short form of scheme ${schemeUri} is: ${concept}`, color_debug)
+}
 
+async function notationsFromConceptUri() {
+  let conceptUri = await ask("Please enter a concept URI", "https://d-nb.info/gnd/4179484-9")
+  const concept = provider._getconceptNotation(conceptUri)
+  prompt(`Concept notation of the concept URI ${conceptUri} is: ${concept}`, color_debug)
+}
 
 
 // Main loop
 async function mainLoop() {
+  prompt("_MOD_API_TEST_CLASS_", color_headline)
   while (true) {
-    console.log(`${color_headline}_MOD_API_TEST_CLASS_${color_reset}`)
-    const choice = (await ask(
-      "What do you request? Please choose from the following options:\n" +
-        "0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept\n0–4 via short-form and notation, 0b-4b via URIs, 'q' to quit",
-    )).trim()
+
+    
+    prompt("What do you request? Please choose from the following options:", color_prompt)
+    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept", color_prompt)
+    prompt("0–4 via short-form and notation, 0b-4b via URIs,", color_prompt)
+    const choice = (await ask("5 for requesting short-form from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
 
     switch (choice) {
       case "q":
       case "Q":
-        console.log("Exiting...")
+        prompt("Exiting...", color_debug)
         rl.close()
-        console.log()
+        prompt("", color_reset)
         return
       case "0":
       case "0b": {
@@ -191,10 +210,19 @@ async function mainLoop() {
         await specificConceptUri()
         break
       }
+
+      case "5": {
+        await shortFormFromUri()
+        break
+      }
+      case "6": {
+        await notationsFromConceptUri()
+        break
+      }
       default:
-        console.log("Invalid choice, please pick between 0 and 4.")
+        prompt("Invalid choice, please pick between 0 and 4.", color_debug)
     }
-    console.log()
+    prompt("", color_reset)
   }
 }
 mainLoop()
