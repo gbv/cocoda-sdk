@@ -51,24 +51,24 @@
   "devDependencies": {
     "axios-mock-adapter": "^2.1.0",
     "clean-jsdoc-theme": "^4.3.0",
-    "esbuild": "~0.24.0",
+    "esbuild": "~0.27.0",
     "esbuild-plugin-ifdef": "^1.0.1",
-    "eslint": "~9.16",
-    "eslint-config-gbv": "~2.6",
-    "glob": "^10.4.5",
+    "eslint": "~9.39",
+    "eslint-config-gbv": "~2.7",
+    "glob": "^13.0.0",
     "husky": "^9.1.7",
     "jsdoc": "^4.0.4",
     "license-checker": "^25.0.1",
-    "lint-staged": "^15.2.11",
+    "lint-staged": "^16.2.7",
     "mocha": "^11.0.1",
     "yesno": "^0.4.0"
   },
   "dependencies": {
     "axios": "^1.7.9",
-    "flexsearch": "~0.6.32",
+    "flexsearch": "~0.8.0",
     "jskos-tools": "^1.0.43",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
-    "uuid": "^11.0.3"
+    "uuid": "^13.0.0"
   }
 }
