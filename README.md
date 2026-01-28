@@ -193,7 +193,7 @@ import CustomProvider from "./custom-provider.js"
 cdk.addProvider(CustomProvider)
 ```
 
-It is then possible to use that provider via cocoda-sdk as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/master/examples/custom-provider.js).)
+It is then possible to use that provider via cocoda-sdk as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/examples/custom-provider.js).)
 
 ### Multiple Instances
 
@@ -288,7 +288,7 @@ You can find more in-depth examples here:
 - The [Vuex store module for authentication in Cocoda](https://github.com/gbv/cocoda/blob/dev/src/store/modules/auth.js).
   - Even if you're not using Vue.js, this can be helpful.
   - Cocoda is using cocoda-sdk extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
-- The [API page of Login Server](https://github.com/gbv/login-server/blob/master/views/api.ejs). This is merely an example on how to use `login-client`.
+- The [API page of Login Server](https://github.com/gbv/login-server/blob/main/views/api.ejs). This is merely an example on how to use `login-client`.
 
 ## Methods
 
@@ -472,9 +472,9 @@ This will:
 - Make sure `dev` is up-to-date
 - Run `npm version patch` (or "minor"/"major")
 - Push changes to `dev`
-- Switch to `master`
+- Switch to `main`
 - Merge changes from `dev`
-- Push `master` with tags
+- Push `main` with tags
 - Switch back to `dev`
 
 After running this, GitHub Actions will automatically publish the new version to npm. It will also create a new GitHub Release draft. Please edit and publish the release manually.
