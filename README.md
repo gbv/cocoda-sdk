@@ -157,7 +157,7 @@ Providers allow access to different types of APIs.
 
 The following providers are offered in cocoda-sdk by default:
 - `Base` - the base provider that all other providers have to inherit from
-- `ConceptApi` - access to concept schemes and concepts via [jskos-server]
+- `ConceptApi` - access to concept schemes and concepts via JSKOS API ([jskos-server] and compatible implementations)
 - `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
 
 The following providers are also exported, but have to be added via `cdk.addProvider`:
@@ -186,14 +186,28 @@ Note that in the browser bundle, all providers listed above are included and do 
 
 Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
 
+#### Custom providers
+
 It is also possible to add custom providers that inherit from BaseProvider:
 
 ```js
-import CustomProvider from "./custom-provider.js"
+import { cdk, BaseProvider } from "cocoda-sdk"
+
+export class CustomProvider extends BaseProvider {
+  static providerName = "Dummy" 
+  // static providerType = "..."    // Optional URI from https://bartoc.org/api-type/
+
+  getConcepts() {
+    return [
+      { prefLabel: { en: "Hello!" } },
+    ]
+  }
+}
+
 cdk.addProvider(CustomProvider)
 ```
 
-It is then possible to use that provider via cocoda-sdk as well. (See also: Example under [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/examples/custom-provider.js).)
+See [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/examples/custom-provider.js) for an extended example.
 
 ### Multiple Instances
 

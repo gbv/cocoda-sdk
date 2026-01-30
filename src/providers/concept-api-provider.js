@@ -30,6 +30,9 @@ import jskos from "jskos-tools"
  * @category Providers
  */
 export default class ConceptApiProvider extends BaseProvider {
+  static providerName = "ConceptApi"
+  static providerType = "http://bartoc.org/api-type/jskos"
+
   static supports = {
     schemes: true,
     top: true,
@@ -463,8 +466,4 @@ export default class ConceptApiProvider extends BaseProvider {
     }
     return types
   }
-
 }
-
-ConceptApiProvider.providerName = "ConceptApi"
-ConceptApiProvider.providerType = "http://bartoc.org/api-type/jskos"

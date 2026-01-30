@@ -1,28 +1,21 @@
 import { cdk, BaseProvider } from "../src/index.js"
 
-// Custom provider that only returns one empty mapping
+// Custom provider that only returns one concept
 class CustomProvider extends BaseProvider {
+  static providerName = "Dummy"
 
-  _setup() {
-    this.has.mappings = true
-  }
-
-  getMappings() {
+  getConcepts() {
     return [
-      {},
+      { prefLabel: { en: "Hello!" } },
     ]
   }
 }
-CustomProvider.providerName = "Custom";
 
 (async () => {
   cdk.addProvider(CustomProvider)
-  const registry = cdk.initializeRegistry({
-    provider: "Custom",
-  })
+  const registry = cdk.initializeRegistry({ provider: "Dummy" })
   await registry.init()
 
-  const mappings = await registry.getMappings()
-  console.log(mappings._totalCount)
-
+  const concepts = await registry.getConcepts()
+  console.log(concepts._totalCount)
 })()
