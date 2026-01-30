@@ -1,4 +1,4 @@
-import SkohubProvider from "../../src/providers/skohub-provider.js"
+import SkohubProvider from "../src/skohub-provider.js"
 import assert from "assert"
 import MockAdapter from "axios-mock-adapter"
 

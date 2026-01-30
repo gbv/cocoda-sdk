@@ -1,16 +1,9 @@
 {
-  "name": "cocoda-sdk",
-  "version": "3.5.0",
-  "description": "SDK for Cocoda",
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.js",
-  "jsdelivr": "dist/cocoda-sdk.js",
-  "unpkg": "dist/cocoda-sdk.js",
-  "sideEffects": false,
-  "browserslist": "defaults and not ie<=11 and supports es6",
+  "name": "jskos-provider",
+  "version": "0.1.0",
+  "description": "Access JSKOS data with a uniform API",
   "type": "module",
   "files": [
-    "dist",
     "lib",
     "errors",
     "utils",
@@ -21,38 +14,32 @@
     "lint": "eslint",
     "fix": "eslint --fix",
     "lint-staged": "lint-staged",
-    "build": "node build.js",
     "docs": "jsdoc -c jsdoc.json",
     "yesno": "node -e \"const yesno = require('yesno'); yesno({ question: 'Are you sure you want to continue?' }).then(ok => process.exit(ok ? 0 : 1));\"",
-    "release": "test $(git rev-parse --abbrev-ref HEAD) = dev && git pull && npm test && npm run build && npm version $SEMVER && npm run --silent yesno && (git push && git checkout main && git merge dev && git push --follow-tags && git checkout dev) || (git tag -d $(git describe --tags) && git reset --hard HEAD~1)",
+    "release": "test $(git rev-parse --abbrev-ref HEAD) = dev && git pull && npm test && npm version $SEMVER && npm run --silent yesno && (git push && git checkout main && git merge dev && git push --follow-tags && git checkout dev) || (git tag -d $(git describe --tags) && git reset --hard HEAD~1)",
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
     "release:major": "SEMVER=major npm run release",
-    "prepare": "husky || true; [ -d './dist' ] || npm run build"
+    "prepare": "husky || true"
   },
   "lint-staged": {
-    "**/*.js": [
-      "eslint --fix"
-    ],
     "**/.*.js": [
       "eslint --fix"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gbv/cocoda-sdk.git"
+    "url": "git+https://github.com/gbv/jskos-provider.git"
   },
-  "author": "Stefan Peters",
+  "author": "Jakob Voß",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gbv/cocoda-sdk/issues"
+    "url": "https://github.com/gbv/jskos-provider/issues"
   },
-  "homepage": "https://github.com/gbv/cocoda-sdk#readme",
+  "homepage": "https://github.com/gbv/jskos-provider#readme",
   "devDependencies": {
     "axios-mock-adapter": "^2.1.0",
     "clean-jsdoc-theme": "^4.3.0",
-    "esbuild": "~0.27.0",
-    "esbuild-plugin-ifdef": "^1.0.1",
     "eslint": "~9.39",
     "eslint-config-gbv": "~2.7",
     "glob": "^13.0.0",

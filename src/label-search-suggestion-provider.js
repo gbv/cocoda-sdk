@@ -1,7 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
-import * as errors from "../errors/index.js"
+import * as _ from "./lodash.js"
+import * as errors from "./errors.js"
 
 // TODO: Only keep the last 20 results in cache.
 // TODO: Try to remove dependencies on `selected`, `scheme._registry.registry.uri`, etc.

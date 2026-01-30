@@ -1,10 +1,15 @@
-# Cocoda SDK
-[![Test and build](https://github.com/gbv/cocoda-sdk/actions/workflows/test-and-build.yml/badge.svg)](https://github.com/gbv/cocoda-sdk/actions/workflows/test-and-build.yml)
-[![GitHub package version](https://img.shields.io/github/package-json/v/gbv/cocoda-sdk.svg?label=version)](https://github.com/gbv/cocoda-sdk)
-[![NPM package name](https://img.shields.io/badge/npm-cocoda--sdk-blue.svg)](https://www.npmjs.com/package/cocoda-sdk)
+# JSKOS Providers
+
+*This is currently being refactored, so the document is outdated!*
+
+This has been split from cocoda-sdk.
+
+[![Test and build](https://github.com/gbv/jskos-provider/actions/workflows/test-and-build.yml/badge.svg)](https://github.com/gbv/jskos-provider/actions/workflows/test-and-build.yml)
+[![GitHub package version](https://img.shields.io/github/package-json/v/gbv/jskos-provider.svg?label=version)](https://github.com/gbv/jskos-provider)
+[![NPM package name](https://img.shields.io/badge/npm-cocoda--sdk-blue.svg)](https://www.npmjs.com/package/jskos-provider)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
 
-> SDK for [Cocoda](https://github.com/gbv/cocoda) and [coli-conc](https://coli-conc.gbv.de/) services
+> Access [JSKOS] data with a uniform API
 
 ## Table of Contents <!-- omit in toc -->
 - [Install](#install)
@@ -17,7 +22,7 @@
   - [Multiple Instances](#multiple-instances)
   - [Authenticated Requests](#authenticated-requests)
 - [Methods](#methods)
-  - [Methods for cocoda-sdk instance](#methods-for-cocoda-sdk-instance)
+  - [Methods for jskos-provider instance](#methods-for-jskos-provider-instance)
   - [Registry Methods - General](#registry-methods---general)
   - [Registry Methods - Concept Schemes](#registry-methods---concept-schemes)
   - [Registry Methods - Concepts](#registry-methods---concepts)
@@ -32,77 +37,12 @@
 - [License](#license)
 
 ## Install
-```bash
-npm i cocoda-sdk
-```
 
-We are also providing a browser bundle: https://cdn.jsdelivr.net/npm/cocoda-sdk@2/dist/cocoda-sdk.js (~51K gzipped, ~155K not gzipped) It will be available under the global name `CDK` and contain the listed members below (in particular the default instance `CDK.cdk`).
-
-[![](https://data.jsdelivr.com/v1/package/npm/cocoda-sdk/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cocoda-sdk)
+...
 
 ## Usage
 
-### Import
-cocoda-sdk exports a default instance, so the same object is used on each import of cocoda-sdk. We recommend using this instance over creating one's own.
-
-```js
-const { cdk } = require("cocoda-sdk") // CommonJS
-import { cdk } from "cocoda-sdk" // ESM
-```
-
-Since cocoda-sdk is an ES module, we'll use the `import`/`export` syntax in the rest of the documentation.
-
-cocoda-sdk also exports some other members:
-- `CocodaSDK` - the class that is behind the default instance
-- `errors` - see [Errors](#errors)
-- All individual provider classes - see [Providers](#providers)
-  - Note: You need to append `Provider` to the names, e.g. `LocalMappings` is exported as `LocalMappingsProvider`.
-- `addAllProviders` - a method that adds all avaiable providers to an instance
-  - Can be called without parameters to add to the default instance. Useful if you need all providers.
-
-### v1 Compatibility
-cocoda-sdk v2 changed how it is exported and therefore it needs to be included differently.
-
-```js
-// CommonJS
-// Previously: const cdk = require("cocoda-sdk")
-// Now:
-const { cdk } = require("cocoda-sdk")
-// or: const cdk = require("cocoda-sdk").cdk
-```
-
-```js
-// ES6
-// Previously: import * as cdk from "cocoda-sdk"
-// Now:
-import { cdk } from "cocoda-sdk"
-```
-
-```js
-// Browser
-// Previously the default instance was globally available under `cdk`.
-// Now the module is available under `CDK` with `cdk` as one of its members. To easily make previous code compatible:
-const { cdk } = CDK
-```
-
-### Configuration
-cocoda-sdk can be configured after import:
-
-```js
-import { cdk } from "cocoda-sdk"
-cdk.setConfig(config)
-```
-
-The configuration can also be loaded from a URL:
-
-```js
-import { cdk } from "cocoda-sdk"
-await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
-```
-
-The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular, the configuration contains an array property [`registries`](#registries).
-
-If you only use cocoda-sdk with a single registry, configuration might not be necessary (see below).
+...
 
 ### Registries
 
@@ -118,6 +58,7 @@ A registry is an individual source of data, for instance a set of concept scheme
 A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
 
 #### Endpoint Determination
+
 For many providers, you need to specify one or more endpoints on the registry object for it to work. There are, however, three steps in which these endpoints are determined:
 
 1. By explicitly specifying an endpoint on the registry object.
@@ -131,7 +72,7 @@ Values set earlier in these steps will never be overwritten by later steps. That
 If you only have a single registry you want to access, you can initialize it as follows:
 
 ```js
-import { cdk, LocalMappingsProvider } from "cocoda-sdk"
+import { cdk, LocalMappingsProvider } from "jskos-provider"
 // Local mappings are not included by default
 cdk.addProvider(LocalMappingsProvider)
 const registry = cdk.initializeRegistry({
@@ -142,20 +83,12 @@ const registry = cdk.initializeRegistry({
 registry.getMappings()
 ```
 
-#### Using Registries From a Configuration
-
-If you initialize cocoda-sdk with a [configuration](#configuration), it will initialize all included registries automatically. Those registries are then accessible via `cdk.config.registries`. Alternatively, you can retrieve registries by URI:
-
-```js
-// After setting up cdk
-const registry = cdk.getRegistryForUri("...")
-```
 
 ### Providers
 
 Providers allow access to different types of APIs.
 
-The following providers are offered in cocoda-sdk by default:
+The following providers are offered in jskos-provider by default:
 - `Base` - the base provider that all other providers have to inherit from
 - `ConceptApi` - access to concept schemes and concepts via JSKOS API ([jskos-server] and compatible implementations)
 - `MappingsApi` - access to concordances, mappings, and annotations via [jskos-server]
@@ -178,20 +111,20 @@ The following providers are also exported, but have to be added via `cdk.addProv
 To add a provider, append `Provider` to its name and import it together with `cdk`:
 
 ```js
-import { cdk, LocApiProvider } from "cocoda-sdk"
+import { cdk, LocApiProvider } from "jskos-provider"
 cdk.addProvider(LocApiProvider)
 ```
 
 Note that in the browser bundle, all providers listed above are included and do not have to be added separately.
 
-Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
+Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/jskos-provider/)
 
 #### Custom providers
 
 It is also possible to add custom providers that inherit from BaseProvider:
 
 ```js
-import { cdk, BaseProvider } from "cocoda-sdk"
+import { BaseProvider } from "jskos-provider"
 
 export class CustomProvider extends BaseProvider {
   static providerName = "Dummy" 
@@ -203,22 +136,13 @@ export class CustomProvider extends BaseProvider {
     ]
   }
 }
-
-cdk.addProvider(CustomProvider)
 ```
 
-See [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/examples/custom-provider.js) for an extended example.
+See [`examples/custom-provider.js`](https://github.com/gbv/jskos-provider/blob/main/examples/custom-provider.js) for an extended example.
 
-### Multiple Instances
-
-The `createInstance` method can be used to create a new and independent instance with a separate configuration if needed:
-
-```js
-const newCdk = cdk.createInstance(config)
-```
 
 ### Authenticated Requests
-The following is a barebones example on how to use cocoda-sdk together with [`login-client`](https://github.com/gbv/login-client).
+The following is a barebones example on how to use jskos-provider together with [`login-client`](https://github.com/gbv/login-client).
 
 Prerequisites:
 - A local instance of [Login Server](https://github.com/gbv/login-server) running on `localhost:3004`
@@ -241,9 +165,9 @@ See also the code comments inside the example.
     <title>Test</title>
 </head>
 <body>
-<!-- login-client, cocoda-sdk -->
+<!-- login-client, jskos-provider -->
 <script src="https://cdn.jsdelivr.net/npm/gbv-login-client@0"></script>
-<script src="https://cdn.jsdelivr.net/npm/cocoda-sdk@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jskos-provider@2"></script>
 <script>
 // Initialize mapping registry at localhost:3000
 const registry = CDK.cdk.initializeRegistry({
@@ -301,161 +225,158 @@ Note that for a real application, there are more things necessary:
 You can find more in-depth examples here:
 - The [Vuex store module for authentication in Cocoda](https://github.com/gbv/cocoda/blob/dev/src/store/modules/auth.js).
   - Even if you're not using Vue.js, this can be helpful.
-  - Cocoda is using cocoda-sdk extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
+  - Cocoda is using jskos-provider extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
 - The [API page of Login Server](https://github.com/gbv/login-server/blob/main/views/api.ejs). This is merely an example on how to use `login-client`.
 
 ## Methods
 
-A cocoda-sdk instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of cocoda-sdk (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
-
-### Methods for cocoda-sdk instance
-Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.html).
+A jskos-provider instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of jskos-provider (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
 
 ### Registry Methods - General
 
 #### `registry.init`
-- [BaseProvider - init](https://gbv.github.io/cocoda-sdk/BaseProvider.html#init)
+- [BaseProvider - init](https://gbv.github.io/jskos-provider/BaseProvider.html#init)
 
 #### `registry.isAuthorizedFor`
-- [BaseProvider - isAuthorizedFor](https://gbv.github.io/cocoda-sdk/BaseProvider.html#isAuthorizedFor)
+- [BaseProvider - isAuthorizedFor](https://gbv.github.io/jskos-provider/BaseProvider.html#isAuthorizedFor)
 
 #### `registry.supportsScheme`
-- [BaseProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme)
-- [LabelSearchSuggestionProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme)
+- [BaseProvider - supportsScheme](https://gbv.github.io/jskos-provider/BaseProvider.html#supportsScheme)
+- [LabelSearchSuggestionProvider - supportsScheme](https://gbv.github.io/jskos-provider/LabelSearchSuggestionProvider.html#supportsScheme)
 
 #### `registry.setAuth`
-- [BaseProvider - setAuth](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth)
+- [BaseProvider - setAuth](https://gbv.github.io/jskos-provider/BaseProvider.html#setAuth)
 
 #### `registry.setRetryConfig`
-- [BaseProvider - setRetryConfig](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
+- [BaseProvider - setRetryConfig](https://gbv.github.io/jskos-provider/BaseProvider.html#setRetryConfig)
 
 #### `registry.getCancelTokenSource`
-- [BaseProvider - getCancelTokenSource](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
+- [BaseProvider - getCancelTokenSource](https://gbv.github.io/jskos-provider/BaseProvider.html#getCancelTokenSource)
 
 ### Registry Methods - Concept Schemes
 
 #### `registry.getSchemes`
-- [ConceptApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getSchemes)
-- [SkosmosApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getSchemes)
+- [ConceptApiProvider - getSchemes](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getSchemes)
+- [SkosmosApiProvider - getSchemes](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#getSchemes)
 
 #### `registry.vocSearch`
-- [ConceptApiProvider - vocSearch](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSearch)
+- [ConceptApiProvider - vocSearch](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#vocSearch)
 
 #### `registry.vocSuggest`
-- [ConceptApiProvider - vocSuggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSuggest)
+- [ConceptApiProvider - vocSuggest](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#vocSuggest)
 
 ### Registry Methods - Concepts
 
 #### `registry.getTop`
-- [ConceptApiProvider - getTop](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTop)
+- [ConceptApiProvider - getTop](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getTop)
 
 #### `registry.getConcepts`
-- [ConceptApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getConcepts)
-- [SkosmosApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getConcepts)
+- [ConceptApiProvider - getConcepts](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getConcepts)
+- [SkosmosApiProvider - getConcepts](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#getConcepts)
 
 #### `registry.getNarrower`
-- [ConceptApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getNarrower)
-- [SkosmosApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getNarrower)
+- [ConceptApiProvider - getNarrower](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getNarrower)
+- [SkosmosApiProvider - getNarrower](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#getNarrower)
 
 #### `registry.getAncestors`
-- [ConceptApiProvider - getAncestors](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getAncestors)
-- [SkosmosApiProvider - getAncestors](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getAncestors)
+- [ConceptApiProvider - getAncestors](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getAncestors)
+- [SkosmosApiProvider - getAncestors](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#getAncestors)
 
 #### `registry.search`
-- [ConceptApiProvider - search](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#search)
-- [SkosmosApiProvider - search](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#search)
+- [ConceptApiProvider - search](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#search)
+- [SkosmosApiProvider - search](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#search)
 
 #### `registry.suggest`
-- [ConceptApiProvider - suggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#suggest)
-- [SkosmosApiProvider - suggest](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#suggest)
+- [ConceptApiProvider - suggest](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#suggest)
+- [SkosmosApiProvider - suggest](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#suggest)
 
 ### Registry Methods - Concordances
 
 #### `registry.getConcordances`
-- [MappingsApiProvider - getConcordances](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getConcordances)
+- [MappingsApiProvider - getConcordances](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#getConcordances)
 
 #### `registry.postConcordance`
-- [MappingsApiProvider - postConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postConcordance)
+- [MappingsApiProvider - postConcordance](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#postConcordance)
 
 #### `registry.putConcordance`
-- [MappingsApiProvider - putConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putConcordance)
+- [MappingsApiProvider - putConcordance](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#putConcordance)
 
 #### `registry.patchConcordance`
-- [MappingsApiProvider - patchConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchConcordance)
+- [MappingsApiProvider - patchConcordance](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#patchConcordance)
 
 #### `registry.deleteConcordance`
-- [MappingsApiProvider - deleteConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteConcordance)
+- [MappingsApiProvider - deleteConcordance](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#deleteConcordance)
 
 ### Registry Methods - Mappings
 
 #### `registry.getMappings`
-- [MappingsApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMappings)
-- [LocalMappingsProvider - getMappings](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMappings)
-- [ReconciliationApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/ReconciliationApiProvider.html#getMappings)
-- [LabelSearchSuggestionProvider - getMappings](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#getMappings)
-- [OccurrencesApiProvider - getMappings](https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getMappings)
+- [MappingsApiProvider - getMappings](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#getMappings)
+- [LocalMappingsProvider - getMappings](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#getMappings)
+- [ReconciliationApiProvider - getMappings](https://gbv.github.io/jskos-provider/ReconciliationApiProvider.html#getMappings)
+- [LabelSearchSuggestionProvider - getMappings](https://gbv.github.io/jskos-provider/LabelSearchSuggestionProvider.html#getMappings)
+- [OccurrencesApiProvider - getMappings](https://gbv.github.io/jskos-provider/OccurrencesApiProvider.html#getMappings)
 
 #### `registry.getMapping`
-- [MappingsApiProvider - getMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getMapping)
-- [LocalMappingsProvider - getMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#getMapping)
+- [MappingsApiProvider - getMapping](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#getMapping)
+- [LocalMappingsProvider - getMapping](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#getMapping)
 
 #### `registry.postMapping`
-- [MappingsApiProvider - postMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postMapping)
-- [LocalMappingsProvider - postMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#postMapping)
+- [MappingsApiProvider - postMapping](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#postMapping)
+- [LocalMappingsProvider - postMapping](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#postMapping)
 
 #### `registry.postMappings`
-- [BaseProvider - postMappings](https://gbv.github.io/cocoda-sdk/BaseProvider.html#postMappings)
+- [BaseProvider - postMappings](https://gbv.github.io/jskos-provider/BaseProvider.html#postMappings)
 
 #### `registry.putMapping`
-- [MappingsApiProvider - putMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putMapping)
-- [LocalMappingsProvider - putMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#putMapping)
+- [MappingsApiProvider - putMapping](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#putMapping)
+- [LocalMappingsProvider - putMapping](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#putMapping)
 
 #### `registry.patchMapping`
-- [MappingsApiProvider - patchMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchMapping)
-- [LocalMappingsProvider - patchMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#patchMapping)
+- [MappingsApiProvider - patchMapping](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#patchMapping)
+- [LocalMappingsProvider - patchMapping](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#patchMapping)
 
 #### `registry.deleteMapping`
-- [MappingsApiProvider - deleteMapping](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteMapping)
-- [LocalMappingsProvider - deleteMapping](https://gbv.github.io/cocoda-sdk/LocalMappingsProvider.html#deleteMapping)
+- [MappingsApiProvider - deleteMapping](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#deleteMapping)
+- [LocalMappingsProvider - deleteMapping](https://gbv.github.io/jskos-provider/LocalMappingsProvider.html#deleteMapping)
 
 #### `registry.deleteMappings`
-- [BaseProvider - deleteMappings](https://gbv.github.io/cocoda-sdk/BaseProvider.html#deleteMappings)
+- [BaseProvider - deleteMappings](https://gbv.github.io/jskos-provider/BaseProvider.html#deleteMappings)
 
 ### Registry Methods - Annotations
 
 #### `registry.getAnnotations`
-- [MappingsApiProvider - getAnnotations](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getAnnotations)
+- [MappingsApiProvider - getAnnotations](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#getAnnotations)
 
 #### `registry.postAnnotation`
-- [MappingsApiProvider - postAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postAnnotation)
+- [MappingsApiProvider - postAnnotation](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#postAnnotation)
 
 #### `registry.putAnnotation`
-- [MappingsApiProvider - putAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putAnnotation)
+- [MappingsApiProvider - putAnnotation](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#putAnnotation)
 
 #### `registry.patchAnnotation`
-- [MappingsApiProvider - patchAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchAnnotation)
+- [MappingsApiProvider - patchAnnotation](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#patchAnnotation)
 
 #### `registry.deleteAnnotation`
-- [MappingsApiProvider - deleteAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteAnnotation)
+- [MappingsApiProvider - deleteAnnotation](https://gbv.github.io/jskos-provider/MappingsApiProvider.html#deleteAnnotation)
 
 ### Registry Methods - Various
 
 #### `registry.getOccurrences`
-- [OccurrencesApiProvider - getOccurrences](https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getOccurrences)
+- [OccurrencesApiProvider - getOccurrences](https://gbv.github.io/jskos-provider/OccurrencesApiProvider.html#getOccurrences)
 
 #### `registry.getTypes`
-- [ConceptApiProvider - getTypes](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTypes)
-- [SkosmosApiProvider - getTypes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getTypes)
+- [ConceptApiProvider - getTypes](https://gbv.github.io/jskos-provider/ConceptApiProvider.html#getTypes)
+- [SkosmosApiProvider - getTypes](https://gbv.github.io/jskos-provider/SkosmosApiProvider.html#getTypes)
 
 ## Errors
-cocoda-sdk defines some custom errors.
+jskos-providers defines some custom errors.
 
 ```js
-const { errors } = require("cocoda-sdk") // CommonJS
-import { errors } from "cocoda-sdk"
+import { errors } from "jskos-provider"
 ```
 
 The following errors are defined:
+
 - `CDKError` - generic error
 - `MethodNotImplementedError` - called method is available, but not implemented by the provider
 - `InvalidOrMissingParameterError` - a parameter is missing or invalid
@@ -465,40 +386,24 @@ The following errors are defined:
 - `InvalidRequestError` - the request was invalid
 - `MissingApiUrlError` - the API URL necessary to make this request is not defined on the registry
 
-For details about the errors, refer to the [documentation](https://gbv.github.io/cocoda-sdk/index.html).
+For details about the errors, refer to the [documentation](https://gbv.github.io/jskos-provider/index.html).
 
 ## Maintainers
-- [@stefandesu](https://github.com/stefandesu)
+
 - [@nichtich](https://github.com/nichtich)
 
 ## Publish
-Please work on the `dev` branch during development (or better yet, develop in a feature branch and merge into `dev` when ready).
 
-When a new release is ready (i.e. the features are finished, merged into `dev`, and all tests succeed), run the included release script (replace "patch" with "minor" or "major" if necessary):
-
-```bash
-npm run release:patch
-```
-
-This will:
-- Run tests and build to make sure everything works
-- Switch to `dev`
-- Make sure `dev` is up-to-date
-- Run `npm version patch` (or "minor"/"major")
-- Push changes to `dev`
-- Switch to `main`
-- Merge changes from `dev`
-- Push `main` with tags
-- Switch back to `dev`
-
-After running this, GitHub Actions will automatically publish the new version to npm. It will also create a new GitHub Release draft. Please edit and publish the release manually.
+Please work on the `dev` branch or on a dedicated feature branch during development and only merge into main for releases!
 
 ## Contribute
-PRs accepted.
 
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+Contributions are welcome!
 
 ## License
-MIT Copyright (c) 2021 Verbundzentrale des GBV (VZG)
+
+MIT Copyright (c) 2026 Verbundzentrale des GBV (VZG)
 
 [jskos-server]: https://github.com/gbv/jskos-server
+[JSKOS]: https://gbv.github.io/jskos/
+

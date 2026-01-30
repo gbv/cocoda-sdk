@@ -1,7 +1,7 @@
 import BaseProvider from "./base-provider.js"
-import * as _ from "../utils/lodash.js"
-import * as errors from "../errors/index.js"
-import * as utils from "../utils/index.js"
+import * as _ from "./lodash.js"
+import * as errors from "./errors.js"
+import * as utils from "./utils.js"
 import jskos from "jskos-tools"
 
 /**

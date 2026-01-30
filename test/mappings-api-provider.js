@@ -1,7 +1,7 @@
-import MappingsApiProvider from "../../src/providers/mappings-api-provider.js"
+import MappingsApiProvider from "../src/mappings-api-provider.js"
 import assert from "assert"
 import MockAdapter from "axios-mock-adapter"
-import * as errors from "../../src/errors/index.js"
+import * as errors from "../src/errors.js"
 import jskos from "jskos-tools"
 
 const api = {

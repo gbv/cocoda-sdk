@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["./src/index.js", "./src/errors", "./src/providers", "./src/lib", "./src/utils"]
+    "include": ["./src"]
   },
   "plugins": [
     "plugins/markdown",

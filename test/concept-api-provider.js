@@ -1,4 +1,4 @@
-import ConceptApiProvider from "../../src/providers/concept-api-provider.js"
+import ConceptApiProvider from "../src/concept-api-provider.js"
 import assert from "assert"
 import MockAdapter from "axios-mock-adapter"
 import { cleanJSKOS } from "jskos-tools"

@@ -1,9 +1,9 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
+import * as _ from "./lodash.js"
 import localforage from "localforage"
 import { v4 as uuid } from "uuid"
-import * as errors from "../errors/index.js"
+import * as errors from "./errors.js"
 const uriPrefix = "urn:uuid:"
 
 /**

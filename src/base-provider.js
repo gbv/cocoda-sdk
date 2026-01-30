@@ -1,8 +1,8 @@
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
+import * as _ from "./lodash.js"
 import axios from "axios"
-import * as utils from "../utils/index.js"
-import * as errors from "../errors/index.js"
+import * as utils from "./utils.js"
+import * as errors from "./errors.js"
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
@@ -12,7 +12,7 @@ import * as errors from "../errors/index.js"
  * Static members that should be set:
  * - providerName (This is how a provider is identified in a "registry" object in field `provider`.)
  * - providerType (Optional BARTOC API type URI. Supported types: https://github.com/gbv/bartoc.org/blob/main/data/bartoc-api-types.concepts.csv, the URI prefix is "http://bartoc.org/api-type/".)
- * - supports (Optional object of supported capabilities. The keys should be values from this list: https://github.com/gbv/cocoda-sdk/blob/9145952398d6828004beb395c1d392a4d24e9288/src/utils/index.js#L159-L174; values should be a boolean. `false` values can be left out. They will be used to initialize `this.has` (see below). Alternatively, `this.has` can be filled in `_prepare` or `_setup`.)
+ * - supports (Optional object of supported capabilities. The keys should be values from this list: https://github.com/gbv/cocoda-sdk/blob/9145952398d6828004beb395c1d392a4d24e9288/s./utils.js#L159-L174; values should be a boolean. `false` values can be left out. They will be used to initialize `this.has` (see below). Alternatively, `this.has` can be filled in `_prepare` or `_setup`.)
  *
  * Methods that can be overridden:
  * - Do not override the constructor! Use _prepare or _setup instead.

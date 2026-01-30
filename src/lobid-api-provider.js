@@ -1,5 +1,5 @@
 import BaseProvider from "./base-provider.js"
-import * as errors from "../errors/index.js"
+import * as errors from "./errors.js"
 import jskos from "jskos-tools"
 import axios from "axios"
 
