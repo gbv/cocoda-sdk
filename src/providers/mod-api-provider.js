@@ -37,7 +37,7 @@ export default class ModApiProvider extends BaseProvider {
     schemes: true,
     top: false,
     data: false,
-    concepts: false,
+    concepts: true,
     narrower: false,
     ancestors: false,
     types: false,
@@ -495,7 +495,7 @@ export default class ModApiProvider extends BaseProvider {
       if (scheme) {
         schemes_results.push(scheme)
       } else {
-        console.warn("No scheme found for artefact: ", artefact)
+        console.warn("JSKOS transformation failed for artefact: ", artefact)
       }
     }
     return schemes_results
@@ -518,8 +518,12 @@ export default class ModApiProvider extends BaseProvider {
       for (const concept of concepts) {
         let conceptMod = await this._getConceptMod(concept)
         if (conceptMod) {
-          // const conceptJ = await this._artefactToJSKOS(conceptMod)
-          concept_results.push(conceptMod)
+          const concept = await this._artefactToJSKOS(conceptMod)
+          if (concept) {
+            concept_results.push(concept)
+          } else {
+            console.warn("JSKOS transformation failed for concept: ", conceptMod)
+          }
         }
       }
     } else if (scheme) {
@@ -528,6 +532,8 @@ export default class ModApiProvider extends BaseProvider {
         const conceptJ = await this._artefactToJSKOS(conceptMod)
         if (conceptJ) {
           concept_results.push(conceptJ)
+        } else {
+          console.warn("JSKOS transformation failed for concept: ", conceptMod)
         }
       }
     }

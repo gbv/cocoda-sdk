@@ -7,13 +7,19 @@ import { stdin as input, stdout as output } from "node:process"
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "ModApi",
-  // api: "https://bartoc.org/api/",
   uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
-  // uri: "http://localhost:8080/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
-  language: "und",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
+  language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
 
+// default values
+const limitDefault = 0
+const specificSchemeDefault = "gndo"
+const specificSchemeDefault2 = "gnd"
+const schemeUriDefault = "http://d-nb.info/standards/elementset/gnd#"
+const schemeUriDefault2 = "https://lobid.org/gnd"
+const conceptUriDefault = "https://d-nb.info/gnd/4179484-9"
+const conceptNotationDefault = "4179484-9"
 
 // Readline interface
 const color_headline = "\x1b[1m\x1b[34m"
@@ -67,7 +73,7 @@ function out(obj, objName, time) {
 // API Calls
 async function allSchemes() {
   prompt("0: All Schemes", color_headline)
-  let inputLimit = await ask("Please enter a limit (0 = all)", 0)
+  let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
   const config = {limit: inputLimit}
   const starttime = Date.now()
   const schemes = await provider.getSchemes(config)
@@ -76,7 +82,7 @@ async function allSchemes() {
 
 async function specificSchemes() {
   prompt("1: Specific Scheme", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", "gndo")
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
   const config = { schemes: [ {short: schemeShort} ] }
   const starttime = Date.now()
   const scheme = await provider.getSchemes(config)
@@ -85,7 +91,7 @@ async function specificSchemes() {
 
 async function topConcepts() {
   prompt("2: Top Concepts", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", "gndo")
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
   const config = {scheme: { short: schemeShort }, limit: 10 }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
@@ -94,8 +100,8 @@ async function topConcepts() {
 
 async function allConcepts() {
   prompt("3: All Concepts", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", "gndo")
-  let inputLimit = await ask("Please enter a limit (0 for all)", 0)
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let inputLimit = await ask("Please enter a limit (0 for all)", limitDefault)
   const config = {scheme: { short: schemeShort }, limit: inputLimit }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
@@ -104,8 +110,8 @@ async function allConcepts() {
 
 async function specificConcept() {
   prompt("4: Specific Concept", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", "gnd")
-  let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", "4179484-9")
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault2)
+  let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
   const config = {concepts: [{ notation: conceptNotation, inScheme: [ { short: schemeShort } ] }]}
   const starttime = Date.now()
   const concept = await provider.getConcepts(config)
@@ -114,7 +120,7 @@ async function specificConcept() {
 
 async function specificSchemesUri() {
   prompt("1b: Specific Scheme via uris", color_headline)
-  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const config = { schemes: [{uri: schemeUri}] }
   const starttime = Date.now()
   const scheme = await provider.getSchemes(config)
@@ -123,7 +129,7 @@ async function specificSchemesUri() {
 
 async function topConceptsUri() {
   prompt("2b: Top Concepts via uris", color_headline)
-  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const config = {scheme: { uri: schemeUri }, limit: 10 }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
@@ -132,8 +138,8 @@ async function topConceptsUri() {
 
 async function allConceptsUri() {
   prompt("3b: All Concepts via uris", color_headline)
-  let schemeUri = await ask("Please enter a scheme URI", "http://d-nb.info/standards/elementset/gnd#")
-  let inputLimit = await ask("Please enter a limit (0 = all)", 0)
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
+  let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
   const config = {scheme: { uri: schemeUri }, limit: inputLimit }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
@@ -142,8 +148,8 @@ async function allConceptsUri() {
 
 async function specificConceptUri() {
   prompt("4b: Specific Concept via uris", color_headline)
-  let schemeUri = await ask("Please enter a scheme URI", "https://lobid.org/gnd")
-  let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", "https://d-nb.info/gnd/4179484-9")
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault2)
+  let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
   const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
   const starttime = Date.now()
   const concept = await provider.getConcepts(config)
@@ -152,14 +158,14 @@ async function specificConceptUri() {
 
 async function shortFormFromUri() {
   prompt("5: Short Form from Scheme URI", color_headline)
-  let schemeUri = await ask("Please enter a scheme URI", "https://lobid.org/gnd")
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault2)
   const starttime = Date.now()
   const concept = await provider._getSchemeShort(schemeUri)
   prompt(`Short form of scheme ${schemeUri} is: ${concept}. It took ${((Date.now() - starttime) / 1000).toFixed(2)} seconds.`, color_debug)
 }
 
 async function notationsFromConceptUri() {
-  let conceptUri = await ask("Please enter a concept URI", "https://d-nb.info/gnd/4179484-9")
+  let conceptUri = await ask("Please enter a concept URI", conceptUriDefault)
   const concept = provider._getconceptNotation(conceptUri)
   prompt(`Concept notation of the concept URI ${conceptUri} is: ${concept}`, color_debug)
 }
