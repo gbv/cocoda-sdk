@@ -16,7 +16,7 @@ import context_jskos from "./contexts/context_jskos.js"
  *   provider: "OlsApi",
  *   language: "en",           // language to use for labels and descriptions. if no language is given in ols, it defaults to "en"
  *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
- *   uri: "https://terminology.services.base4nfdi.de/api-gateway" // "http://localhost:8080/api-gateway" if api-gateway is running locally
+ *   uri: "http://www.ebi.ac.uk/ols/api" // "http://service.tib.eu/ts4tib/api"
  * }
  * ```
  *
@@ -84,14 +84,22 @@ export default class OlsApiProvider extends BaseProvider {
 
   _ontologyToJSKOS(ontology) {
     // const lan = ontology.language || this._language || "en"
-    const scheme = {}
-    return scheme
+    // const scheme = {}
+    // return scheme
+
+    // TODO
+
+    return ontology
   }
 
   _termToJSKOS(term) {
     // const lan = term.language || this._language || "en"
-    const concept = {}
-    return concept
+    // const concept = {}
+    // return concept
+
+    // TODO
+
+    return term
   }
 
   // #### API REQUESTS ####
@@ -100,100 +108,152 @@ export default class OlsApiProvider extends BaseProvider {
     if (!url) {
       return
     }
-    const result = await this.axios({
-      method: "get",
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      ..._config,
-    })
-    if (!result?._url || Object.keys(result).length != 1){
-      return result
+    console.log("Requesting URL: ", url)
+    try {
+      const result = await this.axios({
+        method: "get",
+        url,
+        'Accept-Encoding': 'identity',
+        'User-Agent': 'axios/1.11.0',
+        ..._config,
+      })
+      if (!result?._url || Object.keys(result).length != 1){
+        return result
+      }
+    } catch (error) {
+      console.error("Error requesting URL: ", url, error)
+      return null 
     }
   }
 
+
+
+
+
   // API REQUESTS SCHEMES
 
-  async _getSchemesOls(schemeParam) {
+  async _getSchemesOls() {
     // http://www.ebi.ac.uk/ols/api/ontologies  (ignore pages!) Listing ontologies
-    return {}
+    const url = this._getApiUrl(["ontologies"], null)
+    const pageOne = await this._request(url)
+    if (!pageOne){
+      return null
+    }
+    let ontologies = pageOne._embedded?.ontologies || []
+    const totalPages = pageOne.page?.totalPages || 1
+    for (let n = 2; n <= totalPages; n++) {
+      const urlN = this._getApiUrl(["ontologies"], {page: n})
+      const pageN = await this._request(urlN)
+      if (pageN) {
+        ontologies = ontologies.concat(pageN._embedded?.ontologies || [])
+      }
+    }
+    return ontologies
   }
 
   async _getSchemesOlsLimit(limit) {
     // http://www.ebi.ac.uk/ols/api/ontologies  (pages!) Listing ontologies
-    return {}
+    if (!limit || limit <= 0) {
+      return await this._getSchemesOls()
+    }
+    const url = this._getApiUrl(["ontologies"], {size: limit})
+    let response = await this._request(url)
+    return response._embedded?.ontologies || []
   }
 
   async _getSchemeOls(schemeParam) {
     // http://www.ebi.ac.uk/ols/api/ontologies/envo
     // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl 
-    return {}    
+    if (schemeParam.short) {
+      return await this._getSchemeFromShort(schemeParam.short)
+    } else if (schemeParam.uri) {
+      return await this._getSchemeFromUri(schemeParam.uri)
+    } else {
+      return null
+    }
   }
 
   async _getSchemeFromShort(short) {
     // http://www.ebi.ac.uk/ols/api/ontologies/envo
-    return {}
+    const url = this._getApiUrl(["ontologies", short], null)
+    return await this._request(url)
   }
 
   async _getSchemeFromUri(uri) {
     // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl
-    return {}
+    // https://www.ebi.ac.uk/ols/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
+    // https://www.ebi.ac.uk/ols4/api/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
+    const url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
+    let response = await this._request(url)
+    if (response && response._embedded && response._embedded.ontologies && response._embedded.ontologies.length > 0) {
+      return response._embedded.ontologies[0]
+    }
+    return null
   }
 
   // API REQUESTS CONCEPTS
 
   async _getConceptsOls(scheme) {
     // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms
-    return {}
+    const short = await this._schemeShortFromObj(scheme)
+    const url = this._getApiUrl(["ontologies", short, "terms"], null)
+    let pageOne = await this._request(url)
+    let terms = pageOne._embedded?.terms
+    const totalPages = pageOne.page?.totalPages || 1
+    for (let n = 2; n <= totalPages; n++) {
+      const urlN = this._getApiUrl(["ontologies", short, "terms"], {page: n})
+      const pageN = await this._request(urlN)
+      if (pageN) {
+        terms = terms.concat(pageN._embedded?.terms || [])
+      }
+    }
+    return terms
   }
 
   async _getConceptsOlsLimit(scheme, limit) {
     // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms
-    return {}
+    const short = await this._schemeShortFromObj(scheme)
+    const url = this._getApiUrl(["ontologies", short, "terms"], {size: limit})
+    if (!limit || limit <= 0) {
+      const url = this._getApiUrl(["ontologies", short, "terms"], null)
+    }
+    let response = await this._request(url)
+    if (response && response._embedded && response._embedded.terms) {
+      return response._embedded?.terms
+    }
+    return []
+    
   }
 
   async _getConceptOls(concept) {
     // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms?id=BFO_0000001
     // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
-    return {}
+    const short = await this._schemeShortFromObj(concept.inScheme[0])
+    let url = null
+    if (concept.notation) {
+      url = this._getApiUrl(["ontologies", short, "terms"], {id: concept.notation})
+    } else if (concept.uri) {
+      url = this._getApiUrl(["ontologies", short, "terms"], {iri: concept.uri})
+    }
+    let response = await this._request(url)
+    if (response && response._embedded && response._embedded.terms) {
+      return response._embedded.terms
+    }
+    return null
   }
 
   // UTILITIES
 
-  _containsString(obj, searchString) {
-    for (const key in obj) {
-      const value = obj[key]
-
-      if (typeof value === "string" && value.includes(searchString)) {
-        return true
-      }
-
-      if (typeof value === "object" && value !== null) {
-        if (this.containsString(value, searchString)) {
-          return true
-        }
-      }
-    }
-    return false
-  }
-
-  async _getSchemesContaining(partstring) {
-    let schemes = []
-    const schemesOls = await this._getSchemesOls()
-    for (const scheme of schemesOls) {
-      if (this.containsString(scheme, partstring)) {
-        schemes.push(scheme)
-      }
-    }
-    return schemes
-  }
-
   async _getSchemeShort(uri) {
     // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl
     // get elements/ontologyId
-    return {}
+
+    let url = this._getApiUrl(["ontologies"], {searchFields: "iri", search: uri})
+    let response = await this._request(url)
+    if (response && response._embedded && response._embedded.ontologies && response._embedded.ontologies.length > 0) {
+      return response._embedded.ontologies[0].ontologyId
+    }
+    return null
   }
 
   async _schemeShortFromObj(scheme) {
@@ -223,25 +283,30 @@ export default class OlsApiProvider extends BaseProvider {
   /**
    * Retrieves all concept schemes from the OLS API.
    *
-   * @param {Object} [params={}] - Optional parameters for the request.
+   * @param {Object} [params={}] - An object containing parameters for the request.
+   * @param {Object[]} params.schemes - List of scheme objects to request specific schemes.
+   *   { short: schemeShort, uri:schemeUri }
+   * @param {Object[]} params.limit - Optional limit for results when requesting all schemes.
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
    */
   async getSchemes({schemes, limit, ..._config}) {
     let schemes_results = []
     let ontologies = []
-    if (schemes) {
+    if (schemes) { // a specific scheme or list of schemes is requested
       for (const s of schemes) {
         let sc = await this._getSchemeOls(s)
         if (sc) {
           ontologies.push(sc)
         }
       }
-    } else {
+    } else if (limit) { // limit is given
       ontologies = await this._getSchemesOlsLimit(limit)
+    } else { // all schemes
+      ontologies = await this._getSchemesOls()
     }
 
-    for (const ontology of ontologies) {
+    for (const ontology of ontologies) { // transform to JSKOS
       let scheme = await this._ontologyToJSKOS(ontology)
       if (scheme) {
         schemes_results.push(scheme)
@@ -255,11 +320,13 @@ export default class OlsApiProvider extends BaseProvider {
   /**
  * Retrieves all concepts from the OLS API.
  *
- * @param {Object} params - The options object.
- * @param {string[]} params.concepts - List of concept objects to request specific concepts.
- * @param {string} params.scheme - A scheme object to request concepts from a specific scheme.
- * @param {number} [params.limit] - Optional limit for results when requesting concepts from a scheme.
- * @param {Object} [params._config] - Additional config options.
+ * @param {Object} [params={}] - An object containing parameters for the request.
+ * @param {Object[]} params.concepts - List of concept objects to request specific concepts.
+ *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
+ * @param {Object} params.scheme - A scheme object to request concepts from a specific scheme.
+ *  { short: schemeShort, uri:schemeUri }
+ * @param {number} params.limit - Optional limit for results when requesting concepts from a scheme.
+ * @param {Object} params._config - Additional config options.
  * @returns {Promise<Array>} An array of JSKOS concepts.
  * @async
  */

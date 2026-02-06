@@ -7,7 +7,7 @@ import { stdin as input, stdout as output } from "node:process"
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "OlsApi",
-  uri: "http://service.tib.eu/ts4tib/api", // "http://localhost:8080/api-gateway" if api-gateway is running locally
+  uri: "https://www.ebi.ac.uk/ols4/api", // or "http://service.tib.eu/ts4tib/api", "http://www.ebi.ac.uk/ols/api"
   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
@@ -16,7 +16,7 @@ const provider = cdk.initializeRegistry({
 // default values
 const limitDefault = 0
 const specificSchemeDefault = "envo"
-const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl "
+const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000001"
 const conceptNotationDefault = "BFO_0000001"
 
@@ -156,7 +156,7 @@ async function specificConceptUri() {
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
 }
 
-/*async function shortFormFromUri() {
+async function shortFormFromUri() {
   prompt("5: Short Form from Scheme URI", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const starttime = Date.now()
@@ -164,7 +164,7 @@ async function specificConceptUri() {
   prompt(`Short form of scheme ${schemeUri} is: ${concept}. It took ${((Date.now() - starttime) / 1000).toFixed(2)} seconds.`, color_debug)
 }
 
-async function notationsFromConceptUri() {
+/*async function notationsFromConceptUri() {
   let conceptUri = await ask("Please enter a concept URI", conceptUriDefault)
   const concept = provider._getconceptNotation(conceptUri)
   prompt(`Concept notation of the concept URI ${conceptUri} is: ${concept}`, color_debug)
@@ -178,11 +178,11 @@ async function mainLoop() {
 
     
     prompt("What do you request? Please choose from the following options:", color_prompt)
-    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept", color_prompt)
-/*
+    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: short form from URI", color_prompt)
+    /*
     prompt("0–4 via short-form and notation, 0b-4b via URIs,", color_prompt)
     const choice = (await ask("5 for requesting short-form from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
-*/
+    */
     const choice = (await ask("0–4 via short-form and notation, 0b-4b via URIs, 'q' to quit")).trim()
 
     switch (choice) {
@@ -229,16 +229,10 @@ async function mainLoop() {
         await specificConceptUri()
         break
       }
-/*
       case "5": {
         await shortFormFromUri()
         break
       }
-      case "6": {
-        await notationsFromConceptUri()
-        break
-      }
-*/
       default:
         prompt("Invalid choice, please pick between 0 and 4.", color_debug)
     }
