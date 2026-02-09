@@ -113,8 +113,6 @@ export default class OlsApiProvider extends BaseProvider {
       const result = await this.axios({
         method: "get",
         url,
-        'Accept-Encoding': 'identity',
-        'User-Agent': 'axios/1.11.0',
         ..._config,
       })
       if (!result?._url || Object.keys(result).length != 1){
@@ -163,7 +161,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getSchemeOls(schemeParam) {
     // https://api.terminology.tib.eu/api/ontologies/envo
-    // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl 
+    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl 
     if (schemeParam.short) {
       return await this._getSchemeFromShort(schemeParam.short)
     } else if (schemeParam.uri) {
@@ -412,26 +410,26 @@ export default class OlsApiProvider extends BaseProvider {
     return concept_results
   }
 
-    /**
-     * Returns top concepts for a concept scheme.
-     *
-     * @param {Object} config
-     * @param {Object} config.scheme concept scheme object
-     * @returns {Object[]} array of JSKOS concept objects
-     */
-    async getTop({ scheme, ...config }) {
-      let concept_results = []
-      let termsOls = await this._getTopOls(scheme)
-      for (const termOls of termsOls) {
-        const concept = await this._termToJSKOS(termOls)
-        if (concept) {
-          concept_results.push(concept)
-        } else {
-          console.warn("JSKOS transformation failed for term: ", termOls)
-        }
+  /**
+   * Returns top concepts for a concept scheme.
+   *
+   * @param {Object} config
+   * @param {Object} config.scheme concept scheme object
+   * @returns {Object[]} array of JSKOS concept objects
+   */
+  async getTop({ scheme, ..._config }) {
+    let concept_results = []
+    let termsOls = await this._getTopOls(scheme)
+    for (const termOls of termsOls) {
+      const concept = await this._termToJSKOS(termOls)
+      if (concept) {
+        concept_results.push(concept)
+      } else {
+        console.warn("JSKOS transformation failed for term: ", termOls)
       }
-      return concept_results
     }
+    return concept_results
+  }
 
   /**
    * @private
