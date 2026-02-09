@@ -16,7 +16,7 @@ import context_jskos from "./contexts/context_jskos.js"
  *   provider: "OlsApi",
  *   language: "en",           // language to use for labels and descriptions. if no language is given in ols, it defaults to "en"
  *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
- *   uri: "http://www.ebi.ac.uk/ols/api" // "http://service.tib.eu/ts4tib/api"
+ *   uri: "https://api.terminology.tib.eu/api" // "http://service.tib.eu/ts4tib/api"
  * }
  * ```
  *
@@ -133,7 +133,7 @@ export default class OlsApiProvider extends BaseProvider {
   // API REQUESTS SCHEMES
 
   async _getSchemesOls() {
-    // http://www.ebi.ac.uk/ols/api/ontologies  (ignore pages!) Listing ontologies
+    // https://api.terminology.tib.eu/api/ontologies  (ignore pages!) Listing ontologies
     const url = this._getApiUrl(["ontologies"], null)
     const pageOne = await this._request(url)
     if (!pageOne){
@@ -141,7 +141,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     let ontologies = pageOne._embedded?.ontologies || []
     const totalPages = pageOne.page?.totalPages || 1
-    for (let n = 2; n <= totalPages; n++) {
+    for (let n = 1; n <= totalPages; n++) {
       const urlN = this._getApiUrl(["ontologies"], {page: n})
       const pageN = await this._request(urlN)
       if (pageN) {
@@ -152,7 +152,7 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemesOlsLimit(limit) {
-    // http://www.ebi.ac.uk/ols/api/ontologies  (pages!) Listing ontologies
+    // https://api.terminology.tib.eu/api/ontologies  (pages!) Listing ontologies
     if (!limit || limit <= 0) {
       return await this._getSchemesOls()
     }
@@ -162,7 +162,7 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeOls(schemeParam) {
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo
+    // https://api.terminology.tib.eu/api/ontologies/envo
     // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl 
     if (schemeParam.short) {
       return await this._getSchemeFromShort(schemeParam.short)
@@ -174,27 +174,23 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeFromShort(short) {
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo
+    // https://api.terminology.tib.eu/api/ontologies/envo
     const url = this._getApiUrl(["ontologies", short], null)
     return await this._request(url)
   }
 
   async _getSchemeFromUri(uri) {
-    // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl
-    // https://www.ebi.ac.uk/ols/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
-    // https://www.ebi.ac.uk/ols4/api/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
+    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
     const url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
     let response = await this._request(url)
-    if (response && response._embedded && response._embedded.ontologies && response._embedded.ontologies.length > 0) {
-      return response._embedded.ontologies[0]
-    }
-    return null
+    let ontologies = response.elements
+    return ontologies.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, ontologies[0])
   }
 
   // API REQUESTS CONCEPTS
 
   async _getConceptsOls(scheme) {
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms
     const short = await this._schemeShortFromObj(scheme)
     const url = this._getApiUrl(["ontologies", short, "terms"], null)
     let pageOne = await this._request(url)
@@ -211,23 +207,41 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getConceptsOlsLimit(scheme, limit) {
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms
-    const short = await this._schemeShortFromObj(scheme)
-    const url = this._getApiUrl(["ontologies", short, "terms"], {size: limit})
-    if (!limit || limit <= 0) {
-      const url = this._getApiUrl(["ontologies", short, "terms"], null)
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms
+    if (limit && limit > 0) {
+      return await this._getConceptsOlsLimited(scheme, limit)
     }
+
+    const short = await this._schemeShortFromObj(scheme)
+    let url = this._getApiUrl(["ontologies", short, "terms"], null)
+    let pageOne = await this._request(url)
+    let terms = pageOne._embedded?.terms
+
+    const totalPages = pageOne.page?.totalPages || 1
+    for (let n = 1; n <= totalPages; n++) {
+      const urlN = this._getApiUrl(["ontologies", short, "terms"], {page: n})
+      const pageN = await this._request(urlN)
+      if (pageN) {
+        terms = terms.concat(pageN._embedded?.terms || [])
+      }
+    }
+    return terms
+  }
+
+  async _getConceptsOlsLimited(scheme, limit) {
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms
+    const short = await this._schemeShortFromObj(scheme)
+    let url = this._getApiUrl(["ontologies", short, "terms"], {size: limit})
     let response = await this._request(url)
     if (response && response._embedded && response._embedded.terms) {
       return response._embedded?.terms
     }
     return []
-    
   }
 
   async _getConceptOls(concept) {
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms?id=BFO_0000001
-    // http://www.ebi.ac.uk/ols/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
     const short = await this._schemeShortFromObj(concept.inScheme[0])
     let url = null
     if (concept.notation) {
@@ -242,18 +256,58 @@ export default class OlsApiProvider extends BaseProvider {
     return null
   }
 
+  async _getTopOls(scheme) {
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms/roots
+    const short = await this._schemeShortFromObj(scheme)
+    let url = this._getApiUrl(["ontologies", short, "terms", "roots"], null)
+    let response = await this._request(url)
+    if (response && response._embedded && response._embedded.terms) {
+      return response._embedded.terms || []
+    }
+  }
+
   // UTILITIES
 
-  async _getSchemeShort(uri) {
-    // https://www.ebi.ac.uk/ols4/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl
+  async _getSchemeShortManual(uri) {
     // get elements/ontologyId
 
-    let url = this._getApiUrl(["ontologies"], {searchFields: "iri", search: uri})
-    let response = await this._request(url)
-    if (response && response._embedded && response._embedded.ontologies && response._embedded.ontologies.length > 0) {
-      return response._embedded.ontologies[0].ontologyId
+    const url = this._getApiUrl(["ontologies"], null)
+    const pageOne = await this._request(url)
+    if (!pageOne){
+      return []
+    }
+    let ontologies = pageOne._embedded?.ontologies || []
+    for (const ontology of ontologies) {
+      if (ontology.config?.versionIri == uri) {
+        return ontology.ontologyId
+      }
+    }
+
+    const totalPages = pageOne.page?.totalPages || 1
+    for (let n = 1; n <= totalPages; n++) {
+      const urlN = this._getApiUrl(["ontologies"], {page: n})
+      const pageN = await this._request(urlN)
+      if (pageN) {
+        let ontologies = pageN._embedded?.ontologies || []
+        for (const ontology of ontologies) {
+          if (ontology.config?.versionIri == uri || ontology.config?.fileLocation == uri) {
+            return ontology.ontologyId
+          }
+        }
+      }
     }
     return null
+  }
+
+  async _getSchemeShort(uri) {
+    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
+    let url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
+    let response = await this._request(url)
+    let shorts = []
+    for (const ontology of response.elements){
+      shorts.push(ontology.ontologyId)
+    }
+    return shorts.reduce((shortest, current) => current.length < shortest.length ? current : shortest)
   }
 
   async _schemeShortFromObj(scheme) {
@@ -357,6 +411,27 @@ export default class OlsApiProvider extends BaseProvider {
     }
     return concept_results
   }
+
+    /**
+     * Returns top concepts for a concept scheme.
+     *
+     * @param {Object} config
+     * @param {Object} config.scheme concept scheme object
+     * @returns {Object[]} array of JSKOS concept objects
+     */
+    async getTop({ scheme, ...config }) {
+      let concept_results = []
+      let termsOls = await this._getTopOls(scheme)
+      for (const termOls of termsOls) {
+        const concept = await this._termToJSKOS(termOls)
+        if (concept) {
+          concept_results.push(concept)
+        } else {
+          console.warn("JSKOS transformation failed for term: ", termOls)
+        }
+      }
+      return concept_results
+    }
 
   /**
    * @private

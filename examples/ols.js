@@ -7,7 +7,7 @@ import { stdin as input, stdout as output } from "node:process"
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "OlsApi",
-  uri: "https://www.ebi.ac.uk/ols4/api", // or "http://service.tib.eu/ts4tib/api", "http://www.ebi.ac.uk/ols/api"
+  uri: "https://api.terminology.tib.eu/api/", // or "http://service.tib.eu/ts4tib/api", "http://www.ebi.ac.uk/ols/api", "https://www.ebi.ac.uk/ols4/api"
   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
@@ -92,9 +92,9 @@ async function specificSchemes() {
 async function topConcepts() {
   prompt("2: Top Concepts", color_headline)
   let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
-  const config = {scheme: { short: schemeShort }, limit: 10 }
+  const config = {scheme: { short: schemeShort }}
   const starttime = Date.now()
-  const concepts = await provider.getConcepts(config)
+  const concepts = await provider.getTop(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
 }
 
@@ -128,11 +128,11 @@ async function specificSchemesUri() {
 }
 
 async function topConceptsUri() {
-  prompt("2b: Top Concepts via uris", color_headline)
+  prompt("2: Top Concepts", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const config = {scheme: { uri: schemeUri }, limit: 10 }
   const starttime = Date.now()
-  const concepts = await provider.getConcepts(config)
+  const concepts = await provider.getTop(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
 }
 
