@@ -83,13 +83,33 @@ export default class OlsApiProvider extends BaseProvider {
 
 
   _ontologyToJSKOS(ontology) {
-    // const lan = ontology.language || this._language || "en"
-    // const scheme = {}
-    // return scheme
-
-    // TODO
-
-    return ontology
+    const lan = ontology.lang || this._language || "en"
+    const scheme = {}
+    if (ontology.iri)
+      scheme.uri = ontology.iri
+    scheme.type = [
+      "http://www.w3.org/2004/02/skos/core#ConceptScheme",
+      "http://www.w3.org/2002/07/owl#Ontology"
+    ]
+    if (ontology.title) {
+      scheme.prefLabel = {}
+      scheme.prefLabel[lan] = ontology.title
+    }
+    if (ontology.description){
+      scheme.definition = {}
+      scheme.definition[lan] = [ontology.description]
+    }
+    if (ontology.homepage)
+      scheme.url = ontology.homepage
+    
+    if (ontology.tracker) {
+      scheme.issueTracker = [{"url": ontology.tracker }]
+    }
+    if (ontology.language)
+      scheme.languages = ontology.language
+    if (ontology.license?.url)
+      scheme.license = [{"uri": ontology.license.url}]
+    return scheme
   }
 
   _termToJSKOS(term) {
