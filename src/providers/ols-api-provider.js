@@ -90,8 +90,10 @@ export default class OlsApiProvider extends BaseProvider {
     }
     scheme.type = [
       "http://www.w3.org/2004/02/skos/core#ConceptScheme",
-      "http://www.w3.org/2002/07/owl#Ontology",
     ]
+    if (ontology["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]) {
+      scheme.type = scheme.type.concat(ontology["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"])
+    }
     if (ontology.title) {
       scheme.prefLabel = {}
       scheme.prefLabel[lan] = ontology.title
@@ -130,20 +132,25 @@ export default class OlsApiProvider extends BaseProvider {
 
   // #### API REQUESTS ####
 
-  async _request(url, ..._config) {
+  async _request(url, config = {_skipAdditionalParameters: true}) {
     if (!url) {
       return
     }
-    console.log("Requesting URL: ", url)
+    console.log("Requesting URL: ", `'${url}'`)
     try {
+      const u = new URL(url);
+      const inlineParams = Object.fromEntries(u.searchParams.entries());
+
       const result = await this.axios({
         method: "get",
-        url,
-        ..._config,
+        url: u.origin + u.pathname,
+        params: {
+          ...inlineParams,
+          ...config.params, // explicit params win
+        },
+        ...config,
       })
-      if (!result?._url || Object.keys(result).length != 1) {
-        return result
-      }
+      return result
     } catch (error) {
       console.error("Error requesting URL: ", url, error)
     }
@@ -215,46 +222,24 @@ export default class OlsApiProvider extends BaseProvider {
 
   // API REQUESTS CONCEPTS
 
-  async _getConceptsOls(scheme) {
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms
-    const short = await this._schemeShortFromObj(scheme)
-    if (!short) {
-      return []
-    }
-    const url = this._getApiUrl(["ontologies", short, "terms"], null)
-    let pageOne = await this._request(url)
-    let terms = pageOne._embedded?.terms
-    const totalPages = pageOne.page?.totalPages || 1
-    for (let n = 2; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies", short, "terms"], {page: n})
-      const pageN = await this._request(urlN)
-      if (pageN) {
-        terms = terms.concat(pageN._embedded?.terms || [])
-      }
-    }
-    return terms
-  }
-
-  async _getConceptsOlsLimit(scheme, limit) {
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms
+  async _getConceptsOls(scheme, limit) {
     if (limit && limit > 0) {
       return await this._getConceptsOlsLimited(scheme, limit)
     }
-
+    // https://api.terminology.tib.eu/api/ontologies/envo/terms
     const short = await this._schemeShortFromObj(scheme)
     if (!short) {
       return []
     }
-    let url = this._getApiUrl(["ontologies", short, "terms"], null)
+    const url = this._getApiUrl(["v2", "ontologies", short, "classes"], null)
     let pageOne = await this._request(url)
-    let terms = pageOne._embedded?.terms || []
-
-    const totalPages = pageOne.page?.totalPages || 1
+    let terms = pageOne.elements || []
+    const totalPages = pageOne.totalPages || 1
     for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies", short, "terms"], {page: n})
+      const urlN = this._getApiUrl(["v2", "ontologies", short, "classes"], {page: n})
       const pageN = await this._request(urlN)
       if (pageN) {
-        terms = terms.concat(pageN._embedded?.terms || [])
+        terms = terms.concat(pageN.elements || [])
       }
     }
     return terms
@@ -266,30 +251,32 @@ export default class OlsApiProvider extends BaseProvider {
     if (!short) {
       return []
     }
-    let url = this._getApiUrl(["ontologies", short, "terms"], {size: limit})
+    let url = this._getApiUrl(["v2", "ontologies", short, "classes"], {size: limit})
     let response = await this._request(url)
-    if (response && response._embedded && response._embedded.terms) {
-      return response._embedded?.terms
+    if (response && response.elements) {
+      return response.elements
     }
     return []
   }
 
   async _getConceptOls(concept) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
+    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?shortForm=BFO_0000001
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
+    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http://purl.obolibrary.org/obo/BFO_0000001
     const short = await this._schemeShortFromObj(concept.inScheme[0])
     if (!short) {
       return null
     }
     let url = null
     if (concept.notation) {
-      url = this._getApiUrl(["ontologies", short, "terms"], {id: concept.notation})
+      url = this._getApiUrl(["v2","ontologies", short, "classes"], {shortForm: concept.notation})
     } else if (concept.uri) {
-      url = this._getApiUrl(["ontologies", short, "terms"], {iri: concept.uri})
+      url = this._getApiUrl(["v2","ontologies", short, "classes"], {iri: concept.uri})
     }
     let response = await this._request(url)
-    if (response && response._embedded && response._embedded.terms) {
-      return response._embedded.terms
+    if (response && response.elements) {
+      return response.elements
     }
     return null
   }
@@ -300,45 +287,19 @@ export default class OlsApiProvider extends BaseProvider {
     if (!short) {
       return []
     }
-    let url = this._getApiUrl(["ontologies", short, "terms", "roots"], null)
+    // let url = this._getApiUrl(["ontologies", short, "terms", "roots"], null)
+    let url = this._getApiUrl(["v2","ontologies", short, "classes"], {hasDirectParents: "false"})
+    //let url = this._getApiUrl(["v2","ontologies", short, "classes"], {hasDirectParents: false})
+    // let url = this._getApiUrl(["v2","ontologies", short, "properties"], {hasDirectParents: false})
     let response = await this._request(url)
-    if (response && response._embedded && response._embedded.terms) {
-      return response._embedded.terms || []
+    console.log("Top concepts response: ", response)
+    if (response && response.elements) {
+      return response.elements
     }
+    return []
   }
 
   // UTILITIES
-
-  async _getSchemeShortManual(uri) {
-    // get elements/ontologyId
-
-    const url = this._getApiUrl(["ontologies"], null)
-    const pageOne = await this._request(url)
-    if (!pageOne) {
-      return []
-    }
-    let ontologies = pageOne._embedded?.ontologies || []
-    for (const ontology of ontologies) {
-      if (ontology.config?.versionIri == uri) {
-        return ontology.ontologyId
-      }
-    }
-
-    const totalPages = pageOne.page?.totalPages || 1
-    for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies"], {page: n})
-      const pageN = await this._request(urlN)
-      if (pageN) {
-        let ontologies = pageN._embedded?.ontologies || []
-        for (const ontology of ontologies) {
-          if (ontology.config?.versionIri == uri || ontology.config?.fileLocation == uri) {
-            return ontology.ontologyId
-          }
-        }
-      }
-    }
-    return null
-  }
 
   async _getSchemeShort(uri) {
     // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
@@ -446,7 +407,7 @@ export default class OlsApiProvider extends BaseProvider {
         }
       }
     } else if (scheme) {
-      const termsOls = await this._getConceptsOlsLimit(scheme, limit)
+      const termsOls = await this._getConceptsOls(scheme, limit)
       for (const termOls of termsOls) {
         const concept = await this._termToJSKOS(termOls)
         if (concept) {
