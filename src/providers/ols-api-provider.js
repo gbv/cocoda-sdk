@@ -85,30 +85,36 @@ export default class OlsApiProvider extends BaseProvider {
   _ontologyToJSKOS(ontology) {
     const lan = ontology.lang || this._language || "en"
     const scheme = {}
-    if (ontology.iri)
+    if (ontology.iri) {
       scheme.uri = ontology.iri
+    }
     scheme.type = [
       "http://www.w3.org/2004/02/skos/core#ConceptScheme",
-      "http://www.w3.org/2002/07/owl#Ontology"
+      "http://www.w3.org/2002/07/owl#Ontology",
     ]
     if (ontology.title) {
       scheme.prefLabel = {}
       scheme.prefLabel[lan] = ontology.title
     }
-    if (ontology.description){
+    if (ontology.description) {
       scheme.definition = {}
       scheme.definition[lan] = [ontology.description]
     }
-    if (ontology.homepage)
+    if (ontology.homepage) {
       scheme.url = ontology.homepage
-    
-    if (ontology.tracker) {
-      scheme.issueTracker = [{"url": ontology.tracker }]
     }
-    if (ontology.language)
+    if (ontology.tracker) {
+      scheme.issueTracker = [{url: ontology.tracker }]
+    }
+    if (ontology.language) {
       scheme.languages = ontology.language
-    if (ontology.license?.url)
-      scheme.license = [{"uri": ontology.license.url}]
+    }
+    if (ontology.ontologyId) {
+      scheme.notation = [ontology.ontologyId]
+    }
+    if (ontology.license?.url) {
+      scheme.license = [{uri: ontology.license.url}]
+    }
     return scheme
   }
 
@@ -135,7 +141,7 @@ export default class OlsApiProvider extends BaseProvider {
         url,
         ..._config,
       })
-      if (!result?._url || Object.keys(result).length != 1){
+      if (!result?._url || Object.keys(result).length != 1) {
         return result
       }
     } catch (error) {
@@ -154,8 +160,9 @@ export default class OlsApiProvider extends BaseProvider {
     // https://api.terminology.tib.eu/api/v2/ontologies (pages!)
     const url = this._getApiUrl(["v2", "ontologies"], null)
     const pageOne = await this._request(url)
-    if (!pageOne)
+    if (!pageOne) {
       return null
+    }
     let ontologies = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
     for (let n = 1; n <= totalPages; n++) {
@@ -179,10 +186,12 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeOls(schemeParam) {
-    if (schemeParam.short)
+    if (schemeParam.short) {
       return await this._getSchemeFromShort(schemeParam.short)
-    if (schemeParam.uri)
+    }
+    if (schemeParam.uri) {
       return await this._getSchemeFromUri(schemeParam.uri)
+    }
     return null
   }
 
@@ -197,8 +206,9 @@ export default class OlsApiProvider extends BaseProvider {
     const url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
     let response = await this._request(url)
     let ontologies = response.elements
-    if (ontologies.length == 0)
+    if (ontologies.length == 0) {
       return null
+    }
     // if multiple, return the ontology with the shortest ontologyId (e.g., envo, not envo2021)
     return ontologies.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, ontologies[0])
   }
@@ -208,8 +218,9 @@ export default class OlsApiProvider extends BaseProvider {
   async _getConceptsOls(scheme) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms
     const short = await this._schemeShortFromObj(scheme)
-    if (!short)
+    if (!short) {
       return []
+    }
     const url = this._getApiUrl(["ontologies", short, "terms"], null)
     let pageOne = await this._request(url)
     let terms = pageOne._embedded?.terms
@@ -231,8 +242,9 @@ export default class OlsApiProvider extends BaseProvider {
     }
 
     const short = await this._schemeShortFromObj(scheme)
-    if (!short)
+    if (!short) {
       return []
+    }
     let url = this._getApiUrl(["ontologies", short, "terms"], null)
     let pageOne = await this._request(url)
     let terms = pageOne._embedded?.terms || []
@@ -251,8 +263,9 @@ export default class OlsApiProvider extends BaseProvider {
   async _getConceptsOlsLimited(scheme, limit) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms
     const short = await this._schemeShortFromObj(scheme)
-    if (!short)
+    if (!short) {
       return []
+    }
     let url = this._getApiUrl(["ontologies", short, "terms"], {size: limit})
     let response = await this._request(url)
     if (response && response._embedded && response._embedded.terms) {
@@ -265,8 +278,9 @@ export default class OlsApiProvider extends BaseProvider {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
     const short = await this._schemeShortFromObj(concept.inScheme[0])
-    if (!short)
+    if (!short) {
       return null
+    }
     let url = null
     if (concept.notation) {
       url = this._getApiUrl(["ontologies", short, "terms"], {id: concept.notation})
@@ -283,8 +297,9 @@ export default class OlsApiProvider extends BaseProvider {
   async _getTopOls(scheme) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms/roots
     const short = await this._schemeShortFromObj(scheme)
-    if (!short)
+    if (!short) {
       return []
+    }
     let url = this._getApiUrl(["ontologies", short, "terms", "roots"], null)
     let response = await this._request(url)
     if (response && response._embedded && response._embedded.terms) {
@@ -299,7 +314,7 @@ export default class OlsApiProvider extends BaseProvider {
 
     const url = this._getApiUrl(["ontologies"], null)
     const pageOne = await this._request(url)
-    if (!pageOne){
+    if (!pageOne) {
       return []
     }
     let ontologies = pageOne._embedded?.ontologies || []
@@ -333,17 +348,20 @@ export default class OlsApiProvider extends BaseProvider {
     for (const ontology of response.elements){
       shorts.push(ontology.ontologyId)
     }
-    if (shorts.length == 0)
+    if (shorts.length == 0) {
       return null
+    }
     // if multiple, return the shortest one (e.g., envo, not envo2021)
     return shorts.reduce((shortest, current) => current.length < shortest.length ? current : shortest)
   }
 
   async _schemeShortFromObj(scheme) {
-    if (scheme.short)
+    if (scheme.short) {
       return scheme.short
-    if (scheme.uri)
+    }
+    if (scheme.uri) {
       return await this._getSchemeShort(scheme.uri)
+    }
     return null
   }
 
