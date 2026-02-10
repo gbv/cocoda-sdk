@@ -35,8 +35,8 @@ export default class OlsApiProvider extends BaseProvider {
     top: true,
     data: false,
     concepts: true,
-    narrower: false,
-    ancestors: false,
+    narrower: true,
+    ancestors: true,
     types: false,
     suggest: false,
     search: false,
@@ -121,7 +121,6 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   _termToJSKOS(term) {
-    console.log("Transforming term to JSKOS: ", term)
     const lan = term.language || this._language || "en"
     const concept = {}
     if (term.curie) {
@@ -316,11 +315,42 @@ export default class OlsApiProvider extends BaseProvider {
     //let url = this._getApiUrl(["v2","ontologies", short, "classes"], {hasDirectParents: false})
     // let url = this._getApiUrl(["v2","ontologies", short, "properties"], {hasDirectParents: false})
     let response = await this._request(url)
-    console.log("Top concepts response: ", response)
     if (response && response.elements) {
       return response.elements
     }
     return []
+  }
+
+  
+  async _getNarrowerOls(concept) {
+    const {short, iri} = await this._normalizeConceptObject(concept)
+    if (!short || !iri) {
+      return []
+    }
+    let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
+    let url = this._getApiUrl(["v2","ontologies", short, "classes", iriDoubleEncoded, "children"], null)
+    let response = await this._request(url)
+    if (response && response.elements) {
+      return response.elements
+    }
+    return []
+  }
+
+  async _getAncestorsOls(concept) {
+    const {short, iri} = await this._normalizeConceptObject(concept)
+    if (!short || !iri) {
+      return []
+    }
+    console.log("Getting ancestors for concept with short: ", short, " and iri: ", iri)
+    let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
+    console.log("Double encoded IRI: ", iriDoubleEncoded)
+    let url = this._getApiUrl(["v2","ontologies", short, "classes", iriDoubleEncoded, "ancestors"], null)
+    let response = await this._request(url)
+    if (response && response.elements) {
+      return response.elements
+    }
+    return []
+
   }
 
   // UTILITIES
@@ -348,6 +378,21 @@ export default class OlsApiProvider extends BaseProvider {
       return await this._getSchemeShort(scheme.uri)
     }
     return null
+  }
+
+  async _normalizeConceptObject(concept) {
+    let short = await this._schemeShortFromObj(concept.inScheme[0])
+    let iri = concept.uri || await this._conceptIriFromObj(short, concept.notation)
+    return {short, iri}
+  }
+
+  async _conceptIriFromObj(schemeShort, conceptNotation) {
+    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
+    let url = this._getApiUrl(["v2","ontologies", schemeShort, "classes"], {curie: conceptNotation})
+    let response = await this._request(url)
+    if (response && response.elements && response.elements.length > 0) {
+      return response.elements[0].iri
+    }
   }
 
   // #### OVERRIDE METHODS ####
@@ -463,6 +508,36 @@ export default class OlsApiProvider extends BaseProvider {
       }
     }
     return concept_results
+  }
+  
+  async getNarrower({ concept, ...config }) {
+    let concept_results = []
+    let termsOls = await this._getNarrowerOls(concept)
+    for (const termOls of termsOls) {
+      const concept = await this._termToJSKOS(termOls)
+      if (concept) {
+        concept_results.push(concept)
+      } else {
+        console.warn("JSKOS transformation failed for term: ", termOls)
+      }
+    }
+    return concept_results
+    
+  }
+  async getAncestors({ concept, ...config }) {
+    let concept_results = []
+    let termsOls = await this._getAncestorsOls(concept)
+    for (const termOls of termsOls) {
+      const concept = await this._termToJSKOS(termOls)
+      if (concept) {
+        concept_results.push(concept)
+      } else {
+        console.warn("JSKOS transformation failed for term: ", termOls)
+      }
+    }
+    return concept_results
+
+    
   }
 
   /**

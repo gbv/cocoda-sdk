@@ -17,8 +17,8 @@ const provider = cdk.initializeRegistry({
 const limitDefault = 0
 const specificSchemeDefault = "envo"
 const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
-const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000001"
-const conceptNotationDefault = "BFO:0000001"
+const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
+const conceptNotationDefault = "BFO:0000002"
 
 
 // Readline interface
@@ -128,7 +128,7 @@ async function specificSchemesUri() {
 }
 
 async function topConceptsUri() {
-  prompt("2: Top Concepts", color_headline)
+  prompt("2b: Top Concepts via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const config = {scheme: { uri: schemeUri }, limit: 10 }
   const starttime = Date.now()
@@ -156,8 +156,48 @@ async function specificConceptUri() {
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
 }
 
+async function narrowConcepts() {
+  prompt("5: Narrow Concept", color_headline)
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
+  const config = {concept: { notation: conceptNotation, inScheme: [ { short: schemeShort } ] }}
+  const starttime = Date.now()
+  const concept = await provider.getNarrower(config)
+  out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
+}
+async function narrowConceptsFromUri() {
+  prompt("5b: Narrow Concept via Uri", color_headline)
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
+  let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
+  const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  const starttime = Date.now()
+  const concept = await provider.getNarrower(config)
+  out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
+
+}
+async function ancestorConcepts() {
+  prompt("6: Ancestor Concept", color_headline)
+  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
+  const config = {concept: { notation: conceptNotation, inScheme: [ { short: schemeShort } ] }}
+  const starttime = Date.now()
+  const concept = await provider.getAncestors(config)
+  out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
+
+}
+async function ancestorConceptsFromUri() {
+  prompt("6b: Ancestor Concept via Uri", color_headline)
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
+  let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
+  const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  const starttime = Date.now()
+  const concept = await provider.getAncestors(config)
+  out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
+
+}
+
 async function shortFormFromUri() {
-  prompt("5: Short Form from Scheme URI", color_headline)
+  prompt("7: Short Form from Scheme URI", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const starttime = Date.now()
   const concept = await provider._getSchemeShort(schemeUri)
@@ -178,12 +218,12 @@ async function mainLoop() {
 
     
     prompt("What do you request? Please choose from the following options:", color_prompt)
-    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: short form from URI", color_prompt)
+    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: narrower concepts, 6: ancestor concepts, 7: short form from URI", color_prompt)
     /*
     prompt("0–4 via short-form and notation, 0b-4b via URIs,", color_prompt)
     const choice = (await ask("5 for requesting short-form from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
     */
-    const choice = (await ask("0–4 via short-form and notation, 0b-4b via URIs, 'q' to quit")).trim()
+    const choice = (await ask("0–6 via short-form and notation, 0b-4b via URIs, 'q' to quit")).trim()
 
     switch (choice) {
       case "q":
@@ -230,11 +270,28 @@ async function mainLoop() {
         break
       }
       case "5": {
+        await narrowConcepts()
+        break
+      }
+      case "5b": {
+        await narrowConceptsFromUri()
+        break
+      }
+      case "6": {
+        await ancestorConcepts()
+        break
+      }
+      case "6b": {
+        await ancestorConceptsFromUri()
+        break
+      }
+      case "7":
+      case "7b": {
         await shortFormFromUri()
         break
       }
       default:
-        prompt("Invalid choice, please pick between 0 and 4.", color_debug)
+        prompt("Invalid choice, please pick between 0 and 7.", color_debug)
     }
     prompt("", color_reset)
   }
