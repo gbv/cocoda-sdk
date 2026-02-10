@@ -131,36 +131,34 @@ export default class OlsApiProvider extends BaseProvider {
   // API REQUESTS SCHEMES
 
   async _getSchemesOls() {
-    // https://api.terminology.tib.eu/api/ontologies  (ignore pages!) Listing ontologies
-    const url = this._getApiUrl(["ontologies"], null)
+    // https://api.terminology.tib.eu/api/v2/ontologies (pages!)
+    const url = this._getApiUrl(["v2", "ontologies"], null)
     const pageOne = await this._request(url)
     if (!pageOne)
       return null
-    let ontologies = pageOne._embedded?.ontologies || []
-    const totalPages = pageOne.page?.totalPages || 1
+    let ontologies = pageOne.elements || []
+    const totalPages = pageOne.totalPages || 0
     for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies"], {page: n})
+      const urlN = this._getApiUrl(["v2", "ontologies"], {page: n})
       const pageN = await this._request(urlN)
       if (pageN) {
-        ontologies = ontologies.concat(pageN._embedded?.ontologies || [])
+        ontologies = ontologies.concat(pageN.elements || [])
       }
     }
     return ontologies
   }
 
   async _getSchemesOlsLimit(limit) {
-    // https://api.terminology.tib.eu/api/ontologies  (pages!) Listing ontologies
+    // https://api.terminology.tib.eu/api/v2/ontologies (pages!)
     if (!limit || limit <= 0) {
       return await this._getSchemesOls()
     }
-    const url = this._getApiUrl(["ontologies"], {size: limit})
+    const url = this._getApiUrl(["v2", "ontologies"], {size: limit})
     let response = await this._request(url)
-    return response._embedded?.ontologies || []
+    return response.elements || []
   }
 
   async _getSchemeOls(schemeParam) {
-    // https://api.terminology.tib.eu/api/ontologies/envo
-    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http://purl.obolibrary.org/obo/envo.owl 
     if (schemeParam.short)
       return await this._getSchemeFromShort(schemeParam.short)
     if (schemeParam.uri)
@@ -170,7 +168,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getSchemeFromShort(short) {
     // https://api.terminology.tib.eu/api/ontologies/envo
-    const url = this._getApiUrl(["ontologies", short], null)
+    const url = this._getApiUrl(["v2", "ontologies", short], null)
     return await this._request(url)
   }
 
