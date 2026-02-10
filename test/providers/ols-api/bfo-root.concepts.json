@@ -1,0 +1,14 @@
+[
+  {
+    "notation": [ "0000001" ],
+    "narrower": [ null ],
+    "broader": [],
+    "uri": "http://purl.obolibrary.org/obo/BFO_0000001",
+    "prefLabel": { "en": "entity" },
+    "type": [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "inScheme": [ { "uri": "http://purl.obolibrary.org/obo/bfo.owl" } ]
+  }
+]

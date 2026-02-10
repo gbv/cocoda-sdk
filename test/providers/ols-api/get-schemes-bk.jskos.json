@@ -1,7 +1,6 @@
 [
   {
     "uri": "http://uri.gbv.de/terminology/bk/",
-    "url": "https://www.loc.gov/bibframe/",
     "type": [ "http://www.w3.org/2004/02/skos/core#ConceptScheme" ],
     "url": "http://bartoc.org/en/node/18785",
     "definition": {
