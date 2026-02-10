@@ -420,7 +420,7 @@ export default class OlsApiProvider extends BaseProvider {
    * @param {Object[]} params.limit - Optional limit for results when requesting all schemes.
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
-   */
+  */
   async getSchemes({schemes, limit, ..._config}) {
     let schemes_results = []
     let ontologies = []
@@ -449,18 +449,18 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   /**
- * Retrieves all concepts from the OLS API.
- *
- * @param {Object} [params={}] - An object containing parameters for the request.
- * @param {Object[]} params.concepts - List of concept objects to request specific concepts.
- *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
- * @param {Object} params.scheme - A scheme object to request concepts from a specific scheme.
- *  { short: schemeShort, uri:schemeUri }
- * @param {number} params.limit - Optional limit for results when requesting concepts from a scheme.
- * @param {Object} params._config - Additional config options.
- * @returns {Promise<Array>} An array of JSKOS concepts.
- * @async
- */
+   * Retrieves all concepts from the OLS API.
+   *
+   * @param {Object} [params={}] - An object containing parameters for the request.
+   * @param {Object[]} params.concepts - List of concept objects to request specific concepts.
+   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
+   * @param {Object} params.scheme - A scheme object to request concepts from a specific scheme.
+   *  { short: schemeShort, uri:schemeUri }
+   * @param {number} params.limit - Optional limit for results when requesting concepts from a scheme.
+   * @param {Object} params._config - Additional config options.
+   * @returns {Promise<Array>} An array of JSKOS concepts.
+   * @async
+  */
   async getConcepts({concepts, scheme, limit, ..._config}) {
     let concept_results = []
     if (concepts) {
@@ -492,10 +492,13 @@ export default class OlsApiProvider extends BaseProvider {
   /**
    * Returns top concepts for a concept scheme.
    *
-   * @param {Object} config
-   * @param {Object} config.scheme concept scheme object
+   * @param {Object} [params={}] - An object containing parameters for the request.
+   * @param {Object} params.scheme concept scheme object
+   *   { short: schemeShort, uri:schemeUri }
+   * @param {Object} params._config - Additional config options.
    * @returns {Object[]} array of JSKOS concept objects
-   */
+   * @async
+  */
   async getTop({ scheme, ..._config }) {
     let concept_results = []
     let termsOls = await this._getTopOls(scheme)
@@ -510,7 +513,17 @@ export default class OlsApiProvider extends BaseProvider {
     return concept_results
   }
   
-  async getNarrower({ concept, ...config }) {
+  /**
+   * Returns child concepts of a specific concept.
+   *
+   * @param {Object} params - An object containing parameters for the request.
+   * @param {Object} params.concept concept object
+   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
+   * @param {Object} params._config - Additional config options.
+   * @returns {Object[]} array of JSKOS concept objects
+   * @async
+  */
+  async getNarrower({ concept, ..._config }) {
     let concept_results = []
     let termsOls = await this._getNarrowerOls(concept)
     for (const termOls of termsOls) {
@@ -522,9 +535,19 @@ export default class OlsApiProvider extends BaseProvider {
       }
     }
     return concept_results
-    
   }
-  async getAncestors({ concept, ...config }) {
+  
+  /**
+   * Returns ancestor concepts of a specific concept.
+   *
+   * @param {Object} params - An object containing parameters for the request.
+   * @param {Object} params.concept concept object
+   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
+   * @param {Object} params._config - Additional config options.
+   * @returns {Object[]} array of JSKOS concept objects
+   * @async
+  */
+  async getAncestors({ concept, ..._config }) {
     let concept_results = []
     let termsOls = await this._getAncestorsOls(concept)
     for (const termOls of termsOls) {
@@ -536,8 +559,6 @@ export default class OlsApiProvider extends BaseProvider {
       }
     }
     return concept_results
-
-    
   }
 
   /**
