@@ -1,0 +1,16 @@
+[
+  {
+    "uri": "http://uri.gbv.de/terminology/bk/",
+    "url": "https://www.loc.gov/bibframe/",
+    "type": [ "http://www.w3.org/2004/02/skos/core#ConceptScheme" ],
+    "url": "http://bartoc.org/en/node/18785",
+    "definition": {
+      "en": [
+        "The (Dutch) Basic Classification  (nl Nederlandse basisclassificatie), BK or NBC  is a hierarchical classification system developed by Dutch libraries specifically for scientific works. The classification system was introduced at the end of the 1980s under the direction of the Royal Library of the Netherlands and has been in use since 1990. Since then it has been continually revised. The BK is mainly used in the Netherlands and in the Common Library Network (GBV)." ]
+    },
+    "notation": [ "bk" ],
+    "languages": [ "de", "en" ],
+    "license": [ { "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode" } ],
+    "prefLabel": { "en": "Basisklassifikation" }
+  }
+]

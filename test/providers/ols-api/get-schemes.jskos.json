@@ -12,6 +12,7 @@
     "url": "http://ifomis.org/bfo/",
     "issueTracker": [ { "url": "https://github.com/BFO-ontology/BFO/issues" } ],
     "languages": [ "en" ],
+    "notation": [ "bfo" ],
     "license": [ { "uri": "http://creativecommons.org/licenses/by/4.0/" } ]
   },
   {
@@ -29,6 +30,7 @@
     "issueTracker": [ { "url": "https://github.com/lcnetdev/bibframe-ontology/issues" } ],
     "prefLabel": { "en": "BIBFRAME vocabulary" },
     "languages": [ "en" ],
+    "notation": [ "bf" ],
     "license": [ { "uri": "https://creativecommons.org/publicdomain/zero/1.0/" } ]
   }
 ]
