@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "test": "mocha --recursive",
+    "validate": "jskos-validate",
     "lint": "eslint",
     "fix": "eslint --fix",
     "lint-staged": "lint-staged",
@@ -58,6 +59,7 @@
     "glob": "^10.4.5",
     "husky": "^9.1.7",
     "jsdoc": "^4.0.4",
+    "jskos-cli": "^0.8.4",
     "license-checker": "^25.0.1",
     "lint-staged": "^15.2.11",
     "mocha": "^11.0.1",
