@@ -18,7 +18,7 @@ const limitDefault = 0
 const specificSchemeDefault = "envo"
 const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000001"
-const conceptNotationDefault = "BFO_0000001"
+const conceptNotationDefault = "BFO:0000001"
 
 
 // Readline interface

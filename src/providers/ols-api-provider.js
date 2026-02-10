@@ -121,13 +121,37 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   _termToJSKOS(term) {
-    // const lan = term.language || this._language || "en"
-    // const concept = {}
-    // return concept
-
-    // TODO
-
-    return term
+    console.log("Transforming term to JSKOS: ", term)
+    const lan = term.language || this._language || "en"
+    const concept = {}
+    if (term.curie) {
+      concept.notation = [term.curie]
+    }
+    if (term.hasDirectChildren) {
+      concept.narrower = [null]
+    } else {
+      concept.narrower = []
+    }
+    if (term.hasDirectParents) {
+      concept.broader = [null]
+    } else {
+      concept.broader = []
+    }
+    if (term.iri) {
+      concept.uri = term.iri
+    }
+    if (term["http://www.w3.org/2000/01/rdf-schema#label"]) {
+      concept.prefLabel = {}
+      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"]
+    }
+    concept.type = [
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://www.w3.org/2002/07/owl#Class",
+    ]
+    if (term.ontologyIri) {
+      concept.inScheme = [{uri: term.ontologyIri}]
+    }
+    return concept
   }
 
   // #### API REQUESTS ####
@@ -138,8 +162,8 @@ export default class OlsApiProvider extends BaseProvider {
     }
     console.log("Requesting URL: ", `'${url}'`)
     try {
-      const u = new URL(url);
-      const inlineParams = Object.fromEntries(u.searchParams.entries());
+      const u = new URL(url)
+      const inlineParams = Object.fromEntries(u.searchParams.entries())
 
       const result = await this.axios({
         method: "get",
@@ -261,7 +285,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getConceptOls(concept) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
-    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?shortForm=BFO_0000001
+    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http://purl.obolibrary.org/obo/BFO_0000001
     const short = await this._schemeShortFromObj(concept.inScheme[0])
@@ -270,13 +294,13 @@ export default class OlsApiProvider extends BaseProvider {
     }
     let url = null
     if (concept.notation) {
-      url = this._getApiUrl(["v2","ontologies", short, "classes"], {shortForm: concept.notation})
+      url = this._getApiUrl(["v2","ontologies", short, "classes"], {curie: concept.notation})
     } else if (concept.uri) {
       url = this._getApiUrl(["v2","ontologies", short, "classes"], {iri: concept.uri})
     }
     let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
+    if (response && response.elements && response.elements.length > 0) {
+      return response.elements[0]
     }
     return null
   }
