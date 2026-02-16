@@ -51,7 +51,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   /**
    * Constructs the full API URL for a given endpoint.
-   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeShort>]")
+   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeVOCID>]")
    * @param {Object} params - An object containing query parameters as key-value pairs.
    * @returns {string} The full URL. Returns undefined if any part is undefined.
    * @private
@@ -112,7 +112,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.languages = ontology.language
     }
     if (ontology.ontologyId) {
-      scheme.notation = [ontology.ontologyId]
+      scheme.NOTATION = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
       scheme.license = [{uri: ontology.license.url}]
@@ -124,7 +124,7 @@ export default class OlsApiProvider extends BaseProvider {
     const lan = term.language || this._language || "en"
     const concept = {}
     if (term.curie) {
-      concept.notation = [term.curie]
+      concept.NOTATION = [term.curie]
     }
     if (term.hasDirectChildren) {
       concept.narrower = [null]
@@ -216,8 +216,8 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeOls(schemeParam) {
-    if (schemeParam.short) {
-      return await this._getSchemeFromShort(schemeParam.short)
+    if (schemeParam.VOCID) {
+      return await this._getSchemeFromVOCID(schemeParam.VOCID)
     }
     if (schemeParam.uri) {
       return await this._getSchemeFromUri(schemeParam.uri)
@@ -225,9 +225,9 @@ export default class OlsApiProvider extends BaseProvider {
     return null
   }
 
-  async _getSchemeFromShort(short) {
+  async _getSchemeFromVOCID(VOCID) {
     // https://api.terminology.tib.eu/api/ontologies/envo
-    const url = this._getApiUrl(["v2", "ontologies", short], null)
+    const url = this._getApiUrl(["v2", "ontologies", VOCID], null)
     return await this._request(url)
   }
 
@@ -250,16 +250,16 @@ export default class OlsApiProvider extends BaseProvider {
       return await this._getConceptsOlsLimited(scheme, limit)
     }
     // https://api.terminology.tib.eu/api/ontologies/envo/terms
-    const short = await this._schemeShortFromObj(scheme)
-    if (!short) {
+    const VOCID = await this._getSchemeVOCID(scheme)
+    if (!VOCID) {
       return []
     }
-    const url = this._getApiUrl(["v2", "ontologies", short, "classes"], null)
+    const url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], null)
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
     const totalPages = pageOne.totalPages || 1
     for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["v2", "ontologies", short, "classes"], {page: n})
+      const urlN = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], {page: n})
       const pageN = await this._request(urlN)
       if (pageN) {
         terms = terms.concat(pageN.elements || [])
@@ -270,11 +270,11 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getConceptsOlsLimited(scheme, limit) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms
-    const short = await this._schemeShortFromObj(scheme)
-    if (!short) {
+    const VOCID = await this._getSchemeVOCID(scheme)
+    if (!VOCID) {
       return []
     }
-    let url = this._getApiUrl(["v2", "ontologies", short, "classes"], {size: limit})
+    let url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], {size: limit})
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -287,15 +287,15 @@ export default class OlsApiProvider extends BaseProvider {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http://purl.obolibrary.org/obo/BFO_0000001
-    const short = await this._schemeShortFromObj(concept.inScheme[0])
-    if (!short) {
+    const VOCID = await this._getSchemeVOCID(concept.inScheme[0])
+    if (!VOCID) {
       return null
     }
     let url = null
-    if (concept.notation) {
-      url = this._getApiUrl(["v2","ontologies", short, "classes"], {curie: concept.notation})
+    if (concept.NOTATION) {
+      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: concept.NOTATION})
     } else if (concept.uri) {
-      url = this._getApiUrl(["v2","ontologies", short, "classes"], {iri: concept.uri})
+      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {iri: concept.uri})
     }
     let response = await this._request(url)
     if (response && response.elements && response.elements.length > 0) {
@@ -306,14 +306,14 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getTopOls(scheme) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms/roots
-    const short = await this._schemeShortFromObj(scheme)
-    if (!short) {
+    const VOCID = await this._getSchemeVOCID(scheme)
+    if (!VOCID) {
       return []
     }
-    // let url = this._getApiUrl(["ontologies", short, "terms", "roots"], null)
-    let url = this._getApiUrl(["v2","ontologies", short, "classes"], {hasDirectParents: "false"})
-    //let url = this._getApiUrl(["v2","ontologies", short, "classes"], {hasDirectParents: false})
-    // let url = this._getApiUrl(["v2","ontologies", short, "properties"], {hasDirectParents: false})
+    // let url = this._getApiUrl(["ontologies", VOCID, "terms", "roots"], null)
+    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {hasDirectParents: "false"})
+    //let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {hasDirectParents: false})
+    // let url = this._getApiUrl(["v2","ontologies", VOCID, "properties"], {hasDirectParents: false})
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -323,12 +323,12 @@ export default class OlsApiProvider extends BaseProvider {
 
   
   async _getNarrowerOls(concept) {
-    const {short, iri} = await this._normalizeConceptObject(concept)
-    if (!short || !iri) {
+    const {VOCID, iri} = await this._normalizeConceptObject(concept)
+    if (!VOCID || !iri) {
       return []
     }
     let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    let url = this._getApiUrl(["v2","ontologies", short, "classes", iriDoubleEncoded, "children"], null)
+    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes", iriDoubleEncoded, "children"], null)
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -337,58 +337,62 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getAncestorsOls(concept) {
-    const {short, iri} = await this._normalizeConceptObject(concept)
-    if (!short || !iri) {
+    const {VOCID, iri} = await this._normalizeConceptObject(concept)
+    if (!VOCID || !iri) {
       return []
     }
-    console.log("Getting ancestors for concept with short: ", short, " and iri: ", iri)
+    console.log("Getting ancestors for concept with VOCID: ", VOCID, " and iri: ", iri)
     let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
     console.log("Double encoded IRI: ", iriDoubleEncoded)
-    let url = this._getApiUrl(["v2","ontologies", short, "classes", iriDoubleEncoded, "ancestors"], null)
+    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes", iriDoubleEncoded, "ancestors"], null)
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
     }
     return []
-
   }
 
   // UTILITIES
 
-  async _getSchemeShort(uri) {
+  async _getSchemeVOCIDFromUri(uri) {
     // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
     let url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
     let response = await this._request(url)
-    let shorts = []
+    let VOCIDs = []
     for (const ontology of response.elements){
-      shorts.push(ontology.ontologyId)
+      VOCIDs.push(ontology.ontologyId)
     }
-    if (shorts.length == 0) {
+    if (VOCIDs.length == 0) {
       return null
     }
     // if multiple, return the shortest one (e.g., envo, not envo2021)
-    return shorts.reduce((shortest, current) => current.length < shortest.length ? current : shortest)
+    return VOCIDs.reduce((shortest, current) => current.length < shortest.length ? current : shortest)
   }
 
-  async _schemeShortFromObj(scheme) {
-    if (scheme.short) {
-      return scheme.short
+  async _getSchemeVOCID(scheme) {
+    if (typeof scheme === 'object' && scheme !== null) {
+      if (scheme.uri) {
+        return await this._getSchemeVOCIDFromUri(scheme.uri)
+      }
+      if (scheme.VOCID) {
+        return scheme.VOCID
+      }
     }
-    if (scheme.uri) {
-      return await this._getSchemeShort(scheme.uri)
+    if (typeof scheme === 'string') {
+      return await this._getSchemeVOCIDFromUri(scheme)
     }
     return null
   }
 
   async _normalizeConceptObject(concept) {
-    let short = await this._schemeShortFromObj(concept.inScheme[0])
-    let iri = concept.uri || await this._conceptIriFromObj(short, concept.notation)
-    return {short, iri}
+    let VOCID = await this._getSchemeVOCID(concept.inScheme[0])
+    let iri = concept.uri || await this._conceptIriFromObj(VOCID, concept.NOTATION)
+    return {VOCID, iri}
   }
 
-  async _conceptIriFromObj(schemeShort, conceptNotation) {
+  async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
-    let url = this._getApiUrl(["v2","ontologies", schemeShort, "classes"], {curie: conceptNotation})
+    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: conceptNotation})
     let response = await this._request(url)
     if (response && response.elements && response.elements.length > 0) {
       return response.elements[0].iri
@@ -412,12 +416,40 @@ export default class OlsApiProvider extends BaseProvider {
   _setup() {}
 
   /**
-   * Retrieves all concept schemes from the OLS API.
+   * @private
+   */
+  get _language() {
+    return this._jskos.language || this.languages[0] || this._defaultLanguages[0] || "en"
+  }
+
+
+
+  /**
+   * @typedef {Object} SchemeObject
+   * @property {string} [uri] - Canonical scheme URI (primary identifier).
+   * @property {string} [VOCID] - Internal scheme identifier (alternative).
    *
-   * @param {Object} [params={}] - An object containing parameters for the request.
-   * @param {Object[]} params.schemes - List of scheme objects to request specific schemes.
-   *   { short: schemeShort, uri:schemeUri }
-   * @param {Object[]} params.limit - Optional limit for results when requesting all schemes.
+   * Either `uri` or `VOCID` must be provided.
+   * If both are provided, `VOCID` is ignored
+   */
+
+  /**
+   * @typedef {Object} ConceptObject
+   * @property {string} [uri] - Canonical concept URI (primary identifier).
+   * @property {string} [NOTATION] - Concept notation (alternative identifier).
+   * @property {string[]|SchemeObject[]} [inScheme] - Scheme(s) the concept belongs to. Each scheme can be identified by either its `uri` or `VOCID`.
+   *
+   * Either `uri` or `NOTATION` must be provided.
+   * If both are provided, `NOTATION` is ignored
+   */
+
+
+  /**
+   * Retrieves schemes from the OLS API.
+   *
+   * @param {Object} params - An object containing parameters for the request.
+   * @param {SchemeObject[]} [params.schemes] - List of scheme objects to request specific schemes.
+   * @param {number} [params.limit] - Optional limit for results when requesting all schemes.
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
   */
@@ -449,15 +481,14 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   /**
-   * Retrieves all concepts from the OLS API.
+   * Retrieves concepts from the OLS API.
    *
-   * @param {Object} [params={}] - An object containing parameters for the request.
-   * @param {Object[]} params.concepts - List of concept objects to request specific concepts.
-   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
-   * @param {Object} params.scheme - A scheme object to request concepts from a specific scheme.
-   *  { short: schemeShort, uri:schemeUri }
-   * @param {number} params.limit - Optional limit for results when requesting concepts from a scheme.
-   * @param {Object} params._config - Additional config options.
+   * @param {Object} params - An object containing parameters for the request.
+   * @param {ConceptObject[]} [params.concepts] - Array of concept objects to request specific concepts.
+   * @param {SchemeObject} [params.scheme] - A scheme object to request concepts from a specific scheme.
+   *  either concepts or scheme must be provided. If both are provided, concepts are requested and scheme is ignored.
+   * @param {number} [params.limit] - Optional limit for results when requesting concepts from a scheme.
+   * @param {Object} [params._config] - Additional config options.
    * @returns {Promise<Array>} An array of JSKOS concepts.
    * @async
   */
@@ -490,13 +521,12 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   /**
-   * Returns top concepts for a concept scheme.
+   * Returns top concepts for a scheme.
    *
-   * @param {Object} [params={}] - An object containing parameters for the request.
-   * @param {Object} params.scheme concept scheme object
-   *   { short: schemeShort, uri:schemeUri }
-   * @param {Object} params._config - Additional config options.
-   * @returns {Object[]} array of JSKOS concept objects
+   * @param {Object} params - An object containing parameters for the request.
+   * @param {SchemeObject} params.scheme - A scheme object to request top concepts from a specific scheme.
+   * @param {Object} [params._config] - Additional config options.
+   * @returns {Object[]} - array of JSKOS concept objects
    * @async
   */
   async getTop({ scheme, ..._config }) {
@@ -517,10 +547,9 @@ export default class OlsApiProvider extends BaseProvider {
    * Returns child concepts of a specific concept.
    *
    * @param {Object} params - An object containing parameters for the request.
-   * @param {Object} params.concept concept object
-   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
-   * @param {Object} params._config - Additional config options.
-   * @returns {Object[]} array of JSKOS concept objects
+   * @param {ConceptObject} params.concept - concept object for which to retrieve narrower concepts
+   * @param {Object} [params._config] - Additional config options.
+   * @returns {Object[]} - array of JSKOS concept objects
    * @async
   */
   async getNarrower({ concept, ..._config }) {
@@ -541,10 +570,9 @@ export default class OlsApiProvider extends BaseProvider {
    * Returns ancestor concepts of a specific concept.
    *
    * @param {Object} params - An object containing parameters for the request.
-   * @param {Object} params.concept concept object
-   *  { notation: conceptNotation, uri: conceptUri, inScheme: [ { short: schemeShort, uri:schemeUri } ] }
-   * @param {Object} params._config - Additional config options.
-   * @returns {Object[]} array of JSKOS concept objects
+   * @param {ConceptObject} params.concept - concept object for which to retrieve ancestor concepts
+   * @param {Object} [params._config] - Additional config options.
+   * @returns {Object[]} - array of JSKOS concept objects
    * @async
   */
   async getAncestors({ concept, ..._config }) {
@@ -561,10 +589,19 @@ export default class OlsApiProvider extends BaseProvider {
     return concept_results
   }
 
-  /**
-   * @private
-   */
-  get _language() {
-    return this._jskos.language || this.languages[0] || this._defaultLanguages[0] || "en"
-  }
+
+
+    /**
+     * Returns concept search results.
+     *
+     * @param {Object} config
+     * @param {string} config.search - search string
+     * @param {SchemeObject} config.scheme - scheme to search in
+     * @param {number} [config.limit=0] - maximum number of search results (default might be overridden by registry)
+     * @param {string[]} [config.types=[]] - list of type URIs
+     * @returns {Array} - array of JSKOS concept objects
+     */
+    async search({ search, scheme, limit, types = [], ...config }) {
+      return []
+    }
 }

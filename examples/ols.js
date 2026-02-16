@@ -14,7 +14,7 @@ const provider = cdk.initializeRegistry({
 
 
 // default values
-const limitDefault = 0
+const limitDefault = 250
 const specificSchemeDefault = "envo"
 const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
@@ -82,8 +82,8 @@ async function allSchemes() {
 
 async function specificSchemes() {
   prompt("1: Specific Scheme", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
-  const config = { schemes: [ {short: schemeShort} ] }
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
+  const config = { schemes: [ {VOCID: schemeVOCID} ] }
   const starttime = Date.now()
   const scheme = await provider.getSchemes(config)
   out(scheme, "scheme", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -91,8 +91,8 @@ async function specificSchemes() {
 
 async function topConcepts() {
   prompt("2: Top Concepts", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
-  const config = {scheme: { short: schemeShort }}
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
+  const config = {scheme: { VOCID: schemeVOCID }}
   const starttime = Date.now()
   const concepts = await provider.getTop(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -100,9 +100,9 @@ async function topConcepts() {
 
 async function allConcepts() {
   prompt("3: All Concepts", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let inputLimit = await ask("Please enter a limit (0 for all)", limitDefault)
-  const config = {scheme: { short: schemeShort }, limit: inputLimit }
+  const config = {scheme: { VOCID: schemeVOCID }, limit: inputLimit }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -110,9 +110,9 @@ async function allConcepts() {
 
 async function specificConcept() {
   prompt("4: Specific Concept", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concepts: [{ notation: conceptNotation, inScheme: [ { short: schemeShort } ] }]}
+  const config = {concepts: [{ NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }]}
   const starttime = Date.now()
   const concept = await provider.getConcepts(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -158,9 +158,9 @@ async function specificConceptUri() {
 
 async function narrowConcepts() {
   prompt("5: Narrow Concept", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concept: { notation: conceptNotation, inScheme: [ { short: schemeShort } ] }}
+  const config = {concept: { NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
   const starttime = Date.now()
   const concept = await provider.getNarrower(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -177,9 +177,9 @@ async function narrowConceptsFromUri() {
 }
 async function ancestorConcepts() {
   prompt("6: Ancestor Concept", color_headline)
-  let schemeShort = await ask("Please enter a scheme short name", specificSchemeDefault)
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concept: { notation: conceptNotation, inScheme: [ { short: schemeShort } ] }}
+  const config = {concept: { NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
   const starttime = Date.now()
   const concept = await provider.getAncestors(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -196,11 +196,11 @@ async function ancestorConceptsFromUri() {
 
 }
 
-async function shortFormFromUri() {
+async function VOCIDFromUri() {
   prompt("7: Short Form from Scheme URI", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   const starttime = Date.now()
-  const concept = await provider._getSchemeShort(schemeUri)
+  const concept = await provider._getSchemeVOCIDFromUri(schemeUri)
   prompt(`Short form of scheme ${schemeUri} is: ${concept}. It took ${((Date.now() - starttime) / 1000).toFixed(2)} seconds.`, color_debug)
 }
 
@@ -218,12 +218,12 @@ async function mainLoop() {
 
     
     prompt("What do you request? Please choose from the following options:", color_prompt)
-    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: narrower concepts, 6: ancestor concepts, 7: short form from URI", color_prompt)
+    prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: narrower concepts, 6: ancestor concepts, 7: vocabulary ID from URI", color_prompt)
     /*
-    prompt("0–4 via short-form and notation, 0b-4b via URIs,", color_prompt)
-    const choice = (await ask("5 for requesting short-form from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
+    prompt("0–4 via vocabulary ID and concept notation, 0b-4b via URIs,", color_prompt)
+    const choice = (await ask("5 for requesting vocabularyID from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
     */
-    const choice = (await ask("0–6 via short-form and notation, 0b-4b via URIs, 'q' to quit")).trim()
+    const choice = (await ask("0–6 via vocabularyID and concept notation, 0b-4b via URIs, 'q' to quit")).trim()
 
     switch (choice) {
       case "q":
@@ -287,7 +287,7 @@ async function mainLoop() {
       }
       case "7":
       case "7b": {
-        await shortFormFromUri()
+        await VOCIDFromUri()
         break
       }
       default:
