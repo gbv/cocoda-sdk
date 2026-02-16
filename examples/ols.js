@@ -112,7 +112,7 @@ async function specificConcept() {
   prompt("4: Specific Concept", color_headline)
   let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concepts: [{ NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }]}
+  const config = {concepts: [{ notation: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }]}
   const starttime = Date.now()
   const concept = await provider.getConcepts(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -164,7 +164,7 @@ async function narrowConcepts() {
   prompt("5: Narrow Concept", color_headline)
   let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concept: { NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
+  const config = {concept: { notation: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
   const starttime = Date.now()
   const concept = await provider.getNarrower(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -184,7 +184,7 @@ async function ancestorConcepts() {
   prompt("6: Ancestor Concept", color_headline)
   let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
   let conceptNotation = await ask("Please enter a concept notation [must exist in the scheme]", conceptNotationDefault)
-  const config = {concept: { NOTATION: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
+  const config = {concept: { notation: conceptNotation, inScheme: [ { VOCID: schemeVOCID } ] }}
   const starttime = Date.now()
   const concept = await provider.getAncestors(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))

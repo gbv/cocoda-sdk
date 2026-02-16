@@ -112,7 +112,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.languages = ontology.language
     }
     if (ontology.ontologyId) {
-      scheme.NOTATION = [ontology.ontologyId]
+      scheme.notation = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
       scheme.license = [{uri: ontology.license.url}]
@@ -124,7 +124,7 @@ export default class OlsApiProvider extends BaseProvider {
     const lan = term.language || this._language || "en"
     const concept = {}
     if (term.curie) {
-      concept.NOTATION = [term.curie]
+      concept.notation = [term.curie]
     }
     if (term.hasDirectChildren) {
       concept.narrower = [null]
@@ -295,8 +295,8 @@ export default class OlsApiProvider extends BaseProvider {
       return null
     }
     let url = null
-    if (concept.NOTATION) {
-      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: concept.NOTATION})
+    if (concept.notation) {
+      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: concept.notation})
     } else if (concept.uri) {
       url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {iri: concept.uri})
     }
@@ -389,7 +389,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _normalizeConceptObject(concept) {
     let VOCID = await this._getSchemeVOCID(concept.inScheme[0])
-    let iri = concept.uri || await this._conceptIriFromObj(VOCID, concept.NOTATION)
+    let iri = concept.uri || await this._conceptIriFromObj(VOCID, concept.notation)
     return {VOCID, iri}
   }
 
