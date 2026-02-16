@@ -246,6 +246,10 @@ export default class OlsApiProvider extends BaseProvider {
     return ontologies.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, ontologies[0])
   }
 
+
+
+
+
   // API REQUESTS CONCEPTS
 
   async _getConceptsOls(scheme, limit) {
@@ -324,7 +328,6 @@ export default class OlsApiProvider extends BaseProvider {
     return []
   }
 
-  
   async _getNarrowerOls(concept) {
     const {VOCID, iri} = await this._normalizeConceptObject(concept)
     if (!VOCID || !iri) {
@@ -355,6 +358,10 @@ export default class OlsApiProvider extends BaseProvider {
     return []
   }
 
+
+
+
+
   // UTILITIES
 
   async _getSchemeVOCIDFromUri(uri) {
@@ -362,7 +369,7 @@ export default class OlsApiProvider extends BaseProvider {
     let url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
     let response = await this._request(url)
     let VOCIDs = []
-    for (const ontology of response.elements){
+    for (const ontology of response.elements) {
       VOCIDs.push(ontology.ontologyId)
     }
     if (VOCIDs.length == 0) {
@@ -402,6 +409,10 @@ export default class OlsApiProvider extends BaseProvider {
     }
   }
 
+
+
+
+
   // #### OVERRIDE METHODS ####
 
   /**
@@ -427,6 +438,10 @@ export default class OlsApiProvider extends BaseProvider {
 
 
 
+
+
+  // MAIN FUNCTIONS
+
   /**
    * @typedef {Object} SchemeObject
    * @property {string} [uri] - Canonical scheme URI (primary identifier).
@@ -439,11 +454,11 @@ export default class OlsApiProvider extends BaseProvider {
   /**
    * @typedef {Object} ConceptObject
    * @property {string} [uri] - Canonical concept URI (primary identifier).
-   * @property {string} [NOTATION] - Concept notation (alternative identifier).
+   * @property {string} [notation] - Concept notation (alternative identifier).
    * @property {string[]|SchemeObject[]} [inScheme] - Scheme(s) the concept belongs to. Each scheme can be identified by either its `uri` or `VOCID`.
    *
-   * Either `uri` or `NOTATION` must be provided.
-   * If both are provided, `NOTATION` is ignored
+   * Either `uri` or `notation` must be provided.
+   * If both are provided, `notation` is ignored
    */
 
 
@@ -496,6 +511,9 @@ export default class OlsApiProvider extends BaseProvider {
    * @async
   */
   async getConcepts({concepts, scheme, limit, ..._config}) {
+    if (!concepts && !scheme) {
+      return []
+    }
     let concept_results = []
     if (concepts) {
       for (const concept of concepts) {
@@ -533,6 +551,9 @@ export default class OlsApiProvider extends BaseProvider {
    * @async
   */
   async getTop({ scheme, ..._config }) {
+    if (!scheme) {
+      return []
+    }
     let concept_results = []
     let termsOls = await this._getTopOls(scheme)
     for (const termOls of termsOls) {
@@ -556,6 +577,9 @@ export default class OlsApiProvider extends BaseProvider {
    * @async
   */
   async getNarrower({ concept, ..._config }) {
+    if (!concept) {
+      return []
+    }
     let concept_results = []
     let termsOls = await this._getNarrowerOls(concept)
     for (const termOls of termsOls) {
@@ -579,6 +603,9 @@ export default class OlsApiProvider extends BaseProvider {
    * @async
   */
   async getAncestors({ concept, ..._config }) {
+    if (!concept) {
+      return []
+    }
     let concept_results = []
     let termsOls = await this._getAncestorsOls(concept)
     for (const termOls of termsOls) {

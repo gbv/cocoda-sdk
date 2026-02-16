@@ -226,10 +226,10 @@ async function mainLoop() {
     prompt("What do you request? Please choose from the following options:", color_prompt)
     prompt("0: all schemes, 1: specific scheme, 2: top concepts, 3: all concepts, 4: specific concept, 5: narrower concepts, 6: ancestor concepts, 7: vocabulary ID from URI", color_prompt)
     /*
-    prompt("0–4 via vocabulary ID and concept notation, 0b-4b via URIs,", color_prompt)
+    prompt("0–7 via vocabulary ID and concept notation, 74b via URIs,", color_prompt)
     const choice = (await ask("5 for requesting vocabularyID from scheme URI, 6 to request a concept notation from a concept URI, 'q' to quit")).trim()
     */
-    const choice = (await ask("0–6 via vocabularyID and concept notation, 0b-4b via URIs, 'q' to quit")).trim()
+    const choice = (await ask("0–7 via vocabularyID and concept notation, 0b-7b via URIs, 'q' to quit")).trim()
 
     switch (choice) {
       case "q":
