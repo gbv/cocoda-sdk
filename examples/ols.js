@@ -121,7 +121,8 @@ async function specificConcept() {
 async function specificSchemesUri() {
   prompt("1b: Specific Scheme via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
-  const config = { schemes: [{uri: schemeUri}] }
+  // const config = { schemes: [{uri: schemeUri}] }
+  const config = { schemes: [schemeUri] }
   const starttime = Date.now()
   const scheme = await provider.getSchemes(config)
   out(scheme, "scheme", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -130,7 +131,8 @@ async function specificSchemesUri() {
 async function topConceptsUri() {
   prompt("2b: Top Concepts via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
-  const config = {scheme: { uri: schemeUri }, limit: 10 }
+  // const config = {scheme: { uri: schemeUri }, limit: 10 }
+  const config = {scheme: schemeUri, limit: 10 }
   const starttime = Date.now()
   const concepts = await provider.getTop(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -140,7 +142,8 @@ async function allConceptsUri() {
   prompt("3b: All Concepts via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
-  const config = {scheme: { uri: schemeUri }, limit: inputLimit }
+  // const config = {scheme: { uri: schemeUri }, limit: inputLimit }
+  const config = {scheme: schemeUri, limit: inputLimit }
   const starttime = Date.now()
   const concepts = await provider.getConcepts(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -150,7 +153,8 @@ async function specificConceptUri() {
   prompt("4b: Specific Concept via uris", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
-  const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
+  // const config = {concepts: [{ uri: conceptUri, inScheme: [ { uri: schemeUri } ] }]}
+  const config = {concepts: [{ uri: conceptUri, inScheme: [ schemeUri ] }]}
   const starttime = Date.now()
   const concept = await provider.getConcepts(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -169,7 +173,8 @@ async function narrowConceptsFromUri() {
   prompt("5b: Narrow Concept via Uri", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
-  const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  // const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  const config = {concept: { uri: conceptUri, inScheme: [ schemeUri ] }}
   const starttime = Date.now()
   const concept = await provider.getNarrower(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))
@@ -189,7 +194,8 @@ async function ancestorConceptsFromUri() {
   prompt("6b: Ancestor Concept via Uri", color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
   let conceptUri = await ask("Please enter a concept URI [must exist in the scheme]", conceptUriDefault)
-  const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  // const config = {concept: { uri: conceptUri, inScheme: [ { uri: schemeUri } ] }}
+  const config = {concept: { uri: conceptUri, inScheme: [ schemeUri ] }}
   const starttime = Date.now()
   const concept = await provider.getAncestors(config)
   out(concept, "concept", ((Date.now() - starttime) / 1000).toFixed(2))

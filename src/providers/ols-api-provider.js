@@ -216,6 +216,9 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeOls(schemeParam) {
+    if (typeof schemeParam === "string") {
+      return await this._getSchemeFromUri(schemeParam)
+    }
     if (schemeParam.VOCID) {
       return await this._getSchemeFromVOCID(schemeParam.VOCID)
     }
@@ -370,7 +373,7 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getSchemeVOCID(scheme) {
-    if (typeof scheme === 'object' && scheme !== null) {
+    if (typeof scheme === "object" && scheme !== null) {
       if (scheme.uri) {
         return await this._getSchemeVOCIDFromUri(scheme.uri)
       }
@@ -378,7 +381,7 @@ export default class OlsApiProvider extends BaseProvider {
         return scheme.VOCID
       }
     }
-    if (typeof scheme === 'string') {
+    if (typeof scheme === "string") {
       return await this._getSchemeVOCIDFromUri(scheme)
     }
     return null
@@ -448,7 +451,7 @@ export default class OlsApiProvider extends BaseProvider {
    * Retrieves schemes from the OLS API.
    *
    * @param {Object} params - An object containing parameters for the request.
-   * @param {SchemeObject[]} [params.schemes] - List of scheme objects to request specific schemes.
+   * @param {string[]| SchemeObject[]} [params.schemes] - List of scheme objects to request specific schemes.
    * @param {number} [params.limit] - Optional limit for results when requesting all schemes.
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
@@ -485,7 +488,7 @@ export default class OlsApiProvider extends BaseProvider {
    *
    * @param {Object} params - An object containing parameters for the request.
    * @param {ConceptObject[]} [params.concepts] - Array of concept objects to request specific concepts.
-   * @param {SchemeObject} [params.scheme] - A scheme object to request concepts from a specific scheme.
+   * @param {string | SchemeObject} [params.scheme] - A scheme object to request concepts from a specific scheme.
    *  either concepts or scheme must be provided. If both are provided, concepts are requested and scheme is ignored.
    * @param {number} [params.limit] - Optional limit for results when requesting concepts from a scheme.
    * @param {Object} [params._config] - Additional config options.
@@ -524,7 +527,7 @@ export default class OlsApiProvider extends BaseProvider {
    * Returns top concepts for a scheme.
    *
    * @param {Object} params - An object containing parameters for the request.
-   * @param {SchemeObject} params.scheme - A scheme object to request top concepts from a specific scheme.
+   * @param {string | SchemeObject} params.scheme - A scheme object to request top concepts from a specific scheme.
    * @param {Object} [params._config] - Additional config options.
    * @returns {Object[]} - array of JSKOS concept objects
    * @async
@@ -588,20 +591,4 @@ export default class OlsApiProvider extends BaseProvider {
     }
     return concept_results
   }
-
-
-
-    /**
-     * Returns concept search results.
-     *
-     * @param {Object} config
-     * @param {string} config.search - search string
-     * @param {SchemeObject} config.scheme - scheme to search in
-     * @param {number} [config.limit=0] - maximum number of search results (default might be overridden by registry)
-     * @param {string[]} [config.types=[]] - list of type URIs
-     * @returns {Array} - array of JSKOS concept objects
-     */
-    async search({ search, scheme, limit, types = [], ...config }) {
-      return []
-    }
 }
