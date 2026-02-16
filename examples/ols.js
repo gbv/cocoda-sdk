@@ -238,6 +238,38 @@ async function searchConceptsSchemeFromUri(id) {
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
 }
 
+async function suggestConcepts(id) {
+  prompt(`${id}: Suggest Concepts`, color_headline)
+  let search = await ask("Please enter a search string", searchDefault)
+  let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
+  const config = { search: search, limit: inputLimit, types: ["http://www.w3.org/2002/07/owl#Class"]}
+  const starttime = Date.now()
+  const concepts = await provider.suggest(config)
+  out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
+}
+
+async function suggestConceptsScheme(id) {
+  prompt(`${id}: Suggest Concepts in Scheme via vocabularyID`, color_headline)
+  let search = await ask("Please enter a search string", searchDefault)
+  let schemeVOCID = await ask("Please enter a scheme vocabularyID", specificSchemeDefault)
+  let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
+  const config = { search: search, limit: inputLimit, types: ["http://www.w3.org/2002/07/owl#Class"], scheme: { VOCID: schemeVOCID } }
+  const starttime = Date.now()
+  const concepts = await provider.suggest(config)
+  out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
+}
+
+async function suggestConceptsSchemeFromUri(id) {
+  prompt(`${id}: Suggest Concepts in Scheme via Uri`, color_headline)
+  let search = await ask("Please enter a search string", searchDefault)
+  let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
+  let inputLimit = await ask("Please enter a limit (0 = all)", limitDefault)
+  const config = { search: search, limit: inputLimit, types: ["http://www.w3.org/2002/07/owl#Class"], scheme: schemeUri }
+  const starttime = Date.now()
+  const concepts = await provider.suggest(config)
+  out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))
+}
+
 async function VOCIDFromUri(id) {
   prompt(`${id}: Short Form from Scheme URI`, color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
@@ -337,6 +369,19 @@ async function mainLoop() {
       }
       case "8b": {
         await searchConceptsSchemeFromUri(choice)
+        break
+      }
+      case "9":
+      case "9b": {
+        await suggestConcepts(choice)
+        break
+      }
+      case "10": {
+        await suggestConceptsScheme(choice)
+        break
+      }
+      case "10b": {
+        await suggestConceptsSchemeFromUri(choice)
         break
       }
       case "11": 

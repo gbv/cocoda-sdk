@@ -38,7 +38,7 @@ export default class OlsApiProvider extends BaseProvider {
     narrower: true,
     ancestors: true,
     types: false,
-    suggest: false,
+    suggest: true,
     search: true,
     auth: false,
     mappings: false,
