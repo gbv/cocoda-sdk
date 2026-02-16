@@ -39,7 +39,7 @@ export default class OlsApiProvider extends BaseProvider {
     ancestors: true,
     types: false,
     suggest: false,
-    search: false,
+    search: true,
     auth: false,
     mappings: false,
     concordances: false,
@@ -74,7 +74,7 @@ export default class OlsApiProvider extends BaseProvider {
     // If params are provided, append them as query parameters
     if (params) {
       const paramString = Object.keys(params)
-        .map((k) => `${k}=${encodeURIComponent(params[k])}`)
+        .map((k) => params[k]? `${k}=${encodeURIComponent(params[k])}` : k)
         .join("&")
       result += (result.includes("?") ? "&" : "?") + paramString
     }
@@ -264,7 +264,7 @@ export default class OlsApiProvider extends BaseProvider {
     const url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], null)
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
-    const totalPages = pageOne.totalPages || 1
+    const totalPages = pageOne.totalPages || 0
     for (let n = 1; n <= totalPages; n++) {
       const urlN = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], {page: n})
       const pageN = await this._request(urlN)
@@ -347,15 +347,58 @@ export default class OlsApiProvider extends BaseProvider {
     if (!VOCID || !iri) {
       return []
     }
-    console.log("Getting ancestors for concept with VOCID: ", VOCID, " and iri: ", iri)
     let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    console.log("Double encoded IRI: ", iriDoubleEncoded)
     let url = this._getApiUrl(["v2","ontologies", VOCID, "classes", iriDoubleEncoded, "ancestors"], null)
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
     }
     return []
+  }
+
+  async _searchOls(search, scheme, limit, types) {
+    let concept_results = []
+    if (types.includes("http://www.w3.org/2002/07/owl#Class")) {
+      concept_results = concept_results.concat(await this._searchOlsTyped(search, scheme, limit, "classes"))
+    }
+    if (types.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")) {
+      concept_results = concept_results.concat(await this._searchOlsTyped(search, scheme, limit, "properties"))
+    }
+    return concept_results
+  }
+
+  async _searchOlsTyped(search, scheme, limit, urlType) {
+    if (limit && limit > 0) { // if limit is given, use the limited search to avoid multiple requests for pagination
+      return await this._searchOlsTypedLimited(search, scheme, limit, urlType)
+    }
+    const VOCID = scheme? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
+    if (scheme && !VOCID) { // no results for invalid schemes
+      return []
+    }
+    let url = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID})
+    let pageOne = await this._request(url)
+    let terms = pageOne.elements || []
+    const totalPages = pageOne.totalPages || 0
+    for (let n = 1; n <= totalPages; n++) {
+      const urlN = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID, page: n})
+      const pageN = await this._request(urlN)
+      if (pageN) {
+        terms = terms.concat(pageN.elements || [])
+      }
+    }
+    return terms
+  }
+
+  async _searchOlsTypedLimited(search, scheme, limit, urlType) {
+    const VOCID = scheme? await this._getSchemeVOCID(scheme) : null
+    if (scheme && !VOCID) {
+      return []
+    }
+    let url = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID, size: limit})
+    let response = await this._request(url)
+    if (response && response.elements) {
+      return response.elements
+    }
   }
 
 
@@ -608,6 +651,30 @@ export default class OlsApiProvider extends BaseProvider {
     }
     let concept_results = []
     let termsOls = await this._getAncestorsOls(concept)
+    for (const termOls of termsOls) {
+      const concept = await this._termToJSKOS(termOls)
+      if (concept) {
+        concept_results.push(concept)
+      } else {
+        console.warn("JSKOS transformation failed for term: ", termOls)
+      }
+    }
+    return concept_results
+  }
+
+  /**
+   * Returns concept search results.
+   *
+   * @param {Object} params
+   * @param {string} params.search - search string
+   * @param {string | SchemeObject} params.scheme - scheme to search in
+   * @param {number} [params.limit=0] - maximum number of search results (default might be overridden by registry)
+   * @param {string[]} [params.types=["http://www.w3.org/2002/07/owl#Class"]] - list of type URIs
+   * @returns {Array} - array of JSKOS concept objects
+   */
+  async search({ search, scheme=null, limit=0, types = ["http://www.w3.org/2002/07/owl#Class"], ...config }) {
+    let concept_results = []
+    let termsOls = await this._searchOls(search, scheme, limit, types)
     for (const termOls of termsOls) {
       const concept = await this._termToJSKOS(termOls)
       if (concept) {
