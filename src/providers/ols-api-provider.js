@@ -672,7 +672,7 @@ export default class OlsApiProvider extends BaseProvider {
    * @param {string[]} [params.types=["http://www.w3.org/2002/07/owl#Class"]] - list of type URIs
    * @returns {Array} - array of JSKOS concept objects
    */
-  async search({ search, scheme=null, limit=0, types = ["http://www.w3.org/2002/07/owl#Class"], ...config }) {
+  async search({ search, scheme=null, limit=0, types = ["http://www.w3.org/2002/07/owl#Class"], ..._config }) {
     let concept_results = []
     let termsOls = await this._searchOls(search, scheme, limit, types)
     for (const termOls of termsOls) {
