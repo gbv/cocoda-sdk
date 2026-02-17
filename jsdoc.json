@@ -17,7 +17,7 @@
     "encoding": "utf8",
     "template": "node_modules/clean-jsdoc-theme",
     "readme": "README.md",
-    "destination": "./out",
+    "destination": "./docs",
     "recurse": true
   }
 }

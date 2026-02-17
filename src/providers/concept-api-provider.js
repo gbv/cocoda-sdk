@@ -226,7 +226,8 @@ export default class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getConcepts({ concepts, ...config }) {
-    if (this.has.data === false) {
+    const url = this._api.concepts || this._api.data
+    if (!url) {
       throw new errors.MissingApiUrlError()
     }
     if (!concepts) {
@@ -239,7 +240,7 @@ export default class ConceptApiProvider extends BaseProvider {
     return this.axios({
       ...config,
       method: "get",
-      url: this._api.data,
+      url,
       params: {
         ...this._defaultParams,
         // ? What should the default limit be?
@@ -258,24 +259,29 @@ export default class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getNarrower({ concept, ...config }) {
-    if (!this._api.narrower) {
-      throw new errors.MissingApiUrlError()
-    }
     if (!concept || !concept.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
-    return this.axios({
-      ...config,
-      method: "get",
-      url: this._api.narrower,
-      params: {
-        ...this._defaultParams,
-        // ? What should the default limit be?
-        limit: 10000,
-        ...(config.params || {}),
-        uri: concept.uri,
-      },
-    })
+    if (this._api.narrower) {
+      return this.axios({
+        ...config,
+        method: "get",
+        url: this._api.narrower,
+        params: {
+          ...this._defaultParams,
+          // ? What should the default limit be?
+          limit: 10000,
+          ...(config.params || {}),
+          uri: concept.uri,
+        },
+      })
+    } else {
+      const conf2 = { params: {}, ...config }
+      conf2.params.properties = "narrower"
+      const response = await this.getConcepts({ concepts: [concept], ...conf2 })
+      const narrower = (response[0]?.narrower || [])
+      return narrower.length ? this.getConcepts({ concepts: narrower, ...config }) : []
+    }
   }
 
   /**
@@ -286,24 +292,29 @@ export default class ConceptApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getAncestors({ concept, ...config }) {
-    if (!this._api.ancestors) {
-      throw new errors.MissingApiUrlError()
-    }
     if (!concept || !concept.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
-    return this.axios({
-      ...config,
-      method: "get",
-      url: this._api.ancestors,
-      params: {
-        ...this._defaultParams,
-        // ? What should the default limit be?
-        limit: 10000,
-        ...(config.params || {}),
-        uri: concept.uri,
-      },
-    })
+    if (this._api.ancestors) {
+      return this.axios({
+        ...config,
+        method: "get",
+        url: this._api.ancestors,
+        params: {
+          ...this._defaultParams,
+          // ? What should the default limit be?
+          limit: 10000,
+          ...(config.params || {}),
+          uri: concept.uri,
+        },
+      })
+    } else {
+      const conf2 = { params: {}, ...config }
+      conf2.params.properties = "ancestors"
+      const response = await this.getConcepts({ concepts: [concept], ...conf2 })
+      const ancestors = (response[0]?.ancestors || [])
+      return ancestors.length ? this.getConcepts({ concepts: ancestors, ...config }) : []
+    }
   }
 
   /**
