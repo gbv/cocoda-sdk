@@ -1,7 +1,6 @@
-import test from "node:test";
+import test from "node:test"
 import { cdk, addAllProviders } from "../index.js"
-import * as jskos from "jskos-tools"
-import assert, { deepEqual } from "assert"
+import assert from "assert"
 
 // Provider
 addAllProviders()
