@@ -1,5 +1,5 @@
 import test from "node:test"
-import { cdk, addAllProviders } from "../index.js"
+import { cdk, addAllProviders } from "../../src/index.js"
 import assert from "assert"
 
 // Provider
