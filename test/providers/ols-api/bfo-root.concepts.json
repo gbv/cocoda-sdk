@@ -1,6 +1,6 @@
 [
   {
-    "notation": [ "0000001" ],
+    "notation": [ "BFO:0000001" ],
     "narrower": [ null ],
     "broader": [],
     "uri": "http://purl.obolibrary.org/obo/BFO_0000001",

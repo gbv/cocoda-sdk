@@ -16,9 +16,13 @@ const provider = cdk.initializeRegistry({
 // default values
 
 const limitDefault = 50
+const limitLongDefault = 1000
 const schemeVOCIDDefault = "envo"
 const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "...invalid..."
+const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
+const conceptNotationDefault = "BFO:0000002"
+const searchDefault = "entity"
 
 
 
@@ -132,9 +136,9 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
 // TEST GETTOP
 
 test("OlsProvider.getTop - specific Scheme", async () => {
-  const config = {schemes: [schemeUriDefault] }
-  const configUri = { schemes: [{ uri: schemeUriDefault }] }
-  const configVOCID = {schemes: [{ VOCID: schemeVOCIDDefault }]}
+  const config = {scheme: schemeUriDefault }
+  const configUri = { scheme: { uri: schemeUriDefault } }
+  const configVOCID = {scheme: { VOCID: schemeVOCIDDefault }}
 
   const topConcepts = await provider.getTop(config)
   const topConceptsUri = await provider.getTop(configUri)
@@ -143,14 +147,15 @@ test("OlsProvider.getTop - specific Scheme", async () => {
   assert(Array.isArray(topConcepts) && Array.isArray(topConceptsUri) && Array.isArray(topConceptsVOCID))
   assert.equal(topConcepts.length, topConceptsUri.length)
   assert.equal(topConcepts.length, topConceptsVOCID.length)
-  const array = topConcepts.keys()
 
-  array.forEach(key => {
-    assert.notDeepStrictEqual(topConcepts[key], undefined, `Key '${key}' is missing in topConcepts result`)
-    assert.notDeepStrictEqual(topConceptsUri[key], undefined, `Key '${key}' is missing in topConceptsUri result`)
-    assert.notDeepStrictEqual(topConceptsVOCID[key], undefined, `Key '${key}' is missing in topConceptsVOCID result`)
-    assert.deepStrictEqual(topConcepts[key], topConceptsUri[key], `Value for key '${key}' does not match between topConcepts and topConceptsUri results`)
-    assert.deepStrictEqual(topConcepts[key], topConceptsVOCID[key], `Value for key '${key}' does not match between topConcepts and topConceptsVOCID results`)
+  Object.keys(topConcepts[0]).forEach(key => {
+    if (!key.startsWith("_")) {
+      assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
+      assert.notDeepStrictEqual(topConceptsUri[0][key], undefined, `Key '${key}' is missing in topConceptsUri result`)
+      assert.notDeepStrictEqual(topConceptsVOCID[0][key], undefined, `Key '${key}' is missing in topConceptsVOCID result`)
+      assert.deepStrictEqual(topConcepts[0][key], topConceptsUri[0][key], `Value for key '${key}' does not match between topConcepts and topConceptsUri results`)
+      assert.deepStrictEqual(topConcepts[0][key], topConceptsVOCID[0][key], `Value for key '${key}' does not match between topConcepts and topConceptsVOCID results`)
+    }
   })
 })
 
@@ -175,18 +180,71 @@ test("OlsProvider.getTop - no uri", async () => {
   assert(topConcepts.length === 0)
 })
 
+test("OlsProvider.getTop - no uri", async () => {
+  const config = { scheme: { VOCID: "bfo" } }
+  const topConcepts = await provider.getTop(config)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length === 1)
+  const bfo_root_raw = fs.readFileSync("test/providers/ols-api/bfo-root.concepts.json", "utf-8")
+  const bfo_root_jskos = JSON.parse(bfo_root_raw)
+  Object.keys(bfo_root_jskos[0]).forEach(key => {
+    assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
+    assert.deepStrictEqual(topConcepts[0][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
+  })
+})
+
 
 
 
 
 // TEST GETCONCEPTS
 
+test("OlsProvider.getConcepts - allConcepts long", async () => {
+  const config = {scheme: schemeUriDefault, limit: limitLongDefault }
+  const concepts = await provider.getConcepts(config)
+  assert(Array.isArray(concepts))
+  assert.equal(concepts.length, limitLongDefault) // there are currently 6000+ concepts in ENVO
+})
+
 test("OlsProvider.getConcepts - allConcepts", async () => {
-    const config = {scheme: schemeUriDefault}
+  const config = { scheme: schemeUriDefault, limit: limitDefault }
+  const configUri = { scheme: { uri: schemeUriDefault }, limit: limitDefault }
+  const configVOCID = { scheme: { VOCID: schemeVOCIDDefault }, limit: limitDefault }
+
+  const concepts = await provider.getConcepts(config)
+  const conceptsUri = await provider.getConcepts(configUri)
+  const conceptsVOCID = await provider.getConcepts(configVOCID)
+
+  assert(Array.isArray(concepts) && Array.isArray(conceptsUri) && Array.isArray(conceptsVOCID))
+  assert.equal(concepts.length, limitDefault)
+  assert.equal(conceptsUri.length, limitDefault)
+  assert.equal(conceptsVOCID.length, limitDefault)
+  for (const key in concepts[0]) {
+    if (!key.startsWith("_")) {
+      assert.deepEqual(concepts[0][key], conceptsUri[0][key])
+      assert.deepEqual(concepts[0][key], conceptsVOCID[0][key])
+    }
+  }
 })
 
 test("OlsProvider.getConcepts - specificConcept", async () => {
-})
+  const config = {concepts: [{ uri: conceptUriDefault, inScheme: [ schemeUriDefault ] }]}
+  const configUri = {concepts: [{ uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] }]}
+  const configVOCID = {concepts: [{ notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] }]}
 
-test("OlsProvider.getConcepts - specificConcept", async () => {
+  const specificConcept = await provider.getConcepts(config)
+  const specificConceptUri = await provider.getConcepts(configUri)
+  const specificConceptVOCID = await provider.getConcepts(configVOCID)
+
+  assert(Array.isArray(specificConcept) && Array.isArray(specificConceptUri) && Array.isArray(specificConceptVOCID))
+  assert.equal(specificConcept.length, 1)
+  assert.equal(specificConceptUri.length, 1)
+  assert.equal(specificConceptVOCID.length, 1)
+
+  for (const key in specificConcept[0]) {
+    if (!key.startsWith("_")) {
+      assert.deepEqual(specificConcept[0][key], specificConceptUri[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptUri results`)
+      assert.deepEqual(specificConcept[0][key], specificConceptVOCID[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptVOCID results`)
+    }
+  }
 })
