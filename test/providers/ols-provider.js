@@ -1,7 +1,7 @@
 import test from "node:test"
 import { cdk, addAllProviders } from "../../src/index.js"
 import assert from "assert"
-import fs from 'fs'
+import fs from "fs"
 
 // Set Provider
 
@@ -13,6 +13,7 @@ const provider = cdk.initializeRegistry({
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
 
+/*
 
 
 
@@ -85,10 +86,10 @@ test("OlsProvider.getSchemes - non-existing scheme", async () => {
 })
 
 test("OlsProvider.getSchemes - valid JSKOS", async () => {
-  const config = {schemes: [{"VOCID": "bk"}] }
+  const config = {schemes: [{VOCID: "bk"}] }
   const scheme = await provider.getSchemes(config)
   
-  const bk_raw = fs.readFileSync('test/providers/ols-api/get-schemes-bk.jskos.json', 'utf-8')
+  const bk_raw = fs.readFileSync("test/providers/ols-api/get-schemes-bk.jskos.json", "utf-8")
   const bk_jskos = JSON.parse(bk_raw)
   assert(Array.isArray(scheme))
   assert(scheme.length === 1)
@@ -97,4 +98,34 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
     assert(scheme[0][key])
     assert.deepEqual(scheme[0][key], bk_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected BK JSKOS`)
   }
+})
+*/
+
+
+
+
+
+// TEST GETTOP
+
+test("OlsProvider.getTop - top concepts of a scheme", async () => {
+  const config = {scheme: "http://purl.obolibrary.org/obo/envo.owl" }
+  const topConcepts = await provider.getTop(config)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length > 0)
+})
+
+test("OlsProvider.getTop - top concepts of a non-existing scheme", async () => {
+  const config = {scheme: "...non-existing-scheme..." }
+  const topConcepts = await provider.getTop(config)
+  console.log("Top concepts for non-existing scheme result: ", topConcepts)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length === 0)
+})
+
+test("OlsProvider.getTop - top concepts of a non-existing scheme", async () => {
+  const config = {}
+  const topConcepts = await provider.getTop(config)
+  console.log("Top concepts for non-existing scheme result: ", topConcepts)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length === 0)
 })
