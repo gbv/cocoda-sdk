@@ -86,7 +86,6 @@ test("OlsProvider.getSchemes - specific scheme", async () => {
 test("OlsProvider.getSchemes - non-existing scheme", async () => {
   const config = {schemes: [invalidDefault] }
   const nonExistingScheme = await provider.getSchemes(config)
-  console.log("Non-existing scheme result: ", nonExistingScheme)
   assert(Array.isArray(nonExistingScheme))
   assert(nonExistingScheme.length === 0)
 })
@@ -103,6 +102,26 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
   for (const key in bk_jskos[0]) {
     assert(scheme[0][key])
     assert.deepEqual(scheme[0][key], bk_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected BK JSKOS`)
+  }
+})
+
+test("OlsProvider.getSchemes - valid JSKOS", async () => {
+  const config = { limit: 2 }
+  const scheme = await provider.getSchemes(config)
+  
+  const schemes_raw = fs.readFileSync("test/providers/ols-api/get-schemes.jskos.json", "utf-8")
+  const schemes_jskos = JSON.parse(schemes_raw)
+  assert(Array.isArray(scheme))
+  assert(scheme.length === 2)
+
+  for (const key in schemes_jskos[0]) {
+    assert(scheme[0][key])
+    assert.deepEqual(scheme[0][key], schemes_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected JSKOS`)
+  }
+
+  for (const key in schemes_jskos[1]) {
+    assert(scheme[1][key])
+    assert.deepEqual(scheme[1][key], schemes_jskos[1][key], `Value for key '${key}' does not match between scheme result and expected JSKOS`)
   }
 })
 
@@ -152,7 +171,6 @@ test("OlsProvider.getTop - non-existing VOCID", async () => {
 test("OlsProvider.getTop - no uri", async () => {
   const config = {}
   const topConcepts = await provider.getTop(config)
-  console.log("Top concepts for non-existing scheme result: ", topConcepts)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length === 0)
 })

@@ -115,7 +115,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.notation = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
-      scheme.license = [{url: ontology.license.url}]
+      scheme.license = [{uri: ontology.license.url}]
     }
     return scheme
   }
@@ -159,7 +159,7 @@ export default class OlsApiProvider extends BaseProvider {
     if (!url) {
       return
     }
-    console.log("Requesting URL: ", `'${url}'`)
+    // console.log("Requesting URL: ", `'${url}'`)
     try {
       const u = new URL(url)
       const inlineParams = Object.fromEntries(u.searchParams.entries())

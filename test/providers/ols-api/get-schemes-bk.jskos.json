@@ -9,7 +9,7 @@
     },
     "notation": [ "bk" ],
     "languages": [ "de", "en" ],
-    "license": [ { "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode" } ],
+    "license": [ { "uri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode" } ],
     "prefLabel": { "en": "Basisklassifikation" }
   }
 ]
