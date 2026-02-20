@@ -13,7 +13,6 @@ const provider = cdk.initializeRegistry({
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
 
-/*
 
 
 
@@ -99,7 +98,6 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
     assert.deepEqual(scheme[0][key], bk_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected BK JSKOS`)
   }
 })
-*/
 
 
 
@@ -107,22 +105,42 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
 
 // TEST GETTOP
 
-test("OlsProvider.getTop - top concepts of a scheme", async () => {
+test("OlsProvider.getTop - uri", async () => {
   const config = {scheme: "http://purl.obolibrary.org/obo/envo.owl" }
   const topConcepts = await provider.getTop(config)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length > 0)
 })
 
-test("OlsProvider.getTop - top concepts of a non-existing scheme", async () => {
+test("OlsProvider.getTop - uri2", async () => {
+  const config = {scheme: {uri:"http://purl.obolibrary.org/obo/envo.owl"} }
+  const topConcepts = await provider.getTop(config)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length > 0)
+})
+
+test("OlsProvider.getTop - VOCID", async () => {
+  const config = {scheme: {VOCID:"envo"} }
+  const topConcepts = await provider.getTop(config)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length > 0)
+})
+
+test("OlsProvider.getTop - non-existing uri", async () => {
   const config = {scheme: "...non-existing-scheme..." }
   const topConcepts = await provider.getTop(config)
-  console.log("Top concepts for non-existing scheme result: ", topConcepts)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length === 0)
 })
 
-test("OlsProvider.getTop - top concepts of a non-existing scheme", async () => {
+test("OlsProvider.getTop - non-existing VOCID", async () => {
+  const config = {scheme: {VOCID:"...non-existing-scheme..."} }
+  const topConcepts = await provider.getTop(config)
+  assert(Array.isArray(topConcepts))
+  assert(topConcepts.length === 0)
+})
+
+test("OlsProvider.getTop - no uri", async () => {
   const config = {}
   const topConcepts = await provider.getTop(config)
   console.log("Top concepts for non-existing scheme result: ", topConcepts)
