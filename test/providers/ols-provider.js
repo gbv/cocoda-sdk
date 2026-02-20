@@ -22,7 +22,6 @@ const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "...invalid..."
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
 const conceptNotationDefault = "BFO:0000002"
-const searchDefault = "entity"
 
 
 
@@ -118,15 +117,19 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
   assert(Array.isArray(scheme))
   assert(scheme.length === 2)
 
-  for (const key in schemes_jskos[0]) {
+  const keys = Object.keys(schemes_jskos[0])
+  assert(keys.length > 0)
+  keys.forEach(key => {
     assert(scheme[0][key])
     assert.deepEqual(scheme[0][key], schemes_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected JSKOS`)
-  }
+  })
 
-  for (const key in schemes_jskos[1]) {
+  const keys2 = Object.keys(schemes_jskos[1])
+  assert(keys2.length > 0)
+  keys2.forEach(key => {
     assert(scheme[1][key])
     assert.deepEqual(scheme[1][key], schemes_jskos[1][key], `Value for key '${key}' does not match between scheme result and expected JSKOS`)
-  }
+  })
 })
 
 
@@ -219,12 +222,15 @@ test("OlsProvider.getConcepts - allConcepts", async () => {
   assert.equal(concepts.length, limitDefault)
   assert.equal(conceptsUri.length, limitDefault)
   assert.equal(conceptsVOCID.length, limitDefault)
-  for (const key in concepts[0]) {
+
+  const keys = Object.keys(concepts[0])
+  assert(keys.length > 0)
+  keys.forEach(key => {
     if (!key.startsWith("_")) {
       assert.deepEqual(concepts[0][key], conceptsUri[0][key])
       assert.deepEqual(concepts[0][key], conceptsVOCID[0][key])
     }
-  }
+  })
 })
 
 test("OlsProvider.getConcepts - specificConcept", async () => {
@@ -241,10 +247,76 @@ test("OlsProvider.getConcepts - specificConcept", async () => {
   assert.equal(specificConceptUri.length, 1)
   assert.equal(specificConceptVOCID.length, 1)
 
-  for (const key in specificConcept[0]) {
+  const keys = Object.keys(specificConcept[0])
+  assert(keys.length > 0)
+  keys.forEach(key => {
     if (!key.startsWith("_")) {
       assert.deepEqual(specificConcept[0][key], specificConceptUri[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptUri results`)
       assert.deepEqual(specificConcept[0][key], specificConceptVOCID[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptVOCID results`)
     }
-  }
+  })
+})
+
+
+
+
+
+// TEST GETNARROWER
+
+test("OlsProvider.getNarrower", async () => {
+  const config = { concept: { uri: conceptUriDefault, inScheme: [ schemeUriDefault ] } }
+  const configUri = { concept: { uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] } }
+  const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] } }
+
+  const narrowerConcepts = await provider.getNarrower(config)
+  const narrowerConceptsUri = await provider.getNarrower(configUri)
+  const narrowerConceptsVOCID = await provider.getNarrower(configVOCID)
+
+  assert(Array.isArray(narrowerConcepts) && Array.isArray(narrowerConceptsUri) && Array.isArray(narrowerConceptsVOCID))
+  assert.equal(narrowerConcepts.length, 3)
+  assert.equal(narrowerConceptsUri.length, 3)
+  assert.equal(narrowerConceptsVOCID.length, 3)
+
+  const keys = Object.keys(narrowerConcepts[0])
+  keys.forEach(key => {
+    if (!key.startsWith("_")) {
+      assert.notDeepStrictEqual(narrowerConcepts[0][key], undefined, `Key '${key}' is missing in narrowerConcepts result`)
+      assert.notDeepStrictEqual(narrowerConceptsUri[0][key], undefined, `Key '${key}' is missing in narrowerConceptsUri result`)
+      assert.notDeepStrictEqual(narrowerConceptsVOCID[0][key], undefined, `Key '${key}' is missing in narrowerConceptsVOCID result`)
+      assert.deepEqual(narrowerConcepts[0][key], narrowerConceptsUri[0][key], `Value for key '${key}' does not match between narrowerConcepts and narrowerConceptsUri results`)
+      assert.deepEqual(narrowerConcepts[0][key], narrowerConceptsVOCID[0][key], `Value for key '${key}' does not match between narrowerConcepts and narrowerConceptsVOCID results`)
+    }
+  })
+})
+
+
+
+
+
+// TEST GETANCESTORS
+
+test("OlsProvider.getAncestors", async () => {
+  const config = { concept: { uri: conceptUriDefault, inScheme: [ schemeUriDefault ] } }
+  const configUri = { concept: { uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] } }
+  const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] } }
+
+  const ancestors = await provider.getAncestors(config)
+  const ancestorsUri = await provider.getAncestors(configUri)
+  const ancestorsVOCID = await provider.getAncestors(configVOCID)
+
+  assert(Array.isArray(ancestors) && Array.isArray(ancestorsUri) && Array.isArray(ancestorsVOCID))
+  assert.equal(ancestors.length, 1)
+  assert.equal(ancestorsUri.length, 1)
+  assert.equal(ancestorsVOCID.length, 1)
+
+  const keys = Object.keys(ancestors[0])
+  keys.forEach(key => {
+    if (!key.startsWith("_")) {
+      assert.notDeepStrictEqual(ancestors[0][key], undefined, `Key '${key}' is missing in ancestors result`)
+      assert.notDeepStrictEqual(ancestorsUri[0][key], undefined, `Key '${key}' is missing in ancestorsUri result`)
+      assert.notDeepStrictEqual(ancestorsVOCID[0][key], undefined, `Key '${key}' is missing in ancestorsVOCID result`)
+      assert.deepEqual(ancestors[0][key], ancestorsUri[0][key], `Value for key '${key}' does not match between ancestors and ancestorsUri results`)
+      assert.deepEqual(ancestors[0][key], ancestorsVOCID[0][key], `Value for key '${key}' does not match between ancestors and ancestorsVOCID results`)
+    }
+  })
 })
