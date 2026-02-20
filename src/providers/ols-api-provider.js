@@ -175,6 +175,13 @@ export default class OlsApiProvider extends BaseProvider {
       })
       return result
     } catch (error) {
+      if (error?.code === "ECONNRESET") {
+        config._retryCount = (config._retryCount ?? 0) + 1;
+        if (config._retryCount < 3) {
+          console.warn(`ECONNRESET — retry ${config._retryCount}/3`);
+          return this._request(url, config)
+        }
+      }
       console.error("Error requesting URL: ", url, error)
     }
     return null
