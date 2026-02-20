@@ -134,8 +134,7 @@ async function specificSchemesUri(id) {
 async function topConceptsUri(id) {
   prompt(`${id}: Top Concepts via uris`, color_headline)
   let schemeUri = await ask("Please enter a scheme URI", schemeUriDefault)
-  // const config = {scheme: { uri: schemeUri }, limit: 10 }
-  const config = {scheme: schemeUri, limit: 10 }
+  const config = {scheme: schemeUri}
   const starttime = Date.now()
   const concepts = await provider.getTop(config)
   out(concepts, "concepts", ((Date.now() - starttime) / 1000).toFixed(2))

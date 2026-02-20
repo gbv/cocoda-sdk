@@ -13,6 +13,13 @@ const provider = cdk.initializeRegistry({
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
 
+// default values
+
+const limitDefault = 50
+const schemeVOCIDDefault = "envo"
+const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
+const invalidDefault = "...invalid..."
+
 
 
 
@@ -46,15 +53,15 @@ test("OlsProvider.getSchemes - all schemes", async () => {
 })
 
 test("OlsProvider.getSchemes - limit", async () => {
-  const schemesLimited = await provider.getSchemes({ limit: 50 })
+  const schemesLimited = await provider.getSchemes({ limit: limitDefault })
   assert(Array.isArray(schemesLimited))
-  assert(schemesLimited.length === 50)
+  assert(schemesLimited.length === limitDefault)
 })
 
 test("OlsProvider.getSchemes - specific scheme", async () => {
-  const config = {schemes: ["http://purl.obolibrary.org/obo/envo.owl"]}
-  const configUri = { schemes: [{ uri: "http://purl.obolibrary.org/obo/envo.owl" }] }
-  const configVOCID = {schemes: [{ VOCID: "envo" }]}
+  const config = {schemes: [schemeUriDefault] }
+  const configUri = { schemes: [{ uri: schemeUriDefault }] }
+  const configVOCID = {schemes: [{ VOCID: schemeVOCIDDefault }]}
   
   const specificScheme = await provider.getSchemes(config)
   const specificSchemeUri = await provider.getSchemes(configUri)
@@ -77,7 +84,7 @@ test("OlsProvider.getSchemes - specific scheme", async () => {
 })
 
 test("OlsProvider.getSchemes - non-existing scheme", async () => {
-  const config = {schemes: ["...non-existing-scheme..."] }
+  const config = {schemes: [invalidDefault] }
   const nonExistingScheme = await provider.getSchemes(config)
   console.log("Non-existing scheme result: ", nonExistingScheme)
   assert(Array.isArray(nonExistingScheme))
@@ -105,36 +112,38 @@ test("OlsProvider.getSchemes - valid JSKOS", async () => {
 
 // TEST GETTOP
 
-test("OlsProvider.getTop - uri", async () => {
-  const config = {scheme: "http://purl.obolibrary.org/obo/envo.owl" }
-  const topConcepts = await provider.getTop(config)
-  assert(Array.isArray(topConcepts))
-  assert(topConcepts.length > 0)
-})
+test("OlsProvider.getTop - specific Scheme", async () => {
+  const config = {schemes: [schemeUriDefault] }
+  const configUri = { schemes: [{ uri: schemeUriDefault }] }
+  const configVOCID = {schemes: [{ VOCID: schemeVOCIDDefault }]}
 
-test("OlsProvider.getTop - uri2", async () => {
-  const config = {scheme: {uri:"http://purl.obolibrary.org/obo/envo.owl"} }
   const topConcepts = await provider.getTop(config)
-  assert(Array.isArray(topConcepts))
-  assert(topConcepts.length > 0)
-})
+  const topConceptsUri = await provider.getTop(configUri)
+  const topConceptsVOCID = await provider.getTop(configVOCID)
 
-test("OlsProvider.getTop - VOCID", async () => {
-  const config = {scheme: {VOCID:"envo"} }
-  const topConcepts = await provider.getTop(config)
-  assert(Array.isArray(topConcepts))
-  assert(topConcepts.length > 0)
+  assert(Array.isArray(topConcepts) && Array.isArray(topConceptsUri) && Array.isArray(topConceptsVOCID))
+  assert.equal(topConcepts.length, topConceptsUri.length)
+  assert.equal(topConcepts.length, topConceptsVOCID.length)
+  const array = topConcepts.keys()
+
+  array.forEach(key => {
+    assert.notDeepStrictEqual(topConcepts[key], undefined, `Key '${key}' is missing in topConcepts result`)
+    assert.notDeepStrictEqual(topConceptsUri[key], undefined, `Key '${key}' is missing in topConceptsUri result`)
+    assert.notDeepStrictEqual(topConceptsVOCID[key], undefined, `Key '${key}' is missing in topConceptsVOCID result`)
+    assert.deepStrictEqual(topConcepts[key], topConceptsUri[key], `Value for key '${key}' does not match between topConcepts and topConceptsUri results`)
+    assert.deepStrictEqual(topConcepts[key], topConceptsVOCID[key], `Value for key '${key}' does not match between topConcepts and topConceptsVOCID results`)
+  })
 })
 
 test("OlsProvider.getTop - non-existing uri", async () => {
-  const config = {scheme: "...non-existing-scheme..." }
+  const config = { scheme: invalidDefault }
   const topConcepts = await provider.getTop(config)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length === 0)
 })
 
 test("OlsProvider.getTop - non-existing VOCID", async () => {
-  const config = {scheme: {VOCID:"...non-existing-scheme..."} }
+  const config = { scheme: { VOCID: invalidDefault } }
   const topConcepts = await provider.getTop(config)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length === 0)
@@ -146,4 +155,20 @@ test("OlsProvider.getTop - no uri", async () => {
   console.log("Top concepts for non-existing scheme result: ", topConcepts)
   assert(Array.isArray(topConcepts))
   assert(topConcepts.length === 0)
+})
+
+
+
+
+
+// TEST GETCONCEPTS
+
+test("OlsProvider.getConcepts - allConcepts", async () => {
+    const config = {scheme: schemeUriDefault}
+})
+
+test("OlsProvider.getConcepts - specificConcept", async () => {
+})
+
+test("OlsProvider.getConcepts - specificConcept", async () => {
 })
