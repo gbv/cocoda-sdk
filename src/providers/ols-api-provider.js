@@ -176,9 +176,9 @@ export default class OlsApiProvider extends BaseProvider {
       return result
     } catch (error) {
       if (error?.code === "ECONNRESET") {
-        config._retryCount = (config._retryCount ?? 0) + 1;
+        config._retryCount = (config._retryCount ?? 0) + 1
         if (config._retryCount < 3) {
-          console.warn(`ECONNRESET — retry ${config._retryCount}/3`);
+          console.warn(`ECONNRESET — retry ${config._retryCount}/3`)
           return this._request(url, config)
         }
       }
@@ -363,7 +363,7 @@ export default class OlsApiProvider extends BaseProvider {
     return []
   }
 
-  async _searchOls(search, scheme, limit, types) {
+  async _searchOls(search, scheme, limit, types = ["http://www.w3.org/2002/07/owl#Class"]) {
     let concept_results = []
     if (types.includes("http://www.w3.org/2002/07/owl#Class")) {
       concept_results = concept_results.concat(await this._searchOlsTyped(search, scheme, limit, "classes"))
