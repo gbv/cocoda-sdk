@@ -115,7 +115,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.notation = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
-      scheme.license = [{uri: ontology.license.url}]
+      scheme.license = [{url: ontology.license.url}]
     }
     return scheme
   }

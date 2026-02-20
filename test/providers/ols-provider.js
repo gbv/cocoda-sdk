@@ -1,8 +1,10 @@
 import test from "node:test"
 import { cdk, addAllProviders } from "../../src/index.js"
 import assert from "assert"
+import fs from 'fs'
 
-// Provider
+// Set Provider
+
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "OlsApi",
@@ -10,6 +12,12 @@ const provider = cdk.initializeRegistry({
   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })
+
+
+
+
+
+// TEST GENERAL
 
 test("OlsProvider is a class", () => {
   assert.equal(typeof provider, "object")
@@ -24,6 +32,12 @@ test("OlsProvider has expected methods", async () => {
   assert.equal(typeof provider.suggest, "function")
   assert.equal(typeof provider.search, "function")
 })
+
+
+
+
+
+// TEST GETSCHEMES
 
 test("OlsProvider.getSchemes - all schemes", async () => {
   const schemes = await provider.getSchemes()
@@ -68,4 +82,19 @@ test("OlsProvider.getSchemes - non-existing scheme", async () => {
   console.log("Non-existing scheme result: ", nonExistingScheme)
   assert(Array.isArray(nonExistingScheme))
   assert(nonExistingScheme.length === 0)
+})
+
+test("OlsProvider.getSchemes - valid JSKOS", async () => {
+  const config = {schemes: [{"VOCID": "bk"}] }
+  const scheme = await provider.getSchemes(config)
+  
+  const bk_raw = fs.readFileSync('test/providers/ols-api/get-schemes-bk.jskos.json', 'utf-8')
+  const bk_jskos = JSON.parse(bk_raw)
+  assert(Array.isArray(scheme))
+  assert(scheme.length === 1)
+
+  for (const key in bk_jskos[0]) {
+    assert(scheme[0][key])
+    assert.deepEqual(scheme[0][key], bk_jskos[0][key], `Value for key '${key}' does not match between scheme result and expected BK JSKOS`)
+  }
 })
