@@ -29,7 +29,7 @@ describe("OlsProvider general", () => {
     assert.equal(typeof provider, "object")
   })
 
-  it("has expected methods", async () => {
+  it("has expected methods", () => {
     assert.equal(typeof provider.getSchemes, "function")
     assert.equal(typeof provider.getTop, "function")
     assert.equal(typeof provider.getConcepts, "function")
@@ -50,13 +50,15 @@ describe("OlsProvider.getSchemes", () => {
     assert(schemes.length >= 200) // there are currently 200+ schemes in OLS, but this number can grow, so we check for a minimum
   })
 
-  it("request limited schemes", async () => {
+  it("request limited schemes", async function () {
+    this.timeout(10000)
     const schemesLimited = await provider.getSchemes({ limit: limitDefault })
     assert(Array.isArray(schemesLimited))
     assert(schemesLimited.length === limitDefault)
   })
 
-  it("request specific scheme, compare scheme specifications", async () => {
+  it("request specific scheme, compare scheme specifications", async function () {
+    this.timeout(10000)
     const config = {schemes: [schemeUriDefault] }
     const configUri = { schemes: [{ uri: schemeUriDefault }] }
     const configVOCID = {schemes: [{ VOCID: schemeVOCIDDefault }]}
@@ -79,14 +81,16 @@ describe("OlsProvider.getSchemes", () => {
     })
   })
 
-  it("request non-existing scheme", async () => {
+  it("request non-existing scheme", async function () {
+    this.timeout(10000)
     const config = {schemes: [invalidDefault] }
     const nonExistingScheme = await provider.getSchemes(config)
     assert(Array.isArray(nonExistingScheme))
     assert(nonExistingScheme.length === 0)
   })
 
-  it("test JSKOS of bk", async () => {
+  it("test JSKOS of bk", async function () {
+    this.timeout(10000)
     const config = {schemes: [{VOCID: "bk"}] }
     const scheme = await provider.getSchemes(config)
     const bk_raw = fs.readFileSync("test/providers/ols-api/get-schemes-bk.jskos.json", "utf-8")
@@ -99,7 +103,8 @@ describe("OlsProvider.getSchemes", () => {
     }
   })
 
-  it("test JSKOS of two schemes", async () => {
+  it("test JSKOS of two schemes", async function () {
+    this.timeout(10000)
     const config = {schemes: [{VOCID: "bfo"}, {VOCID: "bf"} ] }
     const scheme = await provider.getSchemes(config)
     const schemes_raw = fs.readFileSync("test/providers/ols-api/get-schemes.jskos.json", "utf-8")
@@ -128,7 +133,8 @@ describe("OlsProvider.getSchemes", () => {
 
 describe("OlsProvider.getTop", () => {
 
-  it("request top concepts of a specific scheme, compare scheme specifications", async () => {
+  it("request top concepts of a specific scheme, compare scheme specifications", async function () {
+    this.timeout(10000)
     const config = {scheme: schemeUriDefault }
     const configUri = { scheme: { uri: schemeUriDefault } }
     const configVOCID = {scheme: { VOCID: schemeVOCIDDefault }}
@@ -149,28 +155,32 @@ describe("OlsProvider.getTop", () => {
     })
   })
 
-  it("request top concepts of a non-existing scheme uri", async () => {
+  it("request top concepts of a non-existing scheme uri", async function () {
+    this.timeout(10000)
     const config = { scheme: invalidDefault }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 0)
   })
 
-  it("request top concepts of a non-existing scheme VOCID", async () => {
+  it("request top concepts of a non-existing scheme VOCID", async function () {
+    this.timeout(10000)
     const config = { scheme: { VOCID: invalidDefault } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 0)
   })
 
-  it("request top concepts without a scheme", async () => {
+  it("request top concepts without a scheme", async function () {
+    this.timeout(10000)
     const config = {}
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 0)
   })
 
-  it("jskos test", async () => {
+  it("jskos test", async function () {
+    this.timeout(10000)
     const config = { scheme: { VOCID: "bfo" } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
@@ -199,7 +209,8 @@ describe("OlsProvider.getConcepts", () => {
     assert.equal(concepts.length, limitLongDefault) // there are currently 6000+ concepts in ENVO
   })
 
-  it("allConcepts short, compare scheme specifications", async () => {
+  it("allConcepts short, compare scheme specifications", async function () {
+    this.timeout(10000)
     const config = { scheme: schemeUriDefault, limit: limitDefault }
     const configUri = { scheme: { uri: schemeUriDefault }, limit: limitDefault }
     const configVOCID = { scheme: { VOCID: schemeVOCIDDefault }, limit: limitDefault }
@@ -223,7 +234,8 @@ describe("OlsProvider.getConcepts", () => {
     })
   })
 
-  it("specificConcept´, compare concept specifications", async () => {
+  it("specificConcept´, compare concept specifications", async function () {
+    this.timeout(10000)
     const config = {concepts: [{ uri: conceptUriDefault, inScheme: [ schemeUriDefault ] }]}
     const configUri = {concepts: [{ uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] }]}
     const configVOCID = {concepts: [{ notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] }]}
@@ -254,7 +266,9 @@ describe("OlsProvider.getConcepts", () => {
 
 
 describe("OlsProvider.getNarrower", () => {
-  it("request narrower concepts of a specific concept", async () => {
+
+  it("request narrower concepts of a specific concept", async function () {
+    this.timeout(10000)
     const config = { concept: { uri: conceptUriDefault, inScheme: [ schemeUriDefault ] } }
     const configUri = { concept: { uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] } }
     const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] } }
@@ -279,10 +293,17 @@ describe("OlsProvider.getNarrower", () => {
       }
     })
   })
+
 })
 
+
+
+
+
 describe("OlsProvider.getAncestors", () => {
-  it("request ancestors of a specific concept", async () => {
+
+  it("request ancestors of a specific concept", async function () {
+    this.timeout(10000)
     const config = { concept: { uri: conceptUriDefault, inScheme: [ schemeUriDefault ] } }
     const configUri = { concept: { uri: conceptUriDefault, inScheme: [ { uri: schemeUriDefault } ] } }
     const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [ { VOCID: schemeVOCIDDefault } ] } }
@@ -307,26 +328,41 @@ describe("OlsProvider.getAncestors", () => {
       }
     })
   })
+
 })
 
+
+
+
+
 describe("OlsProvider.search", () => {
-  it("search for a term in all schemes", async () => {
+
+  it("search for a term in all schemes", async function () {
+    this.timeout(10000)
     const config = { search: searchDefault }
     const concepts = await provider.search(config)
     assert(Array.isArray(concepts))
     assert(concepts.length >= 59) // there are currently 59 concepts in ENVO that match the search term "entity"
   })
 
-  it("search for a term in a specific scheme", async () => {
+  it("search for a term in a specific scheme", async function () {
+    this.timeout(10000)
     const config = { search: searchDefault, scheme: schemeUriDefault }
     const concepts = await provider.search(config)
     assert(Array.isArray(concepts))
     assert.equal(concepts.length, 1)
   })
+
 })
 
+
+
+
+
 describe("OlsProvider.suggest", () => {
-  it("suggest for a term in all schemes", async () => {
+
+  it("suggest for a term in all schemes", async function () {
+    this.timeout(10000)
     const config = { search: searchDefault }
     const concepts = await provider.suggest(config)
     assert(Array.isArray(concepts))
@@ -340,7 +376,8 @@ describe("OlsProvider.suggest", () => {
     assert.equal(concepts[3].length, len)
   })
 
-  it("suggest for a term in a specific scheme", async () => {
+  it("suggest for a term in a specific scheme", async function () {
+    this.timeout(10000)
     const config = { search: searchDefault, scheme: schemeUriDefault }
     const concepts = await provider.suggest(config)
     assert.equal(typeof concepts[0], "string")
@@ -352,4 +389,5 @@ describe("OlsProvider.suggest", () => {
     assert(Array.isArray(concepts[3]))
     assert.equal(concepts[3].length, len)
   })
+
 })
