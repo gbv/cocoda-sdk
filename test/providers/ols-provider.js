@@ -37,13 +37,14 @@ describe("OlsProvider general", () => {
     assert.equal(typeof provider.getAncestors, "function")
     assert.equal(typeof provider.suggest, "function")
     assert.equal(typeof provider.search, "function")
-   })
+  })
   
 })
 
 describe("OlsProvider.getSchemes", () => {
 
   it("request all schemes", async () => {
+    this.timeout(10000);
     const schemes = await provider.getSchemes()
     assert(Array.isArray(schemes))
     assert(schemes.length >= 200) // there are currently 200+ schemes in OLS, but this number can grow, so we check for a minimum
@@ -191,6 +192,7 @@ describe("OlsProvider.getTop", () => {
 describe("OlsProvider.getConcepts", () => {
 
   it("allConcepts long", async () => {
+    this.timeout(10000);
     const config = {scheme: schemeUriDefault, limit: limitLongDefault }
     const concepts = await provider.getConcepts(config)
     assert(Array.isArray(concepts))
