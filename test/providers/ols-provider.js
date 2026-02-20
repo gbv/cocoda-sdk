@@ -22,6 +22,7 @@ const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "...invalid..."
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
 const conceptNotationDefault = "BFO:0000002"
+const searchDefault = "entity"
 
 
 
@@ -319,4 +320,57 @@ test("OlsProvider.getAncestors", async () => {
       assert.deepEqual(ancestors[0][key], ancestorsVOCID[0][key], `Value for key '${key}' does not match between ancestors and ancestorsVOCID results`)
     }
   })
+})
+
+
+
+
+
+// TEST SEARCH
+
+test("OlsProvider.search all schemes", async () => {
+  const config = { search: searchDefault }
+  const concepts = await provider.search(config)
+  assert(Array.isArray(concepts))
+  assert(concepts.length >= 59) // there are currently 59 concepts in ENVO that match the search term "entity"
+})
+
+test("OlsProvider.search specific scheme", async () => {
+  const config = { search: searchDefault, scheme: schemeUriDefault }
+  const concepts = await provider.search(config)
+  assert(Array.isArray(concepts))
+  assert.equal(concepts.length, 1)
+})
+
+
+
+
+
+// TEST SUGGEST
+
+test("OlsProvider.search all schemes", async () => {
+  const config = { search: searchDefault }
+  const concepts = await provider.suggest(config)
+  assert(Array.isArray(concepts))
+  assert.equal(typeof concepts[0], "string")
+  assert(Array.isArray(concepts[1]))
+  const len = concepts[1].length
+  assert(len >= 59)
+  assert(Array.isArray(concepts[2]))
+  assert.equal(concepts[2].length, len)
+  assert(Array.isArray(concepts[3]))
+  assert.equal(concepts[3].length, len)
+})
+
+test("OlsProvider.search specific scheme", async () => {
+  const config = { search: searchDefault, scheme: schemeUriDefault }
+  const concepts = await provider.suggest(config)
+  assert.equal(typeof concepts[0], "string")
+  assert(Array.isArray(concepts[1]))
+  const len = concepts[1].length
+  assert(len >= 1)
+  assert(Array.isArray(concepts[2]))
+  assert.equal(concepts[2].length, len)
+  assert(Array.isArray(concepts[3]))
+  assert.equal(concepts[3].length, len)
 })
