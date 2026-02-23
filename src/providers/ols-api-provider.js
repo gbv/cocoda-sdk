@@ -1,10 +1,5 @@
 import BaseProvider from "./base-provider.js"
-/*
-import jskos from "jskos-tools"
-import jsonld from "jsonld"
-import context_mod from "./contexts/context_mod.js"
-import context_jskos from "./contexts/context_jskos.js"
-*/
+
 /**
  * OLS API.
  *
@@ -15,8 +10,7 @@ import context_jskos from "./contexts/context_jskos.js"
  * {
  *   provider: "OlsApi",
  *   language: "en",           // language to use for labels and descriptions. if no language is given in ols, it defaults to "en"
- *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
- *   uri: "https://api.terminology.tib.eu/api" // "http://service.tib.eu/ts4tib/api"
+ *   uri: "https://api.terminology.tib.eu/api/v2"
  * }
  * ```
  *
@@ -53,32 +47,13 @@ export default class OlsApiProvider extends BaseProvider {
    * Constructs the full API URL for a given endpoint.
    * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeVOCID>]")
    * @param {Object} params - An object containing query parameters as key-value pairs.
-   * @returns {string} The full URL. Returns undefined if any part is undefined.
+   * @returns {string} The full URL.
    * @private
    */
-  _getApiUrl(parts, params) {
-    // result = URL + endpointA (+ artefactID)? (+ endpointB)? (+ paramsString)?
-    let result = this.uri || ""
-    // Ensure the base URL ends with a slash and the endpoint starts with a slash
-    if (result.endsWith("/")) {
-      result = result.slice(0, -1)
-    }
-    for (const part of parts) {
-      if (part) {
-        result += "/" + part
-      } else {
-        return
-      }
-    }
-
-    // If params are provided, append them as query parameters
-    if (params) {
-      const paramString = Object.keys(params)
-        .map((k) => params[k]? `${k}=${encodeURIComponent(params[k])}` : k)
-        .join("&")
-      result += (result.includes("?") ? "&" : "?") + paramString
-    }
-    return result
+  _getApiUrl(parts, params={}) {
+    const url = this.uri + parts.join("/")      
+    params = new URLSearchParams(params)
+    return params.size ? `${url}?${params}` : url
   }
 
 
@@ -106,7 +81,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.url = ontology.homepage
     }
     if (ontology.tracker) {
-      scheme.issueTracker = [{url: ontology.tracker }]
+      scheme.issueTracker = [{ url: ontology.tracker }]
     }
     if (ontology.language) {
       scheme.languages = ontology.language
@@ -115,7 +90,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.notation = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
-      scheme.license = [{uri: ontology.license.url}]
+      scheme.license = [{ uri: ontology.license.url }]
     }
     return scheme
   }
@@ -148,14 +123,14 @@ export default class OlsApiProvider extends BaseProvider {
       "http://www.w3.org/2002/07/owl#Class",
     ]
     if (term.ontologyIri) {
-      concept.inScheme = [{uri: term.ontologyIri}]
+      concept.inScheme = [{ uri: term.ontologyIri }]
     }
     return concept
   }
 
   // #### API REQUESTS ####
 
-  async _request(url, config = {_skipAdditionalParameters: true}) {
+  async _request(url, config = { _skipAdditionalParameters: true }) {
     if (!url) {
       return
     }
@@ -188,22 +163,18 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
 
-
-
-
   // API REQUESTS SCHEMES
 
   async _getSchemesOls() {
-    // https://api.terminology.tib.eu/api/v2/ontologies (pages!)
-    const url = this._getApiUrl(["v2", "ontologies"], null)
+    const url = this._getApiUrl(["ontologies"])
     const pageOne = await this._request(url)
     if (!pageOne) {
       return null
     }
     let ontologies = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["v2", "ontologies"], {page: n})
+    for (let n = 1; n < totalPages; n++) {
+      const urlN = this._getApiUrl(["ontologies"], { page: n })
       const pageN = await this._request(urlN)
       if (pageN) {
         ontologies = ontologies.concat(pageN.elements || [])
@@ -217,7 +188,7 @@ export default class OlsApiProvider extends BaseProvider {
     if (!limit || limit <= 0) {
       return await this._getSchemesOls()
     }
-    const url = this._getApiUrl(["v2", "ontologies"], {size: limit})
+    const url = this._getApiUrl(["ontologies"], { size: limit })
     let response = await this._request(url)
     return response.elements || []
   }
@@ -237,13 +208,13 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getSchemeFromVOCID(VOCID) {
     // https://api.terminology.tib.eu/api/ontologies/envo
-    const url = this._getApiUrl(["v2", "ontologies", VOCID], null)
+    const url = this._getApiUrl(["ontologies", VOCID])
     return await this._request(url)
   }
 
   async _getSchemeFromUri(uri) {
     // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
-    const url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
+    const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
     let response = await this._request(url)
     let ontologies = response.elements
     if (ontologies.length == 0) {
@@ -268,12 +239,12 @@ export default class OlsApiProvider extends BaseProvider {
     if (!VOCID) {
       return []
     }
-    const url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], null)
+    const url = this._getApiUrl(["ontologies", VOCID, "classes"])
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
     for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], {page: n})
+      const urlN = this._getApiUrl(["ontologies", VOCID, "classes"], { page: n })
       const pageN = await this._request(urlN)
       if (pageN) {
         terms = terms.concat(pageN.elements || [])
@@ -288,7 +259,7 @@ export default class OlsApiProvider extends BaseProvider {
     if (!VOCID) {
       return []
     }
-    let url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], {size: limit})
+    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { size: limit })
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -307,9 +278,9 @@ export default class OlsApiProvider extends BaseProvider {
     }
     let url = null
     if (concept.notation) {
-      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: concept.notation})
+      url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: concept.notation })
     } else if (concept.uri) {
-      url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {iri: concept.uri})
+      url = this._getApiUrl(["ontologies", VOCID, "classes"], { iri: concept.uri })
     }
     let response = await this._request(url)
     if (response && response.elements && response.elements.length > 0) {
@@ -324,10 +295,10 @@ export default class OlsApiProvider extends BaseProvider {
     if (!VOCID) {
       return []
     }
-    // let url = this._getApiUrl(["ontologies", VOCID, "terms", "roots"], null)
-    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {hasDirectParents: "false"})
-    //let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {hasDirectParents: false})
-    // let url = this._getApiUrl(["v2","ontologies", VOCID, "properties"], {hasDirectParents: false})
+    // let url = this._getApiUrl(["ontologies", VOCID, "terms", "roots"])
+    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { hasDirectParents: "false" })
+    //let url = this._getApiUrl(["ontologies", VOCID, "classes"], {hasDirectParents: false})
+    // let url = this._getApiUrl(["ontologies", VOCID, "properties"], {hasDirectParents: false})
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -336,12 +307,12 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getNarrowerOls(concept) {
-    const {VOCID, iri} = await this._normalizeConceptObject(concept)
+    const { VOCID, iri } = await this._normalizeConceptObject(concept)
     if (!VOCID || !iri) {
       return []
     }
     let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes", iriDoubleEncoded, "children"], null)
+    let url = this._getApiUrl(["ontologies", VOCID, "classes", iriDoubleEncoded, "children"])
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -350,12 +321,12 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _getAncestorsOls(concept) {
-    const {VOCID, iri} = await this._normalizeConceptObject(concept)
+    const { VOCID, iri } = await this._normalizeConceptObject(concept)
     if (!VOCID || !iri) {
       return []
     }
     let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes", iriDoubleEncoded, "ancestors"], null)
+    let url = this._getApiUrl(["ontologies", VOCID, "classes", iriDoubleEncoded, "ancestors"])
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -378,16 +349,16 @@ export default class OlsApiProvider extends BaseProvider {
     if (limit && limit > 0) { // if limit is given, use the limited search to avoid multiple requests for pagination
       return await this._searchOlsTypedLimited(search, scheme, limit, urlType)
     }
-    const VOCID = scheme? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
+    const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
     if (scheme && !VOCID) { // no results for invalid schemes
       return []
     }
-    let url = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID})
+    let url = this._getApiUrl([urlType], { search: search, ontology: VOCID })
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
     for (let n = 1; n <= totalPages; n++) {
-      const urlN = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID, page: n})
+      const urlN = this._getApiUrl([urlType], { search: search, ontology: VOCID, page: n })
       const pageN = await this._request(urlN)
       if (pageN) {
         terms = terms.concat(pageN.elements || [])
@@ -397,11 +368,11 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async _searchOlsTypedLimited(search, scheme, limit, urlType) {
-    const VOCID = scheme? await this._getSchemeVOCID(scheme) : null
+    const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null
     if (scheme && !VOCID) {
       return []
     }
-    let url = this._getApiUrl(["v2", urlType], {search: search, ontology: VOCID, size: limit})
+    let url = this._getApiUrl([urlType], { search: search, ontology: VOCID, size: limit })
     let response = await this._request(url)
     if (response && response.elements) {
       return response.elements
@@ -416,7 +387,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getSchemeVOCIDFromUri(uri) {
     // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
-    let url = this._getApiUrl(["v2", "ontologies"], {searchFields: "iri", search: uri})
+    let url = this._getApiUrl(["v2", "ontologies"], { searchFields: "iri", search: uri })
     let response = await this._request(url)
     let VOCIDs = []
     for (const ontology of response.elements) {
@@ -447,12 +418,12 @@ export default class OlsApiProvider extends BaseProvider {
   async _normalizeConceptObject(concept) {
     let VOCID = await this._getSchemeVOCID(concept.inScheme[0])
     let iri = concept.uri || await this._conceptIriFromObj(VOCID, concept.notation)
-    return {VOCID, iri}
+    return { VOCID, iri }
   }
 
   async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
-    let url = this._getApiUrl(["v2","ontologies", VOCID, "classes"], {curie: conceptNotation})
+    let url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], { curie: conceptNotation })
     let response = await this._request(url)
     if (response && response.elements && response.elements.length > 0) {
       return response.elements[0].iri
@@ -469,7 +440,7 @@ export default class OlsApiProvider extends BaseProvider {
    * will be called before the registry is initialized (i.e. it's `/status` endpoint is queries if necessasry)
    * @private
    */
-  _prepare() {}
+  _prepare() { }
 
   /**
    * Sets up provider-specific properties.
@@ -477,7 +448,7 @@ export default class OlsApiProvider extends BaseProvider {
    * will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessary), should be used to set properties on this.has and custom preparations
    * @private
    */
-  _setup() {}
+  _setup() { }
 
   /**
    * @private
@@ -521,7 +492,7 @@ export default class OlsApiProvider extends BaseProvider {
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
   */
-  async getSchemes({schemes, limit, ..._config}) {
+  async getSchemes({ schemes, limit, ..._config }) {
     let schemes_results = []
     let ontologies = []
     if (schemes) { // a specific scheme or list of schemes is requested
@@ -560,7 +531,7 @@ export default class OlsApiProvider extends BaseProvider {
    * @returns {Promise<Array>} An array of JSKOS concepts.
    * @async
   */
-  async getConcepts({concepts, scheme, limit, ..._config}) {
+  async getConcepts({ concepts, scheme, limit, ..._config }) {
     if (!concepts && !scheme) {
       return []
     }
@@ -616,7 +587,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     return concept_results
   }
-  
+
   /**
    * Returns child concepts of a specific concept.
    *
@@ -642,7 +613,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     return concept_results
   }
-  
+
   /**
    * Returns ancestor concepts of a specific concept.
    *
@@ -679,7 +650,7 @@ export default class OlsApiProvider extends BaseProvider {
    * @param {string[]} [params.types=["http://www.w3.org/2002/07/owl#Class"]] - list of type URIs
    * @returns {Array} - array of JSKOS concept objects
    */
-  async search({ search, scheme=null, limit=0, types = ["http://www.w3.org/2002/07/owl#Class"], ..._config }) {
+  async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"], ..._config }) {
     let concept_results = []
     let termsOls = await this._searchOls(search, scheme, limit, types)
     for (const termOls of termsOls) {
