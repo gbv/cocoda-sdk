@@ -228,7 +228,7 @@ export default class BaseProvider {
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
         this[method] = () => {
-          throw new errors.MethodNotImplementedError({ method }) 
+          throw new errors.MethodNotImplementedError({ method })
         }
         continue
       }
@@ -286,6 +286,7 @@ export default class BaseProvider {
                 throw new errors.NetworkError({ relatedError: error })
               } else {
                 // Otherwise, throw generic CDKError
+                console.error(error)
                 throw new errors.CDKError({ relatedError: error })
               }
             }
@@ -313,31 +314,31 @@ export default class BaseProvider {
 
   // Expose some properties from original registry object as getters
   get uri() {
-    return this._jskos.uri 
+    return this._jskos.uri
   }
 
   get notation() {
-    return this._jskos.notation 
+    return this._jskos.notation
   }
 
   get prefLabel() {
-    return this._jskos.prefLabel 
+    return this._jskos.prefLabel
   }
 
   get definition() {
-    return this._jskos.definition 
+    return this._jskos.definition
   }
 
   get schemes() {
-    return this._jskos.schemes 
+    return this._jskos.schemes
   }
 
   get excludedSchemes() {
-    return this._jskos.excludedSchemes 
+    return this._jskos.excludedSchemes
   }
 
   get stored() {
-    return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored 
+    return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored
   }
 
   /**
@@ -476,7 +477,7 @@ export default class BaseProvider {
     }
     return result
   }
-    
+
   /**
    * Returns whether a user is authorized for a certain request.
    *

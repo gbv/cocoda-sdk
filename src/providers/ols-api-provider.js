@@ -1,17 +1,15 @@
 import BaseProvider from "./base-provider.js"
 
 /**
- * OLS API.
+ * OLS API V2.
  *
- * The Ontology Lookup Service (OLS) is a repository for biomedical ontologies that aims to provide a single point of access to the latest ontology versions.
+ * The Ontology Lookup Service (OLS) hosts ontologies. Implementation is not fully completed yet.
  *
- * initialization example:
- * ```json
- * {
- *   provider: "OlsApi",
- *   language: "en",           // language to use for labels and descriptions. if no language is given in ols, it defaults to "en"
- *   uri: "https://api.terminology.tib.eu/api/v2"
- * }
+ * ```js
+ * const provider = new OlsApiProvider({
+ *   uri: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL 
+ *   language: "en",                                    // default language to use for labels and descriptions
+ * })
  * ```
  *
  * @extends BaseProvider
@@ -19,38 +17,25 @@ import BaseProvider from "./base-provider.js"
  */
 export default class OlsApiProvider extends BaseProvider {
 
-  // #### PROPERTIES ####
-
-  // - providerName (This is how a provider is identified in a "registry" object in field `provider`.)
   static providerName = "OlsApi"
   static providerType = "http://bartoc.org/api-type/ols"
   static supports = {
     schemes: true,
     top: true,
-    data: false,
+    data: false,        // TODO
     concepts: true,
     narrower: true,
     ancestors: true,
-    types: false,
+    types: false,       // TODO
     suggest: true,
     search: true,
-    auth: false,
-    mappings: false,
-    concordances: false,
-    annotations: false,
-    occurrences: false,
   }
 
-  // #### CUSTOM METHODS ####
 
   /**
    * Constructs the full API URL for a given endpoint.
-   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeVOCID>]")
-   * @param {Object} params - An object containing query parameters as key-value pairs.
-   * @returns {string} The full URL.
-   * @private
    */
-  _getApiUrl(parts, params={}) {
+  _getApiUrl(parts, params = {}) {
     const url = this.uri + parts.join("/")
     params = Object.fromEntries(
       Object.entries(params).filter(([_, v]) => v != null),
@@ -133,18 +118,18 @@ export default class OlsApiProvider extends BaseProvider {
 
   // #### API REQUESTS ####
 
+  // TODO: rename _skipAdditionalParameters
   async _request(url, config = { _skipAdditionalParameters: true }) {
     if (!url) {
       return
     }
-    // console.log("Requesting URL: ", `'${url}'`)
     try {
-      const u = new URL(url)
-      const inlineParams = Object.fromEntries(u.searchParams.entries())
+      url = new URL(url)
+      const inlineParams = Object.fromEntries(url.searchParams.entries())
 
       const result = await this.axios({
         method: "get",
-        url: u.origin + u.pathname,
+        url: url.origin + url.pathname,
         params: {
           ...inlineParams,
           ...config.params, // explicit params win
@@ -153,6 +138,7 @@ export default class OlsApiProvider extends BaseProvider {
       })
       return result
     } catch (error) {
+      // TODO: remove or make configurable
       if (error?.code === "ECONNRESET") {
         config._retryCount = (config._retryCount ?? 0) + 1
         if (config._retryCount < 3) {
@@ -168,234 +154,70 @@ export default class OlsApiProvider extends BaseProvider {
 
   // API REQUESTS SCHEMES
 
-  async _getSchemesOls() {
-    const url = this._getApiUrl(["ontologies"])
-    const pageOne = await this._request(url)
-    if (!pageOne) {
-      return null
-    }
-    let ontologies = pageOne.elements || []
-    const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n < totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies"], { page: n })
-      const pageN = await this._request(urlN)
-      if (pageN) {
-        ontologies = ontologies.concat(pageN.elements || [])
+  async _paginate(base, query, limit) {
+    const size = limit > 0 ? limit : null
+    let url = this._getApiUrl(base, { ...query, size })
+    let page = await this._request(url)
+    let items = page?.elements || []
+    if (!size) {
+      const totalPages = page?.totalPages || 0
+      for (let n = 1; n < totalPages; n++) {
+        url = this._getApiUrl(base, { ...query, page: n })
+        page = await this._request(url)
+        items = items.concat(page?.elements || [])
       }
     }
-    return ontologies
+    return items
   }
-
-  async _getSchemesOlsLimit(limit) {
-    // https://api.terminology.tib.eu/api/v2/ontologies (pages!)
-    if (!limit || limit <= 0) {
-      return await this._getSchemesOls()
-    }
-    const url = this._getApiUrl(["ontologies"], { size: limit })
-    let response = await this._request(url)
-    return response.elements || []
-  }
-
-  async _getSchemeOls(schemeParam) {
-    if (typeof schemeParam === "string") {
-      return await this._getSchemeFromUri(schemeParam)
-    }
-    if (schemeParam.VOCID) {
-      return await this._getSchemeFromVOCID(schemeParam.VOCID)
-    }
-    if (schemeParam.uri) {
-      return await this._getSchemeFromUri(schemeParam.uri)
-    }
-    return null
-  }
-
-  async _getSchemeFromVOCID(VOCID) {
-    // https://api.terminology.tib.eu/api/ontologies/envo
-    const url = this._getApiUrl(["ontologies", VOCID])
-    return await this._request(url)
-  }
-
-  async _getSchemeFromUri(uri) {
-    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
-    const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
-    let response = await this._request(url)
-    let ontologies = response.elements
-    if (ontologies.length == 0) {
-      return null
-    }
-    // if multiple, return the ontology with the shortest ontologyId (e.g., envo, not envo2021)
-    return ontologies.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, ontologies[0])
-  }
-
-
-
-
 
   // API REQUESTS CONCEPTS
-
-  async _getConceptsOls(scheme, limit) {
-    if (limit && limit > 0) {
-      return await this._getConceptsOlsLimited(scheme, limit)
-    }
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms
-    const VOCID = await this._getSchemeVOCID(scheme)
-    if (!VOCID) {
-      return []
-    }
-    const url = this._getApiUrl(["ontologies", VOCID, "classes"])
-    let pageOne = await this._request(url)
-    let terms = pageOne.elements || []
-    const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n < totalPages; n++) {
-      const urlN = this._getApiUrl(["ontologies", VOCID, "classes"], { page: n })
-      const pageN = await this._request(urlN)
-      if (pageN) {
-        terms = terms.concat(pageN.elements || [])
-      }
-    }
-    return terms
-  }
-
-  async _getConceptsOlsLimited(scheme, limit) {
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms
-    const VOCID = await this._getSchemeVOCID(scheme)
-    if (!VOCID) {
-      return []
-    }
-    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { size: limit })
-    let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
-    }
-    return []
-  }
 
   async _getConceptOls(concept) {
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http://purl.obolibrary.org/obo/BFO_0000001
-    const VOCID = await this._getSchemeVOCID(concept.inScheme[0])
-    if (!VOCID) {
-      return null
+    const VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0])
+    if (VOCID) {
+      let url = null
+      if (concept.notation) {
+        url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: concept.notation })
+      } else if (concept.uri) {
+        url = this._getApiUrl(["ontologies", VOCID, "classes"], { iri: concept.uri })
+      }
+      let response = await this._request(url)
+      return response?.elements?.[0] || null
     }
-    let url = null
-    if (concept.notation) {
-      url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: concept.notation })
-    } else if (concept.uri) {
-      url = this._getApiUrl(["ontologies", VOCID, "classes"], { iri: concept.uri })
-    }
-    let response = await this._request(url)
-    if (response && response.elements && response.elements.length > 0) {
-      return response.elements[0]
-    }
-    return null
   }
 
-  async _getTopOls(scheme) {
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms/roots
-    const VOCID = await this._getSchemeVOCID(scheme)
-    if (!VOCID) {
-      return []
-    }
-    // let url = this._getApiUrl(["ontologies", VOCID, "terms", "roots"])
-    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { hasDirectParents: "false" })
-    //let url = this._getApiUrl(["ontologies", VOCID, "classes"], {hasDirectParents: false})
-    // let url = this._getApiUrl(["ontologies", VOCID, "properties"], {hasDirectParents: false})
-    let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
-    }
-    return []
-  }
 
-  async _getNarrowerOls(concept) {
-    const { VOCID, iri } = await this._normalizeConceptObject(concept)
-    if (!VOCID || !iri) {
-      return []
-    }
-    let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    let url = this._getApiUrl(["ontologies", VOCID, "classes", iriDoubleEncoded, "children"])
-    let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
-    }
-    return []
-  }
-
-  async _getAncestorsOls(concept) {
-    const { VOCID, iri } = await this._normalizeConceptObject(concept)
-    if (!VOCID || !iri) {
-      return []
-    }
-    let iriDoubleEncoded = encodeURIComponent(encodeURIComponent(iri))
-    let url = this._getApiUrl(["ontologies", VOCID, "classes", iriDoubleEncoded, "ancestors"])
-    let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
-    }
-    return []
-  }
 
   async _searchOls(search, scheme, limit, types = ["http://www.w3.org/2002/07/owl#Class"]) {
-    let concept_results = []
-    if (types.includes("http://www.w3.org/2002/07/owl#Class")) {
-      concept_results = concept_results.concat(await this._searchOlsTyped(search, scheme, limit, "classes"))
+    let items = []
+    const knownTypes = {
+      "http://www.w3.org/2002/07/owl#Class": "classes",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property": "properties",
     }
-    if (types.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")) {
-      concept_results = concept_results.concat(await this._searchOlsTyped(search, scheme, limit, "properties"))
-    }
-    return concept_results
-  }
-
-  async _searchOlsTyped(search, scheme, limit, urlType) {
-    if (limit && limit > 0) { // if limit is given, use the limited search to avoid multiple requests for pagination
-      return await this._searchOlsTypedLimited(search, scheme, limit, urlType)
-    }
-    const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
-    if (scheme && !VOCID) { // no results for invalid schemes
-      return []
-    }
-    let url = this._getApiUrl([urlType], { search: search, ontology: VOCID })
-    let pageOne = await this._request(url)
-    let terms = pageOne.elements || []
-    const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n < totalPages; n++) {
-      const urlN = this._getApiUrl([urlType], { search: search, ontology: VOCID, page: n })
-      const pageN = await this._request(urlN)
-      if (pageN) {
-        terms = terms.concat(pageN.elements || [])
+    for (const type of types) {
+      if (type in knownTypes) {
+        const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
+        const query = { search: search, ontology: VOCID }
+        if (!scheme || VOCID) {
+          // TODO: how to merge with limit of multiple are included
+          const found = await this._paginate([knownTypes[type]], query, limit)
+          items.push(...found)
+        }
       }
     }
-    return terms
+    return items
   }
-
-  async _searchOlsTypedLimited(search, scheme, limit, urlType) {
-    const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null
-    if (scheme && !VOCID) {
-      return []
-    }
-    let url = this._getApiUrl([urlType], { search: search, ontology: VOCID, size: limit })
-    let response = await this._request(url)
-    if (response && response.elements) {
-      return response.elements
-    }
-  }
-
-
-
-
 
   // UTILITIES
 
   async _getSchemeVOCIDFromUri(uri) {
-    // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
     let url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
     let response = await this._request(url)
-    let VOCIDs = []
-    for (const ontology of response.elements) {
-      VOCIDs.push(ontology.ontologyId)
-    }
+    let VOCIDs = response?.elements.map(e => e.ontologyId) || []
     if (VOCIDs.length == 0) {
       return null
     }
@@ -418,12 +240,6 @@ export default class OlsApiProvider extends BaseProvider {
     return null
   }
 
-  async _normalizeConceptObject(concept) {
-    let VOCID = await this._getSchemeVOCID(concept.inScheme[0])
-    let iri = concept.uri || await this._conceptIriFromObj(VOCID, concept.notation)
-    return { VOCID, iri }
-  }
-
   async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     let url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: conceptNotation })
@@ -433,237 +249,110 @@ export default class OlsApiProvider extends BaseProvider {
     }
   }
 
-
-
-
-
-  // #### OVERRIDE METHODS ####
-
-  /**
-   * will be called before the registry is initialized (i.e. it's `/status` endpoint is queries if necessasry)
-   * @private
-   */
-  _prepare() { }
-
-  /**
-   * Sets up provider-specific properties.
-   * Enables support for mappings in this provider.
-   * will be called after registry is initialized (i.e. it's `/status` endpoint is queries if necessary), should be used to set properties on this.has and custom preparations
-   * @private
-   */
-  _setup() { }
-
-  /**
-   * @private
-   */
   get _language() {
+    // TODO: cleanup
     return this._jskos.language || this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
-
-
-
+  async _getSchemeOls({ uri, VOCID }) {
+    if (VOCID) {
+      return await this._request(this._getApiUrl(["ontologies", VOCID]))
+    }
+    if (uri) {
+      const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
+      let response = await this._request(url)
+      let schemes = response.elements
+      if (schemes.length > 0) {
+        return schemes.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, schemes[0])
+      }
+    }
+    return null
+  }
 
   // MAIN FUNCTIONS
 
-  /**
-   * @typedef {Object} SchemeObject
-   * @property {string} [uri] - Canonical scheme URI (primary identifier).
-   * @property {string} [VOCID] - Internal scheme identifier (alternative).
-   *
-   * Either `uri` or `VOCID` must be provided.
-   * If both are provided, `VOCID` is ignored
-   */
-
-  /**
-   * @typedef {Object} ConceptObject
-   * @property {string} [uri] - Canonical concept URI (primary identifier).
-   * @property {string} [notation] - Concept notation (alternative identifier).
-   * @property {string[]|SchemeObject[]} [inScheme] - Scheme(s) the concept belongs to. Each scheme can be identified by either its `uri` or `VOCID`.
-   *
-   * Either `uri` or `notation` must be provided.
-   * If both are provided, `notation` is ignored
-   */
-
-
-  /**
-   * Retrieves schemes from the OLS API.
-   *
-   * @param {Object} params - An object containing parameters for the request.
-   * @param {string[]| SchemeObject[]} [params.schemes] - List of scheme objects to request specific schemes.
-   * @param {number} [params.limit] - Optional limit for results when requesting all schemes.
-   * @returns {Promise<Array>} An array of JSKOS concept schemes.
-   * @async
-  */
+  // TODO: query parameter are different: schemes are in "params.uri"?
   async getSchemes({ schemes, limit, ..._config }) {
-    let schemes_results = []
     let ontologies = []
-    if (schemes) { // a specific scheme or list of schemes is requested
-      for (const s of schemes) {
-        let sc = await this._getSchemeOls(s)
-        if (sc) {
-          ontologies.push(sc)
-        }
-      }
-    } else if (limit) { // limit is given
-      ontologies = await this._getSchemesOlsLimit(limit)
-    } else { // all schemes
-      ontologies = await this._getSchemesOls()
+
+    if (schemes) {
+      ontologies = (await Promise.all(schemes.map(s => this._getSchemeOls(s)))).filter(Boolean)
+    } else if (limit > 0) {
+      const url = this._getApiUrl(["ontologies"], { size: limit })
+      const response = await this._request(url)
+      ontologies = response.elements || []
+    } else {
+      ontologies = await this._paginate(["ontologies"], {})
     }
 
-    for (const ontology of ontologies) { // transform to JSKOS
-      let scheme = await this._ontologyToJSKOS(ontology)
-      if (scheme) {
-        schemes_results.push(scheme)
-      } else {
-        console.warn("JSKOS transformation failed for ontology: ", ontology)
-      }
-    }
-    return schemes_results
+    return Promise.all(ontologies.map(scheme => this._ontologyToJSKOS(scheme)))
   }
 
-  /**
-   * Retrieves concepts from the OLS API.
-   *
-   * @param {Object} params - An object containing parameters for the request.
-   * @param {ConceptObject[]} [params.concepts] - Array of concept objects to request specific concepts.
-   * @param {string | SchemeObject} [params.scheme] - A scheme object to request concepts from a specific scheme.
-   *  either concepts or scheme must be provided. If both are provided, concepts are requested and scheme is ignored.
-   * @param {number} [params.limit] - Optional limit for results when requesting concepts from a scheme.
-   * @param {Object} [params._config] - Additional config options.
-   * @returns {Promise<Array>} An array of JSKOS concepts.
-   * @async
-  */
   async getConcepts({ concepts, scheme, limit, ..._config }) {
-    if (!concepts && !scheme) {
-      return []
-    }
-    let concept_results = []
+    let result = []
     if (concepts) {
       for (const concept of concepts) {
-        let termOls = await this._getConceptOls(concept)
-        if (termOls) {
-          const concept = await this._termToJSKOS(termOls)
-          if (concept) {
-            concept_results.push(concept)
-          } else {
-            console.warn("JSKOS transformation failed for term: ", termOls)
-          }
+        let item = await this._getConceptOls(concept)
+        if (item) {
+          result.push(await this._termToJSKOS(item))
         }
       }
     } else if (scheme) {
-      const termsOls = await this._getConceptsOls(scheme, limit)
-      for (const termOls of termsOls) {
-        const concept = await this._termToJSKOS(termOls)
-        if (concept) {
-          concept_results.push(concept)
-        } else {
-          console.warn("JSKOS transformation failed for term: ", termOls)
-        }
-      }
+      const VOCID = await this._getSchemeVOCID(scheme)
+      const items = VOCID ? await this._paginate(["ontologies", VOCID, "classes"], {}, limit) : []
+      result = Promise.all(items.map(item => this._termToJSKOS(item)))
     }
-    return concept_results
+    return result
   }
 
-  /**
-   * Returns top concepts for a scheme.
-   *
-   * @param {Object} params - An object containing parameters for the request.
-   * @param {string | SchemeObject} params.scheme - A scheme object to request top concepts from a specific scheme.
-   * @param {Object} [params._config] - Additional config options.
-   * @returns {Object[]} - array of JSKOS concept objects
-   * @async
-  */
   async getTop({ scheme, ..._config }) {
-    if (!scheme) {
-      return []
-    }
-    let concept_results = []
-    let termsOls = await this._getTopOls(scheme)
-    for (const termOls of termsOls) {
-      const concept = await this._termToJSKOS(termOls)
-      if (concept) {
-        concept_results.push(concept)
-      } else {
-        console.warn("JSKOS transformation failed for term: ", termOls)
+    const VOCID = await this._getSchemeVOCID(scheme)
+    if (VOCID) {
+      let url = this._getApiUrl(["ontologies", VOCID, "classes"], { hasDirectParents: "false" })
+      let response = await this._request(url)
+      if (response?.elements) {
+        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
       }
     }
-    return concept_results
+    return []
   }
 
-  /**
-   * Returns child concepts of a specific concept.
-   *
-   * @param {Object} params - An object containing parameters for the request.
-   * @param {ConceptObject} params.concept - concept object for which to retrieve narrower concepts
-   * @param {Object} [params._config] - Additional config options.
-   * @returns {Object[]} - array of JSKOS concept objects
-   * @async
-  */
+  async _splitConcept(concept) {
+    const obj = {}
+    if (concept) {
+      obj.VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0]) // TODO: what if multiple schemes?
+      obj.iri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation)
+      obj.iri = encodeURIComponent(encodeURIComponent(obj.iri))
+    }
+    return obj
+  }
+
   async getNarrower({ concept, ..._config }) {
-    if (!concept) {
-      return []
-    }
-    let concept_results = []
-    let termsOls = await this._getNarrowerOls(concept)
-    for (const termOls of termsOls) {
-      const concept = await this._termToJSKOS(termOls)
-      if (concept) {
-        concept_results.push(concept)
-      } else {
-        console.warn("JSKOS transformation failed for term: ", termOls)
+    const { VOCID, iri } = await this._splitConcept(concept)
+    if (VOCID && iri) {
+      let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "children"])
+      let response = await this._request(url)
+      if (response?.elements) {
+        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
       }
     }
-    return concept_results
+    return []
   }
 
-  /**
-   * Returns ancestor concepts of a specific concept.
-   *
-   * @param {Object} params - An object containing parameters for the request.
-   * @param {ConceptObject} params.concept - concept object for which to retrieve ancestor concepts
-   * @param {Object} [params._config] - Additional config options.
-   * @returns {Object[]} - array of JSKOS concept objects
-   * @async
-  */
   async getAncestors({ concept, ..._config }) {
-    if (!concept) {
-      return []
-    }
-    let concept_results = []
-    let termsOls = await this._getAncestorsOls(concept)
-    for (const termOls of termsOls) {
-      const concept = await this._termToJSKOS(termOls)
-      if (concept) {
-        concept_results.push(concept)
-      } else {
-        console.warn("JSKOS transformation failed for term: ", termOls)
+    const { VOCID, iri } = await this._splitConcept(concept)
+    if (VOCID && iri) {
+      let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "ancestors"])
+      let response = await this._request(url)
+      if (response?.elements) {
+        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
       }
     }
-    return concept_results
+    return []
   }
 
-  /**
-   * Returns concept search results.
-   *
-   * @param {Object} params
-   * @param {string} params.search - search string
-   * @param {string | SchemeObject} params.scheme - scheme to search in
-   * @param {number} [params.limit=0] - maximum number of search results (default might be overridden by registry)
-   * @param {string[]} [params.types=["http://www.w3.org/2002/07/owl#Class"]] - list of type URIs
-   * @returns {Array} - array of JSKOS concept objects
-   */
   async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"], ..._config }) {
-    let concept_results = []
-    let termsOls = await this._searchOls(search, scheme, limit, types)
-    for (const termOls of termsOls) {
-      const concept = await this._termToJSKOS(termOls)
-      if (concept) {
-        concept_results.push(concept)
-      } else {
-        console.warn("JSKOS transformation failed for term: ", termOls)
-      }
-    }
-    return concept_results
+    let items = await this._searchOls(search, scheme, limit, types)
+    return Promise.all(items.map(item => this._termToJSKOS(item)))
   }
 }

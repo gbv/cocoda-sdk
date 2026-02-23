@@ -163,6 +163,7 @@ The following providers are offered in cocoda-sdk by default:
 The following providers are also exported, but have to be added via `cdk.addProvider`:
 - `LocalMappings` - access to local mappings via [localForage](https://github.com/localForage/localForage) (only available in browser)
 - `SkosmosApi` - access to concept schemes and concepts via a [Skosmos](https://github.com/NatLibFi/Skosmos) API
+- `OlsApi`- access to ontologies via Ontology Lookup Service (OLS) API Version 2 (experimental)
 - `LocApi` - access to concept schemes and concepts via the [Library of Congress Linked Data Service](https://id.loc.gov/)
   - **This integration is currently experimental and only supports LCSH and LCNAF.**
 - `Skohub` - access to concept schemes and concepts via a [SkoHub Vocabs](https://blog.lobid.org/2019/09/27/presenting-skohub-vocabs.html)
