@@ -53,8 +53,8 @@ export default class OlsApiProvider extends BaseProvider {
   _getApiUrl(parts, params={}) {
     const url = this.uri + parts.join("/")
     params = Object.fromEntries(
-      Object.entries(params).filter(([_, v]) => v != null)
-    );
+      Object.entries(params).filter(([_, v]) => v != null),
+    )
     params = new URLSearchParams(params)
     return params.size ? `${url}?${params}` : url
   }
