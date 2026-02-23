@@ -7,7 +7,7 @@ import BaseProvider from "./base-provider.js"
  *
  * ```js
  * const provider = new OlsApiProvider({
- *   uri: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL 
+ *   endpoint: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL 
  *   language: "en",                                    // default language to use for labels and descriptions
  * })
  * ```
@@ -31,21 +31,33 @@ export default class OlsApiProvider extends BaseProvider {
     search: true,
   }
 
+  constructor(config) {
+    super(config)
+    this.endpoint = config.endpoint
+  }
+
+  /**
+   * Used by `registryForScheme` (see src/lib/CocodaSDK.js) to determine a provider config for a concept schceme.
+   * TODO: make this obsolete
+   */
+  static _registryConfigForBartocApiConfig({ url } = {}) {
+    if (url) {
+      return { endpoint: url }
+    }
+  }
 
   /**
    * Constructs the full API URL for a given endpoint.
    */
   _getApiUrl(parts, params = {}) {
-    const url = this.uri + parts.join("/")
-    params = Object.fromEntries(
-      Object.entries(params).filter(([_, v]) => v != null),
-    )
+    const url = this.endpoint + parts.join("/")
+    params = Object.fromEntries(Object.entries(params).filter(([_, v]) => v != null))
     params = new URLSearchParams(params)
     return params.size ? `${url}?${params}` : url
   }
 
-
   _ontologyToJSKOS(ontology) {
+    // TODO: filter out skos concept schemes
     const lan = ontology.lang || this._language || "en"
     const scheme = {}
     if (ontology.iri) {
@@ -120,37 +132,20 @@ export default class OlsApiProvider extends BaseProvider {
 
   // TODO: rename _skipAdditionalParameters
   async _request(url, config = { _skipAdditionalParameters: true }) {
-    if (!url) {
-      return
-    }
-    try {
+    if (url) {
       url = new URL(url)
-      const inlineParams = Object.fromEntries(url.searchParams.entries())
-
-      const result = await this.axios({
+      const given = Object.fromEntries(url.searchParams.entries())
+      return this.axios({
         method: "get",
         url: url.origin + url.pathname,
         params: {
-          ...inlineParams,
+          ...given,
           ...config.params, // explicit params win
         },
         ...config,
       })
-      return result
-    } catch (error) {
-      // TODO: remove or make configurable
-      if (error?.code === "ECONNRESET") {
-        config._retryCount = (config._retryCount ?? 0) + 1
-        if (config._retryCount < 3) {
-          console.warn(`ECONNRESET — retry ${config._retryCount}/3`)
-          return this._request(url, config)
-        }
-      }
-      console.error("Error requesting URL: ", url, error)
     }
-    return null
   }
-
 
   // API REQUESTS SCHEMES
 
@@ -173,10 +168,6 @@ export default class OlsApiProvider extends BaseProvider {
   // API REQUESTS CONCEPTS
 
   async _getConceptOls(concept) {
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms?id=BFO_0000001
-    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
-    // https://api.terminology.tib.eu/api/ontologies/envo/terms?iri=http://purl.obolibrary.org/obo/BFO_0000001
-    // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http://purl.obolibrary.org/obo/BFO_0000001
     const VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0])
     if (VOCID) {
       let url = null
@@ -189,8 +180,6 @@ export default class OlsApiProvider extends BaseProvider {
       return response?.elements?.[0] || null
     }
   }
-
-
 
   async _searchOls(search, scheme, limit, types = ["http://www.w3.org/2002/07/owl#Class"]) {
     let items = []
@@ -214,32 +203,6 @@ export default class OlsApiProvider extends BaseProvider {
 
   // UTILITIES
 
-  async _getSchemeVOCIDFromUri(uri) {
-    let url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
-    let response = await this._request(url)
-    let VOCIDs = response?.elements.map(e => e.ontologyId) || []
-    if (VOCIDs.length == 0) {
-      return null
-    }
-    // if multiple, return the shortest one (e.g., envo, not envo2021)
-    return VOCIDs.reduce((shortest, current) => current.length < shortest.length ? current : shortest)
-  }
-
-  async _getSchemeVOCID(scheme) {
-    if (typeof scheme === "object" && scheme !== null) {
-      if (scheme.uri) {
-        return await this._getSchemeVOCIDFromUri(scheme.uri)
-      }
-      if (scheme.VOCID) {
-        return scheme.VOCID
-      }
-    }
-    if (typeof scheme === "string") {
-      return await this._getSchemeVOCIDFromUri(scheme)
-    }
-    return null
-  }
-
   async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     let url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: conceptNotation })
@@ -254,16 +217,36 @@ export default class OlsApiProvider extends BaseProvider {
     return this._jskos.language || this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
-  async _getSchemeOls({ uri, VOCID }) {
-    if (VOCID) {
-      return await this._request(this._getApiUrl(["ontologies", VOCID]))
+  async _getSchemeVOCID(scheme) {
+    return scheme?.VOCID
+      ? scheme.VOCID
+      : this._getScheme(scheme).then(s => s?.ontologyId)
+  }
+
+  async _getScheme(scheme) {
+    if (scheme) {
+      const { VOCID, uri, identifier } = scheme
+      if (VOCID) {
+        return this._request(this._getApiUrl(["ontologies", VOCID]))
+      }
+      const identifiers = [uri, ...(identifier || [])].filter(Boolean)
+      // TODO: Promise.race(...)
+      for (let id of identifiers) {
+        const found = await this._getSchemeFromUri(id)
+        if (found) {
+          return found
+        }
+      }
     }
+  }
+
+  async _getSchemeFromUri(uri) {
     if (uri) {
       const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
       let response = await this._request(url)
-      let schemes = response.elements
-      if (schemes.length > 0) {
-        return schemes.reduce((shortest, current) => current.ontologyId.length < shortest.ontologyId.length ? current : shortest, schemes[0])
+      let schemes = response?.elements
+      if (schemes.length) {
+        return schemes.reduce((short, cur) => cur.ontologyId.length < short.ontologyId.length ? cur : short, schemes[0])
       }
     }
     return null
@@ -276,7 +259,7 @@ export default class OlsApiProvider extends BaseProvider {
     let ontologies = []
 
     if (schemes) {
-      ontologies = (await Promise.all(schemes.map(s => this._getSchemeOls(s)))).filter(Boolean)
+      ontologies = (await Promise.all(schemes.map(s => this._getScheme(s)))).filter(Boolean)
     } else if (limit > 0) {
       const url = this._getApiUrl(["ontologies"], { size: limit })
       const response = await this._request(url)
@@ -299,8 +282,10 @@ export default class OlsApiProvider extends BaseProvider {
       }
     } else if (scheme) {
       const VOCID = await this._getSchemeVOCID(scheme)
-      const items = VOCID ? await this._paginate(["ontologies", VOCID, "classes"], {}, limit) : []
-      result = Promise.all(items.map(item => this._termToJSKOS(item)))
+      if (VOCID) {
+        const items = await this._paginate(["ontologies", VOCID, "classes"], {}, limit)
+        result = Promise.all(items.map(item => this._termToJSKOS(item)))
+      }
     }
     return result
   }

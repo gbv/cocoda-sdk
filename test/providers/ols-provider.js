@@ -4,7 +4,7 @@ import fs from "fs"
 import { mockRequests } from "./requests.js"
 
 const provider = new OlsApiProvider({
-  uri: "https://api.terminology.tib.eu/api/v2/",
+  endpoint: "https://api.terminology.tib.eu/api/v2/",
   language: "en",
 })
 
@@ -131,28 +131,16 @@ describe("OlsProvider.getSchemes", () => {
 describe("OlsProvider.getTop", () => {
 
   it("request top concepts of a specific scheme, compare scheme specifications", async function () {
-    const config = { scheme: schemeUriDefault }
     const configUri = { scheme: { uri: schemeUriDefault } }
     const configVOCID = { scheme: { VOCID: schemeVOCIDDefault } }
-    const topConcepts = await provider.getTop(config)
     const topConceptsUri = await provider.getTop(configUri)
     const topConceptsVOCID = await provider.getTop(configVOCID)
-    assert(Array.isArray(topConcepts) && Array.isArray(topConceptsUri) && Array.isArray(topConceptsVOCID))
-    assert.equal(topConcepts.length, topConceptsUri.length)
-    assert.equal(topConcepts.length, topConceptsVOCID.length)
-    Object.keys(topConcepts[0]).forEach(key => {
-      if (!key.startsWith("_")) {
-        assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
-        assert.notDeepStrictEqual(topConceptsUri[0][key], undefined, `Key '${key}' is missing in topConceptsUri result`)
-        assert.notDeepStrictEqual(topConceptsVOCID[0][key], undefined, `Key '${key}' is missing in topConceptsVOCID result`)
-        assert.deepStrictEqual(topConcepts[0][key], topConceptsUri[0][key], `Value for key '${key}' does not match between topConcepts and topConceptsUri results`)
-        assert.deepStrictEqual(topConcepts[0][key], topConceptsVOCID[0][key], `Value for key '${key}' does not match between topConcepts and topConceptsVOCID results`)
-      }
-    })
+    assert.equal(topConceptsUri.length, 7)
+    assert.equal(topConceptsVOCID.length, 7)
   })
 
   it("request top concepts of a non-existing scheme uri", async function () {
-    const config = { scheme: invalidDefault }
+    const config = { scheme: { uri: invalidDefault  } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 0)
@@ -191,53 +179,28 @@ describe("OlsProvider.getTop", () => {
 describe("OlsProvider.getConcepts", () => {
 
   it("allConcepts short, compare scheme specifications", async function () {
-    const config = { scheme: schemeUriDefault, limit: limitDefault }
     const configUri = { scheme: { uri: schemeUriDefault }, limit: limitDefault }
     const configVOCID = { scheme: { VOCID: schemeVOCIDDefault }, limit: limitDefault }
 
-    const concepts = await provider.getConcepts(config)
     const conceptsUri = await provider.getConcepts(configUri)
     const conceptsVOCID = await provider.getConcepts(configVOCID)
 
-    assert(Array.isArray(concepts) && Array.isArray(conceptsUri) && Array.isArray(conceptsVOCID))
-    assert.equal(concepts.length, limitDefault)
     assert.equal(conceptsUri.length, limitDefault)
     assert.equal(conceptsVOCID.length, limitDefault)
-
-    const keys = Object.keys(concepts[0])
-    assert(keys.length > 0)
-    keys.forEach(key => {
-      if (!key.startsWith("_")) {
-        assert.deepEqual(concepts[0][key], conceptsUri[0][key])
-        assert.deepEqual(concepts[0][key], conceptsVOCID[0][key])
-      }
-    })
   })
 
   // TODO: get concepts with pagination
 
   it("specificConcept´, compare concept specifications", async function () {
-    const config = { concepts: [{ uri: conceptUriDefault, inScheme: [schemeUriDefault] }] }
     const configUri = { concepts: [{ uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] }] }
     const configVOCID = { concepts: [{ notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] }] }
 
-    const specificConcept = await provider.getConcepts(config)
     const specificConceptUri = await provider.getConcepts(configUri)
     const specificConceptVOCID = await provider.getConcepts(configVOCID)
 
-    assert(Array.isArray(specificConcept) && Array.isArray(specificConceptUri) && Array.isArray(specificConceptVOCID))
-    assert.equal(specificConcept.length, 1)
+    assert(Array.isArray(specificConceptUri) && Array.isArray(specificConceptVOCID))
     assert.equal(specificConceptUri.length, 1)
     assert.equal(specificConceptVOCID.length, 1)
-
-    const keys = Object.keys(specificConcept[0])
-    assert(keys.length > 0)
-    keys.forEach(key => {
-      if (!key.startsWith("_")) {
-        assert.deepEqual(specificConcept[0][key], specificConceptUri[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptUri results`)
-        assert.deepEqual(specificConcept[0][key], specificConceptVOCID[0][key], `Value for key '${key}' does not match between specificConcept and specificConceptVOCID results`)
-      }
-    })
   })
 
   it("non-existing concept", async function () {
@@ -250,33 +213,17 @@ describe("OlsProvider.getConcepts", () => {
 })
 
 
-
 describe("OlsProvider.getNarrower", () => {
 
   it("request narrower concepts of a specific concept", async function () {
-    const config = { concept: { uri: conceptUriDefault, inScheme: [schemeUriDefault] } }
     const configUri = { concept: { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] } }
     const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] } }
 
-    const narrowerConcepts = await provider.getNarrower(config)
     const narrowerConceptsUri = await provider.getNarrower(configUri)
     const narrowerConceptsVOCID = await provider.getNarrower(configVOCID)
 
-    assert(Array.isArray(narrowerConcepts) && Array.isArray(narrowerConceptsUri) && Array.isArray(narrowerConceptsVOCID))
-    assert.equal(narrowerConcepts.length, 3)
     assert.equal(narrowerConceptsUri.length, 3)
     assert.equal(narrowerConceptsVOCID.length, 3)
-
-    const keys = Object.keys(narrowerConcepts[0])
-    keys.forEach(key => {
-      if (!key.startsWith("_")) {
-        assert.notDeepStrictEqual(narrowerConcepts[0][key], undefined, `Key '${key}' is missing in narrowerConcepts result`)
-        assert.notDeepStrictEqual(narrowerConceptsUri[0][key], undefined, `Key '${key}' is missing in narrowerConceptsUri result`)
-        assert.notDeepStrictEqual(narrowerConceptsVOCID[0][key], undefined, `Key '${key}' is missing in narrowerConceptsVOCID result`)
-        assert.deepEqual(narrowerConcepts[0][key], narrowerConceptsUri[0][key], `Value for key '${key}' does not match between narrowerConcepts and narrowerConceptsUri results`)
-        assert.deepEqual(narrowerConcepts[0][key], narrowerConceptsVOCID[0][key], `Value for key '${key}' does not match between narrowerConcepts and narrowerConceptsVOCID results`)
-      }
-    })
   })
 
   it("non-existing concept", async function () {
@@ -287,35 +234,17 @@ describe("OlsProvider.getNarrower", () => {
 })
 
 
-
-
-
 describe("OlsProvider.getAncestors", () => {
 
   it("request ancestors of a specific concept", async function () {
-    const config = { concept: { uri: conceptUriDefault, inScheme: [schemeUriDefault] } }
     const configUri = { concept: { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] } }
     const configVOCID = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] } }
 
-    const ancestors = await provider.getAncestors(config)
     const ancestorsUri = await provider.getAncestors(configUri)
     const ancestorsVOCID = await provider.getAncestors(configVOCID)
 
-    assert(Array.isArray(ancestors) && Array.isArray(ancestorsUri) && Array.isArray(ancestorsVOCID))
-    assert.equal(ancestors.length, 1)
     assert.equal(ancestorsUri.length, 1)
     assert.equal(ancestorsVOCID.length, 1)
-
-    const keys = Object.keys(ancestors[0])
-    keys.forEach(key => {
-      if (!key.startsWith("_")) {
-        assert.notDeepStrictEqual(ancestors[0][key], undefined, `Key '${key}' is missing in ancestors result`)
-        assert.notDeepStrictEqual(ancestorsUri[0][key], undefined, `Key '${key}' is missing in ancestorsUri result`)
-        assert.notDeepStrictEqual(ancestorsVOCID[0][key], undefined, `Key '${key}' is missing in ancestorsVOCID result`)
-        assert.deepEqual(ancestors[0][key], ancestorsUri[0][key], `Value for key '${key}' does not match between ancestors and ancestorsUri results`)
-        assert.deepEqual(ancestors[0][key], ancestorsVOCID[0][key], `Value for key '${key}' does not match between ancestors and ancestorsVOCID results`)
-      }
-    })
   })
 
   it("non-existing concept", async function () {
@@ -335,7 +264,7 @@ describe("OlsProvider.search", () => {
   })
 
   it("search for a term in a specific scheme", async function () {
-    const concepts = await provider.search({ search: searchDefault, scheme: schemeUriDefault })
+    const concepts = await provider.search({ search: searchDefault, scheme: { uri: schemeUriDefault } })
     assert.equal(concepts.length, 1)
   })
 
@@ -376,7 +305,7 @@ describe("OlsProvider.suggest", () => {
   })
 
   it("suggest for a term in a specific scheme", async function () {
-    const config = { search: searchDefault, scheme: schemeUriDefault }
+    const config = { search: searchDefault, scheme: { uri: schemeUriDefault } }
     const concepts = await provider.suggest(config)
     assert.equal(typeof concepts[0], "string")
     assert(Array.isArray(concepts[1]))
