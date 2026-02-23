@@ -86,7 +86,7 @@ export default class BaseProvider {
 
     this.axios = axios.create({
       // TODO: Decide on timeout value
-      timeout: 20000,
+      timeout: 200000,
     })
     // Path is used for https check and local mappings
     this._path = typeof window !== "undefined" && window.location.pathname
@@ -228,7 +228,7 @@ export default class BaseProvider {
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
         this[method] = () => {
-          throw new errors.MethodNotImplementedError({ method }) 
+          throw new errors.MethodNotImplementedError({ method })
         }
         continue
       }
@@ -286,6 +286,7 @@ export default class BaseProvider {
                 throw new errors.NetworkError({ relatedError: error })
               } else {
                 // Otherwise, throw generic CDKError
+                console.error(error)
                 throw new errors.CDKError({ relatedError: error })
               }
             }
@@ -313,25 +314,31 @@ export default class BaseProvider {
 
   // Expose some properties from original registry object as getters
   get uri() {
-    return this._jskos.uri 
+    return this._jskos.uri
   }
+
   get notation() {
-    return this._jskos.notation 
+    return this._jskos.notation
   }
+
   get prefLabel() {
-    return this._jskos.prefLabel 
+    return this._jskos.prefLabel
   }
+
   get definition() {
-    return this._jskos.definition 
+    return this._jskos.definition
   }
+
   get schemes() {
-    return this._jskos.schemes 
+    return this._jskos.schemes
   }
+
   get excludedSchemes() {
-    return this._jskos.excludedSchemes 
+    return this._jskos.excludedSchemes
   }
+
   get stored() {
-    return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored 
+    return this._jskos.stored !== undefined ? this._jskos.stored : this.constructor.stored
   }
 
   /**
@@ -438,6 +445,39 @@ export default class BaseProvider {
     }, config)
   }
 
+
+
+
+
+  /**
+   * Returns suggestion result in OpenSearch Suggest Format.
+   *
+   * @param {Object} config
+   * @param {string} config.search search string
+   * @param {Object} [config.scheme] concept scheme to search in
+   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
+   * @param {string[]} [config.types=[]] list of type URIs
+   * @returns {Array} result in OpenSearch Suggest Format
+   */
+  async suggest(config) {
+    config._raw = true
+    const concepts = await this.search(config)
+    const result = [config.search, [], [], []]
+    for (let concept of concepts) {
+      const notation = jskos.notation(concept)
+      const label = jskos.prefLabel(concept)
+      result[1].push((notation ? notation + " " : "") + label)
+      result[2].push("")
+      result[3].push(concept.uri)
+    }
+    if (concepts._totalCount != undefined) {
+      result._totalCount = concepts._totalCount
+    } else {
+      result._totalCount = concepts.length
+    }
+    return result
+  }
+
   /**
    * Returns whether a user is authorized for a certain request.
    *
@@ -531,12 +571,15 @@ export default class BaseProvider {
     concept._registry = this
     return concept
   }
+
   adjustConcepts(concepts) {
     return utils.withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
   }
+
   adjustRegistries(registries) {
     return registries
   }
+
   adjustScheme(scheme) {
     // Don't adjust when already saved in Cocoda
     if (!scheme || scheme.__SAVED__) {
@@ -572,9 +615,11 @@ export default class BaseProvider {
     }
     return scheme
   }
+
   adjustSchemes(schemes) {
     return utils.withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
   }
+
   adjustConcordances(concordances) {
     for (let concordance of concordances) {
       // Add _registry to concordance
@@ -582,6 +627,7 @@ export default class BaseProvider {
     }
     return concordances
   }
+
   adjustMapping(mapping) {
     // TODO: Add default type
     // Add fromScheme and toScheme if missing
@@ -601,6 +647,7 @@ export default class BaseProvider {
     }
     return mapping
   }
+
   adjustMappings(mappings) {
     return utils.withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
   }
@@ -671,7 +718,6 @@ export default class BaseProvider {
     resultItems._errors = errors
     return resultItems
   }
-
 }
 
 BaseProvider.providerName = "Base"

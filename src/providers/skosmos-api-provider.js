@@ -410,35 +410,6 @@ export default class SkosmosApiProvider extends BaseProvider {
   }
 
   /**
-   * Returns suggestion result in OpenSearch Suggest Format.
-   *
-   * @param {Object} config
-   * @param {string} config.search search string
-   * @param {Object} [config.scheme] concept scheme to search in
-   * @param {number} [config.limit=100] maximum number of search results (default might be overridden by registry)
-   * @param {string[]} [config.types=[]] list of type URIs
-   * @returns {Array} result in OpenSearch Suggest Format
-   */
-  async suggest(config) {
-    config._raw = true
-    const concepts = await this.search(config)
-    const result = [config.search, [], [], []]
-    for (let concept of concepts) {
-      const notation = jskos.notation(concept)
-      const label = jskos.prefLabel(concept)
-      result[1].push((notation ? notation + " " : "") + label)
-      result[2].push("")
-      result[3].push(concept.uri)
-    }
-    if (concepts._totalCount != undefined) {
-      result._totalCount = concepts._totalCount
-    } else {
-      result._totalCount = concepts.length
-    }
-    return result
-  }
-
-  /**
    * Returns concept search results.
    *
    * @param {Object} config

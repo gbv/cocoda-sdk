@@ -1,0 +1,57 @@
+// this MOD context is build depending on the JSKOS context, not from an official source from the MODAPI
+export const context_mod = {
+  "@context": {
+    subject: "http://purl.org/dc/terms/subject",
+    type: {
+      "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "@type": "@id",
+    },
+    source_name: "http://www.w3.org/2004/02/skos/core#notation",
+    label: "http://www.w3.org/2004/02/skos/core#prefLabel",
+    synonyms: {
+      "@id": "http://www.w3.org/2004/02/skos/core#altLabel",
+      "@container": "@set",
+    },
+    descriptions: {
+      "@id": "http://www.w3.org/2004/02/skos/core#definition",
+      "@container": "@language",
+    },
+    language: {
+      "@id": "http://purl.org/dc/terms/language",
+      "@container": "@set",
+    },
+    iri: "@id",
+    identifier: "http://purl.org/dc/terms/identifier",
+    source: "http://purl.org/dc/terms/source",
+    source_url: "http://rdfs.org/ns/void#uriSpace",
+    landingPage: {
+      "@id": "http://xmlns.com/foaf/0.1/page",
+      "@type": "@id",
+    },
+    version: "http://www.w3.org/2002/07/owl#versionInfo",
+    modified: {
+      "@id": "http://purl.org/dc/terms/modified",
+      "@type": "xsd:date",
+    },
+    created: {
+      "@id": "http://purl.org/dc/terms/created",
+      "@type": "xsd:date",
+    },
+    hasFormat: "http://purl.org/dc/terms/format",
+    license: "http://purl.org/dc/terms/license",
+    creator: "http://purl.org/dc/terms/creator",
+    contributor: "http://purl.org/dc/terms/contributor",
+    publisher: "http://purl.org/dc/terms/publisher",
+    released: {
+      "@id": "http://purl.org/dc/terms/issued",
+      "@type": "xsd:date",
+    },
+    children: {
+      "@id": "http://www.w3.org/2004/02/skos/core#narrower",
+      "@container": "@set",
+    },
+    short_form: "http://www.w3.org/2004/02/skos/core#notation",
+  },
+}
+
+export default context_mod

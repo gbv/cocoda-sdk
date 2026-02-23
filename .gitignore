@@ -15,5 +15,7 @@ npm-debug.log*
 
 *test*.*js*
 
+coverage/
+
 dist/
 docs/

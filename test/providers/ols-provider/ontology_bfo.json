@@ -1,0 +1,411 @@
+{
+  "classifications": [
+    {
+      "collection": [
+        "NFDI4CHEM",
+        "NFDI4ING",
+        "NFDI4CAT",
+        "Foundational Ontologies",
+        "DataPLANT",
+        "FAIRmat"
+      ]
+    },
+    {
+      "subject": [
+        "General"
+      ]
+    }
+  ],
+  "creator": [
+    "Alan Ruttenberg",
+    "Albert Goldfain",
+    "Barry Smith",
+    "Bill Duncan",
+    "Bjoern Peters",
+    "Chris Mungall",
+    "David Osumi-Sutherland",
+    "Fabian Neuhaus",
+    "Holger Stenzhorn",
+    "James A. Overton",
+    "Janna Hastings",
+    "Jie Zheng",
+    "Jonathan Bona",
+    "Larry Hunter",
+    "Leonard Jacuzzo",
+    "Ludger Jansen",
+    "Mark Ressler",
+    "Mathias Brochhausen",
+    "Mauricio Almeida",
+    "Melanie Courtot",
+    "Pierre Grenon",
+    "Randall Dipert",
+    "Ron Rudnicki",
+    "Selja Seppälä",
+    "Stefan Schulz",
+    "Thomas Bittner",
+    "Werner Ceusters",
+    "Yongqun He"
+  ],
+  "definition": [
+    "Please see the project site https://github.com/BFO-ontology/BFO, the bfo2 owl discussion group http://groups.google.com/group/bfo-owl-devel, the bfo2 discussion group http://groups.google.com/group/bfo-devel, the tracking google doc http://goo.gl/IlrEE, and the current version of the bfo2 reference http://purl.obolibrary.org/obo/bfo/dev/bfo2-reference.docx. This ontology is generated from a specification at https://github.com/BFO-ontology/BFO/tree/master/src/ontology/owl-group/specification/ and with the code that generates the OWL version in https://github.com/BFO-ontology/BFO/tree/master/src/tools/. A very early version of BFO version 2 in CLIF is at http://purl.obolibrary.org/obo/bfo/dev/bfo.clif.",
+    "The BSD license on the BFO project site refers to code used to build BFO.",
+    "This BFO 2.0 version represents a major update to BFO and is not strictly backwards compatible with BFO 1.1. The previous OWL version of BFO, version 1.1.1 will remain available at http://ifomis.org/bfo/1.1 and will no longer be updated. The BFO 2.0 OWL is a classes-only specification. The incorporation of core relations has been held over for a later version."
+  ],
+  "definition_property": [
+    "http://purl.obolibrary.org/obo/IAO_0000115"
+  ],
+  "description": "The upper level ontology upon which OBO Foundry ontologies are built.",
+  "exportsTo": [
+    "tfsco",
+    "msio",
+    "t4fs",
+    "nmrcv2025",
+    "swo",
+    "vibso",
+    "modsci",
+    "duo",
+    "pco",
+    "agro",
+    "aeon",
+    "stato",
+    "vivo",
+    "cto",
+    "efo",
+    "iao",
+    "afo",
+    "cheminf",
+    "bco",
+    "enm",
+    "nmrcv",
+    "proco",
+    "chmo",
+    "sepio",
+    "oeo",
+    "cco",
+    "iofcore",
+    "pmd",
+    "mop",
+    "envo",
+    "envo2023",
+    "envo2021",
+    "obi",
+    "pmat",
+    "uberon",
+    "cao",
+    "ro",
+    "to",
+    "po",
+    "flopo",
+    "pato",
+    "cob",
+    "ppo",
+    "peco",
+    "ecso",
+    "pso",
+    "chiro",
+    "gesah",
+    "pror",
+    "rxno",
+    "m4i",
+    "listdb",
+    "gc"
+  ],
+  "homepage": "http://ifomis.org/bfo/",
+  "imported": false,
+  "importsFrom": [
+    "iao",
+    "uo",
+    "dcterms"
+  ],
+  "iri": "http://purl.obolibrary.org/obo/bfo.owl",
+  "isObsolete": false,
+  "is_foundary": true,
+  "language": [
+    "en"
+  ],
+  "license": {
+    "label": "CC-BY",
+    "logo": "http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png",
+    "url": "http://creativecommons.org/licenses/by/4.0/"
+  },
+  "linkedEntities": {
+    "http://ifomis.org/bfo": {
+      "numAppearsIn": 1,
+      "hasLocalDefinition": false,
+      "type": [
+        "individual",
+        "entity"
+      ],
+      "label": [
+        "bfo"
+      ],
+      "curie": "bfo"
+    },
+    "http://purl.obolibrary.org/obo/IAO_0000115": {
+      "definedBy": [
+        "uo",
+        "iao"
+      ],
+      "numAppearsIn": 61,
+      "hasLocalDefinition": true,
+      "label": [
+        "IAO_0000115"
+      ],
+      "curie": "IAO:0000115",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.obolibrary.org/obo/IAO_0000116": {
+      "definedBy": [
+        "iao"
+      ],
+      "numAppearsIn": 46,
+      "hasLocalDefinition": true,
+      "label": [
+        "editor note"
+      ],
+      "curie": "IAO:0000116",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/elements/1.1/contributor": {
+      "numAppearsIn": 46,
+      "hasLocalDefinition": true,
+      "label": [
+        "contributor"
+      ],
+      "curie": "contributor",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/terms/license": {
+      "definedBy": [
+        "dcterms"
+      ],
+      "numAppearsIn": 119,
+      "hasLocalDefinition": true,
+      "label": [
+        "License"
+      ],
+      "curie": "dcterms:license",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2000/01/rdf-schema#comment": {
+      "definedBy": [
+        "prov"
+      ],
+      "numAppearsIn": 59,
+      "hasLocalDefinition": false,
+      "label": [
+        "comment"
+      ],
+      "curie": "comment",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+      "numAppearsIn": 31,
+      "hasLocalDefinition": true,
+      "label": [
+        "isDefinedBy"
+      ],
+      "curie": "isDefinedBy",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+      "numAppearsIn": 29,
+      "hasLocalDefinition": true,
+      "label": [
+        "seeAlso"
+      ],
+      "curie": "seeAlso",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://xmlns.com/foaf/0.1/homepage": {
+      "numAppearsIn": 41,
+      "hasLocalDefinition": true,
+      "label": [
+        "homepage"
+      ],
+      "curie": "homepage",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://xmlns.com/foaf/0.1/mbox": {
+      "numAppearsIn": 24,
+      "hasLocalDefinition": true,
+      "label": [
+        "mbox"
+      ],
+      "curie": "mbox",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "https://github.com/BFO-ontology/BFO": {
+      "url": "https://github.com/BFO-ontology/BFO",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "github:BFO-ontology/BFO"
+    },
+    "mailto:bfo-owl-devel@googlegroups.com": {
+      "numAppearsIn": 1,
+      "hasLocalDefinition": false,
+      "type": [
+        "individual",
+        "entity"
+      ],
+      "label": [
+        "mailto:bfo-owl-devel@googlegroups.com"
+      ],
+      "curie": "mailto:bfo-owl-devel@googlegroups.com"
+    }
+  },
+  "loaded": "2026-02-08T13:44:17.526278523",
+  "mailingList": "https://groups.google.com/forum/#!forum/bfo-discuss",
+  "numDescendants": 0,
+  "numHierarchicalDescendants": 0,
+  "numberOfClasses": "35",
+  "numberOfEntities": "57",
+  "numberOfIndividuals": "0",
+  "numberOfProperties": "22",
+  "ontologyId": "bfo",
+  "ontologyPurl": "http://purl.obolibrary.org/obo/bfo.owl",
+  "preferredPrefix": "BFO",
+  "repo_url": "https://github.com/BFO-ontology/BFO",
+  "searchableAnnotationValues": [
+    "BFO 2 Reference: BFO does not claim to provide complete coverage of entities of all types. It seeks only to provide coverage of those entities studied by empirical science together with those entities which affect or are involved in human activities such as data processing and planning - coverage that is sufficiently broad to provide assistance to those engaged in building domain ontologies for purposes of data annotation.",
+    "BFO 2 Reference: BFO's treatment of continuants and occurrents - as also its treatment of regions, rests on a dichotomy between space and time, and on the view that there are two perspectives on reality - earlier called the 'SNAP' and 'SPAN' perspectives, both of which are essential to the non-reductionist representation of reality as we understand it from the best available science.",
+    "BFO 2 Reference: For both terms and relational expressions in BFO, we distinguish between primitive and defined. 'Entity' is an example of a  primitive term. Primitive terms in a highest-level ontology such as BFO are terms that are so basic to our understanding of reality that there is no way of defining them in a non-circular fashion. For these, therefore, we can provide only elucidations, supplemented by examples and by axioms.",
+    "Alan Ruttenberg",
+    "Albert Goldfain",
+    "Barry Smith",
+    "Bill Duncan",
+    "Bjoern Peters",
+    "Chris Mungall",
+    "David Osumi-Sutherland",
+    "Fabian Neuhaus",
+    "Holger Stenzhorn",
+    "James A. Overton",
+    "Janna Hastings",
+    "Jie Zheng",
+    "Jonathan Bona",
+    "Larry Hunter",
+    "Leonard Jacuzzo",
+    "Ludger Jansen",
+    "Mark Ressler",
+    "Mathias Brochhausen",
+    "Mauricio Almeida",
+    "Melanie Courtot",
+    "Pierre Grenon",
+    "Randall Dipert",
+    "Ron Rudnicki",
+    "Selja Seppälä",
+    "Stefan Schulz",
+    "Thomas Bittner",
+    "Werner Ceusters",
+    "Yongqun \"Oliver\" He",
+    false,
+    "2026-02-08T13:44:17.526278523",
+    "35",
+    "57",
+    "0",
+    "22",
+    "Sun Feb 08 13:44:17 UTC 2026"
+  ],
+  "sourceFileTimestamp": "Sun Feb 08 13:44:17 UTC 2026",
+  "title": "Basic Formal Ontology",
+  "tracker": "https://github.com/BFO-ontology/BFO/issues",
+  "type": [
+    "ontology"
+  ],
+  "versioned_url": "https://raw.githubusercontent.com/BFO-ontology/BFO/refs/heads/master/bfo_classes_only.owl",
+  "http://purl.obolibrary.org/obo/IAO_0000116": [
+    "BFO 2 Reference: BFO does not claim to provide complete coverage of entities of all types. It seeks only to provide coverage of those entities studied by empirical science together with those entities which affect or are involved in human activities such as data processing and planning - coverage that is sufficiently broad to provide assistance to those engaged in building domain ontologies for purposes of data annotation.",
+    "BFO 2 Reference: BFO's treatment of continuants and occurrents - as also its treatment of regions, rests on a dichotomy between space and time, and on the view that there are two perspectives on reality - earlier called the 'SNAP' and 'SPAN' perspectives, both of which are essential to the non-reductionist representation of reality as we understand it from the best available science.",
+    "BFO 2 Reference: For both terms and relational expressions in BFO, we distinguish between primitive and defined. 'Entity' is an example of a  primitive term. Primitive terms in a highest-level ontology such as BFO are terms that are so basic to our understanding of reality that there is no way of defining them in a non-circular fashion. For these, therefore, we can provide only elucidations, supplemented by examples and by axioms."
+  ],
+  "http://purl.org/dc/elements/1.1/contributor": [
+    "Alan Ruttenberg",
+    "Albert Goldfain",
+    "Barry Smith",
+    "Bill Duncan",
+    "Bjoern Peters",
+    "Chris Mungall",
+    "David Osumi-Sutherland",
+    "Fabian Neuhaus",
+    "Holger Stenzhorn",
+    "James A. Overton",
+    "Janna Hastings",
+    "Jie Zheng",
+    "Jonathan Bona",
+    "Larry Hunter",
+    "Leonard Jacuzzo",
+    "Ludger Jansen",
+    "Mark Ressler",
+    "Mathias Brochhausen",
+    "Mauricio Almeida",
+    "Melanie Courtot",
+    "Pierre Grenon",
+    "Randall Dipert",
+    "Ron Rudnicki",
+    "Selja Seppälä",
+    "Stefan Schulz",
+    "Thomas Bittner",
+    "Werner Ceusters",
+    "Yongqun \"Oliver\" He"
+  ],
+  "http://purl.org/dc/terms/license": "http://creativecommons.org/licenses/by/4.0/",
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+  "http://www.w3.org/2000/01/rdf-schema#comment": [
+    "Please see the project site https://github.com/BFO-ontology/BFO, the bfo2 owl discussion group http://groups.google.com/group/bfo-owl-devel, the bfo2 discussion group http://groups.google.com/group/bfo-devel, the tracking google doc http://goo.gl/IlrEE, and the current version of the bfo2 reference http://purl.obolibrary.org/obo/bfo/dev/bfo2-reference.docx. This ontology is generated from a specification at https://github.com/BFO-ontology/BFO/tree/master/src/ontology/owl-group/specification/ and with the code that generates the OWL version in https://github.com/BFO-ontology/BFO/tree/master/src/tools/. A very early version of BFO version 2 in CLIF is at http://purl.obolibrary.org/obo/bfo/dev/bfo.clif.",
+    "The BSD license on the BFO project site refers to code used to build BFO.",
+    "This BFO 2.0 version represents a major update to BFO and is not strictly backwards compatible with BFO 1.1. The previous OWL version of BFO, version 1.1.1 will remain available at http://ifomis.org/bfo/1.1 and will no longer be updated. The BFO 2.0 OWL is a classes-only specification. The incorporation of core relations has been held over for a later version."
+  ],
+  "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+    "http://purl.obolibrary.org/obo/bfo/dev/bfo.clif",
+    "https://github.com/BFO-ontology/BFO/tree/master/src/ontology/owl-group/specification/"
+  ],
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+    "http://groups.google.com/group/bfo-devel",
+    "http://groups.google.com/group/bfo-discuss",
+    "http://groups.google.com/group/bfo-owl-devel",
+    "http://purl.obolibrary.org/obo/bfo/dev/owl",
+    "https://github.com/BFO-ontology/BFO/tree/master/src/tools/"
+  ],
+  "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/bfo/2019-08-26/bfo.owl",
+  "http://xmlns.com/foaf/0.1/homepage": [
+    "http://basic-formal-ontology.org/",
+    "http://ifomis.org/bfo",
+    "https://github.com/BFO-ontology/BFO"
+  ],
+  "http://xmlns.com/foaf/0.1/mbox": "mailto:bfo-owl-devel@googlegroups.com"
+}
