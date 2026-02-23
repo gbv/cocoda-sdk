@@ -1,0 +1,393 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "envo2023",
+        "envo2021",
+        "flopo",
+        "ppo",
+        "bfo",
+        "proco",
+        "t4fs",
+        "oeo",
+        "vivo",
+        "nmrcv",
+        "peco",
+        "to",
+        "duo",
+        "pco",
+        "pmat",
+        "ro",
+        "afo",
+        "envo",
+        "po",
+        "uberon",
+        "cto",
+        "cheminf",
+        "ecso",
+        "bco",
+        "iofcore",
+        "cco",
+        "agro",
+        "chmo",
+        "aeon",
+        "pmd",
+        "pso",
+        "stato",
+        "vibso",
+        "chiro",
+        "sepio",
+        "iao",
+        "nmrcv2025",
+        "tfsco",
+        "msio",
+        "pato",
+        "swo"
+      ],
+      "curie": "BFO:0000002",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "An entity that exists in full at any time in which it exists at all, persists through time while maintaining its identity and has no temporal parts."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000002",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "continuant"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/PATO_0001739": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "radiation quality"
+          ],
+          "curie": "PATO:0001739",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001000": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 20,
+          "hasLocalDefinition": true,
+          "label": [
+            "derives from"
+          ],
+          "curie": "RO:0001000",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000050": {
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "part of"
+          ],
+          "curie": "BFO:0000050",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/ENVO_00001999": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "marine water body"
+          ],
+          "curie": "ENVO:00001999",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001025": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 30,
+          "hasLocalDefinition": true,
+          "label": [
+            "located in"
+          ],
+          "curie": "RO:0001025",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000003": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "occurrent"
+          ],
+          "curie": "BFO:0000003",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01001667": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "thalassic"
+          ],
+          "curie": "ENVO:01001667",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000052": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "characteristic of"
+          ],
+          "curie": "RO:0000052",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000056": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 43,
+          "hasLocalDefinition": true,
+          "label": [
+            "participates in"
+          ],
+          "curie": "RO:0000056",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01001023": {
+          "definedBy": [
+            "envo2021",
+            "envo"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "radiation"
+          ],
+          "curie": "ENVO2021:01001023",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 5807,
+      "numHierarchicalDescendants": 5766,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedFrom": [
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0000052",
+          "value": "http://purl.obolibrary.org/obo/ENVO_01001667",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000002",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+              "http://www.w3.org/2002/07/owl#unionOf": [
+                {
+                  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+                  "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+                  "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_00001999",
+                  "isObsolete": false
+                },
+                {
+                  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+                  "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0001000",
+                  "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_00001999",
+                  "isObsolete": false
+                },
+                {
+                  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+                  "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0001025",
+                  "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_00001999",
+                  "isObsolete": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0000052",
+          "value": "http://purl.obolibrary.org/obo/PATO_0001739",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000002",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000056",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01001023",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": [
+        "An entity that exists in full at any time in which it exists at all, persists through time while maintaining its identity and has no temporal parts.",
+        false
+      ],
+      "shortForm": "BFO_0000002",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "An entity that exists in full at any time in which it exists at all, persists through time while maintaining its identity and has no temporal parts.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "continuant",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        "http://purl.obolibrary.org/obo/BFO_0000001",
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+          "http://www.w3.org/2002/07/owl#allValuesFrom": "http://purl.obolibrary.org/obo/BFO_0000002",
+          "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isObsolete": false
+        }
+      ],
+      "http://www.w3.org/2002/07/owl#disjointWith": [
+        "http://purl.obolibrary.org/obo/BFO_0000003",
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+          "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/BFO_0000003",
+          "isObsolete": false
+        }
+      ]
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

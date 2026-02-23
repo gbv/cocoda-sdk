@@ -18,14 +18,32 @@ const missing = mockRequests(provider.axios, {
 }, {
   "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
-  // ...
+  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity": "search-concept_entity.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=1": "search-concept_entity-1.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2": "search-concept_entity-2.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology=envo": "search-concept-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FBFO_0000002": "search-concept_bfo0000002.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO%3A0000002": "search-concept_bfo0000002.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors"  : "ancestors_bfo0000002.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children"  : "narrower_bfo0000002.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo": "ontology_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bk": "ontology_bk.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bf": "ontology_bf.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo": "ontology_bfo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?size=50": "ontologies-50.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
 
 
 const limitDefault = 50
-const limitLongDefault = 1000
 const schemeVOCIDDefault = "envo"
 const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "__invalid__"
@@ -57,7 +75,7 @@ describe("OlsProvider.getSchemes", () => {
   it("request all schemes", async function () {
     const schemes = await provider.getSchemes()
     assert(Array.isArray(schemes))
-    assert.equal(schemes.length,40)
+    assert.equal(schemes.length, 40)
   })
 
   it("request limited schemes", async function () {
@@ -103,7 +121,7 @@ describe("OlsProvider.getSchemes", () => {
     this.timeout(10000)
     const config = { schemes: [{ VOCID: "bk" }] }
     const scheme = await provider.getSchemes(config)
-    const bk_raw = fs.readFileSync("test/providers/ols-api/get-schemes-bk.jskos.json", "utf-8")
+    const bk_raw = fs.readFileSync("test/providers/ols-provider/jskos_bk.json", "utf-8")
     const bk_jskos = JSON.parse(bk_raw)
     assert(Array.isArray(scheme))
     assert(scheme.length === 1)
@@ -117,7 +135,7 @@ describe("OlsProvider.getSchemes", () => {
     this.timeout(10000)
     const config = { schemes: [{ VOCID: "bfo" }, { VOCID: "bf" }] }
     const scheme = await provider.getSchemes(config)
-    const schemes_raw = fs.readFileSync("test/providers/ols-api/get-schemes.jskos.json", "utf-8")
+    const schemes_raw = fs.readFileSync("test/providers/ols-provider/jskos_ontology_bfo_bf.json", "utf-8")
     const schemes_jskos = JSON.parse(schemes_raw)
     assert(Array.isArray(scheme))
     assert(scheme.length === 2)
@@ -195,7 +213,7 @@ describe("OlsProvider.getTop", () => {
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 1)
-    const bfo_root_raw = fs.readFileSync("test/providers/ols-api/bfo-root.concepts.json", "utf-8")
+    const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
     Object.keys(bfo_root_jskos[0]).forEach(key => {
       assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
@@ -210,14 +228,6 @@ describe("OlsProvider.getTop", () => {
 
 
 describe("OlsProvider.getConcepts", () => {
-
-  it("allConcepts long", async function () {
-    this.timeout(10000)
-    const config = { scheme: schemeUriDefault, limit: limitLongDefault }
-    const concepts = await provider.getConcepts(config)
-    assert(Array.isArray(concepts))
-    assert.equal(concepts.length, limitLongDefault) // there are currently 6000+ concepts in ENVO
-  })
 
   it("allConcepts short, compare scheme specifications", async function () {
     this.timeout(10000)

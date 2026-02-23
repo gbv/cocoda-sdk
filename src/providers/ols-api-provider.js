@@ -51,7 +51,10 @@ export default class OlsApiProvider extends BaseProvider {
    * @private
    */
   _getApiUrl(parts, params={}) {
-    const url = this.uri + parts.join("/")      
+    const url = this.uri + parts.join("/")
+    params = Object.fromEntries(
+      Object.entries(params).filter(([_, v]) => v != null)
+    );
     params = new URLSearchParams(params)
     return params.size ? `${url}?${params}` : url
   }
@@ -243,7 +246,7 @@ export default class OlsApiProvider extends BaseProvider {
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n <= totalPages; n++) {
+    for (let n = 1; n < totalPages; n++) {
       const urlN = this._getApiUrl(["ontologies", VOCID, "classes"], { page: n })
       const pageN = await this._request(urlN)
       if (pageN) {
@@ -357,7 +360,7 @@ export default class OlsApiProvider extends BaseProvider {
     let pageOne = await this._request(url)
     let terms = pageOne.elements || []
     const totalPages = pageOne.totalPages || 0
-    for (let n = 1; n <= totalPages; n++) {
+    for (let n = 1; n < totalPages; n++) {
       const urlN = this._getApiUrl([urlType], { search: search, ontology: VOCID, page: n })
       const pageN = await this._request(urlN)
       if (pageN) {
@@ -387,7 +390,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getSchemeVOCIDFromUri(uri) {
     // https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl
-    let url = this._getApiUrl(["v2", "ontologies"], { searchFields: "iri", search: uri })
+    let url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
     let response = await this._request(url)
     let VOCIDs = []
     for (const ontology of response.elements) {
@@ -423,7 +426,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
-    let url = this._getApiUrl(["v2", "ontologies", VOCID, "classes"], { curie: conceptNotation })
+    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: conceptNotation })
     let response = await this._request(url)
     if (response && response.elements && response.elements.length > 0) {
       return response.elements[0].iri

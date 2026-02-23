@@ -62,7 +62,7 @@
       ],
       "linkedEntities": {
         "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
-          "numAppearsIn": 2.0,
+          "numAppearsIn": 2,
           "hasLocalDefinition": false,
           "type": [
             "property",
@@ -78,7 +78,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46.0,
+          "numAppearsIn": 46,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -94,7 +94,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 26.0,
+          "numAppearsIn": 26,
           "hasLocalDefinition": true,
           "label": [
             "BFO OWL specification label"
@@ -110,7 +110,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38.0,
+          "numAppearsIn": 38,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -123,7 +123,7 @@
           ]
         },
         "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
-          "numAppearsIn": 31.0,
+          "numAppearsIn": 31,
           "hasLocalDefinition": true,
           "label": [
             "isDefinedBy"
@@ -139,7 +139,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 29.0,
+          "numAppearsIn": 29,
           "hasLocalDefinition": true,
           "label": [
             "has axiom label"
@@ -155,7 +155,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 33.0,
+          "numAppearsIn": 33,
           "hasLocalDefinition": true,
           "label": [
             "elucidation"
@@ -168,7 +168,7 @@
           ]
         },
         "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
-          "numAppearsIn": 29.0,
+          "numAppearsIn": 29,
           "hasLocalDefinition": true,
           "label": [
             "seeAlso"
@@ -184,7 +184,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59.0,
+          "numAppearsIn": 59,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -200,7 +200,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 26.0,
+          "numAppearsIn": 26,
           "hasLocalDefinition": true,
           "label": [
             "BFO CLIF specification label"
@@ -216,7 +216,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59.0,
+          "numAppearsIn": 59,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -229,8 +229,8 @@
           ]
         }
       },
-      "numDescendants": 34.0,
-      "numHierarchicalDescendants": 34.0,
+      "numDescendants": 34,
+      "numHierarchicalDescendants": 34,
       "ontologyId": "bfo",
       "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
       "ontologyPreferredPrefix": "BFO",
