@@ -5,10 +5,13 @@ import BaseProvider from "./base-provider.js"
  *
  * The Ontology Lookup Service (OLS) hosts ontologies. Implementation is not fully completed yet.
  *
+ * Individual are not supported.
+ * Properties are only supported partially.
+ *
  * ```js
  * const provider = new OlsApiProvider({
  *   endpoint: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL 
- *   language: "en",                                    // default language to use for labels and descriptions
+ *   language: "en",         // default language to use for labels and descriptions
  * })
  * ```
  *
@@ -22,11 +25,11 @@ export default class OlsApiProvider extends BaseProvider {
   static supports = {
     schemes: true,
     top: true,
-    data: false,        // TODO
+    data: false, // TODO
     concepts: true,
     narrower: true,
     ancestors: true,
-    types: false,       // TODO
+    types: true,
     suggest: true,
     search: true,
   }
@@ -67,6 +70,7 @@ export default class OlsApiProvider extends BaseProvider {
       "http://www.w3.org/2004/02/skos/core#ConceptScheme",
     ]
     if (ontology["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]) {
+      // TODO: should always be owl:Ontology?
       scheme.type = scheme.type.concat(ontology["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"])
     }
     if (ontology.title) {
@@ -87,6 +91,7 @@ export default class OlsApiProvider extends BaseProvider {
       scheme.languages = ontology.language
     }
     if (ontology.ontologyId) {
+      scheme.VOCID = ontology.ontologyId
       scheme.notation = [ontology.ontologyId]
     }
     if (ontology.license?.url) {
@@ -120,6 +125,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     concept.type = [
       "http://www.w3.org/2004/02/skos/core#Concept",
+      // FIXME: properties are no classes
       "http://www.w3.org/2002/07/owl#Class",
     ]
     if (term.ontologyIri) {
@@ -181,11 +187,14 @@ export default class OlsApiProvider extends BaseProvider {
     }
   }
 
-  async _searchOls(search, scheme, limit, types = ["http://www.w3.org/2002/07/owl#Class"]) {
+  async _searchOls(search, scheme, limit, types) {
     let items = []
     const knownTypes = {
       "http://www.w3.org/2002/07/owl#Class": "classes",
       "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property": "properties",
+    }
+    if (!types?.length) {
+      types = Object.keys(knownTypes)
     }
     for (const type of types) {
       if (type in knownTypes) {
@@ -225,13 +234,25 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _getScheme(scheme) {
     if (scheme) {
-      const { VOCID, uri, identifier } = scheme
+      const { VOCID, uri, notation, identifier } = scheme
       if (VOCID) {
         return this._request(this._getApiUrl(["ontologies", VOCID]))
       }
-      const identifiers = [uri, ...(identifier || [])].filter(Boolean)
-      // TODO: Promise.race(...)
-      for (let id of identifiers) {
+      if (uri) {
+        scheme = await this._getSchemeFromUri(uri)
+        if (scheme) {
+          return scheme
+        }
+      }
+      // VOCID is likely the notation
+      if (notation?.[0] && (uri || identifier?.length)) {
+        scheme = await this._request(this._getApiUrl(["ontologies", notation[0]]))
+        if (scheme.iri === uri || identifier?.includes(scheme.iri)) {
+          return scheme
+        }
+      }
+      // Try other URIs 
+      for (let id of (identifier || [])) {
         const found = await this._getSchemeFromUri(id)
         if (found) {
           return found
@@ -243,11 +264,9 @@ export default class OlsApiProvider extends BaseProvider {
   async _getSchemeFromUri(uri) {
     if (uri) {
       const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
-      let response = await this._request(url)
-      let schemes = response?.elements
-      if (schemes.length) {
-        return schemes.reduce((short, cur) => cur.ontologyId.length < short.ontologyId.length ? cur : short, schemes[0])
-      }
+      const response = await this._request(url)
+      const schemes = response?.elements || []
+      return schemes.reduce((short, cur) => cur.ontologyId.length < short.ontologyId.length ? cur : short, schemes[0])
     }
     return null
   }
@@ -255,7 +274,7 @@ export default class OlsApiProvider extends BaseProvider {
   // MAIN FUNCTIONS
 
   // TODO: query parameter are different: schemes are in "params.uri"?
-  async getSchemes({ schemes, limit, ..._config }) {
+  async getSchemes({ schemes, limit }) {
     let ontologies = []
 
     if (schemes) {
@@ -271,7 +290,7 @@ export default class OlsApiProvider extends BaseProvider {
     return Promise.all(ontologies.map(scheme => this._ontologyToJSKOS(scheme)))
   }
 
-  async getConcepts({ concepts, scheme, limit, ..._config }) {
+  async getConcepts({ concepts, scheme, limit }) {
     let result = []
     if (concepts) {
       for (const concept of concepts) {
@@ -290,7 +309,7 @@ export default class OlsApiProvider extends BaseProvider {
     return result
   }
 
-  async getTop({ scheme, ..._config }) {
+  async getTop({ scheme }) {
     const VOCID = await this._getSchemeVOCID(scheme)
     if (VOCID) {
       let url = this._getApiUrl(["ontologies", VOCID, "classes"], { hasDirectParents: "false" })
@@ -312,7 +331,7 @@ export default class OlsApiProvider extends BaseProvider {
     return obj
   }
 
-  async getNarrower({ concept, ..._config }) {
+  async getNarrower({ concept }) {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
       let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "children"])
@@ -324,7 +343,7 @@ export default class OlsApiProvider extends BaseProvider {
     return []
   }
 
-  async getAncestors({ concept, ..._config }) {
+  async getAncestors({ concept }) {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
       let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "ancestors"])
@@ -336,7 +355,23 @@ export default class OlsApiProvider extends BaseProvider {
     return []
   }
 
-  async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"], ..._config }) {
+  async getTypes() {
+    return [{
+      uri: "http://www.w3.org/2002/07/owl#Class",
+      prefLabel: {
+        en: "Class",
+        de: "Klasse",
+      },
+    },{
+      uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+      prefLabel: {
+        en: "Property",
+        de: "Eigenschaft",
+      },
+    }]
+  }
+
+  async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"] }) {
     let items = await this._searchOls(search, scheme, limit, types)
     return Promise.all(items.map(item => this._termToJSKOS(item)))
   }
