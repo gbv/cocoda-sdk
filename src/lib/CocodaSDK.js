@@ -1,7 +1,7 @@
 import * as errors from "../errors/index.js"
 import axios from "axios"
-import * as _ from "../utils/lodash.js"
 import jskos from "jskos-tools"
+import { isDeepStrictEqual } from "node:util"
 
 import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../providers/index.js"
 
@@ -151,7 +151,7 @@ export default class CocodaSDK {
       callback: (error, result, previousResult) => {
         if (error) {
           callback(error)
-        } else if (previousResult || (!previousResult && buildInfo && !_.isEqual(result, buildInfo))) {
+        } else if (previousResult || (!previousResult && buildInfo && !isDeepStrictEqual(result, buildInfo))) {
           callback(null, result, previousResult || buildInfo)
         }
       },
@@ -252,7 +252,7 @@ export default class CocodaSDK {
     // Functions to handle results and errors
     const handleResult = (result) => {
       const previousResult = repeat.result
-      if (!_.isEqual(previousResult, result)) {
+      if (!isDeepStrictEqual(previousResult, result)) {
         repeat.result = result
         repeat.error = null
         callback(null, result, previousResult)
@@ -344,7 +344,7 @@ export default class CocodaSDK {
               if (prio != -1) {
                 prio = this.config.registries.length - prio
               }
-              otherPrio = this.config.registries.indexOf(_.get(otherScheme, "_registry"))
+              otherPrio = this.config.registries.indexOf(otherScheme?._registry)
               if (otherPrio != -1) {
                 otherPrio = this.config.registries.length - otherPrio
               }
@@ -367,7 +367,8 @@ export default class CocodaSDK {
                   schemes.splice(otherSchemeIndex, 1)
                 }
                 // Integrate details from existing scheme
-                scheme = jskos.merge(scheme, _.omit(otherScheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
+                const { concepts, topConcepts, ...fromOtherScheme } = otherScheme // eslint-disable-line no-unused-vars 
+                scheme = jskos.merge(scheme, fromOtherScheme, { mergeUris: true, skipPaths: ["_registry"] })
               }
               scheme._registry = registry
               // Save scheme in objects and push into schemes array
@@ -377,7 +378,8 @@ export default class CocodaSDK {
               const index = schemes.findIndex(s => jskos.compare(s, scheme))
               if (index != -1) {
                 const otherSchemeRegistry = schemes[index]._registry
-                schemes[index] = jskos.merge(schemes[index], _.omit(scheme, ["concepts", "topConcepts"]), { mergeUris: true, skipPaths: ["_registry"] })
+                const { concepts, topConcepts, ...fromScheme } = scheme  // eslint-disable-line no-unused-vars 
+                schemes[index] = jskos.merge(schemes[index], fromScheme, { mergeUris: true, skipPaths: ["_registry"] })
                 schemes[index]._registry = otherSchemeRegistry
               }
             }

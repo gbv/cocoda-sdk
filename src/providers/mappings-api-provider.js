@@ -1,8 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import * as utils from "../utils/index.js"
+import { concatUrl } from "../utils/index.js"
 
 // TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
 
@@ -43,7 +42,7 @@ export default class MappingsApiProvider extends BaseProvider {
   _prepare() {
     // Set status endpoint only
     if (this._api.api && this._api.status === undefined) {
-      this._api.status = utils.concatUrl(this._api.api, "/status")
+      this._api.status = concatUrl(this._api.api, "/status")
     }
   }
 
@@ -60,33 +59,33 @@ export default class MappingsApiProvider extends BaseProvider {
       }
       for (let key of Object.keys(endpoints)) {
         if (this._api[key] === undefined) {
-          this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
+          this._api[key] = concatUrl(this._api.api, endpoints[key])
         }
       }
     }
     this.has.mappings = this._api.mappings ? {} : false
     if (this.has.mappings) {
-      this.has.mappings.read = !!_.get(this._config, "mappings.read", true)
-      this.has.mappings.create = !!_.get(this._config, "mappings.create")
-      this.has.mappings.update = !!_.get(this._config, "mappings.update")
-      this.has.mappings.delete = !!_.get(this._config, "mappings.delete")
-      this.has.mappings.anonymous = !!_.get(this._config, "mappings.anonymous")
+      this.has.mappings.read = !!(this._config?.mappings?.read ?? true)
+      this.has.mappings.create = !!this._config?.mappings?.create
+      this.has.mappings.update = !!this._config?.mappings?.update
+      this.has.mappings.delete = !!this._config?.mappings?.delete
+      this.has.mappings.anonymous = !!this._config?.mappings?.anonymous
     }
     this.has.concordances = this._api.concordances ? {} : false
     if (this.has.concordances) {
-      this.has.concordances.read = !!_.get(this._config, "concordances.read")
-      this.has.concordances.create = !!_.get(this._config, "concordances.create")
-      this.has.concordances.update = !!_.get(this._config, "concordances.update")
-      this.has.concordances.delete = !!_.get(this._config, "concordances.delete")
+      this.has.concordances.read = !!this._config?.concordances?.read
+      this.has.concordances.create = !!this._config?.concordances?.create
+      this.has.concordances.update = !!this._config?.concordances?.update
+      this.has.concordances.delete = !!this._config?.concordances?.delete
     }
     this.has.annotations = this._api.annotations ? {} : false
     if (this.has.annotations) {
-      this.has.annotations.read = !!_.get(this._config, "annotations.read")
-      this.has.annotations.create = !!_.get(this._config, "annotations.create")
-      this.has.annotations.update = !!_.get(this._config, "annotations.update")
-      this.has.annotations.delete = !!_.get(this._config, "annotations.delete")
+      this.has.annotations.read = !!this._config?.annotations?.read
+      this.has.annotations.create = !!this._config?.annotations?.create
+      this.has.annotations.update = !!this._config?.annotations?.update
+      this.has.annotations.delete = !!this._config?.annotations?.delete
     }
-    this.has.auth = _.get(this._config, "auth.key") != null
+    this.has.auth = this._config?.auth?.key != null
     this._defaultParams = {
       properties: "annotations",
     }
@@ -116,7 +115,7 @@ export default class MappingsApiProvider extends BaseProvider {
         },
       })
     } catch (error) {
-      if (_.get(error, "response.status") == 404) {
+      if (error?.response?.status == 404) {
         return null
       }
       throw error
@@ -132,25 +131,25 @@ export default class MappingsApiProvider extends BaseProvider {
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, cardinality, annotatedBy, annotatedFor, annotatedWith, sort, order, ...config }) {
     let params = {}, url = this._api.mappings
     if (from) {
-      params.from = _.isString(from) ? from : from.uri
+      params.from = typeof from === "string" ? from : from.uri
     }
     if (fromScheme) {
-      params.fromScheme = _.isString(fromScheme) ? fromScheme : fromScheme.uri
+      params.fromScheme = typeof fromScheme === "string" ? fromScheme : fromScheme.uri
     }
     if (to) {
-      params.to = _.isString(to) ? to : to.uri
+      params.to = typeof to === "string" ? to : to.uri
     }
     if (toScheme) {
-      params.toScheme = _.isString(toScheme) ? toScheme : toScheme.uri
+      params.toScheme = typeof toScheme === "string" ? toScheme : toScheme.uri
     }
     if (creator) {
-      params.creator = _.isString(creator) ? creator : jskos.prefLabel(creator)
+      params.creator = typeof creator === "string" ? creator : jskos.prefLabel(creator)
     }
     if (type) {
-      params.type = _.isString(type) ? type : type.uri
+      params.type = typeof type === "string" ? type : type.uri
     }
     if (partOf) {
-      params.partOf = _.isString(partOf) ? partOf : partOf.uri
+      params.partOf = typeof partOf === "string" ? partOf : partOf.uri
     }
     if (offset) {
       params.offset = offset
@@ -262,15 +261,15 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!mapping) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
-    const uri = mapping.uri
-    if (!uri || !uri.startsWith(this._api.mappings)) {
+    if (!mapping.uri?.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
+    const { uri, ...data } = mapping
     return this.axios({
       ...config,
       method: "patch",
       url: uri,
-      data: _.omit(mapping, "uri"),
+      data,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -310,7 +309,8 @@ export default class MappingsApiProvider extends BaseProvider {
    */
   async getAnnotations({ target, ...config }) {
     if (target) {
-      _.set(config, "params.target", target)
+      config.params ||= {}
+      config.params.target = target
     }
     return this.axios({
       ...config,
@@ -470,15 +470,15 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!concordance) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
     }
-    const uri = concordance.uri
-    if (!uri || !uri.startsWith(this._api.concordances)) {
+    if (!concordance.uri?.startsWith(this._api.concordances)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
     }
+    const { uri, ...data } = concordance
     return this.axios({
       ...config,
       method: "patch",
       url: uri,
-      data: _.omit(concordance, "uri"),
+      data,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),

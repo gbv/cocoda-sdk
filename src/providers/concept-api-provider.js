@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import * as utils from "../utils/index.js"
+import { withCustomProps, concatUrl } from "../utils/index.js"
 import jskos from "jskos-tools"
 
 /**
@@ -52,7 +51,7 @@ export default class ConceptApiProvider extends BaseProvider {
   _prepare() {
     // Set status endpoint only
     if (this._api.api && this._api.status === undefined) {
-      this._api.status = utils.concatUrl(this._api.api, "/status")
+      this._api.status = concatUrl(this._api.api, "/status")
     }
   }
 
@@ -76,7 +75,7 @@ export default class ConceptApiProvider extends BaseProvider {
       for (let key of Object.keys(endpoints)) {
         // Only override if undefined
         if (this._api[key] === undefined) {
-          this._api[key] = utils.concatUrl(this._api.api, endpoints[key])
+          this._api[key] = concatUrl(this._api.api, endpoints[key])
         }
       }
     }
@@ -93,7 +92,7 @@ export default class ConceptApiProvider extends BaseProvider {
     this.has.types = !!this._api.types
     this.has.suggest = !!this._api.suggest
     this.has.search = !!this._api.search
-    this.has.auth = _.get(this._config, "auth.key") != null
+    this.has.auth = this._config?.auth?.key
     this._defaultParams = {
       // Default parameters mostly for DANTE
       properties: "+created,issued,modified,editorialNote,scopeNote,note,definition,mappings,location",
@@ -180,7 +179,7 @@ export default class ConceptApiProvider extends BaseProvider {
     })
     // If schemes were given in registry object, only request those schemes from API
     if (Array.isArray(this.schemes)) {
-      return utils.withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
+      return withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
     } else {
       return schemes
     }
@@ -453,7 +452,8 @@ export default class ConceptApiProvider extends BaseProvider {
     }
     const schemeUri = scheme && await this._getSchemeUri(scheme)
     if (schemeUri) {
-      _.set(config, "params.uri", schemeUri)
+      config.params ||= {}
+      config.params.uri = schemeUri
     }
     let types = await this.axios({
       ...config,

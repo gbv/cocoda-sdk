@@ -1,5 +1,4 @@
 import BaseProvider from "./base-provider.js"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
@@ -99,7 +98,7 @@ export default class SkohubProvider extends BaseProvider {
       throw new errors.InvalidRequestError({ message: `Tried to load unsupported scheme (${scheme && scheme.uri})` })
     }
     const uri = schemeFromList.uri
-    uris = _.uniq(uris.concat(jskos.getAllUris(schemeFromList)))
+    uris = [...new Set(uris.concat(jskos.getAllUris(schemeFromList)))]
 
     let postfix = ".json"
     if (uri.endsWith("/")) {
@@ -202,7 +201,7 @@ export default class SkohubProvider extends BaseProvider {
   }
 
   async getConcepts({ concepts, ...config }) {
-    if (!_.isArray(concepts)) {
+    if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
     // Concepts have to be loaded separately, so we parallelize it with Promise.all

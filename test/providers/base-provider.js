@@ -1,7 +1,7 @@
 import BaseProvider from "../../src/providers/base-provider.js"
 import assert from "assert"
 import MockAdapter from "axios-mock-adapter"
-import * as utils from "../../src/utils/index.js"
+import { requestMethods } from "../../src/utils/index.js"
 
 describe("BaseProvider", () => {
   let provider, registry = {}, mock
@@ -30,7 +30,7 @@ describe("BaseProvider", () => {
   })
 
   it("should have all request methods", async () => {
-    for (let { method } of utils.requestMethods) {
+    for (let { method } of requestMethods) {
       assert.ok(!!provider[method], `could not find method ${method}`)
       // All request methods should throw by default
       await assert.rejects(async () => {

@@ -1,7 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
+import { isDeepStrictEqual } from "node:util"
 
 // Cache by registry URI
 const cache = {}
@@ -61,13 +61,13 @@ export default class ReconciliationApiProvider extends BaseProvider {
    */
   async getMappings({ from, to, mode, ...config }) {
     let schemes = []
-    if (_.isArray(this.schemes)) {
+    if (Array.isArray(this.schemes)) {
       schemes = this.schemes
     }
     let swap
     let concept
-    let fromConceptScheme = _.get(from, "inScheme[0]")
-    let toConceptScheme = _.get(to, "inScheme[0]")
+    let fromConceptScheme = from?.inScheme?.[0]
+    let toConceptScheme = to?.inScheme?.[0]
     let fromScheme
     let toScheme
     if (!from || jskos.isContainedIn(fromConceptScheme, schemes)) {
@@ -97,11 +97,11 @@ export default class ReconciliationApiProvider extends BaseProvider {
     if (!language) {
       throw new errors.InvalidOrMissingParameterError({ parameter: swap ? "to" : "from", message: "Missing language" })
     }
-    let altLabels = _.get(concept, `altLabel.${language}`, [])
-    if (_.isString(altLabels)) {
+    let altLabels = concept?.altLabel?.[language] ?? []
+    if (typeof altLabels === "string") {
       altLabels = [altLabels]
     }
-    let prefLabel = _.get(concept, `prefLabel.${language}`)
+    let prefLabel = concept?.prefLabel?.[language]
     let labels = altLabels.concat([prefLabel])
     labels = [prefLabel]
     // Get results from API or cache
@@ -122,7 +122,7 @@ export default class ReconciliationApiProvider extends BaseProvider {
       return a.id.length - b.id.length
     })
     // Prepare namespace
-    let namespace = _.get(toScheme, "namespace", "")
+    let namespace = toScheme?.namespace ?? ""
     // Map results to actual mappings
     let mappings = results.map(result => ({
       fromScheme,
@@ -171,7 +171,7 @@ export default class ReconciliationApiProvider extends BaseProvider {
     labels = labels.sort()
     // Use local cache.
     let resultsFromCache = this._cache.find(item => {
-      return _.isEqual(item.labels, labels) && item.language == language
+      return isDeepStrictEqual(item.labels, labels) && item.language == language
     })
     if (resultsFromCache) {
       return resultsFromCache
@@ -192,7 +192,8 @@ export default class ReconciliationApiProvider extends BaseProvider {
     // Encode data
     const encodedData = `queries=${encodeURIComponent(JSON.stringify(queries))}`
     // Set appropriate header
-    _.set(config, ["headers", "Content-Type"], "application/x-www-form-urlencoded")
+    config.headers ||= {}
+    config.headers["Content-Type"] = "application/x-www-form-urlencoded"
     let data = await this.axios({
       ...config,
       method: "post",

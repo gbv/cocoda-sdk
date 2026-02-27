@@ -1,6 +1,5 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 
 // TODO: Only keep the last 20 results in cache.
@@ -49,7 +48,7 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
    * @returns {boolean}
    */
   supportsScheme(scheme) {
-    return super.supportsScheme(scheme) && _.get(scheme, "_registry.has.search", false)
+    return super.supportsScheme(scheme) && scheme?._registry?.has?.search
   }
 
   /**
@@ -87,12 +86,12 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
     // Reduce number of results until limit is reached
     while (fromResult.length + toResult.length > limit) {
       if (toResult.length >= fromResult.length) {
-        toResult = toResult.slice(0, -1)
+        toResult.pop()
       } else {
-        fromResult = fromResult.slice(0, -1)
+        fromResult.pop()
       }
     }
-    return _.union(fromResult, toResult)
+    return [...fromResult, ...toResult]
   }
 
   /**
@@ -183,7 +182,7 @@ export default class LabelSearchSuggestionProvider extends BaseProvider {
       return resultsFromCache
     }
     // Determine search URI for target scheme's registry
-    const registry = _.get(targetScheme, "_registry")
+    const registry = targetScheme?._registry
     if (!registry || registry.has.search === false) {
       return []
     }

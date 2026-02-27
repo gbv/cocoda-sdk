@@ -1,8 +1,8 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
-import * as utils from "../utils/index.js"
+import { concatUrl } from "../utils/index.js"
+import { isDeepStrictEqual } from "node:util"
 
 // Cache by registry URI
 const cache = {}
@@ -59,7 +59,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
     } else {
       // Load supported schemes from API
       try {
-        const url = utils.concatUrl(this._api.api, "voc")
+        const url = concatUrl(this._api.api, "voc")
         const data = await this.axios({
           method: "get",
           url,
@@ -88,9 +88,9 @@ export default class OccurrencesApiProvider extends BaseProvider {
   async getMappings(config) {
     const occurrences = await this.getOccurrences(config)
     const from = config.from
-    const fromScheme = _.get(from, "inScheme[0]") || config.fromScheme
+    const fromScheme = from?.inScheme?.[0] || config.fromScheme
     const to = config.to
-    const toScheme = _.get(to, "inScheme[0]") || config.toScheme
+    const toScheme = to?.inScheme?.[0] || config.toScheme
     const mappings = []
     // Convert occurrences to mappings
     for (let occurrence of occurrences) {
@@ -98,22 +98,22 @@ export default class OccurrencesApiProvider extends BaseProvider {
         continue
       }
       let mapping = {}
-      mapping.from = _.get(occurrence, "memberSet[0]")
+      mapping.from = occurrence?.memberSet?.[0]
       if (mapping.from) {
         mapping.from = { memberSet: [mapping.from] }
       } else {
         mapping.from = null
       }
-      mapping.fromScheme = _.get(occurrence, "memberSet[0].inScheme[0]")
-      mapping.to = _.get(occurrence, "memberSet[1]")
+      mapping.fromScheme = occurrence?.memberSet?.[0]?.inScheme?.[0]
+      mapping.to = occurrence?.memberSet?.[1]
       if (mapping.to) {
         mapping.to = { memberSet: [mapping.to] }
       } else {
         mapping.to = { memberSet: [] }
       }
-      mapping.toScheme = _.get(occurrence, "memberSet[1].inScheme[0]")
+      mapping.toScheme = occurrence?.memberSet?.[1]?.inScheme?.[0]
       // Swap sides if necessary
-      if (from && jskos.compare(from, _.get(mapping, "to.memberSet[0]")) || to && jskos.compare(to, _.get(mapping, "from.memberSet[0]"))) {
+      if (from && jskos.compare(from, mapping?.to?.memberSet?.[0]) || to && jskos.compare(to, mapping?.from?.memberSet?.[0])) {
         [mapping.from, mapping.fromScheme, mapping.to, mapping.toScheme] = [mapping.to, mapping.toScheme, mapping.from, mapping.fromScheme]
       }
       // Set fromScheme/toScheme if necessary
@@ -145,7 +145,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
     let promises = []
     concepts = (concepts || []).concat([from, to]).filter(c => !!c)
     for (let concept of concepts) {
-      promises.push(this._occurrencesIsSupported(_.get(concept, "inScheme[0]")).then(supported => {
+      promises.push(this._occurrencesIsSupported(concept?.inScheme?.[0]).then(supported => {
         if (supported && concept.uri) {
           return concept.uri
         } else {
@@ -182,7 +182,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
     //   }))
     // }
     const results = await Promise.all(promises)
-    let occurrences = _.concat([], ...results)
+    let occurrences = results.flat()
     // Filter duplicates
     let existingUris = []
     let indexesToDelete = []
@@ -221,7 +221,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
   async _getOccurrences(config) {
     // Use local cache.
     let resultsFromCache = this._cache.find(item => {
-      return _.isEqual(item.config.params, config.params)
+      return isDeepStrictEqual(item.config.params, config.params)
     })
     if (resultsFromCache) {
       return resultsFromCache.data

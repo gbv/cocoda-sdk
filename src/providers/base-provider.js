@@ -1,8 +1,10 @@
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import axios from "axios"
-import * as utils from "../utils/index.js"
+import { withCustomProps, listOfCapabilities, requestMethods } from "../utils/index.js"
 import * as errors from "../errors/index.js"
+import { isDeepStrictEqual } from "node:util"
+
+const intersection = arrays => arrays.reduce((a, b) => a.filter(c => b.includes(c)))
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
@@ -101,7 +103,7 @@ export default class BaseProvider {
       this.has = Object.assign({}, this.constructor?.supports)
     }
     // Explicitly set other capabilities to false
-    utils.listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
+    listOfCapabilities.filter(c => !this.has[c]).forEach(c => {
       this.has[c] = false
     })
     // Set default language priority list
@@ -149,12 +151,15 @@ export default class BaseProvider {
     // Add a request interceptor
     this.axios.interceptors.request.use((config = {}) => {
       if (!config._skipAdditionalParameters) {
+        config.params ||= {}
         // Add language parameter to request
-        const language = _.uniq([].concat(_.get(config, "params.language", "").split(","), this.languages, this._defaultLanguages).filter(lang => lang != "")).join(",")
-        _.set(config, "params.language", language)
+        config.params.language = [...new Set(
+          [].concat((config.params.language ?? "").split(","), this.languages, this._defaultLanguages).filter(Boolean)),
+        ].join(",")
         // Set auth
-        if (this.has.auth && this._auth.bearerToken && !_.get(config, "headers.Authorization")) {
-          _.set(config, "headers.Authorization", `Bearer ${this._auth.bearerToken}`)
+        if (this.has.auth && this._auth.bearerToken && !config?.headers?.Authorization) {
+          config.headers ||= {}
+          config.headers.Authorization = `Bearer ${this._auth.bearerToken}`
         }
       }
 
@@ -177,11 +182,9 @@ export default class BaseProvider {
       if (!url.endsWith("?")) {
         url += "?"
       }
-      _.forOwn(config.params || {}, (value, key) => {
-        url += `${key}=${encodeURIComponent(value)}&`
-      })
+      url += new URLSearchParams(config.params || {}).toString()
 
-      if (_.isArray(data) || _.isObject(data)) {
+      if (typeof data === "object") { // Array or Object
         // Add total count to array as prop
         let totalCount = parseInt(headers["x-total-count"])
         if (!isNaN(totalCount)) {
@@ -193,9 +196,10 @@ export default class BaseProvider {
       // TODO: Return data or whole response here?
       return data
     }, error => {
-      const count = _.get(error, "config._retryCount", 0)
-      const method = _.get(error, "config.method")
-      const statusCode = _.get(error, "response.status")
+      // TODO: this assumes error.config is always set
+      const count = error.config._retryCount ?? 0
+      const method = error.config.method
+      const statusCode = error.response?.status
       if (
         this._retryConfig.methods.includes(method)
         && this._retryConfig.statusCodes.includes(statusCode)
@@ -223,7 +227,7 @@ export default class BaseProvider {
     })
 
     const currentRequests = []
-    for (let { method, type } of utils.requestMethods) {
+    for (let { method, type } of requestMethods) {
       // Make sure all methods exist, but thrown an error if they are not implemented
       const existingMethod = this[method] && this[method].bind(this)
       if (!existingMethod) {
@@ -239,7 +243,7 @@ export default class BaseProvider {
           return existingMethod(options)
         }
         // Return from existing requests if one exists
-        const existingRequest = currentRequests.find(r => r.method == method && _.isEqual(r.options, options))
+        const existingRequest = currentRequests.find(r => r.method == method && isDeepStrictEqual(r.options, options))
         if (existingRequest) {
           return existingRequest.promise
         }
@@ -255,10 +259,8 @@ export default class BaseProvider {
           .then(() => existingMethod(options))
           // Add totalCount to arrays
           .then(result => {
-            if (_.isArray(result) && result._totalCount === undefined) {
-              result._totalCount = result.length
-            } else if (_.isObject(result) && result._totalCount === undefined) {
-              result._totalCount = 1
+            if (typeof result === "object" && result._totalCount === undefined) {
+              result._totalCount = Array.isArray(result) ? result.length : 1
             }
             if (result && type && this[`adjust${type}`]) {
               result = this[`adjust${type}`](result)
@@ -298,9 +300,10 @@ export default class BaseProvider {
           }
         }
         // Save to list of existing requests
+        const { cancelToken, ...opts } = options // eslint-disable-line no-unused-vars
         const request = {
           method,
-          options: _.omit(options, ["cancelToken"]),
+          options: opts,
           promise,
         }
         currentRequests.push(request)
@@ -355,7 +358,7 @@ export default class BaseProvider {
       // Call preparation method
       this._prepare()
       let status
-      if (_.isString(this._api.status)) {
+      if (typeof this._api.status === "string") {
         // Request status endpoint
         try {
           status = await this.axios({
@@ -363,7 +366,7 @@ export default class BaseProvider {
             url: this._api.status,
           })
         } catch (error) {
-          if (_.get(error, "response.status") === 404) {
+          if (error?.response?.status === 404) {
             // If /status is not available, remove from _api
             this._api.status = null
           }
@@ -372,7 +375,7 @@ export default class BaseProvider {
         // Assume object
         status = this._api.status
       }
-      if (_.isObject(status) && !_.isEmpty(status)) {
+      if (typeof status === "object" && Object.keys(status).length) {
         // Set config
         this._config = status.config || {}
         // Merge status result and existing API URLs
@@ -495,7 +498,7 @@ export default class BaseProvider {
     if (!this.has[type]) {
       return false
     }
-    const options = _.get(this._config, `${type}.${action}`)
+    const options = this._config?.[type]?.[action]
     if (!options) {
       return !!this.has[type][action]
     }
@@ -503,26 +506,26 @@ export default class BaseProvider {
       return false
     }
     // Public key mismatch
-    if (options.auth && this._auth.key != _.get(this._config, "auth.key")) {
+    if (options.auth && this._auth.key != this._config?.auth?.key) {
       return false
     }
     // Check if one of the user's identities matches
     const userUris = [user?.uri].concat(Object.values(user?.identities || {}).map(id => id.uri)).filter(Boolean)
     if (options.auth && options.identities) {
-      if (_.intersection(userUris, options.identities).length == 0) {
+      if (intersection(userUris, options.identities).length == 0) {
         return false
       }
     }
     if (options.auth && options.identityProviders) {
       // Check if user has the required provider
       const providers = Object.keys((user?.identities) || {})
-      if (_.intersection(providers, options.identityProviders).length == 0) {
+      if (intersection(providers, options.identityProviders).length == 0) {
         return false
       }
     }
     // Check crossUser capabilities
     if (crossUser) {
-      return options.crossUser === true || _.intersection(options.crossUser || [], userUris).length > 0
+      return options.crossUser === true || intersection(options.crossUser || [], userUris).length > 0
     }
     return !!this.has[type][action]
   }
@@ -537,7 +540,7 @@ export default class BaseProvider {
     if (!scheme) {
       return false
     }
-    let schemes = _.isArray(this.schemes) ? this.schemes : null
+    let schemes = Array.isArray(this.schemes) ? this.schemes : null
     if (schemes == null && !jskos.isContainedIn(scheme, this.excludedSchemes || [])) {
       return true
     }
@@ -573,7 +576,7 @@ export default class BaseProvider {
   }
 
   adjustConcepts(concepts) {
-    return utils.withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
+    return withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
   }
 
   adjustRegistries(registries) {
@@ -617,7 +620,7 @@ export default class BaseProvider {
   }
 
   adjustSchemes(schemes) {
-    return utils.withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
+    return withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
   }
 
   adjustConcordances(concordances) {
@@ -634,13 +637,13 @@ export default class BaseProvider {
     for (let side of ["from", "to"]) {
       let sideScheme = `${side}Scheme`
       if (!mapping[sideScheme]) {
-        mapping[sideScheme] = _.get(jskos.conceptsOfMapping(mapping, side), "[0].inScheme[0]", null)
+        mapping[sideScheme] = jskos.conceptsOfMapping(mapping, side)?.[0]?.inScheme?.[0] ?? null
       }
     }
     mapping._registry = this
     if (!mapping.identifier) {
       // Add mapping identifiers for this mapping
-      let identifier = _.get(jskos.addMappingIdentifiers(mapping), "identifier")
+      let identifier = jskos.addMappingIdentifiers(mapping)?.identifier
       if (identifier) {
         mapping.identifier = identifier
       }
@@ -649,7 +652,7 @@ export default class BaseProvider {
   }
 
   adjustMappings(mappings) {
-    return utils.withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
+    return withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
   }
 
   /**

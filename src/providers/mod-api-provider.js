@@ -1,10 +1,5 @@
 import BaseProvider from "./base-provider.js"
-/*
-import jskos from "jskos-tools"
-import jsonld from "jsonld"
-import context_mod from "./contexts/context_mod.js"
-import context_jskos from "./contexts/context_jskos.js"
-*/
+
 /**
  * MOD API.
  *

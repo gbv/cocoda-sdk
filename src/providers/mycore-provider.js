@@ -1,5 +1,4 @@
 import BaseProvider from "./base-provider.js"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 import jskos from "jskos-tools"
 import FlexSearch from "flexsearch"
@@ -189,7 +188,7 @@ export default class MyCoReProvider extends BaseProvider {
   }
 
   async getConcepts({ concepts, ...config }) {
-    if (!_.isArray(concepts)) {
+    if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
     if (!this._scheme) {

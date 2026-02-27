@@ -1,6 +1,5 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import localforage from "localforage"
 import { v4 as uuid } from "uuid"
 import * as errors from "../errors/index.js"
@@ -96,7 +95,7 @@ export default class LocalMappingsProvider extends BaseProvider {
    * @private
    */
   _getMappingsQueue() {
-    let last = _.last(this.queue) || Promise.resolve()
+    let last = this.queue.slice(-1)[0] || Promise.resolve()
     return new Promise((resolve) => {
       function defer() {
         let res, rej
@@ -151,25 +150,25 @@ export default class LocalMappingsProvider extends BaseProvider {
   async getMappings({ from, fromScheme, to, toScheme, creator, type, partOf, offset, limit, direction, mode, identifier, uri } = {}) {
     let params = {}
     if (from) {
-      params.from = _.isString(from) ? from : from.uri
+      params.from = typeof from === "string" ? from : from.uri
     }
     if (fromScheme) {
-      params.fromScheme = _.isString(fromScheme) ? { uri: fromScheme } : fromScheme
+      params.fromScheme = typeof fromScheme === "string" ? { uri: fromScheme } : fromScheme
     }
     if (to) {
-      params.to = _.isString(to) ? to : to.uri
+      params.to = typeof to === "string" ? to : to.uri
     }
     if (toScheme) {
-      params.toScheme = _.isString(toScheme) ? { uri: toScheme } : toScheme
+      params.toScheme = typeof toScheme === "string" ? { uri: toScheme } : toScheme
     }
     if (creator) {
-      params.creator = _.isString(creator) ? creator : jskos.prefLabel(creator)
+      params.creator = typeof creator === "string" ? creator : jskos.prefLabel(creator)
     }
     if (type) {
-      params.type = _.isString(type) ? type : type.uri
+      params.type = typeof type === "string" ? type : type.uri
     }
     if (partOf) {
-      params.partOf = _.isString(partOf) ? partOf : partOf.uri
+      params.partOf = typeof partOf === "string" ? partOf : partOf.uri
     }
     if (offset) {
       params.offset = offset

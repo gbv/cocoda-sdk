@@ -1,6 +1,5 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
-import * as _ from "../utils/lodash.js"
 import * as errors from "../errors/index.js"
 
 /**
@@ -78,7 +77,7 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {
-    const VOCID = scheme && scheme.VOCID || _.get(this.schemes.find(s => jskos.compare(s, scheme)), "VOCID")
+    const VOCID = scheme && scheme.VOCID || this.schemes.find(s => jskos.compare(s, scheme))?.VOCID
     if (!VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
@@ -95,7 +94,7 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @private
    */
   _getDataUrl(concept, { addFormatParameter = true } = {}) {
-    const scheme = _.get(concept, "inScheme[0]")
+    const scheme = concept?.inScheme?.[0]
     if (!concept || !concept.uri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI" })
     }
@@ -159,31 +158,35 @@ export default class SkosmosApiProvider extends BaseProvider {
 
     // Set prefLabel
     let prefLabel = skosmosConcept.matchedPrefLabel || skosmosConcept.prefLabel || skosmosConcept.label
-    if (_.isString(prefLabel)) {
-      _.set(concept, `prefLabel.${language}`, prefLabel)
+    if (typeof prefLabel === "string") {
+      concept.prefLabel ||= {}
+      concept.prefLabel[language] = prefLabel
     } else {
-      if (prefLabel && !_.isArray(prefLabel)) {
+      if (prefLabel && !Array.isArray(prefLabel)) {
         prefLabel = [prefLabel]
       }
       for (let label of prefLabel || []) {
-        _.set(concept, `prefLabel.${label.lang}`, label.value)
+        concept.prefLabel ||= {}
+        concept.prefLabel[label.lang] = label.value
       }
     }
 
     // Set altLabel
     let altLabel = skosmosConcept.altLabel
-    if (_.isString(altLabel)) {
-      _.set(concept, `altLabel.${language}`, [altLabel])
+    if (typeof altLabel === "string") {
+      concept.altLabel ||= {}
+      concept.altLabel[language] = altLabel
     } else {
-      if (altLabel && !_.isArray(altLabel)) {
+      if (altLabel && !Array.isArray(altLabel)) {
         altLabel = [altLabel]
       }
       for (let label of altLabel || []) {
-        if (_.get(concept, `altLabel.${label.lang}`)) {
+        if (concept?.altLabel?.[label.lang]) {
           concept.altLabel[label.lang].push(label.value)
-          concept.altLabel[label.lang] = _.uniq(concept.altLabel[label.lang])
+          concept.altLabel[label.lang] = [...new Set(concept.altLabel[label.lang])]
         } else {
-          _.set(concept, `altLabel.${label.lang}`, [label.value])
+          concept.altLabel ||= {}
+          concept.altLabel[label.lang] = [label.value]
         }
       }
     }
@@ -197,10 +200,10 @@ export default class SkosmosApiProvider extends BaseProvider {
 
     // Set broader
     if (skosmosConcept.broader) {
-      if (!_.isArray(skosmosConcept.broader)) {
+      if (!Array.isArray(skosmosConcept.broader)) {
         skosmosConcept.broader = [skosmosConcept.broader]
       }
-      concept.broader = skosmosConcept.broader.map(concept => _.isString(concept) ? { uri: concept } : concept)
+      concept.broader = skosmosConcept.broader.map(uri => typeof uri === "string" ? { uri } : uri)
     }
 
     // Set narrower
@@ -211,7 +214,7 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
 
     // Set type
-    if (skosmosConcept.type && !_.isArray(skosmosConcept.type)) {
+    if (skosmosConcept.type && !Array.isArray(skosmosConcept.type)) {
       skosmosConcept.type = [skosmosConcept.type]
     }
     concept.type = concept.type || []
@@ -226,7 +229,7 @@ export default class SkosmosApiProvider extends BaseProvider {
       }
       concept.type.push(type)
     }
-    concept.type = _.uniq(concept.type)
+    concept.type = [...new Set(concept.type)]
     if (!concept.type.length) {
       concept.type = ["http://www.w3.org/2004/02/skos/core#Concept"]
     }
@@ -252,7 +255,8 @@ export default class SkosmosApiProvider extends BaseProvider {
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
       if (label) {
-        _.set(scheme, `prefLabel.${this._language}`, label)
+        scheme.prefLabel ||= {}
+        scheme.prefLabel[this._language] = label
       }
       schemes.push(scheme)
       // Also add scheme to approved schemes
@@ -280,7 +284,8 @@ export default class SkosmosApiProvider extends BaseProvider {
     if (!schemeUri) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing or unsupported scheme or VOCID property on scheme" })
     }
-    _.set(config, "params.scheme", schemeUri)
+    config.params ||= {}
+    config.params.scheme = schemeUri
     const response = await this.axios({
       ...config,
       method: "get",
@@ -306,7 +311,7 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept objects
    */
   async getConcepts({ concepts, ...config }) {
-    if (!_.isArray(concepts)) {
+    if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
     concepts = concepts.map(c => ({ uri: c.uri, inScheme: c.inScheme }))
@@ -331,7 +336,7 @@ export default class SkosmosApiProvider extends BaseProvider {
         // Set broader/narrower
         for (let type of ["broader", "narrower"]) {
           let relatives = resultConcept[type] || newConcept[type]
-          if (relatives && !_.isArray(relatives)) {
+          if (relatives && !Array.isArray(relatives)) {
             relatives = [relatives]
           }
           if (!relatives) {
@@ -367,7 +372,8 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
     const scheme = concept.inScheme[0]
     const url = this._getApiUrl(scheme, "/children")
-    _.set(config, "params.uri", concept.uri)
+    config.params ||= {}
+    config.params.uri = concept.uri
     const response = await this.axios({
       ...config,
       method: "get",
@@ -390,7 +396,8 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
     const scheme = concept.inScheme[0]
     const url = this._getApiUrl(scheme, "/broaderTransitive")
-    _.set(config, "params.uri", concept.uri)
+    config.params ||= {}
+    config.params.uri = concept.uri
     const response = await this.axios({
       ...config,
       method: "get",
@@ -400,10 +407,10 @@ export default class SkosmosApiProvider extends BaseProvider {
     let uri = concept.uri
     while (uri) {
       if (uri != concept.uri) {
-        const ancestor = _.get(response, `broaderTransitive["${uri}"]`)
+        const ancestor = response?.broaderTransitive?.[uri]
         ancestors = ancestors.concat([ancestor])
       }
-      uri = _.get(response, `broaderTransitive["${uri}"].broader[0]`)
+      uri = response?.broaderTransitive?.[uri]?.broader?.[0]
     }
     const concepts = ancestors.map(c => this._toJskosConcept(c, { scheme })).filter(c => c.uri != concept.uri)
     return concepts
@@ -421,10 +428,11 @@ export default class SkosmosApiProvider extends BaseProvider {
    */
   async search({ search, scheme, limit, types = [], ...config }) {
     const url = this._getApiUrl(scheme, "/search")
-    _.set(config, "params.query", `${search}*`)
-    _.set(config, "params.unique", 1)
-    _.set(config, "params.maxhits", limit || 100)
-    _.set(config, "params.type", types.join(" "))
+    config.params ||= {}
+    config.params.query = `${search}*`
+    config.params.unique = 1
+    config.params.maxhits  =limit || 100
+    config.params.type = types.join(" ")
     const response = await this.axios({
       ...config,
       method: "get",
