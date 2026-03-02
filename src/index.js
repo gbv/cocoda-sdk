@@ -36,6 +36,7 @@ export {
 }
 
 import * as providers from "./providers/index.js"
+
 /**
  * Adds all available providers to a CocodaSDK instance.
  *

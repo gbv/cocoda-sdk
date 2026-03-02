@@ -77,6 +77,7 @@ const intersection = arrays => arrays.reduce((a, b) => a.filter(c => b.includes(
  * @category Providers
  */
 export default class BaseProvider {
+  static providerName = "Base"
 
   /**
    * Provider constructor.
@@ -722,5 +723,3 @@ export default class BaseProvider {
     return resultItems
   }
 }
-
-BaseProvider.providerName = "Base"
