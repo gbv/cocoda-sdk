@@ -54,6 +54,7 @@ Since cocoda-sdk is an ES module, we'll use the `import`/`export` syntax in the 
 cocoda-sdk also exports some other members:
 - `CocodaSDK` - the class that is behind the default instance
 - `errors` - see [Errors](#errors)
+- `providers` - an object with all provider classes
 - All individual provider classes - see [Providers](#providers)
   - Note: You need to append `Provider` to the names, e.g. `LocalMappings` is exported as `LocalMappingsProvider`.
 - `addAllProviders` - a method that adds all avaiable providers to an instance
@@ -86,6 +87,15 @@ A registry is an individual source of data, for instance a set of concept scheme
 {
   "uri": "http://coli-conc.gbv.de/registry/local-mappings",
   "provider": "LocalMappings"
+}
+```
+
+For most providers the configuration should use the BARTOC vocabulary API type URI instead:
+
+```json
+{
+  "api": "http://bartoc.org/api-type/skosmos",
+  "endpoint": "https://www.loterre.fr/skosmos/905/"
 }
 ```
 
