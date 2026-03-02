@@ -6,7 +6,8 @@
 
 > SDK for [Cocoda](https://github.com/gbv/cocoda) and [coli-conc](https://coli-conc.gbv.de/) services
 
-## Table of Contents <!-- omit in toc -->
+## Table of Contents
+
 - [Install](#install)
 - [Usage](#usage)
   - [Import](#import)
@@ -15,7 +16,7 @@
   - [Providers](#providers)
   - [Multiple Instances](#multiple-instances)
   - [Authenticated Requests](#authenticated-requests)
-- [CDK Methods](#cdk-methods)
+- [API](#api)
   - [General](#general)
   - [Concept Schemes](#concept-schemes)
   - [Concepts](#concepts)
@@ -24,10 +25,9 @@
   - [Annotations](#annotations)
   - [Occurrences](#occurrences)
   - [Types](#types)
-- [Errors](#errors)
+  - [Errors](#errors)
 - [Maintainers](#maintainers)
-- [Publish](#publish)
-- [Contribute](#contribute)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Install
@@ -114,6 +114,15 @@ const registry = cdk.initializeRegistry({
 })
 // Now, access methods are available on the registry:
 registry.getMappings()
+```
+
+Most Providers can also be initialized with API Type URI from [BARTOC vocabulary API types list](https://bartoc.org/en/node/20002):
+
+```js
+const registry = cdk.initializeRegistry({
+  api: "http://bartoc.org/api-type/skosmos",
+  endpoint: "https://www.loterre.fr/skosmos/905/"
+})
 ```
 
 It's also possible to directly use Registry classes.
@@ -282,88 +291,98 @@ You can find more in-depth examples here:
   - Cocoda is using cocoda-sdk extensively, so other parts of the code might also be helpful. It has gotten pretty big and complex though.
 - The [API page of Login Server](https://github.com/gbv/login-server/blob/main/views/api.ejs). This is merely an example on how to use `login-client`.
 
-## CDK Methods
+## API
 
 A cocoda-sdk instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of cocoda-sdk (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
 
 Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.html) for a list of methods of for cocoda-sdk instances.
 
-## RegistryMethods
-
 ### General
 
-#### init
-- [BaseProvider - init](https://gbv.github.io/cocoda-sdk/BaseProvider.html#init)
+- [init](https://gbv.github.io/cocoda-sdk/BaseProvider.html#init)
 
-#### isAuthorizedFor
-- [BaseProvider - isAuthorizedFor](https://gbv.github.io/cocoda-sdk/BaseProvider.html#isAuthorizedFor)
+- [isAuthorizedFor](https://gbv.github.io/cocoda-sdk/BaseProvider.html#isAuthorizedFor)
 
-#### supportsScheme
-- [BaseProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme)
-- [LabelSearchSuggestionProvider - supportsScheme](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme)
+- `supportsScheme`. Implemented by:
+  - [BaseProvider](https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme)
+  - [LabelSearchSuggestionProvider](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme)
 
-#### setAuth
-- [BaseProvider - setAuth](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth)
+- `setAuth`
+  - Implemented by [BaseProvider](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setAuth)
 
-#### setRetryConfig
-- [BaseProvider - setRetryConfig](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
+- setRetryConfig
+  - Implemented by [BaseProvider](https://gbv.github.io/cocoda-sdk/BaseProvider.html#setRetryConfig)
 
-#### getCancelTokenSource
-- [BaseProvider - getCancelTokenSource](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
+- getCancelTokenSource
+
+  - Implemented by [BaseProvider](https://gbv.github.io/cocoda-sdk/BaseProvider.html#getCancelTokenSource)
 
 ### Concept Schemes
 
-#### getSchemes
-- [ConceptApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getSchemes)
-- [SkosmosApiProvider - getSchemes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getSchemes)
+- `getSchemes`    
+    - [ConceptApiProvider](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getSchemes)
+    - [SkosmosApiProvider](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getSchemes)
+    - ...
 
-#### vocSearch
-- [ConceptApiProvider - vocSearch](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSearch)
+- `vocSearch`
+    - [ConceptApiProvider](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSearch)
+    - ...
 
-#### vocSuggest
-- [ConceptApiProvider - vocSuggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSuggest)
+- `vocSuggest`
+    - [ConceptApiProvider](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#vocSuggest)
 
 ### Concepts
 
 #### getTop
 - [ConceptApiProvider - getTop](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTop)
+- ...
 
 #### getConcepts
 - [ConceptApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getConcepts)
 - [SkosmosApiProvider - getConcepts](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getConcepts)
+- ...
 
 #### getNarrower
 - [ConceptApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getNarrower)
 - [SkosmosApiProvider - getNarrower](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getNarrower)
+- ...
 
 #### getAncestors
 - [ConceptApiProvider - getAncestors](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getAncestors)
 - [SkosmosApiProvider - getAncestors](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getAncestors)
+- ...
 
 #### search
 - [ConceptApiProvider - search](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#search)
 - [SkosmosApiProvider - search](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#search)
+- ...
 
 #### suggest
 - [ConceptApiProvider - suggest](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#suggest)
 - [SkosmosApiProvider - suggest](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#suggest)
+- ...
 
 ### Concordances
 
 #### getConcordances
 - [MappingsApiProvider - getConcordances](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getConcordances)
+- ...
 
 #### postConcordance
 - [MappingsApiProvider - postConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postConcordance)
+- ...
 
 #### putConcordance
 - [MappingsApiProvider - putConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putConcordance)
+- ...
 
 #### patchConcordance
 - [MappingsApiProvider - patchConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchConcordance)
+- ...
 
 #### deleteConcordance
 - [MappingsApiProvider - deleteConcordance](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteConcordance)
+- ...
 
 ### Mappings
 
@@ -402,37 +421,29 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 
 ### Annotations
 
-#### getAnnotations
-- [MappingsApiProvider - getAnnotations](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getAnnotations)
-
-#### postAnnotation
-- [MappingsApiProvider - postAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postAnnotation)
-
-#### putAnnotation
-- [MappingsApiProvider - putAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putAnnotation)
-
-#### patchAnnotation
-- [MappingsApiProvider - patchAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchAnnotation)
-
-#### deleteAnnotation
-- [MappingsApiProvider - deleteAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteAnnotation)
+- [getAnnotations](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#getAnnotations)
+- [postAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#postAnnotation)
+- [putAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#putAnnotation)
+- [patchAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#patchAnnotation)
+- [deleteAnnotation](https://gbv.github.io/cocoda-sdk/MappingsApiProvider.html#deleteAnnotation)
 
 ### Occurrences
 
-#### getOccurrences
-- [OccurrencesApiProvider - getOccurrences](https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getOccurrences)
+- [getOccurrences](https://gbv.github.io/cocoda-sdk/OccurrencesApiProvider.html#getOccurrences)
 
 ### Types
 
-#### getTypes
-- [ConceptApiProvider - getTypes](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTypes)
-- [SkosmosApiProvider - getTypes](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getTypes)
+`getTypes({ scheme })` returns a list of [types](https://gbv.github.io/jskos/#resource-and-property-types) for some concept scheme(s). Implemented by:
 
-## Errors
-cocoda-sdk defines some custom errors.
+- [ConceptApiProvider](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getTypes)
+- [SkosmosApiProvider](https://gbv.github.io/cocoda-sdk/SkosmosApiProvider.html#getTypes)
+- [OlsApiProvider](https://gbv.github.io/cocoda-sdk/OlsApiProvider.html#getTypes)
+- [LobidApiProvider](https://gbv.github.io/cocoda-sdk/LobidApiProvider.html#getTypes)
+
+### Errors
+cocoda-sdk defines some custom errors, grouped in exporteable object `errors`:
 
 ```js
-const { errors } = require("cocoda-sdk") // CommonJS
 import { errors } from "cocoda-sdk"
 ```
 
@@ -449,35 +460,11 @@ The following errors are defined:
 For details about the errors, refer to the [documentation](https://gbv.github.io/cocoda-sdk/index.html).
 
 ## Maintainers
-- [@stefandesu](https://github.com/stefandesu)
 - [@nichtich](https://github.com/nichtich)
 
-## Publish
-Please work on the `dev` branch during development (or better yet, develop in a feature branch and merge into `dev` when ready).
+## Contributing
 
-When a new release is ready (i.e. the features are finished, merged into `dev`, and all tests succeed), run the included release script (replace "patch" with "minor" or "major" if necessary):
-
-```bash
-npm run release:patch
-```
-
-This will:
-- Run tests and build to make sure everything works
-- Switch to `dev`
-- Make sure `dev` is up-to-date
-- Run `npm version patch` (or "minor"/"major")
-- Push changes to `dev`
-- Switch to `main`
-- Merge changes from `dev`
-- Push `main` with tags
-- Switch back to `dev`
-
-After running this, GitHub Actions will automatically publish the new version to npm. It will also create a new GitHub Release draft. Please edit and publish the release manually.
-
-## Contribute
-PRs accepted.
-
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 MIT Copyright (c) 2021- Verbundzentrale des GBV (VZG)
