@@ -142,8 +142,9 @@ export default class BaseProvider {
       annotations: registry.annotations,
       occurrences: registry.occurrences,
       reconcile: registry.reconcile,
-      api: registry.api,
+      api: registry.endpoint || registry.api,
     }
+
     this._config = {}
 
     // Set default retry config

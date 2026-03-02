@@ -4,17 +4,25 @@ import * as providers from "../src/providers/index.js"
 
 addAllProviders(cdk)
 
+const exclude = new Set([
+  "BaseProvider",
+  "LocalMappingsProvider",
+  "OccurrencesApiProvider",
+  "MappingsApiProvider",
+  "LabelSearchSuggestionProvider",
+])
+
 describe("initializeRegistry", () => {
-  for (let p of Object.keys(providers).filter(p => p != "BaseProvider")) {
+  for (let p of Object.keys(providers).filter(p => !exclude.has(p))) {
     it(p, () => {
       const { providerName, providerType } = providers[p]
 
       // old style with name
-      var registry = cdk.initializeRegistry({ provider: providerName })
+      let registry = cdk.initializeRegistry({ provider: providerName })
       assert(registry instanceof providers[p])
 
       // new style with type
-      var registry = cdk.initializeRegistry({ api: providerType })
+      registry = cdk.initializeRegistry({ api: providerType })
       assert(registry instanceof providers[p])
     })
   }

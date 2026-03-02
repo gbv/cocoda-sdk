@@ -9,8 +9,22 @@ import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../provid
 const providers = {
   [BaseProvider.providerName]: BaseProvider,
   init(registry) {
-    if (this[registry.provider]) {
-      return new this[registry.provider](registry)
+    let name = registry.provider // old-style
+
+    // Initialize via JSKOS Service object
+    if (registry.api) {
+      Object.keys(this).find(p => {
+        if (providers[p].prototype instanceof BaseProvider && registry.api === providers[p].providerType) {
+          registry = { ...registry }
+          delete registry.api
+          name = p
+          return true
+        }
+      })
+    }
+
+    if (this[name]) {
+      return new this[name](registry)    
     }
     throw new errors.InvalidProviderError()
   },
