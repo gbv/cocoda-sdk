@@ -1,8 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as errors from "../errors/index.js"
-import { concatUrl } from "../utils/index.js"
-import { isDeepStrictEqual } from "node:util"
+import { concatUrl, deepEqual } from "../utils/index.js"
 
 // Cache by registry URI
 const cache = {}
@@ -220,9 +219,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
    */
   async _getOccurrences(config) {
     // Use local cache.
-    let resultsFromCache = this._cache.find(item => {
-      return isDeepStrictEqual(item.config.params, config.params)
-    })
+    let resultsFromCache = this._cache.find(item => deepEqual(item.config.params, config.params))
     if (resultsFromCache) {
       return resultsFromCache.data
     }

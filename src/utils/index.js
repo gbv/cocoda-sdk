@@ -174,3 +174,32 @@ export const listOfCapabilities = [
   "annotations",
   "occurrences",
 ]
+
+// not available in browser so we can't use node:util
+export const deepEqual = (a,b) => {
+    
+  // same primitive
+  if (a === b) { 
+    return true 
+  }
+
+  // must be array or object but not null
+  if (typeof a !== "object" || typeof b !== "object" || a === null || b === null ) {
+    return false
+  }
+
+  // keys / array members
+  if (Object.keys(a).length === Object.keys(b).length) {
+    for (let key in a) {
+      if (!(key in b)) {
+        return false
+      }
+      if (!deepEqual(a[key], b[key])) {
+        return false
+      }
+    }
+    return true
+  }
+
+  return false
+}

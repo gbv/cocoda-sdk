@@ -1,7 +1,7 @@
 import * as errors from "../errors/index.js"
 import axios from "axios"
 import jskos from "jskos-tools"
-import { isDeepStrictEqual } from "node:util"
+import { deepEqual } from "../utils/index.js"
 
 import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../providers/index.js"
 
@@ -165,7 +165,7 @@ export default class CocodaSDK {
       callback: (error, result, previousResult) => {
         if (error) {
           callback(error)
-        } else if (previousResult || (!previousResult && buildInfo && !isDeepStrictEqual(result, buildInfo))) {
+        } else if (previousResult || (!previousResult && buildInfo && !deepEqual(result, buildInfo))) {
           callback(null, result, previousResult || buildInfo)
         }
       },
@@ -266,7 +266,7 @@ export default class CocodaSDK {
     // Functions to handle results and errors
     const handleResult = (result) => {
       const previousResult = repeat.result
-      if (!isDeepStrictEqual(previousResult, result)) {
+      if (!deepEqual(previousResult, result)) {
         repeat.result = result
         repeat.error = null
         callback(null, result, previousResult)

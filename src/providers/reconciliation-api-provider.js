@@ -1,7 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as errors from "../errors/index.js"
-import { isDeepStrictEqual } from "node:util"
+import { deepEqual } from "../utils/index.js"
 
 // Cache by registry URI
 const cache = {}
@@ -170,9 +170,7 @@ export default class ReconciliationApiProvider extends BaseProvider {
   async _getReconciliationResults({ labels, language, ...config }) {
     labels = labels.sort()
     // Use local cache.
-    let resultsFromCache = this._cache.find(item => {
-      return isDeepStrictEqual(item.labels, labels) && item.language == language
-    })
+    let resultsFromCache = this._cache.find(item => deepEqual(item.labels, labels) && item.language == language)
     if (resultsFromCache) {
       return resultsFromCache
     }

@@ -1,8 +1,7 @@
 import jskos from "jskos-tools"
 import axios from "axios"
-import { withCustomProps, listOfCapabilities, requestMethods } from "../utils/index.js"
+import { withCustomProps, listOfCapabilities, requestMethods, deepEqual } from "../utils/index.js"
 import * as errors from "../errors/index.js"
-import { isDeepStrictEqual } from "node:util"
 
 const intersection = arrays => arrays.reduce((a, b) => a.filter(c => b.includes(c)))
 
@@ -245,7 +244,7 @@ export default class BaseProvider {
           return existingMethod(options)
         }
         // Return from existing requests if one exists
-        const existingRequest = currentRequests.find(r => r.method == method && isDeepStrictEqual(r.options, options))
+        const existingRequest = currentRequests.find(r => r.method == method && deepEqual(r.options, options))
         if (existingRequest) {
           return existingRequest.promise
         }
