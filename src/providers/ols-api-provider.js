@@ -121,7 +121,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     if (term["http://www.w3.org/2000/01/rdf-schema#label"]) {
       concept.prefLabel = {}
-      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"]
+      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"].value || term["http://www.w3.org/2000/01/rdf-schema#label"]
     }
     concept.type = [
       "http://www.w3.org/2004/02/skos/core#Concept",
