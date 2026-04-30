@@ -77,7 +77,7 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {
-    const VOCID = scheme && scheme.VOCID || this.schemes.find(s => jskos.compare(s, scheme))?.VOCID
+    const VOCID = scheme?.VOCID || this.schemes.find(s => jskos.compare(s, scheme))?.VOCID
     if (!VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
@@ -234,6 +234,10 @@ export default class SkosmosApiProvider extends BaseProvider {
       concept.type = ["http://www.w3.org/2004/02/skos/core#Concept"]
     }
 
+    if (skosmosConcept["skos:definition"]?.lang && skosmosConcept["skos:definition"].value) {
+      concept.definition = {[skosmosConcept["skos:definition"].lang]: skosmosConcept["skos:definition"].value}
+    }
+
     return concept
   }
 
@@ -330,7 +334,7 @@ export default class SkosmosApiProvider extends BaseProvider {
           format: "application/json",
         },
       })
-      const resultConcept = result && result.graph && result.graph.find(c => jskos.compare(c, concept))
+      const resultConcept = result?.graph?.find(c => jskos.compare(c, concept))
       if (resultConcept) {
         const newConcept = this._toJskosConcept(resultConcept, { concept, result })
         // Set broader/narrower
@@ -457,7 +461,7 @@ export default class SkosmosApiProvider extends BaseProvider {
       method: "get",
       url,
     })
-    for (let type of (response && response.types) || []) {
+    for (let type of (response?.types) || []) {
       // Skip SKOS type Concept
       if (type.uri == "http://www.w3.org/2004/02/skos/core#Concept") {
         continue
