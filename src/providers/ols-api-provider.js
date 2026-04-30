@@ -36,7 +36,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   constructor(config) {
     super(config)
-    this.endpoint = config.endpoint
+    this.endpoint = config.endpoint || config.uri
   }
 
   /**
