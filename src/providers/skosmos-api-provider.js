@@ -238,7 +238,7 @@ export default class SkosmosApiProvider extends BaseProvider {
       const definition = skosmosConcept["skos:definition"]
       if (definition.lang && definition.value) {
         concept.definition = {
-          [definition.lang]: definition.value
+          [definition.lang]: definition.value,
         }
       } else if (Array.isArray(definition)) {
         concept.definition = {}
