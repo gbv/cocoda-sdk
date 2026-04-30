@@ -36,7 +36,7 @@ export default class OlsApiProvider extends BaseProvider {
 
   constructor(config) {
     super(config)
-    this.endpoint = config.endpoint
+    this.endpoint = config.endpoint || config.uri
   }
 
   /**
@@ -121,7 +121,7 @@ export default class OlsApiProvider extends BaseProvider {
     }
     if (term["http://www.w3.org/2000/01/rdf-schema#label"]) {
       concept.prefLabel = {}
-      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"]
+      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"].value || term["http://www.w3.org/2000/01/rdf-schema#label"]
     }
     concept.type = [
       "http://www.w3.org/2004/02/skos/core#Concept",
@@ -312,11 +312,8 @@ export default class OlsApiProvider extends BaseProvider {
   async getTop({ scheme }) {
     const VOCID = await this._getSchemeVOCID(scheme)
     if (VOCID) {
-      let url = this._getApiUrl(["ontologies", VOCID, "classes"], { hasDirectParents: "false" })
-      let response = await this._request(url)
-      if (response?.elements) {
-        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
-      }
+      let response = await this._paginate(["ontologies", VOCID, "classes"], { hasDirectParents: "false" }, null)
+      return Promise.all(response.map(item => this._termToJSKOS(item)))
     }
     return []
   }
@@ -334,11 +331,8 @@ export default class OlsApiProvider extends BaseProvider {
   async getNarrower({ concept }) {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
-      let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "children"])
-      let response = await this._request(url)
-      if (response?.elements) {
-        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
-      }
+      const items = await this._paginate(["ontologies", VOCID, "classes", iri, "children"], {}, 0)
+      return Promise.all(items.map(item => this._termToJSKOS(item)))
     }
     return []
   }
@@ -346,11 +340,8 @@ export default class OlsApiProvider extends BaseProvider {
   async getAncestors({ concept }) {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
-      let url = this._getApiUrl(["ontologies", VOCID, "classes", iri, "ancestors"])
-      let response = await this._request(url)
-      if (response?.elements) {
-        return Promise.all(response.elements.map(item => this._termToJSKOS(item)))
-      }
+      let response = await this._paginate(["ontologies", VOCID, "classes", iri, "ancestors"], {}, null)
+      return Promise.all(response.map(item => this._termToJSKOS(item)))
     }
     return []
   }
