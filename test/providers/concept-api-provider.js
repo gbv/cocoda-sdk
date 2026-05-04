@@ -32,11 +32,11 @@ describe("ConceptApiProvider", () => {
     })
     mock.onGet(api.concepts).reply(config => {
       const found = []
-      const uris = config.params?.uri?.split("|")
-      if (uris.indexOf("test:concept") >= 0) {
+      const uris = config.params?.uri?.split("|").filter(uri => uri)
+      if (!uris.length || uris.indexOf("test:concept") >= 0) {
         found.push(concept)
       }
-      if (uris.indexOf("test:narrower") >= 0) {
+      if (!uris.length || uris.indexOf("test:narrower") >= 0) {
         found.push(narrower)
       }
       return [200, found]
@@ -61,6 +61,11 @@ describe("ConceptApiProvider", () => {
   it("getConcepts(multiple)", async () => {
     const result = await registry.getConcepts({ concepts: [
       { uri: "test:concept" }, { uri: "test:narrower" }] })
+    assert.deepEqual(cleanArray(result), [concept, narrower])
+  })
+
+  it("getConcepts(all)", async () => {
+    const result = await registry.getConcepts()
     assert.deepEqual(cleanArray(result), [concept, narrower])
   })
 

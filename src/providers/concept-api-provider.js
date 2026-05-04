@@ -232,13 +232,10 @@ export default class ConceptApiProvider extends BaseProvider {
     if (!url) {
       throw new errors.MissingApiUrlError()
     }
-    if (!concepts) {
-      throw new errors.InvalidOrMissingParameterError({ parameter: "concepts" })
-    }
     if (!Array.isArray(concepts)) {
-      concepts = [concepts]
+      concepts = concepts ? [concepts] : []
     }
-    let uris = concepts.map(concept => concept.uri).filter(uri => uri != null)
+    const uris = concepts.map(concept => concept.uri).filter(uri => uri != null)
     return this.axios({
       ...config,
       method: "get",
@@ -246,7 +243,7 @@ export default class ConceptApiProvider extends BaseProvider {
       params: {
         ...this._defaultParams,
         // ? What should the default limit be?
-        limit: 500,
+        limit: 100,
         ...(config.params || {}),
         uri: uris.join("|"),
       },
