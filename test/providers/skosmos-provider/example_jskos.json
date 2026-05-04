@@ -1,0 +1,52 @@
+
+{
+  "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/C3A182",
+  "type": [ "http://www.w3.org/2004/02/skos/core#Concept" ],
+  "inScheme": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus"
+        } ],
+  "prefLabel": { "de": "Nachbildung für wissenschaftliche Zwecke" },
+  "altLabel": { "de": [ "Nachbilden", "Kopieren" ] },
+  "notation": [ "C3A182" ],
+  "definition": {
+    "de": "Erstellung aussagekräftiger Vergleichsstücke zu wissenschaftlichem Zweck"
+  },
+  "ancestors": [],
+  "broader": [
+    {
+      "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/CFGDA3",
+      "inScheme": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus"
+        } ],
+      "prefLabel": { "de": "Maßnahme" },
+      "notation": [ "CFGDA3" ],
+      "type": [ "http://www.w3.org/2004/02/skos/core#Concept" ]
+    }
+  ],
+  "narrower": [
+    {
+      "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/G79CAC",
+      "inScheme": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus"
+        } ],
+      "prefLabel": { "de": "[Vorgehensweise]" },
+      "notation": [ "G79CAC" ],
+      "broader": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/C3A182"
+        } ],
+      "type": [ "http://www.w3.org/2004/02/skos/core#Concept" ]
+    },
+    {
+      "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/C11192",
+      "inScheme": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus"
+        } ],
+      "prefLabel": { "de": "[Nachbildungsergebnisse]" },
+      "notation": [ "C11192" ],
+      "broader": [ {
+            "uri": "https://www.w3id.org/archlink/terms/conservationthesaurus/C3A182"
+        } ],
+      "type": [ "http://www.w3.org/2004/02/skos/core#Concept" ]
+    }
+  ]
+}
