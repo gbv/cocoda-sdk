@@ -245,18 +245,16 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
 
     for (let key in map) {
-      if (skosmosConcept[key]) {
-        const value = skosmosConcept[key]
-        if (value.lang && value.value) {
-          concept[map[key]] = {
-            [value.lang]: value.value,
-          }
-        } else if (Array.isArray(value)) {
-          concept[map[key]] = {}
-          for (let val of value) {
-            if (val.lang && val.value) {
-              concept[map[key]][val.lang] = val.value
-            }
+      let notes = skosmosConcept[key] || []
+      if (!Array.isArray(notes)) {
+        notes = [notes]
+      }
+      if (notes.length) {
+        concept[map[key]] = {}
+        for (const { lang, value } of notes) {
+          if (lang && value) {
+            concept[map[key]][lang] ||= []
+            concept[map[key]][lang].push(value)
           }
         }
       }

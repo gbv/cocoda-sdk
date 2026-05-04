@@ -9,7 +9,7 @@
   "altLabel": { "de": [ "Nachbilden", "Kopieren" ] },
   "notation": [ "C3A182" ],
   "definition": {
-    "de": "Erstellung aussagekräftiger Vergleichsstücke zu wissenschaftlichem Zweck"
+    "de": ["Erstellung aussagekräftiger Vergleichsstücke zu wissenschaftlichem Zweck"]
   },
   "ancestors": [],
   "broader": [
