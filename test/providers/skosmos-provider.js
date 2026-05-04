@@ -6,7 +6,7 @@ import jskos from "jskos-tools"
 
 
 const provider = new SkosmosApiProvider({
-  endpoint: "https://skosmos.bartoc.org/rest/v1/"
+  endpoint: "https://skosmos.bartoc.org/rest/v1/",
 })
 
 const missing = mockRequests(provider.axios, {
