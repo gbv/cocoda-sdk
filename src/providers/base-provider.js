@@ -198,7 +198,7 @@ export default class BaseProvider {
       return data
     }, error => {
       // TODO: this assumes error.config is always set
-      const count = error.config._retryCount ?? 0
+      const count = error.config?._retryCount ?? 0
       const method = error.config.method
       const statusCode = error.response?.status
       if (
