@@ -345,7 +345,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     concepts = concepts.map(c => ({ uri: c.uri, inScheme: c.inScheme }))
     const newConcepts = []
     for (let concept of concepts) {
-      const url = this._getDataUrl(concept, { addFormatParameter: false })
+      if (!concept || !concept.uri) {
+        throw new errors.InvalidOrMissingParameterError({ parameter: "concept", message: "Missing concept URI" })
+      }
+      const params = { uri: concept.uri, format: "application/json" }
+      const url = this._getApiUrl(concept?.inScheme?.[0], "/data", params)
       if (!url) {
         continue
       }
@@ -353,10 +357,6 @@ export default class SkosmosApiProvider extends BaseProvider {
         ...config,
         method: "get",
         url,
-        params: {
-          uri: concept.uri,
-          format: "application/json",
-        },
       })
       const resultConcept = result?.graph?.find(c => jskos.compare(c, concept))
       if (resultConcept) {
