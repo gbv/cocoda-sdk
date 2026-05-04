@@ -234,17 +234,29 @@ export default class SkosmosApiProvider extends BaseProvider {
       concept.type = ["http://www.w3.org/2004/02/skos/core#Concept"]
     }
 
-    if (skosmosConcept["skos:definition"]) {
-      const definition = skosmosConcept["skos:definition"]
-      if (definition.lang && definition.value) {
-        concept.definition = {
-          [definition.lang]: definition.value,
-        }
-      } else if (Array.isArray(definition)) {
-        concept.definition = {}
-        for (let def of definition) {
-          if (def.lang && def.value) {
-            concept.definition[def.lang] = def.value
+    const map = {
+      "skos:definition": "definition",
+      "skos:note": "note",
+      "skos:scopeNote": "scopeNote",
+      "skos:example": "example",
+      "skos:historyNote": "historyNote",
+      "skos:editorialNote": "editorialNote",
+      "skos:changeNote": "changeNote",
+    }
+
+    for (let key in map) {
+      if (skosmosConcept[key]) {
+        const value = skosmosConcept[key]
+        if (value.lang && value.value) {
+          concept[map[key]] = {
+            [value.lang]: value.value,
+          }
+        } else if (Array.isArray(value)) {
+          concept[map[key]] = {}
+          for (let val of value) {
+            if (val.lang && val.value) {
+              concept[map[key]][val.lang] = val.value
+            }
           }
         }
       }
