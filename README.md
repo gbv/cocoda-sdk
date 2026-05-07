@@ -11,10 +11,10 @@
 - [Install](#install)
 - [Usage](#usage)
   - [Import](#import)
-  - [Configuration](#configuration)
-  - [Registries](#registries)
-  - [Providers](#providers)
   - [Multiple Instances](#multiple-instances)
+  - [Configuration](#configuration)
+  - [Providers](#providers)
+  - [Services](#services)
   - [Authenticated Requests](#authenticated-requests)
 - [API](#api)
   - [General](#general)
@@ -22,6 +22,7 @@
   - [Concepts](#concepts)
   - [Concordances](#concordances)
   - [Mappings](#mappings)
+  - [Registries](#registries)
   - [Annotations](#annotations)
   - [Occurrences](#occurrences)
   - [Types](#types)
@@ -60,6 +61,14 @@ cocoda-sdk also exports some other members:
 - `addAllProviders` - a method that adds all avaiable providers to an instance
   - Can be called without parameters to add to the default instance. Useful if you need all providers.
 
+### Multiple Instances
+
+The `createInstance` method can be used to create a new and independent instance with a separate configuration if needed:
+
+```js
+const newCdk = cdk.createInstance(config)
+```
+
 ### Configuration
 cocoda-sdk can be configured after import:
 
@@ -75,76 +84,9 @@ import { cdk } from "cocoda-sdk"
 await cdk.loadConfig("https://raw.githubusercontent.com/gbv/cocoda/dev/config/cocoda.default.json")
 ```
 
-The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular, the configuration contains an array property [`registries`](#registries).
+The configuration is a JSON object corresponding the the [configuration format of Cocoda](https://github.com/gbv/cocoda#configuration). In particular, the configuration contains an array property `registries` holding a list of [services](#services).
 
-If you only use cocoda-sdk with a single registry, configuration might not be necessary (see below).
-
-### Registries
-
-A registry is an individual source of data, for instance a set of concept schemes available from a specific terminology service. The simplest registry consists only of a unique identifier (`uri`) and the name of the access provider (`provider`):
-
-```json
-{
-  "uri": "http://coli-conc.gbv.de/registry/local-mappings",
-  "provider": "LocalMappings"
-}
-```
-
-For most providers the configuration should use the BARTOC vocabulary API type URI instead:
-
-```json
-{
-  "api": "http://bartoc.org/api-type/skosmos",
-  "endpoint": "https://www.loterre.fr/skosmos/905/"
-}
-```
-
-A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
-
-#### Endpoint Determination
-For many providers, you need to specify one or more endpoints on the registry object for it to work. There are, however, three steps in which these endpoints are determined:
-
-1. By explicitly specifying an endpoint on the registry object.
-2. By performaning a request to the provider's `/status` endpoint and parsing its result (which is done in `registry.init()`).
-3. By implication using the `api` base URL.
-
-Values set earlier in these steps will never be overwritten by later steps. That means to disable an endpoint explicitly, you can set it to `null` when configuring the registry. Also, if step 2 is successful, it will be assumed that no further endpoints exist and all missing endpoints will be set to `null`, i.e. essentially skipping step 3.
-
-#### Using a Single Registry
-
-If you only have a single registry you want to access, you can initialize it as follows:
-
-```js
-import { cdk, LocalMappingsProvider } from "cocoda-sdk"
-// Local mappings are not included by default
-cdk.addProvider(LocalMappingsProvider)
-const registry = cdk.initializeRegistry({
-  uri: "http://coli-conc.gbv.de/registry/local-mappings",
-  provider: "LocalMappings"
-})
-// Now, access methods are available on the registry:
-registry.getMappings()
-```
-
-Most Providers can also be initialized with API Type URI from [BARTOC vocabulary API types list](https://bartoc.org/en/node/20002):
-
-```js
-const registry = cdk.initializeRegistry({
-  api: "http://bartoc.org/api-type/skosmos",
-  endpoint: "https://www.loterre.fr/skosmos/905/"
-})
-```
-
-It's also possible to directly use Registry classes.
-
-#### Using Registries From a Configuration
-
-If you initialize cocoda-sdk with a [configuration](#configuration), it will initialize all included registries automatically. Those registries are then accessible via `cdk.config.registries`. Alternatively, you can retrieve registries by URI:
-
-```js
-// After setting up cdk
-const registry = cdk.getRegistryForUri("...")
-```
+If you use cocoda-sdk [with one single service](#using-a-single-service) only, configuration might not be necessary.
 
 ### Providers
 
@@ -166,10 +108,10 @@ The following providers are also exported, but have to be added via `cdk.addProv
 - `LobidApi` - access to GND via [lobid](https://lobid.org)
   - **This integration is currently experimental.**
 - `MyCoRe` - access to vocabularies via [MyCoRe](https://www.mycore.de/)
-  - **This integration is currently experimental. Only one vocabulary per registry is supported. Not recommended for large vocabularies as all of the vocabulary data is loaded and kept in memory.**
+  - **This integration is currently experimental. Only one vocabulary per service is supported. Not recommended for large vocabularies as all of the vocabulary data is loaded and kept in memory.**
 - `ReconciliationApi` - access to mapping suggestions via a [Reconciliation Service API](https://reconciliation-api.github.io/specs/draft/)
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
-- `LabelSearchSuggestion` - access to mapping suggestions using other registries' search endpoints (using [jskos-server])
+- `LabelSearchSuggestion` - access to mapping suggestions using other services' search endpoints (using [jskos-server])
 - `ModApi` - (experimental) access to concept schemes and concepts via a [MOD](https://github.com/FAIR-IMPACT/MOD) API
 
 To add a provider, append `Provider` to its name and import it together with `cdk`:
@@ -206,12 +148,73 @@ cdk.addProvider(CustomProvider)
 
 See [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/examples/custom-provider.js) for an extended example.
 
-### Multiple Instances
+### Services
 
-The `createInstance` method can be used to create a new and independent instance with a separate configuration if needed:
+*Services have also been called registries until cocoda-sdk 3.7.0 but the name was changed to not confuse with JSKOS Registries!*
+
+A service is an individual source of data, for instance a set of concept schemes available from a specific terminology web service. The simplest service consists only of a unique identifier (`uri`) and the name of the access provider (`provider`):
+
+```json
+{
+  "uri": "http://coli-conc.gbv.de/registry/local-mappings",
+  "provider": "LocalMappings"
+}
+```
+
+For most providers the configuration should use the BARTOC vocabulary API type URI instead:
+
+```json
+{
+  "api": "http://bartoc.org/api-type/skosmos",
+  "endpoint": "https://www.loterre.fr/skosmos/905/"
+}
+```
+
+A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
+
+#### Endpoint Determination
+For many providers, you need to specify one or more endpoints on the service object for it to work. There are, however, three steps in which these endpoints are determined:
+
+1. By explicitly specifying an endpoint on the service object.
+2. By performaning a request to the provider's `/status` endpoint and parsing its result (which is done in `service.init()`).
+3. By implication using the `api` base URL.
+
+Values set earlier in these steps will never be overwritten by later steps. That means to disable an endpoint explicitly, you can set it to `null` when configuring the service. Also, if step 2 is successful, it will be assumed that no further endpoints exist and all missing endpoints will be set to `null`, i.e. essentially skipping step 3.
+
+#### Using a Single Service
+
+If you only have a single service you want to access, you can initialize it as follows:
 
 ```js
-const newCdk = cdk.createInstance(config)
+import { cdk, LocalMappingsProvider } from "cocoda-sdk"
+// Local mappings are not included by default
+cdk.addProvider(LocalMappingsProvider)
+const service = cdk.initializeRegistry({
+  uri: "http://coli-conc.gbv.de/registry/local-mappings",
+  provider: "LocalMappings"
+})
+// Now, access methods are available on the service:
+service.getMappings()
+```
+
+Most Providers can also be initialized with API Type URI from [BARTOC vocabulary API types list](https://bartoc.org/en/node/20002):
+
+```js
+const service = cdk.initializeRegistry({
+  api: "http://bartoc.org/api-type/skosmos",
+  endpoint: "https://www.loterre.fr/skosmos/905/"
+})
+```
+
+It's also possible to directly use Provider classes.
+
+#### Using services from a configuration
+
+If you initialize cocoda-sdk with a [configuration](#configuration), it will initialize all included services automatically. Those services are then accessible via `cdk.config.registries`. Alternatively, you can retrieve services by URI:
+
+```js
+// After setting up cdk
+const service = cdk.getServiceForUri("...")
 ```
 
 ### Authenticated Requests
@@ -242,14 +245,14 @@ See also the code comments inside the example.
 <script src="https://cdn.jsdelivr.net/npm/gbv-login-client@0"></script>
 <script src="https://cdn.jsdelivr.net/npm/cocoda-sdk@2"></script>
 <script>
-// Initialize mapping registry at localhost:3000
-const registry = CDK.cdk.initializeRegistry({
+// Initialize mapping service at localhost:3000
+const service = CDK.cdk.initializeRegistry({
   provider: "MappingsApi",
   uri: "local:mappings",
   status: "http://localhost:3000/status",
 })
 // Note: This is an async function, so we might be dealing with race conditions here.
-registry.init()
+service.init()
 // Create client to connect to Login Server at localhost:3004
 let client = new LoginClient("localhost:3004", { ssl: false })
 let user
@@ -258,26 +261,26 @@ client.addEventListener(null, event => {
   switch (event.type) {
     case LoginClient.events.connect:
       // At this point, we don't know whether the user has logged in yet, but we can try
-      console.log(registry.isAuthorizedFor({ type: "mappings", action: "create", user }))
+      console.log(service.isAuthorizedFor({ type: "mappings", action: "create", user }))
       break
     case LoginClient.events.login:
       // Update user
       user = event.user
       // Now we know the user is logged in, so this should return true
       // Note that if the user is already logged in, this event will fire before connected
-      console.log(registry.isAuthorizedFor({ type: "mappings", action: "create", user }))
+      console.log(service.isAuthorizedFor({ type: "mappings", action: "create", user }))
       break
     case LoginClient.events.update:
       // Update user
       user = event.user
       break
     case LoginClient.events.about:
-      // Register the server's public key in the registry
-      registry.setAuth({ key: event.publicKey })
+      // Register the server's public key in the service
+      service.setAuth({ key: event.publicKey })
       break
     case LoginClient.events.token:
-      // On every token update, update the token in the registry
-      registry.setAuth({ bearerToken: event.token })
+      // On every token update, update the token in the service
+      service.setAuth({ bearerToken: event.token })
       break
   }
 })
@@ -291,7 +294,7 @@ client.connect()
 Note that for a real application, there are more things necessary:
 - Track whether the client is connected and whether the user is logged in
 - Tell the user to log in if necessary
-- Check if the `registry.init()` call finished before making requests (might not be necessary because requests will wait for initialization)
+- Check if the `init()` call finished before making requests (might not be necessary because requests will wait for initialization)
 - Error handling
 - etc.
 
@@ -303,7 +306,7 @@ You can find more in-depth examples here:
 
 ## API
 
-A cocoda-sdk instance itself offers only a handful of methods. The actual access to APIs happens through [registries](#registries). The following list of methods assume either an instance of cocoda-sdk (`cdk.someMethod`) or an initialized registry (`registry.someMethod`). Documentation for registry methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
+A cocoda-sdk instance itself offers only a handful of methods. The actual access to APIs happens through [services](#services). The following list of methods assume either an instance of cocoda-sdk (`cdk.someMethod`) or an initialized service (`service.someMethod`). Documentation for service methods is on a per-provider basis. While the API should be the same for a particular methods across providers, the details on how to use it might differ.
 
 Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.html) for a list of methods of for cocoda-sdk instances.
 
@@ -428,6 +431,10 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 
 #### deleteMappings
 - [BaseProvider - deleteMappings](https://gbv.github.io/cocoda-sdk/BaseProvider.html#deleteMappings)
+
+### Registries
+
+- [getRegistries](https://gbv.github.io/cocoda-sdk/ConceptApiProvider.html#getRegistries)
 
 ### Annotations
 

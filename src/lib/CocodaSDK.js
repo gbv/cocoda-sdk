@@ -173,25 +173,34 @@ export default class CocodaSDK {
   }
 
   /**
-   * Method to get a registry by URI.
+   * Method to get a service by URI.
    *
-   * @param {string} uri URI of registry in config
-   * @returns {?Object} initialized registry from config if found
+   * @param {string} uri URI of service in config
+   * @returns {?Object} initialized service from config if found
    */
-  getRegistryForUri(uri) {
+  getServiceForUri(uri) {
     return this.config.registries.find(r => r.uri == uri)
   }
 
+  // alias for backwards compatibility
+  getRegistryForUri(uri) {
+    return this.getRegistryForUri(uri)
+  }
+
   /**
-   * Method to initialize registry.
+   * Method to initialize service.
    *
-   * @param {Object} registry JSKOS registry object
-   * @returns {Object} initialized registry
+   * @param {Object} service JSKOS service object
+   * @returns {Object} initialized service
    */
-  initializeRegistry(registry) {
-    registry = providers.init(registry)
-    registry.cdk = this
-    return registry
+  initializeService(service) {
+    service = providers.init(service)
+    service.cdk = this
+    return service
+  }
+
+  initializeRegistry(service) {
+    return this.initializeService(service)
   }
 
   /**

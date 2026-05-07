@@ -6,7 +6,7 @@ import { getInstance } from "./cdk.js"
   const cdk = await getInstance()
 
   // Get dev mapping registry
-  const registry = cdk.getRegistryForUri("http://coli-conc.gbv.de/registry/coli-conc-mappings-dev")
+  const registry = cdk.getServiceForUri("http://coli-conc.gbv.de/registry/coli-conc-mappings-dev")
 
   // Get 10 mappings
   result = await registry.getMappings({ limit: 10 })

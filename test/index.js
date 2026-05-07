@@ -36,7 +36,9 @@ describe("index", () => {
       "setConfig",
       "loadBuildInfo",
       "getRegistryForUri",
+      "getServiceForUri",
       "initializeRegistry",
+      "initializeService",
       "addProvider",
     ]
     for (let prop of props) {
