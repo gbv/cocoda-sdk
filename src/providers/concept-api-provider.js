@@ -43,6 +43,7 @@ export default class ConceptApiProvider extends BaseProvider {
     suggest: true,
     search: true,
     auth: true,
+    registries: true,
   }
 
   /**
@@ -71,6 +72,7 @@ export default class ConceptApiProvider extends BaseProvider {
         types: "/types",
         suggest: "/suggest",
         search: "/search",
+        registries: "/registries",
       }
       for (let key of Object.keys(endpoints)) {
         // Only override if undefined
@@ -149,6 +151,40 @@ export default class ConceptApiProvider extends BaseProvider {
         identifier: scheme.identifier,
       })
       return null
+    }
+  }
+
+  /**
+   * Returns all concept registries.
+   *
+   * @param {Object} config
+   * @returns {Object[]} array of JSKOS concept registry objects
+   */
+  async getRegistries(config = {}) {
+    if (!this._api.registries) {
+      // If an array of registries is given, return that here
+      if (Array.isArray(this.registries)) {
+        return this.registries
+      }
+      console.log(this._api)
+      throw new errors.MissingApiUrlError()
+    }
+    const registries = await this.axios({
+      ...config,
+      method: "get",
+      url: this._api.registries,
+      params: {
+        ...this._defaultParams,
+        // ? What should the default limit be?
+        limit: 500,
+        ...(config.params || {}),
+      },
+    })
+    // If registries were given in registry object, only request those registries from API
+    if (Array.isArray(this.registries)) {
+      return withCustomProps(registries.filter(r => jskos.isContainedIn(r, this.registries)), registries)
+    } else {
+      return registries
     }
   }
 
