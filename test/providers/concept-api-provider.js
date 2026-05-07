@@ -10,6 +10,7 @@ describe("ConceptApiProvider", () => {
     concepts: "test:/conceptsAPI",
     schemes: "test:/schemesAPI",
     top: "test:/topAPI",
+    registries: "test:/registriesAPI",
   }
 
   const registry = new ConceptApiProvider(api)
@@ -21,10 +22,12 @@ describe("ConceptApiProvider", () => {
     ancestors: [{ uri: "test:concept"}],
   }
   const concept = { uri: "test:concept", narrower: [{uri: "test:narrower"}] }
+  const registryValue = { uri: "test:registry" }
   const scheme = { uri: "test:scheme" }
 
   beforeEach(() => {
     mock.resetHandlers()
+    mock.onGet(api.registries).reply(200, [registryValue])
     mock.onGet(api.schemes).reply(200, [scheme])
     mock.onGet(api.top).reply(config => {
       assert.equal(config.params.uri, scheme.uri)
@@ -41,6 +44,11 @@ describe("ConceptApiProvider", () => {
       }
       return [200, found]
     })
+  })
+
+  it ("getRegistries", async () => {
+    const result = await registry.getRegistries()
+    assert.deepEqual(cleanArray(result), [registryValue])
   })
 
   it("getSchemes", async () => {
