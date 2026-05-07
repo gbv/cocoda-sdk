@@ -81,6 +81,7 @@ export default class ConceptApiProvider extends BaseProvider {
         }
       }
     }
+    this.has.registries = !!this._api.registries
     this.has.schemes = !!this._api.schemes
     // If there is no scheme API endpoint, but a list of schemes is given, use that for schemes.
     if (!this.has.schemes && Array.isArray(this.schemes)) {
@@ -166,7 +167,6 @@ export default class ConceptApiProvider extends BaseProvider {
       if (Array.isArray(this.registries)) {
         return this.registries
       }
-      console.log(this._api)
       throw new errors.MissingApiUrlError()
     }
     const registries = await this.axios({
@@ -180,12 +180,7 @@ export default class ConceptApiProvider extends BaseProvider {
         ...(config.params || {}),
       },
     })
-    // If registries were given in registry object, only request those registries from API
-    if (Array.isArray(this.registries)) {
-      return withCustomProps(registries.filter(r => jskos.isContainedIn(r, this.registries)), registries)
-    } else {
-      return registries
-    }
+    return registries
   }
 
   /**
