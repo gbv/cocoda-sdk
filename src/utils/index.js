@@ -159,6 +159,7 @@ export function withCustomProps(arr, from) {
 }
 
 export const listOfCapabilities = [
+  "registries",
   "schemes",
   "top",
   "data",

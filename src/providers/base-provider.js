@@ -142,6 +142,7 @@ export default class BaseProvider {
       occurrences: registry.occurrences,
       reconcile: registry.reconcile,
       api: registry.endpoint || registry.api,
+      registries: registry.registries,
     }
 
     this._config = {}
