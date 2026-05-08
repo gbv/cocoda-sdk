@@ -152,16 +152,9 @@ See [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/
 
 *Services have also been called registries until cocoda-sdk 3.7.0 but the name was changed to not confuse with JSKOS Registries!*
 
-A service is an individual source of data, for instance a set of concept schemes available from a specific terminology web service. The simplest service consists only of a unique identifier (`uri`) and the name of the access provider (`provider`):
+A service is an individual source of data, for instance a set of concept schemes available from a specific terminology web service.
 
-```json
-{
-  "uri": "http://coli-conc.gbv.de/registry/local-mappings",
-  "provider": "LocalMappings"
-}
-```
-
-For most providers the configuration should use the BARTOC vocabulary API type URI instead:
+For most providers the service configuration must include an `api` URI from [BARTOC vocabulary API types](http://bartoc.org/en/node/20002):
 
 ```json
 {
@@ -170,9 +163,18 @@ For most providers the configuration should use the BARTOC vocabulary API type U
 }
 ```
 
+Some services can also be configured with the name of the access provider (`provider`) instead:
+
+```json
+{
+  "provider": "LocalMappings"
+}
+```
+
 A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
 
 #### Endpoint Determination
+
 For many providers, you need to specify one or more endpoints on the service object for it to work. There are, however, three steps in which these endpoints are determined:
 
 1. By explicitly specifying an endpoint on the service object.
