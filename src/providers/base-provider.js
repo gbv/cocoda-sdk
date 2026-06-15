@@ -560,10 +560,6 @@ export default class BaseProvider {
     concept._getAncestors = (config) => {
       return this.getAncestors({ ...config, concept })
     }
-    // Add _getDetails function to concepts
-    concept._getDetails = async (config) => {
-      return (await this.getConcepts({ ...config, concepts: [concept] }))[0]
-    }
     // Adjust broader/narrower/ancestors if necessary
     for (let type of ["broader", "narrower", "ancestors"]) {
       if (Array.isArray(concept[type]) && concept[type].length && !concept[type].includes(null)) {
@@ -606,14 +602,6 @@ export default class BaseProvider {
       // Add _getTop function to schemes
       scheme._getTop = (config) => {
         return scheme._registry.getTop({ ...config, scheme })
-      }
-      // Add _getTypes function to schemes
-      scheme._getTypes = (config) => {
-        return scheme._registry.getTypes({ ...config, scheme })
-      }
-      // Add _suggest function to schemes
-      scheme._suggest = ({ search, ...config }) => {
-        return scheme._registry.suggest({ ...config, search, scheme })
       }
     }
     return scheme

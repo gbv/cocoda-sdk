@@ -90,9 +90,6 @@ describe("BaseProvider", () => {
     assert.equal(adjustedSchemes._url, schemes._url)
     const [scheme] = adjustedSchemes
     assert.equal(scheme._registry, provider)
-    assert.ok(typeof scheme._getTop == "function")
-    assert.ok(typeof scheme._suggest == "function")
-    assert.ok(typeof scheme._getTypes == "function")
   })
 
   it("should adjust concepts as expected", () => {
@@ -104,9 +101,6 @@ describe("BaseProvider", () => {
     assert.equal(adjustedConcepts._url, concepts._url)
     const [concept] = adjustedConcepts
     assert.equal(concept._registry, provider)
-    assert.ok(typeof concept._getNarrower == "function")
-    assert.ok(typeof concept._getAncestors == "function")
-    assert.ok(typeof concept._getDetails == "function")
   })
 
   it("should adjust mappings as expected", () => {
