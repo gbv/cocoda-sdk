@@ -3,7 +3,7 @@ import axios from "axios"
 import { withCustomProps, listOfCapabilities, requestMethods, deepEqual } from "../utils/index.js"
 import * as errors from "../errors/index.js"
 
-const intersection = arrays => arrays.reduce((a, b) => a.filter(c => b.includes(c)))
+const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
