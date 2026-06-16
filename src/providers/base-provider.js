@@ -629,13 +629,6 @@ export default class BaseProvider {
       }
     }
     mapping._registry = this
-    if (!mapping.identifier) {
-      // Add mapping identifiers for this mapping
-      let identifier = jskos.addMappingIdentifiers(mapping)?.identifier
-      if (identifier) {
-        mapping.identifier = identifier
-      }
-    }
     return mapping
   }
 

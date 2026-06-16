@@ -208,7 +208,6 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
     return this.axios({
       ...config,
       method: "post",
@@ -233,7 +232,6 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     mapping = jskos.minifyMapping(mapping)
-    mapping = jskos.addMappingIdentifiers(mapping)
     const uri = mapping.uri
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })

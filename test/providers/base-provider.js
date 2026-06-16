@@ -112,7 +112,6 @@ describe("BaseProvider", () => {
     assert.equal(adjustedMappings._url, mappings._url)
     const [mapping] = adjustedMappings
     assert.equal(mapping._registry, provider)
-    assert.ok(Array.isArray(mapping.identifier))
     assert.equal(mapping.fromScheme, null)
     assert.equal(mapping.toScheme, null)
   })

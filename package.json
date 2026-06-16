@@ -68,7 +68,7 @@
     "yesno": "^0.4.0"
   },
   "dependencies": {
-    "axios": "^1.7.9",
+    "axios": "^1.18.0",
     "flexsearch": "~0.8.0",
     "jskos-tools": "^1.0.43",
     "localforage": "^1.10.0",

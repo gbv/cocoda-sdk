@@ -2,7 +2,6 @@ import MappingsApiProvider from "../../src/providers/mappings-api-provider.js"
 import assert from "assert"
 import MockAdapter from "axios-mock-adapter"
 import * as errors from "../../src/errors/index.js"
-import jskos from "jskos-tools"
 
 const api = {
   mappings: "test:/mappings",
@@ -88,8 +87,7 @@ describe("MappingsApiProvider", () => {
   })
 
   it("should perform posting a mapping correctly", (done) => {
-    const mappingToPost = {}
-    const mapping = jskos.addMappingIdentifiers(mappingToPost)
+    const mapping = {}
     mock.onPost().reply(config => {
       assert.equal(config.url, api.mappings)
       assert.deepEqual(JSON.parse(config.data), mapping)
@@ -108,7 +106,7 @@ describe("MappingsApiProvider", () => {
       {
         uri: "test:/mappings/2",
       },
-    ].map(mapping => jskos.addMappingIdentifiers(mapping))
+    ]
 
     const postedIndexes = []
     mock.onPost().reply(config => {

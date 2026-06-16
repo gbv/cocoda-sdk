@@ -124,7 +124,6 @@ export default class OccurrencesApiProvider extends BaseProvider {
       }
       mapping.type = [jskos.defaultMappingType.uri]
       mapping._occurrence = occurrence
-      mapping = jskos.addMappingIdentifiers(mapping)
       mappings.push(mapping)
     }
     mappings._url = occurrences._url
