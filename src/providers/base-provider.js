@@ -5,6 +5,9 @@ import * as errors from "../errors/index.js"
 
 const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
 
+// TODO: Decide on default timeout value
+const timeout_default = 200000
+
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
  *
@@ -85,10 +88,11 @@ export default class BaseProvider {
    */
   constructor(registry = {}) {
     this._jskos = registry
-
+    if (this._jskos && this._jskos.timeout && this._jskos.backendTimeout) {
+      this._jskos.timeout = math.max(this._jskos.timeout, this._jskos.backendTimeout)
+    }
     this.axios = axios.create({
-      // TODO: Decide on timeout value
-      timeout: 200000,
+      timeout: this._jskos && this._jskos.timeout ? this._jskos.timeout : timeout_default,
     })
     // Path is used for https check and local mappings
     this._path = typeof window !== "undefined" && window.location.pathname
