@@ -89,7 +89,7 @@ export default class BaseProvider {
   constructor(registry = {}) {
     this._jskos = registry
     if (this._jskos && this._jskos.timeout && this._jskos.backendTimeout) {
-      this._jskos.timeout = math.max(this._jskos.timeout, this._jskos.backendTimeout)
+      this._jskos.timeout = Math.max(this._jskos.timeout, this._jskos.backendTimeout)
     }
     this.axios = axios.create({
       timeout: this._jskos && this._jskos.timeout ? this._jskos.timeout : timeout_default,
