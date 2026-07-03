@@ -12,7 +12,8 @@ import BaseProvider from "./base-provider.js"
  *   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
  *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
  *   <feature removed> transformation: "manual", // "jsonld" for conversion via jsonld-concept or "manual" for manual conversion
- *   uri: "https://terminology.services.base4nfdi.de/api-gateway" // "http://localhost:8080/api-gateway" if api-gateway is running locally
+ *   uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
+ *   accessorTimeout: 60000, // applies for all mod endpoints. timeout in milliseconds, default: 60000
  * }
  * ```
  *
@@ -66,6 +67,15 @@ export default class ModApiProvider extends BaseProvider {
         result += "/" + part
       } else {
         return
+      }
+    }
+
+    if (this._jskos && this._jskos.accessorTimeout) {
+      if (!params) {
+        params = {}
+      }
+      if (!params.timeout) {
+        params.timeout = this._jskos.accessorTimeout
       }
     }
 
