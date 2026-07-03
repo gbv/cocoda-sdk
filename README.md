@@ -125,6 +125,37 @@ Note that in the browser bundle, all providers listed above are included and do 
 
 Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
 
+#### Provider Configuration
+
+Different Providers can be configured using different Parameters:
+
+- `Base`
+	- `provider` (name of the provider)
+	- `uri` (URI for API access)
+	- `timeout` (timeout for api calls, default '200,000')
+- `LocalMappings`, `LocApi`, `LabelSearchSuggestion`
+	- `provider`, `uri`
+- `ConceptApi`, `MappingsApi`, `MyCoRe`, `OccurrencesApi`
+	- `provider`, `uri`
+  - `api`
+- `SkosmosApi`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri` and a `VOCID`)
+- `OlsApi`- access to ontologies via Ontology Lookup Service (OLS) API Version 2 (experimental)
+	- `uri`
+  - `language` (language for labels, default 'en')
+- `Skohub`
+	- `provider`, `uri`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
+- `LobidApi`
+	- nothing
+- `ReconciliationApi`
+	- `provider`, `uri`, `api`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
+- `ModApi`
+	- `provider`, `uri`, `language`
+	- `cleancontext` (remove @context, default 'true')
+	- `backendTimeout` (Timeout for mod endpoints, default '60,000')
+
 #### Custom providers
 
 It is also possible to add custom providers that inherit from BaseProvider:
