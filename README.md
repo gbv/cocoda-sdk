@@ -113,6 +113,7 @@ The following providers are also exported, but have to be added via `cdk.addProv
 - `OccurrencesApi` - access to concept occurrences via [occurrences-api](https://github.com/gbv/occurrences-api) (will be changed to [occurrences-server](https://github.com/gbv/occurrences-server) in the future)
 - `LabelSearchSuggestion` - access to mapping suggestions using other services' search endpoints (using [jskos-server])
 - `ModApi` - (experimental) access to concept schemes and concepts via a [MOD](https://github.com/FAIR-IMPACT/MOD) API
+- `MeshApi` - (experimental) access to concepts via the SPARQL enpoint of the [Medical Subject Headings](http://bartoc.org/api-type/mesh) RDF vocabulary
 
 To add a provider, append `Provider` to its name and import it together with `cdk`:
 
@@ -133,21 +134,21 @@ Different Providers can be configured using different Parameters:
 	- `provider` (name of the provider)
 	- `uri` (URI for API access)
 	- `timeout` (timeout for api calls, default '200,000')
+- `LobidApi`, `MeshApi`
+	- `provider`
 - `LocalMappings`, `LocApi`, `LabelSearchSuggestion`
 	- `provider`, `uri`
 - `ConceptApi`, `MappingsApi`, `MyCoRe`, `OccurrencesApi`
-	- `provider`, `uri`
-  - `api`
+	- `provider`, `uri`, `api`
 - `SkosmosApi`
+  - `provider`
 	- `schemes` (Array of `scheme`-objects, each specified by an `uri` and a `VOCID`)
 - `OlsApi`- access to ontologies via Ontology Lookup Service (OLS) API Version 2 (experimental)
-	- `uri`
+	- `provider`, `uri`
   - `language` (language for labels, default 'en')
 - `Skohub`
 	- `provider`, `uri`
 	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
-- `LobidApi`
-	- nothing
 - `ReconciliationApi`
 	- `provider`, `uri`, `api`
 	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
