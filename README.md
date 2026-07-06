@@ -125,6 +125,37 @@ Note that in the browser bundle, all providers listed above are included and do 
 
 Please refer to each provider's documentation for how exactly to configure that provider: [Documentation](https://gbv.github.io/cocoda-sdk/)
 
+#### Provider Configuration
+
+Different Providers can be configured using different Parameters:
+
+- `Base`
+	- `provider` (name of the provider)
+	- `uri` (URI for API access)
+	- `timeout` (timeout for api calls, default '200,000')
+- `LocalMappings`, `LocApi`, `LabelSearchSuggestion`
+	- `provider`, `uri`
+- `ConceptApi`, `MappingsApi`, `MyCoRe`, `OccurrencesApi`
+	- `provider`, `uri`
+  - `api`
+- `SkosmosApi`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri` and a `VOCID`)
+- `OlsApi`- access to ontologies via Ontology Lookup Service (OLS) API Version 2 (experimental)
+	- `uri`
+  - `language` (language for labels, default 'en')
+- `Skohub`
+	- `provider`, `uri`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
+- `LobidApi`
+	- nothing
+- `ReconciliationApi`
+	- `provider`, `uri`, `api`
+	- `schemes` (Array of `scheme`-objects, each specified by an `uri`)
+- `ModApi`
+	- `provider`, `uri`, `language`
+	- `cleancontext` (remove @context, default 'true')
+	- `backendTimeout` (Timeout for mod endpoints, default '60,000')
+
 #### Custom providers
 
 It is also possible to add custom providers that inherit from BaseProvider:
@@ -154,12 +185,14 @@ See [`examples/custom-provider.js`](https://github.com/gbv/cocoda-sdk/blob/main/
 
 A service is an individual source of data, for instance a set of concept schemes available from a specific terminology web service.
 
-For most providers the service configuration must include an `api` URI from [BARTOC vocabulary API types](http://bartoc.org/en/node/20002):
+For most providers the service configuration must include an `api` URI from [BARTOC vocabulary API types](http://bartoc.org/en/node/20002).
+Further, an optional timeout parameter can be provided:
 
 ```json
 {
   "api": "http://bartoc.org/api-type/skosmos",
-  "endpoint": "https://www.loterre.fr/skosmos/905/"
+  "endpoint": "https://www.loterre.fr/skosmos/905/",
+  "timeout": 200000
 }
 ```
 
@@ -171,7 +204,7 @@ Some services can also be configured with the name of the access provider (`prov
 }
 ```
 
-A list of available providers can be found [below](#providers). Most providers need additional properties to work correctly.
+A list of available providers can be found [above](#providers). Most providers need additional properties to work correctly.
 
 #### Endpoint Determination
 
@@ -192,8 +225,9 @@ import { cdk, LocalMappingsProvider } from "cocoda-sdk"
 // Local mappings are not included by default
 cdk.addProvider(LocalMappingsProvider)
 const service = cdk.initializeRegistry({
+  provider: "LocalMappings",
   uri: "http://coli-conc.gbv.de/registry/local-mappings",
-  provider: "LocalMappings"
+  timeout: 20000
 })
 // Now, access methods are available on the service:
 service.getMappings()
@@ -204,7 +238,8 @@ Most Providers can also be initialized with API Type URI from [BARTOC vocabulary
 ```js
 const service = cdk.initializeRegistry({
   api: "http://bartoc.org/api-type/skosmos",
-  endpoint: "https://www.loterre.fr/skosmos/905/"
+  endpoint: "https://www.loterre.fr/skosmos/905/",
+  timeout = 20000
 })
 ```
 

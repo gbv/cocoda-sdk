@@ -10,7 +10,7 @@ import BaseProvider from "./base-provider.js"
  *
  * ```js
  * const provider = new OlsApiProvider({
- *   endpoint: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL 
+ *   uri: "https://api.terminology.tib.eu/api/v2/",     // OLS API V2 base URL, alternative to use `endpoint`
  *   language: "en",         // default language to use for labels and descriptions
  * })
  * ```
@@ -35,8 +35,8 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   constructor(config) {
+    config.uri =  config.uri || config.endpoint
     super(config)
-    this.endpoint = config.endpoint || config.uri
   }
 
   /**
@@ -53,7 +53,7 @@ export default class OlsApiProvider extends BaseProvider {
    * Constructs the full API URL for a given endpoint.
    */
   _getApiUrl(parts, params = {}) {
-    const url = this.endpoint + parts.join("/")
+    const url = this.uri + parts.join("/")
     params = Object.fromEntries(Object.entries(params).filter(([_, v]) => v != null))
     params = new URLSearchParams(params)
     return params.size ? `${url}?${params}` : url
