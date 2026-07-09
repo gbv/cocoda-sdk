@@ -1,0 +1,35 @@
+{
+  "head": {
+    "vars": [
+      "d",
+      "name",
+      "dateCreated",
+      "dateRevised",
+      "identifier",
+      "broader"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "d": {
+          "type": "uri",
+          "value": "http://id.nlm.nih.gov/mesh/C000002"
+        },
+        "name": {
+          "type": "literal",
+          "xml:lang": "en",
+          "value": "bevonium"
+        },
+        "identifier": {
+          "type": "literal",
+          "value": "C000002"
+        },
+        "broader": {
+          "type": "literal",
+          "value": ""
+        }
+      }
+    ]
+  }
+}
