@@ -1,0 +1,10 @@
+[
+    {
+        "uri": "test:concept",
+        "narrower": [
+            {
+                "uri": "test:narrower"
+            }
+        ]
+    }
+]

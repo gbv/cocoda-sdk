@@ -1,0 +1,261 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "schema"
+      ],
+      "curie": "schema:members",
+      "definedBy": [
+        "schema"
+      ],
+      "definition": [
+        "A member of this organization."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "https://schema.org/members",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "members"
+      ],
+      "linkedEntities": {
+        "https://schema.org/ProgramMembership": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "ProgramMembership"
+          ],
+          "curie": "schema:ProgramMembership",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://schema.org/member": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "member"
+          ],
+          "curie": "schema:member",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "https://schema.org/supersededBy": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "supersededBy"
+          ],
+          "curie": "schema:supersededBy",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy"
+        },
+        "https://schema.org/Text": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "Text"
+          ],
+          "curie": "schema:Text",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://schema.org/Person": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "Person"
+          ],
+          "curie": "schema:Person",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://schema.org/Role": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "Role"
+          ],
+          "curie": "schema:Role",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "https://schema.org/Organization": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "Organization"
+          ],
+          "curie": "schema:Organization",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://schema.org/URL": {
+          "definedBy": [
+            "schema"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "URL"
+          ],
+          "curie": "schema:URL",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "schema",
+      "ontologyIri": "https://schema.org/",
+      "ontologyPreferredPrefix": "schema",
+      "searchableAnnotationValues": false,
+      "shortForm": "schema_members",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "A member of this organization.",
+      "http://www.w3.org/2000/01/rdf-schema#domain": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#unionOf": [
+          "https://schema.org/Organization",
+          "https://schema.org/ProgramMembership"
+        ]
+      },
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "https://schema.org/members",
+      "http://www.w3.org/2000/01/rdf-schema#label": "members",
+      "http://www.w3.org/2000/01/rdf-schema#range": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#unionOf": [
+          "https://schema.org/Organization",
+          "https://schema.org/Person",
+          "https://schema.org/Role",
+          "https://schema.org/URL",
+          "https://schema.org/Text"
+        ]
+      },
+      "https://schema.org/supersededBy": "https://schema.org/member"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

@@ -1,0 +1,4900 @@
+{
+  "page": 1,
+  "numElements": 20,
+  "totalPages": 2,
+  "totalElements": 40,
+  "elements": [
+    {
+      "baseUri": [
+        "https://w3id.org/kim/educationalLevel/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "Educational Resources"
+          ]
+        },
+        {
+          "subject": [
+            "General",
+            "Educational science"
+          ]
+        }
+      ],
+      "creator": [
+        null
+      ],
+      "definition_property": [
+        "http://www.w3.org/2004/02/skos/core#definition"
+      ],
+      "description": "Eine Wertelliste für die Stufe im Bildungssystem als Lehr-/Lernkontext, für den Lernobjekt ausgewiesen ist.",
+      "homepage": "https://github.com/dini-ag-kim/educationalLevel",
+      "iri": "https://w3id.org/kim/educationalLevel/",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "de",
+        "en"
+      ],
+      "license": {
+        "label": "CC0 1.0 DEED CC0 1.0 Universal",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://www.w3.org/2004/02/skos/core#altLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": false,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "skos:altLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": false,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://github.com/dini-ag-kim/educationalLevel": {
+          "url": "https://github.com/dini-ag-kim/educationalLevel",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:dini-ag-kim/educationalLevel"
+        }
+      },
+      "loaded": "2026-02-08T13:51:48.257649718",
+      "mailingList": "https://lists.dnb.de/mailman/listinfo/dini-ag-kim-oer",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "12",
+      "numberOfEntities": "12",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "0",
+      "ontologyId": "educationallevel",
+      "ontologyPurl": "https://raw.githubusercontent.com/dini-ag-kim/educationalLevel/main/educationalLevel.ttl",
+      "preferredPrefix": "EDUCATIONALLEVEL",
+      "repo_url": "https://github.com/dini-ag-kim/educationalLevel",
+      "searchableAnnotationValues": [
+        "2026-02-08T13:51:48.257649718",
+        "12",
+        "0",
+        "Sun Feb 08 13:51:48 UTC 2026"
+      ],
+      "skos": true,
+      "skosNarrower": false,
+      "skosRoot": "TOPCONCEPTOF_PROPERTY",
+      "sourceFileTimestamp": "Sun Feb 08 13:51:48 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#altLabel"
+      ],
+      "title": "Educational level",
+      "tracker": "https://github.com/dini-ag-kim/educationalLevel/issues/",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/dini-ag-kim/educationalLevel/main/educationalLevel.ttl"
+    },
+    {
+      "baseUri": [
+        "http://data.europa.eu/bkc/notation_",
+        "http://data.europa.eu/bkc/note_",
+        "http://data.europa.eu/bkc/label_",
+        "http://data.europa.eu/bkc/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "Educational Resources"
+          ]
+        },
+        {
+          "subject": [
+            "Literature"
+          ]
+        }
+      ],
+      "creator": [
+        "Publications Office of the European Union"
+      ],
+      "definition_property": [
+        "http://www.w3.org/2004/02/skos/core#definition"
+      ],
+      "description": "Dating from 1978 when catalogues of the Central Library of the Commission of the European Communities (now the European Union) were computerised, ECLAS is a thesaurus created by the Central Library of the Commission of the European Communities for indexing the publications and documents acquired by the Central Library of the Commission. ECLAS was based on the Macrothesaurus of OECD and complemented by the ILO thesaurus. After creation of EUROVOC in 1984, convergence started in order to bring ECLAS in line with EUROVOC, but it was never complete. ECLAS contains nineteen areas of interest in a hierarchical tree structure consisting of four levels. ECLAS is fully available in English and in French. The OP COMM ECLAS is maintained by the Publications Office of the European Union on the EU Vocabularies website.",
+      "homepage": "https://op.europa.eu/de/home",
+      "iri": "http://data.europa.eu/bkc/notation_",
+      "isObsolete": false,
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "bg",
+        "cs",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "et",
+        "fi",
+        "fr",
+        "ga",
+        "hr",
+        "hu",
+        "is",
+        "it",
+        "la",
+        "lt",
+        "lv",
+        "mt",
+        "nl",
+        "no",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "sk",
+        "sl",
+        "sr",
+        "sv",
+        "tr"
+      ],
+      "license": {
+        "label": "ATTRIBUTION 4.0 INTERNATIONAL (CC BY 4.0)",
+        "url": "https://op.europa.eu/en/web/about-us/legal-notices/publications-office-of-the-european-union-copyright"
+      },
+      "linkedEntities": {
+        "http://www.w3.org/2004/02/skos/core#altLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": false,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "skos:altLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": false,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "loaded": "2026-02-08T13:51:40.424470774",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "6537",
+      "numberOfEntities": "6537",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "0",
+      "ontologyId": "eclas",
+      "ontologyPurl": "file:/opt/ols/dataload/terminology/vocabularies/eu-vocabularies/eclas-skos-ap-eu.rdf",
+      "preferredPrefix": "ECLAS",
+      "searchableAnnotationValues": [
+        "2026-02-08T13:51:40.424470774",
+        "6537",
+        "0",
+        "Sun Feb 08 13:51:35 UTC 2026"
+      ],
+      "skos": true,
+      "skosNarrower": true,
+      "skosRoot": "TOPCONCEPTOF_PROPERTY",
+      "sourceFileTimestamp": "Sun Feb 08 13:51:35 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#altLabel"
+      ],
+      "title": "ECLAS",
+      "type": [
+        "ontology"
+      ]
+    },
+    {
+      "baseUri": [
+        "http://purl.dataone.org/odo/ECSO8.owl"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "FAIR Data Spaces",
+            "ESS"
+          ]
+        },
+        {
+          "subject": [
+            "Chemical and environmental engineering",
+            "Earth sciences"
+          ]
+        }
+      ],
+      "creator": [
+        "https://github.com/DataONEorg"
+      ],
+      "description": "ECSO expresses 'Measurement Types' to describe measurements present in raw data. It uses the OBOÉ observation and measurements design pattern (OBOE https://github.com/NCEAS/oboe) to capture both the 'entity of interest' and 'characteristic measured'. ECSO is intended to be used with terms in other OWL ontologies, including ENVO, PATO, CHEBI, BCO and PCO. It is currently focused on carbon and associated measurements.",
+      "homepage": "https://github.com/DataONEorg/sem-prov-ontologies",
+      "imported": false,
+      "importsFrom": [
+        "stw",
+        "skos",
+        "envo",
+        "envo2021",
+        "prov",
+        "iao",
+        "uo",
+        "oboe-core",
+        "oboe-characteristics",
+        "ro",
+        "bfo",
+        "pato",
+        "stato"
+      ],
+      "iri": "http://purl.dataone.org/odo/ECSO8.owl",
+      "isObsolete": false,
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "Public"
+      },
+      "linkedEntities": {
+        "https://github.com/DataONEorg": {
+          "url": "https://github.com/DataONEorg",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:DataONEorg"
+        },
+        "https://github.com/DataONEorg/sem-prov-ontologies": {
+          "url": "https://github.com/DataONEorg/sem-prov-ontologies",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:DataONEorg/sem-prov-ontologies"
+        }
+      },
+      "loaded": "2026-02-08T13:51:45.780076410",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "2102",
+      "numberOfEntities": "2288",
+      "numberOfIndividuals": "18",
+      "numberOfProperties": "168",
+      "ontologyId": "ecso",
+      "ontologyPurl": "https://raw.githubusercontent.com/DataONEorg/sem-prov-ontologies/ECSO8-add_non-carbon_measurements/observation/ECSO8.owl",
+      "preferredPrefix": "ECSO",
+      "repo_url": "https://github.com/DataONEorg/sem-prov-ontologies",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:45 UTC 2026",
+      "title": "The Ecosystems Ontology",
+      "tracker": "https://github.com/DataONEorg/sem-prov-ontologies/issues",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/DataONEorg/sem-prov-ontologies/refs/heads/main/ecso/ECSO8.owl",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology"
+    },
+    {
+      "baseUri": [
+        "http://data.europa.eu/ett/kos/c_",
+        "http://data.europa.eu/ett/kos/conceptScheme_",
+        "http://data.europa.eu/ett/kos/xl_en_",
+        "http://data.europa.eu/ett/kos/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "Educational Resources"
+          ]
+        },
+        {
+          "subject": [
+            "General"
+          ]
+        }
+      ],
+      "creator": [
+        "Directorate-General for Communication"
+      ],
+      "definition_property": [
+        "http://www.w3.org/2004/02/skos/core#definition"
+      ],
+      "description": "EDCC Taxonomy contains the terms that are used to classify citizens' requests to the Europe Direct Contact Centre (EDCC). EDCC Taxonomy is maintained by the Directorate-General for Communication of the European Commission and published by the Publications Office of the European Union on the EU Vocabularies website.",
+      "homepage": "https://op.europa.eu/de/home",
+      "imported": false,
+      "iri": "http://data.europa.eu/ett/kos/xl_en_44363b60",
+      "isObsolete": false,
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "ATTRIBUTION 4.0 INTERNATIONAL (CC BY 4.0)",
+        "url": "https://op.europa.eu/en/web/about-us/legal-notices/publications-office-of-the-european-union-copyright"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/terms/modified": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 58,
+          "hasLocalDefinition": false,
+          "label": [
+            "Date Modified"
+          ],
+          "curie": "dcterms:modified",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#date": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "date"
+          ],
+          "curie": "date"
+        },
+        "http://www.w3.org/2004/02/skos/core#altLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": false,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "skos:altLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": false,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2008/05/skos-xl#literalForm": {
+          "definedBy": [
+            "skosxl"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "label": [
+            "literal form"
+          ],
+          "curie": "SKOSXL:literalForm",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        }
+      },
+      "loaded": "2026-02-08T13:51:47.824413010",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "1250",
+      "numberOfEntities": "1250",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "0",
+      "ontologyId": "edcc",
+      "ontologyPurl": "file:/opt/ols/dataload/terminology/vocabularies/eu-vocabularies/edcc-taxonomy.rdf",
+      "preferredPrefix": "EDCC",
+      "skos": true,
+      "skosNarrower": false,
+      "skosRoot": "TOPCONCEPTOF_PROPERTY",
+      "sourceFileTimestamp": "Sun Feb 08 13:51:47 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#altLabel"
+      ],
+      "title": "EDCC Taxonomy",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/terms/modified": "2024-03-01",
+      "http://www.w3.org/2008/05/skos-xl#literalForm": [
+        "European Network and Information Security Agency (ENISA)",
+        "European Network and Information Security Agency (ENISA"
+      ]
+    },
+    {
+      "baseUri": [
+        "http://rs.tdwg.org/dwcpw/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "FAIR Data Spaces"
+          ]
+        },
+        {
+          "subject": [
+            "Life Sciences, biology"
+          ]
+        }
+      ],
+      "creator": [
+        "Biodiversity Information Standards (TDWG)",
+        "TDWG Darwin Core Maintenance Group"
+      ],
+      "description": "Controlled vocabulary for the Darwin Core term pathway",
+      "homepage": "http://rs.tdwg.org/dwcpw.htm",
+      "iri": "http://rs.tdwg.org/dwcpw/",
+      "isObsolete": false,
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "http://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {},
+      "loaded": "2026-02-08T13:51:34.973731066",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "0",
+      "numberOfEntities": "0",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "0",
+      "ontologyId": "dwcpw",
+      "ontologyPurl": "http://rs.tdwg.org/dwcpw.ttl",
+      "preferredPrefix": "DWCPW",
+      "searchableAnnotationValues": [
+        "2026-02-08T13:51:34.973731066",
+        "0",
+        "Sun Feb 08 13:51:34 UTC 2026"
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:34 UTC 2026",
+      "title": "pathway controlled vocabulary",
+      "type": [
+        "ontology"
+      ]
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/chemrof/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4CHEM"
+          ]
+        },
+        {
+          "subject": [
+            "Chemistry"
+          ]
+        }
+      ],
+      "creator": [
+        "https://orcid.org/0000-0002-6601-2165"
+      ],
+      "definition": [
+        "A data model for managing information about chemical entities, ranging from atoms through molecules to complex mixtures.\nAspects of this have been cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes are my own.\nFor full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof)."
+      ],
+      "definition_property": [
+        "http://www.w3.org/2004/02/skos/core#definition"
+      ],
+      "description": "A data model for managing information about chemical entities, ranging from atoms through molecules to complex mixtures. \nAspects of this have been cribbed from various sources including CHEBI, SIO, \nWikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes, \nare my own. \nFor full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof).",
+      "exportsTo": [
+        "efo",
+        "chebi",
+        "chmo"
+      ],
+      "homepage": "https://chemkg.github.io/chemrof/",
+      "imported": false,
+      "importsFrom": [
+        "mop",
+        "gc",
+        "rxno"
+      ],
+      "iri": "https://w3id.org/chemrof",
+      "isObsolete": false,
+      "label": [
+        "Chemical Entities Mixtures and Reactions Ontological Framework",
+        "chemrof"
+      ],
+      "label_property": "http://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC0 1.0 Universal",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": false,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": false,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/pav/version": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "version"
+          ],
+          "curie": "version"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-6601-2165": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Christopher J. Mungall",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q20746118"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-6601-2165"
+        }
+      },
+      "loaded": "2026-02-08T13:49:30.670348467",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "260",
+      "numberOfEntities": "505",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "245",
+      "ontologyId": "chemrof",
+      "ontologyPurl": "https://w3id.org/chemrof/chemrof.owl.ttl",
+      "preferredPrefix": "chemrof",
+      "repo_url": "https://github.com/chemkg/chemrof/",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:49:30 UTC 2026",
+      "title": "Chemical Entities Mixtures and Reactions Ontological Framework",
+      "tracker": "https://github.com/chemkg/chemrof/issues",
+      "type": [
+        "ontology"
+      ],
+      "uri": "https://w3id.org/chemrof/chemrof.owl.ttl",
+      "versioned_url": "https://raw.githubusercontent.com/chemkg/chemrof/main/schema/owl/chemrof.owl.ttl",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "http://purl.org/dc/terms/title": "Chemical Entities Mixtures and Reactions Ontological Framework",
+      "http://purl.org/pav/version": "0.0.1",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#label": "chemrof",
+      "http://www.w3.org/2004/02/skos/core#definition": "A data model for managing information about chemical entities, ranging from atoms through molecules to complex mixtures.\nAspects of this have been cribbed from various sources including CHEBI, SIO, Wikipedia/Wikidata, the NCATS Translator Chemical Working Group, but all mistakes are my own.\nFor full context/motivation see the [GitHub repo](https://github.com/chemkg/chemrof)."
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/digitalconstruction/0.5/Occupancy#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "Digital Planning and Construction",
+            "FID BAUdigital"
+          ]
+        },
+        {
+          "subject": [
+            "Civil Engineering"
+          ]
+        }
+      ],
+      "creator": [
+        "Kostas Tsatsakis",
+        "Spiros Kousouris"
+      ],
+      "definition": [
+        "Digital Construction Occupancy ontology represents those aspects of construction and renovation projects that concern the comfort, safety and health of occupants, including visual and thermal comfort, indoor air quality and building acoustics, as well as related sensor observations.",
+        "Digital Construction Occupancy ontology represents those aspects of construction and renovation projects that concern the comfort, safety and health of occupants, including visual and thermal comfort, indoor air quality and building acoustics, as well as related sensor observations."
+      ],
+      "definition_property": [
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "description": "Digital Construction Occupancy ontology represents those aspects of construction and renovation projects that concern the comfort, safety and health of occupants, including visual and thermal comfort, indoor air quality and building acoustics, as well as related sensor observations.",
+      "homepage": "https://digitalconstruction.github.io/Occupancy/v/0.5/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "vann"
+      ],
+      "iri": "https://w3id.org/digitalconstruction/0.5/Occupancy",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "Digital Construction Occupancy",
+        "Digital Construction Occupancy"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/elements/1.1/date": {
+          "numAppearsIn": 55,
+          "hasLocalDefinition": true,
+          "label": [
+            "date"
+          ],
+          "curie": "date",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/description": {
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "description"
+          ],
+          "curie": "description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/title": {
+          "numAppearsIn": 64,
+          "hasLocalDefinition": true,
+          "label": [
+            "title"
+          ],
+          "curie": "title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/contributor": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "Contributor"
+          ],
+          "curie": "dcterms:contributor",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/created": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 53,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Created"
+          ],
+          "curie": "dcterms:created",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://github.com/digitalconstruction/Occupancy": {
+          "url": "https://github.com/digitalconstruction/Occupancy",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:digitalconstruction/Occupancy"
+        }
+      },
+      "loaded": "2026-02-08T13:51:25.164598432",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "300",
+      "numberOfEntities": "674",
+      "numberOfIndividuals": "14",
+      "numberOfProperties": "360",
+      "ontologyId": "dicob",
+      "ontologyPurl": "https://digitalconstruction.github.io/Occupancy/v/0.5/occupancy.ttl",
+      "preferredPrefix": "dicob",
+      "repo_url": "https://github.com/digitalconstruction/Occupancy",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:25 UTC 2026",
+      "title": "Digital Construction Occupancy (dicob)",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/elements/1.1/date": "2020-04-24",
+      "http://purl.org/dc/elements/1.1/description": "Digital Construction Occupancy ontology represents those aspects of construction and renovation projects that concern the comfort, safety and health of occupants, including visual and thermal comfort, indoor air quality and building acoustics, as well as related sensor observations.",
+      "http://purl.org/dc/elements/1.1/title": "Digital Construction Occupancy",
+      "http://purl.org/dc/terms/contributor": "Seppo Törmä",
+      "http://purl.org/dc/terms/created": "2020-01-12",
+      "http://purl.org/dc/terms/creator": [
+        "Kostas Tsatsakis",
+        "Spiros Kousouris"
+      ],
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "dicob",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://w3id.org/digitalconstruction/0.5/Occupancy",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Digital Construction Occupancy ontology represents those aspects of construction and renovation projects that concern the comfort, safety and health of occupants, including visual and thermal comfort, indoor air quality and building acoustics, as well as related sensor observations.",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Digital Construction Occupancy",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://w3id.org/digitalconstruction/0.5",
+      "http://www.w3.org/2002/07/owl#imports": "https://w3id.org/digitalconstruction/0.5/Information/information.ttl"
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/digitalconstruction/0.5/Energy#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "Digital Planning and Construction",
+            "FID BAUdigital",
+            "NFDI4Energy"
+          ]
+        },
+        {
+          "subject": [
+            "Civil Engineering"
+          ]
+        }
+      ],
+      "creator": [
+        "Kostas Tsatsakis",
+        "Spiros Kousouris"
+      ],
+      "definition": [
+        "An ontology for energy systems and energy efficiency in the construction and renovation domain"
+      ],
+      "definition_property": [
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "description": "An ontology for energy systems and energy efficiency in the construction and renovation domain",
+      "homepage": "https://digitalconstruction.github.io/v/0.5/index.html",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "vann"
+      ],
+      "iri": "https://w3id.org/digitalconstruction/0.5/Energy",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "Digital Construction Energy",
+        "Digital Construction Energy"
+      ],
+      "label_property": "http://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/elements/1.1/creator": {
+          "numAppearsIn": 68,
+          "hasLocalDefinition": true,
+          "label": [
+            "creator"
+          ],
+          "curie": "creator",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/abstract": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 32,
+          "hasLocalDefinition": true,
+          "label": [
+            "Abstract"
+          ],
+          "curie": "dcterms:abstract",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/publisher": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "Publisher"
+          ],
+          "curie": "dcterms:publisher",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://github.com/digitalconstruction/Energy": {
+          "url": "https://github.com/digitalconstruction/Energy",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:digitalconstruction/Energy"
+        }
+      },
+      "loaded": "2026-02-08T13:51:23.082907953",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "322",
+      "numberOfEntities": "743",
+      "numberOfIndividuals": "33",
+      "numberOfProperties": "388",
+      "ontologyId": "dices",
+      "ontologyPurl": "https://digitalconstruction.github.io/Energy/v/0.5/energy.ttl",
+      "preferredPrefix": "dices:",
+      "repo_url": "https://github.com/digitalconstruction/Energy",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:22 UTC 2026",
+      "title": "Digital Construction Energy (dices)",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/elements/1.1/creator": [
+        "Kostas Tsatsakis",
+        "Spiros Kousouris"
+      ],
+      "http://purl.org/dc/terms/abstract": "An ontology for energy systems and energy efficiency in the construction and renovation domain",
+      "http://purl.org/dc/terms/description": "An ontology for energy systems and energy efficiency in the construction and renovation domain",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/publisher": "SUITE5",
+      "http://purl.org/dc/terms/title": "Digital Construction Energy",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "dices:",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://w3id.org/digitalconstruction/0.5/Energy",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Digital Construction Energy",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://w3id.org/digitalconstruction/0.5",
+      "http://www.w3.org/2002/07/owl#imports": "https://w3id.org/digitalconstruction/0.5/Information/information.ttl"
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/digitalconstruction/0.5/Lifecycle#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "Digital Planning and Construction",
+            "FID BAUdigital"
+          ]
+        },
+        {
+          "subject": [
+            "Civil Engineering"
+          ]
+        }
+      ],
+      "creator": [
+        "Janakiram Karlapudi"
+      ],
+      "definition": [
+        "An ontology to represent the enhancement of building data throughout the construction lifecycle stages"
+      ],
+      "definition_property": [
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "description": "An ontology to represent the enhancement of building data throughout the construction lifecycle stages",
+      "homepage": "https://digitalconstruction.github.io/Lifecycle/v/0.5/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "vann",
+        "prov"
+      ],
+      "iri": "https://w3id.org/digitalconstruction/0.5/Lifecycle",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "Digital Construction Lifecycle",
+        "Digital Construction Information"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/date": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 22,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date"
+          ],
+          "curie": "dcterms:date",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        },
+        "http://www.w3.org/2001/XMLSchema#dateTime": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "dateTime"
+          ],
+          "curie": "dateTime"
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://github.com/digitalconstruction/Lifecycle": {
+          "url": "https://github.com/digitalconstruction/Lifecycle",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:digitalconstruction/Lifecycle"
+        }
+      },
+      "loaded": "2026-02-08T13:51:23.968549640",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "165",
+      "numberOfEntities": "471",
+      "numberOfIndividuals": "8",
+      "numberOfProperties": "298",
+      "ontologyId": "dicl",
+      "ontologyPurl": "https://digitalconstruction.github.io/Lifecycle/v/0.5/lifecycle.ttl",
+      "preferredPrefix": "dicl",
+      "repo_url": "https://github.com/digitalconstruction/Lifecycle",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:23 UTC 2026",
+      "title": "Digital Construction Lifecycle (dicl)",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/terms/creator": "Janakiram Karlapudi (janakiram.karlapudi@tu-dresden.de)",
+      "http://purl.org/dc/terms/date": "2020-06-18T12:00:00",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/title": "Digital Construction Lifecycle",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "dicl",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://w3id.org/digitalconstruction/0.5/Lifecycle",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "An ontology to represent the enhancement of building data throughout the construction lifecycle stages",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Digital Construction Information",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://w3id.org/digitalconstruction/0.5",
+      "http://www.w3.org/2002/07/owl#imports": "https://w3id.org/digitalconstruction/0.5/Agents/agents.ttl",
+      "http://www.w3.org/2002/07/owl#versionInfo": "0.5"
+    },
+    {
+      "allow_download": true,
+      "classifications": [
+        {
+          "collection": [
+            "DataPLANT"
+          ]
+        },
+        {
+          "subject": [
+            "Life Sciences, biology"
+          ]
+        }
+      ],
+      "definition": [
+        "COB brings together key terms from a wide range of OBO projects to improve interoperability."
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "description": "COB brings together key terms from a wide range of OBO projects to improve interoperability.",
+      "exportsTo": [
+        "ro",
+        "obi",
+        "peco",
+        "sepio",
+        "uberon",
+        "efo"
+      ],
+      "homepage": "https://obofoundry.org/COB/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "mop",
+        "envo2021",
+        "envo",
+        "uberon",
+        "iao",
+        "uo",
+        "go",
+        "obi",
+        "ro",
+        "bfo",
+        "pato",
+        "pco",
+        "po"
+      ],
+      "iri": "http://purl.obolibrary.org/obo/cob.owl",
+      "isObsolete": false,
+      "label": [
+        "Core Ontology for Biology and Biomedicine"
+      ],
+      "label_property": "http://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC0 1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/contributor": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "Contributor"
+          ],
+          "curie": "dcterms:contributor",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0001-5139-5557": {
+          "url": "https://orcid.org/0000-0001-5139-5557",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0001-5139-5557"
+        },
+        "https://orcid.org/0000-0001-5809-9523": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Darren A. Natale",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q99552327"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0001-5809-9523"
+        },
+        "https://orcid.org/0000-0001-8910-9851": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Lynn Schriml",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q28913673"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0001-8910-9851"
+        },
+        "https://orcid.org/0000-0001-9189-9661": {
+          "url": "https://orcid.org/0000-0001-9189-9661",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0001-9189-9661"
+        },
+        "https://orcid.org/0000-0001-9625-1899": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "William D Duncan",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q89881908"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0001-9625-1899"
+        },
+        "https://orcid.org/0000-0001-9990-8331": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Alexander D Diehl",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47502183"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0001-9990-8331"
+        },
+        "https://orcid.org/0000-0002-1604-3078": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Alan Ruttenberg",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q30508557"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-1604-3078"
+        },
+        "https://orcid.org/0000-0002-2999-0103": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Jie Zheng",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q90780528"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-2999-0103"
+        },
+        "https://orcid.org/0000-0002-6601-2165": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Christopher J. Mungall",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q20746118"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-6601-2165"
+        },
+        "https://orcid.org/0000-0002-7356-1779": {
+          "url": "https://orcid.org/0000-0002-7356-1779",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-7356-1779"
+        },
+        "https://orcid.org/0000-0002-8457-6693": {
+          "url": "https://orcid.org/0000-0002-8457-6693",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-8457-6693"
+        },
+        "https://orcid.org/0000-0002-8688-6599": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "James P. Balhoff",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q37649212"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-8688-6599"
+        },
+        "https://orcid.org/0000-0002-8844-9165": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Damion M Dooley",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q91868864"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-8844-9165"
+        },
+        "https://orcid.org/0000-0003-1640-9989": {
+          "url": "https://orcid.org/0000-0003-1640-9989",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-1640-9989"
+        },
+        "https://orcid.org/0000-0003-4423-4370": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Charles Tapley Hoyt",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47475003"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0003-4423-4370"
+        },
+        "https://orcid.org/0000-0003-4871-5569": {
+          "url": "https://orcid.org/0000-0003-4871-5569",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-4871-5569"
+        },
+        "https://orcid.org/0009-0009-4008-3801": {
+          "url": "https://orcid.org/0009-0009-4008-3801",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0009-0009-4008-3801"
+        }
+      },
+      "loaded": "2026-02-08T13:49:45.357794190",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "68",
+      "numberOfEntities": "106",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "38",
+      "ontologyId": "cob",
+      "ontologyPurl": "http://purl.obolibrary.org/obo/cob.owl",
+      "preferredPrefix": "COB",
+      "repo_url": "https://github.com/OBOFoundry/COB/",
+      "searchableAnnotationValues": [
+        "COB brings together key terms from a wide range of OBO projects to improve interoperability.",
+        "Core Ontology for Biology and Biomedicine",
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:49:45 UTC 2026",
+      "title": "Core Ontology for Biology and Biomedicine",
+      "tracker": "https://github.com/OBOFoundry/COB/issues/",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/OBOFoundry/COB/master/cob.owl",
+      "http://purl.org/dc/terms/contributor": [
+        "https://orcid.org/0000-0001-5139-5557",
+        "https://orcid.org/0000-0001-5809-9523",
+        "https://orcid.org/0000-0001-8910-9851",
+        "https://orcid.org/0000-0001-9189-9661",
+        "https://orcid.org/0000-0001-9625-1899",
+        "https://orcid.org/0000-0001-9990-8331",
+        "https://orcid.org/0000-0002-1604-3078",
+        "https://orcid.org/0000-0002-2999-0103",
+        "https://orcid.org/0000-0002-6601-2165",
+        "https://orcid.org/0000-0002-7356-1779",
+        "https://orcid.org/0000-0002-8457-6693",
+        "https://orcid.org/0000-0002-8688-6599",
+        "https://orcid.org/0000-0002-8844-9165",
+        "https://orcid.org/0000-0003-1640-9989",
+        "https://orcid.org/0000-0003-4423-4370",
+        "https://orcid.org/0000-0003-4871-5569",
+        "https://orcid.org/0009-0009-4008-3801"
+      ],
+      "http://purl.org/dc/terms/description": "COB brings together key terms from a wide range of OBO projects to improve interoperability.",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "http://purl.org/dc/terms/title": "Core Ontology for Biology and Biomedicine",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/cob/releases/2025-12-12/cob.owl",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2025-12-12"
+    },
+    {
+      "baseUri": [
+        "http://www.w3id.org/Concept/Ontology/COnDO#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING"
+          ]
+        },
+        {
+          "subject": [
+            "Engineering"
+          ]
+        }
+      ],
+      "creator": [
+        "Jarmo Kalaoja, VTT",
+        "Julia Kantorovitch, VTT"
+      ],
+      "definition": [
+        "The COnCEPT upper-level Design Ontology (COnDO)."
+      ],
+      "description": "The COnCEPT upper-level Design Ontology (COnDO).",
+      "homepage": "https://github.com/OntoRep/COnCEPT",
+      "imported": false,
+      "iri": "http://www.w3id.org/Concept/Ontology/COnDO#COnDO",
+      "isObsolete": false,
+      "label": [
+        "The COnCEPT upper-level Design Ontology"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "Apache License 2.0",
+        "url": "https://github.com/OntoRep/COnCEPT/blob/master/LICENSE"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": false,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": false,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/issued": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 45,
+          "hasLocalDefinition": false,
+          "label": [
+            "Date Issued"
+          ],
+          "curie": "dcterms:issued",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/modified": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 58,
+          "hasLocalDefinition": false,
+          "label": [
+            "Date Modified"
+          ],
+          "curie": "dcterms:modified",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": false,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": false,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": false,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocommons/voaf#Vocabulary": {
+          "numAppearsIn": 11,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "Vocabulary"
+          ],
+          "curie": "Vocabulary"
+        },
+        "http://www.w3.org/2001/XMLSchema#date": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "date"
+          ],
+          "curie": "date"
+        },
+        "https://github.com/OntoRep/COnCEPT": {
+          "url": "https://github.com/OntoRep/COnCEPT",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:OntoRep/COnCEPT"
+        }
+      },
+      "loaded": "2026-02-08T13:49:45.611350696",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "77",
+      "numberOfEntities": "88",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "11",
+      "ontologyId": "condo",
+      "ontologyPurl": "https://raw.githubusercontent.com/OntoRep/COnCEPT/master/COnDO.ttl",
+      "preferredPrefix": "condo",
+      "repo_url": "https://github.com/OntoRep/COnCEPT",
+      "searchableAnnotationValues": [
+        "The COnCEPT upper-level Design Ontology (COnDO).",
+        "The COnCEPT upper-level Design Ontology",
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:49:45 UTC 2026",
+      "title": "The COnCEPT upper-level Design Ontology",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/OntoRep/COnCEPT/master/COnDO.ttl",
+      "http://purl.org/dc/terms/creator": [
+        "Julia Kantorovitch, VTT",
+        "Jarmo Kalaoja, VTT"
+      ],
+      "http://purl.org/dc/terms/description": "The COnCEPT upper-level Design Ontology (COnDO).",
+      "http://purl.org/dc/terms/issued": "2016-06-09",
+      "http://purl.org/dc/terms/modified": "2016-06-23",
+      "http://purl.org/dc/terms/title": "The COnCEPT upper-level Design Ontology",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "condo",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "http://W3id.org/Concept/Ontology/COnDO#",
+      "http://purl.org/vocommons/voaf#metadataVoc": [
+        "http://www.yso.fi/onto/yso/",
+        "http://www.semanticdesktop.org/ontologies/2007/11/01/pimo",
+        "http://www.semanticdesktop.org/ontologies/2007/01/19/nie"
+      ],
+      "http://purl.org/vocommons/voaf#reliesOn": [
+        "http://xmlns.com/foaf/0.1/",
+        "http://purl.org/goodrelations/v1"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://purl.org/vocommons/voaf#Vocabulary",
+        "http://www.w3.org/2002/07/owl#Ontology"
+      ],
+      "http://www.w3.org/2002/07/owl#versionInfo": "v0.1"
+    },
+    {
+      "baseUri": [
+        "http://rdf.webofcode.org/woc/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING"
+          ]
+        },
+        {
+          "subject": [
+            "Engineering"
+          ]
+        }
+      ],
+      "creator": [
+        "Maurizio Atzori",
+        "Mattia Atzeni",
+        "Mattia Setzu"
+      ],
+      "definition": [
+        "An ontology that represents object-oriented programming languages"
+      ],
+      "description": "An ontology that represents object-oriented programming languages",
+      "homepage": "http://codeontology.org/",
+      "imported": false,
+      "iri": "http://rdf.webofcode.org/woc/",
+      "isObsolete": false,
+      "label": [
+        "CodeOntology"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "GNU General Public License v3.0",
+        "url": "https://github.com/codeontology/parser/blob/master/LICENSE.txt"
+      },
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://github.com/codeontology/parser": {
+          "url": "https://github.com/codeontology/parser",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:codeontology/parser"
+        }
+      },
+      "loaded": "2026-02-08T13:49:44.899506447",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "65",
+      "numberOfEntities": "188",
+      "numberOfIndividuals": "17",
+      "numberOfProperties": "106",
+      "ontologyId": "co",
+      "ontologyPurl": "https://raw.githubusercontent.com/codeontology/parser/master/ontology/CodeOntology.owl",
+      "preferredPrefix": "CO",
+      "repo_url": "https://github.com/codeontology/parser",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:49:44 UTC 2026",
+      "title": "CodeOntology",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/codeontology/parser/master/ontology/CodeOntology.owl",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "An ontology that represents object-oriented programming languages",
+      "http://www.w3.org/2000/01/rdf-schema#label": "CodeOntology"
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/dfgfo/2020/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "FID move",
+            "Digital Planning and Construction",
+            "FID BAUdigital",
+            "ESS"
+          ]
+        },
+        {
+          "subject": [
+            "General",
+            "Educational science"
+          ]
+        }
+      ],
+      "definition": [
+        "DFG Classification of Subject Areas Ontology is being created as part of the TIB Terminology Service"
+      ],
+      "description": "DFG (The Deutsche Forschungsgemeinschaft - German Research Foundation) Fachsystematik Ontology / DFG Classification of Subject Areas Ontology (DFGFO) encodes the DFG Classification of Subject Areas into an ontology, where each subject number are is enconded into a Class with subclass statements following the DFG Classification of Subject Areas hierarchy. Labels are provided in German and English.",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "schema",
+        "skos",
+        "stw",
+        "iao"
+      ],
+      "iri": "https://w3id.org/dfgfo/2020/",
+      "isObsolete": false,
+      "label": [
+        "DFG Classification of Subject Areas Ontology - 2020-2024"
+      ],
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "de",
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/elements/1.1/creator": {
+          "numAppearsIn": 68,
+          "hasLocalDefinition": true,
+          "label": [
+            "creator"
+          ],
+          "curie": "creator",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/description": {
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "description"
+          ],
+          "curie": "description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/title": {
+          "numAppearsIn": 64,
+          "hasLocalDefinition": true,
+          "label": [
+            "title"
+          ],
+          "curie": "title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/modified": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 58,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Modified"
+          ],
+          "curie": "dcterms:modified",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#dateTime": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "dateTime"
+          ],
+          "curie": "dateTime"
+        },
+        "http://www.w3.org/2004/02/skos/core#altLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "skos:altLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#changeNote": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 14,
+          "hasLocalDefinition": true,
+          "label": [
+            "change note"
+          ],
+          "curie": "skos:changeNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": true,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://doi.org/10.17616/R31NJMNN": {
+          "url": "http://dx.doi.org/10.17616/R31NJMNN",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "doi:10.17616/R31NJMNN"
+        },
+        "https://doi.org/10.18419/DARUS-1841.": {
+          "url": "http://dx.doi.org/10.18419/DARUS-1841.",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "doi:10.18419/DARUS-1841."
+        },
+        "https://github.com/tibonto/DFG-Fachsystematik-Ontology": {
+          "url": "https://github.com/tibonto/DFG-Fachsystematik-Ontology",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:tibonto/DFG-Fachsystematik-Ontology"
+        },
+        "https://ror.org/04vnq7t77": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "04vnq7t77"
+          ],
+          "curie": "04vnq7t77"
+        }
+      },
+      "loaded": "2026-02-08T13:51:20.646776942",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "556",
+      "numberOfEntities": "566",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "10",
+      "ontologyId": "dfgfo",
+      "ontologyPurl": "https://raw.githubusercontent.com/tibonto/DFG-Fachsystematik-Ontology/refs/tags/2020-2025-06-01/dfgfo.ttl",
+      "ontology_use": [
+        {
+          "usedBy": {
+            "altLabel": "DaRuS",
+            "contact": [
+              {
+                "mail": "fokus@izus.uni-stuttgart.de"
+              }
+            ],
+            "description": "Data repository of the University of Stuttgart",
+            "homepage": "https://darus.uni-stuttgart.de/",
+            "identifier": [
+              "https://doi.org/10.17616/R31NJMNN"
+            ],
+            "label": "DaRUS",
+            "provider": [
+              {
+                "identifier": "https://ror.org/04vnq7t77",
+                "label": "Uni Stuttgart"
+              }
+            ],
+            "type": "data repository",
+            "usageDescription": {
+              "description": "The DFG subject classification 2020-2024 is used as an annotation value for the field 'Topic Classification' in metadata of data sets registered at Darus. Example: https://doi.org/10.18419/DARUS-1841. The look-up of the terms is performed by human curators.",
+              "language": "en"
+            },
+            "usageReportMetadata": {
+              "created": "2025-07-16"
+            }
+          }
+        }
+      ],
+      "preferredPrefix": "dfgfo",
+      "repo_url": "https://github.com/tibonto/DFG-Fachsystematik-Ontology",
+      "searchableAnnotationValues": [
+        "DFG Classification of Subject Areas Ontology - 2020-2024",
+        "\r\n                                   Changes:\r\n* updated metadata (added: terms:modified, owl:priorVersion, skos:changeNote, updated: dc:title now includes the years) (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/36)\r\n* added handles to dfgfo:314-01 and dfgfo:409-03 (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/38)\r\n* deprecated non-resolvable identifiers and added pointer to w3ids to be used instead (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/36)\r\n* changed label properties: all labels are provided with skos:prefLabel now to treat languages equally (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/37)\r\n",
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:20 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#altLabel"
+      ],
+      "title": "DFG Fachsystematik - Ontologie - 2020-2024",
+      "tracker": "https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/tibonto/DFG-Fachsystematik-Ontology/refs/tags/2020-2025-06-01/dfgfo.ttl",
+      "http://purl.org/dc/elements/1.1/creator": [
+        "André Castro",
+        "Deutsche Forschungsgemeinschaft (DFG)",
+        "Susanne Arndt"
+      ],
+      "http://purl.org/dc/elements/1.1/description": "DFG Fachsystematik Ontology / DFG Classification of Subject Areas Ontology (DFGFO) encodes the DFG Classification of Subject Areas into an ontology, where each subject number are is enconded into a Class with subclass statements following the DFG Classification of Subject Areas hierarchy. Labels are provide German and English.",
+      "http://purl.org/dc/elements/1.1/title": [
+        "DFG Classification of Subject Areas Ontology - 2020-2024"
+      ],
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/modified": "2025-05-31T00:00:00",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "DFG Classification of Subject Areas Ontology is being created as part of the TIB Terminology Service"
+      ],
+      "http://www.w3.org/2002/07/owl#priorVersion": "https://raw.githubusercontent.com/tibonto/DFG-Fachsystematik-Ontology/refs/tags/2023-01-17/dfgfo.ttl",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://w3id.org/dfgfo/2020",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2020-2024",
+      "http://www.w3.org/2004/02/skos/core#changeNote": "\r\n                                   Changes:\r\n* updated metadata (added: terms:modified, owl:priorVersion, skos:changeNote, updated: dc:title now includes the years) (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/36)\r\n* added handles to dfgfo:314-01 and dfgfo:409-03 (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/38)\r\n* deprecated non-resolvable identifiers and added pointer to w3ids to be used instead (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/36)\r\n* changed label properties: all labels are provided with skos:prefLabel now to treat languages equally (cf. https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues/37)\r\n"
+    },
+    {
+      "baseUri": [
+        "https://w3id.org/dfgfo/2024/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "FID move",
+            "Digital Planning and Construction",
+            "FID BAUdigital",
+            "ESS"
+          ]
+        },
+        {
+          "subject": [
+            "General",
+            "Educational science"
+          ]
+        }
+      ],
+      "definition": [
+        "DFG Fachsystematik Ontology / DFG Classification of Subject Areas Ontology (DFGFO) is aligned with GBV DFG2024 via skos:closeMatch relations. The two semantic artifacts were developed separately, but both teams strive towards alignment. While DFGO defines terms as owl:Class instances, GBV defines them as skos:Concept. More details on GBV DFG2024 at http://uri.gbv.de/terminology/dfg/"
+      ],
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "schema",
+        "skos",
+        "stw"
+      ],
+      "iri": "https://w3id.org/dfgfo/2024",
+      "isObsolete": false,
+      "label": [
+        "DFG Classification of Subject Areas Ontology - 2024-2028"
+      ],
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "de",
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/elements/1.1/creator": {
+          "numAppearsIn": 68,
+          "hasLocalDefinition": true,
+          "label": [
+            "creator"
+          ],
+          "curie": "creator",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/description": {
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "description"
+          ],
+          "curie": "description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/title": {
+          "numAppearsIn": 64,
+          "hasLocalDefinition": true,
+          "label": [
+            "title"
+          ],
+          "curie": "title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/modified": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 58,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Modified"
+          ],
+          "curie": "dcterms:modified",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#dateTime": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "dateTime"
+          ],
+          "curie": "dateTime"
+        },
+        "http://www.w3.org/2004/02/skos/core#altLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "skos:altLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#changeNote": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 14,
+          "hasLocalDefinition": true,
+          "label": [
+            "change note"
+          ],
+          "curie": "skos:changeNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": true,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://doi.org/10.17616/R31NJMNN": {
+          "url": "http://dx.doi.org/10.17616/R31NJMNN",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "doi:10.17616/R31NJMNN"
+        },
+        "https://github.com/tibonto/DFG-Fachsystematik-Ontology": {
+          "url": "https://github.com/tibonto/DFG-Fachsystematik-Ontology",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:tibonto/DFG-Fachsystematik-Ontology"
+        },
+        "https://ror.org/04vnq7t77": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "04vnq7t77"
+          ],
+          "curie": "04vnq7t77"
+        }
+      },
+      "loaded": "2026-02-08T13:51:21.136795648",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "281",
+      "numberOfEntities": "291",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "10",
+      "ontologyId": "dfgfo2024",
+      "ontologyPurl": "https://github.com/tibonto/DFG-Fachsystematik-Ontology/raw/refs/tags/2024-2025-05-31/dfgfo.ttl",
+      "ontology_use": [
+        {
+          "usedBy": {
+            "altLabel": "DaRuS",
+            "contact": [
+              {
+                "mail": "fokus@izus.uni-stuttgart.de"
+              }
+            ],
+            "description": "Data repository of the University of Stuttgart",
+            "homepage": "https://darus.uni-stuttgart.de/",
+            "identifier": [
+              "https://doi.org/10.17616/R31NJMNN"
+            ],
+            "label": "DaRUS",
+            "provider": [
+              {
+                "identifier": "https://ror.org/04vnq7t77",
+                "label": "Universität Stuttgart"
+              }
+            ],
+            "type": "data repository",
+            "usageDescription": [
+              {
+                "description": "Die DFG-Fächerklassifikation 2024-2028 wird von DaRUS zur Anreicherung von Metadaten von Forschungsdatensätzen verwendet. Im Feld topic classication können Nutzer die gewünschten Werte selbst auswählen. Im automatisierten Publikationsworkflow, werden nutzervergebene topic classifications mit der DFG-Fächerklassifikation 2024-2028 abgeglichen, wobei eine Rückmeldung an die Datenkuratoren des Repositoriums erfolgt, die die vorgeschlagenen Anreicherungen prüfen und bestätigen oder verwerfen.",
+                "language": "de"
+              },
+              {
+                "description": "The DFG subject classification 2024-2028 is used by DaRUS to enrich the metadata records of research data. In the metadata field topic classification, users can choose values fitting their published data set. In automated curation workflows, user provided subject metadata are being compared to DFG subject classification 2024-2028 and values will be suggested to data curators of the repository who will check and approve or disapprove of the suggested terms.",
+                "language": "en"
+              }
+            ],
+            "usageReportMetadata": {
+              "created": "2026-01-23"
+            }
+          }
+        }
+      ],
+      "preferredPrefix": "dfgfo",
+      "repo_url": "https://github.com/tibonto/DFG-Fachsystematik-Ontology",
+      "searchableAnnotationValues": [
+        "DFG Classification of Subject Areas Ontology - 2024-2028",
+        "Changes:\n* 2025-05-30 added metadata (owl:priorVersion, skos:changeNote)\n* 2025-05-30 provide labels in all languages with skos:prefLabels to treat languages equally\n* added handles for dfgfo:342-01 and dfgfo:443-03",
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:20 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#altLabel"
+      ],
+      "title": "DFG Classification of Subject Areas Ontology - 2024-2028",
+      "tracker": "https://github.com/tibonto/DFG-Fachsystematik-Ontology/issues",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://github.com/tibonto/DFG-Fachsystematik-Ontology/raw/refs/tags/2024-2025-05-31/dfgfo.ttl",
+      "http://purl.org/dc/elements/1.1/creator": [
+        "André Castro",
+        "Deutsche Forschungsgemeinschaft (DFG)",
+        "Susanne Arndt"
+      ],
+      "http://purl.org/dc/elements/1.1/description": "DFG Fachsystematik Ontology / DFG Classification of Subject Areas Ontology (DFGFO) encodes the DFG Classification of Subject Areas into an ontology, where each subject number are is enconded into a Class with subclass statements following the DFG Classification of Subject Areas hierarchy. Labels are provide German and English.",
+      "http://purl.org/dc/elements/1.1/title": [
+        "DFG Classification of Subject Areas Ontology - 2024-2028"
+      ],
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/modified": "2025-05-30T00:00:00",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "DFG Fachsystematik Ontology / DFG Classification of Subject Areas Ontology (DFGFO) is aligned with GBV DFG2024 via skos:closeMatch relations. The two semantic artifacts were developed separately, but both teams strive towards alignment. While DFGO defines terms as owl:Class instances, GBV defines them as skos:Concept. More details on GBV DFG2024 at http://uri.gbv.de/terminology/dfg/"
+      ],
+      "http://www.w3.org/2002/07/owl#priorVersion": "https://raw.githubusercontent.com/tibonto/DFG-Fachsystematik-Ontology/refs/tags/2024-2024-08-31/dfgfo.owl",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://w3id.org/dfgfo/2024",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2024-2028",
+      "http://www.w3.org/2004/02/skos/core#changeNote": "Changes:\n* 2025-05-30 added metadata (owl:priorVersion, skos:changeNote)\n* 2025-05-30 provide labels in all languages with skos:prefLabels to treat languages equally\n* added handles for dfgfo:342-01 and dfgfo:443-03"
+    },
+    {
+      "allow_download": true,
+      "baseUri": [
+        "https://onto.tib.eu/destf/cs/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "Miscellaneous"
+          ]
+        },
+        {
+          "subject": [
+            "General",
+            "Educational science"
+          ]
+        }
+      ],
+      "creator": [
+        "Statistisches Bundesamt",
+        "Tatiana Walther",
+        "Christian Hauschke"
+      ],
+      "description": "Diese Ontologie basiert auf \"Statistisches Bundesamt (2018): Anhang Übersicht 1 - Fächergruppen, Lehr- und Forschungsbereiche, Fachgebiete - Stand 2017. In: Statistisches Bundesamt: Bildung und Kultur - Personal an Hochschulen. Fachserie 11 Reihe 4.4. S. 351. URL: https://www.statistischebibliothek.de/mir/servlets/MCRFileNodeServlet/DEHeft_derivate_00041050/2110440177004.pdf#%5B%7B%22num%22%3A1748%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22Fit%22%7D%5D (letzter Zugriff: 2022-10-12).\" In SKOS konvertiert von Tatiana Walther unter Mitwirkung von Christian Hauschke (Technische Informationsbibliothek (TIB) Hannover). Die Bezeichnungen und Inhalte der Fächersystematik sind unverändert.",
+      "iri": "https://onto.tib.eu/destf/cs/",
+      "isObsolete": false,
+      "label_property": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "language": [
+        "de-DE",
+        "en"
+      ],
+      "license": {
+        "label": "© Statistisches Bundesamt (Destatis), 2018, Vervielfältigung und Verbreitung, auch auszugsweise, mit Quellenangabe gestattet."
+      },
+      "linkedEntities": {
+        "http://www.w3.org/2004/02/skos/core#prefLabel": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 38,
+          "hasLocalDefinition": false,
+          "label": [
+            "preferred label"
+          ],
+          "curie": "skos:prefLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "loaded": "2026-02-08T13:51:20.338416093",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "736",
+      "numberOfEntities": "736",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "0",
+      "ontologyId": "destf",
+      "ontologyPurl": "https://raw.githubusercontent.com/VIVO-DE/destatis_faecherklassifikation/master/faecherklassifikation.rdf",
+      "preferredPrefix": "DESTF",
+      "repo_url": "https://github.com/VIVO-DE/destatis_faecherklassifikation/",
+      "searchableAnnotationValues": [
+        "2026-02-08T13:51:20.338416093",
+        "736",
+        "0",
+        "Sun Feb 08 13:51:20 UTC 2026"
+      ],
+      "skos": true,
+      "skosNarrower": false,
+      "skosRoot": "TOPCONCEPTOF_PROPERTY",
+      "sourceFileTimestamp": "Sun Feb 08 13:51:20 UTC 2026",
+      "title": "Destatis-Fächerklassifikation \"Personal an Hochschulen - Fächersystematik\"",
+      "tracker": "https://github.com/VIVO-DE/destatis_faecherklassifikation/issues",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/VIVO-DE/destatis_faecherklassifikation/master/faecherklassifikation.rdf"
+    },
+    {
+      "allow_download": true,
+      "baseUri": [
+        "https://nfdi4culture.de/ontology/CTO_"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4CULTURE"
+          ]
+        },
+        {
+          "subject": [
+            "Architecture",
+            "Other subjects"
+          ]
+        }
+      ],
+      "creator": [
+        "Harald Sack (https://nfdi4culture.de/id/E1925)",
+        "Tabea Tietz (https://nfdi4culture.de/id/E2415)",
+        "Oleksandra Bruns (https://nfdi4culture.de/id/E2416)",
+        "Etienne Posthumus (https://nfdi4culture.de/id/E3095)",
+        "Jörg Waitelonis (https://orcid.org/0000-0001-7192-7143)"
+      ],
+      "definition": [
+        "The NFDI4Culture Ontology (CTO) models cultural heritage research resources with the goal of enabling a research data index. CTO is a domain-specific module built on top of the mid-level NFDIcore Ontology v.3 (https://ise-fizkarlsruhe.github.io/nfdicore/) and is aligned with the Basic Formal Ontology (BFO) 2020.\nIt describes and interlinks the diverse entities that exist within the communitys research (meta)data, including connections between persons, organizations, places and events, media objects, legal statements, external vocabulary references, musical incipits, and more.\nFurther infomration can be found at in the detailed documentation: https://nfdi.fiz-karlsruhe.de/4culture/"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115",
+        "http://www.w3.org/2004/02/skos/core#definition"
+      ],
+      "description": "The NFDI4Culture Ontology (CTO) models cultural heritage research resources with the goal of enabling a research data index. CTO is a domain-specific module built on top of the mid-level NFDIcore Ontology v.3 (https://ise-fizkarlsruhe.github.io/nfdicore/) and is aligned with the Basic Formal Ontology (BFO) 2020. It describes and interlinks the diverse entities that exist within the communitys research (meta)data, including connections between persons, organizations, places and events, media objects, legal statements, external vocabulary references, musical incipits, and more. Further infomration can be found at in the detailed documentation: https://nfdi.fiz-karlsruhe.de/4culture/",
+      "graph_format": "ttl",
+      "homepage": "https://nfdi.fiz-karlsruhe.de/4culture/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "schema",
+        "iao",
+        "vann",
+        "edam",
+        "prov",
+        "uo",
+        "dcat3",
+        "stw",
+        "skos",
+        "bfo",
+        "emmo"
+      ],
+      "iri": "https://nfdi4culture.de/ontology",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "NFDI4Culture Ontology (CTO)"
+      ],
+      "label_property": "http://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "ar",
+        "cs",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "fr",
+        "it",
+        "ja"
+      ],
+      "license": {
+        "label": "CC0 1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/bibliographicCitation": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 15,
+          "hasLocalDefinition": true,
+          "label": [
+            "Bibliographic Citation"
+          ],
+          "curie": "dcterms:bibliographicCitation",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/contributor": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "Contributor"
+          ],
+          "curie": "dcterms:contributor",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/created": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 53,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Created"
+          ],
+          "curie": "dcterms:created",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/ontology/bibo/status": {
+          "numAppearsIn": 9,
+          "hasLocalDefinition": true,
+          "label": [
+            "status"
+          ],
+          "curie": "status",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#Concept": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "Concept"
+          ],
+          "curie": "skos:Concept",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://github.com/ISE-FIZKarlsruhe/nfdi4culture": {
+          "url": "https://github.com/ISE-FIZKarlsruhe/nfdi4culture",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:ISE-FIZKarlsruhe/nfdi4culture"
+        },
+        "https://orcid.org/0000-0001-7192-7143": {
+          "url": "https://orcid.org/0000-0001-7192-7143",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0001-7192-7143"
+        },
+        "https://orcid.org/0000-0001-7192-7143)": {
+          "url": "https://orcid.org/0000-0001-7192-7143)",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0001-7192-7143)"
+        }
+      },
+      "loaded": "2026-02-08T13:51:16.253051136",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "276",
+      "numberOfEntities": "555",
+      "numberOfIndividuals": "50",
+      "numberOfProperties": "229",
+      "ontologyId": "cto",
+      "ontologyPurl": "https://raw.githubusercontent.com/ISE-FIZKarlsruhe/nfdi4culture/refs/heads/main/cto-full.ttl",
+      "preferredPrefix": "CTO",
+      "preferredRoot": [
+        "http://purl.obolibrary.org/obo/BFO_0000001",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ],
+      "reasoner": "OWL2",
+      "repo_url": "https://github.com/ISE-FIZKarlsruhe/nfdi4culture",
+      "searchableAnnotationValues": [
+        "The NFDI4Culture Ontology (CTO) models cultural heritage research resources with the goal of enabling a research data index. CTO is a domain-specific module built on top of the mid-level NFDIcore Ontology v.3 (https://ise-fizkarlsruhe.github.io/nfdicore/) and is aligned with the Basic Formal Ontology (BFO) 2020.\nIt describes and interlinks the diverse entities that exist within the communitys research (meta)data, including connections between persons, organizations, places and events, media objects, legal statements, external vocabulary references, musical incipits, and more.\nFurther infomration can be found at in the detailed documentation: https://nfdi.fiz-karlsruhe.de/4culture/",
+        "Ontology Specification",
+        false
+      ],
+      "skos": false,
+      "sourceFileTimestamp": "Sun Feb 08 13:51:16 UTC 2026",
+      "synonym_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000118"
+      ],
+      "title": "NFDI4Culture Ontology",
+      "tracker": "https://github.com/ISE-FIZKarlsruhe/nfdi4culture/issues",
+      "type": [
+        "ontology"
+      ],
+      "uri": "https://nfdi4culture.de/ontology/3.0.0",
+      "versioned_url": "https://raw.githubusercontent.com/ISE-FIZKarlsruhe/nfdi4culture/refs/heads/main/cto-full.ttl",
+      "http://purl.org/dc/terms/bibliographicCitation": "Tabea Tietz, Jörg Waitelonis, Oleksandra Bruns, Etienne Posthumus, Harald Sack. NFDI4culture Ontology. Revision: v3.0.0. Retrieved from: https://nfdi4culture.de/ontology/3.0.0",
+      "http://purl.org/dc/terms/contributor": [
+        "https://nfdi4culture.de/id/E1873",
+        "https://nfdi4culture.de/id/E2381",
+        "https://nfdi4culture.de/id/E3715"
+      ],
+      "http://purl.org/dc/terms/created": "2025-03-31",
+      "http://purl.org/dc/terms/creator": [
+        "https://nfdi4culture.de/id/E1925",
+        "https://nfdi4culture.de/id/E2415",
+        "https://nfdi4culture.de/id/E2416",
+        "https://nfdi4culture.de/id/E3095",
+        "https://orcid.org/0000-0001-7192-7143"
+      ],
+      "http://purl.org/dc/terms/description": "The NFDI4Culture Ontology (CTO) models cultural heritage research resources with the goal of enabling a research data index. CTO is a domain-specific module built on top of the mid-level NFDIcore Ontology v.3 (https://ise-fizkarlsruhe.github.io/nfdicore/) and is aligned with the Basic Formal Ontology (BFO) 2020.\nIt describes and interlinks the diverse entities that exist within the communitys research (meta)data, including connections between persons, organizations, places and events, media objects, legal statements, external vocabulary references, musical incipits, and more.\nFurther infomration can be found at in the detailed documentation: https://nfdi.fiz-karlsruhe.de/4culture/",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "http://purl.org/dc/terms/title": "NFDI4Culture Ontology (CTO)",
+      "http://purl.org/ontology/bibo/status": "Ontology Specification",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://nfdi4culture.de/ontology/",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2002/07/owl#priorVersion": "https://nfdi4culture.de/ontology/2.2.0",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://nfdi4culture.de/ontology/3.0.0",
+      "http://www.w3.org/2002/07/owl#versionInfo": "3.0.0"
+    },
+    {
+      "baseUri": [
+        "https://credit.niso.org/contributor-roles/"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4ING",
+            "Digital Planning and Construction",
+            "FID BAUdigital",
+            "FID move"
+          ]
+        },
+        {
+          "subject": [
+            "General"
+          ]
+        }
+      ],
+      "creator": [
+        "Liz Allen"
+      ],
+      "definition": [
+        "CRediT (Contributor Roles Taxonomy) is high-level taxonomy, including 14 roles, that can be used to represent the roles typically played by contributors to scientific scholarly output. The roles describe each contributor’s specific contribution to the scholarly output."
+      ],
+      "definition_property": [
+        "http://purl.org/dc/terms/description"
+      ],
+      "description": "CRediT (Contributor Roles Taxonomy) is a high-level taxonomy, including 14 roles, that can be used to represent the roles typically played by contributors to scientific scholarly output. The roles describe each contributor's specific contribution to the scholarly output.",
+      "hierarchical_property": [
+        "https://www.w3.org/2000/01/rdf-schema#subclassOf"
+      ],
+      "homepage": "https://credit.niso.org/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "iao",
+        "emmo"
+      ],
+      "iri": "https://w3id.org/biopragmatics/resources/credit/credit.ofn",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "Contributor Roles Taxonomy"
+      ],
+      "label_property": "https://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000700": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 17,
+          "hasLocalDefinition": true,
+          "label": [
+            "has ontology root term"
+          ],
+          "curie": "IAO:0000700",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/credit#contributor-role": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "contributor role"
+          ],
+          "curie": "contributor-role",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://usefulinc.com/ns/doap#maintainer": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "maintainer"
+          ],
+          "curie": "maintainer",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#auto-generated-by": {
+          "numAppearsIn": 14,
+          "hasLocalDefinition": true,
+          "label": [
+            "auto-generated-by"
+          ],
+          "curie": "auto-generated-by",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasBroadSynonym": {
+          "numAppearsIn": 41,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "has_broad_synonym"
+          ],
+          "curie": "hasBroadSynonym"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasCloseSynonym": {
+          "url": "http://www.geneontology.org/formats/oboInOwl#hasCloseSynonym",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "oboinowl:hasCloseSynonym"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 54,
+          "hasLocalDefinition": false,
+          "label": [
+            "has_exact_synonym"
+          ],
+          "curie": "hasExactSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasNarrowSynonym": {
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "has narrow synonym"
+          ],
+          "curie": "hasNarrowSynonym"
+        },
+        "http://www.w3.org/2001/XMLSchema#anyURI": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "anyURI"
+          ],
+          "curie": "anyURI"
+        },
+        "http://xmlns.com/foaf/0.1/homepage": {
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "homepage"
+          ],
+          "curie": "homepage",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://xmlns.com/foaf/0.1/logo": {
+          "definedBy": [
+            "emmo"
+          ],
+          "numAppearsIn": 8,
+          "hasLocalDefinition": true,
+          "label": [
+            "logo"
+          ],
+          "curie": "logo",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://github.com/biopragmatics/obo-db-ingest": {
+          "url": "https://github.com/biopragmatics/obo-db-ingest",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:biopragmatics/obo-db-ingest"
+        },
+        "https://orcid.org/0000-0002-9298-3168": {
+          "url": "https://orcid.org/0000-0002-9298-3168",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-9298-3168"
+        }
+      },
+      "loaded": "2026-02-08T13:51:16.013747568",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "16",
+      "numberOfEntities": "27",
+      "numberOfIndividuals": "1",
+      "numberOfProperties": "10",
+      "oboSlims": false,
+      "ontologyId": "credit",
+      "ontologyPurl": "https://w3id.org/biopragmatics/resources/credit/credit.owl",
+      "preferredPrefix": "credit",
+      "preferredRoot": [
+        "http://purl.obolibrary.org/obo/credit#contributor-role"
+      ],
+      "reasoner": "none",
+      "repo_url": "https://github.com/biopragmatics/obo-db-ingest",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:15 UTC 2026",
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasNarrowSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasBroadSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasCloseSynonym"
+      ],
+      "title": "Contributor Roles Taxonomy",
+      "tracker": "https://github.com/biopragmatics/obo-db-ingest/issues",
+      "type": [
+        "ontology"
+      ],
+      "uri": "https://w3id.org/biopragmatics/resources/credit/credit.owl",
+      "versioned_url": "https://raw.githubusercontent.com/biopragmatics/obo-db-ingest/main/export/credit/credit.owl",
+      "http://purl.obolibrary.org/obo/IAO_0000700": "http://purl.obolibrary.org/obo/credit#contributor-role",
+      "http://purl.org/dc/terms/description": "CRediT (Contributor Roles Taxonomy) is high-level taxonomy, including 14 roles, that can be used to represent the roles typically played by contributors to scientific scholarly output. The roles describe each contributor’s specific contribution to the scholarly output.",
+      "http://purl.org/dc/terms/license": "CC-BY-4.0",
+      "http://purl.org/dc/terms/title": "Contributor Roles Taxonomy",
+      "http://usefulinc.com/ns/doap#maintainer": "https://orcid.org/0000-0002-9298-3168",
+      "http://www.geneontology.org/formats/oboInOwl#auto-generated-by": "PyOBO v0.12.13-dev-207b46e9 on 2025-10-31T15:17:17.749082 by https://github.com/biopragmatics/pyobo/blob/main/src/pyobo/sources/credit.py",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://w3id.org/biopragmatics/resources/credit/2022/credit.ofn",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2022",
+      "http://xmlns.com/foaf/0.1/homepage": "https://credit.niso.org/",
+      "http://xmlns.com/foaf/0.1/logo": "https://api.fairsharing.org/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaUFCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--af4f02374db4f42007e6674ea2055ccaa36aa830/credit-icon-499x500-1.png?disposition=inline"
+    },
+    {
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4CHEM",
+            "NFDI4CAT"
+          ]
+        },
+        {
+          "subject": [
+            "Chemistry"
+          ]
+        }
+      ],
+      "creator": [
+        "Colin Batchelor",
+        "Cristian Munteanu",
+        "Egon Willighagen",
+        "Evan Bolton",
+        "Gang Fu",
+        "Janna Hastings",
+        "Leonid Chepelev",
+        "Mark Davies",
+        "Michel Dumontier"
+      ],
+      "definition": [
+        "The chemical information ontology (cheminf) describes information entities about chemical entities. It provides qualitative and quantitative attributes to richly describe chemicals.",
+        "To develop the ontology, you must change the default auto-create settings in Protege 4. Go to file>preferences>New Entities. Change the following:\nspecified URI = http://semanticscience.org/resource/\nFollowed by '/', End with : AutoID\nAutoID - digit count = 6, prefix = CHEMINF_"
+      ],
+      "definition_property": [
+        "http://purl.org/dc/elements/1.1/description",
+        "http://purl.obolibrary.org/obo/IAO_0000115",
+        "http://www.geneontology.org/formats/oboInOwl#hasDefinition"
+      ],
+      "description": "The chemical information ontology (cheminf) describes information entities about chemical entities. It provides qualitative and quantitative attributes to richly describe chemicals. Includes terms for the descriptors commonly used in cheminformatics software applications and the algorithms which generate them.",
+      "homepage": "https://github.com/semanticchemistry/semanticchemistry",
+      "imported": false,
+      "importsFrom": [
+        "iao",
+        "prov",
+        "uo",
+        "go",
+        "dcterms",
+        "obi",
+        "skos",
+        "stw",
+        "ro",
+        "bfo",
+        "pato"
+      ],
+      "iri": "http://semanticchemistry.github.io/semanticchemistry/ontology/cheminf.owl",
+      "isObsolete": false,
+      "label": [
+        "chemical information ontology (cheminf) - information entities about chemical entities"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC0 1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000179": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO OWL specification label"
+          ],
+          "curie": "BFO:0000179",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000180": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO CLIF specification label"
+          ],
+          "curie": "BFO:0000180",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://purl.org/dc/elements/1.1/contributor": {
+          "numAppearsIn": 46,
+          "hasLocalDefinition": true,
+          "label": [
+            "contributor"
+          ],
+          "curie": "contributor",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/description": {
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "description"
+          ],
+          "curie": "description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/format": {
+          "numAppearsIn": 20,
+          "hasLocalDefinition": true,
+          "label": [
+            "format"
+          ],
+          "curie": "format",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/language": {
+          "numAppearsIn": 17,
+          "hasLocalDefinition": true,
+          "label": [
+            "language"
+          ],
+          "curie": "language",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/title": {
+          "numAppearsIn": 64,
+          "hasLocalDefinition": true,
+          "label": [
+            "title"
+          ],
+          "curie": "title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://semanticscience.org/ontology/cheminf-core.owl#short_name": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "short_name"
+          ],
+          "curie": "short_name",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasDefinition": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "hasDefinition"
+          ],
+          "curie": "hasDefinition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 54,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_exact_synonym"
+          ],
+          "curie": "hasExactSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasSynonym": {
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "hasSynonym"
+          ],
+          "curie": "hasSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.semanticweb.org/ontologies/cheminf.owl#short_name": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "short_name"
+          ],
+          "curie": "short_name",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://github.com/semanticchemistry/semanticchemistry": {
+          "url": "https://github.com/semanticchemistry/semanticchemistry",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:semanticchemistry/semanticchemistry"
+        }
+      },
+      "loaded": "2026-02-08T13:49:29.837655552",
+      "mailingList": "https://groups.google.com/forum/#!forum/cheminf-ontology",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "855",
+      "numberOfEntities": "1074",
+      "numberOfIndividuals": "20",
+      "numberOfProperties": "199",
+      "ontologyId": "cheminf",
+      "ontologyPurl": "http://purl.obolibrary.org/obo/cheminf.owl",
+      "preferredPrefix": "CHEMINF",
+      "repo_url": "https://github.com/semanticchemistry/semanticchemistry",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:49:29 UTC 2026",
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasSynonym",
+        "http://purl.obolibrary.org/obo/IAO_0000118",
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym",
+        "http://purl.obolibrary.org/obo/BFO_0000180",
+        "http://purl.obolibrary.org/obo/BFO_0000179",
+        "http://semanticscience.org/ontology/cheminf-core.owl#short_name",
+        "http://www.semanticweb.org/ontologies/cheminf.owl#short_name"
+      ],
+      "title": "Chemical Information Ontology",
+      "tracker": "https://github.com/semanticchemistry/semanticchemistry/issues",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://raw.githubusercontent.com/semanticchemistry/semanticchemistry/master/ontology/cheminf.owl",
+      "http://purl.org/dc/elements/1.1/contributor": [
+        "Egon Willighagen",
+        "Janna Hastings",
+        "Michel Dumontier",
+        "Cristian Munteanu",
+        "Gang Fu",
+        "Leonid Chepelev",
+        "Mark Davies",
+        "Evan Bolton",
+        "Colin Batchelor"
+      ],
+      "http://purl.org/dc/elements/1.1/format": "application/rdf+xml",
+      "http://purl.org/dc/elements/1.1/language": "en",
+      "http://purl.org/dc/elements/1.1/title": "chemical information ontology (cheminf) - information entities about chemical entities",
+      "http://purl.org/dc/terms/license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "The chemical information ontology (cheminf) describes information entities about chemical entities. It provides qualitative and quantitative attributes to richly describe chemicals.",
+        "To develop the ontology, you must change the default auto-create settings in Protege 4. Go to file>preferences>New Entities. Change the following:\nspecified URI = http://semanticscience.org/resource/\nFollowed by '/', End with : AutoID\nAutoID - digit count = 6, prefix = CHEMINF_"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://code.google.com/p/information-artifact-ontology/",
+      "http://www.w3.org/2002/07/owl#imports": [
+        "http://purl.obolibrary.org/obo/iao.owl",
+        "http://semanticchemistry.github.io/semanticchemistry/ontology/cdk.owl",
+        "http://semanticchemistry.github.io/semanticchemistry/ontology/cheminf-algorithms.owl",
+        "http://semanticchemistry.github.io/semanticchemistry/ontology/cheminf-core.owl",
+        "http://semanticchemistry.github.io/semanticchemistry/ontology/cheminf-external.owl"
+      ],
+      "http://www.w3.org/2002/07/owl#versionInfo": "2.1.0"
+    },
+    {
+      "classifications": [
+        {
+          "collection": [
+            "NFDI4CHEM",
+            "ESS",
+            "DataPLANT",
+            "NFDI4CAT"
+          ]
+        },
+        {
+          "subject": [
+            "Chemistry",
+            "Earth sciences"
+          ]
+        }
+      ],
+      "creator": [
+        "ChEBI curation team"
+      ],
+      "definition": [
+        "Chemical Entities of Biological Interest, also known as ChEBI, is a chemical database and ontology of molecular entities focused on 'small' chemical compounds, that is part of the Open Biomedical Ontologies (OBO) effort at the European Bioinformatics Institute (EBI).",
+        "ChEBI subsumes and replaces the Chemical Ontology first. This ontology was developed by Michael Ashburner and Pankaj Jaiswal. Data was cuarated by The ChEBI Curation Team. For any queries contact chebi-help@ebi.ac.uk"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "description": "ChEBI (Chemical Entities of Biological Interest) is a free dictionary of small molecular entities, including distinct atoms, molecules, ions, radicals, and complexes. These entities can be natural or synthetic, used in or affecting biological processes. The term \"small\" excludes genome-encoded entities like nucleic acids and proteins. ChEBI also includes classes of molecular entities and their parts, such as substituent groups or atoms.",
+      "homepage": "http://www.ebi.ac.uk/chebi",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "chemrof",
+        "ro",
+        "iao",
+        "uo"
+      ],
+      "iri": "http://purl.obolibrary.org/obo/chebi.owl",
+      "isObsolete": false,
+      "label": [
+        "ChEBI Ontology"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC-BY",
+        "url": "http://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/license": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 119,
+          "hasLocalDefinition": true,
+          "label": [
+            "License"
+          ],
+          "curie": "dcterms:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#date": {
+          "numAppearsIn": 22,
+          "hasLocalDefinition": true,
+          "label": [
+            "date"
+          ],
+          "curie": "date",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#default-namespace": {
+          "numAppearsIn": 30,
+          "hasLocalDefinition": true,
+          "label": [
+            "default-namespace"
+          ],
+          "curie": "default-namespace",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 54,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_exact_synonym"
+          ],
+          "curie": "hasExactSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasNarrowSynonym": {
+          "numAppearsIn": 40,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "has narrow synonym"
+          ],
+          "curie": "hasNarrowSynonym"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasOBOFormatVersion": {
+          "numAppearsIn": 32,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_obo_format_version"
+          ],
+          "curie": "hasOBOFormatVersion",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 50,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_related_synonym"
+          ],
+          "curie": "hasRelatedSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#saved-by": {
+          "numAppearsIn": 25,
+          "hasLocalDefinition": true,
+          "label": [
+            "saved-by"
+          ],
+          "curie": "saved-by",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#anyURI": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "anyURI"
+          ],
+          "curie": "anyURI"
+        },
+        "http://www.w3.org/2001/XMLSchema#decimal": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "decimal"
+          ],
+          "curie": "decimal"
+        },
+        "http://xmlns.com/foaf/0.1/homepage": {
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "homepage"
+          ],
+          "curie": "homepage",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://doi.org/10.17616/R3XS37": {
+          "url": "http://dx.doi.org/10.17616/R3XS37",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "doi:10.17616/R3XS37"
+        },
+        "https://github.com/ebi-chebi/ChEBI": {
+          "url": "https://github.com/ebi-chebi/ChEBI",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:ebi-chebi/ChEBI"
+        },
+        "https://ror.org/04ers2s45": {
+          "url": "https://ror.org/04ers2s45",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "ror:04ers2s45"
+        }
+      },
+      "loaded": "2026-02-08T13:47:51.851084035",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "224209",
+      "numberOfEntities": "224257",
+      "numberOfIndividuals": "0",
+      "numberOfProperties": "48",
+      "ontologyId": "chebi",
+      "ontologyPurl": "http://purl.obolibrary.org/obo/chebi.owl",
+      "ontology_use": [
+        {
+          "usedBy": {
+            "description": "The information system PANGAEA is operated as an Open Access library aimed at archiving, publishing and distributing georeferenced data from earth system research.",
+            "homepage": "https://pangaea.de/",
+            "identifier": [
+              "https://doi.org/10.17616/R3XS37"
+            ],
+            "label": "PANGAEA",
+            "provider": [
+              {
+                "identifier": "https://ror.org/0326b942",
+                "label": "Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research (AWI)"
+              },
+              {
+                "identifier": "https://ror.org/04ers2s45",
+                "label": "Center for Marine Environmental Sciences, University of Bremen (MARUM)"
+              }
+            ],
+            "type": "repository/portal",
+            "usageDescription": {
+              "description": "By relying on shared, well-documented vocabularies, PANGAEA s metadata is described in a standardized, unambiguous, and machine-readable format. This improves semantic consistency within PANGAEA, enables the integration of heterogeneous datasets, and facilitates alignment with external systems.",
+              "language": "en"
+            },
+            "usageReportMetadata": {
+              "created": "2025-09-04"
+            }
+          }
+        }
+      ],
+      "repo_url": "https://github.com/ebi-chebi/ChEBI",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:46:51 UTC 2026",
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasNarrowSynonym"
+      ],
+      "title": "Chemical Entities of Biological Interest",
+      "tracker": "https://github.com/ebi-chebi/ChEBI/issues",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/terms/description": "Chemical Entities of Biological Interest, also known as ChEBI, is a chemical database and ontology of molecular entities focused on 'small' chemical compounds, that is part of the Open Biomedical Ontologies (OBO) effort at the European Bioinformatics Institute (EBI).",
+      "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/title": "ChEBI Ontology",
+      "http://www.geneontology.org/formats/oboInOwl#date": "06:01:2026 14:33",
+      "http://www.geneontology.org/formats/oboInOwl#default-namespace": "chebi_ontology",
+      "http://www.geneontology.org/formats/oboInOwl#hasOBOFormatVersion": "1.2",
+      "http://www.geneontology.org/formats/oboInOwl#saved-by": "chebi",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "ChEBI subsumes and replaces the Chemical Ontology first. This ontology was developed by Michael Ashburner and Pankaj Jaiswal. Data was cuarated by The ChEBI Curation Team. For any queries contact chebi-help@ebi.ac.uk",
+      "http://www.w3.org/2002/07/owl#versionInfo": "248",
+      "http://xmlns.com/foaf/0.1/homepage": "https://www.ebi.ac.uk/chebi"
+    },
+    {
+      "baseUri": [
+        "https://schema.coypu.org/global#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "CoyPu"
+          ]
+        },
+        {
+          "subject": [
+            "Economics"
+          ]
+        }
+      ],
+      "contributor": [
+        "Andreas Schaefer",
+        "Felix Engel",
+        "Lorenz Bühmann",
+        "Nenad Krdzavac",
+        "Simon Bin",
+        "Till Grabo",
+        "http://aksw.org/NatanaelArndt"
+      ],
+      "creator": [
+        "Nils Steinert"
+      ],
+      "definition": [
+        "The main ontology for the CoyPu project, used to describe companies and their supply network, employees, products, production materials, industries, events and relations."
+      ],
+      "definition_property": [
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "description": "Ontology to describe companies and their supply network, employees, products, production materials, industries, events and relations.",
+      "exportsTo": [
+        "emdat"
+      ],
+      "homepage": "https://gitlab.com/coypu-project/coy-ontology",
+      "imported": false,
+      "importsFrom": [
+        "emdat",
+        "gta",
+        "ta",
+        "tiva",
+        "dcterms",
+        "vann",
+        "schema",
+        "prov",
+        "stw",
+        "skos",
+        "ccrel"
+      ],
+      "iri": "https://schema.coypu.org/global",
+      "isObsolete": false,
+      "label": [
+        "CoyPu Ontology",
+        "coy: CoyPu Ontology"
+      ],
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "Attribution 4.0 International (CC BY 4.0)",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "linkedEntities": {
+        "http://creativecommons.org/ns#license": {
+          "definedBy": [
+            "ccrel"
+          ],
+          "numAppearsIn": 15,
+          "hasLocalDefinition": true,
+          "label": [
+            "cc_license"
+          ],
+          "curie": "cc:license",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/contributor": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "Contributor"
+          ],
+          "curie": "dcterms:contributor",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/created": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 53,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Created"
+          ],
+          "curie": "dcterms:created",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 78,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/modified": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 58,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date Modified"
+          ],
+          "curie": "dcterms:modified",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/rights": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "Rights"
+          ],
+          "curie": "dcterms:rights",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 93,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 57,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#date": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "date"
+          ],
+          "curie": "date"
+        },
+        "http://www.w3.org/2001/XMLSchema#decimal": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "decimal"
+          ],
+          "curie": "decimal"
+        },
+        "https://creativecommons.org/licenses/by/4.0/": {
+          "numAppearsIn": 6,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "CC BY 4.0"
+          ],
+          "curie": ""
+        },
+        "https://gitlab.com/coypu-project/coy-ontology": {
+          "url": "https://gitlab.com/coypu-project/coy-ontology",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "gitlab:coypu-project/coy-ontology"
+        },
+        "https://gitlab.com/coypu-project/coy-ontology/": {
+          "url": "https://gitlab.com/coypu-project/coy-ontology/",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "gitlab:coypu-project/coy-ontology/"
+        },
+        "https://gitlab.com/coypu-project/coy-ontology/-/raw/main/ontology/global/coy.ttl": {
+          "url": "https://gitlab.com/coypu-project/coy-ontology/-/raw/main/ontology/global/coy.ttl",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "gitlab:coypu-project/coy-ontology/-/raw/main/ontology/global/coy.ttl"
+        }
+      },
+      "loaded": "2026-02-08T13:51:15.152723810",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "228",
+      "numberOfEntities": "568",
+      "numberOfIndividuals": "105",
+      "numberOfProperties": "235",
+      "ontologyId": "coy",
+      "ontologyPurl": "https://gitlab.com/coypu-project/coy-ontology/-/raw/main/ontology/global/coy.ttl",
+      "preferredPrefix": "coy",
+      "repo_url": "https://gitlab.com/coypu-project/coy-ontology/",
+      "searchableAnnotationValues": [
+        "Andreas Schaefer",
+        "Eva Hoerster",
+        "Felix Engel",
+        "Jan Reineke",
+        "Justus Rathschlag",
+        "Lars Michaelis",
+        "Lorenz Bühmann",
+        "Malte Weber",
+        "Nadine Weissmann",
+        "Natanael Arndt",
+        "Nenad Krdzavac",
+        "Phillip Ulrich",
+        "Ricardo Usbeck",
+        "Sabine Gründer-Fahrer",
+        "Simon Bin",
+        "Till Grabo",
+        "Nils Steinert",
+        "CC BY 4.0 - CoyPu Project",
+        "CoyPu Ontology",
+        false
+      ],
+      "sourceFileTimestamp": "Sun Feb 08 13:51:15 UTC 2026",
+      "title": "CoyPu Ontology",
+      "type": [
+        "ontology"
+      ],
+      "versioned_url": "https://gitlab.com/coypu-project/coy-ontology/-/raw/main/ontology/global/coy.ttl",
+      "http://creativecommons.org/ns#license": "https://creativecommons.org/licenses/by/4.0/",
+      "http://purl.org/dc/terms/contributor": [
+        "Andreas Schaefer",
+        "Eva Hoerster",
+        "Felix Engel",
+        "Jan Reineke",
+        "Justus Rathschlag",
+        "Lars Michaelis",
+        "Lorenz Bühmann",
+        "Malte Weber",
+        "Nadine Weissmann",
+        "Natanael Arndt",
+        "Nenad Krdzavac",
+        "Phillip Ulrich",
+        "Ricardo Usbeck",
+        "Sabine Gründer-Fahrer",
+        "Simon Bin",
+        "Till Grabo"
+      ],
+      "http://purl.org/dc/terms/created": "2021-09-06",
+      "http://purl.org/dc/terms/creator": "Nils Steinert",
+      "http://purl.org/dc/terms/modified": "2023-02-13",
+      "http://purl.org/dc/terms/rights": "CC BY 4.0 - CoyPu Project",
+      "http://purl.org/dc/terms/title": "CoyPu Ontology",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "coy",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://schema.coypu.org/global#",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "The main ontology for the CoyPu project, used to describe companies and their supply network, employees, products, production materials, industries, events and relations.",
+      "http://www.w3.org/2000/01/rdf-schema#label": "coy: CoyPu Ontology",
+      "http://www.w3.org/2002/07/owl#imports": [
+        "https://schema.coypu.org/em-dat/1.0",
+        "https://schema.coypu.org/gta/1.0",
+        "https://schema.coypu.org/ta/1.0",
+        "https://schema.coypu.org/vtf/1.4",
+        "https://schema.coypu.org/world-port-index/1.0"
+      ],
+      "http://www.w3.org/2002/07/owl#priorVersion": "https://schema.coypu.org/global/2.2",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://schema.coypu.org/global/2.3",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2.3"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

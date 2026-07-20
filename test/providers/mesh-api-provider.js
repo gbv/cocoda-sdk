@@ -1,6 +1,6 @@
 import MeshApiProvider from "../../src/providers/mesh-api-provider.js"
 import assert from "assert"
-import { mockRequests } from "./requests.js"
+import { mockHttpRequests } from "./mocks/http-requests.js"
 
 const provider = new MeshApiProvider({
   provider: "MeshApi",
@@ -8,8 +8,8 @@ const provider = new MeshApiProvider({
 })
 
 
-const missing = mockRequests(provider.axios, {
-  dir: "test/providers/mesh-provider/",
+const missing = mockHttpRequests(provider.http, {
+  dir: "test/providers/mocks/mesh-api-provider/",
   // debug: true,
   downloadMissing: true,
 }, {

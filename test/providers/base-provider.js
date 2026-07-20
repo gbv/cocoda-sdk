@@ -1,13 +1,13 @@
 import BaseProvider from "../../src/providers/base-provider.js"
 import assert from "assert"
-import MockAdapter from "axios-mock-adapter"
+import HttpMockAdapter from "./mocks/http-mock-adapter.js"
 import { requestMethods } from "../../src/utils/index.js"
 
 describe("BaseProvider", () => {
   let provider, registry = {}, mock
   const getProvider = (...args) => {
     const provider = new BaseProvider(...args)
-    mock = new MockAdapter(provider.axios)
+    mock = new HttpMockAdapter(provider.http)
     return provider
   }
 
@@ -26,7 +26,7 @@ describe("BaseProvider", () => {
     assert.equal(provider._jskos, registry, "registry property does not refer to registry object")
     assert.deepEqual(provider.languages, [], "languages property is not an empty array")
     assert.deepEqual(provider._auth, { key: null, bearerToken: null })
-    assert.notEqual(provider.axios && provider.axios.request, undefined)
+    assert.notEqual(provider.http && provider.http.request, undefined)
   })
 
   it("should have all request methods", async () => {
@@ -51,9 +51,8 @@ describe("BaseProvider", () => {
     provider.languages = ["abc"]
     provider.setAuth({ key: "blubb", bearerToken: "abcdef" })
     provider.has.auth = true
-    await provider.axios({
+    await provider._request("test", {
       method: "get",
-      url: "test",
       params: {
         language: "def",
       },
@@ -64,17 +63,15 @@ describe("BaseProvider", () => {
     let result
 
     mock.onGet("test").reply(200, {})
-    result = await provider.axios({
+    result = await provider._request("test", {
       method: "get",
-      url: "test",
     })
     delete result._url
     assert.deepEqual(result, {})
 
     mock.onGet("test").reply(200, [], { "x-total-count": 5 })
-    result = await provider.axios({
+    result = await provider._request("test", {
       method: "get",
-      url: "test",
     })
     assert.ok(Array.isArray(result))
     assert.ok(result._url && result._url.startsWith("test"))
@@ -167,9 +164,8 @@ describe("BaseProvider", () => {
       return [requestCount == 1 ? 403 : 200]
     })
     await assert.doesNotReject(async () => {
-      await provider.axios({
+      await provider._request("test", {
         method: "get",
-        url: "test",
       })
     })
     assert(requestCount, 2)
@@ -184,12 +180,7 @@ describe("BaseProvider", () => {
       requestCount += 1
       return [401]
     })
-    await assert.rejects(async () => {
-      await provider.axios({
-        method: "get",
-        url: "test",
-      })
-    })
+    await assert.rejects(provider._request("test", { method: "get" }))
     assert(requestCount, 3)
   })
 
@@ -203,9 +194,8 @@ describe("BaseProvider", () => {
       return [401]
     })
     await assert.rejects(async () => {
-      await provider.axios({
+      await provider._request("test", {
         method: "get",
-        url: "test",
       })
     })
     assert(requestCount, 1)
@@ -221,9 +211,8 @@ describe("BaseProvider", () => {
       return [401]
     })
     await assert.rejects(async () => {
-      await provider.axios({
+      await provider._request("test", {
         method: "post",
-        url: "test",
       })
     })
     assert(requestCount, 1)
@@ -232,14 +221,13 @@ describe("BaseProvider", () => {
   it("should not repeat the same axios request is one is already there", async () => {
     class CustomProvider extends BaseProvider {
       async getMappings() {
-        return this.axios({
+        return this._request("mappings", {
           method: "get",
-          url: "mappings",
         })
       }
     }
     const provider = new CustomProvider({})
-    const mock = new MockAdapter(provider.axios)
+    const mock = new HttpMockAdapter(provider.http)
     let mockCalled = 0
     mock.onGet("mappings").reply(() => {
       mockCalled += 1

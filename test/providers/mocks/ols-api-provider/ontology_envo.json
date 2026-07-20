@@ -1,0 +1,391 @@
+{
+  "classifications": [
+    {
+      "collection": [
+        "FAIR Data Spaces",
+        "NFDI4CHEM",
+        "ESS",
+        "DataPLANT",
+        "NFDI4CAT"
+      ]
+    },
+    {
+      "subject": [
+        "Earth sciences",
+        "Life Sciences, biology"
+      ]
+    }
+  ],
+  "creator": [
+    "Christopher Mungall",
+    "Suzanna Lewis",
+    "Norman Morrison",
+    "Pier Luigi Buttigieg"
+  ],
+  "definition": [
+    "ENVO is an ontology which represents knowledge about environments,environmental processes, ecosystems, habitats, and related entities",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/chemical_concentration.owl>) VersionIRI(<null>))) [Axioms: 679 Logical Axioms: 119]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_attribute.owl>) VersionIRI(<null>))) [Axioms: 206 Logical Axioms: 34]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_attribute_location.owl>) VersionIRI(<null>))) [Axioms: 168 Logical Axioms: 29]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_quality_location.owl>) VersionIRI(<null>))) [Axioms: 40 Logical Axioms: 6]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/process_attribute.owl>) VersionIRI(<null>))) [Axioms: 21 Logical Axioms: 2]"
+  ],
+  "description": "ENVO is an ontology which represents knowledge about environments,environmental processes, ecosystems, habitats, and related entities",
+  "exportsTo": [
+    "envo2023",
+    "enm",
+    "agro",
+    "peco",
+    "ecso",
+    "chiro",
+    "cob",
+    "obi",
+    "aeon",
+    "uberon",
+    "dpbo",
+    "cao",
+    "afo",
+    "ro",
+    "bco",
+    "pco",
+    "pso"
+  ],
+  "homepage": "http://environmentontology.org/",
+  "imported": false,
+  "importsFrom": [
+    "pato",
+    "pco",
+    "po",
+    "ro",
+    "uberon",
+    "go",
+    "prov",
+    "obi",
+    "iao",
+    "uo",
+    "dcterms",
+    "bfo",
+    "skos",
+    "stw"
+  ],
+  "iri": "http://purl.obolibrary.org/obo/envo.owl",
+  "isObsolete": false,
+  "label": [
+    "The Environment Ontology"
+  ],
+  "language": [
+    "de",
+    "en",
+    "en-br",
+    "en-us",
+    "es",
+    "it",
+    "zh"
+  ],
+  "license": {
+    "label": "CC0 1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "linkedEntities": {
+    "http://purl.org/dc/elements/1.1/contributor": {
+      "numAppearsIn": 46,
+      "hasLocalDefinition": true,
+      "label": [
+        "contributor"
+      ],
+      "curie": "contributor",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/elements/1.1/creator": {
+      "numAppearsIn": 68,
+      "hasLocalDefinition": true,
+      "label": [
+        "creator"
+      ],
+      "curie": "creator",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/elements/1.1/description": {
+      "numAppearsIn": 59,
+      "hasLocalDefinition": true,
+      "label": [
+        "description"
+      ],
+      "curie": "description",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/elements/1.1/title": {
+      "numAppearsIn": 64,
+      "hasLocalDefinition": true,
+      "label": [
+        "title"
+      ],
+      "curie": "title",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/terms/license": {
+      "definedBy": [
+        "dcterms"
+      ],
+      "numAppearsIn": 119,
+      "hasLocalDefinition": true,
+      "label": [
+        "License"
+      ],
+      "curie": "dcterms:license",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ]
+    },
+    "http://usefulinc.com/ns/doap#GitRepository": {
+      "numAppearsIn": 6,
+      "hasLocalDefinition": true,
+      "label": [
+        "GitRepository"
+      ],
+      "curie": "GitRepository",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://usefulinc.com/ns/doap#bug-database": {
+      "numAppearsIn": 19,
+      "hasLocalDefinition": true,
+      "label": [
+        "bug-database"
+      ],
+      "curie": "bug-database",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://www.geneontology.org/formats/oboInOwl#default-namespace": {
+      "numAppearsIn": 30,
+      "hasLocalDefinition": true,
+      "label": [
+        "default-namespace"
+      ],
+      "curie": "default-namespace",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2000/01/rdf-schema#comment": {
+      "definedBy": [
+        "prov"
+      ],
+      "numAppearsIn": 59,
+      "hasLocalDefinition": true,
+      "label": [
+        "comment"
+      ],
+      "curie": "comment",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2001/XMLSchema#anyURI": {
+      "numAppearsIn": 1,
+      "hasLocalDefinition": false,
+      "type": [
+        "class",
+        "entity"
+      ],
+      "label": [
+        "anyURI"
+      ],
+      "curie": "anyURI"
+    },
+    "http://xmlns.com/foaf/0.1/homepage": {
+      "numAppearsIn": 41,
+      "hasLocalDefinition": true,
+      "label": [
+        "homepage"
+      ],
+      "curie": "homepage",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "https://github.com/EnvironmentOntology/envo": {
+      "url": "https://github.com/EnvironmentOntology/envo",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "github:EnvironmentOntology/envo"
+    },
+    "https://orcid.org/0000-0002-2996-719X": {
+      "url": "https://orcid.org/0000-0002-2996-719X",
+      "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+      "curie": "orcid:0000-0002-2996-719X"
+    },
+    "https://orcid.org/0000-0002-4366-3088": {
+      "numAppearsIn": 1,
+      "hasLocalDefinition": false,
+      "type": [
+        "individual",
+        "entity"
+      ],
+      "label": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Pier Luigi Buttigieg",
+          "axioms": [
+            {
+              "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q41566750"
+            }
+          ]
+        }
+      ],
+      "curie": "0000-0002-4366-3088"
+    },
+    "https://ror.org/032e6b942": {
+      "url": "https://ror.org/032e6b942",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "ror:032e6b942"
+    },
+    "https://ror.org/04ers2y35": {
+      "url": "https://ror.org/04ers2y35",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "ror:04ers2y35"
+    },
+    "https://ror.org/04v4h0v24": {
+      "url": "https://ror.org/04v4h0v24",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "ror:04v4h0v24"
+    }
+  },
+  "loaded": "2026-02-08T13:53:21.283048048",
+  "numDescendants": 0,
+  "numHierarchicalDescendants": 0,
+  "numberOfClasses": "6906",
+  "numberOfEntities": "7225",
+  "numberOfIndividuals": "44",
+  "numberOfProperties": "275",
+  "ontologyId": "envo",
+  "ontologyPurl": "http://purl.obolibrary.org/obo/envo.owl",
+  "ontology_use": [
+    {
+      "usedBy": {
+        "description": "The information system PANGAEA is operated as an Open Access library aimed at archiving, publishing and distributing georeferenced data from earth system research.",
+        "homepage": "https://pangaea.de/",
+        "label": "PANGAEA",
+        "provider": [
+          {
+            "identifier": "https://ror.org/032e6b942",
+            "label": "Alfred Wegener Institute, Helmholtz Center for Polar and Marine Research (AWI)"
+          },
+          {
+            "identifier": "https://ror.org/04ers2y35",
+            "label": "Center for Marine Environmental Sciences, University of Bremen (MARUM)"
+          }
+        ],
+        "type": "repository/portal",
+        "usageDescription": {
+          "description": "By relying on shared, well-documented vocabularies, PANGAEA’s metadata is described in a standardized, unambiguous, and machine-readable format. This improves semantic consistency within PANGAEA, enables the integration of heterogeneous datasets, and facilitates alignment with external systems.",
+          "language": "en"
+        },
+        "usageReportMetadata": {
+          "created": "2025-09-04",
+          "source": "https://wiki.pangaea.de/wiki/Term_catalogue"
+        }
+      }
+    },
+    {
+      "usedBy": {
+        "description": "FAIR WISH will (1) develop standardised and discipline specific IGSN metadata schemes for different samples types within the research field Earth and Environment (EaE) that are complementing the core IGSN metadata schema; and (2) develop workflows to generate machine-readable IGSN metadata from different states of digitisation (from templates to databases) and to automatically register IGSNs.",
+        "homepage": "https://helmholtz-metadaten.de/en/inf-projects/fair-wish",
+        "label": "FAIR Wish",
+        "provider": [
+          {
+            "identifier": "https://ror.org/04v4h0v24",
+            "label": "Helmholtz Metadata Collaboration"
+          }
+        ],
+        "type": "project",
+        "usageReportMetadata": {
+          "created": "2025-09-04"
+        }
+      }
+    }
+  ],
+  "preferredPrefix": "ENVO",
+  "repo_url": "https://github.com/EnvironmentOntology/envo",
+  "searchableAnnotationValues": [
+    "http://orcid.org/0000-0002-6601-2165",
+    "http://orcid.org/0000-0002-8343-612X",
+    "http://orcid.org/0000-0003-1604-1512",
+    "ENVO is an ontology which represents knowledge about environments,environmental processes, ecosystems, habitats, and related entities",
+    "The Environment Ontology",
+    "https://github.com/EnvironmentOntology/envo/",
+    "https://github.com/EnvironmentOntology/envo/issues/",
+    "ENVO",
+    "http://environmentontology.org/",
+    false,
+    "2026-02-08T13:53:21.283048048",
+    "6906",
+    "7225",
+    "44",
+    "275",
+    "Sun Feb 08 13:53:19 UTC 2026"
+  ],
+  "sourceFileTimestamp": "Sun Feb 08 13:53:19 UTC 2026",
+  "title": "The Environment Ontology Latest Release",
+  "tracker": "https://github.com/EnvironmentOntology/envo/issues/",
+  "type": [
+    "ontology"
+  ],
+  "versioned_url": "https://raw.githubusercontent.com/EnvironmentOntology/envo/master/envo.owl",
+  "http://purl.org/dc/elements/1.1/contributor": "https://orcid.org/0000-0002-2996-719X",
+  "http://purl.org/dc/elements/1.1/creator": [
+    "https://orcid.org/0000-0002-4366-3088",
+    "http://orcid.org/0000-0002-6601-2165",
+    "http://orcid.org/0000-0002-8343-612X",
+    "http://orcid.org/0000-0003-1604-1512"
+  ],
+  "http://purl.org/dc/elements/1.1/description": "ENVO is an ontology which represents knowledge about environments,environmental processes, ecosystems, habitats, and related entities",
+  "http://purl.org/dc/elements/1.1/title": "The Environment Ontology",
+  "http://purl.org/dc/terms/license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "http://usefulinc.com/ns/doap#GitRepository": "https://github.com/EnvironmentOntology/envo/",
+  "http://usefulinc.com/ns/doap#bug-database": "https://github.com/EnvironmentOntology/envo/issues/",
+  "http://www.geneontology.org/formats/oboInOwl#default-namespace": "ENVO",
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+  "http://www.w3.org/2000/01/rdf-schema#comment": [
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/chemical_concentration.owl>) VersionIRI(<null>))) [Axioms: 679 Logical Axioms: 119]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_attribute.owl>) VersionIRI(<null>))) [Axioms: 206 Logical Axioms: 34]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_attribute_location.owl>) VersionIRI(<null>))) [Axioms: 168 Logical Axioms: 29]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_quality_location.owl>) VersionIRI(<null>))) [Axioms: 40 Logical Axioms: 6]",
+    "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/process_attribute.owl>) VersionIRI(<null>))) [Axioms: 21 Logical Axioms: 2]"
+  ],
+  "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/envo/releases/2025-10-20/envo.owl",
+  "http://www.w3.org/2002/07/owl#versionInfo": "2025-10-20",
+  "http://xmlns.com/foaf/0.1/homepage": "http://environmentontology.org/"
+}
