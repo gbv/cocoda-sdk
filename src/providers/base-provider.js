@@ -397,6 +397,13 @@ export default class BaseProvider {
     return this._init
   }
 
+  async _request(url, config = {}) {
+    return this.axios({
+      url: url,
+      ...config
+    })
+  }
+
   /**
    * Preparation to be executed before init. Should be overwritten by subclasses.
    *

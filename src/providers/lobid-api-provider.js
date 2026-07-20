@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
 import jskos from "jskos-tools"
-import axios from "axios"
 
 const api = "https://lobid.org/gnd/"
 
@@ -303,7 +302,7 @@ export default class LobidApiProvider extends BaseProvider {
     const errors = []
     const results = await Promise.all(notations.map(async notation => {
       try {
-        const result = await axios.get(`${this._api.api}${notation}.json`)
+        const result = await this._request(`${this._api.api}${notation}.json`)
         return toJSKOS(result.data)
       } catch (error) {
         errors.push(error)
@@ -323,7 +322,7 @@ export default class LobidApiProvider extends BaseProvider {
     }
     const uri = fixURI(concept.uri)
     const q = broaderProps.map(prop => `${prop}.id:"${uri}"`).join(" OR ")
-    const result = await axios.get(`${this._api.api}search`, {
+    const result = await this._request(`${this._api.api}search`, {
       params: {
         q,
         format: "json",
@@ -358,7 +357,7 @@ export default class LobidApiProvider extends BaseProvider {
     if (types.length) {
       filter = types.map(type => `type:${type}`).join(" OR ")
     }
-    const results = await axios.get(`${this._api.api}search`, { params: {
+    const results = await this._request(`${this._api.api}search`, { params: {
       q: search,
       filter,
       format,

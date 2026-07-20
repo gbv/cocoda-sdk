@@ -134,37 +134,18 @@ export default class OlsApiProvider extends BaseProvider {
     return concept
   }
 
-  // #### API REQUESTS ####
-
-  // TODO: rename _skipAdditionalParameters
-  async _request(url, config = { _skipAdditionalParameters: true }) {
-    if (url) {
-      url = new URL(url)
-      const given = Object.fromEntries(url.searchParams.entries())
-      return this.axios({
-        method: "get",
-        url: url.origin + url.pathname,
-        params: {
-          ...given,
-          ...config.params, // explicit params win
-        },
-        ...config,
-      })
-    }
-  }
-
   // API REQUESTS SCHEMES
 
   async _paginate(base, query, limit) {
     const size = limit > 0 ? limit : null
     let url = this._getApiUrl(base, { ...query, size })
-    let page = await this._request(url)
+    let page = await this._request(url, { _skipAdditionalParameters: true })
     let items = page?.elements || []
     if (!size) {
       const totalPages = page?.totalPages || 0
       for (let n = 1; n < totalPages; n++) {
         url = this._getApiUrl(base, { ...query, page: n })
-        page = await this._request(url)
+        page = await this._request(url, { _skipAdditionalParameters: true })
         items = items.concat(page?.elements || [])
       }
     }
@@ -182,7 +163,7 @@ export default class OlsApiProvider extends BaseProvider {
       } else if (concept.uri) {
         url = this._getApiUrl(["ontologies", VOCID, "classes"], { iri: concept.uri })
       }
-      let response = await this._request(url)
+      let response = await this._request(url, { _skipAdditionalParameters: true })
       return response?.elements?.[0] || null
     }
   }
@@ -215,7 +196,7 @@ export default class OlsApiProvider extends BaseProvider {
   async _conceptIriFromObj(VOCID, conceptNotation) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
     let url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: conceptNotation })
-    let response = await this._request(url)
+    let response = await this._request(url, { _skipAdditionalParameters: true })
     if (response && response.elements && response.elements.length > 0) {
       return response.elements[0].iri
     }
@@ -236,7 +217,7 @@ export default class OlsApiProvider extends BaseProvider {
     if (scheme) {
       const { VOCID, uri, notation, identifier } = scheme
       if (VOCID) {
-        return this._request(this._getApiUrl(["ontologies", VOCID]))
+        return this._request(this._getApiUrl(["ontologies", VOCID]), { _skipAdditionalParameters: true })
       }
       if (uri) {
         scheme = await this._getSchemeFromUri(uri)
@@ -246,7 +227,7 @@ export default class OlsApiProvider extends BaseProvider {
       }
       // VOCID is likely the notation
       if (notation?.[0] && (uri || identifier?.length)) {
-        scheme = await this._request(this._getApiUrl(["ontologies", notation[0]]))
+        scheme = await this._request(this._getApiUrl(["ontologies", notation[0]]), { _skipAdditionalParameters: true })
         if (scheme.iri === uri || identifier?.includes(scheme.iri)) {
           return scheme
         }
@@ -264,7 +245,7 @@ export default class OlsApiProvider extends BaseProvider {
   async _getSchemeFromUri(uri) {
     if (uri) {
       const url = this._getApiUrl(["ontologies"], { searchFields: "iri", search: uri })
-      const response = await this._request(url)
+      const response = await this._request(url, { _skipAdditionalParameters: true })
       const schemes = response?.elements || []
       return schemes.reduce((short, cur) => cur.ontologyId.length < short.ontologyId.length ? cur : short, schemes[0])
     }
@@ -281,10 +262,10 @@ export default class OlsApiProvider extends BaseProvider {
       ontologies = (await Promise.all(schemes.map(s => this._getScheme(s)))).filter(Boolean)
     } else if (limit > 0) {
       const url = this._getApiUrl(["ontologies"], { size: limit })
-      const response = await this._request(url)
+      const response = await this._request(url, { _skipAdditionalParameters: true })
       ontologies = response.elements || []
     } else {
-      ontologies = await this._paginate(["ontologies"], {})
+      ontologies = await this._paginate(["ontologies"])
     }
 
     return Promise.all(ontologies.map(scheme => this._ontologyToJSKOS(scheme)))
