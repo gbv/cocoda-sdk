@@ -1,0 +1,226 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "uberon",
+        "cto",
+        "ecso",
+        "cheminf",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "aeon",
+        "nmrcv2025",
+        "agro",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/ENVO_01000315": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "acidic environment"
+          ],
+          "curie": "ENVO:01000315",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01000997": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "environmental system determined by a quality"
+          ],
+          "curie": "ENVO:01000997",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0000001": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 22,
+          "hasLocalDefinition": true,
+          "label": [
+            "quality"
+          ],
+          "curie": "PATO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0002507": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 8,
+          "hasLocalDefinition": true,
+          "label": [
+            "determined by"
+          ],
+          "curie": "RO:0002507",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0001429": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "acidic"
+          ],
+          "curie": "PATO:0001429",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000086": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "has quality"
+          ],
+          "curie": "RO:0000086",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 6333,
+      "numHierarchicalDescendants": 6291,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedFrom": [
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0002507",
+          "value": "http://purl.obolibrary.org/obo/ENVO_01000315",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000001",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000086",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/PATO_0001429",
+              "isObsolete": false
+            }
+          ]
+        },
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0002507",
+          "value": "http://purl.obolibrary.org/obo/ENVO_01000997",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000001",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000086",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/PATO_0000001",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": false,
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

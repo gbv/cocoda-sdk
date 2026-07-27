@@ -1,0 +1,21 @@
+[
+    {
+        "uri": "test:concept",
+        "narrower": [
+            {
+                "uri": "test:narrower"
+            }
+        ]
+    },
+    {
+        "uri": "test:narrower",
+        "prefLabel": {
+            "en": "narrower"
+        },
+        "ancestors": [
+            {
+                "uri": "test:concept"
+            }
+        ]
+    }
+]

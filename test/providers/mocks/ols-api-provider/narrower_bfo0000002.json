@@ -1,0 +1,792 @@
+{
+  "page": 0,
+  "numElements": 3,
+  "totalPages": 1,
+  "totalElements": 3,
+  "elements": [
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2021",
+        "iao",
+        "vivo",
+        "ppo",
+        "sepio",
+        "afo",
+        "envo2023",
+        "nmrcv",
+        "t4fs",
+        "cco",
+        "duo",
+        "to",
+        "pco",
+        "ro",
+        "po",
+        "cheminf",
+        "envo",
+        "flopo",
+        "peco",
+        "pmat",
+        "aeon",
+        "uberon",
+        "bco",
+        "nmrcv2025",
+        "stato",
+        "cto",
+        "iofcore",
+        "agro",
+        "efo",
+        "pso",
+        "pmd",
+        "tfsco",
+        "oeo",
+        "msio",
+        "proco",
+        "vibso",
+        "chmo",
+        "pato",
+        "swo"
+      ],
+      "curie": "BFO:0000020",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "b is a relational specifically dependent continuant = Def. b is a specifically dependent continuant and there are n &gt; 1 independent continuants c1, … cn which are not spatial regions are such that for all 1  i &lt; j  n, ci  and cj share no common parts, are such that for each 1  i  n, b s-depends_on ci at every time t during the course of b’s existence (axiom label in BFO2 Reference: [131-004])",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "b is a specifically dependent continuant = Def. b is a continuant & there is some independent continuant c which is not a spatial region and which is such that b s-depends_on c at every time t during the course of b’s existence. (axiom label in BFO2 Reference: [050-003])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/050-003"
+            }
+          ]
+        }
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000020",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "specifically dependent continuant"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000050": {
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "part of"
+          ],
+          "curie": "BFO:0000050",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000004": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 42,
+          "hasLocalDefinition": true,
+          "label": [
+            "independent continuant"
+          ],
+          "curie": "BFO:0000004",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0010000": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "has axiom label"
+          ],
+          "curie": "IAO:0010000",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000031": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "generically dependent continuant"
+          ],
+          "curie": "BFO:0000031",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 719,
+      "numHierarchicalDescendants": 720,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "b is a relational specifically dependent continuant = Def. b is a specifically dependent continuant and there are n &gt; 1 independent continuants c1, … cn which are not spatial regions are such that for all 1  i &lt; j  n, ci  and cj share no common parts, are such that for each 1  i  n, b s-depends_on ci at every time t during the course of b’s existence (axiom label in BFO2 Reference: [131-004])",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "b is a specifically dependent continuant = Def. b is a continuant & there is some independent continuant c which is not a spatial region and which is such that b s-depends_on c at every time t during the course of b’s existence. (axiom label in BFO2 Reference: [050-003])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/050-003"
+            }
+          ]
+        },
+        false
+      ],
+      "shortForm": "BFO_0000020",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": [
+        "b is a relational specifically dependent continuant = Def. b is a specifically dependent continuant and there are n &gt; 1 independent continuants c1, … cn which are not spatial regions are such that for all 1  i &lt; j  n, ci  and cj share no common parts, are such that for each 1  i  n, b s-depends_on ci at every time t during the course of b’s existence (axiom label in BFO2 Reference: [131-004])",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "b is a specifically dependent continuant = Def. b is a continuant & there is some independent continuant c which is not a spatial region and which is such that b s-depends_on c at every time t during the course of b’s existence. (axiom label in BFO2 Reference: [050-003])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/050-003"
+            }
+          ]
+        }
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "specifically dependent continuant",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+          "http://www.w3.org/2002/07/owl#allValuesFrom": "http://purl.obolibrary.org/obo/BFO_0000020",
+          "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isObsolete": false
+        }
+      ],
+      "http://www.w3.org/2002/07/owl#disjointWith": [
+        "http://purl.obolibrary.org/obo/BFO_0000031",
+        "http://purl.obolibrary.org/obo/BFO_0000004"
+      ]
+    },
+    {
+      "appearsIn": [
+        "envo2021",
+        "bfo",
+        "t4fs",
+        "flopo",
+        "ppo",
+        "envo2023",
+        "oeo",
+        "proco",
+        "vivo",
+        "afo",
+        "envo",
+        "nmrcv",
+        "pco",
+        "pmat",
+        "to",
+        "peco",
+        "po",
+        "uberon",
+        "ro",
+        "duo",
+        "gesah",
+        "cheminf",
+        "iofcore",
+        "cco",
+        "ecso",
+        "bco",
+        "chmo",
+        "aeon",
+        "pmd",
+        "pso",
+        "agro",
+        "cto",
+        "stato",
+        "sepio",
+        "iao",
+        "nmrcv2025",
+        "vibso",
+        "msio",
+        "chiro",
+        "tfsco",
+        "swo",
+        "pato"
+      ],
+      "curie": "BFO:0000004",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/017-002"
+            }
+          ]
+        }
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000004",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "independent continuant"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000050": {
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "part of"
+          ],
+          "curie": "BFO:0000050",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0010000": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "has axiom label"
+          ],
+          "curie": "IAO:0010000",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000031": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "generically dependent continuant"
+          ],
+          "curie": "BFO:0000031",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 5071,
+      "numHierarchicalDescendants": 5029,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/017-002"
+            }
+          ]
+        },
+        false
+      ],
+      "shortForm": "BFO_0000004",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": {
+        "type": [
+          "reification"
+        ],
+        "value": "b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])",
+        "axioms": [
+          {
+            "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/017-002"
+          }
+        ]
+      },
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "independent continuant",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+          "http://www.w3.org/2002/07/owl#allValuesFrom": "http://purl.obolibrary.org/obo/BFO_0000004",
+          "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isObsolete": false
+        }
+      ],
+      "http://www.w3.org/2002/07/owl#disjointWith": [
+        "http://purl.obolibrary.org/obo/BFO_0000020",
+        "http://purl.obolibrary.org/obo/BFO_0000031"
+      ]
+    },
+    {
+      "appearsIn": [
+        "aeon",
+        "bco",
+        "uberon",
+        "nmrcv2025",
+        "cto",
+        "stato",
+        "agro",
+        "pso",
+        "pmd",
+        "tfsco",
+        "proco",
+        "iofcore",
+        "msio",
+        "oeo",
+        "vibso",
+        "chmo",
+        "listdb",
+        "swo",
+        "bfo",
+        "iao",
+        "vivo",
+        "afo",
+        "envo2021",
+        "nmrcv",
+        "sepio",
+        "ppo",
+        "envo2023",
+        "t4fs",
+        "cco",
+        "duo",
+        "ro",
+        "cheminf",
+        "envo",
+        "pco",
+        "ecso"
+      ],
+      "curie": "BFO:0000031",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "b is a generically dependent continuant = Def. b is a continuant that g-depends_on one or more other entities. (axiom label in BFO2 Reference: [074-001])"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalParent": [
+        "http://purl.obolibrary.org/obo/BFO_0000002"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000031",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "generically dependent continuant"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000050": {
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "part of"
+          ],
+          "curie": "BFO:0000050",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000004": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 42,
+          "hasLocalDefinition": true,
+          "label": [
+            "independent continuant"
+          ],
+          "curie": "BFO:0000004",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 14,
+      "numHierarchicalDescendants": 14,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "b is a generically dependent continuant = Def. b is a continuant that g-depends_on one or more other entities. (axiom label in BFO2 Reference: [074-001])",
+        false
+      ],
+      "shortForm": "BFO_0000031",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "b is a generically dependent continuant = Def. b is a continuant that g-depends_on one or more other entities. (axiom label in BFO2 Reference: [074-001])",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "generically dependent continuant",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+          "http://www.w3.org/2002/07/owl#allValuesFrom": "http://purl.obolibrary.org/obo/BFO_0000031",
+          "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isObsolete": false
+        }
+      ],
+      "http://www.w3.org/2002/07/owl#disjointWith": [
+        "http://purl.obolibrary.org/obo/BFO_0000004",
+        "http://purl.obolibrary.org/obo/BFO_0000020"
+      ]
+    }
+  ]
+}

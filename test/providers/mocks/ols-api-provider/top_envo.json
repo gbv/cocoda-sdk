@@ -1,0 +1,1678 @@
+{
+  "page": 0,
+  "numElements": 7,
+  "totalPages": 1,
+  "totalElements": 7,
+  "elements": [
+    {
+      "appearsIn": [
+        "envo",
+        "envo2023"
+      ],
+      "curie": "ENVO:03400011",
+      "definedBy": [
+        "envo"
+      ],
+      "definition": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Precipitation which is composed primarily of hail stones.",
+          "axioms": [
+            {
+              "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://orcid.org/0000-0003-4808-4736"
+            }
+          ]
+        },
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Individual units of hail are called hailstones. Thunderstorms that are characterized by strong updrafts, large liquid water contents, large cloud-drop sizes, and great vertical height are favorable to hail formation. The destructive effects of hailstorms upon plant and animal life, buildings and property, and aircraft in flight render them a prime object of weather modification studies. In aviation weather observations, hail is encoded A. Smaller particles of similar origin, formerly called small hail, may be classed as either ice pellets or snow pellets.",
+          "axioms": [
+            {
+              "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://orcid.org/0000-0003-4808-4736"
+            }
+          ]
+        }
+      ],
+      "definitionProperty": [
+        "http://purl.obolibrary.org/obo/IAO_0000115",
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/BFO_0000027",
+        "http://purl.obolibrary.org/obo/BFO_0000040",
+        "http://purl.obolibrary.org/obo/BFO_0000004",
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001"
+      ],
+      "hierarchicalParent": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "http://purl.obolibrary.org/obo/BFO_0000027",
+          "axioms": [
+            {
+              "childRelationToParent": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+            }
+          ]
+        }
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/ENVO_03400011",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "hail"
+      ],
+      "linkedEntities": {
+        "https://orcid.org/0000-0003-4808-4736": {
+          "url": "https://orcid.org/0000-0003-4808-4736",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-4808-4736"
+        },
+        "https://orcid.org/0000-0002-4366-3088": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Pier Luigi Buttigieg",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q41566750"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-4366-3088"
+        },
+        "https://orcid.org/0000-0002-3410-4655": {
+          "url": "https://orcid.org/0000-0002-3410-4655",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-3410-4655"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#inSubset": {
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "in_subset"
+          ],
+          "curie": "inSubset",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000004": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 42,
+          "hasLocalDefinition": true,
+          "label": [
+            "independent continuant"
+          ],
+          "curie": "BFO:0000004",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-0337-8610": {
+          "url": "https://orcid.org/0000-0002-0337-8610",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-0337-8610"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#created_by": {
+          "numAppearsIn": 43,
+          "hasLocalDefinition": true,
+          "label": [
+            "created_by"
+          ],
+          "curie": "created_by",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-2908-3327": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Anne Thessen",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47503085"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-2908-3327"
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_03400012": {
+          "definedBy": [
+            "envo"
+          ],
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "hail stone"
+          ],
+          "curie": "ENVO:03400012",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000040": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "material entity"
+          ],
+          "curie": "BFO:0000040",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#creation_date": {
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "creation_date"
+          ],
+          "curie": "creation_date",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasDbXref": {
+          "numAppearsIn": 55,
+          "hasLocalDefinition": true,
+          "label": [
+            "database_cross_reference"
+          ],
+          "curie": "hasDbXref",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-0632-7576": {
+          "url": "https://orcid.org/0000-0003-0632-7576",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-0632-7576"
+        },
+        "http://purl.obolibrary.org/obo/RO_0002351": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "has member"
+          ],
+          "curie": "RO:0002351",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#dateTime": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "dateTime"
+          ],
+          "curie": "dateTime"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-2282-7215": {
+          "url": "https://orcid.org/0000-0002-2282-7215",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-2282-7215"
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000027": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 27,
+          "hasLocalDefinition": true,
+          "label": [
+            "object aggregate"
+          ],
+          "curie": "BFO:0000027",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://sweetontology.net/phenAtmoPrecipitation/FreezingRain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "freezing rain"
+          ],
+          "curie": "FreezingRain"
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedTo": [
+        {
+          "property": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+          "value": "http://purl.obolibrary.org/obo/BFO_0000027",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000027",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0002351",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_03400012",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Precipitation which is composed primarily of hail stones.",
+          "axioms": [
+            {
+              "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://orcid.org/0000-0003-4808-4736"
+            }
+          ]
+        },
+        false
+      ],
+      "shortForm": "ENVO_03400011",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": {
+        "type": [
+          "reification"
+        ],
+        "value": "Precipitation which is composed primarily of hail stones.",
+        "axioms": [
+          {
+            "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://orcid.org/0000-0003-4808-4736"
+          }
+        ]
+      },
+      "http://www.geneontology.org/formats/oboInOwl#created_by": [
+        "https://orcid.org/0000-0002-0337-8610",
+        "https://orcid.org/0000-0002-2282-7215",
+        "https://orcid.org/0000-0002-2908-3327",
+        "https://orcid.org/0000-0002-3410-4655",
+        "https://orcid.org/0000-0002-4366-3088",
+        "https://orcid.org/0000-0003-0632-7576",
+        "https://orcid.org/0000-0003-4808-4736"
+      ],
+      "http://www.geneontology.org/formats/oboInOwl#creation_date": "2021-04-14T18:57:18.275Z",
+      "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "http://sweetontology.net/phenAtmoPrecipitation/FreezingRain",
+      "http://www.geneontology.org/formats/oboInOwl#inSubset": [
+        "envoCryo",
+        "envoPolar"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#comment": {
+        "type": [
+          "reification"
+        ],
+        "value": "Individual units of hail are called hailstones. Thunderstorms that are characterized by strong updrafts, large liquid water contents, large cloud-drop sizes, and great vertical height are favorable to hail formation. The destructive effects of hailstorms upon plant and animal life, buildings and property, and aircraft in flight render them a prime object of weather modification studies. In aviation weather observations, hail is encoded A. Smaller particles of similar origin, formerly called small hail, may be classed as either ice pellets or snow pellets.",
+        "axioms": [
+          {
+            "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://orcid.org/0000-0003-4808-4736"
+          }
+        ]
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": "hail",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#intersectionOf": [
+          "http://purl.obolibrary.org/obo/BFO_0000027",
+          {
+            "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+            "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0002351",
+            "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_03400012",
+            "isObsolete": false
+          }
+        ]
+      }
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "envo2023"
+      ],
+      "curie": "ENVO:03400017",
+      "definedBy": [
+        "envo"
+      ],
+      "definition": [
+        "The depth of some water ice."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/PATO_0001595",
+        "http://purl.obolibrary.org/obo/PATO_0001708",
+        "http://purl.obolibrary.org/obo/PATO_0000117",
+        "http://purl.obolibrary.org/obo/PATO_0000051",
+        "http://purl.obolibrary.org/obo/PATO_0001241",
+        "http://purl.obolibrary.org/obo/BFO_0000019",
+        "http://purl.obolibrary.org/obo/BFO_0000020",
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001",
+        "http://purl.obolibrary.org/obo/PATO_0000001"
+      ],
+      "hierarchicalParent": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "http://purl.obolibrary.org/obo/PATO_0001595",
+          "axioms": [
+            {
+              "childRelationToParent": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+            }
+          ]
+        }
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/ENVO_03400017",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "depth of water ice"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000019": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "quality"
+          ],
+          "curie": "BFO:0000019",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-4808-4736": {
+          "url": "https://orcid.org/0000-0003-4808-4736",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-4808-4736"
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01000277": {
+          "definedBy": [
+            "envo2021",
+            "envo"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "water ice"
+          ],
+          "curie": "ENVO2021:01000277",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-4366-3088": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Pier Luigi Buttigieg",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q41566750"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-4366-3088"
+        },
+        "https://orcid.org/0000-0002-3410-4655": {
+          "url": "https://orcid.org/0000-0002-3410-4655",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-3410-4655"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#inSubset": {
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "in_subset"
+          ],
+          "curie": "inSubset",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0000001": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 22,
+          "hasLocalDefinition": true,
+          "label": [
+            "quality"
+          ],
+          "curie": "PATO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0001708": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 16,
+          "hasLocalDefinition": true,
+          "label": [
+            "1-D extent"
+          ],
+          "curie": "PATO:0001708",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-0337-8610": {
+          "url": "https://orcid.org/0000-0002-0337-8610",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-0337-8610"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#created_by": {
+          "numAppearsIn": 43,
+          "hasLocalDefinition": true,
+          "label": [
+            "created_by"
+          ],
+          "curie": "created_by",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0000051": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 21,
+          "hasLocalDefinition": true,
+          "label": [
+            "morphology"
+          ],
+          "curie": "PATO:0000051",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-2908-3327": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Anne Thessen",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47503085"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0002-2908-3327"
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#creation_date": {
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "creation_date"
+          ],
+          "curie": "creation_date",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-0632-7576": {
+          "url": "https://orcid.org/0000-0003-0632-7576",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0003-0632-7576"
+        },
+        "http://purl.obolibrary.org/obo/RO_0000052": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "characteristic of"
+          ],
+          "curie": "RO:0000052",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#dateTime": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "dateTime"
+          ],
+          "curie": "dateTime"
+        },
+        "http://purl.obolibrary.org/obo/PATO_0001595": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 12,
+          "hasLocalDefinition": true,
+          "label": [
+            "depth"
+          ],
+          "curie": "PATO:0001595",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0002-2282-7215": {
+          "url": "https://orcid.org/0000-0002-2282-7215",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "orcid:0000-0002-2282-7215"
+        },
+        "http://purl.obolibrary.org/obo/PATO_0000117": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 15,
+          "hasLocalDefinition": true,
+          "label": [
+            "size"
+          ],
+          "curie": "PATO:0000117",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0001241": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 20,
+          "hasLocalDefinition": true,
+          "label": [
+            "physical object quality"
+          ],
+          "curie": "PATO:0001241",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedTo": [
+        {
+          "property": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+          "value": "http://purl.obolibrary.org/obo/PATO_0001595",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/PATO_0001595",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000052",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01000277",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": [
+        "The depth of some water ice.",
+        false
+      ],
+      "shortForm": "ENVO_03400017",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "The depth of some water ice.",
+      "http://www.geneontology.org/formats/oboInOwl#created_by": [
+        "https://orcid.org/0000-0002-0337-8610",
+        "https://orcid.org/0000-0002-2282-7215",
+        "https://orcid.org/0000-0002-2908-3327",
+        "https://orcid.org/0000-0002-3410-4655",
+        "https://orcid.org/0000-0002-4366-3088",
+        "https://orcid.org/0000-0003-0632-7576",
+        "https://orcid.org/0000-0003-4808-4736"
+      ],
+      "http://www.geneontology.org/formats/oboInOwl#creation_date": "2021-04-14T18:57:18.275Z",
+      "http://www.geneontology.org/formats/oboInOwl#inSubset": [
+        "envoCryo",
+        "envoPolar"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "depth of water ice",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#intersectionOf": [
+          "http://purl.obolibrary.org/obo/PATO_0001595",
+          {
+            "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+            "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000052",
+            "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01000277",
+            "isObsolete": false
+          }
+        ]
+      }
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "uberon",
+        "cto",
+        "ecso",
+        "cheminf",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "aeon",
+        "nmrcv2025",
+        "agro",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/ENVO_01000315": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "acidic environment"
+          ],
+          "curie": "ENVO:01000315",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01000997": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "environmental system determined by a quality"
+          ],
+          "curie": "ENVO:01000997",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0000001": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 22,
+          "hasLocalDefinition": true,
+          "label": [
+            "quality"
+          ],
+          "curie": "PATO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0002507": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 8,
+          "hasLocalDefinition": true,
+          "label": [
+            "determined by"
+          ],
+          "curie": "RO:0002507",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/PATO_0001429": {
+          "definedBy": [
+            "pato"
+          ],
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "acidic"
+          ],
+          "curie": "PATO:0001429",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000086": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "has quality"
+          ],
+          "curie": "RO:0000086",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 6333,
+      "numHierarchicalDescendants": 6291,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedFrom": [
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0002507",
+          "value": "http://purl.obolibrary.org/obo/ENVO_01000315",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000001",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000086",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/PATO_0001429",
+              "isObsolete": false
+            }
+          ]
+        },
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0002507",
+          "value": "http://purl.obolibrary.org/obo/ENVO_01000997",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000001",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000086",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/PATO_0000001",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": false,
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity"
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "omp",
+        "pato",
+        "enm",
+        "chebi",
+        "uberon",
+        "flopo",
+        "peco",
+        "chiro",
+        "envo2021",
+        "cao",
+        "hp",
+        "agro",
+        "ro",
+        "to",
+        "envo2023"
+      ],
+      "curie": "CHEBI:50906",
+      "definition": [
+        "A role is particular behaviour which a material entity may exhibit."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/CHEBI_50906",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "role"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 111,
+      "numHierarchicalDescendants": 111,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "CHEBI_50906",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A role is particular behaviour which a material entity may exhibit.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "role"
+    },
+    {
+      "appearsIn": [
+        "ro",
+        "peco",
+        "ppo",
+        "pato",
+        "swo",
+        "pco",
+        "to",
+        "msio",
+        "po",
+        "hp",
+        "uberon",
+        "agro",
+        "flopo",
+        "stato",
+        "envo",
+        "obi",
+        "chiro",
+        "pso",
+        "efo",
+        "go",
+        "envo2023",
+        "envo2021",
+        "cob",
+        "omp",
+        "sepio",
+        "bao"
+      ],
+      "curie": "GO:0008150",
+      "definedBy": [
+        "go"
+      ],
+      "definition": [
+        "A biological process is the execution of a genetically-encoded biological module or program. It consists of all the steps required to achieve the specific biological objective of the module. A biological process is accomplished by a particular set of molecular functions carried out by specific gene products (or macromolecular complexes), often in a highly regulated manner and in a particular temporal sequence."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/GO_0008150",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "biological_process"
+      ],
+      "linkedEntities": {
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 54,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_exact_synonym"
+          ],
+          "curie": "hasExactSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 50,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_related_synonym"
+          ],
+          "curie": "hasRelatedSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 44,
+      "numHierarchicalDescendants": 45,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "GO_0008150",
+      "synonym": [
+        "biological process",
+        "physiological process",
+        "single organism process",
+        "single-organism process"
+      ],
+      "synonymProperty": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym",
+        "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym"
+      ],
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A biological process is the execution of a genetically-encoded biological module or program. It consists of all the steps required to achieve the specific biological objective of the module. A biological process is accomplished by a particular set of molecular functions carried out by specific gene products (or macromolecular complexes), often in a highly regulated manner and in a particular temporal sequence.",
+      "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym": [
+        "biological process",
+        "physiological process"
+      ],
+      "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym": [
+        "single organism process",
+        "single-organism process"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "biological_process"
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "pato",
+        "agro",
+        "envo2021",
+        "flopo",
+        "envo2023"
+      ],
+      "curie": "PATO:0001739",
+      "definedBy": [
+        "pato"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/PATO_0001739",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "PATO_0001739"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/RO_0000052": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "characteristic of"
+          ],
+          "curie": "RO:0000052",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000056": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 43,
+          "hasLocalDefinition": true,
+          "label": [
+            "participates in"
+          ],
+          "curie": "RO:0000056",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01001023": {
+          "definedBy": [
+            "envo2021",
+            "envo"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "radiation"
+          ],
+          "curie": "ENVO2021:01001023",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 41,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "relatedTo": [
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0000052",
+          "value": "http://purl.obolibrary.org/obo/BFO_0000002",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000002",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000056",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01001023",
+              "isObsolete": false
+            }
+          ]
+        }
+      ],
+      "searchableAnnotationValues": false,
+      "shortForm": "PATO_0001739",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+        "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000052",
+        "http://www.w3.org/2002/07/owl#someValuesFrom": {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000002",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000056",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01001023",
+              "isObsolete": false
+            }
+          ]
+        },
+        "isObsolete": false
+      }
+    },
+    {
+      "appearsIn": [
+        "agro",
+        "flopo",
+        "pato",
+        "envo2023",
+        "peco",
+        "envo2021",
+        "envo",
+        "bco",
+        "pco"
+      ],
+      "curie": "PCO:0000031",
+      "definedBy": [
+        "pco"
+      ],
+      "definition": [
+        "A material entity that is one or more organisms, viruses or viroids."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/PCO_0000031",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "organismal entity"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000114": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 33,
+          "hasLocalDefinition": true,
+          "label": [
+            "has curation status"
+          ],
+          "curie": "IAO:0000114",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 61,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000120": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "label": [
+            "metadata complete"
+          ],
+          "curie": "IAO:0000120",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 9,
+      "numHierarchicalDescendants": 9,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "PCO_0000031",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000114": "http://purl.obolibrary.org/obo/IAO_0000120",
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A material entity that is one or more organisms, viruses or viroids.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "organismal entity"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

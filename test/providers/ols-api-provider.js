@@ -1,15 +1,15 @@
 import OlsApiProvider from "../../src/providers/ols-api-provider.js"
 import assert from "assert"
 import fs from "fs"
-import { mockRequests } from "./requests.js"
+import { mockHttpRequests } from "./mocks/http-requests.js"
 
 const provider = new OlsApiProvider({
   endpoint: "https://api.terminology.tib.eu/api/v2/",
   language: "en",
 })
 
-const missing = mockRequests(provider.axios, {
-  dir: "test/providers/ols-provider/",
+const missing = mockHttpRequests(provider.http, {
+  dir: "test/providers/mocks/ols-api-provider/",
   // debug: true,
   downloadMissing: true,
 }, {
@@ -94,7 +94,7 @@ describe("OlsProvider.getSchemes", () => {
   it("test JSKOS of bk", async function () {
     const config = { schemes: [{ VOCID: "bk" }] }
     const scheme = await provider.getSchemes(config)
-    const bk_raw = fs.readFileSync("test/providers/ols-provider/jskos_bk.json", "utf-8")
+    const bk_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_bk.json", "utf-8")
     const bk_jskos = JSON.parse(bk_raw)
     assert(Array.isArray(scheme))
     assert(scheme.length === 1)
@@ -107,7 +107,7 @@ describe("OlsProvider.getSchemes", () => {
   it("test JSKOS of two schemes", async function () {
     const config = { schemes: [{ VOCID: "bfo" }, { VOCID: "bf" }] }
     const scheme = await provider.getSchemes(config)
-    const schemes_raw = fs.readFileSync("test/providers/ols-provider/jskos_ontology_bfo_bf.json", "utf-8")
+    const schemes_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_ontology_bfo_bf.json", "utf-8")
     const schemes_jskos = JSON.parse(schemes_raw)
     assert(Array.isArray(scheme))
     assert(scheme.length === 2)
@@ -165,7 +165,7 @@ describe("OlsProvider.getTop", () => {
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
     assert(topConcepts.length === 1)
-    const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
+    const bfo_root_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
     Object.keys(bfo_root_jskos[0]).forEach(key => {
       assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)

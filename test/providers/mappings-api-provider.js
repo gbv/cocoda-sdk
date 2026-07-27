@@ -1,19 +1,15 @@
 import MappingsApiProvider from "../../src/providers/mappings-api-provider.js"
 import assert from "assert"
-import MockAdapter from "axios-mock-adapter"
+import HttpMockAdapter from "./mocks/http-mock-adapter.js"
 import * as errors from "../../src/errors/index.js"
+import fs from "fs"
 
-const api = {
-  mappings: "test:/mappings",
-  concordances: "test:/concordances",
-  annotations: "test:/annotations",
-  status: "test:/status",
-}
+const api = JSON.parse(fs.readFileSync("test/providers/mocks/mappings-api-provider/api.json", "utf-8"))
 
 const registry = new MappingsApiProvider({
   status: api.status,
 })
-const mock = new MockAdapter(registry.axios)
+const mock = new HttpMockAdapter(registry.http)
 
 describe("MappingsApiProvider", () => {
 
@@ -57,7 +53,6 @@ describe("MappingsApiProvider", () => {
     // Simply test whether the correct URL is called
     mock.onGet().reply(config => {
       assert.equal(config.url, mapping.uri)
-
       done()
       return [200, {}]
     })
@@ -91,7 +86,6 @@ describe("MappingsApiProvider", () => {
     mock.onPost().reply(config => {
       assert.equal(config.url, api.mappings)
       assert.deepEqual(JSON.parse(config.data), mapping)
-
       done()
       return [200, {}]
     })
@@ -114,10 +108,9 @@ describe("MappingsApiProvider", () => {
       const index = mappings.findIndex(mapping => mapping.uri === JSON.parse(config.data).uri)
       assert.ok(index !== -1 && !postedIndexes.includes(index))
       postedIndexes.push(index)
-      if (postedIndexes.length === mappings.length) {
-        done()
-      }
-
+      assert(postedIndexes.length === mappings.length)
+      
+      done()
       return [200, {}]
     })
     registry.postMappings({ mappings })

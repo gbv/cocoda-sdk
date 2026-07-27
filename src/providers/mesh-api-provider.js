@@ -144,9 +144,7 @@ export default class MeshApiProvider extends BaseProvider {
     offset = offset || this._defaultParams.offset
     let url = this._api.api || this.uri || this._jskos.uri || this._jskos.url || this._jskos.api || this._defaultParams.uri
 
-    let result = await this.axios({
-      method: "get",
-      url: url,
+    let result = await this._request(url, {
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
