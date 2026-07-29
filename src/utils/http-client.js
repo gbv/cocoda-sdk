@@ -4,13 +4,7 @@ export default class HttpClient {
 
   constructor(options = {}) {
     this.timeout = options.timeout ?? timeout_default
-
-    // Default adapter
-    this.fetch = options.fetch ?? globalThis.fetch
-  }
-
-  setAdapter(fetchAdapter) {
-    this.fetch = fetchAdapter
+    this.fetch = globalThis.fetch.bind(globalThis)
   }
 
   getCancelTokenSource() {

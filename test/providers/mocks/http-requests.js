@@ -7,10 +7,9 @@ export function mockHttpRequests(http, config, requests) {
 
   const originalFetch = http.fetch
 
-  http.setAdapter(async (url, options = {}) => {
+  http.fetch = async (url, options = {}) => {
 
     let fullUrl = buildUrl(url, options.params)
-
 
     if (options.method && (options.method !== "GET" && options.method !== "get")) {
       fullUrl = options.method + " " + fullUrl
@@ -81,7 +80,7 @@ export function mockHttpRequests(http, config, requests) {
         },
       },
     )
-  })
+  }
 
   return missing
 }

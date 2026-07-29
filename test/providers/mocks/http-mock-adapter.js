@@ -11,7 +11,7 @@ export class HttpMockAdapter {
       delete: [],
     }
 
-    this.httpClient.setAdapter(async (url, options = {}) => {
+    this.httpClient.fetch = async (url, options = {}) => {
       const method = (options.method || "GET").toLowerCase()
       const response = this.getMockResponse(method, url, options)
       const responseBody = response.status === 204 
@@ -27,7 +27,7 @@ export class HttpMockAdapter {
         status: response.status,
         headers: responseHeaders,
       })
-    })
+    }
   }
 
   /**
