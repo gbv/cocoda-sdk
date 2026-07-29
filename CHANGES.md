@@ -1,5 +1,12 @@
+# 3.8.1
+
+- Hotfix for use of fetch in the browser
+
 # 3.8.0
 
+- Replace axios with native fetch
+- Add MeSH API provider
+- Add generic timeout parameter
 - Update jskos-tools to 1.3.0
 
 # 3.7.0
