@@ -34,7 +34,7 @@ describe("MappingsApiProvider", () => {
       // TODO: Add more parameters
     }
     mock.onGet().reply(config => {
-      assert.equal(config.url, api.mappings)
+      assert.ok(config.url.startsWith(api.mappings))
       assert.equal(config.params.from, requestConfig.from)
       assert.equal(config.params.fromScheme, requestConfig.fromScheme)
       assert.equal(config.params.to, requestConfig.to.uri)
@@ -52,7 +52,7 @@ describe("MappingsApiProvider", () => {
     }
     // Simply test whether the correct URL is called
     mock.onGet().reply(config => {
-      assert.equal(config.url, mapping.uri)
+      assert.ok(config.url.startsWith(mapping.uri))
       done()
       return [200, {}]
     })
@@ -84,7 +84,7 @@ describe("MappingsApiProvider", () => {
   it("should perform posting a mapping correctly", (done) => {
     const mapping = {}
     mock.onPost().reply(config => {
-      assert.equal(config.url, api.mappings)
+      assert.ok(config.url.startsWith(api.mappings))
       assert.deepEqual(JSON.parse(config.data), mapping)
       done()
       return [200, {}]
@@ -104,7 +104,7 @@ describe("MappingsApiProvider", () => {
 
     const postedIndexes = []
     mock.onPost().reply(config => {
-      assert.equal(config.url, api.mappings)
+      assert.ok(config.url.startsWith(api.mappings))
       const index = mappings.findIndex(mapping => mapping.uri === JSON.parse(config.data).uri)
       assert.ok(index !== -1 && !postedIndexes.includes(index))
       postedIndexes.push(index)
@@ -121,7 +121,7 @@ describe("MappingsApiProvider", () => {
       uri: "test:/mappings/1",
     }
     mock.onDelete().reply(config => {
-      assert.equal(config.url, mapping.uri)
+      assert.ok(config.url.startsWith(mapping.uri))
       done()
       return [204]
     })

@@ -87,10 +87,14 @@ export function mockHttpRequests(http, config, requests) {
 
 function buildUrl(url, params = {}) {
   const fullUrl = new URL(url, "http://localhost")
+  const searchParams = fullUrl.searchParams
 
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
-      fullUrl.searchParams.append(key, value)
+      if (searchParams.has(key)) {
+        searchParams.delete(key)
+      }
+      searchParams.append(key, value)
     }
   })
 

@@ -61,11 +61,11 @@ const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
  * Example:
  * ```js
  *  getConcept({ concept, ...config }) {
- *    return this.http._request(url, ...config)})
+ *    return this._request(url, ...config)})
  *  }
  * ```
  *
- * Always use `this.http._request` like in the example for http requests!
+ * Always use `this._request` like in the example for http requests!
  *
  * @category Providers
  */
@@ -309,10 +309,11 @@ export default class BaseProvider {
   async _request(url, config = {}) {
     if (!config._skipAdditionalParameters) {
       config.params ||= {}
-      // Add language parameter to request
-      config.params.language = [...new Set(
-        [].concat((config.params.language ?? "").split(","), this.languages, this._defaultLanguages).filter(Boolean)),
-      ].join(",")
+      // Add or extend language parameter
+      if (this.languages.length) {
+        const languages = new Set([].concat((config.params.language ?? "").split(","), this.languages).filter(Boolean))
+        config.params.language = [...languages].sort().join(",")
+      }
       // Set auth
       if (this.has.auth && this._auth.bearerToken && !config?.headers?.Authorization) {
         config.headers ||= {}
@@ -322,10 +323,6 @@ export default class BaseProvider {
     try {
       const response = await this.http.request(url, config)
       let { data, headers } = response
-      
-
-      // Apply unicode normalization
-      data = jskos.normalize(data)
 
       if (typeof data === "object" && data !== null) {
         // Add total count
