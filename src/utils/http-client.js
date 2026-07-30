@@ -1,3 +1,5 @@
+import jskos from "jskos-tools"
+
 const timeout_default = 200000
 
 export default class HttpClient {
@@ -19,11 +21,17 @@ export default class HttpClient {
     const {
       method = "GET",
       headers = {},
+      params = {},
       body,
       signal,
       timeout = this.timeout,
       ...options
     } = config
+
+    const query = new URLSearchParams(params)
+    if (query.size) {
+      url = url + (url.indexOf("?") >= 0 ? "&" : "?") + query
+    }
 
     const timeoutController = this.getCancelTokenSource()
 
@@ -78,9 +86,13 @@ export default class HttpClient {
 
       if (contentType.includes("application/json")) {
         data = await response.json()
+        // TODO: add own property ._url or similar to track where data came from
       } else {
         data = await response.text()
       }
+
+      // Apply unicode normalization
+      data = jskos.normalize(data)
 
       return {
         data,
