@@ -58,6 +58,7 @@ export default class HttpClient {
               ? body
               : JSON.stringify(body),
         signal: requestSignal,
+        params,
         ...options,
       })
 

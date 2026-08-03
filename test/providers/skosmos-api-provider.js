@@ -15,6 +15,8 @@ const missing = mockHttpRequests(provider.http, {
   downloadMissing: true,
 }, {
   "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en&language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp":"skosmos-concept.json",
+
+  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en":"skosmos-concept.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))

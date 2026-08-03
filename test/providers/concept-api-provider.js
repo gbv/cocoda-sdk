@@ -35,6 +35,17 @@ const missing = mockHttpRequests(registry.http, {
   "test:/conceptsAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=100&uri=&language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concepts.json",
   "test:/conceptsAPI?properties=narrower&limit=100&uri=test%3Aconcept&language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concept.json",
   "test:/conceptsAPI?properties=ancestors&limit=100&uri=test%3Anarrower&language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "narrower.json",
+
+  "test:/registriesAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=500": "registry.json",
+  "test:/schemesAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=500": "scheme.json",
+  "test:/schemesAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=500&uri=test%3Ascheme": "scheme.json",
+  "test:/topAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=10000&uri=test%3Ascheme": "concept.json",
+  "test:/conceptsAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=100&uri=test%3Aconcept": "concept.json",
+  "test:/conceptsAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=100&uri=test%3Aconcept%7Ctest%3Anarrower": "concepts.json",
+  "test:/conceptsAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=100&uri=test%3Anarrower": "narrower.json",
+  "test:/conceptsAPI?properties=%2Bcreated%2Cissued%2Cmodified%2CeditorialNote%2CscopeNote%2Cnote%2Cdefinition%2Cmappings%2Clocation&limit=100&uri=": "concepts.json",
+  "test:/conceptsAPI?properties=narrower&limit=100&uri=test%3Aconcept": "concept.json",
+  "test:/conceptsAPI?properties=ancestors&limit=100&uri=test%3Anarrower": "narrower.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: '${url}'`)))
