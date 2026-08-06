@@ -30,6 +30,7 @@ export default class ModApiProvider extends BaseProvider {
   static providerType = "http://bartoc.org/en/node/20333"
   // - supports (Optional object of supported capabilities. The keys should be values from this list: https://github.com/gbv/cocoda-sdk/blob/9145952398d6828004beb395c1d392a4d24e9288/src/utils/index.js#L159-L174; values should be a boolean. `false` values can be left out. They will be used to initialize `this.has` (see below). Alternatively, `this.has` can be filled in `_prepare` or `_setup`.)
   static supports = {
+    registries: true,
     schemes: true,
     top: false,
     data: false,
@@ -271,6 +272,32 @@ export default class ModApiProvider extends BaseProvider {
     return concept
   }
 
+  // API REQUESTS REGISTRIES
+
+  async _getRegistriesMod() {
+    //https://terminology.services.base4nfdi.de/api-gateway/collections/
+    const url = this._getApiUrl(["collections"], null)
+    return await this._request(url)
+  }
+
+  async _getRegistriesModLimit(limit) {
+    const artifacts = await this._getRegistriesMod()
+    if (limit && limit > 0) {
+      return artifacts.slice(0, limit)
+    }
+    return artifacts
+  }
+
+  async _getRegistryMod(registryParam) {
+    // filter from https://terminology.services.base4nfdi.de/api-gateway/collections/
+    const artifacts = await this._getRegistriesMod()
+    for (const registry of artifacts) {
+      if (registry.uri && registry.uri === registryParam.uri) {
+        return registry
+      }
+    }
+  }
+
   // API REQUESTS SCHEMES
 
   async _getSchemesMod() {
@@ -453,6 +480,40 @@ export default class ModApiProvider extends BaseProvider {
    * @private
    */
   _setup() {}
+
+
+  /**
+   * Retrieves all registries (terminology collections aka JSKOS Scheme Registries) from the MOD API.
+   *
+   * @param {Object} [params={}] - Optional parameters for the request.
+   * @returns {Promise<Array>} An array of JSKOS concept schemes.
+   * @async
+   */
+  async getRegistries({registries, limit, ..._config}) {
+    let registry_results = []
+    let artefacts = []
+    if (registries) {
+      for (const r of registries) {
+        let sc = await this._getRegistryMod(r)
+        if (sc) {
+          artefacts.push(sc)
+        }
+      }
+    } else {
+      artefacts = await this._getRegistriesModLimit(limit)
+    }
+
+    for (const artefact of artefacts) {
+      let scheme = await this._artefactToJSKOS(artefact)
+      if (scheme) {
+        registry_results.push(scheme)
+      } else {
+        console.warn("JSKOS transformation failed for artefact: ", artefact)
+      }
+    }
+    return registry_results
+  }
+
 
   /**
    * Retrieves all concept schemes from the MOD API.
