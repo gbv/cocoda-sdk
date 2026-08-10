@@ -3,8 +3,7 @@ import assert from "assert"
 import { mockHttpRequests } from "./mocks/http-requests.js"
 
 const provider = new ModApiProvider({
-  provider: "ModApi",
-  uri: "https://terminology.services.base4nfdi.de/api-gateway",
+  endpoint: "https://terminology.services.base4nfdi.de/api-gateway/",
   language: "en",
   cleancontext: true,
 })
@@ -18,13 +17,13 @@ const missing = mockHttpRequests(provider.http, {
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "scheme-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo/resources/concepts?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concepts-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gnd/resources/concepts/4179484-9?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concept-4179484-9.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/collections?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "collections.json",
+  "https://terminology.services.base4nfdi.de/api-gateway/collections/?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "collections.json",
 
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts": "schemes.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo": "scheme-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo/resources/concepts": "concepts-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gnd/resources/concepts/4179484-9": "concept-4179484-9.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/collections": "collections.json",
+  "https://terminology.services.base4nfdi.de/api-gateway/collections/": "collections.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
