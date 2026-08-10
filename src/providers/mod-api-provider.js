@@ -1,3 +1,4 @@
+import { isValidUri } from "jskos-tools"
 import BaseProvider from "./base-provider.js"
 
 /**
@@ -238,7 +239,7 @@ export default class ModApiProvider extends BaseProvider {
 
     if (artefact.terminologies) {
       item.schemes = artefact.terminologies.map(({uri,label}) => {
-        if (uri) {
+        if (uri && isValidUri(uri)) {
           return label ? {uri, prefLabel:{und: label}} : {uri}
         }
       }).filter(Boolean)
