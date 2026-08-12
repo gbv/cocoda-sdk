@@ -1,3 +1,11 @@
+# 3.8.2
+
+The 3.8.x releases are intermediate release for testing. In doubt, keep at version 3.7.0.
+
+- Extend MOD API, in particular by addition of getRegistries
+- Continue migration from axios to fetch
+- Update dependencies
+
 # 3.8.1
 
 - Hotfix for use of fetch in the browser
