@@ -10,6 +10,7 @@ import LocApiProvider from "./loc-api-provider.js"
 import SkohubProvider from "./skohub-provider.js"
 import LobidApiProvider from "./lobid-api-provider.js"
 import ModApiProvider from "./mod-api-provider.js"
+import MeshApiProvider from "./mesh-api-provider.js"
 import OlsApiProvider from "./ols-api-provider.js"
 import MyCoReProvider from "./mycore-provider.js"
 import NoTApiProvider from "./not-api-provider.js"
@@ -28,6 +29,7 @@ export {
   LobidApiProvider,
   MyCoReProvider,
   ModApiProvider,
+  MeshApiProvider,
   OlsApiProvider,
   NoTApiProvider,
 }
