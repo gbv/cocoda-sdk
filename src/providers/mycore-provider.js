@@ -135,8 +135,10 @@ export default class MyCoReProvider extends BaseProvider {
    * Loads the data from the API. Only called from getSchemes and only called once.
    */
   async _loadSchemeData(config) {
-    const schemeInfo = await this._request(this._api.api, {
+    const schemeInfo = await this.axios({
       ...config,
+      method: "get",
+      url: this._api.api,
       _skipAdditionalParameters: true,
     })
     this._scheme = this._schemeInfoToJSKOS(schemeInfo)

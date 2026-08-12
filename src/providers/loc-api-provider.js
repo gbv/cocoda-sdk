@@ -1,6 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
 import jskos from "jskos-tools"
+import axios from "axios"
 
 const locUriPrefix = "http://id.loc.gov/authorities/"
 const supportedSchemes = [
@@ -153,18 +154,20 @@ export default class LocApiProvider extends BaseProvider {
     const schemes = []
 
     for (let scheme of await Promise.all(
-      supportedSchemes.filter(s => !this.schemes || !this.schemes.length || this.schemes.find(s2 => jskos.compare(s, s2))).map(s => this._request(`${s.uri.replace("http:", "https:")}.json`)
-        .then(({ status, data }) => {
-          if (status === 200) {
-            let scheme = data.find(d => s.uri === d["@id"])
-            if (scheme) {
-              scheme = jskos.merge(madsToJskosScheme(scheme), s)
-              scheme.topConcepts = (scheme.topConcepts || []).filter(c => c)
-              return scheme
-            }
+      supportedSchemes.filter(s => !this.schemes || !this.schemes.length || this.schemes.find(s2 => jskos.compare(s, s2))).map(s => axios({
+        method: "get",
+        url: `${s.uri.replace("http:", "https:")}.json`,
+      }).then(({ status, data }) => {
+        if (status === 200) {
+          let scheme = data.find(d => s.uri === d["@id"])
+          if (scheme) {
+            scheme = jskos.merge(madsToJskosScheme(scheme), s)
+            scheme.topConcepts = (scheme.topConcepts || []).filter(c => c)
+            return scheme
           }
-          return null
-        })))) {
+        }
+        return null
+      })))) {
       if (scheme) {
         schemes.push(scheme)
       }
@@ -204,17 +207,19 @@ export default class LocApiProvider extends BaseProvider {
 
     const resultConcepts = []
 
-    for (let concept of await Promise.all(concepts.map(c => this._request(`${c.uri.replace("http:", "https:")}.json`)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          let concept = data.find(d => c.uri === d["@id"])
-          if (concept) {
-            return madsToJskosConcept(concept, { scheme: c.inScheme && c.inScheme[0] })
-          }
-          return null
+    for (let concept of await Promise.all(concepts.map(c => axios({
+      method: "get",
+      url: `${c.uri.replace("http:", "https:")}.json`,
+    }).then(({ status, data }) => {
+      if (status === 200) {
+        let concept = data.find(d => c.uri === d["@id"])
+        if (concept) {
+          return madsToJskosConcept(concept, { scheme: c.inScheme && c.inScheme[0] })
         }
+        return null
+      }
 
-      })))) {
+    })))) {
       if (concept) {
         resultConcepts.push(concept)
       }
@@ -265,7 +270,9 @@ export default class LocApiProvider extends BaseProvider {
     }
     limit = limit || this._jskos.suggestResultLimit || 100
     offset = offset || 0
-    const { data } = await this._request(`${schemeUri}/suggest2`.replace("http:", "https:"), {
+    const { data } = await axios({
+      method: "get",
+      url: `${schemeUri}/suggest2`.replace("http:", "https:"),
       params: {
         q: search,
         count: limit || 100,

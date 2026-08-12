@@ -1,6 +1,0 @@
-{
-  "mappings": "test:/mappings",
-  "concordances": "test:/concordances",
-  "annotations": "test:/annotations",
-  "status": "test:/status"
-}

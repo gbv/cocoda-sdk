@@ -1,13 +1,13 @@
 import BaseProvider from "../../src/providers/base-provider.js"
 import assert from "assert"
-import HttpMockAdapter from "./mocks/http-mock-adapter.js"
+import MockAdapter from "axios-mock-adapter"
 import { requestMethods } from "../../src/utils/index.js"
 
 describe("BaseProvider", () => {
   let provider, registry = {}, mock
   const getProvider = (...args) => {
     const provider = new BaseProvider(...args)
-    mock = new HttpMockAdapter(provider.http)
+    mock = new MockAdapter(provider.axios)
     return provider
   }
 
@@ -26,7 +26,7 @@ describe("BaseProvider", () => {
     assert.equal(provider._jskos, registry, "registry property does not refer to registry object")
     assert.deepEqual(provider.languages, [], "languages property is not an empty array")
     assert.deepEqual(provider._auth, { key: null, bearerToken: null })
-    assert.notEqual(provider.http && provider.http.request, undefined)
+    assert.notEqual(provider.axios && provider.axios.request, undefined)
   })
 
   it("should have all request methods", async () => {
@@ -39,16 +39,21 @@ describe("BaseProvider", () => {
     }
   })
 
-  it("should set certain parameters and headers on request", async () => {
-    mock.onGet("test?language=abc%2Cdef").reply(config => {
+  it("should set certain parameters and headers on axios request", async () => {
+    mock.onGet("test").reply(config => {
+      const languages = (config.params.language || "").split(",")
+      assert.equal(languages[0], "def")
+      assert.equal(languages[1], "abc")
       assert.equal(config.headers.Authorization, "Bearer abcdef")
+
       return [200, {}]
     })
     provider.languages = ["abc"]
     provider.setAuth({ key: "blubb", bearerToken: "abcdef" })
     provider.has.auth = true
-    await provider._request("test", {
+    await provider.axios({
       method: "get",
+      url: "test",
       params: {
         language: "def",
       },
@@ -56,19 +61,20 @@ describe("BaseProvider", () => {
   })
 
   it("should perform certain actions on response", async () => {
-    provider.languages = []
-
     let result
+
     mock.onGet("test").reply(200, {})
-    result = await provider._request("test", {
+    result = await provider.axios({
       method: "get",
+      url: "test",
     })
     delete result._url
     assert.deepEqual(result, {})
 
     mock.onGet("test").reply(200, [], { "x-total-count": 5 })
-    result = await provider._request("test", {
+    result = await provider.axios({
       method: "get",
+      url: "test",
     })
     assert.ok(Array.isArray(result))
     assert.ok(result._url && result._url.startsWith("test"))
@@ -151,7 +157,7 @@ describe("BaseProvider", () => {
 
   // })
 
-  it("should retry requests", async () => {
+  it("should retry axios requests", async () => {
     provider.setRetryConfig({
       delay: 5,
     })
@@ -161,14 +167,15 @@ describe("BaseProvider", () => {
       return [requestCount == 1 ? 403 : 200]
     })
     await assert.doesNotReject(async () => {
-      await provider._request("test", {
+      await provider.axios({
         method: "get",
+        url: "test",
       })
     })
     assert(requestCount, 2)
   })
 
-  it("should not retry requests indefinitely", async () => {
+  it("should not retry axios requests indefinitely", async () => {
     provider.setRetryConfig({
       delay: 5,
     })
@@ -177,11 +184,16 @@ describe("BaseProvider", () => {
       requestCount += 1
       return [401]
     })
-    await assert.rejects(provider._request("test", { method: "get" }))
+    await assert.rejects(async () => {
+      await provider.axios({
+        method: "get",
+        url: "test",
+      })
+    })
     assert(requestCount, 3)
   })
 
-  it("should not retry requests at all if count is set to 0", async () => {
+  it("should not retry axios requests at all if count is set to 0", async () => {
     provider.setRetryConfig({
       count: 0,
     })
@@ -191,14 +203,15 @@ describe("BaseProvider", () => {
       return [401]
     })
     await assert.rejects(async () => {
-      await provider._request("test", {
+      await provider.axios({
         method: "get",
+        url: "test",
       })
     })
     assert(requestCount, 1)
   })
 
-  it("should not retry requests for POST requests", async () => {
+  it("should not retry axios requests for POST requests", async () => {
     provider.setRetryConfig({
       count: 3,
     })
@@ -208,23 +221,25 @@ describe("BaseProvider", () => {
       return [401]
     })
     await assert.rejects(async () => {
-      await provider._request("test", {
+      await provider.axios({
         method: "post",
+        url: "test",
       })
     })
     assert(requestCount, 1)
   })
 
-  it("should not repeat the same request is one is already there", async () => {
+  it("should not repeat the same axios request is one is already there", async () => {
     class CustomProvider extends BaseProvider {
       async getMappings() {
-        return this._request("mappings", {
+        return this.axios({
           method: "get",
+          url: "mappings",
         })
       }
     }
     const provider = new CustomProvider({})
-    const mock = new HttpMockAdapter(provider.http)
+    const mock = new MockAdapter(provider.axios)
     let mockCalled = 0
     mock.onGet("mappings").reply(() => {
       mockCalled += 1
@@ -235,10 +250,10 @@ describe("BaseProvider", () => {
     assert.equal(promise1, promise2)
     await promise1
     await promise2
-    assert.equal(mockCalled, 1, "request was performed twice even though it shouldn't")
-    // Now that the request is finished, do it again to make sure it made a new request
+    assert.equal(mockCalled, 1, "axios request was performed twice even though it shouldn't")
+    // Now that the request is finished, do it again to make sure it made a new axios request
     await provider.getMappings()
-    assert.equal(mockCalled, 2, "expected to perform a new request after other requests are finished")
+    assert.equal(mockCalled, 2, "expected axios to perform a new request after other requests are finished")
   })
 
   it("should properly handle `stored` property", () => {

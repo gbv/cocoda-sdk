@@ -192,9 +192,10 @@ export default class ReconciliationApiProvider extends BaseProvider {
     // Set appropriate header
     config.headers ||= {}
     config.headers["Content-Type"] = "application/x-www-form-urlencoded"
-    let data = await this._request(url, {
+    let data = await this.axios({
       ...config,
       method: "post",
+      url,
       data: encodedData,
     })
     data = data || {}

@@ -1,9 +1,12 @@
 import jskos from "jskos-tools"
+import axios from "axios"
 import { withCustomProps, listOfCapabilities, requestMethods, deepEqual } from "../utils/index.js"
 import * as errors from "../errors/index.js"
-import HttpClient from "../utils/http-client.js"
 
 const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
+
+// TODO: Decide on default timeout value
+const timeout_default = 200000
 
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
@@ -57,15 +60,21 @@ const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
  * - `this._api`: object of API endpoints for the registry
  * - `this._config`: configuration of the registry as provided by the `/status` endpoint if available
  *
- * All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the http request.
+ * All of the request methods take ONE parameter which is a config object. Actual parameters should be properties on this object. The config object should be destructured to remove the properties your method needs, and the remaining config object should be given to the axios request.
  * Example:
  * ```js
  *  getConcept({ concept, ...config }) {
- *    return this._request(url, ...config)})
+ *    return this.axios({
+ *      ...config,
+ *      method: "get",
+ *      params: {
+ *        uri: concept.uri,
+ *      },
+ *    })
  *  }
  * ```
  *
- * Always use `this._request` like in the example for http requests!
+ * Always use `this.axios` like in the example for http requests!
  *
  * @category Providers
  */
@@ -82,7 +91,9 @@ export default class BaseProvider {
     if (this._jskos && this._jskos.timeout && this._jskos.backendTimeout) {
       this._jskos.timeout = Math.max(this._jskos.timeout, this._jskos.backendTimeout)
     }
-    this.http = new HttpClient()
+    this.axios = axios.create({
+      timeout: this._jskos && this._jskos.timeout ? this._jskos.timeout : timeout_default,
+    })
     // Path is used for https check and local mappings
     this._path = typeof window !== "undefined" && window.location.pathname
     /**
@@ -143,6 +154,82 @@ export default class BaseProvider {
     // Set default retry config
     this.setRetryConfig()
 
+    // Add a request interceptor
+    this.axios.interceptors.request.use((config = {}) => {
+      if (!config._skipAdditionalParameters) {
+        config.params ||= {}
+        // Add language parameter to request
+        config.params.language = [...new Set(
+          [].concat((config.params.language ?? "").split(","), this.languages, this._defaultLanguages).filter(Boolean)),
+        ].join(",")
+        // Set auth
+        if (this.has.auth && this._auth.bearerToken && !config?.headers?.Authorization) {
+          config.headers ||= {}
+          config.headers.Authorization = `Bearer ${this._auth.bearerToken}`
+        }
+      }
+
+      // Don't perform http requests if site is used via https
+      if (config.url?.startsWith("http:") && typeof window !== "undefined" && window.location.protocol == "https:") {
+        // TODO: Return proper error object.
+        throw new axios.Cancel("Can't call http API from https.")
+      }
+
+      return config
+    })
+
+    // Add a response interceptor
+    this.axios.interceptors.response.use(({ data, headers = {}, config = {} }) => {
+      // Apply unicode normalization
+      data = jskos.normalize(data)
+
+      // Add URL to array as prop
+      let url = config.url
+      if (!url.endsWith("?")) {
+        url += "?"
+      }
+      url += new URLSearchParams(config.params || {}).toString()
+
+      if (typeof data === "object") { // Array or Object
+        // Add total count to array as prop
+        let totalCount = parseInt(headers["x-total-count"])
+        if (!isNaN(totalCount)) {
+          data._totalCount = totalCount
+        }
+        data._url = url
+      }
+
+      // TODO: Return data or whole response here?
+      return data
+    }, error => {
+      const count = error.config?._retryCount ?? 0
+      const statusCode = error.response?.status
+      if (
+        this._retryConfig.methods.includes(error.config?.method)
+        && this._retryConfig.statusCodes.includes(statusCode)
+        && count < this._retryConfig.count
+      ) {
+        error.config._retryCount = count + 1
+        // from: https://github.com/axios/axios/issues/934#issuecomment-531463172
+        if (error.config.data) {
+          error.config.data = JSON.parse(error.config.data)
+        }
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            this.axios(error.config).then(resolve).catch(reject)
+          }, (() => {
+            const delay = this._retryConfig.delay
+            if (typeof delay === "function") {
+              return delay(count)
+            }
+            return delay
+          })())
+        })
+      } else {
+        return Promise.reject(error)
+      }
+    })
+
     const currentRequests = []
     for (let { method, type } of requestMethods) {
       // Make sure all methods exist, but thrown an error if they are not implemented
@@ -164,10 +251,11 @@ export default class BaseProvider {
         if (existingRequest) {
           return existingRequest.promise
         }
+        // Add an axios cancel token to each request
         let source
         if (!options.cancelToken) {
-          source = this.http.getCancelTokenSource()
-          options.cancelToken = source.signal
+          source = this.getCancelTokenSource()
+          options.cancelToken = source.token
         }
         // Make sure a registry is initialized (see `init` method) before any request
         // TODO: Is this a good solution?
@@ -212,7 +300,7 @@ export default class BaseProvider {
         // Attach cancel method to Promise
         if (source) {
           promise.cancel = (...args) => {
-            return source.abort(...args)
+            return source.cancel(...args)
           }
         }
         // Save to list of existing requests
@@ -277,7 +365,10 @@ export default class BaseProvider {
       if (typeof this._api.status === "string") {
         // Request status endpoint
         try {
-          status = await this._request(this._api.status)
+          status = await this.axios({
+            method: "get",
+            url: this._api.status,
+          })
         } catch (error) {
           if (error?.response?.status === 404) {
             // If /status is not available, remove from _api
@@ -307,63 +398,10 @@ export default class BaseProvider {
   }
 
   async _request(url, config = {}) {
-    if (!config._skipAdditionalParameters) {
-      config.params ||= {}
-      // Add or extend language parameter
-      if (this.languages.length) {
-        const languages = new Set([].concat((config.params.language ?? "").split(","), this.languages).filter(Boolean))
-        config.params.language = [...languages].sort().join(",")
-      }
-      // Set auth
-      if (this.has.auth && this._auth.bearerToken && !config?.headers?.Authorization) {
-        config.headers ||= {}
-        config.headers.Authorization = `Bearer ${this._auth.bearerToken}`
-      }
-    }
-    try {
-      const response = await this.http.request(url, config)
-      let { data, headers } = response
-
-      if (typeof data === "object" && data !== null) {
-        // Add total count
-        const totalCount = parseInt(headers.get("x-total-count"))
-        if (!isNaN(totalCount)) {
-          data._totalCount = totalCount
-        }
-        data._url = url
-      }
-      return data
-    } catch (error) {
-      const count = error.config?._retryCount ?? 0
-      const statusCode = error.status
-
-      if (
-        this._retryConfig.methods.includes(error.config?.method) &&
-        this._retryConfig.statusCodes.includes(statusCode) &&
-        count < this._retryConfig.count
-      ) {
-        error.config._retryCount = count + 1
-
-        // Preserve existing behavior
-        if (error.config.data && typeof error.config.data === "string") {
-          try {
-            error.config.data = JSON.parse(error.config.data)
-          } catch {
-            // ignore invalid JSON in retry config body
-          }
-        }
-
-        const delay = typeof this._retryConfig.delay === "function"
-          ? this._retryConfig.delay(count)
-          : this._retryConfig.delay
-
-        await new Promise(resolve => setTimeout(resolve, delay))
-
-        return this._request(url, error.config)
-      }
-
-      throw error
-    }
+    return this.axios({
+      url: url,
+      ...config,
+    })
   }
 
   /**
@@ -379,6 +417,15 @@ export default class BaseProvider {
    * @private
    */
   _setup() { }
+
+  /**
+   * Returns a source for a axios cancel token.
+   *
+   * @returns {Object} axios cancel token source
+   */
+  getCancelTokenSource() {
+    return axios.CancelToken.source()
+  }
 
   /**
    * Sets authentication credentials.
@@ -584,9 +631,6 @@ export default class BaseProvider {
   }
 
   adjustMapping(mapping) {
-    if (!mapping || typeof mapping !== "object") {
-      return mapping
-    }
     // TODO: Add default type
     // Add fromScheme and toScheme if missing
     for (let side of ["from", "to"]) {

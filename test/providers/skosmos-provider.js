@@ -1,7 +1,7 @@
 import SkosmosApiProvider from "../../src/providers/skosmos-api-provider.js"
 import assert from "assert"
 import fs from "fs"
-import { mockHttpRequests } from "./mocks/http-requests.js"
+import { mockRequests } from "./requests.js"
 import jskos from "jskos-tools"
 
 
@@ -9,14 +9,13 @@ const provider = new SkosmosApiProvider({
   endpoint: "https://skosmos.bartoc.org/rest/v1/",
 })
 
-const missing = mockHttpRequests(provider.http, {
-  dir: "test/providers/mocks/skosmos-api-provider/",
+const missing = mockRequests(provider.axios, {
+  dir: "test/providers/skosmos-provider/",
   // debug: true,
   downloadMissing: true,
 }, {
-  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en&language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp":"skosmos-concept.json",
-
-  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en":"skosmos-concept.json",
+  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp":
+  "skosmos-concept.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
@@ -34,7 +33,7 @@ describe("SkosmosApiProvider.getConcepts", () => {
 
     assert.equal(conceptresult.length, 1)
 
-    const example_jskos_raw = fs.readFileSync("test/providers/mocks/skosmos-api-provider/example_jskos.json", "utf-8")
+    const example_jskos_raw = fs.readFileSync("test/providers/skosmos-provider/example_jskos.json", "utf-8")
     const example_jskos_json = JSON.parse(example_jskos_raw)
 
     for (let key in example_jskos_json) {

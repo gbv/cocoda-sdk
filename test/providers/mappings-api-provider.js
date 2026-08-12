@@ -1,15 +1,19 @@
 import MappingsApiProvider from "../../src/providers/mappings-api-provider.js"
 import assert from "assert"
-import HttpMockAdapter from "./mocks/http-mock-adapter.js"
+import MockAdapter from "axios-mock-adapter"
 import * as errors from "../../src/errors/index.js"
-import fs from "fs"
 
-const api = JSON.parse(fs.readFileSync("test/providers/mocks/mappings-api-provider/api.json", "utf-8"))
+const api = {
+  mappings: "test:/mappings",
+  concordances: "test:/concordances",
+  annotations: "test:/annotations",
+  status: "test:/status",
+}
 
 const registry = new MappingsApiProvider({
   status: api.status,
 })
-const mock = new HttpMockAdapter(registry.http)
+const mock = new MockAdapter(registry.axios)
 
 describe("MappingsApiProvider", () => {
 
@@ -34,7 +38,7 @@ describe("MappingsApiProvider", () => {
       // TODO: Add more parameters
     }
     mock.onGet().reply(config => {
-      assert.ok(config.url.startsWith(api.mappings))
+      assert.equal(config.url, api.mappings)
       assert.equal(config.params.from, requestConfig.from)
       assert.equal(config.params.fromScheme, requestConfig.fromScheme)
       assert.equal(config.params.to, requestConfig.to.uri)
@@ -52,7 +56,8 @@ describe("MappingsApiProvider", () => {
     }
     // Simply test whether the correct URL is called
     mock.onGet().reply(config => {
-      assert.ok(config.url.startsWith(mapping.uri))
+      assert.equal(config.url, mapping.uri)
+
       done()
       return [200, {}]
     })
@@ -84,8 +89,9 @@ describe("MappingsApiProvider", () => {
   it("should perform posting a mapping correctly", (done) => {
     const mapping = {}
     mock.onPost().reply(config => {
-      assert.ok(config.url.startsWith(api.mappings))
+      assert.equal(config.url, api.mappings)
       assert.deepEqual(JSON.parse(config.data), mapping)
+
       done()
       return [200, {}]
     })
@@ -104,13 +110,14 @@ describe("MappingsApiProvider", () => {
 
     const postedIndexes = []
     mock.onPost().reply(config => {
-      assert.ok(config.url.startsWith(api.mappings))
+      assert.equal(config.url, api.mappings)
       const index = mappings.findIndex(mapping => mapping.uri === JSON.parse(config.data).uri)
       assert.ok(index !== -1 && !postedIndexes.includes(index))
       postedIndexes.push(index)
-      assert(postedIndexes.length === mappings.length)
-      
-      done()
+      if (postedIndexes.length === mappings.length) {
+        done()
+      }
+
       return [200, {}]
     })
     registry.postMappings({ mappings })
@@ -121,7 +128,7 @@ describe("MappingsApiProvider", () => {
       uri: "test:/mappings/1",
     }
     mock.onDelete().reply(config => {
-      assert.ok(config.url.startsWith(mapping.uri))
+      assert.equal(config.url, mapping.uri)
       done()
       return [204]
     })

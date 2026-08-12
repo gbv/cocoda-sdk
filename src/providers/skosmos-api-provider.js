@@ -119,7 +119,10 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
     // Otherwise load scheme data and save in approved/rejected schemes
     const url = this._getApiUrl(scheme, "/")
-    const data = await this._request(url)
+    const data = await this.axios({
+      method: "get",
+      url,
+    })
     const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
     if (resultScheme) {
       this._approvedSchemes.push({
@@ -270,7 +273,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     const schemes = []
     for (let scheme of this.schemes || []) {
       const url = this._getApiUrl(scheme, "/")
-      const data = await this._request(url, {...config})
+      const data = await this.axios({
+        ...config,
+        method: "get",
+        url,
+      })
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
       if (label) {
@@ -305,7 +312,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     }
     config.params ||= {}
     config.params.scheme = schemeUri
-    const response = await this._request(url, {...config})
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     const concepts = []
     for (let concept of response.topconcepts || []) {
       const newConcept = this._toJskosConcept(concept, {
@@ -340,7 +351,11 @@ export default class SkosmosApiProvider extends BaseProvider {
       if (!url) {
         continue
       }
-      const result = await this._request(url, {...config})
+      const result = await this.axios({
+        ...config,
+        method: "get",
+        url,
+      })
       const resultConcept = result?.graph?.find(c => jskos.compare(c, concept))
       if (resultConcept) {
         const newConcept = this._toJskosConcept(resultConcept, { concept, result })
@@ -385,7 +400,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     const url = this._getApiUrl(scheme, "/children")
     config.params ||= {}
     config.params.uri = concept.uri
-    const response = await this._request(url, {...config})
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     const concepts = (response.narrower || []).map(c => this._toJskosConcept(c, { scheme }))
     return concepts
   }
@@ -405,7 +424,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     const url = this._getApiUrl(scheme, "/broaderTransitive")
     config.params ||= {}
     config.params.uri = concept.uri
-    const response = await this._request(url, {...config})
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     let ancestors = []
     let uri = concept.uri
     while (uri) {
@@ -436,7 +459,11 @@ export default class SkosmosApiProvider extends BaseProvider {
     config.params.unique = 1
     config.params.maxhits  =limit || 100
     config.params.type = types.join(" ")
-    const response = await this._request(url, {...config})
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     const concepts = (response.results || []).map(c => this._toJskosConcept(c, { scheme }))
     return concepts
   }
@@ -451,7 +478,11 @@ export default class SkosmosApiProvider extends BaseProvider {
   async getTypes({ scheme, ...config }) {
     const url = this._getApiUrl(scheme, "/types")
     const types = []
-    const response = await this._request(url, {...config})
+    const response = await this.axios({
+      ...config,
+      method: "get",
+      url,
+    })
     for (let type of (response?.types) || []) {
       // Skip SKOS type Concept
       if (type.uri == "http://www.w3.org/2004/02/skos/core#Concept") {

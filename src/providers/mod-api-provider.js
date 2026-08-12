@@ -1,10 +1,21 @@
-import { isValidUri } from "jskos-tools"
 import BaseProvider from "./base-provider.js"
 
 /**
  * MOD API.
  *
  * MOD (Metadata Object Description) is a service that provides access to metadata artifacts such as vocabularies, concept schemes, and related resources via a RESTful API.
+ *
+ * initialization example:
+ * ```json
+ * {
+ *   provider: "ModApi",
+ *   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
+ *   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
+ *   <feature removed> transformation: "manual", // "jsonld" for conversion via jsonld-concept or "manual" for manual conversion
+ *   uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
+ *   backendTimeout: 60000, // applies for all mod endpoints. timeout in milliseconds, default: 60000
+ * }
+ * ```
  *
  * @extends BaseProvider
  * @category Providers
@@ -13,10 +24,12 @@ export default class ModApiProvider extends BaseProvider {
 
   // #### PROPERTIES ####
 
+  // - providerName (This is how a provider is identified in a "registry" object in field `provider`.)
   static providerName = "ModApi"
-  static providerType = "http://bartoc.org/api-type/mod-api"
+  // - providerType (Optional BARTOC API type URI. Supported types: https://github.com/gbv/bartoc.org/blob/main/data/bartoc-api-types.concepts.csv, the URI prefix is "http://bartoc.org/api-type/".)
+  static providerType = "http://bartoc.org/en/node/20333"
+  // - supports (Optional object of supported capabilities. The keys should be values from this list: https://github.com/gbv/cocoda-sdk/blob/9145952398d6828004beb395c1d392a4d24e9288/src/utils/index.js#L159-L174; values should be a boolean. `false` values can be left out. They will be used to initialize `this.has` (see below). Alternatively, `this.has` can be filled in `_prepare` or `_setup`.)
   static supports = {
-    registries: true,
     schemes: true,
     top: false,
     data: false,
@@ -37,13 +50,25 @@ export default class ModApiProvider extends BaseProvider {
 
   /**
    * Constructs the full API URL for a given endpoint.
-   * @param {Array} endpoint - API Endpoint following the base URL
+   * @param {Array} parts - Array of api parts (e.g., "[artifacts, <schemeShort>]")
    * @param {Object} params - An object containing query parameters as key-value pairs.
    * @returns {string} The full URL. Returns undefined if any part is undefined.
    * @private
    */
-  _getApiUrl(endpoint, params) {
-    let result = `${this._api.api}${endpoint}`
+  _getApiUrl(parts, params) {
+    // result = URL + endpointA (+ artefactID)? (+ endpointB)? (+ paramsString)?
+    let result = this.uri || ""
+    // Ensure the base URL ends with a slash and the endpoint starts with a slash
+    if (result.endsWith("/")) {
+      result = result.slice(0, -1)
+    }
+    for (const part of parts) {
+      if (part) {
+        result += "/" + part
+      } else {
+        return
+      }
+    }
 
     if (this._jskos && this._jskos.backendTimeout) {
       if (!params) {
@@ -124,14 +149,14 @@ export default class ModApiProvider extends BaseProvider {
   // _modToJskosManual(artefact) {
   _artefactToJSKOS(artefact) {
     const lan = artefact.language || this._language || "en"
-    const item = {}
+    const concept = {}
     // artefact.rightsHolder
     // artefact.backend_type
     // artefact.createdWith
     // artefact.keywords
     // artefact.contactPoint
     if (artefact.subject) {
-      item.subject = [artefact.subject]
+      concept.subject = [artefact.subject]
     }
     // artefact.obsolete // boolean
     // artefact.accrualMethod
@@ -142,146 +167,127 @@ export default class ModApiProvider extends BaseProvider {
     // artefact.coverage
     // artefact.competencyQuestion
     if (artefact.includedInDataCatalog) {
-      item.api = [artefact.includedInDataCatalog]
+      concept.api = [artefact.includedInDataCatalog]
     }
     // artefact.accessRights
 
     // TYPES
     if (artefact["@type"]) {
-      item["@type"] = artefact["@type"]
+      concept["@type"] = artefact["@type"]
     }
     if (artefact.type) {
-      item.type = [artefact.type]
+      concept.type = [artefact.type]
     }
 
     // NOTATION
     if (artefact.source_name) {
-      item.notation = [artefact.source_name]
+      concept.notation = [artefact.source_name]
     }
     if (artefact.short_form){
-      if (!item.notation) {
-        item.notation = [artefact.short_form]
+      if (!concept.notation) {
+        concept.notation = [artefact.short_form]
       } else {
-        item.notation.push(artefact.short_form)
+        concept.notation.push(artefact.short_form)
       }
     }
     if (artefact.label){
-      item.prefLabel = {}
-      item.prefLabel[lan] = []
-      item.prefLabel[lan].push(artefact.label)
+      concept.prefLabel = {}
+      concept.prefLabel[lan] = []
+      concept.prefLabel[lan].push(artefact.label)
     }
     if (artefact.synonyms){
-      item.altLabel = {}
-      item.altLabel[lan] = artefact.synonyms
+      concept.altLabel = {}
+      concept.altLabel[lan] = artefact.synonyms
     }
     if (artefact.descriptions){
-      item.definition = {}
-      item.definition[lan] = artefact.descriptions
+      concept.definition = {}
+      concept.definition[lan] = artefact.descriptions
     }
     if (artefact.language){
-      item.languages = artefact.language
+      concept.languages = artefact.language
     }
 
     // URLS
     if (artefact["@id"]) {
-      item.uri = artefact["@id"]
+      concept.uri = artefact["@id"]
     }
     if (artefact.iri) {
-      item.iri = artefact.iri
+      concept.iri = artefact.iri
     }
     if (artefact.identifier) {
-      item.identifier = [artefact.identifier]
+      concept.identifier = [artefact.identifier]
     }
     if (artefact.source) {
-      item.source = [artefact.source]
+      concept.source = [artefact.source]
     }
     if (artefact.source_url) {
-      item.namespace = artefact.source_url
+      concept.namespace = artefact.source_url
     }
     if (artefact.landingPage) {
-      item.url = artefact.landingPage
+      concept.url = artefact.landingPage
     }
 
     // METADATA
     if (artefact.version) {
-      item.version = artefact.version
+      concept.version = artefact.version
     }
     // artefact.versionIRI
     if (artefact.modified) {
-      item.modified = artefact.modified
+      concept.modified = artefact.modified
     }
     if (artefact.created) {
-      item.created = artefact.created
+      concept.created = artefact.created
     }
-    // item.startDate
+    // concept.startDate
     if (artefact.hasFormat) {
-      item.format = artefact.hasFormat
+      concept.format = artefact.hasFormat
     }
     if (artefact.license) {
-      item.license = [artefact.license]
+      concept.license = [artefact.license]
     }
-    // TODO: MOD API does not return proper creator URIs
-    /*
     if (artefact.creator) {
-      item.creator = artefact.creator
+      concept.creator = artefact.creator
     }
     // artefact.wasGeneratedBy
     if (artefact.contributor){
-      item.contributor = {}
-      item.contributor.prefLabel = {}
-      item.contributor.prefLabel[lan] = artefact.contributor
+      concept.contributor = {}
+      concept.contributor.prefLabel = {}
+      concept.contributor.prefLabel[lan] = artefact.contributor
     }
     if (artefact.publisher){
-      item.publisher = {}
-      item.publisher[lan] = artefact.publisher
+      concept.publisher = {}
+      concept.publisher[lan] = artefact.publisher
     }
-    */
-
-    if (artefact.terminologies) {
-      item.schemes = artefact.terminologies.map(({uri,label}) => {
-        if (uri && isValidUri(uri)) {
-          return label ? {uri, prefLabel:{und: label}} : {uri}
-        }
-      }).filter(Boolean)
-    }
-
-
     // artefact.title
     if (artefact.released){
-      item.issued = artefact.released
+      concept.issued = artefact.released
     }
     // artefact.acronym
     if (artefact.children){
-      item.narrower = {}
-      item.narrower[lan] = artefact.children
+      concept.narrower = {}
+      concept.narrower[lan] = artefact.children
     }
 
-    return item
+    return concept
   }
 
-  // API REQUESTS REGISTRIES
+  // #### API REQUESTS ####
 
-  async _getRegistriesMod() {
-    //https://terminology.services.base4nfdi.de/api-gateway/collections/
-    const url = this._getApiUrl("collections/", null)
-    return await this._request(url)
-  }
-
-  async _getRegistriesModLimit(limit) {
-    const artifacts = await this._getRegistriesMod()
-    if (limit && limit > 0) {
-      return artifacts.slice(0, limit)
+  async _request(url, ..._config) {
+    if (!url) {
+      return
     }
-    return artifacts
-  }
-
-  async _getRegistryMod(registryParam) {
-    // filter from https://terminology.services.base4nfdi.de/api-gateway/collections/
-    const artifacts = await this._getRegistriesMod()
-    for (const registry of artifacts) {
-      if (registry.uri && registry.uri === registryParam.uri) {
-        return registry
-      }
+    const result = await this.axios({
+      method: "get",
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      ..._config,
+    })
+    if (!result?._url || Object.keys(result).length != 1){
+      return result
     }
   }
 
@@ -289,7 +295,7 @@ export default class ModApiProvider extends BaseProvider {
 
   async _getSchemesMod() {
     //https://terminology.services.base4nfdi.de/api-gateway/artefacts
-    const url = this._getApiUrl("artefacts", null)
+    const url = this._getApiUrl(["artefacts"], null)
     return await this._request(url)
   }
 
@@ -312,7 +318,7 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   async _getSchemeFromShort(short) {
-    const url = this._getApiUrl(`artefacts/${short}`, null)
+    const url = this._getApiUrl(["artefacts", short], null)
     return await this._request(url)
   }
 
@@ -345,7 +351,7 @@ export default class ModApiProvider extends BaseProvider {
     }
 
     // pull page 1
-    const url = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts`, null)
+    const url = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts"], null)
     const pageOne = await this._request(url)
     if (!pageOne){
       return []
@@ -361,7 +367,7 @@ export default class ModApiProvider extends BaseProvider {
 
     // pull remaining pages
     for (let p = page+1; p <= totalPages; p++) {
-      const urlPage = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts`, {page: p})
+      const urlPage = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts"], {page: p})
       const pageP = await this._request(urlPage)
       if (!pageP){
         break
@@ -387,8 +393,7 @@ export default class ModApiProvider extends BaseProvider {
   async _getConceptMod(concept) {
     // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeShort>/resources/concepts/<conceptNotation>
     const {conceptNotation, schemeShort} = await this._conceptNotationFromObj(concept)
-    // FIXME: notation may need to be escaped
-    const url = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts/${conceptNotation}`, null)
+    const url = this._getApiUrl(["artefacts", schemeShort, "resources", "concepts", conceptNotation], null)
     return await this._request(url)
   }
 
@@ -468,40 +473,6 @@ export default class ModApiProvider extends BaseProvider {
    * @private
    */
   _setup() {}
-
-
-  /**
-   * Retrieves all registries (terminology collections aka JSKOS Scheme Registries) from the MOD API.
-   *
-   * @param {Object} [params={}] - Optional parameters for the request.
-   * @returns {Promise<Array>} An array of JSKOS concept schemes.
-   * @async
-   */
-  async getRegistries({registries, limit, ..._config}) {
-    let registry_results = []
-    let artefacts = []
-    if (registries) {
-      for (const r of registries) {
-        let sc = await this._getRegistryMod(r)
-        if (sc) {
-          artefacts.push(sc)
-        }
-      }
-    } else {
-      artefacts = await this._getRegistriesModLimit(limit)
-    }
-
-    for (const artefact of artefacts) {
-      let scheme = await this._artefactToJSKOS(artefact)
-      if (scheme) {
-        registry_results.push(scheme)
-      } else {
-        console.warn("JSKOS transformation failed for artefact: ", artefact)
-      }
-    }
-    return registry_results
-  }
-
 
   /**
    * Retrieves all concept schemes from the MOD API.

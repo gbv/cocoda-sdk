@@ -7,7 +7,7 @@ import { stdin as input, stdout as output } from "node:process"
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "ModApi",
-  endpoint: "https://terminology.services.base4nfdi.de/api-gateway/", // "http://localhost:8080/api-gateway/" if api-gateway is running locally
+  uri: "https://terminology.services.base4nfdi.de/api-gateway", // "http://localhost:8080/api-gateway" if api-gateway is running locally
   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
 })

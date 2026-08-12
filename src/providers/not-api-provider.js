@@ -1,5 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import * as errors from "../errors/index.js"
+import axios from "axios"
 import jskos from "jskos-tools"
 
 /**
@@ -61,12 +62,9 @@ export default class NoTApiProvider extends BaseProvider {
 
   async getSchemes() {
     if (!cache.schemes.length) {
-      const result = await this._request(this._api.api, {
-        method: "post",
-        data: {
-          query: "query sources { sources { name uri description alternateName } }",
-          operationName: "sources",
-        },
+      const result = await axios.post(this._api.api, {
+        query: "query sources { sources { name uri description alternateName } }",
+        operationName: "sources",
       })
       const schemes = result?.data?.data?.sources || []
       if (schemes.length) {
@@ -100,11 +98,8 @@ export default class NoTApiProvider extends BaseProvider {
     if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
-    const result = await this._request(this._api.api, {
-      method: "post",
-      data: {
-        query: `query { lookup( uris: [${concepts.map(c => `"${c.uri}"`)}], ) { uri source {   ... on Source {     uri   } } result {   ... on Term {     uri     prefLabel     scopeNote     altLabel  broader { uri } narrower { uri } } } } }`,
-      },
+    const result = await axios.post(this._api.api, {
+      query: `query { lookup( uris: [${concepts.map(c => `"${c.uri}"`)}], ) { uri source {   ... on Source {     uri   } } result {   ... on Term {     uri     prefLabel     scopeNote     altLabel  broader { uri } narrower { uri } } } } }`,
     })
     return (result.data?.data?.lookup || []).map(entry => {
       const concept = {
@@ -154,11 +149,8 @@ export default class NoTApiProvider extends BaseProvider {
     if (!scheme || !jskos.isContainedIn(scheme, cache.schemes)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme" })
     }
-    const result = await this._request(this._api.api, {
-      method: "post",
-      data: {
-        query: `query {  terms(    sources: ["${scheme.uri}"]    query: "${search}"  ) {    source {      uri    }     result {      ... on Terms {        terms {          uri          prefLabel          scopeNote        }      }    }  }}`,
-      },
+    const result = await axios.post(this._api.api, {
+      query: `query {  terms(    sources: ["${scheme.uri}"]    query: "${search}"  ) {    source {      uri    }     result {      ... on Terms {        terms {          uri          prefLabel          scopeNote        }      }    }  }}`,
     })
     return (result.data?.data?.terms?.[0]?.result?.terms || []).map(concept => {
       const jskos = {

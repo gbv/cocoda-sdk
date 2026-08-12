@@ -169,10 +169,13 @@ export default class ConceptApiProvider extends BaseProvider {
       }
       throw new errors.MissingApiUrlError()
     }
-    const registries = await this._request(this._api.registries, {
+    const registries = await this.axios({
       ...config,
+      method: "get",
+      url: this._api.registries,
       params: {
         ...this._defaultParams,
+        // ? What should the default limit be?
         limit: 500,
         ...(config.params || {}),
       },
@@ -194,8 +197,10 @@ export default class ConceptApiProvider extends BaseProvider {
       }
       throw new errors.MissingApiUrlError()
     }
-    const schemes = await this._request(this._api.schemes, {
+    const schemes = await this.axios({
       ...config,
+      method: "get",
+      url: this._api.schemes,
       params: {
         ...this._defaultParams,
         // ? What should the default limit be?
@@ -232,8 +237,10 @@ export default class ConceptApiProvider extends BaseProvider {
     if (Array.isArray(this._api.top)) {
       return this._api.top
     }
-    return this._request(this._api.top, {
+    return this.axios({
       ...config,
+      method: "get",
+      url: this._api.top,
       params: {
         ...this._defaultParams,
         // ? What should the default limit be?
@@ -260,8 +267,10 @@ export default class ConceptApiProvider extends BaseProvider {
       concepts = concepts ? [concepts] : []
     }
     const uris = concepts.map(concept => concept.uri).filter(uri => uri != null)
-    return this._request(url, {
+    return this.axios({
       ...config,
+      method: "get",
+      url,
       params: {
         ...this._defaultParams,
         // ? What should the default limit be?
@@ -284,8 +293,10 @@ export default class ConceptApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
     if (this._api.narrower) {
-      return this._request(this._api.narrower, {
+      return this.axios({
         ...config,
+        method: "get",
+        url: this._api.narrower,
         params: {
           ...this._defaultParams,
           // ? What should the default limit be?
@@ -315,8 +326,10 @@ export default class ConceptApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concept" })
     }
     if (this._api.ancestors) {
-      return this._request(this._api.ancestors, {
+      return this.axios({
         ...config,
+        method: "get",
+        url: this._api.ancestors,
         params: {
           ...this._defaultParams,
           // ? What should the default limit be?
@@ -434,7 +447,7 @@ export default class ConceptApiProvider extends BaseProvider {
     const voc = scheme && await this._getSchemeUri(scheme)
     // Some registries use URL templates with {searchTerms}
     url = url.replace("{searchTerms}", search)
-    return this._request(url, {
+    return this.axios({
       ...config,
       params: {
         ...this._defaultParams,
@@ -446,6 +459,8 @@ export default class ConceptApiProvider extends BaseProvider {
         query: search,
         voc,
       },
+      method: "get",
+      url,
     })
   }
 
@@ -468,7 +483,11 @@ export default class ConceptApiProvider extends BaseProvider {
       config.params ||= {}
       config.params.uri = schemeUri
     }
-    let types = await this._request(this._api.types, ...config)
+    let types = await this.axios({
+      ...config,
+      method: "get",
+      url: this._api.types,
+    })
     // It might be necessary to filter the result by its `inScheme` property (only if it exists, otherwise assume it belongs to the requested scheme URI).
     if (schemeUri) {
       types = types.filter(type => !type.inScheme || jskos.isContainedIn(scheme, type.inScheme))
