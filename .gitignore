@@ -17,5 +17,6 @@ npm-debug.log*
 
 coverage/
 
+dependencies.png
 dist/
 docs/

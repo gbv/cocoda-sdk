@@ -1,7 +1,7 @@
 import * as errors from "../errors/index.js"
 import axios from "axios"
 import jskos from "jskos-tools"
-import { deepEqual } from "../utils/index.js"
+import { deepEqual } from "../providers/base-provider.js"
 
 import { BaseProvider, ConceptApiProvider, MappingsApiProvider } from "../providers/index.js"
 

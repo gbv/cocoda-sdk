@@ -1,7 +1,6 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as errors from "../errors/index.js"
-import { concatUrl } from "../utils/index.js"
 
 // TODO: Check capabilities (`this.has`) and authorization (`this.isAuthorizedFor`) before actions.
 
@@ -42,7 +41,7 @@ export default class MappingsApiProvider extends BaseProvider {
   _prepare() {
     // Set status endpoint only
     if (this._api.api && this._api.status === undefined) {
-      this._api.status = concatUrl(this._api.api, "/status")
+      this._api.status = this._api.api + "/status"
     }
   }
 
@@ -59,7 +58,7 @@ export default class MappingsApiProvider extends BaseProvider {
       }
       for (let key of Object.keys(endpoints)) {
         if (this._api[key] === undefined) {
-          this._api[key] = concatUrl(this._api.api, endpoints[key])
+          this._api[key] = this._api.api + endpoints[key]
         }
       }
     }

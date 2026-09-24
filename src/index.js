@@ -4,26 +4,18 @@
 
 import CocodaSDK from "./lib/CocodaSDK.js"
 import * as errors from "./errors/index.js"
-import * as utils from "./utils/index.js"
 export * from "./providers/index.js"
 
 import * as providers from "./providers/index.js"
-
 
 // Create and export a default instance
 const cdk = new CocodaSDK()
 
 export {
-  // Default CocodaSDK instance
-  cdk,
-  // CocodaSDK class (to create new instances or checks with `instanceof`)
-  CocodaSDK,
-  // Error classes
+  cdk,          // Default CocodaSDK instance
+  CocodaSDK,    // CocodaSDK class (to create new instances or checks with `instanceof`)
   errors,
-  // Provider classes
   providers,
-  // Utility functions
-  utils,
 }
 
 /**

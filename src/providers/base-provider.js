@@ -1,9 +1,189 @@
 import jskos from "jskos-tools"
 import axios from "axios"
-import { withCustomProps, listOfCapabilities, requestMethods, deepEqual } from "../utils/index.js"
 import * as errors from "../errors/index.js"
 
 const intersection = (a1, a2) => a1.filter(x => a2.includes(x))
+
+export const requestMethods = [
+  // General
+  {
+    method: "getRegistries",
+    fallback: [],
+    type: "Registries",
+  },
+  {
+    method: "getSchemes",
+    fallback: [],
+    type: "Schemes",
+  },
+  {
+    method: "vocSearch",
+    fallback: [],
+    type: "Schemes",
+  },
+  {
+    method: "getTypes",
+    fallback: [],
+    type: "Types",
+  },
+  {
+    method: "suggest",
+    fallback: ["", [], [], []],
+  },
+  {
+    method: "vocSuggest",
+    fallback: ["", [], [], []],
+  },
+  {
+    method: "getConcordances",
+    fallback: [],
+    type: "Concordances",
+  },
+  {
+    method: "getOccurrences",
+    fallback: [],
+    type: "Occurrences",
+  },
+  // Concepts
+  {
+    method: "getTop",
+    fallback: [],
+    type: "Concepts",
+  },
+  {
+    method: "getConcepts",
+    fallback: [],
+    type: "Concepts",
+  },
+  {
+    method: "getNarrower",
+    fallback: [],
+    type: "Concepts",
+  },
+  {
+    method: "getAncestors",
+    fallback: [],
+    type: "Concepts",
+  },
+  {
+    method: "search",
+    fallback: [],
+    type: "Concepts",
+  },
+  // Mappings
+  {
+    method: "getMapping",
+    fallback: null,
+    type: "Mapping",
+  },
+  {
+    method: "getMappings",
+    fallback: [],
+    type: "Mappings",
+  },
+  {
+    method: "postMapping",
+    fallback: null,
+    type: "Mapping",
+  },
+  {
+    method: "postMappings",
+    fallback: [],
+    type: "Mapping",
+  },
+  {
+    method: "putMapping",
+    fallback: null,
+    type: "Mapping",
+  },
+  {
+    method: "patchMapping",
+    fallback: null,
+    type: "Mapping",
+  },
+  {
+    method: "deleteMapping",
+    fallback: false,
+  },
+  {
+    method: "deleteMappings",
+    fallback: [],
+  },
+  // Annotations
+  // {
+  //   method: "getAnnotation",
+  //   fallback: "",
+  // },
+  {
+    method: "getAnnotations",
+    fallback: [],
+    type: "Annotations",
+  },
+  {
+    method: "postAnnotation",
+    fallback: null,
+    type: "Annotation",
+  },
+  {
+    method: "putAnnotation",
+    fallback: null,
+    type: "Annotation",
+  },
+  {
+    method: "patchAnnotation",
+    fallback: null,
+    type: "Annotation",
+  },
+  {
+    method: "deleteAnnotation",
+    fallback: false,
+  },
+]
+
+const listOfCapabilities = [
+  "registries",
+  "schemes",
+  "top",
+  "data",
+  "concepts",
+  "narrower",
+  "ancestors",
+  "types",
+  "suggest",
+  "search",
+  "auth",
+  "mappings",
+  "concordances",
+  "annotations",
+  "occurrences",
+]
+
+// not available in browser so we can't use node:util
+export const deepEqual = (a,b) => {
+    
+  // same primitive
+  if (a === b) { 
+    return true 
+  }
+
+  // must be array or object but not null
+  if (typeof a !== "object" || typeof b !== "object" || a === null || b === null ) {
+    return false
+  }
+
+  // keys / array members
+  if (Object.keys(a).length === Object.keys(b).length) {
+    for (let key in a) {
+      if (!(key in b)) {
+        return false
+      }
+      if (!deepEqual(a[key], b[key])) {
+        return false
+      }
+    }
+    return true
+  }
+}
 
 // TODO: Decide on default timeout value
 const timeout_default = 200000
@@ -78,7 +258,7 @@ const timeout_default = 200000
  *
  * @category Providers
  */
-export default class BaseProvider {
+export class BaseProvider {
   static providerName = "Base"
 
   /**
@@ -583,7 +763,7 @@ export default class BaseProvider {
   }
 
   adjustConcepts(concepts) {
-    return withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
+    return this._withCustomProps(concepts.map(concept => this.adjustConcept(concept)), concepts)
   }
 
   adjustRegistries(registries) {
@@ -619,7 +799,7 @@ export default class BaseProvider {
   }
 
   adjustSchemes(schemes) {
-    return withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
+    return this._withCustomProps(schemes.map(scheme => this.adjustScheme(scheme)), schemes)
   }
 
   adjustConcordances(concordances) {
@@ -644,7 +824,7 @@ export default class BaseProvider {
   }
 
   adjustMappings(mappings) {
-    return withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
+    return this._withCustomProps(mappings.map(mapping => this.adjustMapping(mapping)), mappings)
   }
 
   /**
@@ -713,4 +893,14 @@ export default class BaseProvider {
     resultItems._errors = errors
     return resultItems
   }
+
+  // Retain custom array properties
+  _withCustomProps(arr, from) {
+    arr._totalCount = from._totalCount
+    arr._url = from._url
+    return arr
+  }
+
 }
+
+export default BaseProvider

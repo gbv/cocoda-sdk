@@ -1,7 +1,7 @@
-import BaseProvider from "./base-provider.js"
+import { BaseProvider } from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as errors from "../errors/index.js"
-import { concatUrl, deepEqual } from "../utils/index.js"
+import { deepEqual } from "./base-provider.js"
 
 // Cache by registry URI
 const cache = {}
@@ -58,10 +58,9 @@ export default class OccurrencesApiProvider extends BaseProvider {
     } else {
       // Load supported schemes from API
       try {
-        const url = concatUrl(this._api.api, "voc")
         const data = await this.axios({
           method: "get",
-          url,
+          url: this._api.api + "/voc",
         })
         this._occurrencesSupportedSchemes = data || []
       } catch (error) {

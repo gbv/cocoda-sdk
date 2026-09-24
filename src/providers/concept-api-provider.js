@@ -1,6 +1,5 @@
-import BaseProvider from "./base-provider.js"
+import BaseProvider from "../providers/base-provider.js"
 import * as errors from "../errors/index.js"
-import { withCustomProps, concatUrl } from "../utils/index.js"
 import jskos from "jskos-tools"
 
 /**
@@ -52,7 +51,7 @@ export default class ConceptApiProvider extends BaseProvider {
   _prepare() {
     // Set status endpoint only
     if (this._api.api && this._api.status === undefined) {
-      this._api.status = concatUrl(this._api.api, "/status")
+      this._api.status = this._api.api + "/status"
     }
   }
 
@@ -77,7 +76,7 @@ export default class ConceptApiProvider extends BaseProvider {
       for (let key of Object.keys(endpoints)) {
         // Only override if undefined
         if (this._api[key] === undefined) {
-          this._api[key] = concatUrl(this._api.api, endpoints[key])
+          this._api[key] = this._api.api + endpoints[key]
         }
       }
     }
@@ -210,7 +209,7 @@ export default class ConceptApiProvider extends BaseProvider {
     })
     // If schemes were given in registry object, only request those schemes from API
     if (Array.isArray(this.schemes)) {
-      return withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
+      return this._withCustomProps(schemes.filter(s => jskos.isContainedIn(s, this.schemes)), schemes)
     } else {
       return schemes
     }

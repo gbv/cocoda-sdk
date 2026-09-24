@@ -1,3 +1,8 @@
+# 3.9.0
+
+- Remove exported but undocumented `utils` object with utility functions
+- Do not append `/` to API endpoint base URL, if missing
+
 # 3.8.3
 
 - Rollback of 3.8.0 to 3.8.2

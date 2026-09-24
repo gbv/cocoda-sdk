@@ -1,7 +1,7 @@
 import BaseProvider from "./base-provider.js"
 import jskos from "jskos-tools"
 import * as errors from "../errors/index.js"
-import { deepEqual } from "../utils/index.js"
+import { deepEqual } from "./base-provider.js"
 
 // Cache by registry URI
 const cache = {}
