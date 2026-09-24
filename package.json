@@ -19,6 +19,8 @@
   "scripts": {
     "test": "mocha --recursive",
     "coverage": "c8 --reporter=text --skip-full mocha --exit",
+    "loc": "cloc $(git ls-files)",
+    "deps": "madge -i dependencies.png src",
     "validate": "jskos-validate",
     "lint": "eslint",
     "fix": "eslint --fix",
