@@ -327,6 +327,7 @@ export class BaseProvider {
       reconcile: registry.reconcile,
       api: registry.endpoint || registry.api,
       registries: registry.registries,
+      checkAuth: null,
     }
 
     this._config = {}
@@ -571,10 +572,22 @@ export class BaseProvider {
             this._api[key] = status[key] || null
           }
         }
+        if (status.openapi?.paths?.["/checkAuth"]) {
+          this._api.checkAuth = this._api.api + "/checkAuth"
+        }          
       }
       this._setup()
     })()
     return this._init
+  }
+
+  /**
+   * Retrieves a matrix of capabilities with boolean value whether user is authorized for.
+   */
+  async checkAuth(params={}) {      
+    return this._api.checkAuth
+      ? this._request(this._api.checkAuth, { params })
+      : Promise.reject(new Error("/checkAuth endpoint not available"))
   }
 
   async _request(url, config = {}) {

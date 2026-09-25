@@ -354,6 +354,8 @@ Please refer to the [documentation](https://gbv.github.io/cocoda-sdk/CocodaSDK.h
 
 - [isAuthorizedFor](https://gbv.github.io/cocoda-sdk/BaseProvider.html#isAuthorizedFor)
 
+- [checkAuth](https://gbv.github.io/cocoda-sdk/BaseProvider.html#checkAuth)
+
 - `supportsScheme`. Implemented by:
   - [BaseProvider](https://gbv.github.io/cocoda-sdk/BaseProvider.html#supportsScheme)
   - [LabelSearchSuggestionProvider](https://gbv.github.io/cocoda-sdk/LabelSearchSuggestionProvider.html#supportsScheme)
