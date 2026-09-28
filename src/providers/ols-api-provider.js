@@ -1,5 +1,29 @@
 import BaseProvider from "./base-provider.js"
 
+const entityTypes = [{
+  _api: "classes",
+  uri: "http://www.w3.org/2002/07/owl#Class",
+  prefLabel: {
+    en: "Class",
+    de: "Klasse",
+  },
+},{
+  _api: "properties",
+  uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+  prefLabel: {
+    en: "Property",
+    de: "Eigenschaft",
+  },
+},{
+  _api: "individuals",
+  uri: "http://www.w3.org/2002/07/owl#NamedIndividual",
+  prefLabel: {
+    en: "Individual",
+    de: "Individuum",
+  },
+}]
+
+
 /**
  * OLS API V2.
  *
@@ -189,24 +213,22 @@ export default class OlsApiProvider extends BaseProvider {
 
   async _searchOls(search, scheme, limit, types) {
     let items = []
-    const knownTypes = {
-      "http://www.w3.org/2002/07/owl#Class": "classes",
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property": "properties",
+
+    if (types?.length) {
+      types = entityTypes.filter(t => types.includes(t.uri))
+    } else {
+      types = entityTypes
     }
-    if (!types?.length) {
-      types = Object.keys(knownTypes)
-    }
-    for (const type of types) {
-      if (type in knownTypes) {
-        const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
-        const query = { search: search, ontology: VOCID }
-        if (!scheme || VOCID) {
-          // TODO: how to merge with limit of multiple are included
-          const found = await this._paginate([knownTypes[type]], query, limit)
-          items.push(...found)
-        }
+
+    const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
+    if (!scheme || VOCID) {
+      for (const { _api } of types) {
+        // TODO: how to merge with limit if multiple are included
+        const found = await this._paginate([_api], { search: search, ontology: VOCID }, limit)
+        items.push(...found)
       }
     }
+
     return items
   }
 
@@ -347,19 +369,7 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async getTypes() {
-    return [{
-      uri: "http://www.w3.org/2002/07/owl#Class",
-      prefLabel: {
-        en: "Class",
-        de: "Klasse",
-      },
-    },{
-      uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-      prefLabel: {
-        en: "Property",
-        de: "Eigenschaft",
-      },
-    }]
+    return entityTypes.map(({uri, prefLabel}) => ({ uri, prefLabel}))
   }
 
   async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"] }) {
