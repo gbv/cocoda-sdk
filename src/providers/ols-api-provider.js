@@ -23,13 +23,16 @@ const entityTypes = [{
   },
 }]
 
+const searchTypesDefault = ["http://www.w3.org/2002/07/owl#Class", "http://www.w3.org/2002/07/owl#NamedIndividual"]
+// old: ["http://www.w3.org/2002/07/owl#Class"]
+// all: entityTypes.map(t => t.uri)
+
 
 /**
  * OLS API V2.
  *
  * The Ontology Lookup Service (OLS) hosts ontologies. Implementation is not fully completed yet.
  *
- * Individual are not supported.
  * Properties are only supported partially.
  *
  * ```js
@@ -124,6 +127,10 @@ export default class OlsApiProvider extends BaseProvider {
     return scheme
   }
 
+  /**
+   * OLS term to JSKOS concept
+   * term._api determines entity type,  default: 'classes'
+   */
   _termToJSKOS(term) {
     const lan = term.language || this._language || "en"
     const concept = {}
@@ -147,10 +154,10 @@ export default class OlsApiProvider extends BaseProvider {
       concept.prefLabel = {}
       concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"].value || term["http://www.w3.org/2000/01/rdf-schema#label"]
     }
+    const entityType = entityTypes.find(t => t._api === term._api) || entityTypes[0]
     concept.type = [
       "http://www.w3.org/2004/02/skos/core#Concept",
-      // FIXME: properties are no classes
-      "http://www.w3.org/2002/07/owl#Class",
+      entityType.uri,
     ]
     if (term.ontologyIri) {
       concept.inScheme = [{ uri: term.ontologyIri }]
@@ -197,18 +204,35 @@ export default class OlsApiProvider extends BaseProvider {
 
   // API REQUESTS CONCEPTS
 
+  /**
+   * Returns entity types matching type URIs, default: all
+   */
+  _entityTypesFor(types) {
+    const matching = types?.length ? entityTypes.filter(t => types.includes(t.uri)) : []
+    return matching.length ? matching : entityTypes
+  }
+
   async _getConceptOls(concept) {
     const VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0])
-    if (VOCID) {
-      let url = null
-      if (concept.notation) {
-        url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: concept.notation })
-      } else if (concept.uri) {
-        url = this._getApiUrl(["ontologies", VOCID, "classes"], { iri: concept.uri })
-      }
-      let response = await this._request(url)
-      return response?.elements?.[0] || null
+    if (!VOCID) {
+      return null
     }
+    // notation is an array in JSKOS, but plain strings are accepted too
+    const notation = [concept.notation].flat()[0]
+    const params = notation
+      ? { curie: notation }
+      : concept.uri ? { iri: concept.uri } : null
+    if (!params) {
+      return null
+    }
+    for (const { _api } of this._entityTypesFor(concept.type)) {
+      const response = await this._request(this._getApiUrl(["ontologies", VOCID, _api], params))
+      const item = response?.elements?.[0]
+      if (item) {
+        return { ...item, _api }
+      }
+    }
+    return null
   }
 
   async _searchOls(search, scheme, limit, types) {
@@ -225,7 +249,7 @@ export default class OlsApiProvider extends BaseProvider {
       for (const { _api } of types) {
         // TODO: how to merge with limit if multiple are included
         const found = await this._paginate([_api], { search: search, ontology: VOCID }, limit)
-        items.push(...found)
+        items.push(...found.map(item => ({ ...item, _api })))
       }
     }
 
@@ -234,13 +258,14 @@ export default class OlsApiProvider extends BaseProvider {
 
   // UTILITIES
 
-  async _conceptIriFromObj(VOCID, conceptNotation) {
+  async _conceptIriFromObj(VOCID, conceptNotation, types) {
     // https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO:0000001
-    let url = this._getApiUrl(["ontologies", VOCID, "classes"], { curie: conceptNotation })
-    let response = await this._request(url)
-    if (response && response.elements && response.elements.length > 0) {
-      return response.elements[0].iri
-    }
+    const item = await this._getConceptOls({
+      inScheme: [{ VOCID }],
+      notation: [conceptNotation].flat(),
+      type: types,
+    })
+    return item?.iri
   }
 
   get _language() {
@@ -324,18 +349,25 @@ export default class OlsApiProvider extends BaseProvider {
     } else if (scheme) {
       const VOCID = await this._getSchemeVOCID(scheme)
       if (VOCID) {
-        const items = await this._paginate(["ontologies", VOCID, "classes"], {}, limit)
-        result = Promise.all(items.map(item => this._termToJSKOS(item)))
+        for (const { _api } of entityTypes) {
+          const items = await this._paginate(["ontologies", VOCID, _api], {}, limit)
+          result.push(...items.map(item => this._termToJSKOS({ ...item, _api })))
+        }
+        if (limit > 0) {
+          result = result.slice(0, limit)
+        }
       }
     }
     return result
   }
 
+  // Top, narrower and ancestors only exist for classes in OLS
+
   async getTop({ scheme }) {
     const VOCID = await this._getSchemeVOCID(scheme)
     if (VOCID) {
       let response = await this._paginate(["ontologies", VOCID, "classes"], { hasDirectParents: "false" }, null)
-      return Promise.all(response.map(item => this._termToJSKOS(item)))
+      return Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
     }
     return []
   }
@@ -344,8 +376,10 @@ export default class OlsApiProvider extends BaseProvider {
     const obj = {}
     if (concept) {
       obj.VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0]) // TODO: what if multiple schemes?
-      obj.iri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation)
-      obj.iri = encodeURIComponent(encodeURIComponent(obj.iri))
+      obj.iri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation, concept.type)
+      if (obj.iri) {
+        obj.iri = encodeURIComponent(encodeURIComponent(obj.iri))
+      }
     }
     return obj
   }
@@ -354,7 +388,7 @@ export default class OlsApiProvider extends BaseProvider {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
       const items = await this._paginate(["ontologies", VOCID, "classes", iri, "children"], {}, 0)
-      return Promise.all(items.map(item => this._termToJSKOS(item)))
+      return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
     }
     return []
   }
@@ -363,7 +397,7 @@ export default class OlsApiProvider extends BaseProvider {
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
       let response = await this._paginate(["ontologies", VOCID, "classes", iri, "ancestors"], {}, null)
-      return Promise.all(response.map(item => this._termToJSKOS(item)))
+      return Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
     }
     return []
   }
@@ -371,8 +405,8 @@ export default class OlsApiProvider extends BaseProvider {
   async getTypes() {
     return entityTypes.map(({uri, prefLabel}) => ({ uri, prefLabel}))
   }
-
-  async search({ search, scheme = null, limit = 0, types = ["http://www.w3.org/2002/07/owl#Class"] }) {
+  
+  async search({ search, scheme = null, limit = 0, types = searchTypesDefault }) {
     let items = await this._searchOls(search, scheme, limit, types)
     return Promise.all(items.map(item => this._termToJSKOS(item)))
   }
