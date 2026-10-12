@@ -1,9 +1,135 @@
 {
   "page": 0,
   "numElements": 20,
-  "totalPages": 3,
-  "totalElements": 59,
+  "totalPages": 4,
+  "totalElements": 64,
   "elements": [
+    {
+      "appearsIn": [
+        "dr"
+      ],
+      "curie": "Entity",
+      "definition": [
+        "Anything: real, possible, or imaginary, which some modeller wants to talk about for some purpose."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "directAncestor": [
+        "http://www.w3id.org/ecsel-dr#Power_Lobe"
+      ],
+      "directParent": [
+        "http://www.w3id.org/ecsel-dr#Power_Lobe"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://www.w3id.org/ecsel-dr#Power_Lobe"
+      ],
+      "hierarchicalParent": [
+        "http://www.w3id.org/ecsel-dr#Power_Lobe"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://www.w3id.org/ecsel-dr-Power-PWR#Entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3id.org/ecsel-dr#Power_Lobe": {
+          "definedBy": [
+            "dr"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "Power Lobe"
+          ],
+          "curie": "dr_Power_Lobe",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "Is Defined By"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 45,
+      "numHierarchicalDescendants": 47,
+      "ontologyId": "dr",
+      "ontologyIri": "http://www.w3id.org/ecsel-dr",
+      "ontologyPreferredPrefix": "dr",
+      "searchableAnnotationValues": false,
+      "shortForm": "Entity",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Anything: real, possible, or imaginary, which some modeller wants to talk about for some purpose.",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "World Wide Web Consortium SSN DUL https://www.w3.org/2005/Incubator/ssn/wiki/DUL_ssn#Entity",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Entity",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://www.w3id.org/ecsel-dr#Power_Lobe"
+    },
     {
       "appearsIn": [
         "dices",
@@ -32,7 +158,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -65,7 +191,97 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 260,
+      "numHierarchicalDescendants": 241,
+      "ontologyId": "dices",
+      "ontologyIri": "https://w3id.org/digitalconstruction/0.5/Energy",
+      "ontologyPreferredPrefix": "dices:",
+      "searchableAnnotationValues": true,
+      "shortForm": "Entity",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Entity is equivalent to the BFO class 'entity' (http://purl.obolibrary.org/obo/BFO_0000001)",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Entity",
+      "http://www.w3.org/2002/07/owl#equivalentClass": "https://w3id.org/digitalconstruction/0.5/Variables#Subject"
+    },
+    {
+      "appearsIn": [
+        "dices",
+        "dicob",
+        "dicl"
+      ],
+      "curie": "Entity",
+      "definition": [
+        "Entity is equivalent to the BFO class 'entity' (http://purl.obolibrary.org/obo/BFO_0000001)"
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": true,
+      "iri": "https://w3id.org/digitalconstruction/0.5/Entities#Entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001)": {
+          "url": "http://purl.obolibrary.org/obo/BFO_0000001)",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "bfo:0000001)"
+        },
+        "https://w3id.org/digitalconstruction/0.5/Variables#Subject": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "Subject"
+          ],
+          "curie": "Subject",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -122,7 +338,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -155,7 +371,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -183,156 +399,6 @@
       "http://www.w3.org/2000/01/rdf-schema#comment": "Entity is equivalent to the BFO class 'entity' (http://purl.obolibrary.org/obo/BFO_0000001)",
       "http://www.w3.org/2000/01/rdf-schema#label": "Entity",
       "http://www.w3.org/2002/07/owl#equivalentClass": "https://w3id.org/digitalconstruction/0.5/Variables#Subject"
-    },
-    {
-      "appearsIn": [
-        "dices",
-        "dicob",
-        "dicl"
-      ],
-      "curie": "Entity",
-      "definition": [
-        "Entity is equivalent to the BFO class 'entity' (http://purl.obolibrary.org/obo/BFO_0000001)"
-      ],
-      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "imported": true,
-      "iri": "https://w3id.org/digitalconstruction/0.5/Entities#Entity",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "Entity"
-      ],
-      "linkedEntities": {
-        "http://www.w3.org/2000/01/rdf-schema#comment": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": false,
-          "label": [
-            "comment"
-          ],
-          "curie": "comment",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/BFO_0000001)": {
-          "url": "http://purl.obolibrary.org/obo/BFO_0000001)",
-          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
-          "curie": "bfo:0000001)"
-        },
-        "https://w3id.org/digitalconstruction/0.5/Variables#Subject": {
-          "numAppearsIn": 3,
-          "hasLocalDefinition": true,
-          "label": [
-            "Subject"
-          ],
-          "curie": "Subject",
-          "type": [
-            "class",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#label": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": false,
-          "label": [
-            "label"
-          ],
-          "curie": "label",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 260,
-      "numHierarchicalDescendants": 241,
-      "ontologyId": "dices",
-      "ontologyIri": "https://w3id.org/digitalconstruction/0.5/Energy",
-      "ontologyPreferredPrefix": "dices:",
-      "searchableAnnotationValues": true,
-      "shortForm": "Entity",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2000/01/rdf-schema#comment": "Entity is equivalent to the BFO class 'entity' (http://purl.obolibrary.org/obo/BFO_0000001)",
-      "http://www.w3.org/2000/01/rdf-schema#label": "Entity",
-      "http://www.w3.org/2002/07/owl#equivalentClass": "https://w3id.org/digitalconstruction/0.5/Variables#Subject"
-    },
-    {
-      "appearsIn": [
-        "cora"
-      ],
-      "curie": "Entity",
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "imported": true,
-      "iri": "http://purl.org/ieee1872-owl/sumo-cora#Entity",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "Entity"
-      ],
-      "linkedEntities": {
-        "http://purl.org/ieee1872-owl/sumo-cora#Abstract": {
-          "numAppearsIn": 1,
-          "hasLocalDefinition": true,
-          "label": [
-            "Abstract"
-          ],
-          "curie": "Abstract",
-          "type": [
-            "class",
-            "entity"
-          ]
-        },
-        "http://purl.org/ieee1872-owl/sumo-cora#Physical": {
-          "numAppearsIn": 1,
-          "hasLocalDefinition": true,
-          "label": [
-            "Physical"
-          ],
-          "curie": "Physical",
-          "type": [
-            "class",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 62,
-      "numHierarchicalDescendants": 62,
-      "ontologyId": "cora",
-      "ontologyIri": "http://purl.org/ieee1872-owl/cora",
-      "ontologyPreferredPrefix": "CORA",
-      "searchableAnnotationValues": true,
-      "shortForm": "Entity",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2002/07/owl#disjointUnionOf": [
-        "http://purl.org/ieee1872-owl/sumo-cora#Abstract",
-        "http://purl.org/ieee1872-owl/sumo-cora#Physical"
-      ]
     },
     {
       "appearsIn": [
@@ -369,7 +435,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 4,
+          "numAppearsIn": 5,
           "hasLocalDefinition": true,
           "label": [
             "prov_definition"
@@ -423,7 +489,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -439,7 +505,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 6,
+          "numAppearsIn": 7,
           "hasLocalDefinition": true,
           "label": [
             "Entity"
@@ -489,24 +555,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -545,7 +618,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -577,7 +650,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -651,7 +724,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -683,7 +756,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -804,7 +877,7 @@
       ],
       "linkedEntities": {
         "http://www.w3.org/2001/XMLSchema#date": {
-          "numAppearsIn": 2,
+          "numAppearsIn": 3,
           "hasLocalDefinition": false,
           "type": [
             "property",
@@ -821,7 +894,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 14,
+          "numAppearsIn": 17,
           "hasLocalDefinition": false,
           "label": [
             "is in scheme"
@@ -838,7 +911,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 55,
           "hasLocalDefinition": false,
           "label": [
             "definition"
@@ -855,7 +928,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 23,
+          "numAppearsIn": 29,
           "hasLocalDefinition": false,
           "label": [
             "Concept"
@@ -871,7 +944,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 29,
+          "numAppearsIn": 34,
           "hasLocalDefinition": false,
           "label": [
             "has narrower"
@@ -888,7 +961,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 10,
+          "numAppearsIn": 13,
           "hasLocalDefinition": false,
           "label": [
             "is top concept in scheme"
@@ -934,7 +1007,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 78,
+          "numAppearsIn": 103,
           "hasLocalDefinition": false,
           "label": [
             "Creator"
@@ -942,7 +1015,6 @@
           "curie": "dcterms:creator",
           "type": [
             "property",
-            "objectProperty",
             "entity"
           ]
         },
@@ -950,14 +1022,13 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 53,
+          "numAppearsIn": 83,
           "hasLocalDefinition": false,
           "label": [
             "Date Created"
           ],
           "curie": "dcterms:created",
           "type": [
-            "dataProperty",
             "property",
             "entity"
           ]
@@ -967,7 +1038,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 57,
           "hasLocalDefinition": false,
           "label": [
             "preferred label"
@@ -1033,7 +1104,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -1089,7 +1160,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 78,
+          "numAppearsIn": 102,
           "hasLocalDefinition": true,
           "label": [
             "Description"
@@ -1097,7 +1168,6 @@
           "curie": "dcterms:description",
           "type": [
             "property",
-            "annotationProperty",
             "entity"
           ]
         },
@@ -1191,7 +1261,7 @@
           "curie": "isDefinedBy"
         },
         "http://www.w3.org/2001/XMLSchema#decimal": {
-          "numAppearsIn": 1,
+          "numAppearsIn": 2,
           "hasLocalDefinition": false,
           "type": [
             "class",
@@ -1262,7 +1332,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/identifier": {
-          "numAppearsIn": 26,
+          "numAppearsIn": 30,
           "hasLocalDefinition": false,
           "type": [
             "property",
@@ -1306,6 +1376,21 @@
             "entity"
           ]
         },
+        "http://semanticscience.org/resource/SIO_000613": {
+          "definedBy": [
+            "sio"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "ordinal position"
+          ],
+          "curie": "sio:000613",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
         "http://semanticscience.org/resource/SIO_000217": {
           "definedBy": [
             "sio"
@@ -1322,23 +1407,8 @@
             "entity"
           ]
         },
-        "http://semanticscience.org/resource/SIO_000613": {
-          "definedBy": [
-            "sio"
-          ],
-          "numAppearsIn": 1,
-          "hasLocalDefinition": true,
-          "label": [
-            "ordinal position"
-          ],
-          "curie": "sio:000613",
-          "type": [
-            "class",
-            "entity"
-          ]
-        },
         "http://www.w3.org/2001/XMLSchema#integer": {
-          "numAppearsIn": 1,
+          "numAppearsIn": 2,
           "hasLocalDefinition": false,
           "type": [
             "class",
@@ -1368,7 +1438,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -1413,91 +1483,28 @@
           ]
         }
       },
-      "numDescendants": 1580,
-      "numHierarchicalDescendants": 1581,
+      "numDescendants": 1581,
+      "numHierarchicalDescendants": 1582,
       "ontologyId": "sio",
       "ontologyIri": "http://semanticscience.org/ontology/sio.owl",
       "ontologyPreferredPrefix": "sio",
       "relatedFrom": [
         {
           "property": "http://semanticscience.org/resource/SIO_000338",
-          "value": "http://semanticscience.org/resource/SIO_000917",
-          "type": [
-            "related"
-          ],
-          "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb433",
-          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-          "http://www.w3.org/2002/07/owl#intersectionOf": [
-            "http://semanticscience.org/resource/SIO_000000",
-            {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb435",
-              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
-              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000300",
-              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://www.w3.org/2001/XMLSchema#integer",
-              "isObsolete": false
-            }
-          ],
-          "searchableAnnotationValues": ":arc9cacb433"
-        },
-        {
-          "property": "http://semanticscience.org/resource/SIO_000338",
           "value": "http://semanticscience.org/resource/SIO_000915",
           "type": [
             "related"
           ],
-          "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb423",
           "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
           "http://www.w3.org/2002/07/owl#intersectionOf": [
             "http://semanticscience.org/resource/SIO_000000",
             {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb425",
               "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
               "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000300",
               "http://www.w3.org/2002/07/owl#someValuesFrom": "http://www.w3.org/2000/01/rdf-schema#Literal",
               "isObsolete": false
             }
-          ],
-          "searchableAnnotationValues": ":arc9cacb423"
-        },
-        {
-          "property": "http://semanticscience.org/resource/SIO_000338",
-          "value": "http://semanticscience.org/resource/SIO_000916",
-          "type": [
-            "related"
-          ],
-          "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb428",
-          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-          "http://www.w3.org/2002/07/owl#intersectionOf": [
-            "http://semanticscience.org/resource/SIO_000000",
-            {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb430",
-              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
-              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000300",
-              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://www.w3.org/2001/XMLSchema#decimal",
-              "isObsolete": false
-            }
-          ],
-          "searchableAnnotationValues": ":arc9cacb428"
-        },
-        {
-          "property": "http://semanticscience.org/resource/SIO_000218",
-          "value": "http://semanticscience.org/resource/SIO_000758",
-          "type": [
-            "related"
-          ],
-          "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb364",
-          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-          "http://www.w3.org/2002/07/owl#intersectionOf": [
-            "http://semanticscience.org/resource/SIO_000000",
-            {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb366",
-              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
-              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000217",
-              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://semanticscience.org/resource/SIO_000555",
-              "isObsolete": false
-            }
-          ],
-          "searchableAnnotationValues": ":arc9cacb364"
+          ]
         },
         {
           "property": "http://semanticscience.org/resource/SIO_000059",
@@ -1505,26 +1512,73 @@
           "type": [
             "related"
           ],
-          "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb564",
           "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
           "http://www.w3.org/2002/07/owl#intersectionOf": [
             "http://semanticscience.org/resource/SIO_000000",
             {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb566",
               "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
               "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000008",
               "http://www.w3.org/2002/07/owl#someValuesFrom": "http://semanticscience.org/resource/SIO_000613",
               "isObsolete": false
             },
             {
-              "http://purl.org/dc/elements/1.1/identifier": ":arc9cacb568",
               "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
               "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000628",
               "http://www.w3.org/2002/07/owl#someValuesFrom": "http://semanticscience.org/resource/SIO_000000",
               "isObsolete": false
             }
+          ]
+        },
+        {
+          "property": "http://semanticscience.org/resource/SIO_000218",
+          "value": "http://semanticscience.org/resource/SIO_000758",
+          "type": [
+            "related"
           ],
-          "searchableAnnotationValues": ":arc9cacb564"
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://semanticscience.org/resource/SIO_000000",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000217",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://semanticscience.org/resource/SIO_000555",
+              "isObsolete": false
+            }
+          ]
+        },
+        {
+          "property": "http://semanticscience.org/resource/SIO_000338",
+          "value": "http://semanticscience.org/resource/SIO_000916",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://semanticscience.org/resource/SIO_000000",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000300",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://www.w3.org/2001/XMLSchema#decimal",
+              "isObsolete": false
+            }
+          ]
+        },
+        {
+          "property": "http://semanticscience.org/resource/SIO_000338",
+          "value": "http://semanticscience.org/resource/SIO_000917",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://semanticscience.org/resource/SIO_000000",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://semanticscience.org/resource/SIO_000300",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://www.w3.org/2001/XMLSchema#integer",
+              "isObsolete": false
+            }
+          ]
         }
       ],
       "searchableAnnotationValues": [
@@ -1561,24 +1615,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -1629,7 +1690,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -1661,7 +1722,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -1722,7 +1783,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 41,
+          "numAppearsIn": 48,
           "hasLocalDefinition": true,
           "label": [
             "continuant"
@@ -1737,7 +1798,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 47,
           "hasLocalDefinition": true,
           "label": [
             "occurrent"
@@ -1765,7 +1826,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": true,
           "label": [
             "comment"
@@ -1797,7 +1858,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -1810,8 +1871,8 @@
           ]
         }
       },
-      "numDescendants": 840,
-      "numHierarchicalDescendants": 824,
+      "numDescendants": 845,
+      "numHierarchicalDescendants": 828,
       "ontologyId": "cheminf",
       "ontologyIri": "http://semanticchemistry.github.io/semanticchemistry/ontology/cheminf.owl",
       "ontologyPreferredPrefix": "CHEMINF",
@@ -1927,24 +1988,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -1983,7 +2051,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -2015,7 +2083,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -2089,7 +2157,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -2121,7 +2189,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -2242,24 +2310,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -2341,7 +2416,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -2373,7 +2448,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -2447,7 +2522,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": true,
           "label": [
             "comment"
@@ -2479,7 +2554,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 35,
+          "numAppearsIn": 38,
           "hasLocalDefinition": true,
           "label": [
             "has quality"
@@ -2511,7 +2586,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -2645,24 +2720,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -2694,7 +2776,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 55,
           "hasLocalDefinition": true,
           "label": [
             "definition"
@@ -2723,7 +2805,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -2755,7 +2837,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -2771,7 +2853,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 23,
+          "numAppearsIn": 30,
           "hasLocalDefinition": true,
           "label": [
             "temporal region"
@@ -2844,7 +2926,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -2857,7 +2939,7 @@
           ]
         },
         "http://purl.obolibrary.org/obo/BFO_0000108": {
-          "numAppearsIn": 5,
+          "numAppearsIn": 9,
           "hasLocalDefinition": true,
           "label": [
             "exists at",
@@ -2890,7 +2972,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -2907,7 +2989,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 57,
           "hasLocalDefinition": true,
           "label": [
             "preferred label"
@@ -2920,10 +3002,10 @@
           ]
         }
       },
-      "numDescendants": 3437,
-      "numHierarchicalDescendants": 3406,
+      "numDescendants": 3554,
+      "numHierarchicalDescendants": 3505,
       "ontologyId": "afo",
-      "ontologyIri": "http://purl.allotrope.org/voc/afo/merged/REC/2025/03/merged-without-qudt-and-inferred",
+      "ontologyIri": "http://purl.allotrope.org/voc/afo/merged/REC/2026/03/merged-without-qudt-and-inferred",
       "ontologyPreferredPrefix": "AFO",
       "searchableAnnotationValues": [
         "Julius Caesar",
@@ -2994,24 +3076,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -3038,7 +3127,7 @@
       ],
       "linkedEntities": {
         "http://purl.org/dc/elements/1.1/identifier": {
-          "numAppearsIn": 26,
+          "numAppearsIn": 30,
           "hasLocalDefinition": true,
           "label": [
             "identifier"
@@ -3055,7 +3144,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 55,
           "hasLocalDefinition": true,
           "label": [
             "definition"
@@ -3072,7 +3161,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 48,
+          "numAppearsIn": 59,
           "hasLocalDefinition": true,
           "label": [
             "example"
@@ -3088,7 +3177,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -3105,7 +3194,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 57,
           "hasLocalDefinition": true,
           "label": [
             "preferred label"
@@ -3118,11 +3207,11 @@
           ]
         }
       },
-      "numDescendants": 112,
-      "numHierarchicalDescendants": 113,
+      "numDescendants": 118,
+      "numHierarchicalDescendants": 119,
       "ontologyId": "iofcore",
       "ontologyIri": "https://spec.industrialontologies.org/ontology/core/Core/",
-      "ontologyPreferredPrefix": "iof-core",
+      "ontologyPreferredPrefix": "IOFCORE",
       "searchableAnnotationValues": [
         "(Elucidation) An entity is anything that exists or has existed or will exist",
         "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem",
@@ -3159,24 +3248,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -3188,159 +3284,6 @@
       "hasDirectParents": false,
       "hasHierarchicalChildren": true,
       "hasHierarchicalParents": false,
-      "imported": true,
-      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "entity"
-      ],
-      "linkedEntities": {
-        "http://purl.org/dc/elements/1.1/identifier": {
-          "numAppearsIn": 26,
-          "hasLocalDefinition": true,
-          "label": [
-            "identifier"
-          ],
-          "curie": "identifier",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2004/02/skos/core#definition": {
-          "definedBy": [
-            "stw",
-            "skos"
-          ],
-          "numAppearsIn": 40,
-          "hasLocalDefinition": true,
-          "label": [
-            "definition"
-          ],
-          "curie": "definition",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2004/02/skos/core#example": {
-          "definedBy": [
-            "skos",
-            "stw"
-          ],
-          "numAppearsIn": 48,
-          "hasLocalDefinition": true,
-          "label": [
-            "example"
-          ],
-          "curie": "skos:example",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#label": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": false,
-          "label": [
-            "label"
-          ],
-          "curie": "label",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 1771,
-      "numHierarchicalDescendants": 1421,
-      "ontologyId": "cco",
-      "ontologyIri": "http://www.ontologyrepository.com/CommonCoreOntologies/Mid/AllCoreOntology",
-      "ontologyPreferredPrefix": "CommonCoreOntologies",
-      "searchableAnnotationValues": [
-        "(Elucidation) An entity is anything that exists or has existed or will exist",
-        "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem",
-        true
-      ],
-      "shortForm": "BFO_0000001",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://purl.org/dc/elements/1.1/identifier": "001-BFO",
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
-      "http://www.w3.org/2004/02/skos/core#definition": "(Elucidation) An entity is anything that exists or has existed or will exist",
-      "http://www.w3.org/2004/02/skos/core#example": "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem"
-    },
-    {
-      "appearsIn": [
-        "bfo",
-        "envo2023",
-        "oeo",
-        "t4fs",
-        "proco",
-        "ppo",
-        "enm",
-        "envo2021",
-        "iao",
-        "vivo",
-        "nmrcv",
-        "pco",
-        "duo",
-        "peco",
-        "afo",
-        "envo",
-        "uberon",
-        "cto",
-        "ecso",
-        "cheminf",
-        "bco",
-        "cco",
-        "iofcore",
-        "pso",
-        "stato",
-        "aeon",
-        "nmrcv2025",
-        "agro",
-        "sepio",
-        "pmd",
-        "chmo",
-        "msio",
-        "tfsco",
-        "vibso",
-        "swo",
-        "listdb"
-      ],
-      "curie": "BFO:0000001",
-      "definedBy": [
-        "bfo"
-      ],
-      "directAncestor": [
-        "http://www.w3.org/2002/07/owl#Thing"
-      ],
-      "directParent": [
-        "http://www.w3.org/2002/07/owl#Thing"
-      ],
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "hierarchicalAncestor": [
-        "http://www.w3.org/2002/07/owl#Thing"
-      ],
-      "hierarchicalParent": [
-        "http://www.w3.org/2002/07/owl#Thing"
-      ],
       "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
       "imported": false,
       "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
@@ -3368,7 +3311,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -3400,7 +3343,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -3474,7 +3417,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -3506,329 +3449,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": false,
-          "label": [
-            "label"
-          ],
-          "curie": "label",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.org/dc/elements/1.1/source": {
-          "numAppearsIn": 38,
-          "hasLocalDefinition": true,
-          "label": [
-            "source"
-          ],
-          "curie": "source",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 241,
-      "numHierarchicalDescendants": 205,
-      "ontologyId": "aeon",
-      "ontologyIri": "http://purl.obolibrary.org/obo/aeon.owl",
-      "ontologyPreferredPrefix": "AEON",
-      "searchableAnnotationValues": [
-        "Julius Caesar",
-        "Verdi’s Requiem",
-        "the Second World War",
-        "your body mass index",
-        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
-              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
-              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
-            }
-          ]
-        },
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
-            }
-          ]
-        },
-        false
-      ],
-      "shortForm": "BFO_0000001",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://purl.obolibrary.org/obo/BFO_0000179": "entity",
-      "http://purl.obolibrary.org/obo/BFO_0000180": "Entity",
-      "http://purl.obolibrary.org/obo/IAO_0000112": [
-        "Julius Caesar",
-        "Verdi’s Requiem",
-        "the Second World War",
-        "your body mass index"
-      ],
-      "http://purl.obolibrary.org/obo/IAO_0000116": [
-        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
-              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
-              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
-            }
-          ]
-        }
-      ],
-      "http://purl.obolibrary.org/obo/IAO_0000600": {
-        "type": [
-          "reification"
-        ],
-        "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
-        "axioms": [
-          {
-            "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
-          }
-        ]
-      },
-      "http://purl.org/dc/elements/1.1/source": [
-        "http://purl.obolibrary.org/obo/bfo/2019-08-26/bfo.owl",
-        "http://purl.obolibrary.org/obo/iao/2022-11-07/iao.owl"
-      ],
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/bfo.owl",
-      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
-      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://www.w3.org/2002/07/owl#Thing"
-    },
-    {
-      "appearsIn": [
-        "bfo",
-        "envo2023",
-        "oeo",
-        "t4fs",
-        "proco",
-        "ppo",
-        "enm",
-        "envo2021",
-        "iao",
-        "vivo",
-        "nmrcv",
-        "pco",
-        "duo",
-        "peco",
-        "afo",
-        "envo",
-        "uberon",
-        "cto",
-        "ecso",
-        "cheminf",
-        "bco",
-        "cco",
-        "iofcore",
-        "pso",
-        "stato",
-        "aeon",
-        "nmrcv2025",
-        "agro",
-        "sepio",
-        "pmd",
-        "chmo",
-        "msio",
-        "tfsco",
-        "vibso",
-        "swo",
-        "listdb"
-      ],
-      "curie": "BFO:0000001",
-      "definedBy": [
-        "bfo"
-      ],
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "imported": false,
-      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "entity"
-      ],
-      "linkedEntities": {
-        "http://purl.obolibrary.org/obo/IAO_0000116": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 46,
-          "hasLocalDefinition": true,
-          "label": [
-            "editor note"
-          ],
-          "curie": "IAO:0000116",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/BFO_0000179": {
-          "definedBy": [
-            "bfo"
-          ],
-          "numAppearsIn": 26,
-          "hasLocalDefinition": true,
-          "label": [
-            "BFO OWL specification label"
-          ],
-          "curie": "BFO:0000179",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/IAO_0000112": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 38,
-          "hasLocalDefinition": true,
-          "label": [
-            "example of usage"
-          ],
-          "curie": "IAO:0000112",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
-          "numAppearsIn": 31,
-          "hasLocalDefinition": false,
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ],
-          "label": [
-            "isDefinedBy"
-          ],
-          "curie": "isDefinedBy"
-        },
-        "http://purl.obolibrary.org/obo/IAO_0010000": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 29,
-          "hasLocalDefinition": true,
-          "label": [
-            "has axiom label"
-          ],
-          "curie": "IAO:0010000",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/IAO_0000600": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 33,
-          "hasLocalDefinition": true,
-          "label": [
-            "elucidation"
-          ],
-          "curie": "IAO:0000600",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
-          "numAppearsIn": 29,
-          "hasLocalDefinition": false,
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ],
-          "label": [
-            "seeAlso"
-          ],
-          "curie": "seeAlso"
-        },
-        "http://www.geneontology.org/formats/oboInOwl#ObsoleteClass": {
-          "numAppearsIn": 13,
-          "hasLocalDefinition": true,
-          "label": [
-            "Obsolete Class"
-          ],
-          "curie": "ObsoleteClass",
-          "type": [
-            "class",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#comment": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": true,
-          "label": [
-            "comment"
-          ],
-          "curie": "comment",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/BFO_0000180": {
-          "definedBy": [
-            "bfo"
-          ],
-          "numAppearsIn": 26,
-          "hasLocalDefinition": true,
-          "label": [
-            "BFO CLIF specification label"
-          ],
-          "curie": "BFO:0000180",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#label": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -3841,419 +3462,8 @@
           ]
         }
       },
-      "numDescendants": 169,
-      "numHierarchicalDescendants": 149,
-      "ontologyId": "bco",
-      "ontologyIri": "http://purl.obolibrary.org/obo/bco.owl",
-      "ontologyPreferredPrefix": "BCO",
-      "searchableAnnotationValues": [
-        "Julius Caesar",
-        "Verdi’s Requiem",
-        "the Second World War",
-        "your body mass index",
-        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
-              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
-              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
-            }
-          ]
-        },
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
-            }
-          ]
-        },
-        false
-      ],
-      "shortForm": "BFO_0000001",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://purl.obolibrary.org/obo/BFO_0000179": "entity",
-      "http://purl.obolibrary.org/obo/BFO_0000180": "Entity",
-      "http://purl.obolibrary.org/obo/IAO_0000112": [
-        "Julius Caesar",
-        "Verdi’s Requiem",
-        "the Second World War",
-        "your body mass index"
-      ],
-      "http://purl.obolibrary.org/obo/IAO_0000116": [
-        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
-        {
-          "type": [
-            "reification"
-          ],
-          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
-          "axioms": [
-            {
-              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
-              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
-              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
-            }
-          ]
-        }
-      ],
-      "http://purl.obolibrary.org/obo/IAO_0000600": {
-        "type": [
-          "reification"
-        ],
-        "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
-        "axioms": [
-          {
-            "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
-          }
-        ]
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/bfo.owl",
-      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
-      "http://www.w3.org/2002/07/owl#disjointWith": "http://www.geneontology.org/formats/oboInOwl#ObsoleteClass"
-    },
-    {
-      "appearsIn": [
-        "bfo",
-        "envo2023",
-        "oeo",
-        "t4fs",
-        "proco",
-        "ppo",
-        "enm",
-        "envo2021",
-        "iao",
-        "vivo",
-        "nmrcv",
-        "pco",
-        "duo",
-        "peco",
-        "afo",
-        "envo",
-        "uberon",
-        "cto",
-        "ecso",
-        "cheminf",
-        "bco",
-        "cco",
-        "iofcore",
-        "pso",
-        "stato",
-        "aeon",
-        "nmrcv2025",
-        "agro",
-        "sepio",
-        "pmd",
-        "chmo",
-        "msio",
-        "tfsco",
-        "vibso",
-        "swo",
-        "listdb"
-      ],
-      "curie": "BFO:0000001",
-      "definedBy": [
-        "bfo"
-      ],
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "imported": false,
-      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "entity"
-      ],
-      "linkedEntities": {
-        "http://purl.obolibrary.org/obo/IAO_0000412": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 35,
-          "hasLocalDefinition": true,
-          "label": [
-            "imported from"
-          ],
-          "curie": "IAO:0000412",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#label": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": true,
-          "label": [
-            "label"
-          ],
-          "curie": "label",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 62,
-      "numHierarchicalDescendants": 62,
-      "ontologyId": "ecso",
-      "ontologyIri": "http://purl.dataone.org/odo/ECSO8.owl",
-      "ontologyPreferredPrefix": "ECSO",
-      "searchableAnnotationValues": false,
-      "shortForm": "BFO_0000001",
-      "type": [
-        "class",
-        "entity"
-      ],
-      "http://purl.obolibrary.org/obo/IAO_0000412": "http://purl.obolibrary.org/obo/envo.owl",
-      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-      "http://www.w3.org/2000/01/rdf-schema#label": "entity"
-    },
-    {
-      "appearsIn": [
-        "bfo",
-        "envo2023",
-        "oeo",
-        "t4fs",
-        "proco",
-        "ppo",
-        "enm",
-        "envo2021",
-        "iao",
-        "vivo",
-        "nmrcv",
-        "pco",
-        "duo",
-        "peco",
-        "afo",
-        "envo",
-        "uberon",
-        "cto",
-        "ecso",
-        "cheminf",
-        "bco",
-        "cco",
-        "iofcore",
-        "pso",
-        "stato",
-        "aeon",
-        "nmrcv2025",
-        "agro",
-        "sepio",
-        "pmd",
-        "chmo",
-        "msio",
-        "tfsco",
-        "vibso",
-        "swo",
-        "listdb"
-      ],
-      "curie": "BFO:0000001",
-      "definedBy": [
-        "bfo"
-      ],
-      "hasDirectChildren": true,
-      "hasDirectParents": false,
-      "hasHierarchicalChildren": true,
-      "hasHierarchicalParents": false,
-      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-      "imported": false,
-      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
-      "isDefiningOntology": false,
-      "isObsolete": false,
-      "isPreferredRoot": false,
-      "label": [
-        "entity"
-      ],
-      "linkedEntities": {
-        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
-          "numAppearsIn": 2,
-          "hasLocalDefinition": false,
-          "type": [
-            "property",
-            "objectProperty",
-            "entity"
-          ],
-          "label": [
-            "subClassOf"
-          ],
-          "curie": "subClassOf"
-        },
-        "http://purl.obolibrary.org/obo/IAO_0000116": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 46,
-          "hasLocalDefinition": true,
-          "label": [
-            "editor note"
-          ],
-          "curie": "IAO:0000116",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/BFO_0000179": {
-          "definedBy": [
-            "bfo"
-          ],
-          "numAppearsIn": 26,
-          "hasLocalDefinition": true,
-          "label": [
-            "BFO OWL specification label"
-          ],
-          "curie": "BFO:0000179",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/IAO_0000112": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 38,
-          "hasLocalDefinition": true,
-          "label": [
-            "example of usage"
-          ],
-          "curie": "IAO:0000112",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
-          "numAppearsIn": 31,
-          "hasLocalDefinition": true,
-          "label": [
-            "isDefinedBy"
-          ],
-          "curie": "isDefinedBy",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/IAO_0010000": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 29,
-          "hasLocalDefinition": true,
-          "label": [
-            "has axiom label"
-          ],
-          "curie": "IAO:0010000",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/IAO_0000600": {
-          "definedBy": [
-            "iao"
-          ],
-          "numAppearsIn": 33,
-          "hasLocalDefinition": true,
-          "label": [
-            "elucidation"
-          ],
-          "curie": "IAO:0000600",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
-          "numAppearsIn": 29,
-          "hasLocalDefinition": true,
-          "label": [
-            "seeAlso"
-          ],
-          "curie": "seeAlso",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#comment": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": false,
-          "label": [
-            "comment"
-          ],
-          "curie": "comment",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://purl.obolibrary.org/obo/BFO_0000180": {
-          "definedBy": [
-            "bfo"
-          ],
-          "numAppearsIn": 26,
-          "hasLocalDefinition": true,
-          "label": [
-            "BFO CLIF specification label"
-          ],
-          "curie": "BFO:0000180",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        },
-        "http://www.w3.org/2000/01/rdf-schema#label": {
-          "definedBy": [
-            "prov"
-          ],
-          "numAppearsIn": 59,
-          "hasLocalDefinition": true,
-          "label": [
-            "label"
-          ],
-          "curie": "label",
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
-          ]
-        }
-      },
-      "numDescendants": 3324,
-      "numHierarchicalDescendants": 3194,
+      "numDescendants": 2394,
+      "numHierarchicalDescendants": 2264,
       "ontologyId": "chmo",
       "ontologyIri": "http://purl.obolibrary.org/obo/chmo.owl",
       "ontologyPreferredPrefix": "CHMO",
@@ -4336,6 +3546,431 @@
     },
     {
       "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
+        "uberon",
+        "cto",
+        "fto-mw",
+        "ecso",
+        "cheminf",
+        "mto",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "vto",
+        "nmrcv2025",
+        "agro",
+        "nfdicore",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "cepo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000179": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO OWL specification label"
+          ],
+          "curie": "BFO:0000179",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0010000": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "has axiom label"
+          ],
+          "curie": "IAO:0010000",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000600": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 33,
+          "hasLocalDefinition": true,
+          "label": [
+            "elucidation"
+          ],
+          "curie": "IAO:0000600",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000180": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO CLIF specification label"
+          ],
+          "curie": "BFO:0000180",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 305,
+      "numHierarchicalDescendants": 286,
+      "ontologyId": "duo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/duo.owl",
+      "ontologyPreferredPrefix": "DUO",
+      "searchableAnnotationValues": [
+        "Julius Caesar",
+        "Verdi’s Requiem",
+        "the Second World War",
+        "your body mass index",
+        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
+              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
+            }
+          ]
+        },
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
+            }
+          ]
+        },
+        false
+      ],
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/BFO_0000179": "entity",
+      "http://purl.obolibrary.org/obo/BFO_0000180": "Entity",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "Julius Caesar",
+        "Verdi’s Requiem",
+        "the Second World War",
+        "your body mass index"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000116": [
+        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
+              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
+            }
+          ]
+        }
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000600": {
+        "type": [
+          "reification"
+        ],
+        "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
+        "axioms": [
+          {
+            "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
+          }
+        ]
+      },
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/bfo.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://www.w3.org/2002/07/owl#Thing"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
+        "uberon",
+        "cto",
+        "fto-mw",
+        "ecso",
+        "cheminf",
+        "mto",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "vto",
+        "nmrcv2025",
+        "agro",
+        "nfdicore",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "cepo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000412": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "imported from"
+          ],
+          "curie": "IAO:0000412",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 62,
+      "numHierarchicalDescendants": 62,
+      "ontologyId": "ecso",
+      "ontologyIri": "http://purl.dataone.org/odo/ECSO8.owl",
+      "ontologyPreferredPrefix": "ECSO",
+      "searchableAnnotationValues": false,
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000412": "http://purl.obolibrary.org/obo/envo.owl",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity"
+    },
+    {
+      "appearsIn": [
         "dpv"
       ],
       "curie": "dpv:Entity",
@@ -4360,24 +3995,27 @@
       ],
       "linkedEntities": {
         "http://xmlns.com/foaf/0.1/name": {
-          "numAppearsIn": 17,
-          "hasLocalDefinition": false,
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
+          "definedBy": [
+            "foaf"
           ],
+          "numAppearsIn": 21,
+          "hasLocalDefinition": false,
           "label": [
             "name"
           ],
-          "curie": "name"
+          "curie": "foaf:name",
+          "type": [
+            "dataProperty",
+            "property",
+            "entity"
+          ]
         },
         "http://www.w3.org/2004/02/skos/core#inScheme": {
           "definedBy": [
             "stw",
             "skos"
           ],
-          "numAppearsIn": 14,
+          "numAppearsIn": 17,
           "hasLocalDefinition": false,
           "label": [
             "is in scheme"
@@ -4410,7 +4048,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 55,
           "hasLocalDefinition": false,
           "label": [
             "definition"
@@ -4427,7 +4065,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 23,
+          "numAppearsIn": 29,
           "hasLocalDefinition": false,
           "label": [
             "Concept"
@@ -4452,7 +4090,7 @@
           "curie": "isDefinedBy"
         },
         "http://www.w3.org/2000/01/rdf-schema#Class": {
-          "numAppearsIn": 3,
+          "numAppearsIn": 12,
           "hasLocalDefinition": false,
           "type": [
             "class",
@@ -4479,32 +4117,38 @@
           ]
         },
         "http://xmlns.com/foaf/0.1/homepage": {
-          "numAppearsIn": 41,
-          "hasLocalDefinition": false,
-          "type": [
-            "property",
-            "annotationProperty",
-            "entity"
+          "definedBy": [
+            "foaf"
           ],
+          "numAppearsIn": 45,
+          "hasLocalDefinition": false,
           "label": [
             "homepage"
           ],
-          "curie": "homepage"
+          "curie": "foaf:homepage",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
         },
         "http://xmlns.com/foaf/0.1/Person": {
-          "numAppearsIn": 22,
-          "hasLocalDefinition": false,
-          "type": [
-            "class",
-            "entity"
+          "definedBy": [
+            "foaf"
           ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": false,
           "label": [
             "Person"
           ],
-          "curie": "Person"
+          "curie": "foaf:Person",
+          "type": [
+            "class",
+            "entity"
+          ]
         },
         "http://www.w3.org/2001/XMLSchema#date": {
-          "numAppearsIn": 2,
+          "numAppearsIn": 3,
           "hasLocalDefinition": false,
           "type": [
             "property",
@@ -4517,19 +4161,22 @@
           "curie": "date"
         },
         "http://xmlns.com/foaf/0.1/Organization": {
-          "numAppearsIn": 16,
-          "hasLocalDefinition": false,
-          "type": [
-            "class",
-            "entity"
+          "definedBy": [
+            "foaf"
           ],
+          "numAppearsIn": 19,
+          "hasLocalDefinition": false,
           "label": [
             "Organization"
           ],
-          "curie": "Organization"
+          "curie": "foaf:Organization",
+          "type": [
+            "class",
+            "entity"
+          ]
         },
         "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": {
-          "numAppearsIn": 4,
+          "numAppearsIn": 6,
           "hasLocalDefinition": false,
           "type": [
             "property",
@@ -4545,14 +4192,13 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 53,
+          "numAppearsIn": 83,
           "hasLocalDefinition": false,
           "label": [
             "Date Created"
           ],
           "curie": "dcterms:created",
           "type": [
-            "dataProperty",
             "property",
             "entity"
           ]
@@ -4561,7 +4207,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 67,
+          "numAppearsIn": 90,
           "hasLocalDefinition": false,
           "label": [
             "Contributor"
@@ -4569,7 +4215,6 @@
           "curie": "dcterms:contributor",
           "type": [
             "property",
-            "objectProperty",
             "entity"
           ]
         },
@@ -4578,7 +4223,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 57,
           "hasLocalDefinition": false,
           "label": [
             "preferred label"
@@ -4591,8 +4236,8 @@
           ]
         }
       },
-      "numDescendants": 48,
-      "numHierarchicalDescendants": 48,
+      "numDescendants": 50,
+      "numHierarchicalDescendants": 50,
       "ontologyId": "dpv",
       "ontologyIri": "https://w3id.org/dpv",
       "ontologyPreferredPrefix": "dpv",
@@ -4632,6 +4277,499 @@
       "http://www.w3.org/2004/02/skos/core#definition": "A human or non-human 'thing' that constitutes as an entity",
       "http://www.w3.org/2004/02/skos/core#inScheme": "https://w3id.org/dpv#entities-classes",
       "http://www.w3.org/2004/02/skos/core#prefLabel": "Entity"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
+        "uberon",
+        "cto",
+        "fto-mw",
+        "ecso",
+        "cheminf",
+        "mto",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "vto",
+        "nmrcv2025",
+        "agro",
+        "nfdicore",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "cepo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "(Elucidation) An entity is anything that exists or has existed or will exist"
+      ],
+      "definitionProperty": "http://www.w3.org/2004/02/skos/core#definition",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": true,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 55,
+          "hasLocalDefinition": true,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000179": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO OWL specification label"
+          ],
+          "curie": "BFO:0000179",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0010000": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "has axiom label"
+          ],
+          "curie": "IAO:0010000",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000600": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 33,
+          "hasLocalDefinition": true,
+          "label": [
+            "elucidation"
+          ],
+          "curie": "IAO:0000600",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        },
+        "http://purl.org/dc/elements/1.1/identifier": {
+          "numAppearsIn": 30,
+          "hasLocalDefinition": true,
+          "label": [
+            "identifier"
+          ],
+          "curie": "identifier",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000180": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "BFO CLIF specification label"
+          ],
+          "curie": "BFO:0000180",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#example": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "example"
+          ],
+          "curie": "skos:example",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 219,
+      "numHierarchicalDescendants": 274,
+      "ontologyId": "cto",
+      "ontologyIri": "https://nfdi4culture.de/ontology",
+      "ontologyPreferredPrefix": "CTO",
+      "searchableAnnotationValues": [
+        "Julius Caesar",
+        "Verdi’s Requiem",
+        "the Second World War",
+        "your body mass index",
+        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
+              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
+            }
+          ]
+        },
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
+            }
+          ]
+        },
+        "(Elucidation) An entity is anything that exists or has existed or will exist",
+        "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem",
+        false
+      ],
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/BFO_0000179": "entity",
+      "http://purl.obolibrary.org/obo/BFO_0000180": "Entity",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "Julius Caesar",
+        "Verdi’s Requiem",
+        "the Second World War",
+        "your body mass index"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000116": [
+        "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/0000004",
+              "http://www.w3.org/2000/01/rdf-schema#comment": "per discussion with Barry Smith",
+              "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf"
+            }
+          ]
+        }
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000600": {
+        "type": [
+          "reification"
+        ],
+        "value": "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
+        "axioms": [
+          {
+            "http://purl.obolibrary.org/obo/IAO_0010000": "http://purl.obolibrary.org/obo/bfo/axiom/001-001"
+          }
+        ]
+      },
+      "http://purl.org/dc/elements/1.1/identifier": "001-BFO",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/bfo.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2004/02/skos/core#definition": "(Elucidation) An entity is anything that exists or has existed or will exist",
+      "http://www.w3.org/2004/02/skos/core#example": "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
+        "uberon",
+        "cto",
+        "fto-mw",
+        "ecso",
+        "cheminf",
+        "mto",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "vto",
+        "nmrcv2025",
+        "agro",
+        "nfdicore",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "cepo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "(Elucidation) An entity is anything that exists or has existed or will exist"
+      ],
+      "definitionProperty": "http://www.w3.org/2004/02/skos/core#definition",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2004/02/skos/core#definition": {
+          "definedBy": [
+            "stw",
+            "skos"
+          ],
+          "numAppearsIn": 55,
+          "hasLocalDefinition": true,
+          "label": [
+            "definition"
+          ],
+          "curie": "definition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2004/02/skos/core#example": {
+          "definedBy": [
+            "skos",
+            "stw"
+          ],
+          "numAppearsIn": 59,
+          "hasLocalDefinition": true,
+          "label": [
+            "example"
+          ],
+          "curie": "skos:example",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 984,
+      "numHierarchicalDescendants": 1206,
+      "ontologyId": "cto-mw",
+      "ontologyIri": "https://w3id.org/pmd/cto/",
+      "ontologyPreferredPrefix": "CTO-MW",
+      "searchableAnnotationValues": [
+        "(Elucidation) An entity is anything that exists or has existed or will exist",
+        "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem",
+        false
+      ],
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2004/02/skos/core#definition": "(Elucidation) An entity is anything that exists or has existed or will exist",
+      "http://www.w3.org/2004/02/skos/core#example": "Julius Caesar; the Second World War; your body mass index; Verdi's Requiem"
     }
   ],
   "facetFieldsToCounts": {}

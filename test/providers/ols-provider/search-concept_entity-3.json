@@ -1,0 +1,284 @@
+{
+  "page": 3,
+  "numElements": 4,
+  "totalPages": 4,
+  "totalElements": 64,
+  "elements": [
+    {
+      "appearsIn": [
+        "sd",
+        "repr",
+        "prov",
+        "premis3",
+        "tsrto",
+        "dcat3",
+        "pmat"
+      ],
+      "curie": "prov:Entity",
+      "definedBy": [
+        "prov"
+      ],
+      "definition": [
+        "a physical, digital, conceptual, or other kind of thing with some fixed aspects\n(http://www.w3.org/ns/prov#Entity)"
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/ns/prov#Entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#InstantaneousEvent": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "InstantaneousEvent"
+          ],
+          "curie": "prov:InstantaneousEvent",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 126,
+      "numHierarchicalDescendants": 121,
+      "ontologyId": "pmat",
+      "ontologyIri": "https://w3id.org/polymat/",
+      "ontologyPreferredPrefix": "pmat",
+      "searchableAnnotationValues": false,
+      "shortForm": "prov_Entity",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "a physical, digital, conceptual, or other kind of thing with some fixed aspects\n(http://www.w3.org/ns/prov#Entity)",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Entity",
+      "http://www.w3.org/2002/07/owl#disjointWith": "http://www.w3.org/ns/prov#InstantaneousEvent"
+    },
+    {
+      "appearsIn": [
+        "sd",
+        "repr",
+        "prov",
+        "premis3",
+        "tsrto",
+        "dcat3",
+        "pmat"
+      ],
+      "curie": "prov:Entity",
+      "definedBy": [
+        "prov"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/ns/prov#Entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 2,
+      "numHierarchicalDescendants": 2,
+      "ontologyId": "sd",
+      "ontologyIri": "https://w3id.org/okn/o/sd",
+      "ontologyPreferredPrefix": "sd",
+      "searchableAnnotationValues": false,
+      "shortForm": "prov_Entity",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class"
+    },
+    {
+      "appearsIn": [
+        "sd",
+        "repr",
+        "prov",
+        "premis3",
+        "tsrto",
+        "dcat3",
+        "pmat"
+      ],
+      "curie": "prov:Entity",
+      "definedBy": [
+        "prov"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/ns/prov#Entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {
+        "https://gitlab.com/kupferdigital/process-graphs/relaxation-test/": {
+          "url": "https://gitlab.com/kupferdigital/process-graphs/relaxation-test/",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "gitlab:kupferdigital/process-graphs/relaxation-test/"
+        }
+      },
+      "numDescendants": 111,
+      "numHierarchicalDescendants": 60,
+      "ontologyId": "tsrto",
+      "ontologyIri": "https://gitlab.com/kupferdigital/process-graphs/relaxation-test/",
+      "ontologyPreferredPrefix": "tsrto",
+      "searchableAnnotationValues": false,
+      "shortForm": "prov_Entity",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "oeo",
+        "t4fs",
+        "proco",
+        "ppo",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "pco",
+        "duo",
+        "peco",
+        "afo",
+        "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
+        "uberon",
+        "cto",
+        "fto-mw",
+        "ecso",
+        "cheminf",
+        "mto",
+        "bco",
+        "cco",
+        "iofcore",
+        "pso",
+        "stato",
+        "vto",
+        "nmrcv2025",
+        "agro",
+        "nfdicore",
+        "sepio",
+        "pmd",
+        "chmo",
+        "msio",
+        "tfsco",
+        "vibso",
+        "cepo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "BFO:0000001",
+      "definedBy": [
+        "bfo"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": true,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "Entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 318,
+      "numHierarchicalDescendants": 318,
+      "ontologyId": "vivo",
+      "ontologyIri": "http://vivoweb.org/ontology/core",
+      "ontologyPreferredPrefix": "vivo",
+      "searchableAnnotationValues": false,
+      "shortForm": "BFO_0000001",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "Entity"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

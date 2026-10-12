@@ -9,7 +9,8 @@
         "FID BAUdigital",
         "FID move",
         "NFDI4ING",
-        "ESS"
+        "ESS",
+        "MaRDI"
       ]
     },
     {
@@ -44,7 +45,7 @@
         "skos",
         "stw"
       ],
-      "numAppearsIn": 41,
+      "numAppearsIn": 53,
       "hasLocalDefinition": false,
       "label": [
         "alternative label"
@@ -61,7 +62,7 @@
         "stw",
         "skos"
       ],
-      "numAppearsIn": 40,
+      "numAppearsIn": 55,
       "hasLocalDefinition": false,
       "label": [
         "definition"
@@ -78,7 +79,7 @@
         "skos",
         "stw"
       ],
-      "numAppearsIn": 38,
+      "numAppearsIn": 57,
       "hasLocalDefinition": false,
       "label": [
         "preferred label"
@@ -91,26 +92,26 @@
       ]
     }
   },
-  "loaded": "2026-02-08T13:44:17.800575982",
+  "loaded": "2026-09-30T15:42:14.647393953",
   "numDescendants": 0,
   "numHierarchicalDescendants": 0,
-  "numberOfClasses": "2092",
-  "numberOfEntities": "2092",
+  "numberOfClasses": "2141",
+  "numberOfEntities": "2141",
   "numberOfIndividuals": "0",
   "numberOfProperties": "0",
   "ontologyId": "bk",
   "ontologyPurl": "file:/opt/ols/dataload/terminology/vocabularies/basisklassifikation/bk__default-turtle.ttl",
   "preferredPrefix": "BK",
   "searchableAnnotationValues": [
-    "2026-02-08T13:44:17.800575982",
-    "2092",
+    "2026-09-30T15:42:14.647393953",
+    "2141",
     "0",
-    "Sun Feb 08 13:44:17 UTC 2026"
+    "Wed Sep 30 15:42:14 UTC 2026"
   ],
   "skos": true,
   "skosNarrower": false,
   "skosRoot": "TOPCONCEPTOF_PROPERTY",
-  "sourceFileTimestamp": "Sun Feb 08 13:44:17 UTC 2026",
+  "sourceFileTimestamp": "Wed Sep 30 15:42:14 UTC 2026",
   "synonym_property": [
     "http://www.w3.org/2004/02/skos/core#altLabel"
   ],

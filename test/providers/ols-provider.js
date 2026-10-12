@@ -13,33 +13,38 @@ const missing = mockRequests(provider.axios, {
   // debug: true,
   downloadMissing: true,
 }, {
-  "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
-  "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
-  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity": "search-concept_entity.json",
-  "https://api.terminology.tib.eu/api/v2/classes?search=entity&size=20": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=1": "search-concept_entity-1.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2": "search-concept_entity-2.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=3": "search-concept_entity-3.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&size=20": "search-concept_entity.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=1&size=20": "search-concept_entity-1.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2&size=20": "search-concept_entity-2.json",
-
-  "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2": "search-concept_entity-2.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology=envo": "search-concept-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/individuals?search=entity": "search-individual_entity.json",
+  "https://api.terminology.tib.eu/api/v2/individuals?search=entity&size=20": "search-individual_entity-20.json",
+  "https://api.terminology.tib.eu/api/v2/individuals?search=entity&ontology=envo": "search-individual-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?size=50": "ontologies-50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo": "ontology_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bk": "ontology_bk.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bf": "ontology_bf.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo": "ontology_bfo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FBFO_0000002": "search-concept_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO%3A0000002": "search-concept_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "ancestors_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "narrower_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo": "ontology_envo.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/bk": "ontology_bk.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/bf": "ontology_bf.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/bfo": "ontology_bfo.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies?size=50": "ontologies-50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?size=50": "properties-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?size=50": "individuals-envo_50.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
@@ -135,8 +140,8 @@ describe("OlsProvider.getTop", () => {
     const configVOCID = { scheme: { VOCID: schemeVOCIDDefault } }
     const topConceptsUri = await provider.getTop(configUri)
     const topConceptsVOCID = await provider.getTop(configVOCID)
-    assert.equal(topConceptsUri.length, 7)
-    assert.equal(topConceptsVOCID.length, 7)
+    assert.equal(topConceptsUri.length, 14)
+    assert.equal(topConceptsVOCID.length, 14)
   })
 
   it("request top concepts of a non-existing scheme uri", async function () {
@@ -260,7 +265,7 @@ describe("OlsProvider.search", () => {
   it("search for a term in all schemes", async function () {
     const concepts = await provider.search({ search: searchDefault })
     assert(Array.isArray(concepts))
-    assert.equal(concepts.length, 59)
+    assert.equal(concepts.length, 64)
   })
 
   it("search for a term in a specific scheme", async function () {
@@ -297,7 +302,7 @@ describe("OlsProvider.suggest", () => {
     assert.equal(typeof concepts[0], "string")
     assert(Array.isArray(concepts[1]))
     const len = concepts[1].length
-    assert(len >= 59)
+    assert.equal(len, 64)
     assert(Array.isArray(concepts[2]))
     assert.equal(concepts[2].length, len)
     assert(Array.isArray(concepts[3]))
@@ -310,7 +315,7 @@ describe("OlsProvider.suggest", () => {
     assert.equal(typeof concepts[0], "string")
     assert(Array.isArray(concepts[1]))
     const len = concepts[1].length
-    assert(len >= 1)
+    assert.equal(len, 1)
     assert(Array.isArray(concepts[2]))
     assert.equal(concepts[2].length, len)
     assert(Array.isArray(concepts[3]))

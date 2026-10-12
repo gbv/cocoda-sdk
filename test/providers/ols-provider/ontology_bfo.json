@@ -7,7 +7,9 @@
         "NFDI4CAT",
         "Foundational Ontologies",
         "DataPLANT",
-        "FAIRmat"
+        "FAIRmat",
+        "NFDIxCS",
+        "NFDI-MatWerk"
       ]
     },
     {
@@ -66,7 +68,6 @@
     "duo",
     "pco",
     "agro",
-    "aeon",
     "stato",
     "vivo",
     "cto",
@@ -74,6 +75,7 @@
     "iao",
     "afo",
     "cheminf",
+    "cepo",
     "bco",
     "enm",
     "nmrcv",
@@ -82,15 +84,22 @@
     "sepio",
     "oeo",
     "cco",
+    "mwo",
     "iofcore",
     "pmd",
+    "mto",
+    "cto-mw",
+    "vto",
+    "nfdicore",
     "mop",
-    "envo",
+    "fto-mw",
     "envo2023",
     "envo2021",
+    "envo",
     "obi",
     "pmat",
     "uberon",
+    "bto-mw",
     "cao",
     "ro",
     "to",
@@ -99,8 +108,8 @@
     "pato",
     "cob",
     "ppo",
-    "peco",
     "ecso",
+    "peco",
     "pso",
     "chiro",
     "gesah",
@@ -108,13 +117,15 @@
     "rxno",
     "m4i",
     "listdb",
-    "gc"
+    "gc",
+    "dpbo"
   ],
   "homepage": "http://ifomis.org/bfo/",
   "imported": false,
   "importsFrom": [
     "iao",
     "uo",
+    "foaf",
     "dcterms"
   ],
   "iri": "http://purl.obolibrary.org/obo/bfo.owl",
@@ -146,7 +157,7 @@
         "uo",
         "iao"
       ],
-      "numAppearsIn": 61,
+      "numAppearsIn": 71,
       "hasLocalDefinition": true,
       "label": [
         "IAO_0000115"
@@ -162,7 +173,7 @@
       "definedBy": [
         "iao"
       ],
-      "numAppearsIn": 46,
+      "numAppearsIn": 52,
       "hasLocalDefinition": true,
       "label": [
         "editor note"
@@ -175,7 +186,7 @@
       ]
     },
     "http://purl.org/dc/elements/1.1/contributor": {
-      "numAppearsIn": 46,
+      "numAppearsIn": 50,
       "hasLocalDefinition": true,
       "label": [
         "contributor"
@@ -191,7 +202,7 @@
       "definedBy": [
         "dcterms"
       ],
-      "numAppearsIn": 119,
+      "numAppearsIn": 136,
       "hasLocalDefinition": true,
       "label": [
         "License"
@@ -199,7 +210,6 @@
       "curie": "dcterms:license",
       "type": [
         "property",
-        "objectProperty",
         "entity"
       ]
     },
@@ -207,7 +217,7 @@
       "definedBy": [
         "prov"
       ],
-      "numAppearsIn": 59,
+      "numAppearsIn": 60,
       "hasLocalDefinition": false,
       "label": [
         "comment"
@@ -246,28 +256,34 @@
       ]
     },
     "http://xmlns.com/foaf/0.1/homepage": {
-      "numAppearsIn": 41,
+      "definedBy": [
+        "foaf"
+      ],
+      "numAppearsIn": 45,
       "hasLocalDefinition": true,
       "label": [
         "homepage"
       ],
-      "curie": "homepage",
+      "curie": "foaf:homepage",
       "type": [
         "property",
-        "annotationProperty",
+        "objectProperty",
         "entity"
       ]
     },
     "http://xmlns.com/foaf/0.1/mbox": {
-      "numAppearsIn": 24,
+      "definedBy": [
+        "foaf"
+      ],
+      "numAppearsIn": 28,
       "hasLocalDefinition": true,
       "label": [
-        "mbox"
+        "personal mailbox"
       ],
-      "curie": "mbox",
+      "curie": "foaf:mbox",
       "type": [
         "property",
-        "annotationProperty",
+        "objectProperty",
         "entity"
       ]
     },
@@ -289,7 +305,7 @@
       "curie": "mailto:bfo-owl-devel@googlegroups.com"
     }
   },
-  "loaded": "2026-02-08T13:44:17.526278523",
+  "loaded": "2026-09-30T15:42:14.323813378",
   "mailingList": "https://groups.google.com/forum/#!forum/bfo-discuss",
   "numDescendants": 0,
   "numHierarchicalDescendants": 0,
@@ -334,14 +350,14 @@
     "Werner Ceusters",
     "Yongqun \"Oliver\" He",
     false,
-    "2026-02-08T13:44:17.526278523",
+    "2026-09-30T15:42:14.323813378",
     "35",
     "57",
     "0",
     "22",
-    "Sun Feb 08 13:44:17 UTC 2026"
+    "Wed Sep 30 15:42:13 UTC 2026"
   ],
-  "sourceFileTimestamp": "Sun Feb 08 13:44:17 UTC 2026",
+  "sourceFileTimestamp": "Wed Sep 30 15:42:13 UTC 2026",
   "title": "Basic Formal Ontology",
   "tracker": "https://github.com/BFO-ontology/BFO/issues",
   "type": [
