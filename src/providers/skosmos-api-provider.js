@@ -340,7 +340,7 @@ export default class SkosmosApiProvider extends BaseProvider {
     if (!Array.isArray(concepts)) {
       concepts = [concepts]
     }
-    concepts = concepts.map(c => ({ uri: c.uri, inScheme: c.inScheme }))
+    concepts = concepts.filter(Boolean).map(c => ({ uri: c?.uri, inScheme: c?.inScheme }))
     const newConcepts = []
     for (let concept of concepts) {
       if (!concept || !concept.uri) {
