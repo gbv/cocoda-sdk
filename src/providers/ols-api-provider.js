@@ -23,17 +23,13 @@ const entityTypes = [{
   },
 }]
 
-const searchTypesDefault = ["http://www.w3.org/2002/07/owl#Class", "http://www.w3.org/2002/07/owl#NamedIndividual"]
-// old: ["http://www.w3.org/2002/07/owl#Class"]
-// all: entityTypes.map(t => t.uri)
+const searchTypesDefault = entityTypes.map(t => t.uri) // old: ["http://www.w3.org/2002/07/owl#Class"]
 
 
 /**
  * OLS API V2.
  *
  * The Ontology Lookup Service (OLS) hosts ontologies. Implementation is not fully completed yet.
- *
- * Properties are only supported partially.
  *
  * ```js
  * const provider = new OlsApiProvider({
@@ -247,8 +243,11 @@ export default class OlsApiProvider extends BaseProvider {
     const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
     if (!scheme || VOCID) {
       for (const { _api } of types) {
-        // TODO: how to merge with limit if multiple are included
-        const found = await this._paginate([_api], { search: search, ontology: VOCID }, limit)
+        const remaining = limit > 0 ? limit - items.length : 0 // calculate remaining if limit is set
+        if (limit > 0 && remaining <= 0) {
+          break
+        }
+        const found = await this._paginate([_api], { search: search, ontology: VOCID }, remaining)
         items.push(...found.map(item => ({ ...item, _api })))
       }
     }

@@ -1,0 +1,1217 @@
+{
+  "page": 0,
+  "numElements": 9,
+  "totalPages": 1,
+  "totalElements": 9,
+  "elements": [
+    {
+      "appearsIn": [
+        "envo",
+        "envo2021",
+        "envo2023",
+        "enm"
+      ],
+      "curie": "entity",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/envo-p/patterns/process_attribute/entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo2021",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO2021",
+      "searchableAnnotationValues": false,
+      "shortForm": "entity",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "envo2021",
+        "envo2023",
+        "enm"
+      ],
+      "curie": "entity",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/envo-p/patterns/process_attribute/entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo2023",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO2023",
+      "searchableAnnotationValues": false,
+      "shortForm": "entity",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "envo2021",
+        "envo2023",
+        "enm"
+      ],
+      "curie": "entity",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/envo-p/patterns/process_attribute/entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "entity",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "envo",
+        "envo2021",
+        "envo2023",
+        "enm"
+      ],
+      "curie": "entity",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": true,
+      "iri": "http://purl.obolibrary.org/obo/envo-p/patterns/process_attribute/entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "enm",
+      "ontologyIri": "http://enanomapper.github.io/ontologies/enanomapper.owl",
+      "ontologyPreferredPrefix": "ENM",
+      "searchableAnnotationValues": true,
+      "shortForm": "entity",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "premis3",
+        "dcat3",
+        "pmat",
+        "prov",
+        "repr"
+      ],
+      "curie": "prov:entity",
+      "definedBy": [
+        "prov"
+      ],
+      "directAncestor": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "directParent": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/ns/prov#entity",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#EntityInfluence": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "EntityInfluence"
+          ],
+          "curie": "prov:EntityInfluence",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#category": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_category"
+          ],
+          "curie": "prov:category",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#editorsDefinition": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorsDefinition"
+          ],
+          "curie": "prov:editorsDefinition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#Entity": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "Entity"
+          ],
+          "curie": "prov:Entity",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#inverse": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_inverse"
+          ],
+          "curie": "prov:inverse",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/ns/prov#influencer": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "influencer"
+          ],
+          "curie": "prov:influencer",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/ns/prov#editorialNote": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorialNote"
+          ],
+          "curie": "prov:editorialNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "prov",
+      "ontologyIri": "http://www.w3.org/ns/prov-o#",
+      "ontologyPreferredPrefix": "prov",
+      "searchableAnnotationValues": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+        false
+      ],
+      "shortForm": "prov_entity",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/ns/prov#EntityInfluence",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://www.w3.org/ns/prov-o#",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/ns/prov#Entity",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/ns/prov#influencer",
+      "http://www.w3.org/ns/prov#category": "qualified",
+      "http://www.w3.org/ns/prov#editorialNote": "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+      "http://www.w3.org/ns/prov#editorsDefinition": "The prov:entity property references an prov:Entity which influenced a resource. This property applies to an prov:EntityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent.",
+      "http://www.w3.org/ns/prov#inverse": "entityOfInfluence"
+    },
+    {
+      "appearsIn": [
+        "premis3",
+        "dcat3",
+        "pmat",
+        "prov",
+        "repr"
+      ],
+      "curie": "prov:entity",
+      "definedBy": [
+        "prov"
+      ],
+      "directAncestor": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "directParent": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": true,
+      "iri": "http://www.w3.org/ns/prov#entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#EntityInfluence": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "EntityInfluence"
+          ],
+          "curie": "prov:EntityInfluence",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#category": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_category"
+          ],
+          "curie": "prov:category",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#editorsDefinition": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorsDefinition"
+          ],
+          "curie": "prov:editorsDefinition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#Entity": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "Entity"
+          ],
+          "curie": "prov:Entity",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#inverse": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_inverse"
+          ],
+          "curie": "prov:inverse",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/ns/prov#influencer": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "influencer"
+          ],
+          "curie": "prov:influencer",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/ns/prov#editorialNote": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorialNote"
+          ],
+          "curie": "prov:editorialNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "dcat3",
+      "ontologyIri": "http://www.w3.org/ns/dcat",
+      "ontologyPreferredPrefix": "dcat",
+      "searchableAnnotationValues": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+        true
+      ],
+      "shortForm": "prov_entity",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/ns/prov#EntityInfluence",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://www.w3.org/ns/prov-o#",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/ns/prov#Entity",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/ns/prov#influencer",
+      "http://www.w3.org/ns/prov#category": "qualified",
+      "http://www.w3.org/ns/prov#editorialNote": "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+      "http://www.w3.org/ns/prov#editorsDefinition": "The prov:entity property references an prov:Entity which influenced a resource. This property applies to an prov:EntityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent.",
+      "http://www.w3.org/ns/prov#inverse": "entityOfInfluence"
+    },
+    {
+      "appearsIn": [
+        "premis3",
+        "dcat3",
+        "pmat",
+        "prov",
+        "repr"
+      ],
+      "curie": "prov:entity",
+      "definedBy": [
+        "prov"
+      ],
+      "definition": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/ns/prov#entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#EntityInfluence": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "EntityInfluence"
+          ],
+          "curie": "prov:EntityInfluence",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": true,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#Entity": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "Entity"
+          ],
+          "curie": "prov:Entity",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "pmat",
+      "ontologyIri": "https://w3id.org/polymat/",
+      "ontologyPreferredPrefix": "pmat",
+      "searchableAnnotationValues": false,
+      "shortForm": "prov_entity",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple."
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/ns/prov#EntityInfluence",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/ns/prov#Entity"
+    },
+    {
+      "appearsIn": [
+        "premis3",
+        "dcat3",
+        "pmat",
+        "prov",
+        "repr"
+      ],
+      "curie": "prov:entity",
+      "definedBy": [
+        "prov"
+      ],
+      "directAncestor": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "directParent": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": true,
+      "iri": "http://www.w3.org/ns/prov#entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#EntityInfluence": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "EntityInfluence"
+          ],
+          "curie": "prov:EntityInfluence",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#category": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_category"
+          ],
+          "curie": "prov:category",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#editorsDefinition": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorsDefinition"
+          ],
+          "curie": "prov:editorsDefinition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#Entity": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "Entity"
+          ],
+          "curie": "prov:Entity",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#inverse": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_inverse"
+          ],
+          "curie": "prov:inverse",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/ns/prov#influencer": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "influencer"
+          ],
+          "curie": "prov:influencer",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/ns/prov#editorialNote": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorialNote"
+          ],
+          "curie": "prov:editorialNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "repr",
+      "ontologyIri": "https://w3id.org/reproduceme",
+      "ontologyPreferredPrefix": "repr",
+      "searchableAnnotationValues": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+        true
+      ],
+      "shortForm": "prov_entity",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/ns/prov#EntityInfluence",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://www.w3.org/ns/prov-o#",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/ns/prov#Entity",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/ns/prov#influencer",
+      "http://www.w3.org/ns/prov#category": "qualified",
+      "http://www.w3.org/ns/prov#editorialNote": "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+      "http://www.w3.org/ns/prov#editorsDefinition": "The prov:entity property references an prov:Entity which influenced a resource. This property applies to an prov:EntityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent.",
+      "http://www.w3.org/ns/prov#inverse": "entityOfInfluence"
+    },
+    {
+      "appearsIn": [
+        "premis3",
+        "dcat3",
+        "pmat",
+        "prov",
+        "repr"
+      ],
+      "curie": "prov:entity",
+      "definedBy": [
+        "prov"
+      ],
+      "directAncestor": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "directParent": [
+        "http://www.w3.org/ns/prov#influencer"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": true,
+      "iri": "http://www.w3.org/ns/prov#entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/ns/prov#EntityInfluence": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "EntityInfluence"
+          ],
+          "curie": "prov:EntityInfluence",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#category": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_category"
+          ],
+          "curie": "prov:category",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#editorsDefinition": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorsDefinition"
+          ],
+          "curie": "prov:editorsDefinition",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#Entity": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "Entity"
+          ],
+          "curie": "prov:Entity",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/ns/prov#inverse": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_inverse"
+          ],
+          "curie": "prov:inverse",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/ns/prov#influencer": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "influencer"
+          ],
+          "curie": "prov:influencer",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/ns/prov#editorialNote": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": true,
+          "label": [
+            "prov_editorialNote"
+          ],
+          "curie": "prov:editorialNote",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "premis3",
+      "ontologyIri": "http://www.loc.gov/premis/rdf/v3/",
+      "ontologyPreferredPrefix": "PREMIS3",
+      "searchableAnnotationValues": [
+        "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+        true
+      ],
+      "shortForm": "prov_entity",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/ns/prov#EntityInfluence",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://www.w3.org/ns/prov-o#",
+      "http://www.w3.org/2000/01/rdf-schema#label": "entity",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/ns/prov#Entity",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/ns/prov#influencer",
+      "http://www.w3.org/ns/prov#category": "qualified",
+      "http://www.w3.org/ns/prov#editorialNote": "This property behaves in spirit like rdf:object; it references the object of a prov:wasInfluencedBy triple.",
+      "http://www.w3.org/ns/prov#editorsDefinition": "The prov:entity property references an prov:Entity which influenced a resource. This property applies to an prov:EntityInfluence, which is given by a subproperty of prov:qualifiedInfluence from the influenced prov:Entity, prov:Activity or prov:Agent.",
+      "http://www.w3.org/ns/prov#inverse": "entityOfInfluence"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

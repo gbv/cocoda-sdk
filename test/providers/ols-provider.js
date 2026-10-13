@@ -13,19 +13,26 @@ const missing = mockRequests(provider.axios, {
   // debug: true,
   downloadMissing: true,
 }, {
+  // classes
   "https://api.terminology.tib.eu/api/v2/classes?search=entity": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=1": "search-concept_entity-1.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2": "search-concept_entity-2.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=3": "search-concept_entity-3.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&size=20": "search-concept_entity.json",
-  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=1&size=20": "search-concept_entity-1.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2&size=20": "search-concept_entity-2.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology=envo": "search-concept-envo_entity.json",
+  // individuals
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity": "search-individual_entity.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&size=20": "search-individual_entity-20.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&ontology=envo": "search-individual-envo_entity.json",
+  // properties
+  "https://api.terminology.tib.eu/api/v2/properties?search=entity": "search-property_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
+  "https://api.terminology.tib.eu/api/v2/properties?search=entity&ontology=envo": "search-property-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/properties?search=entity&size=20": "search-property_entity-20.json",
+  // ontologies
   "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?size=50": "ontologies-50.json",
@@ -264,13 +271,15 @@ describe("OlsProvider.search", () => {
 
   it("search for a term in all schemes", async function () {
     const concepts = await provider.search({ search: searchDefault })
+    // console.log(concepts.map(c => ({ l: c.prefLabel, n: c.notation, t: c.type })))
     assert(Array.isArray(concepts))
-    assert.equal(concepts.length, 64)
+    assert.equal(concepts.length, 73) // 59 classes + 5 individuals + 9 properties
   })
 
   it("search for a term in a specific scheme", async function () {
     const concepts = await provider.search({ search: searchDefault, scheme: { uri: schemeUriDefault } })
-    assert.equal(concepts.length, 1)
+    const expectedlen = 2  // 1 class + 1 property
+    assert.equal(concepts.length, expectedlen)
   })
 
   it("search with unknown type", async function () {
@@ -300,26 +309,26 @@ describe("OlsProvider.suggest", () => {
     const concepts = await provider.suggest(config)
     assert(Array.isArray(concepts))
     assert.equal(typeof concepts[0], "string")
+    const expectedlen = 73  // 59 classes + 5 individuals + 9 properties
     assert(Array.isArray(concepts[1]))
-    const len = concepts[1].length
-    assert.equal(len, 64)
     assert(Array.isArray(concepts[2]))
-    assert.equal(concepts[2].length, len)
     assert(Array.isArray(concepts[3]))
-    assert.equal(concepts[3].length, len)
+    assert.equal(concepts[1].length, expectedlen)
+    assert.equal(concepts[2].length, expectedlen)
+    assert.equal(concepts[3].length, expectedlen)
   })
 
   it("suggest for a term in a specific scheme", async function () {
     const config = { search: searchDefault, scheme: { uri: schemeUriDefault } }
     const concepts = await provider.suggest(config)
     assert.equal(typeof concepts[0], "string")
+    const expectedlen = 2  // 1 class + 1 property
     assert(Array.isArray(concepts[1]))
-    const len = concepts[1].length
-    assert.equal(len, 1)
     assert(Array.isArray(concepts[2]))
-    assert.equal(concepts[2].length, len)
     assert(Array.isArray(concepts[3]))
-    assert.equal(concepts[3].length, len)
+    assert.equal(concepts[1].length, expectedlen)
+    assert.equal(concepts[2].length, expectedlen)
+    assert.equal(concepts[3].length, expectedlen)
   })
 
 })
