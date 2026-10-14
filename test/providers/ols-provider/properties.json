@@ -135,7 +135,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -208,7 +208,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
@@ -250,8 +250,8 @@
           "https://schema.org/Organization",
           "https://schema.org/Person",
           "https://schema.org/Role",
-          "https://schema.org/URL",
-          "https://schema.org/Text"
+          "https://schema.org/Text",
+          "https://schema.org/URL"
         ]
       },
       "https://schema.org/supersededBy": "https://schema.org/member"

@@ -1,0 +1,44 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "envo",
+        "envo2021",
+        "envo2023",
+        "enm"
+      ],
+      "curie": "entity",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/envo-p/patterns/process_attribute/entity",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "entity"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "entity",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

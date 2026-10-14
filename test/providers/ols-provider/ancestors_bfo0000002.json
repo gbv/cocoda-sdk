@@ -22,24 +22,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -142,7 +149,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 35,
+          "numAppearsIn": 38,
           "hasLocalDefinition": true,
           "label": [
             "has quality"
@@ -158,7 +165,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -171,8 +178,8 @@
           ]
         }
       },
-      "numDescendants": 6333,
-      "numHierarchicalDescendants": 6291,
+      "numDescendants": 6114,
+      "numHierarchicalDescendants": 6072,
       "ontologyId": "envo",
       "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
       "ontologyPreferredPrefix": "ENVO",

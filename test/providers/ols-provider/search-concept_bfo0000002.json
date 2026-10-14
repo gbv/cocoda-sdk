@@ -24,20 +24,26 @@
         "ro",
         "afo",
         "envo",
+        "bto-mw",
         "po",
+        "mwo",
         "uberon",
+        "cto-mw",
         "cto",
+        "fto-mw",
         "cheminf",
         "ecso",
+        "mto",
         "bco",
         "iofcore",
         "cco",
         "agro",
+        "vto",
         "chmo",
-        "aeon",
         "pmd",
         "pso",
         "stato",
+        "nfdicore",
         "vibso",
         "chiro",
         "sepio",
@@ -45,6 +51,7 @@
         "nmrcv2025",
         "tfsco",
         "msio",
+        "cepo",
         "pato",
         "swo"
       ],
@@ -86,7 +93,7 @@
           "definedBy": [
             "pato"
           ],
-          "numAppearsIn": 6,
+          "numAppearsIn": 7,
           "hasLocalDefinition": true,
           "label": [
             "radiation quality"
@@ -101,7 +108,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 20,
+          "numAppearsIn": 23,
           "hasLocalDefinition": true,
           "label": [
             "derives from"
@@ -114,7 +121,7 @@
           ]
         },
         "http://purl.obolibrary.org/obo/BFO_0000050": {
-          "numAppearsIn": 49,
+          "numAppearsIn": 55,
           "hasLocalDefinition": true,
           "label": [
             "part of"
@@ -160,7 +167,7 @@
             "uo",
             "iao"
           ],
-          "numAppearsIn": 61,
+          "numAppearsIn": 71,
           "hasLocalDefinition": true,
           "label": [
             "IAO_0000115"
@@ -176,7 +183,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 30,
+          "numAppearsIn": 35,
           "hasLocalDefinition": true,
           "label": [
             "located in"
@@ -192,7 +199,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 36,
+          "numAppearsIn": 43,
           "hasLocalDefinition": true,
           "label": [
             "entity"
@@ -207,7 +214,7 @@
           "definedBy": [
             "bfo"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 47,
           "hasLocalDefinition": true,
           "label": [
             "occurrent"
@@ -238,7 +245,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 41,
+          "numAppearsIn": 45,
           "hasLocalDefinition": true,
           "label": [
             "characteristic of"
@@ -254,7 +261,7 @@
           "definedBy": [
             "ro"
           ],
-          "numAppearsIn": 43,
+          "numAppearsIn": 47,
           "hasLocalDefinition": true,
           "label": [
             "participates in"
@@ -286,7 +293,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": true,
           "label": [
             "label"
@@ -299,12 +306,29 @@
           ]
         }
       },
-      "numDescendants": 5807,
-      "numHierarchicalDescendants": 5766,
+      "numDescendants": 5596,
+      "numHierarchicalDescendants": 5555,
       "ontologyId": "envo",
       "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
       "ontologyPreferredPrefix": "ENVO",
       "relatedFrom": [
+        {
+          "property": "http://purl.obolibrary.org/obo/RO_0000052",
+          "value": "http://purl.obolibrary.org/obo/PATO_0001739",
+          "type": [
+            "related"
+          ],
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000002",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
+              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000056",
+              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01001023",
+              "isObsolete": false
+            }
+          ]
+        },
         {
           "property": "http://purl.obolibrary.org/obo/RO_0000052",
           "value": "http://purl.obolibrary.org/obo/ENVO_01001667",
@@ -336,23 +360,6 @@
                   "isObsolete": false
                 }
               ]
-            }
-          ]
-        },
-        {
-          "property": "http://purl.obolibrary.org/obo/RO_0000052",
-          "value": "http://purl.obolibrary.org/obo/PATO_0001739",
-          "type": [
-            "related"
-          ],
-          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
-          "http://www.w3.org/2002/07/owl#intersectionOf": [
-            "http://purl.obolibrary.org/obo/BFO_0000002",
-            {
-              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Restriction",
-              "http://www.w3.org/2002/07/owl#onProperty": "http://purl.obolibrary.org/obo/RO_0000056",
-              "http://www.w3.org/2002/07/owl#someValuesFrom": "http://purl.obolibrary.org/obo/ENVO_01001023",
-              "isObsolete": false
             }
           ]
         }
