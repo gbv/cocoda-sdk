@@ -23,6 +23,7 @@ const entityTypes = [{
   },
 }]
 
+const property = entityTypes.find(t => t._api === "properties")
 const searchTypesDefault = entityTypes.map(t => t.uri) // old: ["http://www.w3.org/2002/07/owl#Class"]
 
 
@@ -70,6 +71,43 @@ export default class OlsApiProvider extends BaseProvider {
     if (url) {
       return { endpoint: url }
     }
+  }
+
+  async _propertyRootJskos(scheme) {
+    const uri = scheme?.uri || await this._getScheme(scheme)?.iri
+    return {
+      uri: property.uri,
+      prefLabel: { ...property.prefLabel },
+      type: [
+        "http://www.w3.org/2004/02/skos/core#Concept",
+        property.uri,
+      ],
+      broader: [],
+      narrower: [null],
+      inScheme: [uri ? { uri: uri } : null],
+    }
+  }
+
+  _isPropertyConcept(concept) {
+    return this._isPropertyRootConcept(concept)
+    || this._getConceptOls(concept).then(item => {
+      return item._api === property._api
+    })
+  }
+
+  _isPropertyRootConcept(concept) {
+    return concept.uri === property.uri 
+    || concept.notation === property._api
+  }
+
+  async _isPropertyRoot(concept) {
+    const myproperty = await this._propertyRootJskos(concept.inScheme?.[0])
+    for (const key of ["uri", "prefLabel", "type", "broader", "narrower", "inScheme"]) {
+      if (JSON.stringify(concept[key]) !== JSON.stringify(myproperty[key])) {
+        return false
+      }
+    }
+    return true
   }
 
   /**
@@ -138,7 +176,7 @@ export default class OlsApiProvider extends BaseProvider {
     } else {
       concept.narrower = []
     }
-    if (term.hasDirectParents) {
+    if (term.hasDirectParents || term._api === "properties") {
       concept.broader = [null]
     } else {
       concept.broader = []
@@ -360,15 +398,18 @@ export default class OlsApiProvider extends BaseProvider {
     return result
   }
 
-  // Top, narrower and ancestors only exist for classes in OLS
+  // Top, narrower and ancestors exist for classes in OLS
+  // properties are rooted under a virtual rdf:Property (see _propertyRootJskos)
 
   async getTop({ scheme }) {
-    const VOCID = await this._getSchemeVOCID(scheme)
-    if (VOCID) {
-      let response = await this._paginate(["ontologies", VOCID, "classes"], { hasDirectParents: "false" }, null)
-      return Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    const ontology = await this._getScheme(scheme)
+    if (!ontology?.ontologyId) {
+      return []
     }
-    return []
+    let response = await this._paginate(["ontologies", ontology.ontologyId, "classes"], { hasDirectParents: "false" }, null)
+    const top = await Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    top.push(await this._propertyRootJskos(scheme)) // add virtual property root
+    return top
   }
 
   async _splitConcept(concept) {
@@ -384,15 +425,35 @@ export default class OlsApiProvider extends BaseProvider {
   }
 
   async getNarrower({ concept }) {
-    const { VOCID, iri } = await this._splitConcept(concept)
-    if (VOCID && iri) {
-      const items = await this._paginate(["ontologies", VOCID, "classes", iri, "children"], {}, 0)
-      return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    if (!concept) {
+      return []
     }
-    return []
+    const { VOCID, iri } = await this._splitConcept(concept)
+    // properties
+    if (this._isPropertyRootConcept(concept)) {
+      const items = await this._paginate(["ontologies", VOCID, "properties"], { hasDirectParents: "false" }, null)
+      return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "properties" })))
+    }
+    // not properties
+    if (!VOCID || !iri) {
+      return []
+    }
+    const items = await this._paginate(["ontologies", VOCID, "classes", iri, "children"], {}, 0)
+    return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
   }
 
   async getAncestors({ concept }) {
+    if (!concept) {
+      return []
+    }
+    // properties
+    if (this._isPropertyRootConcept(concept)) {
+      return []
+    }
+    if (this._isPropertyConcept(concept)) {
+      return [await this._propertyRootJskos(concept.inScheme?.[0]?.ontologyId, await this._getSchemeVOCID(concept?.inScheme?.[0]))]
+    }
+    // not properties
     const { VOCID, iri } = await this._splitConcept(concept)
     if (VOCID && iri) {
       let response = await this._paginate(["ontologies", VOCID, "classes", iri, "ancestors"], {}, null)
