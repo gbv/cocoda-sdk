@@ -21,15 +21,18 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2&size=20": "search-concept_entity-2.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology=envo": "search-concept-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=Bubble+Sort": "empty.json",
   // individuals
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity": "empty.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&size=20": "empty.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&ontology=envo": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/individuals?search=Bubble+Sort": "search-individual_bubble_sort.json",
   // properties
   "https://api.terminology.tib.eu/api/v2/properties?search=entity": "search-property_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=entity&ontology=envo": "search-property-envo_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=entity&size=20": "search-property_entity-20.json",
+  "https://api.terminology.tib.eu/api/v2/properties?search=Bubble+Sort": "empty.json",
   // ontologies
   "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
@@ -359,6 +362,14 @@ describe ("OlsProvider.search", () => {
     // FIXME: jskos is not correct, must be Property
     assert.equal(concepts.length, 1)
   })
+
+  it("search for \"Bubble Sort\" in all schemes", async function () {
+    const concepts = await provider.search({ search: "Bubble Sort" })
+    assert.equal(concepts.length, 1)
+    assert(Array.isArray(concepts))
+  })
+
+
 })
 
 

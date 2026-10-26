@@ -184,9 +184,14 @@ export default class OlsApiProvider extends BaseProvider {
     if (term.iri) {
       concept.uri = term.iri
     }
-    if (term["http://www.w3.org/2000/01/rdf-schema#label"]) {
-      concept.prefLabel = {}
-      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"].value || term["http://www.w3.org/2000/01/rdf-schema#label"]
+    {
+      let preflabelkeys = ["prefLabel", "http://www.w3.org/2004/02/skos/core#prefLabel", "label", "http://www.w3.org/2000/01/rdf-schema#label"]
+      const value = preflabelkeys.map(key => term[key]?.value ?? term[key])
+        .find(v => v != null && (!Array.isArray(v) || v.length > 0))
+      if (value != null) {
+        concept.prefLabel = {}
+        concept.prefLabel[lan] = Array.isArray(value) ? value[0] : value
+      }
     }
     const entityType = entityTypes.find(t => t._api === term._api) || entityTypes[0]
     concept.type = [
