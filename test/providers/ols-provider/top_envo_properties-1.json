@@ -1,0 +1,3126 @@
+{
+  "page": 1,
+  "numElements": 20,
+  "totalPages": 2,
+  "totalElements": 40,
+  "elements": [
+    {
+      "appearsIn": [
+        "m4i",
+        "duo",
+        "proco",
+        "peco",
+        "flopo",
+        "vivo",
+        "envo",
+        "bco",
+        "bao",
+        "uberon",
+        "bto",
+        "envo2021",
+        "cheminf",
+        "efo",
+        "envo2023",
+        "to",
+        "pco",
+        "po",
+        "chebi",
+        "mi",
+        "rxno",
+        "sepio",
+        "enm",
+        "obi",
+        "chmo",
+        "mop",
+        "mmo",
+        "go",
+        "agro",
+        "ms",
+        "pato",
+        "iao",
+        "nmrcv2025",
+        "vibso",
+        "cepo"
+      ],
+      "curie": "IAO:0000231",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000231",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "IAO_0000231"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000231",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "ro",
+        "duo",
+        "proco",
+        "oeo",
+        "vivo",
+        "envo",
+        "bao",
+        "bco",
+        "ecso",
+        "bfo",
+        "cto-mw",
+        "uberon",
+        "envo2021",
+        "cheminf",
+        "efo",
+        "afo",
+        "envo2023",
+        "pco",
+        "pmd",
+        "nmrcv",
+        "pso",
+        "stato",
+        "enm",
+        "sepio",
+        "obi",
+        "chmo",
+        "cto",
+        "agro",
+        "swo",
+        "cepo",
+        "iao",
+        "nmrcv2025",
+        "msio",
+        "tfsco",
+        "vibso"
+      ],
+      "curie": "IAO:0000232",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000232",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "curator note"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000232",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "curator note"
+    },
+    {
+      "appearsIn": [
+        "listdb",
+        "enm",
+        "nmrcv",
+        "iao",
+        "bfo",
+        "chmo",
+        "sepio",
+        "obi",
+        "mop",
+        "stato",
+        "cepo",
+        "rxno",
+        "vivo",
+        "tfsco",
+        "msio",
+        "vibso",
+        "swo",
+        "nmrcv2025",
+        "agro",
+        "ecso",
+        "cto",
+        "bco",
+        "envo",
+        "omp",
+        "bao",
+        "efo",
+        "oeo",
+        "envo2021",
+        "cheminf",
+        "proco",
+        "duo",
+        "afo",
+        "envo2023",
+        "pco",
+        "ro"
+      ],
+      "curie": "IAO:0000412",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000412",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "imported from"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000412",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "imported from"
+    },
+    {
+      "appearsIn": [
+        "swo",
+        "iao",
+        "nmrcv2025",
+        "sepio",
+        "enm",
+        "agro",
+        "ecso",
+        "bco",
+        "chmo",
+        "obi",
+        "envo",
+        "pso",
+        "cepo",
+        "efo",
+        "envo2021",
+        "cheminf",
+        "duo",
+        "ro",
+        "pco",
+        "envo2023",
+        "vibso"
+      ],
+      "curie": "IAO:0000424",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000424",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "expand expression to"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000424",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "expand expression to"
+    },
+    {
+      "appearsIn": [
+        "agro",
+        "enm",
+        "ecso",
+        "bco",
+        "omp",
+        "envo",
+        "obi",
+        "cepo",
+        "efo",
+        "chmo",
+        "cheminf",
+        "duo",
+        "vibso",
+        "pco",
+        "ro",
+        "nmrcv2025",
+        "envo2021",
+        "iao",
+        "tfsco",
+        "envo2023"
+      ],
+      "curie": "IAO:0000425",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000425",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "expand assertion to"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000425",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "expand assertion to"
+    },
+    {
+      "appearsIn": [
+        "agro",
+        "bco",
+        "enm",
+        "envo",
+        "ecso",
+        "obi",
+        "cepo",
+        "chmo",
+        "cheminf",
+        "duo",
+        "vibso",
+        "pco",
+        "nmrcv2025",
+        "ro",
+        "tfsco",
+        "efo",
+        "envo2021",
+        "iao",
+        "envo2023"
+      ],
+      "curie": "IAO:0000426",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000426",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "IAO_0000426"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000426",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "envo2021",
+        "oeo",
+        "proco",
+        "duo",
+        "ro",
+        "envo2023",
+        "vibso",
+        "tfsco",
+        "swo",
+        "bao",
+        "sepio",
+        "enm",
+        "go",
+        "chmo",
+        "bco",
+        "efo",
+        "stato",
+        "cepo",
+        "pso",
+        "cheminf",
+        "cto",
+        "iao",
+        "nmrcv2025",
+        "pco",
+        "agro",
+        "uberon",
+        "ecso",
+        "envo",
+        "obi"
+      ],
+      "curie": "IAO:0000589",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000589",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "IAO_0000589"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000589",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "oeo",
+        "proco",
+        "sepio",
+        "chmo",
+        "tfsco",
+        "t4fs",
+        "vibso",
+        "cepo",
+        "msio",
+        "swo",
+        "modsci",
+        "agro",
+        "bco",
+        "ecso",
+        "nmrcv2025",
+        "envo",
+        "cto",
+        "stato",
+        "obi",
+        "ro",
+        "pso",
+        "efo",
+        "afo",
+        "pco",
+        "cheminf",
+        "duo"
+      ],
+      "curie": "IAO:0000600",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000600",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "IAO_0000600"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000600",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "cheminf",
+        "cepo",
+        "efo",
+        "obi",
+        "swo",
+        "iao",
+        "nmrcv2025",
+        "peco",
+        "vibso",
+        "msio",
+        "envo",
+        "agro",
+        "cto",
+        "ppo",
+        "t4fs",
+        "envo2021",
+        "oeo",
+        "envo2023",
+        "bfo",
+        "tfsco",
+        "duo",
+        "enm",
+        "sepio",
+        "pco",
+        "modsci",
+        "bco",
+        "afo",
+        "chmo",
+        "nmrcv"
+      ],
+      "curie": "IAO:0010000",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0010000",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "IAO_0010000"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0010000",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "mwo",
+        "po",
+        "peco",
+        "envo",
+        "omp",
+        "bao",
+        "bto",
+        "cto-mw",
+        "enm",
+        "bau",
+        "pco",
+        "to",
+        "obi",
+        "cepo",
+        "chmo",
+        "chebi",
+        "cheminf",
+        "ms",
+        "mmo",
+        "mop",
+        "pato",
+        "swo",
+        "nfdicore",
+        "vibso",
+        "uo",
+        "nmrcv2025",
+        "mi",
+        "m4i",
+        "duo",
+        "mod",
+        "flopo",
+        "cob",
+        "bco",
+        "linsearch",
+        "hp",
+        "uberon",
+        "sepio",
+        "ro",
+        "efo",
+        "envo2021",
+        "envo2023",
+        "pmd",
+        "ecso",
+        "rxno",
+        "chiro",
+        "agro",
+        "go",
+        "dfgfo",
+        "iao",
+        "tfsco"
+      ],
+      "curie": "IAO:0100001",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0100001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "term replaced by"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0100001",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "term replaced by"
+    },
+    {
+      "appearsIn": [
+        "iao",
+        "sepio",
+        "hp",
+        "pmat",
+        "pmd",
+        "chmo",
+        "flopo",
+        "obi",
+        "cob",
+        "stato",
+        "ppo",
+        "cepo",
+        "t4fs",
+        "vivo",
+        "msio",
+        "nfdicore",
+        "vibso",
+        "tfsco",
+        "gesah",
+        "swo",
+        "nmrcv2025",
+        "cto-mw",
+        "pco",
+        "agro",
+        "vto",
+        "uberon",
+        "bto",
+        "pato",
+        "peco",
+        "ecso",
+        "bco",
+        "envo",
+        "efo",
+        "envo2021",
+        "mwo",
+        "oeo",
+        "pso",
+        "cheminf",
+        "proco",
+        "duo",
+        "ro",
+        "afo",
+        "envo2023",
+        "po",
+        "to"
+      ],
+      "curie": "RO:0000053",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "Inverse of characteristic_of"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0000053",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "has characteristic"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000111": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor preferred term"
+          ],
+          "curie": "IAO:0000111",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001900": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 25,
+          "hasLocalDefinition": true,
+          "label": [
+            "temporal interpretation"
+          ],
+          "curie": "RO:0001900",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001901": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "label": [
+            "axiom holds for all times"
+          ],
+          "curie": "RO:0001901",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000052": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 45,
+          "hasLocalDefinition": true,
+          "label": [
+            "characteristic of"
+          ],
+          "curie": "RO:0000052",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 4,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "bearer of",
+        "this apple is bearer of this red color",
+        "this vase is bearer of this fragility",
+        "Inverse of characteristic_of",
+        "A bearer can have many dependents, and its dependents can exist for different periods of time, but none of its dependents can exist when the bearer does not exist.",
+        "bearer_of",
+        "is bearer of",
+        false
+      ],
+      "shortForm": "RO_0000053",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000111": "bearer of",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "this apple is bearer of this red color",
+        "this vase is bearer of this fragility"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "Inverse of characteristic_of",
+      "http://purl.obolibrary.org/obo/IAO_0000116": "A bearer can have many dependents, and its dependents can exist for different periods of time, but none of its dependents can exist when the bearer does not exist.",
+      "http://purl.obolibrary.org/obo/IAO_0000118": [
+        "bearer_of",
+        "is bearer of"
+      ],
+      "http://purl.obolibrary.org/obo/RO_0001900": "http://purl.obolibrary.org/obo/RO_0001901",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty",
+        "http://www.w3.org/2002/07/owl#InverseFunctionalProperty"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": "has characteristic",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://purl.obolibrary.org/obo/BFO_0000020",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0000052"
+    },
+    {
+      "appearsIn": [
+        "enm",
+        "sepio",
+        "pmat",
+        "hp",
+        "flopo",
+        "mwo",
+        "cob",
+        "obi",
+        "pror",
+        "tfsco",
+        "stato",
+        "cepo",
+        "vivo",
+        "nfdicore",
+        "vibso",
+        "msio",
+        "ppo",
+        "iao",
+        "nmrcv2025",
+        "agro",
+        "vto",
+        "cto-mw",
+        "bco",
+        "gesah",
+        "uberon",
+        "pato",
+        "swo",
+        "pco",
+        "envo",
+        "omp",
+        "ecso",
+        "m4i",
+        "peco",
+        "proco",
+        "pso",
+        "chmo",
+        "po",
+        "ro",
+        "cheminf",
+        "duo",
+        "oeo",
+        "pmd",
+        "envo2023",
+        "afo",
+        "to",
+        "efo",
+        "envo2021"
+      ],
+      "curie": "RO:0000056",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "a relation between a continuant and a process, in which the continuant is somehow involved in the process"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0000056",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "participates in"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000111": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor preferred term"
+          ],
+          "curie": "IAO:0000111",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000057": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 45,
+          "hasLocalDefinition": true,
+          "label": [
+            "has participant"
+          ],
+          "curie": "RO:0000057",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 48,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000003": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "occurrent"
+          ],
+          "curie": "BFO:0000003",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 4,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "participates in",
+        "this blood clot participates in this blood coagulation",
+        "this input material (or this output material) participates in this process",
+        "this investigator participates in this investigation",
+        "a relation between a continuant and a process, in which the continuant is somehow involved in the process",
+        "participates_in",
+        false
+      ],
+      "shortForm": "RO_0000056",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000111": "participates in",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "this blood clot participates in this blood coagulation",
+        "this input material (or this output material) participates in this process",
+        "this investigator participates in this investigation"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "a relation between a continuant and a process, in which the continuant is somehow involved in the process",
+      "http://purl.obolibrary.org/obo/IAO_0000118": "participates_in",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://purl.obolibrary.org/obo/BFO_0000002",
+      "http://www.w3.org/2000/01/rdf-schema#label": "participates in",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://purl.obolibrary.org/obo/BFO_0000003",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0000057"
+    },
+    {
+      "appearsIn": [
+        "flopo",
+        "cob",
+        "hp",
+        "mwo",
+        "pmat",
+        "pror",
+        "tfsco",
+        "obi",
+        "stato",
+        "msio",
+        "cepo",
+        "nfdicore",
+        "vibso",
+        "vivo",
+        "ppo",
+        "iao",
+        "nmrcv2025",
+        "bco",
+        "cto-mw",
+        "agro",
+        "vto",
+        "uberon",
+        "swo",
+        "envo",
+        "pco",
+        "cheminf",
+        "pato",
+        "gesah",
+        "m4i",
+        "peco",
+        "ecso",
+        "chmo",
+        "po",
+        "proco",
+        "duo",
+        "ro",
+        "oeo",
+        "pmd",
+        "afo",
+        "envo2023",
+        "sepio",
+        "to",
+        "efo",
+        "envo2021",
+        "pso"
+      ],
+      "curie": "RO:0000057",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "a relation between a process and a continuant, in which the continuant is somehow involved in the process"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0000057",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "has participant"
+      ],
+      "linkedEntities": {
+        "http://purl.org/dc/terms/source": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 68,
+          "hasLocalDefinition": true,
+          "label": [
+            "Source"
+          ],
+          "curie": "dcterms:source",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000055": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "realizes"
+          ],
+          "curie": "BFO:0000055",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000051": {
+          "numAppearsIn": 50,
+          "hasLocalDefinition": true,
+          "label": [
+            "has part"
+          ],
+          "curie": "BFO:0000051",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000111": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor preferred term"
+          ],
+          "curie": "IAO:0000111",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 48,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000003": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "occurrent"
+          ],
+          "curie": "BFO:0000003",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000052": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 45,
+          "hasLocalDefinition": true,
+          "label": [
+            "characteristic of"
+          ],
+          "curie": "RO:0000052",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0000056": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "participates in"
+          ],
+          "curie": "RO:0000056",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 3,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "has participant",
+        "this blood coagulation has participant this blood clot",
+        "this investigation has participant this investigator",
+        "this process has participant this input material (or this output material)",
+        "a relation between a process and a continuant, in which the continuant is somehow involved in the process",
+        "Has_participant is a primitive instance-level relation between a process, a continuant, and a time at which the continuant participates in some way in the process. The relation obtains, for example, when this particular process of oxygen exchange across this particular alveolar membrane has_participant this particular sample of hemoglobin at this particular time.",
+        "has_participant",
+        false
+      ],
+      "shortForm": "RO_0000057",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000111": "has participant",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "this blood coagulation has participant this blood clot",
+        "this investigation has participant this investigator",
+        "this process has participant this input material (or this output material)"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "a relation between a process and a continuant, in which the continuant is somehow involved in the process",
+      "http://purl.obolibrary.org/obo/IAO_0000116": "Has_participant is a primitive instance-level relation between a process, a continuant, and a time at which the continuant participates in some way in the process. The relation obtains, for example, when this particular process of oxygen exchange across this particular alveolar membrane has_participant this particular sample of hemoglobin at this particular time.",
+      "http://purl.obolibrary.org/obo/IAO_0000118": "has_participant",
+      "http://purl.org/dc/terms/source": "http://www.obofoundry.org/ro/#OBO_REL:has_participant",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://purl.obolibrary.org/obo/BFO_0000003",
+      "http://www.w3.org/2000/01/rdf-schema#label": "has participant",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://purl.obolibrary.org/obo/BFO_0000002",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0000056",
+      "http://www.w3.org/2002/07/owl#propertyChainAxiom": [
+        [
+          "http://purl.obolibrary.org/obo/BFO_0000051",
+          "http://purl.obolibrary.org/obo/BFO_0000055",
+          "http://purl.obolibrary.org/obo/RO_0000052"
+        ],
+        [
+          "http://purl.obolibrary.org/obo/BFO_0000051",
+          "http://purl.obolibrary.org/obo/RO_0000057"
+        ]
+      ]
+    },
+    {
+      "appearsIn": [
+        "mwo",
+        "cob",
+        "tfsco",
+        "obi",
+        "cepo",
+        "msio",
+        "nfdicore",
+        "vibso",
+        "iao",
+        "nmrcv2025",
+        "stato",
+        "agro",
+        "bco",
+        "vto",
+        "cto-mw",
+        "cheminf",
+        "envo",
+        "pco",
+        "swo",
+        "pmd",
+        "duo",
+        "ro",
+        "afo",
+        "envo2021",
+        "sepio",
+        "envo2023"
+      ],
+      "curie": "RO:0000058",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "A relationship between a generically dependent continuant and a specifically dependent continuant or process, in which the generically dependent continuant depends on some independent continuant or process in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. A generically dependent continuant may be concretized as multiple specifically dependent continuants or processes."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0000058",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "is concretized as"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000015": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 56,
+          "hasLocalDefinition": true,
+          "label": [
+            "process"
+          ],
+          "curie": "BFO:0000015",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/RO_0000059": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 27,
+          "hasLocalDefinition": true,
+          "label": [
+            "concretizes"
+          ],
+          "curie": "RO:0000059",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000031": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 42,
+          "hasLocalDefinition": true,
+          "label": [
+            "generically dependent continuant"
+          ],
+          "curie": "BFO:0000031",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "A journal article is an information artifact that inheres in some number of printed journals. For each copy of the printed journal there is some quality that carries the journal article, such as a pattern of ink. The journal article (a generically dependent continuant) is concretized as the quality (a specifically dependent continuant), and both depend on that copy of the printed journal (an independent continuant).",
+        "An investigator reads a protocol and forms a plan to carry out an assay. The plan is a realizable entity (a specifically dependent continuant) that concretizes the protocol (a generically dependent continuant), and both depend on the investigator (an independent continuant). The plan is then realized by the assay (a process).",
+        "A relationship between a generically dependent continuant and a specifically dependent continuant or process, in which the generically dependent continuant depends on some independent continuant or process in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. A generically dependent continuant may be concretized as multiple specifically dependent continuants or processes.",
+        false
+      ],
+      "shortForm": "RO_0000058",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "A journal article is an information artifact that inheres in some number of printed journals. For each copy of the printed journal there is some quality that carries the journal article, such as a pattern of ink. The journal article (a generically dependent continuant) is concretized as the quality (a specifically dependent continuant), and both depend on that copy of the printed journal (an independent continuant).",
+        "An investigator reads a protocol and forms a plan to carry out an assay. The plan is a realizable entity (a specifically dependent continuant) that concretizes the protocol (a generically dependent continuant), and both depend on the investigator (an independent continuant). The plan is then realized by the assay (a process)."
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A relationship between a generically dependent continuant and a specifically dependent continuant or process, in which the generically dependent continuant depends on some independent continuant or process in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. A generically dependent continuant may be concretized as multiple specifically dependent continuants or processes.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://purl.obolibrary.org/obo/BFO_0000031",
+      "http://www.w3.org/2000/01/rdf-schema#label": "is concretized as",
+      "http://www.w3.org/2000/01/rdf-schema#range": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#unionOf": [
+          "http://purl.obolibrary.org/obo/BFO_0000015",
+          "http://purl.obolibrary.org/obo/BFO_0000020"
+        ]
+      },
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0000059"
+    },
+    {
+      "appearsIn": [
+        "cob",
+        "mwo",
+        "tfsco",
+        "cepo",
+        "nfdicore",
+        "obi",
+        "envo",
+        "msio",
+        "vibso",
+        "iao",
+        "nmrcv2025",
+        "stato",
+        "agro",
+        "cto-mw",
+        "vto",
+        "bco",
+        "pco",
+        "swo",
+        "cheminf",
+        "pmd",
+        "duo",
+        "proco",
+        "afo",
+        "chmo",
+        "ro",
+        "envo2021",
+        "envo2023"
+      ],
+      "curie": "RO:0000059",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "A relationship between a specifically dependent continuant or process and a generically dependent continuant, in which the generically dependent continuant depends on some independent continuant in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. Multiple specifically dependent continuants or processes can concretize the same generically dependent continuant."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0000059",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "concretizes"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/BFO_0000015": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 56,
+          "hasLocalDefinition": true,
+          "label": [
+            "process"
+          ],
+          "curie": "BFO:0000015",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/RO_0000058": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "is concretized as"
+          ],
+          "curie": "RO:0000058",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000031": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 42,
+          "hasLocalDefinition": true,
+          "label": [
+            "generically dependent continuant"
+          ],
+          "curie": "BFO:0000031",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000020": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "specifically dependent continuant"
+          ],
+          "curie": "BFO:0000020",
+          "type": [
+            "class",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "A journal article is an information artifact that inheres in some number of printed journals. For each copy of the printed journal there is some quality that carries the journal article, such as a pattern of ink. The quality (a specifically dependent continuant) concretizes the journal article (a generically dependent continuant), and both depend on that copy of the printed journal (an independent continuant).",
+        "An investigator reads a protocol and forms a plan to carry out an assay. The plan is a realizable entity (a specifically dependent continuant) that concretizes the protocol (a generically dependent continuant), and both depend on the investigator (an independent continuant). The plan is then realized by the assay (a process).",
+        "A relationship between a specifically dependent continuant or process and a generically dependent continuant, in which the generically dependent continuant depends on some independent continuant in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. Multiple specifically dependent continuants or processes can concretize the same generically dependent continuant.",
+        false
+      ],
+      "shortForm": "RO_0000059",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "A journal article is an information artifact that inheres in some number of printed journals. For each copy of the printed journal there is some quality that carries the journal article, such as a pattern of ink. The quality (a specifically dependent continuant) concretizes the journal article (a generically dependent continuant), and both depend on that copy of the printed journal (an independent continuant).",
+        "An investigator reads a protocol and forms a plan to carry out an assay. The plan is a realizable entity (a specifically dependent continuant) that concretizes the protocol (a generically dependent continuant), and both depend on the investigator (an independent continuant). The plan is then realized by the assay (a process)."
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A relationship between a specifically dependent continuant or process and a generically dependent continuant, in which the generically dependent continuant depends on some independent continuant in virtue of the fact that the specifically dependent continuant or process also depends on that same independent continuant. Multiple specifically dependent continuants or processes can concretize the same generically dependent continuant.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#domain": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+        "http://www.w3.org/2002/07/owl#unionOf": [
+          "http://purl.obolibrary.org/obo/BFO_0000015",
+          "http://purl.obolibrary.org/obo/BFO_0000020"
+        ]
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": "concretizes",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://purl.obolibrary.org/obo/BFO_0000031",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0000058"
+    },
+    {
+      "appearsIn": [
+        "efo",
+        "cheminf",
+        "cepo",
+        "pmd",
+        "ro",
+        "msio",
+        "tfsco",
+        "envo2023",
+        "agro",
+        "envo2021",
+        "iao",
+        "afo",
+        "envo",
+        "pco",
+        "bco",
+        "vto",
+        "ecso",
+        "duo",
+        "cto-mw"
+      ],
+      "curie": "RO:0001001",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "a relation between two distinct material entities, the old entity and the new entity, in which the new entity begins to exist when the old entity ceases to exist, and the new entity inherits the significant portion of the matter of the old entity"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0001001",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "derives into"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/RO_0001000": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "derives from"
+          ],
+          "curie": "RO:0001000",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#inSubset": {
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "in_subset"
+          ],
+          "curie": "inSubset",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000114": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "has curation status"
+          ],
+          "curie": "IAO:0000114",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000125": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 31,
+          "hasLocalDefinition": false,
+          "label": [
+            "pending final vetting"
+          ],
+          "curie": "IAO:0000125",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ro/subsets#ro-eco": {
+          "numAppearsIn": 13,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "ro-eco"
+          ],
+          "curie": "ro-eco"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "this parent cell derives into this cell (cell division)",
+        "this parent nucleus derives into this nucleus (nuclear division)",
+        "a relation between two distinct material entities, the old entity and the new entity, in which the new entity begins to exist when the old entity ceases to exist, and the new entity inherits the significant portion of the matter of the old entity",
+        "This is a very general relation. More specific relations are preferred when applicable, such as 'directly develops into'. To avoid making statements about a future that may not come to pass, it is often better to use the backward-looking 'derives from' rather than the forward-looking 'derives into'.",
+        "derives_into",
+        false
+      ],
+      "shortForm": "RO_0001001",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "this parent cell derives into this cell (cell division)",
+        "this parent nucleus derives into this nucleus (nuclear division)"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000114": "http://purl.obolibrary.org/obo/IAO_0000125",
+      "http://purl.obolibrary.org/obo/IAO_0000115": "a relation between two distinct material entities, the old entity and the new entity, in which the new entity begins to exist when the old entity ceases to exist, and the new entity inherits the significant portion of the matter of the old entity",
+      "http://purl.obolibrary.org/obo/IAO_0000116": "This is a very general relation. More specific relations are preferred when applicable, such as 'directly develops into'. To avoid making statements about a future that may not come to pass, it is often better to use the backward-looking 'derives from' rather than the forward-looking 'derives into'.",
+      "http://purl.obolibrary.org/obo/IAO_0000118": "derives_into",
+      "http://www.geneontology.org/formats/oboInOwl#inSubset": "http://purl.obolibrary.org/obo/ro/subsets#ro-eco",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "derives into",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0001000"
+    },
+    {
+      "appearsIn": [
+        "efo",
+        "cepo",
+        "pmd",
+        "obi",
+        "iao",
+        "stato",
+        "afo",
+        "envo",
+        "to",
+        "duo",
+        "pco",
+        "ecso",
+        "pmat",
+        "uberon",
+        "cheminf",
+        "cto-mw",
+        "gesah",
+        "hp",
+        "proco",
+        "cob",
+        "po",
+        "oeo",
+        "envo2021",
+        "flopo",
+        "tfsco",
+        "ro",
+        "envo2023",
+        "vivo",
+        "agro",
+        "vto",
+        "bco",
+        "pato"
+      ],
+      "curie": "RO:0001015",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "a relation between two independent continuants, the location and the target, in which the target is entirely within the location"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0001015",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "location of"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000111": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor preferred term"
+          ],
+          "curie": "IAO:0000111",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001900": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 25,
+          "hasLocalDefinition": true,
+          "label": [
+            "temporal interpretation"
+          ],
+          "curie": "RO:0001900",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001901": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "label": [
+            "axiom holds for all times"
+          ],
+          "curie": "RO:0001901",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001025": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "located in"
+          ],
+          "curie": "RO:0001025",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "is location of",
+        "my head is the location of my brain",
+        "this cage is the location of this rat",
+        "a relation between two independent continuants, the location and the target, in which the target is entirely within the location",
+        "Most location relations will only hold at certain times, but this is difficult to specify in OWL. See http://purl.obolibrary.org/obo/ro/docs/temporal-semantics/",
+        "location_of",
+        false
+      ],
+      "shortForm": "RO_0001015",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000111": "is location of",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "my head is the location of my brain",
+        "this cage is the location of this rat"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "a relation between two independent continuants, the location and the target, in which the target is entirely within the location",
+      "http://purl.obolibrary.org/obo/IAO_0000116": "Most location relations will only hold at certain times, but this is difficult to specify in OWL. See http://purl.obolibrary.org/obo/ro/docs/temporal-semantics/",
+      "http://purl.obolibrary.org/obo/IAO_0000118": "location_of",
+      "http://purl.obolibrary.org/obo/RO_0001900": "http://purl.obolibrary.org/obo/RO_0001901",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty",
+        "http://www.w3.org/2002/07/owl#TransitiveProperty"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": "location of",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0001025"
+    },
+    {
+      "appearsIn": [
+        "proco",
+        "cob",
+        "envo2021",
+        "mwo",
+        "oeo",
+        "po",
+        "envo2023",
+        "flopo",
+        "tfsco",
+        "vivo",
+        "vto",
+        "iao",
+        "bco",
+        "omp",
+        "nfdicore",
+        "pato",
+        "stato",
+        "cepo",
+        "efo",
+        "pmd",
+        "obi",
+        "agro",
+        "gesah",
+        "to",
+        "afo",
+        "envo",
+        "duo",
+        "ro",
+        "ecso",
+        "pco",
+        "pmat",
+        "cheminf",
+        "cto-mw",
+        "hp",
+        "uberon"
+      ],
+      "curie": "RO:0001025",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "a relation between two independent continuants, the target and the location, in which the target is entirely within the location"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0001025",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "located in"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2001/XMLSchema#anyURI": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "anyURI"
+          ],
+          "curie": "anyURI"
+        },
+        "http://purl.org/dc/terms/source": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 68,
+          "hasLocalDefinition": true,
+          "label": [
+            "Source"
+          ],
+          "curie": "dcterms:source",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000050": {
+          "numAppearsIn": 55,
+          "hasLocalDefinition": true,
+          "label": [
+            "part of"
+          ],
+          "curie": "BFO:0000050",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#inSubset": {
+          "numAppearsIn": 40,
+          "hasLocalDefinition": true,
+          "label": [
+            "in_subset"
+          ],
+          "curie": "inSubset",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000116": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 52,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor note"
+          ],
+          "curie": "IAO:0000116",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000111": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 36,
+          "hasLocalDefinition": true,
+          "label": [
+            "editor preferred term"
+          ],
+          "curie": "IAO:0000111",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000004": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "independent continuant"
+          ],
+          "curie": "BFO:0000004",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000118": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "alternative label"
+          ],
+          "curie": "IAO:0000118",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000006": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 39,
+          "hasLocalDefinition": true,
+          "label": [
+            "spatial region"
+          ],
+          "curie": "BFO:0000006",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001900": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 25,
+          "hasLocalDefinition": true,
+          "label": [
+            "temporal interpretation"
+          ],
+          "curie": "RO:0001900",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0001901": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "label": [
+            "axiom holds for all times"
+          ],
+          "curie": "RO:0001901",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        },
+        "http://purl.obolibrary.org/obo/RO_0001015": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 32,
+          "hasLocalDefinition": true,
+          "label": [
+            "location of"
+          ],
+          "curie": "RO:0001015",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/valid_for_go_gp2term": {
+          "numAppearsIn": 13,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "valid_for_go_gp2term"
+          ],
+          "curie": "valid_for_go_gp2term"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        "located in",
+        "my brain is located in my head",
+        "this rat is located in this cage",
+        "a relation between two independent continuants, the target and the location, in which the target is entirely within the location",
+        "Location as a relation between instances: The primitive instance-level relation c located_in r at t reflects the fact that each continuant is at any given time associated with exactly one spatial region, namely its exact location. Following we can use this relation to define a further instance-level location relation - not between a continuant and the region which it exactly occupies, but rather between one continuant and another. c is located in c1, in this sense, whenever the spatial region occupied by c is part_of the spatial region occupied by c1.    Note that this relation comprehends both the relation of exact location between one continuant and another which obtains when r and r1 are identical (for example, when a portion of fluid exactly fills a cavity), as well as those sorts of inexact location relations which obtain, for example, between brain and head or between ovum and uterus",
+        "Most location relations will only hold at certain times, but this is difficult to specify in OWL. See http://purl.obolibrary.org/obo/ro/docs/temporal-semantics/",
+        "located_in",
+        false
+      ],
+      "shortForm": "RO_0001025",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000111": "located in",
+      "http://purl.obolibrary.org/obo/IAO_0000112": [
+        "my brain is located in my head",
+        "this rat is located in this cage"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "a relation between two independent continuants, the target and the location, in which the target is entirely within the location",
+      "http://purl.obolibrary.org/obo/IAO_0000116": [
+        "Location as a relation between instances: The primitive instance-level relation c located_in r at t reflects the fact that each continuant is at any given time associated with exactly one spatial region, namely its exact location. Following we can use this relation to define a further instance-level location relation - not between a continuant and the region which it exactly occupies, but rather between one continuant and another. c is located in c1, in this sense, whenever the spatial region occupied by c is part_of the spatial region occupied by c1.    Note that this relation comprehends both the relation of exact location between one continuant and another which obtains when r and r1 are identical (for example, when a portion of fluid exactly fills a cavity), as well as those sorts of inexact location relations which obtain, for example, between brain and head or between ovum and uterus",
+        "Most location relations will only hold at certain times, but this is difficult to specify in OWL. See http://purl.obolibrary.org/obo/ro/docs/temporal-semantics/"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000118": "located_in",
+      "http://purl.obolibrary.org/obo/RO_0001900": "http://purl.obolibrary.org/obo/RO_0001901",
+      "http://purl.org/dc/terms/source": "http://www.obofoundry.org/ro/#OBO_REL:located_in",
+      "http://www.geneontology.org/formats/oboInOwl#inSubset": "http://purl.obolibrary.org/obo/valid_for_go_gp2term",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty",
+        "http://www.w3.org/2002/07/owl#TransitiveProperty"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#domain": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "http://purl.obolibrary.org/obo/BFO_0000004",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0000116": "This is redundant with the more specific 'independent and not spatial region' constraint. We leave in the redundant axiom for use with reasoners that do not use negation."
+            }
+          ]
+        },
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000004",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+              "http://www.w3.org/2002/07/owl#complementOf": "http://purl.obolibrary.org/obo/BFO_0000006"
+            }
+          ]
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": "located in",
+      "http://www.w3.org/2000/01/rdf-schema#range": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "http://purl.obolibrary.org/obo/BFO_0000004",
+          "axioms": [
+            {
+              "http://purl.obolibrary.org/obo/IAO_0000116": "This is redundant with the more specific 'independent and not spatial region' constraint. We leave in the redundant axiom for use with reasoners that do not use negation."
+            }
+          ]
+        },
+        {
+          "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+          "http://www.w3.org/2002/07/owl#intersectionOf": [
+            "http://purl.obolibrary.org/obo/BFO_0000004",
+            {
+              "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+              "http://www.w3.org/2002/07/owl#complementOf": "http://purl.obolibrary.org/obo/BFO_0000006"
+            }
+          ]
+        }
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://wiki.geneontology.org/Located_in",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0001015",
+      "http://www.w3.org/2002/07/owl#propertyChainAxiom": [
+        "http://purl.obolibrary.org/obo/RO_0001025",
+        "http://purl.obolibrary.org/obo/BFO_0000050"
+      ]
+    },
+    {
+      "appearsIn": [
+        "nmrcv2025",
+        "pco",
+        "swo",
+        "envo",
+        "bco",
+        "msio",
+        "ro",
+        "vibso",
+        "tfsco",
+        "proco",
+        "t4fs",
+        "agro",
+        "envo2021",
+        "efo",
+        "envo2023",
+        "stato",
+        "cheminf",
+        "ecso",
+        "duo",
+        "enm",
+        "iao",
+        "sepio",
+        "pso",
+        "cepo",
+        "oeo"
+      ],
+      "curie": "RO:0001900",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "An assertion that holds between an OWL Object Property and a temporal interpretation that elucidates how OWL Class Axioms that use this property are to be interpreted in a temporal context."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0001900",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "temporal interpretation"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ],
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso"
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "RO_0001900",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "An assertion that holds between an OWL Object Property and a temporal interpretation that elucidates how OWL Class Axioms that use this property are to be interpreted in a temporal context.",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "temporal interpretation",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "http://purl.obolibrary.org/obo/ro/docs/temporal-semantics/"
+    },
+    {
+      "appearsIn": [
+        "agro",
+        "pso",
+        "po",
+        "uberon",
+        "pato",
+        "ro",
+        "envo2023",
+        "envo",
+        "to",
+        "flopo",
+        "efo",
+        "envo2021"
+      ],
+      "curie": "RO:0002160",
+      "definedBy": [
+        "ro"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0002160",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "RO_0002160"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": false,
+      "shortForm": "RO_0002160",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

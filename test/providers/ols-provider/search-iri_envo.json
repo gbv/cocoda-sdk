@@ -5,7 +5,6 @@
   "totalElements": 3,
   "elements": [
     {
-      "allow_download": true,
       "baseUri": [
         "http://purl.obolibrary.org/obo/ENVO_"
       ],
@@ -46,7 +45,6 @@
         "chiro",
         "cob",
         "obi",
-        "aeon",
         "uberon",
         "dpbo",
         "cao",
@@ -69,7 +67,9 @@
         "obi",
         "iao",
         "uo",
+        "foaf",
         "ro",
+        "doap",
         "bfo"
       ],
       "iri": "http://purl.obolibrary.org/obo/envo.owl",
@@ -95,7 +95,7 @@
       },
       "linkedEntities": {
         "http://purl.org/dc/elements/1.1/creator": {
-          "numAppearsIn": 68,
+          "numAppearsIn": 74,
           "hasLocalDefinition": true,
           "label": [
             "creator"
@@ -108,7 +108,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/description": {
-          "numAppearsIn": 59,
+          "numAppearsIn": 65,
           "hasLocalDefinition": true,
           "label": [
             "description"
@@ -121,7 +121,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/title": {
-          "numAppearsIn": 64,
+          "numAppearsIn": 69,
           "hasLocalDefinition": true,
           "label": [
             "title"
@@ -137,7 +137,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 119,
+          "numAppearsIn": 136,
           "hasLocalDefinition": true,
           "label": [
             "License"
@@ -145,38 +145,41 @@
           "curie": "dcterms:license",
           "type": [
             "property",
-            "objectProperty",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#GitRepository": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 6,
           "hasLocalDefinition": true,
           "label": [
-            "GitRepository"
+            "Git Repository"
           ],
-          "curie": "GitRepository",
+          "curie": "doap:GitRepository",
           "type": [
-            "property",
-            "annotationProperty",
+            "class",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#bug-database": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 19,
           "hasLocalDefinition": true,
           "label": [
-            "bug-database"
+            "bug database"
           ],
-          "curie": "bug-database",
+          "curie": "doap:bug-database",
           "type": [
             "property",
-            "annotationProperty",
             "entity"
           ]
         },
         "http://www.geneontology.org/formats/oboInOwl#default-namespace": {
-          "numAppearsIn": 30,
+          "numAppearsIn": 31,
           "hasLocalDefinition": true,
           "label": [
             "default-namespace"
@@ -192,7 +195,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": true,
           "label": [
             "comment"
@@ -221,7 +224,7 @@
             "stw",
             "skos"
           ],
-          "numAppearsIn": 40,
+          "numAppearsIn": 55,
           "hasLocalDefinition": false,
           "label": [
             "definition"
@@ -238,7 +241,7 @@
             "skos",
             "stw"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 57,
           "hasLocalDefinition": false,
           "label": [
             "preferred label"
@@ -251,15 +254,18 @@
           ]
         },
         "http://xmlns.com/foaf/0.1/homepage": {
-          "numAppearsIn": 41,
+          "definedBy": [
+            "foaf"
+          ],
+          "numAppearsIn": 45,
           "hasLocalDefinition": true,
           "label": [
             "homepage"
           ],
-          "curie": "homepage",
+          "curie": "foaf:homepage",
           "type": [
             "property",
-            "annotationProperty",
+            "objectProperty",
             "entity"
           ]
         },
@@ -269,7 +275,7 @@
           "curie": "github:EnvironmentOntology/envo"
         }
       },
-      "loaded": "2026-02-08T13:53:23.742130147",
+      "loaded": "2026-09-30T16:00:04.172077783",
       "numDescendants": 0,
       "numHierarchicalDescendants": 0,
       "numberOfClasses": "6566",
@@ -285,7 +291,7 @@
         false
       ],
       "skos": false,
-      "sourceFileTimestamp": "Sun Feb 08 13:53:23 UTC 2026",
+      "sourceFileTimestamp": "Wed Sep 30 16:00:03 UTC 2026",
       "synonym_property": [
         "true"
       ],
@@ -358,7 +364,6 @@
         "chiro",
         "cob",
         "obi",
-        "aeon",
         "uberon",
         "dpbo",
         "cao",
@@ -381,10 +386,13 @@
         "obi",
         "iao",
         "uo",
+        "foaf",
         "dcterms",
+        "doap",
         "bfo",
-        "skos",
-        "stw"
+        "cob",
+        "stw",
+        "skos"
       ],
       "iri": "http://purl.obolibrary.org/obo/envo.owl",
       "isObsolete": false,
@@ -406,7 +414,7 @@
       },
       "linkedEntities": {
         "http://purl.org/dc/elements/1.1/contributor": {
-          "numAppearsIn": 46,
+          "numAppearsIn": 50,
           "hasLocalDefinition": true,
           "label": [
             "contributor"
@@ -419,7 +427,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/creator": {
-          "numAppearsIn": 68,
+          "numAppearsIn": 74,
           "hasLocalDefinition": true,
           "label": [
             "creator"
@@ -432,7 +440,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/description": {
-          "numAppearsIn": 59,
+          "numAppearsIn": 65,
           "hasLocalDefinition": true,
           "label": [
             "description"
@@ -445,7 +453,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/title": {
-          "numAppearsIn": 64,
+          "numAppearsIn": 69,
           "hasLocalDefinition": true,
           "label": [
             "title"
@@ -461,7 +469,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 119,
+          "numAppearsIn": 136,
           "hasLocalDefinition": true,
           "label": [
             "License"
@@ -469,38 +477,41 @@
           "curie": "dcterms:license",
           "type": [
             "property",
-            "objectProperty",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#GitRepository": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 6,
           "hasLocalDefinition": true,
           "label": [
-            "GitRepository"
+            "Git Repository"
           ],
-          "curie": "GitRepository",
+          "curie": "doap:GitRepository",
           "type": [
-            "property",
-            "annotationProperty",
+            "class",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#bug-database": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 19,
           "hasLocalDefinition": true,
           "label": [
-            "bug-database"
+            "bug database"
           ],
-          "curie": "bug-database",
+          "curie": "doap:bug-database",
           "type": [
             "property",
-            "annotationProperty",
             "entity"
           ]
         },
         "http://www.geneontology.org/formats/oboInOwl#default-namespace": {
-          "numAppearsIn": 30,
+          "numAppearsIn": 31,
           "hasLocalDefinition": true,
           "label": [
             "default-namespace"
@@ -516,7 +527,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": true,
           "label": [
             "comment"
@@ -541,15 +552,18 @@
           "curie": "anyURI"
         },
         "http://xmlns.com/foaf/0.1/homepage": {
-          "numAppearsIn": 41,
+          "definedBy": [
+            "foaf"
+          ],
+          "numAppearsIn": 45,
           "hasLocalDefinition": true,
           "label": [
             "homepage"
           ],
-          "curie": "homepage",
+          "curie": "foaf:homepage",
           "type": [
             "property",
-            "annotationProperty",
+            "objectProperty",
             "entity"
           ]
         },
@@ -601,19 +615,19 @@
           "curie": "ror:04v4h0v24"
         }
       },
-      "loaded": "2026-02-08T13:53:21.283048048",
+      "loaded": "2026-09-30T16:00:01.660375074",
       "numDescendants": 0,
       "numHierarchicalDescendants": 0,
-      "numberOfClasses": "6906",
-      "numberOfEntities": "7225",
+      "numberOfClasses": "6936",
+      "numberOfEntities": "7252",
       "numberOfIndividuals": "44",
-      "numberOfProperties": "275",
+      "numberOfProperties": "272",
       "ontologyId": "envo",
       "ontologyPurl": "http://purl.obolibrary.org/obo/envo.owl",
       "ontology_use": [
         {
           "usedBy": {
-            "description": "The information system PANGAEA is operated as an Open Access library aimed at archiving, publishing and distributing georeferenced data from earth system research.",
+            "description": "The information system PANGAEA is operated as an Open Access library aimed at archiving, publishing and distributing georeferenced data from earth system research. By relying on shared, well-documented vocabularies, PANGAEA’s metadata is described in a standardized, unambiguous, and machine-readable format. This improves semantic consistency within PANGAEA, enables the integration of heterogeneous datasets, and facilitates alignment with external systems.",
             "homepage": "https://pangaea.de/",
             "label": "PANGAEA",
             "provider": [
@@ -627,10 +641,6 @@
               }
             ],
             "type": "repository/portal",
-            "usageDescription": {
-              "description": "By relying on shared, well-documented vocabularies, PANGAEA’s metadata is described in a standardized, unambiguous, and machine-readable format. This improves semantic consistency within PANGAEA, enables the integration of heterogeneous datasets, and facilitates alignment with external systems.",
-              "language": "en"
-            },
             "usageReportMetadata": {
               "created": "2025-09-04",
               "source": "https://wiki.pangaea.de/wiki/Term_catalogue"
@@ -650,7 +660,20 @@
             ],
             "type": "project",
             "usageReportMetadata": {
-              "created": "2025-09-04"
+              "created": "2025-09-04",
+              "source": "Alfred Wegner Institute (AWI)"
+            }
+          }
+        },
+        {
+          "usedBy": {
+            "description": "An open source ISA software suite and an extensible hierarchical data structure implemented by a growing number of international public resources. It caters to data as diverse as stem cell, toxicogenomics, environmental gene surveys, microbial diversity studies, and a variety of metabolomics and metagenomics-based studies. But it maintains cross-domain compatibility in the way the experimental context is described.",
+            "homepage": "http://isa-tools.org",
+            "label": "ISA software suite",
+            "type": "application",
+            "usageReportMetadata": {
+              "created": "2011-05-16",
+              "source": "OntoPortal"
             }
           }
         }
@@ -660,7 +683,7 @@
       "searchableAnnotationValues": [
         false
       ],
-      "sourceFileTimestamp": "Sun Feb 08 13:53:19 UTC 2026",
+      "sourceFileTimestamp": "Wed Sep 30 16:00:00 UTC 2026",
       "title": "The Environment Ontology Latest Release",
       "tracker": "https://github.com/EnvironmentOntology/envo/issues/",
       "type": [
@@ -685,8 +708,8 @@
         "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/entity_quality_location.owl>) VersionIRI(<null>))) [Axioms: 40 Logical Axioms: 6]",
         "Includes Ontology(OntologyID(OntologyIRI(<http://purl.obolibrary.org/obo/envo/modules/process_attribute.owl>) VersionIRI(<null>))) [Axioms: 21 Logical Axioms: 2]"
       ],
-      "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/envo/releases/2025-10-20/envo.owl",
-      "http://www.w3.org/2002/07/owl#versionInfo": "2025-10-20",
+      "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/envo/releases/2026-06-26/envo.owl",
+      "http://www.w3.org/2002/07/owl#versionInfo": "2026-06-26",
       "http://xmlns.com/foaf/0.1/homepage": "http://environmentontology.org/"
     },
     {
@@ -737,10 +760,12 @@
         "obi",
         "iao",
         "uo",
+        "foaf",
         "dcterms",
+        "doap",
         "bfo",
-        "skos",
-        "stw"
+        "stw",
+        "skos"
       ],
       "iri": "http://purl.obolibrary.org/obo/envo.owl",
       "isObsolete": false,
@@ -762,7 +787,7 @@
       },
       "linkedEntities": {
         "http://purl.org/dc/elements/1.1/contributor": {
-          "numAppearsIn": 46,
+          "numAppearsIn": 50,
           "hasLocalDefinition": true,
           "label": [
             "contributor"
@@ -775,7 +800,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/creator": {
-          "numAppearsIn": 68,
+          "numAppearsIn": 74,
           "hasLocalDefinition": true,
           "label": [
             "creator"
@@ -788,7 +813,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/description": {
-          "numAppearsIn": 59,
+          "numAppearsIn": 65,
           "hasLocalDefinition": true,
           "label": [
             "description"
@@ -801,7 +826,7 @@
           ]
         },
         "http://purl.org/dc/elements/1.1/title": {
-          "numAppearsIn": 64,
+          "numAppearsIn": 69,
           "hasLocalDefinition": true,
           "label": [
             "title"
@@ -817,7 +842,7 @@
           "definedBy": [
             "dcterms"
           ],
-          "numAppearsIn": 119,
+          "numAppearsIn": 136,
           "hasLocalDefinition": true,
           "label": [
             "License"
@@ -825,38 +850,41 @@
           "curie": "dcterms:license",
           "type": [
             "property",
-            "objectProperty",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#GitRepository": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 6,
           "hasLocalDefinition": true,
           "label": [
-            "GitRepository"
+            "Git Repository"
           ],
-          "curie": "GitRepository",
+          "curie": "doap:GitRepository",
           "type": [
-            "property",
-            "annotationProperty",
+            "class",
             "entity"
           ]
         },
         "http://usefulinc.com/ns/doap#bug-database": {
+          "definedBy": [
+            "doap"
+          ],
           "numAppearsIn": 19,
           "hasLocalDefinition": true,
           "label": [
-            "bug-database"
+            "bug database"
           ],
-          "curie": "bug-database",
+          "curie": "doap:bug-database",
           "type": [
             "property",
-            "annotationProperty",
             "entity"
           ]
         },
         "http://www.geneontology.org/formats/oboInOwl#default-namespace": {
-          "numAppearsIn": 30,
+          "numAppearsIn": 31,
           "hasLocalDefinition": true,
           "label": [
             "default-namespace"
@@ -872,7 +900,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": true,
           "label": [
             "comment"
@@ -897,15 +925,18 @@
           "curie": "anyURI"
         },
         "http://xmlns.com/foaf/0.1/homepage": {
-          "numAppearsIn": 41,
+          "definedBy": [
+            "foaf"
+          ],
+          "numAppearsIn": 45,
           "hasLocalDefinition": true,
           "label": [
             "homepage"
           ],
-          "curie": "homepage",
+          "curie": "foaf:homepage",
           "type": [
             "property",
-            "annotationProperty",
+            "objectProperty",
             "entity"
           ]
         },
@@ -942,7 +973,7 @@
           "curie": "0000-0002-4366-3088"
         }
       },
-      "loaded": "2026-02-08T13:53:26.165105852",
+      "loaded": "2026-09-30T16:00:06.409050075",
       "numDescendants": 0,
       "numHierarchicalDescendants": 0,
       "numberOfClasses": "6996",
@@ -956,7 +987,7 @@
       "searchableAnnotationValues": [
         false
       ],
-      "sourceFileTimestamp": "Sun Feb 08 13:53:25 UTC 2026",
+      "sourceFileTimestamp": "Wed Sep 30 16:00:05 UTC 2026",
       "title": "The Environment Ontology 2023-02-13 release",
       "tracker": "https://github.com/EnvironmentOntology/envo/issues/",
       "type": [

@@ -1,0 +1,343 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "agro",
+        "enm",
+        "envo",
+        "envo2023",
+        "envo2021"
+      ],
+      "curie": "ENVO:00002237",
+      "definedBy": [
+        "envo",
+        "envo2021"
+      ],
+      "definition": [
+        {
+          "type": [
+            "reification"
+          ],
+          "value": "Chernozems are soils with a thick black surface layer that is rich in organic matter.",
+          "axioms": [
+            {
+              "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "FAO:http://fao.org/ag/agl/agll/wrb/doc/wrb2006final.pdf"
+            }
+          ]
+        }
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/ENVO_00001998",
+        "http://purl.obolibrary.org/obo/ENVO_00010483",
+        "http://purl.obolibrary.org/obo/BFO_0000040",
+        "http://purl.obolibrary.org/obo/BFO_0000004",
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001",
+        "http://purl.obolibrary.org/obo/ENVO_01000813"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/ENVO_00001998"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": true,
+      "hierarchicalAncestor": [
+        "http://purl.obolibrary.org/obo/ENVO_00001998",
+        "http://purl.obolibrary.org/obo/ENVO_00010483",
+        "http://purl.obolibrary.org/obo/BFO_0000040",
+        "http://purl.obolibrary.org/obo/BFO_0000004",
+        "http://purl.obolibrary.org/obo/BFO_0000002",
+        "http://purl.obolibrary.org/obo/BFO_0000001",
+        "http://purl.obolibrary.org/obo/ENVO_01000813"
+      ],
+      "hierarchicalParent": [
+        "http://purl.obolibrary.org/obo/ENVO_00001998"
+      ],
+      "hierarchicalProperty": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/ENVO_00002237",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "chernozem"
+      ],
+      "linkedEntities": {
+        "ENVO:00002237": {
+          "iri": "http://purl.obolibrary.org/obo/ENVO_00002237",
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 5,
+          "hasLocalDefinition": true,
+          "label": [
+            "chernozem"
+          ],
+          "curie": "ENVO:00002237",
+          "type": [
+            "class",
+            "entity"
+          ],
+          "url": "http://purl.obolibrary.org/obo/ENVO_00002237",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#id": {
+          "numAppearsIn": 45,
+          "hasLocalDefinition": true,
+          "label": [
+            "id"
+          ],
+          "curie": "id",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ],
+          "label": [
+            "subClassOf"
+          ],
+          "curie": "subClassOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_00001998": {
+          "definedBy": [
+            "envo2021",
+            "envo"
+          ],
+          "numAppearsIn": 7,
+          "hasLocalDefinition": true,
+          "label": [
+            "soil"
+          ],
+          "curie": "ENVO2021:00001998",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000004": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 49,
+          "hasLocalDefinition": true,
+          "label": [
+            "independent continuant"
+          ],
+          "curie": "BFO:0000004",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000001": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 43,
+          "hasLocalDefinition": true,
+          "label": [
+            "entity"
+          ],
+          "curie": "BFO:0000001",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym": {
+          "definedBy": [
+            "uo"
+          ],
+          "numAppearsIn": 54,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_related_synonym"
+          ],
+          "curie": "hasRelatedSynonym",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000002": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 48,
+          "hasLocalDefinition": true,
+          "label": [
+            "continuant"
+          ],
+          "curie": "BFO:0000002",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/BFO_0000040": {
+          "definedBy": [
+            "bfo"
+          ],
+          "numAppearsIn": 51,
+          "hasLocalDefinition": true,
+          "label": [
+            "material entity"
+          ],
+          "curie": "BFO:0000040",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasDbXref": {
+          "numAppearsIn": 62,
+          "hasLocalDefinition": true,
+          "label": [
+            "database_cross_reference"
+          ],
+          "curie": "hasDbXref",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_01000813": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 8,
+          "hasLocalDefinition": true,
+          "label": [
+            "astronomical body part"
+          ],
+          "curie": "ENVO:01000813",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/ENVO_00010483": {
+          "definedBy": [
+            "envo",
+            "envo2021"
+          ],
+          "numAppearsIn": 10,
+          "hasLocalDefinition": true,
+          "label": [
+            "environmental material"
+          ],
+          "curie": "ENVO:00010483",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasOBONamespace": {
+          "numAppearsIn": 38,
+          "hasLocalDefinition": true,
+          "label": [
+            "has_obo_namespace"
+          ],
+          "curie": "hasOBONamespace",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "envo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/envo.owl",
+      "ontologyPreferredPrefix": "ENVO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "ENVO_00002237",
+      "synonym": [
+        "black earth",
+        "boroll"
+      ],
+      "synonymProperty": "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym",
+      "type": [
+        "class",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": {
+        "type": [
+          "reification"
+        ],
+        "value": "Chernozems are soils with a thick black surface layer that is rich in organic matter.",
+        "axioms": [
+          {
+            "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "FAO:http://fao.org/ag/agl/agll/wrb/doc/wrb2006final.pdf"
+          }
+        ]
+      },
+      "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "https://en.wikipedia.org/wiki/Chernozem",
+      "http://www.geneontology.org/formats/oboInOwl#hasOBONamespace": "ENVO",
+      "http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym": [
+        "black earth",
+        "boroll"
+      ],
+      "http://www.geneontology.org/formats/oboInOwl#id": "ENVO:00002237",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Class",
+      "http://www.w3.org/2000/01/rdf-schema#label": "chernozem",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://purl.obolibrary.org/obo/ENVO_00001998"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

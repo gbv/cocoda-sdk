@@ -22,24 +22,31 @@
         "peco",
         "afo",
         "envo",
+        "mwo",
+        "bto-mw",
+        "cto-mw",
         "uberon",
         "cto",
+        "fto-mw",
         "ecso",
         "cheminf",
+        "mto",
         "bco",
         "cco",
         "iofcore",
         "pso",
         "stato",
-        "aeon",
+        "vto",
         "nmrcv2025",
         "agro",
+        "nfdicore",
         "sepio",
         "pmd",
         "chmo",
         "msio",
         "tfsco",
         "vibso",
+        "cepo",
         "swo",
         "listdb"
       ],
@@ -78,7 +85,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 46,
+          "numAppearsIn": 52,
           "hasLocalDefinition": true,
           "label": [
             "editor note"
@@ -110,7 +117,7 @@
           "definedBy": [
             "iao"
           ],
-          "numAppearsIn": 38,
+          "numAppearsIn": 44,
           "hasLocalDefinition": true,
           "label": [
             "example of usage"
@@ -184,7 +191,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 60,
           "hasLocalDefinition": false,
           "label": [
             "comment"
@@ -216,7 +223,7 @@
           "definedBy": [
             "prov"
           ],
-          "numAppearsIn": 59,
+          "numAppearsIn": 67,
           "hasLocalDefinition": false,
           "label": [
             "label"
