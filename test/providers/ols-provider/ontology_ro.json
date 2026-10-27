@@ -1,0 +1,251 @@
+{
+  "classifications": [
+    {
+      "collection": [
+        "NFDI4CHEM",
+        "DataPLANT",
+        "Foundational Ontologies"
+      ]
+    },
+    {
+      "subject": [
+        "General",
+        "Life Sciences, biology"
+      ]
+    }
+  ],
+  "definition": [
+    "The OBO Relations Ontology (RO) is a collection of OWL relations (ObjectProperties) intended for use across a wide variety of biological ontologies."
+  ],
+  "definition_property": [
+    "http://purl.obolibrary.org/obo/IAO_0000115"
+  ],
+  "description": "Relationship types shared across multiple ontologies.",
+  "exportsTo": [
+    "agro",
+    "nmrcv2025",
+    "envo",
+    "envo2023",
+    "vibso",
+    "pco",
+    "sepio",
+    "to",
+    "flopo",
+    "pso",
+    "bco",
+    "swo",
+    "po",
+    "uberon",
+    "pato",
+    "hp",
+    "chebi",
+    "peco",
+    "oeo",
+    "efo",
+    "envo2021",
+    "tfsco",
+    "enm",
+    "afo",
+    "iao",
+    "obi",
+    "pmd",
+    "t4fs",
+    "cepo",
+    "duo",
+    "mwo",
+    "vto",
+    "ecso",
+    "cto-mw",
+    "cheminf",
+    "nfdicore",
+    "msio",
+    "pmat",
+    "stato",
+    "proco",
+    "ppo",
+    "dpbo",
+    "listdb",
+    "chmo",
+    "omp",
+    "cob",
+    "pror",
+    "vivo",
+    "gesah",
+    "m4i",
+    "bto",
+    "go",
+    "bao",
+    "chiro",
+    "mop",
+    "dsw",
+    "hoom"
+  ],
+  "homepage": "https://oborel.github.io/",
+  "imported": false,
+  "importsFrom": [
+    "dcterms",
+    "uberon",
+    "prov",
+    "iao",
+    "uo",
+    "foaf",
+    "skos",
+    "stw",
+    "go",
+    "obi",
+    "envo",
+    "envo2021",
+    "cob",
+    "bfo",
+    "pato",
+    "cito"
+  ],
+  "iri": "http://purl.obolibrary.org/obo/ro.owl",
+  "isObsolete": false,
+  "is_foundary": true,
+  "label": [
+    "OBO Relations Ontology"
+  ],
+  "language": [
+    "en"
+  ],
+  "license": {
+    "label": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "linkedEntities": {
+    "http://purl.obolibrary.org/obo/IAO_0000115": {
+      "definedBy": [
+        "uo",
+        "iao"
+      ],
+      "numAppearsIn": 71,
+      "hasLocalDefinition": true,
+      "label": [
+        "IAO_0000115"
+      ],
+      "curie": "IAO:0000115",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/terms/description": {
+      "definedBy": [
+        "dcterms"
+      ],
+      "numAppearsIn": 102,
+      "hasLocalDefinition": true,
+      "label": [
+        "Description"
+      ],
+      "curie": "dcterms:description",
+      "type": [
+        "property",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/terms/license": {
+      "definedBy": [
+        "dcterms"
+      ],
+      "numAppearsIn": 136,
+      "hasLocalDefinition": true,
+      "label": [
+        "License"
+      ],
+      "curie": "dcterms:license",
+      "type": [
+        "property",
+        "entity"
+      ]
+    },
+    "http://purl.org/dc/terms/title": {
+      "definedBy": [
+        "dcterms"
+      ],
+      "numAppearsIn": 118,
+      "hasLocalDefinition": true,
+      "label": [
+        "Title"
+      ],
+      "curie": "dcterms:title",
+      "type": [
+        "property",
+        "entity"
+      ]
+    },
+    "http://www.w3.org/2001/XMLSchema#anyURI": {
+      "numAppearsIn": 1,
+      "hasLocalDefinition": false,
+      "type": [
+        "class",
+        "entity"
+      ],
+      "label": [
+        "anyURI"
+      ],
+      "curie": "anyURI"
+    },
+    "http://xmlns.com/foaf/0.1/homepage": {
+      "definedBy": [
+        "foaf"
+      ],
+      "numAppearsIn": 45,
+      "hasLocalDefinition": true,
+      "label": [
+        "homepage"
+      ],
+      "curie": "foaf:homepage",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ]
+    },
+    "https://github.com/oborel/obo-relations": {
+      "url": "https://github.com/oborel/obo-relations",
+      "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+      "curie": "github:oborel/obo-relations"
+    }
+  },
+  "loaded": "2026-09-30T16:27:47.330690397",
+  "mailingList": "https://groups.google.com/forum/#!forum/obo-relations",
+  "numDescendants": 0,
+  "numHierarchicalDescendants": 0,
+  "numberOfClasses": "58",
+  "numberOfEntities": "985",
+  "numberOfIndividuals": "91",
+  "numberOfProperties": "836",
+  "ontologyId": "ro",
+  "ontologyPurl": "http://purl.obolibrary.org/obo/ro.owl",
+  "preferredPrefix": "RO",
+  "repo_url": "https://github.com/oborel/obo-relations",
+  "searchableAnnotationValues": [
+    "The OBO Relations Ontology (RO) is a collection of OWL relations (ObjectProperties) intended for use across a wide variety of biological ontologies.",
+    "OBO Relations Ontology",
+    " https://github.com/oborel/obo-relations/",
+    false,
+    "2026-09-30T16:27:47.330690397",
+    "58",
+    "985",
+    "91",
+    "836",
+    "Wed Sep 30 16:27:46 UTC 2026"
+  ],
+  "sourceFileTimestamp": "Wed Sep 30 16:27:46 UTC 2026",
+  "title": "Relation Ontology",
+  "tracker": "https://github.com/oborel/obo-relations/issues",
+  "type": [
+    "ontology"
+  ],
+  "versioned_url": "https://raw.githubusercontent.com/oborel/obo-relations/master/ro.owl",
+  "http://purl.org/dc/terms/description": "The OBO Relations Ontology (RO) is a collection of OWL relations (ObjectProperties) intended for use across a wide variety of biological ontologies.",
+  "http://purl.org/dc/terms/license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "http://purl.org/dc/terms/title": "OBO Relations Ontology",
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+  "http://www.w3.org/2002/07/owl#versionIRI": "http://purl.obolibrary.org/obo/ro/releases/2026-09-04/ro.owl",
+  "http://www.w3.org/2002/07/owl#versionInfo": "2026-09-04",
+  "http://xmlns.com/foaf/0.1/homepage": " https://github.com/oborel/obo-relations/"
+}

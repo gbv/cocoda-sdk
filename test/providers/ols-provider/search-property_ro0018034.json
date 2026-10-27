@@ -1,0 +1,240 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "to",
+        "hp",
+        "ro",
+        "chebi",
+        "peco",
+        "uberon"
+      ],
+      "curie": "RO:0018034",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "A is a protonated form of B if and only if A is chemical entity that is a Brønsted–Lowry Acid (i.e., can give up a proton) and by removing some nonzero number of protons transforms it into B.\n\nThis is a transitive relationship and follows this design pattern: https://oborel.github.io/obo-relations/direct-and-indirect-relations."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/RO_0018030"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/RO_0018030"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0018034",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "is protonated form of"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-4423-4370": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Charles Tapley Hoyt",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47475003"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0003-4423-4370",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 103,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "CHEBI:10956": {
+          "url": "http://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:10956",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "CHEBI:10956"
+        },
+        "http://www.geneontology.org/formats/oboInOwl#hasDbXref": {
+          "numAppearsIn": 62,
+          "hasLocalDefinition": true,
+          "label": [
+            "database_cross_reference",
+            "has cross-reference"
+          ],
+          "curie": "hasDbXref",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "CHEBI:57252": {
+          "url": "http://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:57252",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "CHEBI:57252"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://purl.obolibrary.org/obo/RO_0018030": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "chemical relationship"
+          ],
+          "curie": "RO:0018030",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0018033": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "is deprotonated form of"
+          ],
+          "curie": "RO:0018033",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 1,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "ro",
+      "ontologyIri": "http://purl.obolibrary.org/obo/ro.owl",
+      "ontologyPreferredPrefix": "RO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "RO_0018034",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000112": "(E)-cinnamoyl-CoA (CHEBI:10956) is a protonated form of (E)-cinnamoyl-CoA(4-) (CHEBI:57252), which involves adding four protons.",
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A is a protonated form of B if and only if A is chemical entity that is a Brønsted–Lowry Acid (i.e., can give up a proton) and by removing some nonzero number of protons transforms it into B.\n\nThis is a transitive relationship and follows this design pattern: https://oborel.github.io/obo-relations/direct-and-indirect-relations.",
+      "http://purl.org/dc/terms/creator": "https://orcid.org/0000-0003-4423-4370",
+      "http://www.geneontology.org/formats/oboInOwl#hasDbXref": "obo:chebi#is_conjugate_acid_of",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty",
+        "http://www.w3.org/2002/07/owl#TransitiveProperty"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": "is protonated form of",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://github.com/oborel/obo-relations/issues/643",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.obolibrary.org/obo/RO_0018030",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0018033"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}
