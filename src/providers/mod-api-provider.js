@@ -167,8 +167,9 @@ export default class ModApiProvider extends BaseProvider {
     }
     if (artefact.label){
       item.prefLabel = {}
-      item.prefLabel[lan] = []
-      item.prefLabel[lan].push(artefact.label)
+      item.prefLabel[lan] = artefact.label
+      // item.prefLabel[lan] = []
+      // item.prefLabel[lan].push(artefact.label)
     }
     if (artefact.synonyms){
       item.altLabel = {}
@@ -240,7 +241,7 @@ export default class ModApiProvider extends BaseProvider {
     if (artefact.terminologies) {
       item.schemes = artefact.terminologies.map(({uri,label}) => {
         if (uri && isValidUri(uri)) {
-          return label ? {uri, prefLabel:{und: label}} : {uri}
+          return label ? {uri, prefLabel:{[lan]: label}} : {uri}
         }
       }).filter(Boolean)
     }

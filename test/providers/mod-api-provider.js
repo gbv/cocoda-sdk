@@ -43,6 +43,15 @@ describe("ModApiProvider.getRegistries", () => {
     const registries = await provider.getRegistries()
     assert(Array.isArray(registries))
     assert.ok(registries.length > 5)
+    for (const registry of registries){
+      assert(registry?.prefLabel?.en)
+      assert(!Array.isArray(registry?.prefLabel?.en))
+      assert(Array.isArray(registry.schemes))
+      for (const scheme of registry.schemes){
+        assert(scheme?.prefLabel?.en)
+        assert(scheme?.uri)
+      }
+    }
   })
 
   it("allRegistriesLimit", async () => {
