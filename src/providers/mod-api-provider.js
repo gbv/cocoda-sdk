@@ -257,6 +257,10 @@ export default class ModApiProvider extends BaseProvider {
       item.narrower[lan] = artefact.children
     }
 
+    if (artefact.id){
+      item.identifier = artefact.id
+    }
+
     return item
   }
 
@@ -300,7 +304,7 @@ export default class ModApiProvider extends BaseProvider {
     // filter from https://terminology.services.base4nfdi.de/api-gateway/collections/
     const artifacts = await this._getRegistriesMod()
     for (const registry of artifacts) {
-      if (registry.uri && registry.uri === registryParam.uri) {
+      if (registry.id && registry.id === registryParam.id) {
         return registry
       }
     }
@@ -495,6 +499,9 @@ export default class ModApiProvider extends BaseProvider {
    * Retrieves all registries (terminology collections aka JSKOS Scheme Registries) from the MOD API.
    *
    * @param {Object} [params={}] - Optional parameters for the request.
+   * @param {Object} [params.registries] - optional list of registries [{id:<id>}, ..].
+   * @param {int} [params.limit] - optional limit for returned registries (if registries is not provided)
+ * @param {Object} [params._config] - Additional config options.
    * @returns {Promise<Array>} An array of JSKOS concept schemes.
    * @async
    */
@@ -521,6 +528,24 @@ export default class ModApiProvider extends BaseProvider {
       }
     }
     return registry_results
+  }
+  /**
+   * Retrieves a single registries (terminology collections aka JSKOS Scheme Registries) from the MOD API.
+   *
+   * @param {Object} [params={}] - Optional parameters for the request.
+   * @param {Object} [params.registry] - specific  of registry to request, {id:<id>}.
+   * @param {Object} [params._config] - Additional config options.
+   * @returns {Promise<Object>} A JSKOS registry object.
+   * @async
+   */
+  async getRegistry({registry, ..._config}) {
+    if (!registry) {
+      return
+    }
+    let artefact = await this._getRegistryMod(registry)
+    if (artefact) {
+      return await this._artefactToJSKOS(artefact)
+    }
   }
 
 

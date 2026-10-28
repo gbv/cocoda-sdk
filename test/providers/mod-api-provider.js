@@ -36,6 +36,7 @@ const schemeUriDefault = "http://d-nb.info/standards/elementset/gnd#"
 const schemeUriDefault2 = "https://lobid.org/gnd"
 const conceptUriDefault = "https://d-nb.info/gnd/4179484-9"
 const conceptNotationDefault = "4179484-9"
+const registryID = "dc45621d-7e40-47ce-9616-4133f0b54edf"
 
 describe("ModApiProvider.getRegistries", () => {
 
@@ -61,10 +62,18 @@ describe("ModApiProvider.getRegistries", () => {
   })
 
   it("allRegistriesSpecific", async () => {
-    const registries = await provider.getRegistries({ limit: limitDefault })
+    const registries = await provider.getRegistries({ registries: [{id: registryID}] })
     assert(Array.isArray(registries))
-    assert.equal(registries.length, limitDefault)
+    assert.equal(registries.length, 1)
+    assert(registries[0].prefLabel?.en)
   })
+
+  it("allRegistrySpecific", async () => {
+    const registry = await provider.getRegistry({ registry: {id:registryID} })
+    assert(registry)
+    assert(registry?.prefLabel?.en)
+  })
+  
 })
 
 
