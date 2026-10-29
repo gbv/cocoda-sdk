@@ -45,6 +45,7 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__": "empty.json",
   
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/individuals?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
@@ -68,12 +69,12 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FIAO_0000118": "search_iao0000118_envo.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?size=50": "individuals-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_individuals_envo00002237.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
   
-
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?curie=RO%3A0018034": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
@@ -267,9 +268,11 @@ describe ("OlsProvider.getTop", () => {
 
     const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
+
+    assert(provider._isPropertyRootConcept(topConcepts[0]))
     Object.keys(bfo_root_jskos[0]).forEach(key => {
-      assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
-      assert.deepStrictEqual(topConcepts[0][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
+      assert.notDeepStrictEqual(topConcepts[1][key], undefined, `Key '${key}' is missing in topConcepts result`)
+      assert.deepStrictEqual(topConcepts[1][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
     })
   })
 
