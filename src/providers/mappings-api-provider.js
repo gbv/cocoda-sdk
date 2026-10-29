@@ -105,9 +105,8 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     try {
-      return await this.axios({
+      return await this._request(mapping.uri, {
         ...config,
-        url: mapping.uri,
         params: {
           ...this._defaultParams,
           ...(config.params || {}),
@@ -183,10 +182,8 @@ export default class MappingsApiProvider extends BaseProvider {
     if (order) {
       params.order = order
     }
-    return this.axios({
+    return this._request(url, {
       ...config,
-      method: "get",
-      url,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -207,10 +204,9 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping" })
     }
     mapping = jskos.minifyMapping(mapping)
-    return this.axios({
+    return this._request(this._api.mappings, {
       ...config,
       method: "post",
-      url: this._api.mappings,
       data: mapping,
       params: {
         ...this._defaultParams,
@@ -235,10 +231,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "put",
-      url: uri,
       data: mapping,
       params: {
         ...this._defaultParams,
@@ -262,10 +257,9 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
     const { uri, ...data } = mapping
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "patch",
-      url: uri,
       data,
       params: {
         ...this._defaultParams,
@@ -289,10 +283,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.mappings)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "mapping", message: "URI doesn't seem to be part of this registry." })
     }
-    await this.axios({
+    await this._request(uri, {
       ...config,
       method: "delete",
-      url: uri,
     })
     return true
   }
@@ -309,10 +302,9 @@ export default class MappingsApiProvider extends BaseProvider {
       config.params ||= {}
       config.params.target = target
     }
-    return this.axios({
+    return this._request(this._api.annotations, {
       ...config,
       method: "get",
-      url: this._api.annotations,
     })
   }
 
@@ -324,10 +316,9 @@ export default class MappingsApiProvider extends BaseProvider {
    * @returns {Object} JSKOS annotation object
    */
   async postAnnotation({ annotation, ...config }) {
-    return this.axios({
+    return this._request(this._api.annotations, {
       ...config,
       method: "post",
-      url: this._api.annotations,
       data: annotation,
     })
   }
@@ -344,10 +335,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "put",
-      url: uri,
       data: annotation,
     })
   }
@@ -364,10 +354,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "patch",
-      url: uri,
       data: annotation,
     })
   }
@@ -384,10 +373,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.annotations)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "annotation", message: "URI doesn't seem to be part of this registry." })
     }
-    await this.axios({
+    await this._request(uri, {
       ...config,
       method: "delete",
-      url: uri,
     })
     return true
   }
@@ -399,10 +387,9 @@ export default class MappingsApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concordance objects
    */
   async getConcordances(config) {
-    return this.axios({
+    return this._request(this._api.concordances, {
       ...config,
       method: "get",
-      url: this._api.concordances,
     })
   }
 
@@ -417,10 +404,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!concordance) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance" })
     }
-    return this.axios({
+    return this._request(this._api.concordances, {
       ...config,
       method: "post",
-      url: this._api.concordances,
       data: concordance,
       params: {
         ...this._defaultParams,
@@ -444,10 +430,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.concordances)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
     }
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "put",
-      url: uri,
       data: concordance,
       params: {
         ...this._defaultParams,
@@ -471,10 +456,9 @@ export default class MappingsApiProvider extends BaseProvider {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
     }
     const { uri, ...data } = concordance
-    return this.axios({
+    return this._request(uri, {
       ...config,
       method: "patch",
-      url: uri,
       data,
       params: {
         ...this._defaultParams,
@@ -498,10 +482,9 @@ export default class MappingsApiProvider extends BaseProvider {
     if (!uri || !uri.startsWith(this._api.concordances)) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "concordance", message: "URI doesn't seem to be part of this registry." })
     }
-    await this.axios({
+    await this._request(uri, {
       ...config,
       method: "delete",
-      url: uri,
     })
     return true
   }

@@ -14,7 +14,7 @@ const missing = mockRequests(provider.axios, {
   // debug: true,
   downloadMissing: true,
 }, {
-  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp":
+  "https://skosmos.bartoc.org/rest/v1/20691/data?uri=https%3A%2F%2Fwww.w3id.org%2Farchlink%2Fterms%2Fconservationthesaurus%2FC3A182&format=application%2Fjson&lang=en":
   "skosmos-concept.json",
 })
 

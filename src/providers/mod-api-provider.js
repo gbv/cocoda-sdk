@@ -264,26 +264,6 @@ export default class ModApiProvider extends BaseProvider {
     return item
   }
 
-  // #### API REQUESTS ####
-
-  async _request(url, ..._config) {
-    if (!url) {
-      return
-    }
-    const result = await this.axios({
-      method: "get",
-      url,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      ..._config,
-    })
-    if (!result?._url || Object.keys(result).length != 1){
-      return result
-    }
-  }
-  
   // API REQUESTS REGISTRIES
 
   async _getRegistriesMod() {

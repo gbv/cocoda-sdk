@@ -105,7 +105,7 @@ export default class SkohubProvider extends BaseProvider {
       postfix = "index.json"
     }
     // Errors for this request will trickle upwards of the call chain
-    const data = await this.axios({ ...config, url: `${uri}${postfix}`, _skipAdditionalParameters: true })
+    const data = await this._request(`${uri}${postfix}`, { ...config, _skipAdditionalParameters: true })
 
     if (data.id !== uri) {
       throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept scheme" })
@@ -148,7 +148,7 @@ export default class SkohubProvider extends BaseProvider {
     }
 
     try {
-      const data = await this.axios({ ...config, url: `${uri}.json`, _skipAdditionalParameters: true })
+      const data = await this._request(`${uri}.json`, { ...config, _skipAdditionalParameters: true })
       if (data.id !== uri) {
         throw new errors.InvalidRequestError({ message: "Skohub URL did not return expected concept URI" })
       }
@@ -180,7 +180,12 @@ export default class SkohubProvider extends BaseProvider {
       concept.scopeNote = data.scopeNote
       // scopeNote values in JSKOS are arrays
       Object.keys(concept.scopeNote).forEach(key => {
-        concept.scopeNote[key] = [decodeUnicode(concept.scopeNote[key])]
+        const val = concept.scopeNote[key]
+        if (Array.isArray(val)) {
+          concept.scopeNote[key] = val.map(v => decodeUnicode(v))
+        } else {
+          concept.scopeNote[key] = [decodeUnicode(val)]
+        }
       })
     }
 
@@ -271,7 +276,7 @@ export default class SkohubProvider extends BaseProvider {
         if (scheme.uri.endsWith("/")) {
           postfix = `index${postfix}`
         }
-        const data = await this.axios({ url: `${scheme.uri}${postfix}`, _skipAdditionalParameters: true })
+        const data = await this._request(`${scheme.uri}${postfix}`, { _skipAdditionalParameters: true })
         if (data.length < 100) {
           // Assume the index is empty and skip it
           this._index[scheme.uri][lang] = null

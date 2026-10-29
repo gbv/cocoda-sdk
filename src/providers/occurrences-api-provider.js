@@ -58,10 +58,8 @@ export default class OccurrencesApiProvider extends BaseProvider {
     } else {
       // Load supported schemes from API
       try {
-        const data = await this.axios({
-          method: "get",
-          url: this._api.api + "/voc",
-        })
+        const url = this._api.api + "/voc"
+        const data = await this._request(url)
         this._occurrencesSupportedSchemes = data || []
       } catch (error) {
         // Do nothing so that it is tried again next time
@@ -221,11 +219,7 @@ export default class OccurrencesApiProvider extends BaseProvider {
     if (resultsFromCache) {
       return resultsFromCache.data
     }
-    const data = await this.axios({
-      ...config,
-      method: "get",
-      url: this._api.api,
-    })
+    const data = await this._request(this._api.api, {...config})
     this._cache.push({
       config,
       data,

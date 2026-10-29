@@ -598,7 +598,11 @@ export class BaseProvider {
     return this.axios({
       url: url,
       ...config,
-    })
+      _skipAdditionalParameters: true,
+    }).catch ( () => {
+      return {}
+    },
+    )
   }
 
   /**

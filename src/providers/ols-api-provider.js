@@ -164,28 +164,6 @@ export default class OlsApiProvider extends BaseProvider {
     return concept
   }
 
-  // #### API REQUESTS ####
-
-  // TODO: rename _skipAdditionalParameters
-  async _request(url, config = { _skipAdditionalParameters: true }) {
-    if (url) {
-      url = new URL(url)
-      const given = Object.fromEntries(url.searchParams.entries())
-      return this.axios({
-        method: "get",
-        url: url.origin + url.pathname,
-        params: {
-          ...given,
-          ...config.params, // explicit params win
-        },
-        ...config,
-      }).catch ( () => {
-        return {}
-      },
-      )
-    }
-  }
-
   // API REQUESTS SCHEMES
 
   async _paginate(base, query, limit) {
@@ -332,7 +310,7 @@ export default class OlsApiProvider extends BaseProvider {
       const response = await this._request(url)
       ontologies = response.elements || []
     } else {
-      ontologies = await this._paginate(["ontologies"], {})
+      ontologies = await this._paginate(["ontologies"])
     }
 
     return Promise.all(ontologies.map(scheme => this._ontologyToJSKOS(scheme)))
