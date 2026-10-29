@@ -49,6 +49,9 @@ export default class ConceptApiProvider extends BaseProvider {
    * @private
    */
   _prepare() {
+    if (this._api.api?.endsWith("/")) {
+      this._api.api = this._api.api.slice(0,-1)
+    }
     // Set status endpoint only
     if (this._api.api && this._api.status === undefined) {
       this._api.status = this._api.api + "/status"
