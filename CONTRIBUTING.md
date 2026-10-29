@@ -31,6 +31,13 @@ npm test
 npm run coverage
 ```
 
+The command line script `cdk` can be used to quickly test read-only queries and trace which requests are being made:
+
+```bash
+npm link
+cdk -c examples/bartoc.json schemes limit=5 | jq -c
+```
+
 ## Documentation
 
 If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.

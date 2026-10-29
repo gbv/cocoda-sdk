@@ -380,6 +380,10 @@ export class BaseProvider {
         data._url = url
       }
 
+      if (this.logRequest) {
+        this.logRequest(url)
+      }
+
       // TODO: Return data or whole response here?
       return data
     }, error => {

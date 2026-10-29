@@ -14,8 +14,12 @@
     "lib",
     "errors",
     "utils",
-    "providers"
+    "providers",
+    "bin"
   ],
+  "bin": {
+    "cdk": "./bin/cdk.js"
+  },
   "scripts": {
     "test": "mocha --recursive",
     "coverage": "c8 --reporter=text --skip-full mocha --exit",
