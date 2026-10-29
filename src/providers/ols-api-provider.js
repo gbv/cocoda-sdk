@@ -76,6 +76,7 @@ export default class OlsApiProvider extends BaseProvider {
   async _propertyRootJskos(scheme) {
     const uri = scheme?.uri || await this._getScheme(scheme)?.iri
     return {
+      notation: [ property._api ],
       uri: property.uri,
       prefLabel: { ...property.prefLabel },
       type: [
@@ -88,11 +89,12 @@ export default class OlsApiProvider extends BaseProvider {
     }
   }
 
-  _isPropertyConcept(concept) {
-    return this._isPropertyRootConcept(concept)
-    || this._getConceptOls(concept).then(item => {
-      return item._api === property._api
-    })
+  async _isPropertyConcept(concept) {
+    if (this._isPropertyRootConcept(concept)) {
+      return true
+    }
+    const item = await this._getConceptOls(concept)
+    return item._api === property._api
   }
 
   _isPropertyRootConcept(concept) {
@@ -184,9 +186,14 @@ export default class OlsApiProvider extends BaseProvider {
     if (term.iri) {
       concept.uri = term.iri
     }
-    if (term["http://www.w3.org/2000/01/rdf-schema#label"]) {
-      concept.prefLabel = {}
-      concept.prefLabel[lan] = term["http://www.w3.org/2000/01/rdf-schema#label"].value || term["http://www.w3.org/2000/01/rdf-schema#label"]
+    {
+      let preflabelkeys = ["prefLabel", "http://www.w3.org/2004/02/skos/core#prefLabel", "label", "http://www.w3.org/2000/01/rdf-schema#label"]
+      const value = preflabelkeys.map(key => term[key]?.value ?? term[key])
+        .find(v => v != null && (!Array.isArray(v) || v.length > 0))
+      if (value != null) {
+        concept.prefLabel = {}
+        concept.prefLabel[lan] = Array.isArray(value) ? value[0] : value
+      }
     }
     const entityType = entityTypes.find(t => t._api === term._api) || entityTypes[0]
     concept.type = [
@@ -379,8 +386,12 @@ export default class OlsApiProvider extends BaseProvider {
     if (concepts) {
       for (const concept of concepts) {
         let item = await this._getConceptOls(concept)
-        if (item) {
-          result.push(await this._termToJSKOS(item))
+        if (this._isPropertyRootConcept(concept)){
+          result.push(this._propertyRootJskos(concept.scheme))
+        } else {
+          if (item) {
+            result.push(await this._termToJSKOS(item))
+          }
         }
       }
     } else if (scheme) {
@@ -438,28 +449,35 @@ export default class OlsApiProvider extends BaseProvider {
     if (!VOCID || !iri) {
       return []
     }
-    const items = await this._paginate(["ontologies", VOCID, "classes", iri, "children"], {}, 0)
+    let items = []
+    for (const type of entityTypes.map(t => t._api)) {
+      const narrower = await this._paginate(["ontologies", VOCID, type, iri, "children"], {}, 0)
+      items.push(narrower)
+    }
     return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
   }
 
   async getAncestors({ concept }) {
-    if (!concept) {
+    if (!concept || this._isPropertyRootConcept(concept)) {
       return []
     }
-    // properties
-    if (this._isPropertyRootConcept(concept)) {
-      return []
-    }
-    if (this._isPropertyConcept(concept)) {
-      return [await this._propertyRootJskos(concept.inScheme?.[0]?.ontologyId, await this._getSchemeVOCID(concept?.inScheme?.[0]))]
-    }
-    // not properties
     const { VOCID, iri } = await this._splitConcept(concept)
-    if (VOCID && iri) {
-      let response = await this._paginate(["ontologies", VOCID, "classes", iri, "ancestors"], {}, null)
-      return Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    let items = []
+    if (!VOCID || !iri) {
+      return items
     }
-    return []
+    if (await this._isPropertyConcept(concept)) {
+      items.push(await this._propertyRootJskos(concept.inScheme?.[0]?.ontologyId, await this._getSchemeVOCID(concept?.inScheme?.[0])))
+    }
+
+    for (const type of entityTypes.map(t => t._api)) {
+      const ancestors = await this._paginate(["ontologies", VOCID, type, iri, "ancestors"], {}, null)
+      for (const ancestor of ancestors){
+        const ancestorJSKOS = await this._termToJSKOS({...await ancestor, _api: type})
+        items.push(ancestorJSKOS)
+      }
+    }
+    return items
   }
 
   async getTypes() {

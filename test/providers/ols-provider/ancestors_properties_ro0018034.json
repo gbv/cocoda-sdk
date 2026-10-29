@@ -1,0 +1,121 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "ro",
+        "uberon",
+        "hp"
+      ],
+      "curie": "RO:0018030",
+      "definedBy": [
+        "ro"
+      ],
+      "hasDirectChildren": true,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0018030",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "chemical relationship"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000232": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "curator note"
+          ],
+          "curie": "IAO:0000232",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-4423-4370": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Charles Tapley Hoyt",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47475003"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0003-4423-4370",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 103,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 10,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "ro",
+      "ontologyIri": "http://purl.obolibrary.org/obo/ro.owl",
+      "ontologyPreferredPrefix": "RO",
+      "searchableAnnotationValues": [
+        "Do not use this relation directly. It is intended as a grouping for a diverse set of relations, in which the subject or object is a chemical.",
+        false
+      ],
+      "shortForm": "RO_0018030",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000232": "Do not use this relation directly. It is intended as a grouping for a diverse set of relations, in which the subject or object is a chemical.",
+      "http://purl.org/dc/terms/creator": "https://orcid.org/0000-0003-4423-4370",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "chemical relationship"
+    }
+  ]
+}

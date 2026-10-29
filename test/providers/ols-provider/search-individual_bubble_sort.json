@@ -1,0 +1,265 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "amv"
+      ],
+      "curie": "amv:BubbleSort",
+      "definedBy": [
+        "amv"
+      ],
+      "definition": [
+        "Simple sorting algorithm that works by repeatedly swapping the adjacent elements."
+      ],
+      "definitionProperty": "http://purl.org/dc/terms/description",
+      "directAncestor": [
+        "https://w3id.org/amv#Algorithm"
+      ],
+      "directParent": [
+        "https://w3id.org/amv#Algorithm"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "https://w3id.org/amv#BubbleSort",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "label": [
+        "Bubble sort"
+      ],
+      "linkedEntities": {
+        "https://w3id.org/amv#Algorithm": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "Algorithm"
+          ],
+          "curie": "amv:Algorithm",
+          "type": [
+            "class",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#hasImplementation": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "has implementation"
+          ],
+          "curie": "amv:hasImplementation",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/description": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 102,
+          "hasLocalDefinition": true,
+          "label": [
+            "Description"
+          ],
+          "curie": "dcterms:description",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#dataStructureUsed": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "data Structure Used"
+          ],
+          "curie": "amv:dataStructureUsed",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#Array": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "amv_Array"
+          ],
+          "curie": "amv:Array",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#hasTimeComplexity": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "has time complexity"
+          ],
+          "curie": "amv:hasTimeComplexity",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#BubbleSortTimeComplexity": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "amv_BubbleSortTimeComplexity"
+          ],
+          "curie": "amv:BubbleSortTimeComplexity",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#computesSolutionTo": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "computes solution to"
+          ],
+          "curie": "amv:computesSolutionTo",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#BubbleSortSpaceComplexity": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "amv_BubbleSortSpaceComplexity"
+          ],
+          "curie": "amv:BubbleSortSpaceComplexity",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#BubbleSortPseudocodeImplementation": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "Bubble Sort Pseudocode Implementation"
+          ],
+          "curie": "amv:BubbleSortPseudocodeImplementation",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#Sorting": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "Sorting"
+          ],
+          "curie": "amv:Sorting",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/terms/title": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 118,
+          "hasLocalDefinition": true,
+          "label": [
+            "Title"
+          ],
+          "curie": "dcterms:title",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "https://w3id.org/amv#hasSpaceComplexity": {
+          "definedBy": [
+            "amv"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "has space complexity"
+          ],
+          "curie": "amv:hasSpaceComplexity",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "amv",
+      "ontologyIri": "https://w3id.org/amv",
+      "ontologyPreferredPrefix": "amv",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "amv_BubbleSort",
+      "type": [
+        "individual",
+        "entity"
+      ],
+      "http://purl.org/dc/terms/description": "Simple sorting algorithm that works by repeatedly swapping the adjacent elements.",
+      "http://purl.org/dc/terms/title": "Bubble sort",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+        "http://www.w3.org/2002/07/owl#NamedIndividual",
+        "https://w3id.org/amv#Algorithm"
+      ],
+      "https://w3id.org/amv#computesSolutionTo": "https://w3id.org/amv#Sorting",
+      "https://w3id.org/amv#dataStructureUsed": "https://w3id.org/amv#Array",
+      "https://w3id.org/amv#hasImplementation": "https://w3id.org/amv#BubbleSortPseudocodeImplementation",
+      "https://w3id.org/amv#hasSpaceComplexity": "https://w3id.org/amv#BubbleSortSpaceComplexity",
+      "https://w3id.org/amv#hasTimeComplexity": "https://w3id.org/amv#BubbleSortTimeComplexity"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

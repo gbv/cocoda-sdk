@@ -1,0 +1,250 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "appearsIn": [
+        "ro"
+      ],
+      "curie": "RO:0018032",
+      "definedBy": [
+        "ro"
+      ],
+      "definition": [
+        "A is a direct conjugate acid of B if and only if A is chemical entity that is a Brønsted–Lowry Acid (i.e., can give up a proton) and by removing a particular proton transforms it into B."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "directAncestor": [
+        "http://purl.obolibrary.org/obo/RO_0018034",
+        "http://purl.obolibrary.org/obo/RO_0018030"
+      ],
+      "directParent": [
+        "http://purl.obolibrary.org/obo/RO_0018034"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/RO_0018032",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "is direct conjugate acid of"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/RO_0002575": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 12,
+          "hasLocalDefinition": true,
+          "label": [
+            "is direct form of"
+          ],
+          "curie": "RO:0002575",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000112": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 44,
+          "hasLocalDefinition": true,
+          "label": [
+            "example of usage"
+          ],
+          "curie": "IAO:0000112",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://orcid.org/0000-0003-4423-4370": {
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            {
+              "type": [
+                "reification"
+              ],
+              "value": "Charles Tapley Hoyt",
+              "axioms": [
+                {
+                  "http://purl.org/dc/terms/source": "http://www.wikidata.org/entity/Q47475003"
+                }
+              ]
+            }
+          ],
+          "curie": "0000-0003-4423-4370",
+          "type": [
+            "individual",
+            "entity"
+          ]
+        },
+        "CHEBI:32816": {
+          "url": "http://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:32816",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "CHEBI:32816"
+        },
+        "http://purl.org/dc/terms/creator": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 103,
+          "hasLocalDefinition": true,
+          "label": [
+            "Creator"
+          ],
+          "curie": "dcterms:creator",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+          "numAppearsIn": 29,
+          "hasLocalDefinition": true,
+          "label": [
+            "seeAlso"
+          ],
+          "curie": "seeAlso",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://purl.obolibrary.org/obo/RO_0018031": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "is direct conjugate base of"
+          ],
+          "curie": "RO:0018031",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/RO_0018030": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 3,
+          "hasLocalDefinition": true,
+          "label": [
+            "chemical relationship"
+          ],
+          "curie": "RO:0018030",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "CHEBI:15361": {
+          "url": "http://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:15361",
+          "source": "https://raw.githubusercontent.com/geneontology/go-site/master/metadata/db-xrefs.yaml",
+          "curie": "CHEBI:15361"
+        },
+        "http://purl.obolibrary.org/obo/RO_0018034": {
+          "definedBy": [
+            "ro"
+          ],
+          "numAppearsIn": 6,
+          "hasLocalDefinition": true,
+          "label": [
+            "is protonated form of"
+          ],
+          "curie": "RO:0018034",
+          "type": [
+            "property",
+            "objectProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "ro",
+      "ontologyIri": "http://purl.obolibrary.org/obo/ro.owl",
+      "ontologyPreferredPrefix": "RO",
+      "searchableAnnotationValues": [
+        false
+      ],
+      "shortForm": "RO_0018032",
+      "type": [
+        "property",
+        "objectProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000112": "neutral pyruvic acid (CHEBI:32816) is the conjugate acid of the pyruvate anion (CHEBI:15361)",
+      "http://purl.obolibrary.org/obo/IAO_0000115": "A is a direct conjugate acid of B if and only if A is chemical entity that is a Brønsted–Lowry Acid (i.e., can give up a proton) and by removing a particular proton transforms it into B.",
+      "http://purl.obolibrary.org/obo/RO_0002575": "http://purl.obolibrary.org/obo/RO_0018034",
+      "http://purl.org/dc/terms/creator": "https://orcid.org/0000-0003-4423-4370",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#ObjectProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "is direct conjugate acid of",
+      "http://www.w3.org/2000/01/rdf-schema#seeAlso": "https://github.com/oborel/obo-relations/issues/643",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.obolibrary.org/obo/RO_0018034",
+      "http://www.w3.org/2002/07/owl#inverseOf": "http://purl.obolibrary.org/obo/RO_0018031"
+    }
+  ]
+}

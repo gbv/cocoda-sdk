@@ -21,15 +21,18 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&page=2&size=20": "search-concept_entity-2.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology": "search-concept_entity.json",
   "https://api.terminology.tib.eu/api/v2/classes?search=entity&ontology=envo": "search-concept-envo_entity.json",
+  "https://api.terminology.tib.eu/api/v2/classes?search=Bubble+Sort": "empty.json",
   // individuals
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity": "empty.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&size=20": "empty.json",
   "https://api.terminology.tib.eu/api/v2/individuals?search=entity&ontology=envo": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/individuals?search=Bubble+Sort": "search-individual_bubble_sort.json",
   // properties
   "https://api.terminology.tib.eu/api/v2/properties?search=entity": "search-property_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=entity&ontology=envo": "search-property-envo_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=entity&size=20": "search-property_entity-20.json",
+  "https://api.terminology.tib.eu/api/v2/properties?search=Bubble+Sort": "empty.json",
   // ontologies
   "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?page=1": "ontologies-1.json",
@@ -38,23 +41,56 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/bk": "ontology_bk.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/bf": "ontology_bf.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo": "ontology_bfo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro" : "ontology_ro.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__": "empty.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?size=50": "properties-envo_50.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?size=50": "individuals-envo_50.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?hasDirectParents=false": "top_envo_properties.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?hasDirectParents=false&page=1": "top_envo_properties-1.json",
+  
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
+
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FBFO_0000002": "search-concept_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FENVO_00002237": "search-concept_envo00002237.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FIAO_0000118": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO%3A0000002": "search-concept_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "narrower_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "ancestors_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_envo00002237.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?size=50": "properties-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?hasDirectParents=false": "top_envo_properties.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?hasDirectParents=false&page=1": "top_envo_properties-1.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_properties_envo00002237.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FIAO_0000118": "search_iao0000118_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?size=50": "individuals-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_individuals_envo00002237.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
+  
+
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?curie=RO%3A0018034": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?curie=properties": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?hasDirectParents=false": "narrower_ro_base-property.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?hasDirectParents=false&page=1": "narrower_ro_base-property-1.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "children-ro-properties.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?curie=RO%3A0018034": "search-property_ro0018034.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "ancestors_properties_ro0018034.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?curie=properties": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?curie=properties": "empty.json",
+  
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
@@ -65,9 +101,48 @@ const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "__invalid__"
 const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
 const propertyRdfUri = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-const propertyUriDefault = "http://purl.obolibrary.org/obo/ENVO_00002237"
+// const propertyUriDefault = "http://purl.obolibrary.org/obo/ENVO_00002237"
+const propertyUriDefault = "http://purl.obolibrary.org/obo/IAO_0000118"
 const conceptNotationDefault = "BFO:0000002"
 const searchDefault = "entity"
+const scheme = { VOCID: "ro" }
+const concept = { notation: "RO:0018034", inScheme: [scheme] }
+const conceptBase1 = { uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property", inScheme: [scheme]}
+const conceptBase2 = { notation: "properties", inScheme: [scheme] }
+const label = "is protonated form of"
+
+
+
+
+describe ("OlsProvider Basics", () => {
+
+  it("is Property", async function () {
+    const classConcept = { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] }
+    assert.equal(await provider._isPropertyConcept(classConcept), false)
+    const propertyConcept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriDefault }] }
+    assert.equal(await provider._isPropertyConcept(propertyConcept), true)
+
+  })
+
+  it("get property raw", async function () {
+    let concepts = await provider._getConceptOls(concept)
+    assert.equal(concepts.label[0], label)
+  })
+
+
+  it("get base property", async function (){
+    const base = await provider._propertyRootJskos(scheme)
+    assert(provider._isPropertyRootConcept(conceptBase1))
+    let conceptsA = await provider.getConcepts({ concepts: [conceptBase1] })
+    assert.deepEqual(await conceptsA[0], base)
+    assert(provider._isPropertyRootConcept(conceptBase2))
+    let conceptsB = await provider.getConcepts({ concepts: [conceptBase2] })
+    assert.deepEqual(await conceptsB[0], base)
+  })
+
+
+})
+
 
 describe ("OlsProvider.getSchemes", () => {
 
@@ -250,6 +325,16 @@ describe ("OlsProvider.getConcepts", () => {
     assert.equal(specificConcept.length, 1)
     assert.deepEqual(specificConcept[0].broader, [null]) // property concept has broader concept
   })
+  
+  it("get property", async function () {
+    let concepts = await provider.getConcepts({ concepts: [concept] })
+    assert(Array.isArray(concepts))
+    assert.equal(concepts.length, 1)
+    assert.equal(concepts[0].prefLabel.en, label)
+    assert.deepStrictEqual(concepts[0].narrower, [null])
+    assert.deepStrictEqual(concepts[0].broader, [null])
+  })
+
 })
 
 
@@ -282,6 +367,18 @@ describe ("OlsProvider.getNarrower", () => {
     assert.equal(concepts.length, 0)
   })
 
+  it("get narrower base property", async function (){
+    let narrower = await provider.getNarrower({ concept: conceptBase1 })
+    assert(Array.isArray(narrower))
+    assert(narrower.length > 0)
+  })
+
+  it("get narrower property", async function () {
+    let narrower = await provider.getNarrower({ concept: concept })
+    assert(Array.isArray(narrower))
+    assert(narrower.length> 0)
+  })
+
 })
 
 
@@ -290,6 +387,7 @@ describe("OlsProvider.getAncestors", () => {
   it("request ancestors of a specific concept, uri", async function () {
     const config = { concept: { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] } }
     const ancestors = await provider.getAncestors(config)
+    assert(!await provider._isPropertyConcept(config.concept))
     assert.equal(ancestors.length, 1)
 
   })
@@ -324,6 +422,18 @@ describe("OlsProvider.getAncestors", () => {
     assert.equal(concepts.length, 0)
   })
 
+  it("get ancestors base property", async function (){
+    let ancestors = await provider.getAncestors({ concept: conceptBase1 })
+    assert(Array.isArray(ancestors))
+    assert(ancestors.length == 0)
+  })
+
+  it("get ancestors property", async function () {
+    let ancestors = await provider.getAncestors({ concept: concept })
+    assert(Array.isArray(ancestors))
+    assert(ancestors.length > 0)
+  })
+
 })
 
 
@@ -331,7 +441,6 @@ describe ("OlsProvider.search", () => {
 
   it("search for a term in all schemes", async function () {
     const concepts = await provider.search({ search: searchDefault })
-    // console.log(concepts.map(c => ({ l: c.prefLabel, n: c.notation, t: c.type })))
     assert(Array.isArray(concepts))
     assert.equal(concepts.length, 49) // 2 pages 40 classes and individuals (shortened, actually 59 classes + 5 individuals) + 9 properties
   })
@@ -355,10 +464,16 @@ describe ("OlsProvider.search", () => {
   it("search with property type", async function () {
     const types = ["un:known", propertyRdfUri]
     const concepts = await provider.search({ search: "members", types })
-    // console.log(concepts)
-    // FIXME: jskos is not correct, must be Property
+    assert.deepStrictEqual(concepts[0].type, ["http://www.w3.org/2004/02/skos/core#Concept", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"])
     assert.equal(concepts.length, 1)
   })
+
+  it("search for \"Bubble Sort\" in all schemes", async function () {
+    const concepts = await provider.search({ search: "Bubble Sort" })
+    assert.equal(concepts.length, 1)
+    assert(Array.isArray(concepts))
+  })
+
 })
 
 
@@ -369,10 +484,10 @@ describe ("OlsProvider.suggest", () => {
     const concepts = await provider.suggest(config)
     assert(Array.isArray(concepts))
     assert.equal(typeof concepts[0], "string")
-    const expectedlen = 49 // 2 pages 40 classes and individuals (shortened, actually 59 classes + 5 individuals) + 9 properties
     assert(Array.isArray(concepts[1]))
     assert(Array.isArray(concepts[2]))
     assert(Array.isArray(concepts[3]))
+    const expectedlen = 49 // 2 pages 40 classes and individuals (shortened, actually 59 classes + 5 individuals) + 9 properties
     assert.equal(concepts[1].length, expectedlen)
     assert.equal(concepts[2].length, expectedlen)
     assert.equal(concepts[3].length, expectedlen)
