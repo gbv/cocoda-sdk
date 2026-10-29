@@ -221,7 +221,10 @@ export default class OlsApiProvider extends BaseProvider {
           ...config.params, // explicit params win
         },
         ...config,
-      })
+      }).catch ( () => {
+        return {}
+      },
+      )
     }
   }
 
