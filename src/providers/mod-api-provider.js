@@ -14,7 +14,7 @@ export default class ModApiProvider extends BaseProvider {
   // #### PROPERTIES ####
 
   static providerName = "ModApi"
-  static providerType = "http://bartoc.org/api-type/mod-api"
+  static providerType = "http://bartoc.org/api-type/mod"
   static supports = {
     registries: true,
     schemes: true,
