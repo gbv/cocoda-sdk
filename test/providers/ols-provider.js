@@ -45,6 +45,7 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__": "empty.json",
   
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/individuals?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
@@ -68,12 +69,12 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FIAO_0000118": "search_iao0000118_envo.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?size=50": "individuals-envo_50.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_individuals_envo00002237.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
   
-
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?curie=RO%3A0018034": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
@@ -86,7 +87,7 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "ancestors_properties_ro0018034.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?curie=properties": "empty.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "children-ro-individuals.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?curie=properties": "empty.json",
@@ -96,19 +97,19 @@ const missing = mockRequests(provider.axios, {
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
 
 const limitDefault = 50
-const schemeVOCIDDefault = "envo"
-const schemeUriDefault = "http://purl.obolibrary.org/obo/envo.owl"
+const schemeVOCIDENVO = "envo"
+const schemeUriEnvo = "http://purl.obolibrary.org/obo/envo.owl"
 const invalidDefault = "__invalid__"
-const conceptUriDefault = "http://purl.obolibrary.org/obo/BFO_0000002"
+const conceptUriBfo = "http://purl.obolibrary.org/obo/BFO_0000002"
 const propertyRdfUri = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
 // const propertyUriDefault = "http://purl.obolibrary.org/obo/ENVO_00002237"
 const propertyUriDefault = "http://purl.obolibrary.org/obo/IAO_0000118"
 const conceptNotationDefault = "BFO:0000002"
 const searchDefault = "entity"
-const scheme = { VOCID: "ro" }
-const concept = { notation: "RO:0018034", inScheme: [scheme] }
-const conceptBase1 = { uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property", inScheme: [scheme]}
-const conceptBase2 = { notation: "properties", inScheme: [scheme] }
+const schemeRO = { VOCID: "ro" }
+const conceptRO = { notation: "RO:0018034", inScheme: [schemeRO] }
+const conceptBase1 = { uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property", inScheme: [schemeRO]}
+const conceptBase2 = { notation: "properties", inScheme: [schemeRO] }
 const label = "is protonated form of"
 
 
@@ -117,21 +118,21 @@ const label = "is protonated form of"
 describe ("OlsProvider Basics", () => {
 
   it("is Property", async function () {
-    const classConcept = { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] }
+    const classConcept = { uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] }
     assert.equal(await provider._isPropertyConcept(classConcept), false)
-    const propertyConcept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriDefault }] }
+    const propertyConcept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }
     assert.equal(await provider._isPropertyConcept(propertyConcept), true)
 
   })
 
   it("get property raw", async function () {
-    let concepts = await provider._getConceptOls(concept)
+    let concepts = await provider._getConceptOls(conceptRO)
     assert.equal(concepts.label[0], label)
   })
 
 
   it("get base property", async function (){
-    const base = await provider._propertyRootJskos(scheme)
+    const base = await provider._propertyRootJskos(schemeRO)
     assert(provider._isPropertyRootConcept(conceptBase1))
     let conceptsA = await provider.getConcepts({ concepts: [conceptBase1] })
     assert.deepEqual(await conceptsA[0], base)
@@ -159,8 +160,8 @@ describe ("OlsProvider.getSchemes", () => {
   })
 
   it("request specific scheme, compare scheme specifications", async function () {
-    const configUri = { schemes: [{ uri: schemeUriDefault }] }
-    const configVOCID = { schemes: [{ VOCID: schemeVOCIDDefault }] }
+    const configUri = { schemes: [{ uri: schemeUriEnvo }] }
+    const configVOCID = { schemes: [{ VOCID: schemeVOCIDENVO }] }
     const specificSchemeUri = await provider.getSchemes(configUri)
     const specificSchemeVOCID = await provider.getSchemes(configVOCID)
     assert(Array.isArray(specificSchemeUri) && Array.isArray(specificSchemeVOCID))
@@ -223,7 +224,7 @@ describe ("OlsProvider.getSchemes", () => {
 describe ("OlsProvider.getTop", () => {
 
   it("request top concepts of a specific scheme Uri", async function () {
-    const config = { scheme: { uri: schemeUriDefault } }
+    const config = { scheme: { uri: schemeUriEnvo } }
     const topConcepts = await provider.getTop(config)
     assert.equal(topConcepts.length, 15) // 14 classes + rdf:Property
     assert.equal(topConcepts.filter(c => c.uri != propertyRdfUri).length, 14)
@@ -231,7 +232,7 @@ describe ("OlsProvider.getTop", () => {
   })
 
   it("request top concepts of a specific scheme, VOCID", async function () {
-    const config = { scheme: { VOCID: schemeVOCIDDefault } }
+    const config = { scheme: { VOCID: schemeVOCIDENVO } }
     const topConcepts = await provider.getTop(config)
     assert.equal(topConcepts.length, 15) // 14 classes + rdf:Property
     assert.equal(topConcepts.filter(c => c.uri != propertyRdfUri).length, 14)
@@ -267,9 +268,11 @@ describe ("OlsProvider.getTop", () => {
 
     const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
+
+    assert(provider._isPropertyRootConcept(topConcepts[0]))
     Object.keys(bfo_root_jskos[0]).forEach(key => {
-      assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
-      assert.deepStrictEqual(topConcepts[0][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
+      assert.notDeepStrictEqual(topConcepts[1][key], undefined, `Key '${key}' is missing in topConcepts result`)
+      assert.deepStrictEqual(topConcepts[1][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
     })
   })
 
@@ -279,8 +282,8 @@ describe ("OlsProvider.getTop", () => {
 describe ("OlsProvider.getConcepts", () => {
 
   it("allConcepts short, compare scheme specifications", async function () {
-    const configUri = { scheme: { uri: schemeUriDefault }, limit: limitDefault }
-    const configVOCID = { scheme: { VOCID: schemeVOCIDDefault }, limit: limitDefault }
+    const configUri = { scheme: { uri: schemeUriEnvo }, limit: limitDefault }
+    const configVOCID = { scheme: { VOCID: schemeVOCIDENVO }, limit: limitDefault }
 
     const conceptsUri = await provider.getConcepts(configUri)
     const conceptsVOCID = await provider.getConcepts(configVOCID)
@@ -292,14 +295,14 @@ describe ("OlsProvider.getConcepts", () => {
   // TODO: get concepts with pagination
 
   it("specificConcept, uri", async function () {
-    const config = { concepts: [{ uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] }] }
+    const config = { concepts: [{ uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] }] }
     const specificConcept = await provider.getConcepts(config)
     assert(Array.isArray(specificConcept))
     assert.equal(specificConcept.length, 1)
   })
 
   it("specificConcept, notation", async function () {
-    const config = { concepts: [{ notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] }] }
+    const config = { concepts: [{ notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDENVO }] }] }
     const specificConcept = await provider.getConcepts(config)
     assert(Array.isArray(specificConcept))
     assert.equal(specificConcept.length, 1)
@@ -312,14 +315,14 @@ describe ("OlsProvider.getConcepts", () => {
   })
 
   it("concept, no inScheme", async function () {
-    const config = { concepts: [{ uri: conceptUriDefault }] }
+    const config = { concepts: [{ uri: conceptUriBfo }] }
     const specificConcept = await provider.getConcepts(config)
     assert(Array.isArray(specificConcept))
     assert.equal(specificConcept.length, 0) // if no inScheme is provided, the concept cannot be found
   })
 
   it ("property concept, uri", async function () {
-    const config = { concepts: [{ uri: propertyUriDefault, inScheme: [{ uri: schemeUriDefault }] }] }
+    const config = { concepts: [{ uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }] }
     const specificConcept = await provider.getConcepts(config)
     assert(Array.isArray(specificConcept))
     assert.equal(specificConcept.length, 1)
@@ -327,7 +330,7 @@ describe ("OlsProvider.getConcepts", () => {
   })
   
   it("get property", async function () {
-    let concepts = await provider.getConcepts({ concepts: [concept] })
+    let concepts = await provider.getConcepts({ concepts: [conceptRO] })
     assert(Array.isArray(concepts))
     assert.equal(concepts.length, 1)
     assert.equal(concepts[0].prefLabel.en, label)
@@ -342,19 +345,19 @@ describe ("OlsProvider.getNarrower", () => {
   
 
   it("request narrower concepts of a specific concept, uri", async function () {
-    const config = { concept: { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] } }
+    const config = { concept: { uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] } }
     const narrowerConcepts = await provider.getNarrower(config)
     assert.equal(narrowerConcepts.length, 3)
   })
 
   it("request narrower concepts of a specific concept, notation", async function () {
-    const config = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] } }
+    const config = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDENVO }] } }
     const narrowerConcepts = await provider.getNarrower(config)
     assert.equal(narrowerConcepts.length, 3)
   })
 
   it("narrower of rdf:Property", async function () {
-    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriDefault }] }
+    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriEnvo }] }
     const config = { concept: concept }
     assert(provider._isPropertyConcept(concept))
     assert(provider._isPropertyRootConcept(concept))
@@ -374,7 +377,7 @@ describe ("OlsProvider.getNarrower", () => {
   })
 
   it("get narrower property", async function () {
-    let narrower = await provider.getNarrower({ concept: concept })
+    let narrower = await provider.getNarrower({ concept: conceptRO })
     assert(Array.isArray(narrower))
     assert(narrower.length> 0)
   })
@@ -385,7 +388,7 @@ describe ("OlsProvider.getNarrower", () => {
 describe("OlsProvider.getAncestors", () => {
 
   it("request ancestors of a specific concept, uri", async function () {
-    const config = { concept: { uri: conceptUriDefault, inScheme: [{ uri: schemeUriDefault }] } }
+    const config = { concept: { uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] } }
     const ancestors = await provider.getAncestors(config)
     assert(!await provider._isPropertyConcept(config.concept))
     assert.equal(ancestors.length, 1)
@@ -393,13 +396,13 @@ describe("OlsProvider.getAncestors", () => {
   })
 
   it("request ancestors of a specific concept, notation", async function () {
-    const config = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDDefault }] } }
+    const config = { concept: { notation: conceptNotationDefault, inScheme: [{ VOCID: schemeVOCIDENVO }] } }
     const ancestors = await provider.getAncestors(config)
     assert.equal(ancestors.length, 1)
   })
 
   it("ancestor of rdf:Property", async function () {
-    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriDefault }] }
+    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriEnvo }] }
     const config = { concept: concept }
     assert(provider._isPropertyConcept(concept))
     assert(provider._isPropertyRootConcept(concept))
@@ -408,7 +411,7 @@ describe("OlsProvider.getAncestors", () => {
   })
 
   it("ancestor of a property", async function () {
-    const concept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriDefault }] }
+    const concept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }
     const config = { concept: concept }
     const ancestors = await provider.getAncestors(config)
     assert(provider._isPropertyConcept(concept))
@@ -429,7 +432,7 @@ describe("OlsProvider.getAncestors", () => {
   })
 
   it("get ancestors property", async function () {
-    let ancestors = await provider.getAncestors({ concept: concept })
+    let ancestors = await provider.getAncestors({ concept: conceptRO })
     assert(Array.isArray(ancestors))
     assert(ancestors.length > 0)
   })
@@ -446,7 +449,7 @@ describe ("OlsProvider.search", () => {
   })
 
   it("search for a term in a specific scheme", async function () {
-    const concepts = await provider.search({ search: searchDefault, scheme: { uri: schemeUriDefault } })
+    const concepts = await provider.search({ search: searchDefault, scheme: { uri: schemeUriEnvo } })
     const expectedlen = 2  // 1 class + 1 property
     assert.equal(concepts.length, expectedlen)
   })
@@ -494,7 +497,7 @@ describe ("OlsProvider.suggest", () => {
   })
 
   it("suggest for a term in a specific scheme", async function () {
-    const config = { search: searchDefault, scheme: { uri: schemeUriDefault } }
+    const config = { search: searchDefault, scheme: { uri: schemeUriEnvo } }
     const concepts = await provider.suggest(config)
     assert.equal(typeof concepts[0], "string")
     const expectedlen = 2  // 1 class + 1 property

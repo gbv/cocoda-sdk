@@ -178,7 +178,7 @@ export default class OlsApiProvider extends BaseProvider {
     } else {
       concept.narrower = []
     }
-    if (term.hasDirectParents || term._api === "properties") {
+    if (term.hasDirectParents || term._api === property._api) {
       concept.broader = [null]
     } else {
       concept.broader = []
@@ -221,7 +221,10 @@ export default class OlsApiProvider extends BaseProvider {
           ...config.params, // explicit params win
         },
         ...config,
-      })
+      }).catch ( () => {
+        return {}
+      },
+      )
     }
   }
 
@@ -397,6 +400,7 @@ export default class OlsApiProvider extends BaseProvider {
     } else if (scheme) {
       const VOCID = await this._getSchemeVOCID(scheme)
       if (VOCID) {
+        result.push(await this._propertyRootJskos(scheme)) // add virtual property root
         for (const { _api } of entityTypes) {
           const items = await this._paginate(["ontologies", VOCID, _api], {}, limit)
           result.push(...items.map(item => this._termToJSKOS({ ...item, _api })))
@@ -417,9 +421,12 @@ export default class OlsApiProvider extends BaseProvider {
     if (!ontology?.ontologyId) {
       return []
     }
-    let response = await this._paginate(["ontologies", ontology.ontologyId, "classes"], { hasDirectParents: "false" }, null)
-    const top = await Promise.all(response.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    let top = []
     top.push(await this._propertyRootJskos(scheme)) // add virtual property root
+    for (const { _api } of entityTypes.filter(e => e._api != property._api)) {
+      const items = await this._paginate(["ontologies", ontology.ontologyId, _api], { hasDirectParents: "false" }, null)
+      top.push(...items.map(item => this._termToJSKOS({ ...item, _api })))
+    }
     return top
   }
 
@@ -427,9 +434,13 @@ export default class OlsApiProvider extends BaseProvider {
     const obj = {}
     if (concept) {
       obj.VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0]) // TODO: what if multiple schemes?
-      obj.iri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation, concept.type)
-      if (obj.iri) {
-        obj.iri = encodeURIComponent(encodeURIComponent(obj.iri))
+      obj.uri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation, concept.type)
+      if (concept?.inScheme?.length>0){
+        concept.inScheme[0].VOCID = obj.VOCID
+        concept.inScheme[0].uri = obj.uri
+      }
+      if (obj.uri) {
+        obj.uri = encodeURIComponent(encodeURIComponent(obj.uri))
       }
     }
     return obj
@@ -439,39 +450,40 @@ export default class OlsApiProvider extends BaseProvider {
     if (!concept) {
       return []
     }
-    const { VOCID, iri } = await this._splitConcept(concept)
+    const { VOCID, uri } = await this._splitConcept(concept)
     // properties
     if (this._isPropertyRootConcept(concept)) {
-      const items = await this._paginate(["ontologies", VOCID, "properties"], { hasDirectParents: "false" }, null)
-      return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "properties" })))
+      const items = await this._paginate(["ontologies", VOCID, property._api], { hasDirectParents: "false" }, null)
+      return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: property._api })))
     }
     // not properties
-    if (!VOCID || !iri) {
+    if (!VOCID || !uri) {
       return []
     }
     let items = []
     for (const type of entityTypes.map(t => t._api)) {
-      const narrower = await this._paginate(["ontologies", VOCID, type, iri, "children"], {}, 0)
-      items.push(narrower)
+      const narrower = await this._paginate(["ontologies", VOCID, type, uri, "children"], {}, 0)
+      const narrowerJSKOS = Promise.all(narrower.map(item => this._termToJSKOS({ ...item, _api: type })))
+      items.push(narrowerJSKOS)
     }
-    return Promise.all(items.map(item => this._termToJSKOS({ ...item, _api: "classes" })))
+    return items
   }
 
   async getAncestors({ concept }) {
     if (!concept || this._isPropertyRootConcept(concept)) {
       return []
     }
-    const { VOCID, iri } = await this._splitConcept(concept)
+    const { VOCID, uri } = await this._splitConcept(concept)
     let items = []
-    if (!VOCID || !iri) {
+    if (!VOCID || !uri) {
       return items
     }
     if (await this._isPropertyConcept(concept)) {
-      items.push(await this._propertyRootJskos(concept.inScheme?.[0]?.ontologyId, await this._getSchemeVOCID(concept?.inScheme?.[0])))
+      items.push(await this._propertyRootJskos(concept.inScheme))
     }
 
     for (const type of entityTypes.map(t => t._api)) {
-      const ancestors = await this._paginate(["ontologies", VOCID, type, iri, "ancestors"], {}, null)
+      const ancestors = await this._paginate(["ontologies", VOCID, type, uri, "ancestors"], {}, null)
       for (const ancestor of ancestors){
         const ancestorJSKOS = await this._termToJSKOS({...await ancestor, _api: type})
         items.push(ancestorJSKOS)

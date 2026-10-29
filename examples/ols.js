@@ -7,6 +7,7 @@ import { stdin as input, stdout as output } from "node:process"
 addAllProviders()
 const provider = cdk.initializeRegistry({
   provider: "OlsApi",
+  endpoint: "https://api.terminology.tib.eu/api/v2/", // or "http://service.tib.eu/ts4tib/api/v2", "http://www.ebi.ac.uk/ols/api/v2", "https://www.ebi.ac.uk/ols4/api/v2"
   uri: "https://api.terminology.tib.eu/api/v2/", // or "http://service.tib.eu/ts4tib/api/v2", "http://www.ebi.ac.uk/ols/api/v2", "https://www.ebi.ac.uk/ols4/api/v2"
   language: "en",           // language to use for labels and descriptions. if no language is given in mod, it defaults to "en"
   cleancontext: true,       // if true, the @context element will be cleaned up to remove unnecessary keys
