@@ -1,6 +1,6 @@
 import ModApiProvider from "../../src/providers/mod-api-provider.js"
 import assert from "assert"
-import { mockRequests } from "./requests.js"
+import { mockHttpRequests } from "./mocks/http-requests.js"
 
 const provider = new ModApiProvider({
   endpoint: "https://terminology.services.base4nfdi.de/api-gateway/",
@@ -8,7 +8,7 @@ const provider = new ModApiProvider({
   cleancontext: true,
 })
 
-const missing = mockRequests(provider.axios, {
+const missing = mockHttpRequests(provider.http, {
   dir: "test/providers/mocks/mod-api-provider/",
   // debug: true,
   downloadMissing: true,

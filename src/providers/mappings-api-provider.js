@@ -207,7 +207,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(this._api.mappings, {
       ...config,
       method: "post",
-      data: mapping,
+      body: mapping,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -234,7 +234,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(uri, {
       ...config,
       method: "put",
-      data: mapping,
+      body: mapping,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -319,7 +319,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(this._api.annotations, {
       ...config,
       method: "post",
-      data: annotation,
+      body: annotation,
     })
   }
 
@@ -338,7 +338,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(uri, {
       ...config,
       method: "put",
-      data: annotation,
+      body: annotation,
     })
   }
 
@@ -357,7 +357,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(uri, {
       ...config,
       method: "patch",
-      data: annotation,
+      body: annotation,
     })
   }
 
@@ -407,7 +407,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(this._api.concordances, {
       ...config,
       method: "post",
-      data: concordance,
+      body: concordance,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),
@@ -433,7 +433,7 @@ export default class MappingsApiProvider extends BaseProvider {
     return this._request(uri, {
       ...config,
       method: "put",
-      data: concordance,
+      body: concordance,
       params: {
         ...this._defaultParams,
         ...(config.params || {}),

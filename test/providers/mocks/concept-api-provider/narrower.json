@@ -1,0 +1,13 @@
+[
+    {
+        "uri": "test:narrower",
+        "prefLabel": {
+            "en": "narrower"
+        },
+        "ancestors": [
+            {
+                "uri": "test:concept"
+            }
+        ]
+    }
+]

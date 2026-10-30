@@ -185,9 +185,6 @@ export const deepEqual = (a,b) => {
   }
 }
 
-// TODO: Decide on default timeout value
-const timeout_default = 200000
-
 /**
  * BaseProvider to be subclassed to implement specific providers. Do not initialize a registry directly with this!
  *
@@ -503,6 +500,7 @@ export class BaseProvider {
   }
 
   async _request(url, config = {}) {
+    config = {_skipAdditionalParameters: true, ...config}
     if (!config._skipAdditionalParameters) {
       config.params ||= {}
       // Add language parameter to request

@@ -1,15 +1,15 @@
 import OlsApiProvider from "../../src/providers/ols-api-provider.js"
 import assert from "assert"
 import fs from "fs"
-import { mockRequests } from "./requests.js"
+import { mockHttpRequests } from "./mocks/http-requests.js"
 
 const provider = new OlsApiProvider({
   endpoint: "https://api.terminology.tib.eu/api/v2/",
   language: "en",
 })
 
-const missing = mockRequests(provider.axios, {
-  dir: "test/providers/ols-provider/",
+const missing = mockHttpRequests(provider.http, {
+  dir: "test/providers/mocks/ols-api-provider/",
   // debug: true,
   downloadMissing: true,
 }, {
@@ -91,7 +91,7 @@ const missing = mockRequests(provider.axios, {
   
   "https://api.terminology.tib.eu/api/v2/ontologies/amv/classes/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/amv/properties/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-properties.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/amv/individuals/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-individuals.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/amv/individuals/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "empty.json",
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
@@ -153,7 +153,7 @@ describe ("OlsProvider.getSchemes", () => {
   it("test JSKOS of bk", async function () {
     const config = { schemes: [{ VOCID: "bk" }] }
     const scheme = await provider.getSchemes(config)
-    const bk_raw = fs.readFileSync("test/providers/ols-provider/jskos_bk.json", "utf-8")
+    const bk_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_bk.json", "utf-8")
     const bk_jskos = JSON.parse(bk_raw)
     assert(Array.isArray(scheme))
     assert.equal(scheme.length, 1)
@@ -166,7 +166,7 @@ describe ("OlsProvider.getSchemes", () => {
   it("test JSKOS of two schemes", async function () {
     const config = { schemes: [{ VOCID: "bfo" }, { VOCID: "bf" }] }
     const scheme = await provider.getSchemes(config)
-    const schemes_raw = fs.readFileSync("test/providers/ols-provider/jskos_ontology_bfo_bf.json", "utf-8")
+    const schemes_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_ontology_bfo_bf.json", "utf-8")
     const schemes_jskos = JSON.parse(schemes_raw)
     assert(Array.isArray(scheme))
     assert.equal(scheme.length, 2)
@@ -230,8 +230,7 @@ describe ("OlsProvider.getTop", () => {
     assert(Array.isArray(topConcepts))
     assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/2002/07/owl#Class")).length, 1)
     assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")).length, 22)
-
-    const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
+    const bfo_root_raw = fs.readFileSync("test/providers/mocks/ols-api-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
     Object.keys(bfo_root_jskos[0]).forEach(key => {
       assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
