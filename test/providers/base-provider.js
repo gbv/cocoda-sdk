@@ -39,10 +39,11 @@ describe("BaseProvider", () => {
   })
 
   it("should set certain parameters and headers on axios request", async () => {
-    mock.onGet("test").reply(config => {
-      const languages = (config.params.language || "").split(",")
-      assert.equal(languages[0], "def")
-      assert.equal(languages[1], "abc")
+    mock.onGet("test?language=abc%2Cdef").reply(config => {
+      const params = Object.fromEntries(new URL(config.url, "http://localhost").searchParams)
+      const languages = (params.language || "").split(",")
+      assert(languages.includes("abc"))
+      assert(languages.includes("def"))
       assert.equal(config.headers.Authorization, "Bearer abcdef")
 
       return [200, {}]
@@ -154,7 +155,7 @@ describe("BaseProvider", () => {
 
   // })
 
-  it("should retry axios requests", async () => {
+  it("should retry requests", async () => {
     provider.setRetryConfig({
       delay: 5,
     })
@@ -171,7 +172,7 @@ describe("BaseProvider", () => {
     assert(requestCount, 2)
   })
 
-  it("should not retry axios requests indefinitely", async () => {
+  it("should not retry requests indefinitely", async () => {
     provider.setRetryConfig({
       delay: 5,
     })
@@ -184,7 +185,7 @@ describe("BaseProvider", () => {
     assert(requestCount, 3)
   })
 
-  it("should not retry axios requests at all if count is set to 0", async () => {
+  it("should not retry requests at all if count is set to 0", async () => {
     provider.setRetryConfig({
       count: 0,
     })
@@ -201,7 +202,7 @@ describe("BaseProvider", () => {
     assert(requestCount, 1)
   })
 
-  it("should not retry axios requests for POST requests", async () => {
+  it("should not retry requests for POST requests", async () => {
     provider.setRetryConfig({
       count: 3,
     })
@@ -218,7 +219,7 @@ describe("BaseProvider", () => {
     assert(requestCount, 1)
   })
 
-  it("should not repeat the same axios request is one is already there", async () => {
+  it("should not repeat the same request is one is already there", async () => {
     class CustomProvider extends BaseProvider {
       async getMappings() {
         return this._request("mappings", {
@@ -238,10 +239,10 @@ describe("BaseProvider", () => {
     assert.equal(promise1, promise2)
     await promise1
     await promise2
-    assert.equal(mockCalled, 1, "axios request was performed twice even though it shouldn't")
-    // Now that the request is finished, do it again to make sure it made a new axios request
+    assert.equal(mockCalled, 1, "request was performed twice even though it shouldn't")
+    // Now that the request is finished, do it again to make sure it made a new request
     await provider.getMappings()
-    assert.equal(mockCalled, 2, "expected axios to perform a new request after other requests are finished")
+    assert.equal(mockCalled, 2, "expected to perform a new request after other requests are finished")
   })
 
   it("should properly handle `stored` property", () => {

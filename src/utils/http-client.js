@@ -1,3 +1,5 @@
+import jskos from "jskos-tools"
+
 const timeout_default = 200000
 
 export default class HttpClient {
@@ -19,29 +21,35 @@ export default class HttpClient {
 
   async request(url, config = {}) {
     if (!url) {
-      return
+      throw new Error("HttpClient.request: url is required")
     }
 
     const {
       method = "GET",
       headers = {},
+      params = {},
       body,
       signal,
       timeout = this.timeout,
       ...options
     } = config
 
+    const query = new URLSearchParams(params)
+    if (query.size) {
+      url = url + (url.indexOf("?") >= 0 ? "&" : "?") + query
+    }
+
     const timeoutController = this.getCancelTokenSource()
-
-    const timeoutId = setTimeout(() => {
-      timeoutController.abort()
-    }, timeout)
-
-    const requestSignal = signal
-      ? AbortSignal.any([signal, timeoutController.signal])
-      : timeoutController.signal
-
+    let timeoutId
     try {
+      timeoutId = setTimeout(() => {
+        timeoutController.abort()
+      }, timeout)
+
+      const requestSignal = signal
+        ? AbortSignal.any([signal, timeoutController.signal])
+        : timeoutController.signal
+
       const response = await this.fetch(url, {
         method,
         headers: {
@@ -84,9 +92,13 @@ export default class HttpClient {
 
       if (contentType.includes("application/json")) {
         data = await response.json()
+        // TODO: add own property ._url or similar to track where data came from
       } else {
         data = await response.text()
       }
+
+      // Apply unicode normalization
+      data = jskos.normalize(data)
 
       return {
         data,

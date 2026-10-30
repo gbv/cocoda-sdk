@@ -13,10 +13,6 @@ const mock = new HttpMockAdapter(registry.http)
 
 describe("MappingsApiProvider", () => {
 
-  beforeEach(() => {
-    mock.resetHandlers()
-  })
-
   it("should init the registry correctly via /status", async () => {
     mock.onGet(api.status).reply(200, api)
     await registry.init()
@@ -25,7 +21,7 @@ describe("MappingsApiProvider", () => {
     })
   })
 
-  it("should perform requesting mappings correctly", (done) => {
+  it("should perform requesting mappings correctly", async () => {
     const requestConfig = {
       from: "testFrom",
       fromScheme: "testFromScheme",
@@ -34,26 +30,25 @@ describe("MappingsApiProvider", () => {
       // TODO: Add more parameters
     }
     mock.onGet().reply(config => {
-      assert.equal(config.url, api.mappings)
-      assert.equal(config.params.from, requestConfig.from)
-      assert.equal(config.params.fromScheme, requestConfig.fromScheme)
-      assert.equal(config.params.to, requestConfig.to.uri)
-      assert.equal(config.params.toScheme, requestConfig.toScheme.uri)
+      const params = Object.fromEntries(new URL(config.url, "http://localhost").searchParams)
+      assert.equal(config.url.split("?")[0], api.mappings)
+      assert.equal(params.from, requestConfig.from)
+      assert.equal(params.fromScheme, requestConfig.fromScheme)
+      assert.equal(params.to, requestConfig.to.uri)
+      assert.equal(params.toScheme, requestConfig.toScheme.uri)
 
-      done()
       return [200, []]
     })
     registry.getMappings(requestConfig)
   })
 
-  it("should perform requesting a single mapping correctly", (done) => {
+  it("should perform requesting a single mapping correctly", async () => {
     const mapping = {
       uri: `${api.mappings}/123`,
     }
     // Simply test whether the correct URL is called
     mock.onGet().reply(config => {
-      assert.equal(config.url, mapping.uri)
-      done()
+      assert.equal(config.url.split("?")[0], mapping.uri)
       return [200, {}]
     })
     registry.getMapping({ mapping })
@@ -81,18 +76,17 @@ describe("MappingsApiProvider", () => {
     assert(wasError)
   })
 
-  it("should perform posting a mapping correctly", (done) => {
+  it("should perform posting a mapping correctly", async () => {
     const mapping = {}
     mock.onPost().reply(config => {
-      assert.equal(config.url, api.mappings)
+      assert.equal(config.url.split("?")[0], api.mappings)
       assert.deepEqual(JSON.parse(config.data), mapping)
-      done()
       return [200, {}]
     })
     registry.postMapping({ mapping })
   })
 
-  it("should perform posting multiple mappings correctly", (done) => {
+  it("should perform posting multiple mappings correctly", async  () => {
     const mappings = [
       {
         uri: "test:/mappings/1",
@@ -109,8 +103,6 @@ describe("MappingsApiProvider", () => {
       assert.ok(index !== -1 && !postedIndexes.includes(index))
       postedIndexes.push(index)
       assert(postedIndexes.length === mappings.length)
-      
-      done()
       return [200, {}]
     })
     registry.postMappings({ mappings })
