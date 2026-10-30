@@ -84,6 +84,9 @@ if (!method) {
 if (typeof params.scheme === "string") {
   params.scheme = { uri: params.scheme }
 }
+if (typeof params.concept === "string") {
+  params.concept = { uri: params.concept }
+}
 if (typeof params.types === "string") {
   params.types = params.types.split(/\s|\|/)
 }

@@ -428,10 +428,19 @@ export default class OlsApiProvider extends BaseProvider {
     return top
   }
 
-  async _splitConcept(concept) {
+  async _splitConcept(concept, scheme) {
     const obj = {}
     if (concept) {
-      obj.VOCID = await this._getSchemeVOCID(concept?.inScheme?.[0]) // TODO: what if multiple schemes?
+      if (concept.inScheme?.[0]) { // this assumes every concept is in exactely one scheme!
+        if (scheme) {
+          if (!scheme.VOCID && scheme.uri === concept.inScheme[0].uri) {
+            scheme.VOCID = concept.inScheme[0].VOCID
+          }
+        } else {
+          scheme = concept.inScheme[0]
+        }
+      }
+      obj.VOCID = await this._getSchemeVOCID(scheme)
       obj.uri = concept.uri || await this._conceptIriFromObj(obj.VOCID, concept.notation, concept.type)
       if (concept?.inScheme?.length>0){
         concept.inScheme[0].VOCID = obj.VOCID
@@ -444,11 +453,11 @@ export default class OlsApiProvider extends BaseProvider {
     return obj
   }
 
-  async getNarrower({ concept, types }) {
+  async getNarrower({ concept, scheme, types }) {
     if (!concept) {
       return []
     }
-    const { VOCID, uri } = await this._splitConcept(concept)
+    const { VOCID, uri } = await this._splitConcept(concept, scheme)
     // properties
     if (this._isPropertyRootConcept(concept)) {
       const items = await this._paginate(["ontologies", VOCID, property._api], { hasDirectParents: "false" }, null)
@@ -467,11 +476,11 @@ export default class OlsApiProvider extends BaseProvider {
     return items
   }
 
-  async getAncestors({ concept, types }) {
+  async getAncestors({ concept, scheme, types }) {
     if (!concept || this._isPropertyRootConcept(concept)) {
       return []
     }
-    const { VOCID, uri } = await this._splitConcept(concept)
+    const { VOCID, uri } = await this._splitConcept(concept, scheme)
     let items = []
     if (!VOCID || !uri) {
       return items
