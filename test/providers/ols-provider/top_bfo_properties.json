@@ -1,0 +1,2241 @@
+{
+  "page": 0,
+  "numElements": 20,
+  "totalPages": 2,
+  "totalElements": 22,
+  "elements": [
+    {
+      "appearsIn": [
+        "tfsco",
+        "msio",
+        "t4fs",
+        "nmrcv2025",
+        "swo",
+        "vibso",
+        "modsci",
+        "duo",
+        "pco",
+        "bfo",
+        "agro",
+        "stato",
+        "vivo",
+        "cto",
+        "efo",
+        "iao",
+        "afo",
+        "cheminf",
+        "cepo",
+        "bco",
+        "enm",
+        "nmrcv",
+        "proco",
+        "chmo",
+        "sepio",
+        "oeo"
+      ],
+      "curie": "BFO:0000179",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "Relates an entity in the ontology to the name of the variable that is used to represent it in the code that generates the BFO OWL file from the lispy specification."
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000179",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "BFO OWL specification label"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000232": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "curator note"
+          ],
+          "curie": "IAO:0000232",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": [
+        "Relates an entity in the ontology to the name of the variable that is used to represent it in the code that generates the BFO OWL file from the lispy specification.",
+        "Really of interest to developers only",
+        false
+      ],
+      "shortForm": "BFO_0000179",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "Relates an entity in the ontology to the name of the variable that is used to represent it in the code that generates the BFO OWL file from the lispy specification.",
+      "http://purl.obolibrary.org/obo/IAO_0000232": "Really of interest to developers only",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "BFO OWL specification label",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    {
+      "appearsIn": [
+        "stato",
+        "cepo",
+        "cto",
+        "cheminf",
+        "bco",
+        "chmo",
+        "pco",
+        "sepio",
+        "afo",
+        "nmrcv",
+        "duo",
+        "enm",
+        "modsci",
+        "efo",
+        "oeo",
+        "proco",
+        "vivo",
+        "bfo",
+        "iao",
+        "nmrcv2025",
+        "msio",
+        "vibso",
+        "swo",
+        "tfsco",
+        "agro",
+        "t4fs"
+      ],
+      "curie": "BFO:0000180",
+      "definedBy": [
+        "bfo"
+      ],
+      "definition": [
+        "Relates an entity in the ontology to the term that is used to represent it in the the CLIF specification of BFO2"
+      ],
+      "definitionProperty": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/BFO_0000180",
+      "isDefiningOntology": true,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "BFO CLIF specification label"
+      ],
+      "linkedEntities": {
+        "http://purl.obolibrary.org/obo/IAO_0000115": {
+          "definedBy": [
+            "uo",
+            "iao"
+          ],
+          "numAppearsIn": 71,
+          "hasLocalDefinition": true,
+          "label": [
+            "IAO_0000115"
+          ],
+          "curie": "IAO:0000115",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000232": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 35,
+          "hasLocalDefinition": true,
+          "label": [
+            "curator note"
+          ],
+          "curie": "IAO:0000232",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://purl.obolibrary.org/obo/IAO_0000119": {
+          "definedBy": [
+            "iao"
+          ],
+          "numAppearsIn": 47,
+          "hasLocalDefinition": true,
+          "label": [
+            "definition source"
+          ],
+          "curie": "IAO:0000119",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": [
+        "Relates an entity in the ontology to the term that is used to represent it in the the CLIF specification of BFO2",
+        "Really of interest to developers only",
+        false
+      ],
+      "shortForm": "BFO_0000180",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://purl.obolibrary.org/obo/IAO_0000115": "Relates an entity in the ontology to the term that is used to represent it in the the CLIF specification of BFO2",
+      "http://purl.obolibrary.org/obo/IAO_0000119": "Person:Alan Ruttenberg",
+      "http://purl.obolibrary.org/obo/IAO_0000232": "Really of interest to developers only",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#label": "BFO CLIF specification label",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    {
+      "appearsIn": [
+        "ecso",
+        "agro",
+        "cto",
+        "swo",
+        "linsearch",
+        "cheminf",
+        "efo",
+        "cepo",
+        "nmrcv2025",
+        "pco",
+        "vibso",
+        "msio",
+        "ro",
+        "duo",
+        "stato",
+        "vivo",
+        "emg",
+        "bfo",
+        "envo",
+        "obi",
+        "dpbo",
+        "listdb",
+        "t4fs",
+        "envo2021",
+        "iao",
+        "envo2023",
+        "tfsco",
+        "chmo",
+        "pso",
+        "proco",
+        "nmrcv",
+        "enm",
+        "sepio",
+        "oeo",
+        "bao",
+        "bco"
+      ],
+      "curie": "IAO:0000111",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000111",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "editor preferred term"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000111",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "editor preferred term"
+    },
+    {
+      "appearsIn": [
+        "ecso",
+        "uberon",
+        "vto",
+        "agro",
+        "cheminf",
+        "cto-mw",
+        "cto",
+        "swo",
+        "efo",
+        "cepo",
+        "nmrcv2025",
+        "modsci",
+        "pso",
+        "vibso",
+        "ro",
+        "duo",
+        "pco",
+        "stato",
+        "mwo",
+        "envo",
+        "obi",
+        "emg",
+        "bfo",
+        "dpbo",
+        "vivo",
+        "envo2021",
+        "iao",
+        "t4fs",
+        "afo",
+        "envo2023",
+        "tfsco",
+        "msio",
+        "pmd",
+        "chmo",
+        "nfdicore",
+        "nmrcv",
+        "proco",
+        "plsmo",
+        "sepio",
+        "enm",
+        "listdb",
+        "bao",
+        "oeo",
+        "bco"
+      ],
+      "curie": "IAO:0000112",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000112",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "example of usage"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000112",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "example of usage"
+    },
+    {
+      "appearsIn": [
+        "go",
+        "cheminf",
+        "agro",
+        "efo",
+        "nmrcv2025",
+        "ncit",
+        "ro",
+        "duo",
+        "linsearch",
+        "emg",
+        "obi",
+        "flopo",
+        "uberon",
+        "bfo",
+        "hp",
+        "vivo",
+        "mod",
+        "plsmo",
+        "proco",
+        "panet",
+        "ppo",
+        "iao",
+        "chiro",
+        "omp",
+        "nmrcv",
+        "tfsco",
+        "enm",
+        "sepio",
+        "pmd",
+        "bao",
+        "dpbo",
+        "rxno",
+        "cob",
+        "cto",
+        "ms",
+        "cao",
+        "stato",
+        "cepo",
+        "vto",
+        "mi",
+        "pso",
+        "peco",
+        "to",
+        "afo",
+        "bto",
+        "envo",
+        "glass",
+        "po",
+        "pco",
+        "mmo",
+        "cto-mw",
+        "ecso",
+        "mwo",
+        "envo2023",
+        "ldo",
+        "mop",
+        "oeo",
+        "docbias",
+        "t4fs",
+        "envo2021",
+        "nfdicore",
+        "msio",
+        "vibso",
+        "uo",
+        "chebi",
+        "pato",
+        "chmo",
+        "bco",
+        "swo",
+        "listdb",
+        "rex"
+      ],
+      "curie": "IAO:0000115",
+      "definedBy": [
+        "uo",
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000115",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "definition"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000115",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "definition"
+    },
+    {
+      "appearsIn": [
+        "cto",
+        "stato",
+        "cepo",
+        "pso",
+        "vto",
+        "afo",
+        "envo",
+        "pco",
+        "to",
+        "glass",
+        "po",
+        "cto-mw",
+        "ecso",
+        "mwo",
+        "envo2023",
+        "mop",
+        "oeo",
+        "envo2021",
+        "t4fs",
+        "vibso",
+        "msio",
+        "chmo",
+        "nfdicore",
+        "bco",
+        "swo",
+        "listdb",
+        "cheminf",
+        "modsci",
+        "agro",
+        "efo",
+        "nmrcv2025",
+        "ro",
+        "duo",
+        "obi",
+        "emg",
+        "ncit",
+        "uberon",
+        "vivo",
+        "bfo",
+        "flopo",
+        "proco",
+        "ppo",
+        "iao",
+        "chiro",
+        "nmrcv",
+        "sepio",
+        "enm",
+        "tfsco",
+        "bao",
+        "pmd",
+        "cob",
+        "go"
+      ],
+      "curie": "IAO:0000116",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000116",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "editor note"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000116",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "editor note"
+    },
+    {
+      "appearsIn": [
+        "cheminf",
+        "cto",
+        "cepo",
+        "cao",
+        "chmo",
+        "pmd",
+        "pso",
+        "efo",
+        "stato",
+        "agro",
+        "afo",
+        "envo",
+        "pco",
+        "duo",
+        "linsearch",
+        "emg",
+        "ro",
+        "obi",
+        "ecso",
+        "envo2021",
+        "envo2023",
+        "vivo",
+        "bfo",
+        "oeo",
+        "proco",
+        "t4fs",
+        "sepio",
+        "iao",
+        "nmrcv",
+        "nmrcv2025",
+        "chiro",
+        "enm",
+        "tfsco",
+        "bao",
+        "msio",
+        "vibso",
+        "bco",
+        "dpbo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "IAO:0000117",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000117",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "term editor"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000117",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "term editor"
+    },
+    {
+      "appearsIn": [
+        "cheminf",
+        "efo",
+        "cepo",
+        "obi",
+        "chmo",
+        "pso",
+        "cto",
+        "stato",
+        "nmrcv",
+        "agro",
+        "glass",
+        "pco",
+        "afo",
+        "envo",
+        "ro",
+        "ecso",
+        "duo",
+        "mwo",
+        "envo2021",
+        "vivo",
+        "envo2023",
+        "ppo",
+        "oeo",
+        "bfo",
+        "proco",
+        "t4fs",
+        "enm",
+        "iao",
+        "nmrcv2025",
+        "sepio",
+        "bao",
+        "msio",
+        "nfdicore",
+        "vibso",
+        "bco",
+        "tfsco",
+        "dpbo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "IAO:0000118",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000118",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "alternative term"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000118",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "alternative term"
+    },
+    {
+      "appearsIn": [
+        "cao",
+        "cheminf",
+        "efo",
+        "cepo",
+        "obi",
+        "chmo",
+        "pmd",
+        "pso",
+        "agro",
+        "cto",
+        "vto",
+        "stato",
+        "nmrcv",
+        "glass",
+        "linsearch",
+        "pco",
+        "emg",
+        "peco",
+        "afo",
+        "envo",
+        "ro",
+        "duo",
+        "ecso",
+        "cto-mw",
+        "vivo",
+        "t4fs",
+        "envo2021",
+        "mwo",
+        "oeo",
+        "envo2023",
+        "bfo",
+        "proco",
+        "panet",
+        "enm",
+        "sepio",
+        "iao",
+        "nmrcv2025",
+        "nfdicore",
+        "bao",
+        "msio",
+        "vibso",
+        "bco",
+        "chiro",
+        "tfsco",
+        "dpbo",
+        "swo",
+        "listdb"
+      ],
+      "curie": "IAO:0000119",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000119",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "definition source"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000119",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "definition source"
+    },
+    {
+      "appearsIn": [
+        "ro",
+        "duo",
+        "proco",
+        "oeo",
+        "vivo",
+        "envo",
+        "bao",
+        "bco",
+        "ecso",
+        "bfo",
+        "cto-mw",
+        "uberon",
+        "envo2021",
+        "cheminf",
+        "efo",
+        "afo",
+        "envo2023",
+        "pco",
+        "pmd",
+        "nmrcv",
+        "pso",
+        "stato",
+        "enm",
+        "sepio",
+        "obi",
+        "chmo",
+        "cto",
+        "agro",
+        "swo",
+        "cepo",
+        "iao",
+        "nmrcv2025",
+        "msio",
+        "tfsco",
+        "vibso"
+      ],
+      "curie": "IAO:0000232",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000232",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "curator note"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000232",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "curator note"
+    },
+    {
+      "appearsIn": [
+        "listdb",
+        "enm",
+        "nmrcv",
+        "iao",
+        "bfo",
+        "chmo",
+        "sepio",
+        "obi",
+        "mop",
+        "stato",
+        "cepo",
+        "rxno",
+        "vivo",
+        "tfsco",
+        "msio",
+        "vibso",
+        "swo",
+        "nmrcv2025",
+        "agro",
+        "ecso",
+        "cto",
+        "bco",
+        "envo",
+        "omp",
+        "bao",
+        "efo",
+        "oeo",
+        "envo2021",
+        "cheminf",
+        "proco",
+        "duo",
+        "afo",
+        "envo2023",
+        "pco",
+        "ro"
+      ],
+      "curie": "IAO:0000412",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000412",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "imported from"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000412",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "imported from"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "envo2023",
+        "enm",
+        "envo2021",
+        "iao",
+        "vivo",
+        "nmrcv",
+        "oeo",
+        "proco",
+        "sepio",
+        "chmo",
+        "tfsco",
+        "t4fs",
+        "vibso",
+        "cepo",
+        "msio",
+        "swo",
+        "modsci",
+        "agro",
+        "bco",
+        "ecso",
+        "nmrcv2025",
+        "envo",
+        "cto",
+        "stato",
+        "obi",
+        "ro",
+        "pso",
+        "efo",
+        "afo",
+        "pco",
+        "cheminf",
+        "duo"
+      ],
+      "curie": "IAO:0000600",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000600",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "elucidation"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000600",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "elucidation"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "enm",
+        "vivo",
+        "nmrcv",
+        "proco",
+        "sepio",
+        "oeo",
+        "tfsco",
+        "t4fs",
+        "iao",
+        "nmrcv2025",
+        "swo",
+        "vibso",
+        "msio",
+        "cepo",
+        "bco",
+        "agro",
+        "stato",
+        "cto",
+        "chmo",
+        "obi",
+        "efo",
+        "afo",
+        "cheminf",
+        "duo",
+        "pco"
+      ],
+      "curie": "IAO:0000601",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000601",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "has associated axiom(nl)"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000601",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "has associated axiom(nl)"
+    },
+    {
+      "appearsIn": [
+        "bfo",
+        "enm",
+        "vivo",
+        "proco",
+        "sepio",
+        "oeo",
+        "tfsco",
+        "iao",
+        "nmrcv2025",
+        "t4fs",
+        "swo",
+        "vibso",
+        "cepo",
+        "msio",
+        "cto",
+        "agro",
+        "stato",
+        "obi",
+        "bco",
+        "chmo",
+        "duo",
+        "nmrcv",
+        "efo",
+        "afo",
+        "modsci",
+        "pco",
+        "cheminf"
+      ],
+      "curie": "IAO:0000602",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0000602",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "has associated axiom(fol)"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0000602",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "has associated axiom(fol)"
+    },
+    {
+      "appearsIn": [
+        "cheminf",
+        "cepo",
+        "efo",
+        "obi",
+        "swo",
+        "iao",
+        "nmrcv2025",
+        "peco",
+        "vibso",
+        "msio",
+        "envo",
+        "agro",
+        "cto",
+        "ppo",
+        "t4fs",
+        "envo2021",
+        "oeo",
+        "envo2023",
+        "bfo",
+        "tfsco",
+        "duo",
+        "enm",
+        "sepio",
+        "pco",
+        "modsci",
+        "bco",
+        "afo",
+        "chmo",
+        "nmrcv"
+      ],
+      "curie": "IAO:0010000",
+      "definedBy": [
+        "iao"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.obolibrary.org/obo/IAO_0010000",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "has axiom label"
+      ],
+      "linkedEntities": {
+        "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": {
+          "numAppearsIn": 31,
+          "hasLocalDefinition": true,
+          "label": [
+            "isDefinedBy"
+          ],
+          "curie": "isDefinedBy",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.obolibrary.org/obo/iao.owl": {
+          "numAppearsIn": 4,
+          "hasLocalDefinition": false,
+          "type": [
+            "individual",
+            "entity"
+          ],
+          "label": [
+            "iao.owl"
+          ],
+          "curie": "iao.owl"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "IAO_0010000",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty",
+      "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": "http://purl.obolibrary.org/obo/iao.owl",
+      "http://www.w3.org/2000/01/rdf-schema#label": "has axiom label"
+    },
+    {
+      "appearsIn": [
+        "duo",
+        "msio",
+        "edam",
+        "ro",
+        "tfsco",
+        "t4fs",
+        "mdv",
+        "ppo",
+        "envo2021",
+        "oeo",
+        "nmrcv2025",
+        "agro",
+        "bco",
+        "cito",
+        "swo",
+        "chmo",
+        "afo",
+        "cco",
+        "bdsubj",
+        "iofcore",
+        "iotlite",
+        "iao",
+        "bfo",
+        "ecso",
+        "fabio",
+        "envo2023",
+        "mwo",
+        "pco",
+        "vibso",
+        "envo",
+        "bao",
+        "proco",
+        "ldo",
+        "sio",
+        "cepo",
+        "dogont",
+        "ifc",
+        "nfdicore",
+        "obi",
+        "stato",
+        "docbias",
+        "sepio",
+        "enm",
+        "sd",
+        "nmrcv",
+        "fiestaiot",
+        "cto",
+        "cao",
+        "cheminf",
+        "gesah"
+      ],
+      "curie": "contributor",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/elements/1.1/contributor",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "contributor"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "contributor",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "cheminf",
+        "bfo",
+        "cepo",
+        "vibso",
+        "duo",
+        "iao",
+        "nmrcv2025",
+        "msio",
+        "tfsco",
+        "agro",
+        "chmo",
+        "oeo",
+        "enm",
+        "nmrcv"
+      ],
+      "curie": "member",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/elements/1.1/member",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "member"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "member",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "glass",
+        "s4grid",
+        "ssn",
+        "bau",
+        "plsmo",
+        "proco",
+        "envo",
+        "credit",
+        "gufo",
+        "s4envi",
+        "sio",
+        "cto",
+        "stato",
+        "cepo",
+        "vibso",
+        "uo",
+        "nfdicore",
+        "dcterms",
+        "chmo",
+        "cif",
+        "chebi",
+        "dsw",
+        "envo2023",
+        "s4mari",
+        "s4city",
+        "s4ehaw",
+        "dices",
+        "s4auto",
+        "tso",
+        "uberon",
+        "cto-mw",
+        "po",
+        "modsci",
+        "atomistic",
+        "ordo41",
+        "cgo",
+        "s4syst",
+        "afo",
+        "nmrcv2025",
+        "wlmo",
+        "agro",
+        "m4i",
+        "flopo",
+        "emg",
+        "fmi",
+        "cob",
+        "t4fs",
+        "om",
+        "iofcore",
+        "enm",
+        "mathmoddb",
+        "sosa",
+        "mop",
+        "pmd",
+        "battinfo",
+        "bot",
+        "modalia",
+        "obi",
+        "cheminf",
+        "fair",
+        "ordo42",
+        "saref",
+        "hoom",
+        "ontokin",
+        "s4bldg",
+        "ordo46",
+        "s4watr",
+        "pco",
+        "s4lift",
+        "pato",
+        "amv",
+        "mdo",
+        "kpi",
+        "pror",
+        "vto",
+        "mwo",
+        "sms",
+        "rxno",
+        "sim",
+        "panet",
+        "gfo",
+        "io",
+        "dicl",
+        "iao",
+        "listdb",
+        "sargon2",
+        "s4wear",
+        "bfo",
+        "ssnsystem",
+        "envo2021",
+        "bdsubj",
+        "dfgfo2024",
+        "s4ener",
+        "ordo47",
+        "cco",
+        "to",
+        "s4inma",
+        "dcat3",
+        "duo",
+        "gpo",
+        "emmo",
+        "swo",
+        "bco",
+        "oeo",
+        "hpont",
+        "cito",
+        "ontocompchem",
+        "ppo",
+        "ordo",
+        "raum",
+        "dfgfo",
+        "go",
+        "mt",
+        "fibo",
+        "chameo",
+        "dicob",
+        "s4agri",
+        "tfsco",
+        "sepio",
+        "dr",
+        "openadr",
+        "pmat",
+        "ontorxn",
+        "nmrcv",
+        "sto",
+        "docbias",
+        "sd",
+        "building",
+        "sweet",
+        "efo",
+        "fabio",
+        "hp",
+        "lis",
+        "ordo40",
+        "pso",
+        "ro"
+      ],
+      "curie": "dcterms:license",
+      "definedBy": [
+        "dcterms"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/terms/license",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "license"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "dcterms_license",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "pco",
+        "nmrcv2025",
+        "msio",
+        "vibso",
+        "tfsco",
+        "swo",
+        "duo",
+        "fiestaiot",
+        "meth",
+        "dcat3",
+        "chmo",
+        "bao",
+        "premis3",
+        "enm",
+        "oeo",
+        "proco",
+        "afo",
+        "nmrcv",
+        "iao",
+        "dr",
+        "cepo",
+        "cheminf",
+        "cito",
+        "lis",
+        "prov",
+        "bfo",
+        "repr",
+        "agro",
+        "cto",
+        "fabio",
+        "vivo"
+      ],
+      "curie": "isDefinedBy",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "isDefinedBy"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "isDefinedBy",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    },
+    {
+      "appearsIn": [
+        "afo",
+        "nmrcv",
+        "enm",
+        "repr",
+        "chmo",
+        "efo",
+        "meth",
+        "iao",
+        "dcat3",
+        "fabio",
+        "bfo",
+        "cheminf",
+        "prov",
+        "obi",
+        "uberon",
+        "lis",
+        "duo",
+        "msio",
+        "vibso",
+        "tfsco",
+        "ro",
+        "oeo",
+        "agro",
+        "proco",
+        "nmrcv2025",
+        "fiestaiot",
+        "premis3",
+        "bao",
+        "cepo"
+      ],
+      "curie": "seeAlso",
+      "hasDirectChildren": false,
+      "hasDirectParents": false,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "seeAlso"
+      ],
+      "linkedEntities": {},
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "bfo",
+      "ontologyIri": "http://purl.obolibrary.org/obo/bfo.owl",
+      "ontologyPreferredPrefix": "BFO",
+      "searchableAnnotationValues": false,
+      "shortForm": "seeAlso",
+      "type": [
+        "property",
+        "annotationProperty",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#AnnotationProperty"
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

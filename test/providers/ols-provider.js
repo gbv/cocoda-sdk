@@ -31,7 +31,6 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/properties?search=entity": "search-property_entity.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=members": "properties.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=entity&ontology=envo": "search-property-envo_entity.json",
-  "https://api.terminology.tib.eu/api/v2/properties?search=entity&size=20": "search-property_entity-20.json",
   "https://api.terminology.tib.eu/api/v2/properties?search=Bubble+Sort": "empty.json",
   // ontologies
   "https://api.terminology.tib.eu/api/v2/ontologies": "ontologies.json",
@@ -41,10 +40,11 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/bk": "ontology_bk.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/bf": "ontology_bf.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo": "ontology_bfo.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/ro" : "ontology_ro.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__": "empty.json",
   
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo/classes?hasDirectParents=false": "top_bfo_classes.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/properties?hasDirectParents=false": "top_bfo_properties.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/bfo/properties?hasDirectParents=false&page=1": "top_bfo_properties-1.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/bfo/individuals?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
@@ -54,12 +54,10 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FBFO_0000002": "search-concept_bfo0000002.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FENVO_00002237": "search-concept_envo00002237.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FIAO_0000118": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?curie=BFO%3A0000002": "search-concept_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/children": "narrower_bfo0000002.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FBFO_0000002/ancestors": "ancestors_bfo0000002.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FENVO_00002237/ancestors": "ancestors_envo00002237.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FIAO_0000118/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?size=50": "properties-envo_50.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/properties?hasDirectParents=false": "top_envo_properties.json",
@@ -81,8 +79,6 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/classes?curie=properties": "empty.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?hasDirectParents=false": "narrower_ro_base-property.json",
-  "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?hasDirectParents=false&page=1": "narrower_ro_base-property-1.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/children": "children-ro-properties.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties?curie=RO%3A0018034": "search-property_ro0018034.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/properties/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "ancestors_properties_ro0018034.json",
@@ -96,7 +92,6 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/amv/classes/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/amv/properties/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-properties.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/amv/individuals/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-individuals.json",
-  
 })
 
 after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
@@ -113,41 +108,7 @@ const conceptNotationDefault = "BFO:0000002"
 const searchDefault = "entity"
 const schemeRO = { VOCID: "ro" }
 const conceptRO = { notation: "RO:0018034", inScheme: [schemeRO] }
-const conceptBase1 = { uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property", inScheme: [schemeRO]}
-const conceptBase2 = { notation: "properties", inScheme: [schemeRO] }
 const label = "is protonated form of"
-
-
-
-
-describe ("OlsProvider Basics", () => {
-
-  it("is Property", async function () {
-    const classConcept = { uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] }
-    assert.equal(await provider._isPropertyConcept(classConcept), false)
-    const propertyConcept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }
-    assert.equal(await provider._isPropertyConcept(propertyConcept), true)
-
-  })
-
-  it("get property raw", async function () {
-    let concepts = await provider._getConceptOls(conceptRO)
-    assert.equal(concepts.label[0], label)
-  })
-
-
-  it("get base property", async function (){
-    const base = await provider._propertyRootJskos(schemeRO)
-    assert(provider._isPropertyRootConcept(conceptBase1))
-    let conceptsA = await provider.getConcepts({ concepts: [conceptBase1] })
-    assert.deepEqual(await conceptsA[0], base)
-    assert(provider._isPropertyRootConcept(conceptBase2))
-    let conceptsB = await provider.getConcepts({ concepts: [conceptBase2] })
-    assert.deepEqual(await conceptsB[0], base)
-  })
-
-
-})
 
 
 describe ("OlsProvider.getSchemes", () => {
@@ -231,53 +192,50 @@ describe ("OlsProvider.getTop", () => {
   it("request top concepts of a specific scheme Uri", async function () {
     const config = { scheme: { uri: schemeUriEnvo } }
     const topConcepts = await provider.getTop(config)
-    assert.equal(topConcepts.length, 15) // 14 classes + rdf:Property
-    assert.equal(topConcepts.filter(c => c.uri != propertyRdfUri).length, 14)
-    assert(topConcepts.find(c => c.uri === propertyRdfUri))
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/2002/07/owl#Class")).length, 14)
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")).length, 40)
   })
 
   it("request top concepts of a specific scheme, VOCID", async function () {
     const config = { scheme: { VOCID: schemeVOCIDENVO } }
     const topConcepts = await provider.getTop(config)
-    assert.equal(topConcepts.length, 15) // 14 classes + rdf:Property
-    assert.equal(topConcepts.filter(c => c.uri != propertyRdfUri).length, 14)
-    assert(topConcepts.find(c => c.uri === propertyRdfUri))
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/2002/07/owl#Class")).length, 14)
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")).length, 40)
   })
 
   it("request top concepts of a non-existing scheme", async function () {
     const config = { scheme: { uri: invalidDefault  } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
-    assert.equal(topConcepts.length, 0) // if the scheme does not exist, no top concepts can be returned and no property is added
+    assert.equal(topConcepts.length, 0) // if the scheme does not exist, no top concepts can be returned
   })
 
   it("request top concepts of a non-existing scheme VOCID", async function () {
     const config = { scheme: { VOCID: invalidDefault } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
-    assert.equal(topConcepts.length, 0) // if the scheme does not exist, no top concepts can be returned and no property is added
+    assert.equal(topConcepts.length, 0) // if the scheme does not exist, no top concepts can be returned
   })
 
   it("request top concepts without a scheme", async function () {
     const config = {}
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
-    assert.equal(topConcepts.length, 0) // without scheme, no top concepts can be returned and no property is added
+    assert.equal(topConcepts.length, 0) // without scheme, no top concepts can be returned
   })
 
   it("jskos test", async function () {
     const config = { scheme: { VOCID: "bfo" } }
     const topConcepts = await provider.getTop(config)
     assert(Array.isArray(topConcepts))
-    assert.equal(topConcepts.length, 2) // 1 class + rdf:Property
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/2002/07/owl#Class")).length, 1)
+    assert.equal(topConcepts.filter(concept => concept.type?.includes("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")).length, 22)
 
     const bfo_root_raw = fs.readFileSync("test/providers/ols-provider/jskos_top_bfo.json", "utf-8")
     const bfo_root_jskos = JSON.parse(bfo_root_raw)
-
-    assert(provider._isPropertyRootConcept(topConcepts[0]))
     Object.keys(bfo_root_jskos[0]).forEach(key => {
-      assert.notDeepStrictEqual(topConcepts[1][key], undefined, `Key '${key}' is missing in topConcepts result`)
-      assert.deepStrictEqual(topConcepts[1][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
+      assert.notDeepStrictEqual(topConcepts[0][key], undefined, `Key '${key}' is missing in topConcepts result`)
+      assert.deepStrictEqual(topConcepts[0][key], bfo_root_jskos[0][key], `Value for key '${key}' does not match between topConcepts and expected JSKOS`)
     })
   })
 
@@ -331,7 +289,6 @@ describe ("OlsProvider.getConcepts", () => {
     const specificConcept = await provider.getConcepts(config)
     assert(Array.isArray(specificConcept))
     assert.equal(specificConcept.length, 1)
-    assert.deepEqual(specificConcept[0].broader, [null]) // property concept has broader concept
   })
   
   it("get property", async function () {
@@ -361,24 +318,9 @@ describe ("OlsProvider.getNarrower", () => {
     assert.equal(narrowerConcepts.length, 3)
   })
 
-  it("narrower of rdf:Property", async function () {
-    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriEnvo }] }
-    const config = { concept: concept }
-    assert(provider._isPropertyConcept(concept))
-    assert(provider._isPropertyRootConcept(concept))
-    const narrower = await provider.getNarrower(config)
-    assert.equal(narrower.length, 40) // should get all properties. shortened to 2 pages, 40 entries for testing purposes, see top_envo_properties.json
-  })
-
   it("non-existing concept", async function () {
     const concepts = await provider.getNarrower()
     assert.equal(concepts.length, 0)
-  })
-
-  it("get narrower base property", async function (){
-    let narrower = await provider.getNarrower({ concept: conceptBase1 })
-    assert(Array.isArray(narrower))
-    assert(narrower.length > 0)
   })
 
   it("get narrower property", async function () {
@@ -405,9 +347,7 @@ describe("OlsProvider.getAncestors", () => {
   it("request ancestors of a specific concept, uri", async function () {
     const config = { concept: { uri: conceptUriBfo, inScheme: [{ uri: schemeUriEnvo }] } }
     const ancestors = await provider.getAncestors(config)
-    assert(!await provider._isPropertyConcept(config.concept))
     assert.equal(ancestors.length, 1)
-
   })
 
   it("request ancestors of a specific concept, notation", async function () {
@@ -416,40 +356,22 @@ describe("OlsProvider.getAncestors", () => {
     assert.equal(ancestors.length, 1)
   })
 
-  it("ancestor of rdf:Property", async function () {
-    const concept = { uri: propertyRdfUri, inScheme: [{ uri: schemeUriEnvo }] }
+  it("ancestor of a top property", async function () {
+    const concept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }
     const config = { concept: concept }
-    assert(provider._isPropertyConcept(concept))
-    assert(provider._isPropertyRootConcept(concept))
     const ancestors = await provider.getAncestors(config)
     assert.equal(ancestors.length, 0)
   })
 
   it("ancestor of a property", async function () {
-    const concept = { uri: propertyUriDefault, inScheme: [{ uri: schemeUriEnvo }] }
-    const config = { concept: concept }
-    const ancestors = await provider.getAncestors(config)
-    assert(provider._isPropertyConcept(concept))
-    assert(!provider._isPropertyRootConcept(concept))
+    let ancestors = await provider.getAncestors({ concept: conceptRO })
+    assert(Array.isArray(ancestors))
     assert.equal(ancestors.length, 1)
-    assert(await provider._isPropertyRoot(ancestors[0]))
   })
 
   it("non-existing concept", async function () {
     const concepts = await provider.getAncestors()
     assert.equal(concepts.length, 0)
-  })
-
-  it("get ancestors base property", async function (){
-    let ancestors = await provider.getAncestors({ concept: conceptBase1 })
-    assert(Array.isArray(ancestors))
-    assert(ancestors.length == 0)
-  })
-
-  it("get ancestors property", async function () {
-    let ancestors = await provider.getAncestors({ concept: conceptRO })
-    assert(Array.isArray(ancestors))
-    assert(ancestors.length > 0)
   })
 
 })
@@ -482,7 +404,7 @@ describe ("OlsProvider.search", () => {
   it("search with property type", async function () {
     const types = ["un:known", propertyRdfUri]
     const concepts = await provider.search({ search: "members", types })
-    assert.deepStrictEqual(concepts[0].type, ["http://www.w3.org/2004/02/skos/core#Concept", "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"])
+    assert.deepStrictEqual(concepts[0].type, ["http://www.w3.org/2004/02/skos/core#Concept", propertyRdfUri])
     assert.equal(concepts.length, 1)
   })
 
