@@ -81,9 +81,13 @@ if (!method) {
   usage(`Expected method, one of: ${methods.join("\n")}`)
 }
 
-if (typeof params["scheme"] === "string") {
-  params["scheme"] = { uri: params["scheme"] }
+if (typeof params.scheme === "string") {
+  params.scheme = { uri: params.scheme }
 }
+if (typeof params.types === "string") {
+  params.types = params.types.split(/\s|\|/)
+}
+
 if (search.length) {
   params["search"] = search.join(" ")
 }

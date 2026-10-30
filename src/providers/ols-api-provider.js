@@ -24,7 +24,6 @@ const entityTypes = [{
 }]
 
 const property = entityTypes.find(t => t._api === "properties")
-const searchTypesDefault = entityTypes.map(t => t.uri) // old: ["http://www.w3.org/2002/07/owl#Class"]
 
 
 /**
@@ -248,12 +247,12 @@ export default class OlsApiProvider extends BaseProvider {
 
   // API REQUESTS CONCEPTS
 
-  /**
-   * Returns entity types matching type URIs, default: all
-   */
+  // Maps type URIs or lowercase English labels to entity types
   _entityTypesFor(types) {
-    const matching = types?.length ? entityTypes.filter(t => types.includes(t.uri)) : []
-    return matching.length ? matching : entityTypes
+    if (types?.length) {
+      return entityTypes.filter(t => types.includes(t.uri) || types.includes(t.prefLabel.en.toLowerCase()))
+    }
+    return entityTypes
   }
 
   async _getConceptOls(concept) {
@@ -282,11 +281,7 @@ export default class OlsApiProvider extends BaseProvider {
   async _searchOls(search, scheme, limit, types) {
     let items = []
 
-    if (types?.length) {
-      types = entityTypes.filter(t => types.includes(t.uri))
-    } else {
-      types = entityTypes
-    }
+    types = this._entityTypesFor(types)
 
     const VOCID = scheme ? await this._getSchemeVOCID(scheme) : null // if no scheme is given, search in all schemes
     if (!scheme || VOCID) {
@@ -384,7 +379,7 @@ export default class OlsApiProvider extends BaseProvider {
     return Promise.all(ontologies.map(scheme => this._ontologyToJSKOS(scheme)))
   }
 
-  async getConcepts({ concepts, scheme, limit }) {
+  async getConcepts({ concepts, scheme, limit, types }) {
     let result = []
     if (concepts) {
       for (const concept of concepts) {
@@ -401,7 +396,7 @@ export default class OlsApiProvider extends BaseProvider {
       const VOCID = await this._getSchemeVOCID(scheme)
       if (VOCID) {
         result.push(await this._propertyRootJskos(scheme)) // add virtual property root
-        for (const { _api } of entityTypes) {
+        for (const { _api } of this._entityTypesFor(types)) {
           const items = await this._paginate(["ontologies", VOCID, _api], {}, limit)
           result.push(...items.map(item => this._termToJSKOS({ ...item, _api })))
         }
@@ -416,14 +411,17 @@ export default class OlsApiProvider extends BaseProvider {
   // Top, narrower and ancestors exist for classes in OLS
   // properties are rooted under a virtual rdf:Property (see _propertyRootJskos)
 
-  async getTop({ scheme }) {
+  async getTop({ scheme, types }) {
     const ontology = await this._getScheme(scheme)
     if (!ontology?.ontologyId) {
       return []
     }
     let top = []
-    top.push(await this._propertyRootJskos(scheme)) // add virtual property root
-    for (const { _api } of entityTypes.filter(e => e._api != property._api)) {
+    types = this._entityTypesFor(types)
+    if (types.filter(t => t._api == property._api).length) {
+      top.push(await this._propertyRootJskos(scheme)) // add virtual property root
+    }
+    for (const { _api } of types.filter(e => e._api != property._api)) {
       const items = await this._paginate(["ontologies", ontology.ontologyId, _api], { hasDirectParents: "false" }, null)
       top.push(...items.map(item => this._termToJSKOS({ ...item, _api })))
     }
@@ -446,7 +444,7 @@ export default class OlsApiProvider extends BaseProvider {
     return obj
   }
 
-  async getNarrower({ concept }) {
+  async getNarrower({ concept, types }) {
     if (!concept) {
       return []
     }
@@ -461,7 +459,7 @@ export default class OlsApiProvider extends BaseProvider {
       return []
     }
     let items = []
-    for (const type of entityTypes.map(t => t._api)) {
+    for (const type of this._entityTypesFor(types).map(t => t._api)) {
       const narrower = await this._paginate(["ontologies", VOCID, type, uri, "children"], {}, 0)
       const narrowerJSKOS = Promise.all(narrower.map(item => this._termToJSKOS({ ...item, _api: type })))
       items.push(narrowerJSKOS)
@@ -469,7 +467,7 @@ export default class OlsApiProvider extends BaseProvider {
     return items
   }
 
-  async getAncestors({ concept }) {
+  async getAncestors({ concept, types }) {
     if (!concept || this._isPropertyRootConcept(concept)) {
       return []
     }
@@ -482,7 +480,7 @@ export default class OlsApiProvider extends BaseProvider {
       items.push(await this._propertyRootJskos(concept.inScheme))
     }
 
-    for (const type of entityTypes.map(t => t._api)) {
+    for (const type of this._entityTypesFor(types).map(t => t._api)) {
       const ancestors = await this._paginate(["ontologies", VOCID, type, uri, "ancestors"], {}, null)
       for (const ancestor of ancestors){
         const ancestorJSKOS = await this._termToJSKOS({...await ancestor, _api: type})
@@ -496,7 +494,7 @@ export default class OlsApiProvider extends BaseProvider {
     return entityTypes.map(({uri, prefLabel}) => ({ uri, prefLabel}))
   }
   
-  async search({ search, scheme = null, limit = 0, types = searchTypesDefault }) {
+  async search({ search, scheme = null, limit = 0, types }) {
     let items = await this._searchOls(search, scheme, limit, types)
     return Promise.all(items.map(item => this._termToJSKOS(item)))
   }
