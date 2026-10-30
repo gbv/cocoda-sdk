@@ -1,0 +1,758 @@
+{
+  "page": 0,
+  "numElements": 4,
+  "totalPages": 1,
+  "totalElements": 4,
+  "elements": [
+    {
+      "appearsIn": [
+        "gufo",
+        "amv",
+        "proco",
+        "s4ehaw",
+        "sio",
+        "battinfo",
+        "pror",
+        "s4grid",
+        "s4lift",
+        "dogont",
+        "chameo",
+        "mathmoddb",
+        "idsa",
+        "iofcore",
+        "s4agri",
+        "docbias",
+        "lis",
+        "ordo46",
+        "cto",
+        "datatype",
+        "modalia",
+        "bot",
+        "mv",
+        "pmat",
+        "enm",
+        "qudt",
+        "sto",
+        "s4watr",
+        "bau",
+        "s4bldg",
+        "ordo40",
+        "fiestaiot",
+        "hoom",
+        "saref",
+        "sweet",
+        "mdv",
+        "ordo42",
+        "flopo",
+        "sou",
+        "qudtdatatypeschema",
+        "fabio",
+        "fibo",
+        "dfgfo2024",
+        "m4i",
+        "dr",
+        "dcterms",
+        "prefix",
+        "qkdv",
+        "dcat3",
+        "ordo",
+        "cito",
+        "raum",
+        "ordo47",
+        "s4ener",
+        "s4mari",
+        "cepo",
+        "s4city",
+        "s4envi",
+        "abcd",
+        "repr",
+        "sargon2",
+        "soqk",
+        "constant",
+        "s4wear",
+        "dfgfo",
+        "quantitykind",
+        "s4inma",
+        "s4syst",
+        "afo",
+        "energymarketroles",
+        "ets",
+        "unit",
+        "coy",
+        "atomistic",
+        "ordo41",
+        "s4auto",
+        "tso",
+        "modsci"
+      ],
+      "curie": "dcterms:modified",
+      "definedBy": [
+        "dcterms"
+      ],
+      "definition": [
+        "Date on which the resource was changed."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "directAncestor": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "directParent": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/terms/modified",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "modified"
+      ],
+      "linkedEntities": {
+        "http://purl.org/dc/terms/date": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date"
+          ],
+          "curie": "dcterms:date",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#Literal": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "Literal"
+          ],
+          "curie": "Literal"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "amv",
+      "ontologyIri": "https://w3id.org/amv",
+      "ontologyPreferredPrefix": "amv",
+      "searchableAnnotationValues": false,
+      "shortForm": "dcterms_modified",
+      "type": [
+        "dataProperty",
+        "property",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#DatatypeProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Date on which the resource was changed.",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2000/01/rdf-schema#label": "modified",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/2000/01/rdf-schema#Literal",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.org/dc/terms/date"
+    },
+    {
+      "appearsIn": [
+        "modalia",
+        "nfdicore",
+        "soqk",
+        "s4wear",
+        "dices",
+        "bdsubj",
+        "ordo47",
+        "pso",
+        "ordo41",
+        "afo",
+        "s4syst",
+        "s4mari",
+        "s4lift",
+        "vto",
+        "pmd",
+        "qudtdatatypeschema",
+        "sou",
+        "constant",
+        "idsa",
+        "duo",
+        "vibso",
+        "nmrcv2025",
+        "qudt",
+        "gesah",
+        "bto-mw",
+        "dicob",
+        "mdv",
+        "ro",
+        "cto",
+        "cheminf",
+        "dicl",
+        "sosa",
+        "amv",
+        "docbias",
+        "emg",
+        "battinfo",
+        "pror",
+        "dr",
+        "prefix",
+        "obi",
+        "pmat",
+        "coy",
+        "iao",
+        "ordo40",
+        "sargon2",
+        "cco",
+        "dcterms",
+        "hoom",
+        "ordo46",
+        "unit",
+        "chameo",
+        "cgo",
+        "ordo42",
+        "s4watr",
+        "cito",
+        "s4agri",
+        "gufo",
+        "hpont",
+        "datatype",
+        "ssnsystem",
+        "s4auto",
+        "plsmo",
+        "s4ehaw",
+        "chmo",
+        "sim",
+        "qkdv",
+        "m4i",
+        "mdo",
+        "glass",
+        "ssn",
+        "modsci",
+        "panet",
+        "ordo",
+        "dcat3",
+        "s4inma",
+        "tfsco",
+        "atomistic",
+        "fabio",
+        "cto-mw",
+        "s4envi",
+        "mwo",
+        "repr",
+        "quantitykind"
+      ],
+      "curie": "dcterms:created",
+      "definedBy": [
+        "dcterms"
+      ],
+      "definition": [
+        "The date of creation of the algorithm."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "directAncestor": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "directParent": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/terms/created",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "created"
+      ],
+      "linkedEntities": {
+        "http://purl.org/dc/terms/date": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date"
+          ],
+          "curie": "dcterms:date",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#Literal": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "Literal"
+          ],
+          "curie": "Literal"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "amv",
+      "ontologyIri": "https://w3id.org/amv",
+      "ontologyPreferredPrefix": "amv",
+      "searchableAnnotationValues": false,
+      "shortForm": "dcterms_created",
+      "type": [
+        "dataProperty",
+        "property",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#DatatypeProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "The date of creation of the algorithm.",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2000/01/rdf-schema#label": "created",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/2000/01/rdf-schema#Literal",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.org/dc/terms/date"
+    },
+    {
+      "appearsIn": [
+        "dcterms",
+        "afo",
+        "amv",
+        "dcat3"
+      ],
+      "curie": "dcterms:available",
+      "definedBy": [
+        "dcterms"
+      ],
+      "definition": [
+        "Date (often a range) that the resource became or will become available."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "directAncestor": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "directParent": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/terms/available",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "available"
+      ],
+      "linkedEntities": {
+        "http://purl.org/dc/terms/date": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date"
+          ],
+          "curie": "dcterms:date",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#Literal": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "Literal"
+          ],
+          "curie": "Literal"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "amv",
+      "ontologyIri": "https://w3id.org/amv",
+      "ontologyPreferredPrefix": "amv",
+      "searchableAnnotationValues": false,
+      "shortForm": "dcterms_available",
+      "type": [
+        "dataProperty",
+        "property",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#DatatypeProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Date (often a range) that the resource became or will become available.",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2000/01/rdf-schema#label": "available",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/2000/01/rdf-schema#Literal",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.org/dc/terms/date"
+    },
+    {
+      "appearsIn": [
+        "amv",
+        "fabio",
+        "dcat3",
+        "dcterms",
+        "afo"
+      ],
+      "curie": "dcterms:dateSubmitted",
+      "definedBy": [
+        "dcterms"
+      ],
+      "definition": [
+        "Date of submission of the resource."
+      ],
+      "definitionProperty": "http://www.w3.org/2000/01/rdf-schema#comment",
+      "directAncestor": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "directParent": [
+        "http://purl.org/dc/terms/date"
+      ],
+      "hasDirectChildren": false,
+      "hasDirectParents": true,
+      "hasHierarchicalChildren": false,
+      "hasHierarchicalParents": false,
+      "imported": false,
+      "iri": "http://purl.org/dc/terms/dateSubmitted",
+      "isDefiningOntology": false,
+      "isObsolete": false,
+      "isPreferredRoot": false,
+      "label": [
+        "dateSubmitted"
+      ],
+      "linkedEntities": {
+        "http://purl.org/dc/terms/date": {
+          "definedBy": [
+            "dcterms"
+          ],
+          "numAppearsIn": 23,
+          "hasLocalDefinition": true,
+          "label": [
+            "Date"
+          ],
+          "curie": "dcterms:date",
+          "type": [
+            "property",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#range": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "range"
+          ],
+          "curie": "range"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "subPropertyOf"
+          ],
+          "curie": "subPropertyOf"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#domain": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "property",
+            "entity"
+          ],
+          "label": [
+            "domain"
+          ],
+          "curie": "domain"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#Literal": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "Literal"
+          ],
+          "curie": "Literal"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "ontologyId": "amv",
+      "ontologyIri": "https://w3id.org/amv",
+      "ontologyPreferredPrefix": "amv",
+      "searchableAnnotationValues": false,
+      "shortForm": "dcterms_dateSubmitted",
+      "type": [
+        "dataProperty",
+        "property",
+        "entity"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#DatatypeProperty",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "Date of submission of the resource.",
+      "http://www.w3.org/2000/01/rdf-schema#domain": "http://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2000/01/rdf-schema#label": "dateSubmitted",
+      "http://www.w3.org/2000/01/rdf-schema#range": "http://www.w3.org/2000/01/rdf-schema#Literal",
+      "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": "http://purl.org/dc/terms/date"
+    }
+  ]
+}

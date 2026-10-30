@@ -1,0 +1,327 @@
+{
+  "page": 0,
+  "numElements": 1,
+  "totalPages": 1,
+  "totalElements": 1,
+  "elements": [
+    {
+      "baseUri": [
+        "https://w3id.org/amv#"
+      ],
+      "classifications": [
+        {
+          "collection": [
+            "NFDIxCS",
+            "MaRDI"
+          ]
+        },
+        {
+          "subject": [
+            "Computer Science"
+          ]
+        }
+      ],
+      "definition": [
+        "AMV v1.0 was first published on June 16, 2021. This is the revised version dated on February 6, 2023.",
+        "Metadata vocabularies are used in various domains of study. It provides an in-depth description of the resources. In this work, we develop Algorithm Metadata Vocabulary (AMV), a vocabulary for capturing and storing the metadata about the algorithms (a procedure or a set of rules that is followed step-by-step to solve a problem, especially by a computer). The snag faced by the researchers in the current time is the failure of getting relevant results when searching for algorithms in any search engine. AMV is represented as a semantic model and produced OWL file, which can be directly used by anyone interested to create and publish algorithm metadata as a knowledge graph, or to provide metadata service through SPARQL endpoint. To design the vocabulary, we propose a well-defined methodology, which considers real issues faced by the algorithm users and the practitioners. The evaluation shows a promising result."
+      ],
+      "definition_property": [
+        "http://www.w3.org/2000/01/rdf-schema#comment"
+      ],
+      "description": "Metadata vocabularies are used in various domains of study. It provides an in-depth description of the resources. In this work, we develop Algorithm Metadata Vocabulary (AMV), a vocabulary for capturing and storing the metadata about the algorithms (a procedure or a set of rules that is followed step-by-step to solve a problem, especially by a computer). The snag faced by the researchers in the current time is the failure of getting relevant results when searching for algorithms in any search engine. AMV is represented as a semantic model and produced OWL file, which can be directly used by anyone interested to create and publish algorithm metadata as a knowledge graph, or to provide metadata service through SPARQL endpoint. To design the vocabulary, we propose a well-defined methodology, which considers real issues faced by the algorithm users and the practitioners. The evaluation shows a promising result.",
+      "homepage": "https://www.isibang.ac.in/ns/amv/",
+      "imported": false,
+      "importsFrom": [
+        "dcterms",
+        "foaf",
+        "dcat3",
+        "prov",
+        "vann",
+        "schema"
+      ],
+      "iri": "https://w3id.org/amv",
+      "isObsolete": false,
+      "is_foundary": false,
+      "label": [
+        "AMV:Algorithm Metadata Vocabulary"
+      ],
+      "label_property": "http://www.w3.org/2000/01/rdf-schema#label",
+      "language": [
+        "en"
+      ],
+      "license": {
+        "label": "CC0 1.0",
+        "logo": "http://mirrors.creativecommons.org/presskit/buttons/80x15/png/publicdomain.png",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "linkedEntities": {
+        "http://purl.org/dc/elements/1.1/creator": {
+          "numAppearsIn": 74,
+          "hasLocalDefinition": true,
+          "label": [
+            "creator"
+          ],
+          "curie": "creator",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/description": {
+          "numAppearsIn": 65,
+          "hasLocalDefinition": true,
+          "label": [
+            "description"
+          ],
+          "curie": "description",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/issued": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "issued"
+          ],
+          "curie": "issued",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/modified": {
+          "numAppearsIn": 2,
+          "hasLocalDefinition": true,
+          "label": [
+            "modified"
+          ],
+          "curie": "modified",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/publisher": {
+          "numAppearsIn": 26,
+          "hasLocalDefinition": true,
+          "label": [
+            "publisher"
+          ],
+          "curie": "publisher",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/rights": {
+          "numAppearsIn": 27,
+          "hasLocalDefinition": true,
+          "label": [
+            "rights"
+          ],
+          "curie": "rights",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/dc/elements/1.1/title": {
+          "numAppearsIn": 69,
+          "hasLocalDefinition": true,
+          "label": [
+            "title"
+          ],
+          "curie": "title",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Prefix"
+          ],
+          "curie": "vann:preferredNamespacePrefix",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://purl.org/vocab/vann/preferredNamespaceUri": {
+          "definedBy": [
+            "vann"
+          ],
+          "numAppearsIn": 63,
+          "hasLocalDefinition": true,
+          "label": [
+            "Preferred Namespace Uri"
+          ],
+          "curie": "vann:preferredNamespaceUri",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#comment": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 60,
+          "hasLocalDefinition": false,
+          "label": [
+            "comment"
+          ],
+          "curie": "comment",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+          "definedBy": [
+            "prov"
+          ],
+          "numAppearsIn": 67,
+          "hasLocalDefinition": false,
+          "label": [
+            "label"
+          ],
+          "curie": "label",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "http://www.w3.org/2001/XMLSchema#anyURI": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": false,
+          "type": [
+            "class",
+            "entity"
+          ],
+          "label": [
+            "anyURI"
+          ],
+          "curie": "anyURI"
+        },
+        "http://www.w3.org/2004/02/skos/core#AltLabel": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "AltLabel"
+          ],
+          "curie": "AltLabel",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://github.com/biswanathdutta/amv": {
+          "url": "https://github.com/biswanathdutta/amv",
+          "source": "https://raw.githubusercontent.com/biopragmatics/bioregistry/main/exports/registry/registry.json",
+          "curie": "github:biswanathdutta/amv"
+        },
+        "https://w3id.org/mod#competencyQuestion": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "competencyQuestion"
+          ],
+          "curie": "competencyQuestion",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        },
+        "https://w3id.org/mod#vocabularyUsed": {
+          "numAppearsIn": 1,
+          "hasLocalDefinition": true,
+          "label": [
+            "vocabularyUsed"
+          ],
+          "curie": "vocabularyUsed",
+          "type": [
+            "property",
+            "annotationProperty",
+            "entity"
+          ]
+        }
+      },
+      "loaded": "2026-09-30T15:21:24.611557976",
+      "numDescendants": 0,
+      "numHierarchicalDescendants": 0,
+      "numberOfClasses": "66",
+      "numberOfEntities": "405",
+      "numberOfIndividuals": "192",
+      "numberOfProperties": "147",
+      "ontologyId": "amv",
+      "ontologyPurl": "https://www.isibang.ac.in/ns/amv/",
+      "preferredPrefix": "amv",
+      "repo_url": "https://github.com/biswanathdutta/amv",
+      "searchableAnnotationValues": [
+        "AMV v1.0 was first published on June 16, 2021. This is the revised version dated on February 6, 2023.",
+        "Metadata vocabularies are used in various domains of study. It provides an in-depth description of the resources. In this work, we develop Algorithm Metadata Vocabulary (AMV), a vocabulary for capturing and storing the metadata about the algorithms (a procedure or a set of rules that is followed step-by-step to solve a problem, especially by a computer). The snag faced by the researchers in the current time is the failure of getting relevant results when searching for algorithms in any search engine. AMV is represented as a semantic model and produced OWL file, which can be directly used by anyone interested to create and publish algorithm metadata as a knowledge graph, or to provide metadata service through SPARQL endpoint. To design the vocabulary, we propose a well-defined methodology, which considers real issues faced by the algorithm users and the practitioners. The evaluation shows a promising result.",
+        "2021-06-16",
+        "2023-02-06",
+        "https://creativecommons.org/publicdomain/zero/1.0/",
+        "AMV:Algorithm Metadata Vocabulary",
+        "Example competency questions. \nCQ1: What characteristics or properties are common across all algorithms?\nCQ2: List all algorithms that compute the solution to problem X along with their types and input. \nCQ3: Retrieve an algorithm that solves problem X with its details like best case space complexity, best case time complexity, and the problems related to it. \nCQ4: Retrieve all the algorithms X which are expressed in the form of a flowchart.\nCQ5: Which Sorting algorithms are derived from the already existing sorting algorithms?",
+        "http://xmlns.com/foaf/0.1/",
+        false
+      ],
+      "skos": false,
+      "sourceFileTimestamp": "Wed Sep 30 15:21:22 UTC 2026",
+      "synonym_property": [
+        "http://www.w3.org/2004/02/skos/core#AltLabel"
+      ],
+      "title": "AMV:Algorithm Metadata Vocabulary",
+      "tracker": "https://github.com/biswanathdutta/amv/issues",
+      "type": [
+        "ontology"
+      ],
+      "http://purl.org/dc/elements/1.1/creator": [
+        "Biswanath Dutta (https://sites.google.com/view/bdutta)",
+        "Jyotima Patel (https://www.linkedin.com/in/jyotima-patel-61220411b)"
+      ],
+      "http://purl.org/dc/elements/1.1/description": [
+        "AMV v1.0 was first published on June 16, 2021. This is the revised version dated on February 6, 2023.",
+        "Metadata vocabularies are used in various domains of study. It provides an in-depth description of the resources. In this work, we develop Algorithm Metadata Vocabulary (AMV), a vocabulary for capturing and storing the metadata about the algorithms (a procedure or a set of rules that is followed step-by-step to solve a problem, especially by a computer). The snag faced by the researchers in the current time is the failure of getting relevant results when searching for algorithms in any search engine. AMV is represented as a semantic model and produced OWL file, which can be directly used by anyone interested to create and publish algorithm metadata as a knowledge graph, or to provide metadata service through SPARQL endpoint. To design the vocabulary, we propose a well-defined methodology, which considers real issues faced by the algorithm users and the practitioners. The evaluation shows a promising result."
+      ],
+      "http://purl.org/dc/elements/1.1/issued": "2021-06-16",
+      "http://purl.org/dc/elements/1.1/modified": "2023-02-06",
+      "http://purl.org/dc/elements/1.1/publisher": "Indian Statistical Institute (https://www.isibang.ac.in/)",
+      "http://purl.org/dc/elements/1.1/rights": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "http://purl.org/dc/elements/1.1/title": "AMV:Algorithm Metadata Vocabulary",
+      "http://purl.org/vocab/vann/preferredNamespacePrefix": "amv",
+      "http://purl.org/vocab/vann/preferredNamespaceUri": "https://w3id.org/amv",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://www.w3.org/2002/07/owl#Ontology",
+      "http://www.w3.org/2002/07/owl#versionIRI": "https://w3id.org/amv/1.0",
+      "http://www.w3.org/2002/07/owl#versionInfo": "V1.0",
+      "https://w3id.org/mod#competencyQuestion": "Example competency questions. \nCQ1: What characteristics or properties are common across all algorithms?\nCQ2: List all algorithms that compute the solution to problem X along with their types and input. \nCQ3: Retrieve an algorithm that solves problem X with its details like best case space complexity, best case time complexity, and the problems related to it. \nCQ4: Retrieve all the algorithms X which are expressed in the form of a flowchart.\nCQ5: Which Sorting algorithms are derived from the already existing sorting algorithms?",
+      "https://w3id.org/mod#vocabularyUsed": [
+        "http://xmlns.com/foaf/0.1/"
+      ]
+    }
+  ],
+  "facetFieldsToCounts": {}
+}

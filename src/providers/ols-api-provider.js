@@ -470,8 +470,7 @@ export default class OlsApiProvider extends BaseProvider {
     let items = []
     for (const type of this._entityTypesFor(types).map(t => t._api)) {
       const narrower = await this._paginate(["ontologies", VOCID, type, uri, "children"], {}, 0)
-      const narrowerJSKOS = Promise.all(narrower.map(item => this._termToJSKOS({ ...item, _api: type })))
-      items.push(narrowerJSKOS)
+      Promise.all(narrower.map(item => items.push(this._termToJSKOS({ ...item, _api: type }))))
     }
     return items
   }
@@ -491,10 +490,7 @@ export default class OlsApiProvider extends BaseProvider {
 
     for (const type of this._entityTypesFor(types).map(t => t._api)) {
       const ancestors = await this._paginate(["ontologies", VOCID, type, uri, "ancestors"], {}, null)
-      for (const ancestor of ancestors){
-        const ancestorJSKOS = await this._termToJSKOS({...await ancestor, _api: type})
-        items.push(ancestorJSKOS)
-      }
+      Promise.all(ancestors.map(item => items.push(this._termToJSKOS({ ...item, _api: type }))))
     }
     return items
   }

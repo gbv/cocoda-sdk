@@ -49,6 +49,7 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/__invalid__/classes?hasDirectParents=false": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=__invalid__": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2Fenvo.owl": "search-iri_envo.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies?searchFields=iri&search=https%3A%2F%2Fw3id.org%2Famv": "search-iri_amv.json",
 
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?size=50": "concepts-envo_50.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/envo/classes?hasDirectParents=false": "top_envo.json",
@@ -91,6 +92,10 @@ const missing = mockRequests(provider.axios, {
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FRO_0018034/ancestors": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?iri=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23Property": "empty.json",
   "https://api.terminology.tib.eu/api/v2/ontologies/ro/individuals?curie=properties": "empty.json",
+  
+  "https://api.terminology.tib.eu/api/v2/ontologies/amv/classes/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "empty.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/amv/properties/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-properties.json",
+  "https://api.terminology.tib.eu/api/v2/ontologies/amv/individuals/http%253A%252F%252Fpurl.org%252Fdc%252Fterms%252Fdate/children": "children-amv-individuals.json",
   
 })
 
@@ -380,6 +385,16 @@ describe ("OlsProvider.getNarrower", () => {
     let narrower = await provider.getNarrower({ concept: conceptRO })
     assert(Array.isArray(narrower))
     assert(narrower.length> 0)
+  })
+
+  it("get narrower amv date", async function () {
+    let config = {concept:{uri:"http://purl.org/dc/terms/date"},scheme:{uri:"https://w3id.org/amv"}}
+    let narrower = await provider.getNarrower(config)
+    assert(Array.isArray(narrower))
+    assert(narrower.length> 0)
+    narrower.map( narr => {
+      assert(narr.uri && narr.notation)
+    })
   })
 
 })
