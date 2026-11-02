@@ -1,4 +1,4 @@
-name: Release at npmjs and at GitHub releases
+name: Release at npmjs
 
 on:
   push:
@@ -25,24 +25,3 @@ jobs:
         npm test
     - name: Publish to npm
       run: npm publish --provenance --access=public
-  github:
-    runs-on: ubuntu-latest
-    needs: npm
-    steps:
-    - uses: actions/checkout@v6
-    - uses: actions/setup-node@v6
-    - name: Install, build, and pack
-      run: |
-        npm ci
-        npm run build
-        npm pack
-    - run: |
-        echo "ARTIFACT_NAME=$(ls cocoda-sdk-*.tgz)" >> $GITHUB_ENV
-    - name: Create GitHub release
-      uses: softprops/action-gh-release@v2
-      with:
-        name: cocoda-sdk ${{ github.ref_name }}
-        body: TODO
-        draft: true
-        prerelease: false
-        files: ${{ env.ARTIFACT_NAME }}
