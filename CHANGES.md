@@ -2,6 +2,13 @@
 
 - Remove exported but undocumented `utils` object with utility functions
 - Do not append `/` to API endpoint base URL, if missing
+- Add command line script `cdk`
+- Extend MOD provider with registries
+- Extend OLS provider
+
+# 3.8.4
+
+- Add method checkAuth
 
 # 3.8.3
 
