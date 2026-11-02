@@ -185,6 +185,14 @@ export const deepEqual = (a,b) => {
   }
 }
 
+function buildURL(base, query) {
+  query = new URLSearchParams(query || {})
+  return query.size
+    ? (base.endsWith("?") ? base : base + "?") + query.toString()
+    : base
+}
+
+
 // TODO: Decide on default timeout value
 const timeout_default = 200000
 
@@ -271,9 +279,6 @@ export class BaseProvider {
     if (this._jskos && this._jskos.timeout && this._jskos.backendTimeout) {
       this._jskos.timeout = Math.max(this._jskos.timeout, this._jskos.backendTimeout)
     }
-    this.axios = axios.create({
-      timeout: this._jskos && this._jskos.timeout ? this._jskos.timeout : timeout_default,
-    })
     // Path is used for https check and local mappings
     this._path = typeof window !== "undefined" && window.location.pathname
     /**
@@ -335,7 +340,11 @@ export class BaseProvider {
     // Set default retry config
     this.setRetryConfig()
 
-    // Add a request interceptor
+    // Initialize axios HTTP client
+    this.axios = axios.create({
+      timeout: this._jskos && this._jskos.timeout ? this._jskos.timeout : timeout_default,
+    })
+
     this.axios.interceptors.request.use((config = {}) => {
       if (!config._skipAdditionalParameters) {
         config.params ||= {}
@@ -356,6 +365,10 @@ export class BaseProvider {
         throw new axios.Cancel("Can't call http API from https.")
       }
 
+      if (this.logRequest) {
+        this.logRequest(buildURL(config.url, config.params))
+      }
+
       return config
     })
 
@@ -364,24 +377,13 @@ export class BaseProvider {
       // Apply unicode normalization
       data = jskos.normalize(data)
 
-      // Add URL to array as prop
-      let url = config.url
-      if (!url.endsWith("?")) {
-        url += "?"
-      }
-      url += new URLSearchParams(config.params || {}).toString()
-
       if (typeof data === "object") { // Array or Object
         // Add total count to array as prop
         let totalCount = parseInt(headers["x-total-count"])
         if (!isNaN(totalCount)) {
           data._totalCount = totalCount
         }
-        data._url = url
-      }
-
-      if (this.logRequest) {
-        this.logRequest(url)
+        data._url = buildURL(config.url, config.params)
       }
 
       // TODO: Return data or whole response here?
@@ -590,15 +592,8 @@ export class BaseProvider {
    */
   async checkAuth(params={}) {      
     return this._api.checkAuth
-      ? this._request(this._api.checkAuth, { params })
+      ? this.axios({ url: this._api.checkAuth, ...params })
       : Promise.reject(new Error("/checkAuth endpoint not available"))
-  }
-
-  async _request(url, config = {}) {
-    return this.axios({
-      url: url,
-      ...config,
-    })
   }
 
   /**
