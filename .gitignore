@@ -17,6 +17,8 @@ npm-debug.log*
 
 coverage/
 
+service.js # local config
+
 dependencies.png
 dist/
 docs/
