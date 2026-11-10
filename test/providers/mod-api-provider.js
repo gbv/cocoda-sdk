@@ -13,12 +13,6 @@ const missing = mockRequests(provider.axios, {
   // debug: true,
   downloadMissing: true,
 }, {
-  "https://terminology.services.base4nfdi.de/api-gateway/artefacts?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "schemes.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "scheme-gndo.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo/resources/concepts?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concepts-gndo.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gnd/resources/concepts/4179484-9?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "concept-4179484-9.json",
-  "https://terminology.services.base4nfdi.de/api-gateway/collections/?language=en%2Cde%2Cfr%2Ces%2Cnl%2Cit%2Cfi%2Cpl%2Cru%2Ccs%2Cjp": "collections.json",
-
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts": "schemes.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo": "scheme-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo/resources/concepts": "concepts-gndo.json",
@@ -32,7 +26,7 @@ after(() => missing.forEach(url => console.log(`Missing response for: ${url}`)))
 const limitDefault = 5
 const specificSchemeDefault = "gndo"
 const specificSchemeDefault2 = "gnd"
-const schemeUriDefault = "http://d-nb.info/standards/elementset/gnd#"
+const schemeUriDefault = "https://d-nb.info/standards/elementset/gnd#"
 const schemeUriDefault2 = "https://lobid.org/gnd"
 const conceptUriDefault = "https://d-nb.info/gnd/4179484-9"
 const conceptNotationDefault = "4179484-9"

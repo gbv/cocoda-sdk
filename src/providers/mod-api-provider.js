@@ -277,6 +277,7 @@ export default class ModApiProvider extends BaseProvider {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+      _skipAdditionalParameters: true,
       ..._config,
     })
     if (!result?._url || Object.keys(result).length != 1){
@@ -337,7 +338,7 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   async _getSchemeFromShort(short) {
-    const url = this._getApiUrl(`artefacts/${short}`, null)
+    const url = this._getApiUrl(`artefacts/${encodeURIComponent(short)}`, null)
     return await this._request(url)
   }
 
@@ -370,7 +371,7 @@ export default class ModApiProvider extends BaseProvider {
     }
 
     // pull page 1
-    const url = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts`, null)
+    const url = this._getApiUrl(`artefacts/${encodeURIComponent(schemeShort)}/resources/concepts`, null)
     const pageOne = await this._request(url)
     if (!pageOne){
       return []
@@ -386,7 +387,7 @@ export default class ModApiProvider extends BaseProvider {
 
     // pull remaining pages
     for (let p = page+1; p <= totalPages; p++) {
-      const urlPage = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts`, {page: p})
+      const urlPage = this._getApiUrl(`artefacts/${encodeURIComponent(schemeShort)}/resources/concepts`, {page: p})
       const pageP = await this._request(urlPage)
       if (!pageP){
         break
@@ -413,7 +414,7 @@ export default class ModApiProvider extends BaseProvider {
     // https://terminology.services.base4nfdi.de/api-gateway/artefacts/<schemeShort>/resources/concepts/<conceptNotation>
     const {conceptNotation, schemeShort} = await this._conceptNotationFromObj(concept)
     // FIXME: notation may need to be escaped
-    const url = this._getApiUrl(`artefacts/${schemeShort}/resources/concepts/${conceptNotation}`, null)
+    const url = this._getApiUrl(`artefacts/${encodeURIComponent(schemeShort)}/resources/concepts/${encodeURIComponent(conceptNotation)}`, null)
     return await this._request(url)
   }
 
