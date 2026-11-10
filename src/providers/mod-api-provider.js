@@ -343,6 +343,14 @@ export default class ModApiProvider extends BaseProvider {
   }
 
   async _getSchemeFromUri(uri) {
+    // test if it is possible to get scheme from uri
+    const url = this._getApiUrl(`artefacts/${encodeURIComponent(uri)}`, null)
+    let scheme = await this._request(url)
+    if (scheme && Array.isArray(scheme) && scheme.length > 0) {
+      return scheme
+    }
+
+    // if not possible, fall back to iteration. Should be removed, if https://github.com/ts4nfdi/api-gateway/issues/105 is resolved
     const schemesMod = await this._getSchemesMod()
     if (!schemesMod){
       return

@@ -1,0 +1,116 @@
+{
+  "rightsHolder": null,
+  "backend_type": "gnd",
+  "createdWith": null,
+  "keywords": [
+    "authority data",
+    "Germany",
+    "Austria",
+    "Switzerland"
+  ],
+  "contactPoint": [
+    "https://lobid.org/team"
+  ],
+  "subject": null,
+  "@type": "https://w3id.org/mod#SemanticArtefact",
+  "obsolete": false,
+  "language": [
+    "de"
+  ],
+  "source": "https://lobid.org",
+  "type": "http://www.w3.org/2002/07/owl#Ontology",
+  "descriptions": [
+    "The Common Authority File (GND) contains more than 8 million standard data sets. It is used to catalog literature in libraries, as well as archives, museums and research projects."
+  ],
+  "source_url": "https://lobid.org/gnd",
+  "accrualMethod": null,
+  "wasGeneratedBy": null,
+  "contributor": null,
+  "semanticArtefactRelation": null,
+  "modified": "Updated hourly",
+  "@id": "https://lobid.org/gnd",
+  "source_name": "gnd",
+  "versionIRI": null,
+  "coverage": null,
+  "iri": "https://lobid.org/gnd",
+  "identifier": "https://lobid.org/gnd",
+  "hasFormat": [
+    "json",
+    "ttl",
+    "rdf/xml"
+  ],
+  "competencyQuestion": null,
+  "creator": [
+    "Hochschulbibliothekszentrum des Landes Nordrhein-Westfalen (hbz)"
+  ],
+  "synonyms": [
+    "lobid GND"
+  ],
+  "created": "2018-07-11",
+  "landingPage": "https://lobid.org/gnd",
+  "label": "GND",
+  "version": "Not specified",
+  "@context": {
+    "rightsHolder": "http://base4nfdi.de/ts4nfdi/schema/rightsHolder",
+    "backend_type": "http://base4nfdi.de/ts4nfdi/schema/backend_type",
+    "createdWith": "http://purl.org/pav/createdWith",
+    "keywords": "http://www.w3.org/ns/dcat#keywords",
+    "contactPoint": "http://www.w3.org/ns/dcat#contactPoint",
+    "subject": "http://base4nfdi.de/ts4nfdi/schema/subject",
+    "obsolete": "http://www.w3.org/2002/07/owl#deprecated",
+    "language": "http://base4nfdi.de/ts4nfdi/schema/language",
+    "source": "http://base4nfdi.de/ts4nfdi/schema/source",
+    "type": "http://base4nfdi.de/ts4nfdi/schema/type",
+    "descriptions": "http://purl.org/dc/terms/description",
+    "source_url": "http://base4nfdi.de/ts4nfdi/schema/source_url",
+    "accrualMethod": "http://base4nfdi.de/ts4nfdi/schema/accrualMethod",
+    "wasGeneratedBy": "https://w3id.org/mod#wasGeneratedBy",
+    "contributor": "http://base4nfdi.de/ts4nfdi/schema/contributor",
+    "semanticArtefactRelation": "https://w3id.org/mod#semanticArtefactRelation",
+    "modified": "http://purl.org/dc/terms/modified",
+    "source_name": "http://base4nfdi.de/ts4nfdi/schema/source_name",
+    "versionIRI": "http://base4nfdi.de/ts4nfdi/schema/versionIRI",
+    "coverage": "http://base4nfdi.de/ts4nfdi/schema/coverage",
+    "iri": "http://base4nfdi.de/ts4nfdi/schema/iri",
+    "identifier": "http://base4nfdi.de/ts4nfdi/schema/identifier",
+    "hasFormat": "http://base4nfdi.de/ts4nfdi/schema/hasFormat",
+    "competencyQuestion": "https://w3id.org/mod#competencyQuestion",
+    "@base": "http://base4nfdi.de/ts4nfdi/schema/",
+    "creator": "http://base4nfdi.de/ts4nfdi/schema/creator",
+    "synonyms": "http://www.w3.org/2004/02/skos/core#altLabel",
+    "created": "http://purl.org/dc/terms/created",
+    "landingPage": "http://www.w3.org/ns/dcat#landingPage",
+    "label": "http://www.w3.org/2004/02/skos/core#prefLabel",
+    "version": "http://www.w3.org/2002/07/owl#versionInfo",
+    "license": "http://base4nfdi.de/ts4nfdi/schema/license",
+    "includedInDataCatalog": "http://schema.org/includedInDataCatalog",
+    "short_form": "http://www.w3.org/2004/02/skos/core#notation",
+    "publisher": "http://base4nfdi.de/ts4nfdi/schema/publisher",
+    "accrualPeriodicity": "http://base4nfdi.de/ts4nfdi/schema/accrualPeriodicity",
+    "accessRights": "http://base4nfdi.de/ts4nfdi/schema/accessRights",
+    "bibliographicCitation": "http://base4nfdi.de/ts4nfdi/schema/bibliographicCitation",
+    "statistics": "http://base4nfdi.de/ts4nfdi/schema/statistics",
+    "status": "https://w3id.org/mod#status"
+  },
+  "license": "CC0 1.0",
+  "includedInDataCatalog": null,
+  "short_form": "GND",
+  "publisher": [
+    "Hochschulbibliothekszentrum des Landes Nordrhein-Westfalen (hbz)"
+  ],
+  "accrualPeriodicity": null,
+  "accessRights": "public",
+  "bibliographicCitation": null,
+  "statistics": [
+    {
+      "created": "2026-11-09",
+      "count": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property": 0,
+        "http://www.w3.org/2002/07/owl#Class": 0,
+        "http://www.w3.org/2002/07/owl#NamedIndividual": 0,
+        "http://www.w3.org/2004/02/skos/core#Concept": 10401972
+      }
+    }
+  ],
+  "status": "production"
+}

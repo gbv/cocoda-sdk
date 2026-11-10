@@ -14,7 +14,10 @@ const missing = mockRequests(provider.axios, {
   downloadMissing: true,
 }, {
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts": "schemes.json",
+  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gnd": "scheme-gnd.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo": "scheme-gndo.json",
+  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/https%3A%2F%2Fd-nb.info%2Fstandards%2Felementset%2Fgnd%23": "empty.json", // currently API returns an empty response, should return scheme-gndo.json
+  "https://terminology.services.base4nfdi.de/api-gateway/artefacts/https%3A%2F%2Flobid.org%2Fgnd": "scheme-gnd.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gndo/resources/concepts": "concepts-gndo.json",
   "https://terminology.services.base4nfdi.de/api-gateway/artefacts/gnd/resources/concepts/4179484-9": "concept-4179484-9.json",
   "https://terminology.services.base4nfdi.de/api-gateway/collections/": "collections.json",
