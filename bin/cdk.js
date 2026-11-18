@@ -91,6 +91,17 @@ if (typeof params.types === "string") {
   params.types = params.types.split(/\s|\|/)
 }
 
+if (method == "getConcepts" && !params.concepts) {
+  const concept = params.concept ?? (typeof params.uri === "string" ? { uri: params.uri } : null)
+  if (concept) {
+    if (params.scheme && !concept.inScheme) {
+      concept.inScheme = [params.scheme] 
+    }
+    params.concepts = [concept]
+    delete params.concept
+  }
+}
+
 if (search.length) {
   params["search"] = search.join(" ")
 }
