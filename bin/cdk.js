@@ -100,6 +100,10 @@ if (method == "getConcepts" && !params.concepts) {
     params.concepts = [concept]
     delete params.concept
   }
+} else if (method === "getSchemes") {
+  if (!params.params) {
+    params.params = { uri: params.scheme || params.uri }
+  }
 }
 
 if (search.length) {
