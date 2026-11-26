@@ -73,6 +73,27 @@ export default class SkosmosApiProvider extends BaseProvider {
     return this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
+  async _getSkosSchemes(...config) {
+    try {
+      const url = `${this._api.api}/vocabularies?lang=${this._language}`
+
+      const data = await this.axios({
+        ...config,
+        method: "get",
+        url,
+      })
+      return await data.vocabularies.map(v => ({
+        uri: String(v.uri),
+        VOCID: String(v.id),
+        prefLabel: {
+          [this._language]: String(v.prefLabel || v.label || v.title),
+        },
+      }))
+    } catch (error) {
+      return this.schemes || []
+    }
+  }
+
   /**
    * @private
    */
@@ -126,14 +147,14 @@ export default class SkosmosApiProvider extends BaseProvider {
     const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
     if (resultScheme) {
       this._approvedSchemes.push({
-        uri: resultScheme.uri,
+        uri: String(resultScheme.uri),
         identifier: jskos.getAllUris(scheme),
       })
       return resultScheme.uri
     } else {
       this._rejectedSchemes.push({
-        uri: scheme.uri,
-        identifier: scheme.identifier,
+        uri: String(scheme.uri),
+        identifier: String(scheme.identifier),
       })
       return null
     }
@@ -271,25 +292,38 @@ export default class SkosmosApiProvider extends BaseProvider {
    */
   async getSchemes({ ...config } = {}) {
     const schemes = []
-    for (let scheme of this.schemes || []) {
+    for (let scheme of await this._getSkosSchemes()) {
       const url = this._getApiUrl(scheme, "/")
       const data = await this.axios({
         ...config,
         method: "get",
         url,
       })
+      // const resultScheme = data.conceptschemes[0]
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
-      const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
-      if (label) {
-        scheme.prefLabel ||= {}
-        scheme.prefLabel[this._language] = label
-      }
-      schemes.push(scheme)
-      // Also add scheme to approved schemes
-      this._approvedSchemes = this._approvedSchemes || []
-      if (!this._approvedSchemes.find(s => jskos.compare(scheme, s))) {
-        this._approvedSchemes.push({
-          uri: resultScheme.uri,
+      if (resultScheme) {
+        const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
+        if (label) {
+          scheme.prefLabel ||= {}
+          scheme.prefLabel[this._language] = label
+        }
+        schemes.push(scheme)
+        // Also add scheme to approved schemes
+        this._approvedSchemes = this._approvedSchemes || []
+        console.log("Approved schemes:", this._approvedSchemes)
+        console.log("scheme:", scheme)
+        let approved = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+        if (!approved) {
+          this._approvedSchemes.push({
+            uri: ""+resultScheme.uri,
+            identifier: jskos.getAllUris(scheme),
+          })
+        }
+      } else {
+        // If no result scheme was found, add it to rejected schemes
+        this._rejectedSchemes = this._rejectedSchemes || []
+        this._rejectedSchemes.push({
+          uri: String(scheme.uri),
           identifier: jskos.getAllUris(scheme),
         })
       }
