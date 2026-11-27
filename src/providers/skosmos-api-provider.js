@@ -13,13 +13,9 @@ import * as errors from "../errors/index.js"
  * {
  *  "uri": "http://coli-conc.gbv.de/registry/skosmos-zbw",
  *  "provider": "SkosmosApi",
- *  "api": "https://zbw.eu/beta/skosmos/rest/v1/",
- *  "schemes": [
- *    {
- *      "uri": "http://bartoc.org/en/node/313",
- *      "VOCID": "stw"
- *    }
- *  ]
+ *  "api": "https://skosmos.bartoc.org/rest/v1/",  
+ *    // further valid example apis: "https://zbw.eu/beta/skosmos/rest/v1/", "https://zbw.eu/beta/skosmos/rest/v1/"
+ *  "uriTemplate": "http://bartoc.org/en/node/{vocid}/"
  * }
  * ```
  *
@@ -73,32 +69,38 @@ export default class SkosmosApiProvider extends BaseProvider {
     return this.languages[0] || this._defaultLanguages[0] || "en"
   }
 
-  async _getSkosSchemes(...config) {
-    try {
-      const url = `${this._api.api}/vocabularies?lang=${this._language}`
+  _uriFromTemplate(vocid) {
+    return this._jskos?.uriTemplate?.replace("{vocid}", vocid)
+  }
 
-      const data = await this.axios({
-        ...config,
-        method: "get",
-        url,
-      })
-      return await data.vocabularies.map(v => ({
-        uri: String(v.uri),
+  async _getSkosSchemes(...config) {
+    const url = `${this._api.api}vocabularies`
+    const data = await this.axios({
+      ...config,
+      method: "get",
+      url,
+      params: { ...(config?.params || {}), lang: this._language },
+    })
+
+    return data.vocabularies?.map(v => {
+      const uri = jskos.isValidUri(String(v.uri)) ? String(v.uri) : this._uriFromTemplate(String(v.id))
+      const result = {
+        ...(uri && jskos.isValidUri(uri) ? { uri } : {}),
         VOCID: String(v.id),
+        identifier: [String(uri)],
         prefLabel: {
           [this._language]: String(v.prefLabel || v.label || v.title),
         },
-      }))
-    } catch (error) {
-      return this.schemes || []
-    }
+      }
+      return result
+    })
   }
 
   /**
    * @private
    */
   _getApiUrl(scheme, endpoint, params) {
-    const VOCID = scheme?.VOCID || this.schemes.find(s => jskos.compare(s, scheme))?.VOCID
+    const VOCID = scheme?.VOCID
     if (!VOCID) {
       throw new errors.InvalidOrMissingParameterError({ parameter: "scheme", message: "Missing scheme or VOCID property on scheme" })
     }
@@ -291,7 +293,12 @@ export default class SkosmosApiProvider extends BaseProvider {
    * @returns {Object[]} array of JSKOS concept scheme objects
    */
   async getSchemes({ ...config } = {}) {
-    const schemes = []
+    let uris = config.params?.uri?.split("|")
+    if (uris) {
+      delete config.params.uri
+    }
+    config.params?.uri
+    let schemes = []
     for (let scheme of await this._getSkosSchemes()) {
       const url = this._getApiUrl(scheme, "/")
       const data = await this.axios({
@@ -299,7 +306,15 @@ export default class SkosmosApiProvider extends BaseProvider {
         method: "get",
         url,
       })
-      // const resultScheme = data.conceptschemes[0]
+      scheme.source = url
+      scheme.identifier = [...(scheme.identifier || []), ...(data.conceptschemes?.map(s => s.uri) || [])]
+      const label = data.conceptschemes?.map(s => s.prefLabel || s.label || s.title)?.[0]
+      if (label) {
+        scheme.prefLabel ||= {}
+        scheme.prefLabel[this._language] = label
+      }
+      schemes.push(scheme)
+      /* 
       const resultScheme = data.conceptschemes.find(s => jskos.compare(s, scheme))
       if (resultScheme) {
         const label = resultScheme && (resultScheme.prefLabel || resultScheme.label || resultScheme.title)
@@ -309,25 +324,27 @@ export default class SkosmosApiProvider extends BaseProvider {
         }
         schemes.push(scheme)
         // Also add scheme to approved schemes
-        this._approvedSchemes = this._approvedSchemes || []
-        console.log("Approved schemes:", this._approvedSchemes)
-        console.log("scheme:", scheme)
-        let approved = this._approvedSchemes.find(s => jskos.compare(scheme, s))
-        if (!approved) {
-          this._approvedSchemes.push({
-            uri: ""+resultScheme.uri,
-            identifier: jskos.getAllUris(scheme),
-          })
-        }
-      } else {
-        // If no result scheme was found, add it to rejected schemes
-        this._rejectedSchemes = this._rejectedSchemes || []
-        this._rejectedSchemes.push({
-          uri: String(scheme.uri),
+        */
+      this._approvedSchemes = this._approvedSchemes || []
+      let approved = this._approvedSchemes.find(s => jskos.compare(scheme, s))
+      if (!approved) {
+        this._approvedSchemes.push({
+          uri: scheme.uri,
+          //          uri: resultScheme.uri,
           identifier: jskos.getAllUris(scheme),
         })
       }
+      //    }
     }
+
+    // filter if config has {params:{uri:uris.join("|")}}
+    if (uris) {
+      schemes = schemes.filter(scheme => {
+        return scheme.uri && uris.includes(scheme.uri) 
+        || scheme.identifiers?.filter(id => uris?.includes(id))
+      })
+    }
+
     return schemes
   }
 
