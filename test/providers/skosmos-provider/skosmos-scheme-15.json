@@ -1,0 +1,570 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "onki": "http://schema.onki.fi/onki#",
+    "dct": "http://purl.org/dc/terms/",
+    "uri": "@id",
+    "type": "@type",
+    "conceptschemes": "onki:hasConceptScheme",
+    "id": "onki:vocabularyIdentifier",
+    "defaultLanguage": "onki:defaultLanguage",
+    "languages": "onki:language",
+    "label": "rdfs:label",
+    "prefLabel": "skos:prefLabel",
+    "title": "dct:title",
+    "@language": "en?language=en,de,fr,es,nl,it,fi,pl,ru,cs,jp",
+    "@base": "https://skosmos.bartoc.org/rest/v1/15/"
+  },
+  "uri": "",
+  "id": "15",
+  "marcSource": false,
+  "title": "Multilingual Thesaurus of the European Union",
+  "defaultLanguage": "bg",
+  "languages": [
+    "bg",
+    "ca",
+    "cs",
+    "hr",
+    "da",
+    "et",
+    "fi",
+    "fr",
+    "el",
+    "en",
+    "it",
+    "lv",
+    "lt",
+    "mk",
+    "mt",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "sr",
+    "sk",
+    "sl",
+    "es",
+    "sv",
+    "de",
+    "hu"
+  ],
+  "conceptschemes": [
+    {
+      "uri": "http://eurovoc.europa.eu/100141",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100163",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100164",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100165",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100166",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100167",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100168",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100169",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100170",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100171",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100172",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100173",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100174",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100175",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100176",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100177",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100178",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100179",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100180",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100181",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100182",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100183",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100184",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100185",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100186",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100187",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100188",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100189",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100190",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100191",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100192",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100193",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100194",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100195",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100196",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100197",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100198",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100199",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100200",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100201",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100202",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100203",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100204",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100205",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100206",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100207",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100208",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100209",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100210",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100211",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100212",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100213",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100214",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100215",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100216",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100217",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100218",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100219",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100220",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100221",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100222",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100223",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100224",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100225",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100226",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100227",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100228",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100229",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100230",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100231",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100232",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100233",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100234",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100235",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100236",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100237",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100238",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100239",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100240",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100241",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100242",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100243",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100244",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100245",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100246",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100247",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100248",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100249",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100250",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100251",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100252",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100253",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100254",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100255",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100256",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100257",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100258",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100259",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100260",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100261",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100262",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100263",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100264",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100265",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100266",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100267",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100268",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100269",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100270",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100271",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100272",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100273",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100274",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100275",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100276",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100277",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100278",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100279",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100280",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100281",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100282",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100283",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100284",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100285",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100286",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100287",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100288",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/100289",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://eurovoc.europa.eu/domains",
+      "type": "skos:ConceptScheme"
+    }
+  ]
+}

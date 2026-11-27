@@ -1,0 +1,42 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "onki": "http://schema.onki.fi/onki#",
+    "title": {
+      "@id": "rdfs:label",
+      "@language": "en?language=en,de,fr,es,nl,it,fi,pl,ru,cs,jp"
+    },
+    "vocabularies": "onki:hasVocabulary",
+    "id": "onki:vocabularyIdentifier",
+    "uri": "@id",
+    "@base": "https://skosmos.bartoc.org/rest/v1/vocabularies"
+  },
+  "uri": "",
+  "vocabularies": [
+    {
+      "uri": 7,
+      "id": 7,
+      "title": "AGIFT"
+    },
+    {
+      "uri": 11,
+      "id": 11,
+      "title": "Canadian Subject Headings"
+    },
+    {
+      "uri": 15,
+      "id": 15,
+      "title": "Multilingual Thesaurus of the European Union"
+    },
+    {
+      "uri": 28,
+      "id": 28,
+      "title": "PICO Thesaurus"
+    },
+    {
+      "uri": 29,
+      "id": 29,
+      "title": "Polytematický strukturovaný heslář"
+    }
+  ]
+}

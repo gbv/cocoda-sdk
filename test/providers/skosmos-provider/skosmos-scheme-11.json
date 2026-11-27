@@ -1,0 +1,42 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "onki": "http://schema.onki.fi/onki#",
+    "dct": "http://purl.org/dc/terms/",
+    "uri": "@id",
+    "type": "@type",
+    "conceptschemes": "onki:hasConceptScheme",
+    "id": "onki:vocabularyIdentifier",
+    "defaultLanguage": "onki:defaultLanguage",
+    "languages": "onki:language",
+    "label": "rdfs:label",
+    "prefLabel": "skos:prefLabel",
+    "title": "dct:title",
+    "@language": "en?language=en,de,fr,es,nl,it,fi,pl,ru,cs,jp",
+    "@base": "https://skosmos.bartoc.org/rest/v1/11/"
+  },
+  "uri": "",
+  "id": "11",
+  "marcSource": false,
+  "title": "Canadian Subject Headings",
+  "defaultLanguage": "fr",
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "conceptschemes": [
+    {
+      "uri": "http://id.loc.gov/subjects#conceptScheme",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://rvmweb.bibl.ulaval.ca/sujets#conceptScheme",
+      "type": "skos:ConceptScheme"
+    },
+    {
+      "uri": "http://www.collectionscanada.gc.ca/obj/900/f11/040004/canadian-subject-headings",
+      "type": "skos:ConceptScheme"
+    }
+  ]
+}

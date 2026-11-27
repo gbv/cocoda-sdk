@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "onki": "http://schema.onki.fi/onki#",
+    "dct": "http://purl.org/dc/terms/",
+    "uri": "@id",
+    "type": "@type",
+    "conceptschemes": "onki:hasConceptScheme",
+    "id": "onki:vocabularyIdentifier",
+    "defaultLanguage": "onki:defaultLanguage",
+    "languages": "onki:language",
+    "label": "rdfs:label",
+    "prefLabel": "skos:prefLabel",
+    "title": "dct:title",
+    "@language": "en?language=en,de,fr,es,nl,it,fi,pl,ru,cs,jp",
+    "@base": "https://skosmos.bartoc.org/rest/v1/28/"
+  },
+  "uri": "",
+  "id": "28",
+  "marcSource": false,
+  "title": "PICO Thesaurus",
+  "defaultLanguage": "en",
+  "languages": [
+    "en",
+    "it"
+  ],
+  "conceptschemes": []
+}
