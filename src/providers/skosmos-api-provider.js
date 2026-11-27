@@ -83,11 +83,12 @@ export default class SkosmosApiProvider extends BaseProvider {
     })
 
     return data.vocabularies?.map(v => {
-      const uri = jskos.isValidUri(String(v.uri)) ? String(v.uri) : this._uriFromTemplate(String(v.id))
+      const uri = (typeof v.uri === "string" && jskos.isValidUri(v.uri)) 
+        ? v.uri : this._uriFromTemplate(v.id)
       const result = {
         ...(uri && jskos.isValidUri(uri) ? { uri } : {}),
         VOCID: String(v.id),
-        identifier: [String(uri)],
+        identifier: uri ? [uri] : [],
         prefLabel: {
           [this._language]: String(v.prefLabel || v.label || v.title),
         },
@@ -307,7 +308,7 @@ export default class SkosmosApiProvider extends BaseProvider {
         url,
       })
       scheme.source = url
-      scheme.identifier = [...(scheme.identifier || []), ...(data.conceptschemes?.map(s => s.uri) || [])]
+      scheme.identifier.push(...(data.conceptschemes?.map(s => s.uri)?.filter(uri => uri && jskos.isValidUri(uri)) || []))
       const label = data.conceptschemes?.map(s => s.prefLabel || s.label || s.title)?.[0]
       if (label) {
         scheme.prefLabel ||= {}

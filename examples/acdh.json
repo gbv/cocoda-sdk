@@ -1,4 +1,4 @@
 {
   "api": "http://bartoc.org/api-type/skosmos",
-  "endpoint": "https://vocabs.acdh.oeaw.ac.at/"
+  "endpoint": "http://vocabs.acdh.oeaw.ac.at/rest/v1/"
 }
